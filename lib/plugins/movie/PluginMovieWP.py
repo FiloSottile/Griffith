@@ -38,7 +38,7 @@ class Plugin(movie.Movie):
 		self.encode='iso-8859-2'
 
 	def picture(self):
-		self.page = gutils.trim(self.page,"<td width=\"160\" valign=\"top\">","<script ")	# should go to sub_page function!
+		self.page = gutils.trim(self.page,"<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">","<script ")	# should go to sub_page function!
 		if string.find(self.page,"http://film.wp.pl/f/no.gif") > -1:
 			self.picture_url = ""
 		else:
@@ -46,15 +46,15 @@ class Plugin(movie.Movie):
 			self.picture_url = 'http://film.wp.pl/f/prev/' + self.picture_url
 
 	def original_title(self):
-		self.original_title = gutils.trim(self.page,"<i class=\"ti\" id=\"gr\">","</i>")
-		self.original_title = string.replace(self.original_title,"\r\n", "")
+		self.original_title = gutils.trim(self.page,"<i class=\"ti\" id=\"gr\" style=\"font-size: 14px\">","</i>")
+		print "ot="+self.original_title
 
 	def title(self):
-		self.title = gutils.trim(self.page,"<b class=\"ti\">","</b>")
+		self.title = gutils.trim(self.page,"<b class=\"ti\" style=\"font-size: 15px\">","</b>")
 		tmp = string.find(self.title," (")
-		if tmp:
-			self.title = self.title[:tmp]	# cut ending " (YEAR)"
-		if self.original_title == "":
+		if tmp != -1:
+			self.title = self.title[:tmp]	# cut " (YEAR)"
+		if self.original_title == '':
 			self.original_title = self.title
 
 	def director(self):
