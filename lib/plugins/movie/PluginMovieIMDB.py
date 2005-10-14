@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginMovieIMDB.py,v 1.9 2005/09/13 14:38:35 pox Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -36,7 +36,7 @@ plugin_version = "0.4"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode='utf-8'
+        self.encode='iso-8859-1'
         self.movie_id = id
         self.url = "http://imdb.com/title/tt" + str(self.movie_id)
         
@@ -105,7 +105,7 @@ class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.original_url_search    = "http://imdb.com/find?more=tt;q="
         self.translated_url_search    = "http://imdb.com/find?more=tt;q="
-        self.encode='utf-8'
+        self.encode='iso-8859-1'
         
     def search(self,parent_window):
         self.open_search(parent_window)
@@ -114,7 +114,7 @@ class SearchPlugin(movie.SearchMovie):
         
     def sub_search(self):
         self.page = gutils.trim(self.page,"</b> found the following results:", "<b>Suggestions For Improving Your Results</b>");
-        self.page = self.page.decode('utf-8')
+        self.page = self.page.decode('iso-8859-1')
         
     def get_searches(self):
         self.elements = string.split(self.page,"<li>")
