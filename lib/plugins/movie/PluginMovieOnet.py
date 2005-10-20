@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-2 -*-
-__revision__ = '$Id: PluginMovieOnet.py,v 1.5 2005/09/13 13:50:43 pox Exp $'
+__revision__ = '$Id$'
 # Copyright (c) 2005 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
@@ -39,7 +39,7 @@ class Plugin(movie.Movie):
 
 	# reszta z tej klasy jeszcze nie napisana
 	def picture(self):
-		self.picture_url = ""
+		self.picture_url = ''
 		if string.find(self.page,"IMG class=pic alt=\"Plakat\"") <> -1:
 			self.picture_url = gutils.trim(self.page," class=pic alt=\"Plakat\" border=1 src=\"","\">")
 			self.picture_url = 'http://film.onet.pl/' + self.picture_url
@@ -50,8 +50,8 @@ class Plugin(movie.Movie):
 			self.original_title = self.original_title[4:] + ", The"
 
 	def title(self):
-		self.title = gutils.trim(self.page,"<TITLE>"," - Film.onet.pl")
-		if self.original_title == "":
+		self.title = gutils.trim(self.page,"<TITLE>Onet.pl - Film - ","</TITLE>")
+		if self.original_title == '':
 			self.original_title = self.title
 
 	def director(self):
@@ -86,19 +86,19 @@ class Plugin(movie.Movie):
 		self.with = self.with[18:]
 
 	def classification(self):
-		self.classification = ""
+		self.classification = ''
 
 	def studio(self):
-		self.studio = ""
+		self.studio = ''
 
 	def site(self):
-		self.site = ""
+		self.site = ''
 
 	def imdb(self):
 		self.imdb = self.url
 
 	def trailer(self):
-		self.trailer = ""
+		self.trailer = ''
 
 	def country(self):
 		self.country = gutils.trim(self.page,"class=a2 valign=top width=\"100%\">",")<BR>")
@@ -136,7 +136,7 @@ class SearchPlugin(movie.SearchMovie):
 
 		if (self.elements[0]<>''):
 			for element in self.elements:
-				self.ids.append(gutils.trim(element,"class=a2 width=100%><A href=\"","\" class=u"))
+				self.ids.append(gutils.trim(element,"class=a2 width=\"100%\"><A href=\"","\" class=u"))
 				element = gutils.trim(element,"class=u><B>","</B>")
 				element = gutils.strip_tags(element)
 				self.titles.append(element)
