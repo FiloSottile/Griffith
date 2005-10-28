@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: movie.py,v 1.42 2005/09/26 17:32:44 iznogoud Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -91,7 +91,7 @@ class Movie:
                 self.picture = "%s.jpg" % \
                     (string.replace(tmp_dest,os.path.join(gglobals.griffith_dir, \
                     "posters")+"/",""))
-                dest = tmp_dest+".jpg"        
+                dest = tmp_dest+".jpg" 
                 progress = Progress(self.parent_window,_("Fetching poster"),_("Wait a moment"))
                 retriever = Retriever(self.picture_url,self.parent_window,progress,dest)
                 retriever.start()
