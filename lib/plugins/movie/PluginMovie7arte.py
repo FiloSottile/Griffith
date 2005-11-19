@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 
-__revision__ = '$Id: PluginMovie7arte.py,v 1.8 2005/09/18 20:54:07 iznogoud Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -89,9 +89,11 @@ class Plugin(movie.Movie):
         self.with = gutils.trim(self.page, "<B>Actores:</B>", "</FONT></TD>")
         self.with = string.replace(self.with, "\n", ", ")
         self.with = string.strip(gutils.strip_tags(self.with))
+        self.with = string.replace(self.with, "»", "")
         self.with = self.with[4:-1]
         self.with = string.replace(self.with, "  ", " ")
         self.with = string.replace(self.with, ", ", "\n")
+
     
     def classification(self):
         """Find the film's classification"""
