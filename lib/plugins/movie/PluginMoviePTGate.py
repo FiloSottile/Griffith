@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginMoviePTGate.py,v 1.8 2005/09/18 20:54:07 iznogoud Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -89,7 +89,7 @@ class Plugin(movie.Movie):
         self.trailer = gutils.trim(self.page,"trailer</b><br><a class=external href='", "'>visionar")
         
     def country(self):
-        self.country = gutils.trim(self.page,"<b>país</b><br>","<br><br><b>género")
+        self.country = gutils.trim(self.page,"s</b><br>","<br><br><b>g")
         
     def rating(self):
         self.rating = ""            
