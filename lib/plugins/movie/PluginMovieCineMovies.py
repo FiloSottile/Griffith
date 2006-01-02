@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginMovieCineMovies.py,v 1.5 2005/08/16 12:25:58 iznogoud Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -99,6 +99,7 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
+        self.encode='iso-8859-1'
         self.original_url_search    = "http://www.cinemovies.fr/resultat_recherche.php?cherche="
         self.translated_url_search    = "http://www.cinemovies.fr/resultat_recherche.php?cherche="
         

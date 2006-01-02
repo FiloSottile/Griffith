@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginMovieCinematografo.py,v 1.3 2005/09/18 20:54:07 iznogoud Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -137,6 +137,7 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
     "A movie search object"
     def __init__(self):
+        self.encode='iso-8859-1'
         self.original_url_search = \
             "http://www.cinematografo.it/bdcm/bancadati_query.asp?ty=CONTIENEPAROLE&R1=TI&I2.x=0&I2.y=0&fi="
         self.translated_url_search = \

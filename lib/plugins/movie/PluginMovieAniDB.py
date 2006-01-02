@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-__revision__ = '$Id: PluginMovieAniDB.py,v 1.9 2005/09/13 13:50:43 pox Exp $'
+__revision__ = '$Id$'
 # Copyright (c) 2005 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
@@ -140,7 +140,7 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-        	self.encode='iso-8859-1'
+		self.encode='iso-8859-1'
 		self.original_url_search	= "http://anidb.info/perl-bin/animedb.pl?show=animelist&adb.search="
 		self.translated_url_search	= "http://anidb.info/perl-bin/animedb.pl?show=animelist&adb.search="
 
