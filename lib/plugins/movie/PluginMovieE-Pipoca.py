@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginMovieE-Pipoca.py,v 1.5 2005/08/16 12:25:58 iznogoud Exp $'
+__revision__ = '$Id$'
 
 # Copyright (c) 2005 Vasco Nunes
 #
@@ -30,7 +30,7 @@ plugin_url = "epipoca.cidadeinternet.com.br"
 plugin_language = _("Brazilian Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email="<vasco.m.nunes@gmail.com>"
-plugin_version = "0.1"
+plugin_version = "0.2"
 
 class Plugin(movie.Movie):
     "A movie plugin object"
@@ -147,6 +147,7 @@ class SearchPlugin(movie.SearchMovie):
             "http://epipoca.cidadeinternet.com.br/search/?Ordenado=Popular&busca="
         self.translated_url_search = \
             "http://epipoca.cidadeinternet.com.br/search/?Ordenado=Popular&busca="
+        self.encode='iso-8859-1'
         
     def search(self, parent_window):
         "Perform the web search"
