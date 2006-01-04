@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ plugin_url = "7arte.net"
 plugin_language = _("Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.3"
+plugin_version = "0.4"
 
 class Plugin(movie.Movie):
     """A movie plugin object"""
@@ -87,14 +87,9 @@ class Plugin(movie.Movie):
     def with(self):
         self.with = ""
         self.with = gutils.trim(self.page, "<B>Actores:</B>", "</FONT></TD>")
-        self.with = string.replace(self.with, "\n", ", ")
-        self.with = string.strip(gutils.strip_tags(self.with))
-        self.with = string.replace(self.with, "Â»", "")
-        self.with = self.with[4:-1]
-        self.with = string.replace(self.with, "  ", " ")
-        self.with = string.replace(self.with, ", ", "\n")
-
-    
+        self.with = string.replace(self.with, "È</B> ", "")
+        #self.with = self.with[4:-1]
+  
     def classification(self):
         """Find the film's classification"""
         self.classification = gutils.trim(self.page, \
