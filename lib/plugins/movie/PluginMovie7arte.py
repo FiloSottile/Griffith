@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: UTF-8 -*-
 
 __revision__ = '$Id$'
 
@@ -87,8 +87,7 @@ class Plugin(movie.Movie):
     def with(self):
         self.with = ""
         self.with = gutils.trim(self.page, "<B>Actores:</B>", "</FONT></TD>")
-        self.with = string.replace(self.with, "È</B> ", "")
-        #self.with = self.with[4:-1]
+        self.with = string.replace(self.with, "<B>»</B> ", "")
   
     def classification(self):
         """Find the film's classification"""
