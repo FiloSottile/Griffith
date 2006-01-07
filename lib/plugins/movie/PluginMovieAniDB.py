@@ -149,7 +149,7 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def sub_search(self):
-		tmp = string.find(self.page,"<h1>Anime List - Search for: lain</h1>")
+		tmp = string.find(self.page,"<h1>Anime List - Search for: ")
 		if tmp == -1:		# already movie page
 			self.page = ''
 		else:			# multiple matches
