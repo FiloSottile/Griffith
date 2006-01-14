@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-2 -*-
-__revision__ = '$Id: PluginMovieFilmweb.py,v 1.10 2005/09/13 13:50:43 pox Exp $'
+__revision__ = '$Id$'
 # Copyright (c) 2005 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
@@ -23,91 +23,86 @@ from gettext import gettext as _
 import gutils
 import movie,string
 
-plugin_name = "Filmweb"
-plugin_description = "Web pelen filmow"
-plugin_url = "www.filmweb.pl"
-plugin_language = _("Polish")
-plugin_author = "Piotr Ozarowski"
+plugin_name         = "Filmweb"
+plugin_description  = "Web pelen filmow"
+plugin_url          = "www.filmweb.pl"
+plugin_language     = _("Polish")
+plugin_author       = "Piotr Ozarowski"
 plugin_author_email = "<ozarow@gmail.com>"
-plugin_version = "1.4"
+plugin_version      = "1.5"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = "filmweb"
-		self.url = str(id)
-		self.encode='iso-8859-2'
+		self.url      = str(id)
+		self.encode   = "iso-8859-2"
 
 	def picture(self):
 		if string.find(self.page,"http://gfx.filmweb.pl/gf/bf.gif") > -1:
 			self.picture_url = ''
 		else:
 			self.picture_url = gutils.trim(self.page," class=\"k1\"","<br />")
-			self.picture_url = gutils.after(self.picture_url,"<img  src=")
-			self.picture_url = gutils.trim(self.picture_url,"\"","\" alt=")
+			self.picture_url = gutils.after(self.picture_url,"<img  src=\"")
+			self.picture_url = gutils.before(self.picture_url,"\" alt=")
 
 	def original_title(self):
-		if( string.find(self.page,"class=\"styt\">(") ):
-			self.original_title = ""
-		else:
-			self.original_title = gutils.trim(self.page,"class=\"styt\">"," </span>")
-			self.original_title = string.replace(self.original_title, "\t","")
-			self.original_title = string.replace(self.original_title, "\n","")
+		self.original_title = gutils.trim(self.page,"\n\t\t\t\t<span class=\"styt\">"," </span>")
+		self.original_title = string.replace(self.original_title, "\t", '')
+		self.original_title = string.replace(self.original_title, "\n", '')
 
 	def title(self):
 		self.title = gutils.trim(self.page,"<div class=\"tyt\">","<span")
-		self.title = string.replace(self.title, "\t","")
-		self.title = string.replace(self.title, "\n","")
-		if self.original_title == "":
+		self.title = string.replace(self.title, "\t",'')
+		self.title = string.replace(self.title, "\n",'')
+		if self.original_title == '':
 			self.original_title = self.title
 
 	def director(self):
 		self.director = gutils.trim(self.page,"\treżyseria	","\tscenariusz	")
-		self.director = string.replace(self.director, "\t","")
-		self.director = string.replace(self.director, "\n","")
+		self.director = string.replace(self.director, "\t",'')
+		self.director = string.replace(self.director, "\n",'')
 		self.director = string.replace(self.director, ",",", ")
-		self.director = string.replace(self.director, ",  (więcej&#160;...)","")
+		self.director = string.replace(self.director, ",  (więcej&#160;...)",'')
 
 	def plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")
 		url = gutils.trim(self.plot,"\t...","</a>")
 		url = gutils.trim(url, "href=\"","\">")
-		self.plot = string.replace(self.plot, "\t","")
+		self.plot = string.replace(self.plot, "\t",'')
 		self.plot = gutils.strip_tags(self.plot)
 		self.plot = string.replace(self.plot, "\n... więcej","...")
-		if url != "":
+		if url != '':
 			self.plot = self.plot + "\nWIECEJ NA: " + url
 
 	def year(self):
 		self.year = gutils.trim(self.page,"\tdata premiery:","</td>")
-		self.year = gutils.after(self.year,"<b>")
-		self.year = gutils.after(self.year,"<b>")
+		tmp = string.rfind(self.year, "<b>")
+		self.year = self.year[tmp:]
 		self.year = gutils.before(self.year,"</b>")
-		self.year = string.replace(self.year, "\t","")
-		self.year = string.replace(self.year, "\n","")
 
 	def running_time(self):
 		self.running_time = gutils.trim(self.page,"\tczas trwania: ","\n")
 
 	def genre(self):
 		self.genre = gutils.trim(self.page,"\tgatunek: ","\t")
-		self.genre = string.replace(self.genre, "\t","")
-		self.genre = string.replace(self.genre, "\n","")
+		self.genre = string.replace(self.genre, "\t",'')
+		self.genre = string.replace(self.genre, "\n",'')
 
 	def with(self):
 		self.with = gutils.trim(self.page,"alt=\"obsada\" />","</table>")
 		self.with = string.replace(self.with,":&#160;", _(" as "))
 		self.with = string.replace(self.with,_(" as ")+"</td>",_(" as "))
-		self.with = string.replace(self.with, "\n","")
+		self.with = string.replace(self.with, "\n",'')
 		self.with = string.replace(self.with,"</td>","\n")
 		self.with = string.replace(self.with,"valign=\"top\"", "\n")
-		self.with = string.replace(self.with, "\t","")
+		self.with = string.replace(self.with, "\t",'')
 		self.with = gutils.strip_tags(self.with)
 		self.with = string.replace(self.with, _(" as ")+"\n","\n")
 
 	def classification(self):
 		self.classification = gutils.trim(self.page,"\tod lat: ","\t")
-		self.classification = string.replace(self.classification, "\t","")
-		self.classification = string.replace(self.classification, "\n","")
+		self.classification = string.replace(self.classification, "\t",'')
+		self.classification = string.replace(self.classification, "\n",'')
 
 	def studio(self):
 		self.studio = ''
