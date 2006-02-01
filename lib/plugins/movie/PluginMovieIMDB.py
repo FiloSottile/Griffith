@@ -50,8 +50,9 @@ class Plugin(movie.Movie):
         self.title = self.original_title
         
     def director(self):       
-        self.director = gutils.trim(self.page,"<a href=\"/name/","</a><br>")
-        self.director = gutils.after(self.director,">")
+        #self.director = gutils.trim(self.page,"<a href=\"/name/","</a><br>")
+        #self.director = gutils.after(self.director,">")
+        self.director = gutils.trim(self.page,"Directed by</b><br>","<br>")
         
     def plot(self):
         self.plot = gutils.trim(self.page,"<b class=\"ch\">Plot","<a href=\"/rg/title-tease/plot")
