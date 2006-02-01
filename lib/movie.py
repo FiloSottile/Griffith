@@ -32,7 +32,6 @@ import os
 import os.path
 import threading
 import time
-import gdebug
 import tempfile
 
 class Movie:
@@ -155,25 +154,26 @@ class Movie:
 			self.notes = gutils.gdecode(self.notes, self.encode)
 		except:
 			pass
-		self.debug_info()
+		#self.debug_info()
 			
 	def debug_info(self):
-		gdebug.debug("movie number: %s"%self.number)
-		gdebug.debug("original title: %s"%self.original_title)
-		gdebug.debug("title: %s"%self.title)
-		gdebug.debug("picture url: %s"%self.picture_url)
-		gdebug.debug("director: %s"%self.director)
-		gdebug.debug("year: %s"%self.year)
-		gdebug.debug("running time: %s"%self.running_time)
-		gdebug.debug("genre: %s"%self.genre)
-		gdebug.debug("actors: %s"%self.with)
-		gdebug.debug("classification: %s"%self.classification)
-		gdebug.debug("studio: %s"%self.studio)
-		gdebug.debug("imdb: %s"%self.imdb)
-		gdebug.debug("site: %s"%self.site)
-		gdebug.debug("trailer: %s"%self.trailer)
-		gdebug.debug("country: %s"%self.country)
-		gdebug.debug( "rating: %s"%self.rating)
+		pass
+		#gdebug.debug("movie number: %s"%self.number)
+		#gdebug.debug("original title: %s"%self.original_title)
+		#gdebug.debug("title: %s"%self.title)
+		#gdebug.debug("picture url: %s"%self.picture_url)
+		#gdebug.debug("director: %s"%self.director)
+		#gdebug.debug("year: %s"%self.year)
+		#gdebug.debug("running time: %s"%self.running_time)
+		#gdebug.debug("genre: %s"%self.genre)
+		#gdebug.debug("actors: %s"%self.with)
+		#gdebug.debug("classification: %s"%self.classification)
+		#gdebug.debug("studio: %s"%self.studio)
+		#gdebug.debug("imdb: %s"%self.imdb)
+		#gdebug.debug("site: %s"%self.site)
+		#gdebug.debug("trailer: %s"%self.trailer)
+		#gdebug.debug("country: %s"%self.country)
+		#gdebug.debug( "rating: %s"%self.rating)
 		
 class SearchMovie:
 	
@@ -232,7 +232,7 @@ class Retriever(threading.Thread):
 			self.suspend()
 	def hook(self,count, blockSize, totalSize):
 		if totalSize ==-1:
-			gdebug.debug('total size of %s is unknown'%self.URL)
+			pass
 		else:
 			try:
 				downloaded_percentage = min((count*blockSize*100)/totalSize, 100)
@@ -241,9 +241,6 @@ class Retriever(threading.Thread):
 			if count != 0:
 				downloaded_kbyte = int(count * blockSize/1024.0)
 				filesize_kbyte = int(totalSize/1024.0)
-				gdebug.debug('total filesize of %s: %sKb'%(self.URL, filesize_kbyte))
-				gdebug.debug('downloaded kbytes: %sKb'%downloaded_kbyte)
-				gdebug.debug('downloaded percentage: %s'%downloaded_percentage)
 
 class Progress:
 	def __init__(self, window, title, message):
