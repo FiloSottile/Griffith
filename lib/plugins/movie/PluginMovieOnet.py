@@ -23,26 +23,26 @@ from gettext import gettext as _
 import gutils
 import movie,string
 
-plugin_name = "Onet"
-plugin_description = "Onet Film"
-plugin_url = "film.onet.pl"
-plugin_language = _("Polish")
-plugin_author = "Piotr Ozarowski"
+plugin_name         = "Onet"
+plugin_description  = "Onet Film"
+plugin_url          = "film.onet.pl"
+plugin_language     = _("Polish")
+plugin_author       = "Piotr Ozarowski"
 plugin_author_email = "<ozarow@gmail.com>"
-plugin_version = "1.2"
+plugin_version      = "1.3"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
+		self.encode='iso-8859-2'
 		self.movie_id = id
 		self.url = "http://film.onet.pl/" + str(self.movie_id)
-		self.encode='iso-8859-2'
 
-	# reszta z tej klasy jeszcze nie napisana
 	def picture(self):
 		self.picture_url = ''
 		if string.find(self.page,"IMG class=pic alt=\"Plakat\"") <> -1:
 			self.picture_url = gutils.trim(self.page," class=pic alt=\"Plakat\" border=1 src=\"","\">")
 			self.picture_url = 'http://film.onet.pl/' + self.picture_url
+		self.movie_id = '' # often bad characters (problems with decoding polish characters in UTF8), so dont remember ID
 
 	def original_title(self):
 		self.original_title = gutils.trim(self.page,"class=a2 valign=top width=\"100%\"><B>","</B>")
@@ -114,6 +114,7 @@ class Plugin(movie.Movie):
 
 	def notes(self):
 		self.notes = ''
+		self.movie_id = 'onet'	# movie_id often has bad characters, so after fetching poster, delete poster's name
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
