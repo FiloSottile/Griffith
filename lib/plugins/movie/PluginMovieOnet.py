@@ -114,7 +114,6 @@ class Plugin(movie.Movie):
 
 	def notes(self):
 		self.notes = ''
-		self.movie_id = 'onet'	# movie_id often has bad characters, so after fetching poster, delete poster's name
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
