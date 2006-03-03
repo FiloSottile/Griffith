@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-2 -*-
-__revision__ = '$Id: PluginMovieStopklatka.py,v 1.5 2005/09/13 13:50:43 pox Exp $'
+__revision__ = '$Id$'
 # Copyright (c) 2005 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
@@ -29,7 +29,7 @@ plugin_url = "www.stopklatka.pl"
 plugin_language = _("Polish")
 plugin_author = "Piotr Ozarowski"
 plugin_author_email = "<ozarow@gmail.com>"
-plugin_version = "1.4"
+plugin_version = "1.5"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -75,10 +75,13 @@ class Plugin(movie.Movie):
 		self.genre = gutils.after(self.genre,"<b>")
 
 	def with(self):
-		self.with = gutils.trim(self.page,">obsada:<","</b></a></font>")
+		self.with = gutils.trim(self.page,">obsada:</font>","</font>")
 		self.with = gutils.after(self.with,"<b>")
 		self.with = string.replace(self.with,", ", "\n")
 		self.with = string.strip(gutils.strip_tags(self.with))
+		pos = string.find(self.with,"Więcej &gt;")
+		if pos > 0:
+			self.with = self.with[0:pos]
 
 	def classification(self):
 		self.classification = ""
