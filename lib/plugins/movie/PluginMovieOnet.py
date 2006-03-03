@@ -29,7 +29,7 @@ plugin_url          = "film.onet.pl"
 plugin_language     = _("Polish")
 plugin_author       = "Piotr Ozarowski"
 plugin_author_email = "<ozarow@gmail.com>"
-plugin_version      = "1.3"
+plugin_version      = "1.4"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -38,11 +38,16 @@ class Plugin(movie.Movie):
 		self.url = "http://film.onet.pl/" + str(self.movie_id)
 
 	def picture(self):
+		self.movie_id = '' # problems with decoding polish characters in UTF8 => forget ID
+		
 		self.picture_url = ''
-		if string.find(self.page,"IMG class=pic alt=\"Plakat\"") <> -1:
-			self.picture_url = gutils.trim(self.page," class=pic alt=\"Plakat\" border=1 src=\"","\">")
-			self.picture_url = 'http://film.onet.pl/' + self.picture_url
-		self.movie_id = '' # often bad characters (problems with decoding polish characters in UTF8), so dont remember ID
+		pos = string.find(self.page, "alt=\"Galeria\" border=1 src=\"")
+		if pos > 0:
+			self.picture_url = "http://film.onet.pl/" + gutils.trim(self.page[pos:], "src=\"", '"')
+			return
+		pos = string.find(self.page,"IMG class=pic alt=\"Plakat\"")
+		if pos > 0:
+			self.picture_url = "http://film.onet.pl/" + gutils.trim(self.page[pos:],"src=\"","\">")
 
 	def original_title(self):
 		self.original_title = gutils.trim(self.page,"class=a2 valign=top width=\"100%\"><B>","</B>")
@@ -50,7 +55,7 @@ class Plugin(movie.Movie):
 			self.original_title = self.original_title[4:] + ", The"
 
 	def title(self):
-		self.title = gutils.trim(self.page,"<TITLE>Onet.pl - Film - ","</TITLE>")
+		self.title = gutils.trim(self.page,"<TITLE>"," - Onet.pl Film</TITLE>")
 		if self.original_title == '':
 			self.original_title = self.title
 
@@ -64,7 +69,17 @@ class Plugin(movie.Movie):
 			self.director = gutils.before(self.director,"</B>")
 
 	def plot(self):
-		self.plot = gutils.trim(self.page,"<DIV class=a2>","</DIV>")
+		pos = string.find(self.page, "<TD class=tym>Tre¶æ</TD>")
+		if pos > 0:
+			self.plot = self.page[pos:]
+			self.plot = gutils.trim(self.plot, "<DIV class=a2>", "</DIV>")
+			return
+		pos = string.find(self.page,">Recenzje</FONT>&nbsp;")
+		if pos > 0:
+			self.plot = self.page[pos:]
+			self.plot = gutils.trim(self.plot, "<TD class=a1 colspan=3>","<A class=\"ar\" ")
+		else:
+			self.plot = ''
 
 	def year(self):
 		self.year = gutils.trim(self.page,"class=a2 valign=top width=\"100%\">",")<BR>")
