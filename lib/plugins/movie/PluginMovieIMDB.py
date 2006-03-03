@@ -32,7 +32,7 @@ plugin_url = "www.imdb.com"
 plugin_language = _("English")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.5"
+plugin_version = "0.6"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -41,7 +41,8 @@ class Plugin(movie.Movie):
         self.url = "http://imdb.com/title/tt" + str(self.movie_id)
         
     def picture(self):
-        self.picture_url = gutils.trim(self.page,"alt=\"cover\" src=\"","\"")
+    	self.picture_url = gutils.after(self.page,"a name=\"poster\"");
+        self.picture_url = gutils.trim(self.picture_url,"src=\"","\"")
         
     def original_title(self):
         self.original_title = gutils.trim(self.page,"<h1><strong class=\"title\">"," <small>")
@@ -50,8 +51,6 @@ class Plugin(movie.Movie):
         self.title = self.original_title
         
     def director(self):       
-        #self.director = gutils.trim(self.page,"<a href=\"/name/","</a><br>")
-        #self.director = gutils.after(self.director,">")
         self.director = gutils.trim(self.page,"Directed by</b><br>","<br>")
         
     def plot(self):
