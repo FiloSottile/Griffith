@@ -130,7 +130,7 @@ class Plugin(movie.Movie):
         Convert if needed when assigning."""
         tmp_rating = gutils.trim(self.page, "ticas por:</B></Center>", \
             "c_critica.pl?id=")
-        if self.rating:
+        if tmp_rating:
             self.rating = str(float(string.count(tmp_rating, 'estrela.gif'))*2)
         
 class SearchPlugin(movie.SearchMovie):

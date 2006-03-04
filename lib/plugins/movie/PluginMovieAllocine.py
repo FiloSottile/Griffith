@@ -6,7 +6,7 @@ __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
+# the Free Software Foundation; either version 2 of the License, orprint
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -39,16 +39,11 @@ class Plugin(movie.Movie):
         # self.encode='iso-8859-1'
         self.movie_id = id
         self.url = "http://www.allocine.fr/film/fichefilm_gen_cfilm=" + str(self.movie_id) + ".html"
-	print "retrieve " + self.url +"\n"
         
     def picture(self):
-	print "picture foundind ...\n";
         self.picture_url = gutils.trim(self.page,"Poster","Date de sor")
-	print "eesai #0 " + self.picture_url + "\n";
         self.picture_url = gutils.after(self.picture_url,"activerlientexte.inc")
-	print "eesai #1 " + self.picture_url + "\n";
         self.picture_url = gutils.trim(self.picture_url,"<img src=\"","\"")
-	print "eesai #2 " + self.picture_url + "\n";
 
     def original_title(self):
         self.original_title = ""
@@ -60,18 +55,7 @@ class Plugin(movie.Movie):
         self.title = gutils.trim(self.page,"<title>","</title>")
 
     def director(self):       
-        #self.director = gutils.trim(self.page,"<a href=\"/name/","</a><br>")
-        #self.director = gutils.after(self.director,">")
-        #self.director = gutils.trim(self.page,"Directed by</b><br>","<br>")
-        self.director = gutils.trim(self.page," par <","</a>")
-        self.director = gutils.after(self.director,">")
-	print "**1* " + self.director + "\n"
-	#PLL
-
-        self.director = ""
-        self.director = gutils.trim(self.page,"<h4>RÃ©alisÃ© par ","</h4>")
-	self.director = gutils.strip_tags(self.director)
-	print "**2* " + self.director + "\n"
+        self.director = gutils.trim(self.page,"<h4>Réalisé par ","</a></h4>")
         
     def plot(self):
         self.plot = gutils.trim(self.page,"Synopsis</b></h3></td></tr></table>","</h4>")
@@ -79,22 +63,19 @@ class Plugin(movie.Movie):
         
     def year(self):
         self.year = gutils.trim(self.page,"e de production : ","</h4>")
-	#PLL
         
     def running_time(self):
-        self.running_time = gutils.trim(self.page,"Dur*e : ","min")
-        #self.running_time = self.running_time*60
-	#self.running_time = self.running_time + gutils.trim(self.page,"h ","min")
-	#PLL
+        self.running_time = gutils.trim(self.page,"<h4>Durée : ","min.</h4>&nbsp;")
         
     def genre(self):
         self.genre = gutils.trim(self.page,"<h4>Genre : ","</h4>")
-	self.genre = gutils.strip_tags(self.genre)
+        self.genre = gutils.strip_tags(self.genre)
         
     def with(self):
         self.with = ""
         self.with = gutils.trim(self.page,"<h4>Avec ","</h4>")
-	self.with = gutils.strip_tags(self.with)
+        self.with = gutils.strip_tags(self.with)
+        self.with = string.replace(self.with,", ", "\n")
         
     def classification(self):
         self.classification = ""
@@ -113,20 +94,19 @@ class Plugin(movie.Movie):
         
     def country(self):
         self.country = gutils.trim(self.page,"<h4>Film ",".</h4>&nbsp;")
-        # self.country = gutils.after(self.country,"/\">")
         
     def rating(self):
-        self.rating = gutils.trim(self.page, """<b class="ch">User Rating:</b>""","/10</b> (")
+        """Find the film's rating. From 0 to 10. 
+        Convert if needed when assigning."""
+        self.rating = gutils.trim(self.page, "http://a69.g.akamai.net/n/69/10688/v1/img5.allocine.fr/acmedia/skin/allocinev5/icone/etoile_", ".gif\" border=\"0\"")
         if self.rating:
-            self.rating = str(float(gutils.clean(self.rating)))
+            self.rating = str(float(int(self.rating)*2))
         
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
         self.original_url_search    = "http://www.allocine.fr/recherche/?motcle="
         self.translated_url_search    = "http://www.allocine.fr/recherche/?motcle="
-        # self.encode='iso-8859-1'
-        # self.encode='utf8'
         
     def search(self,parent_window):
         self.open_search(parent_window)
@@ -134,17 +114,13 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
         
     def sub_search(self):
-	if (string.find(self.page,"ponse)</h4") > 0):
-        	self.page = gutils.trim(self.page,"ponse)</h4>", "<hr /></td>");
-	if (string.find(self.page,"ponses)</h4") > 0 ):
-        	self.page = gutils.trim(self.page,"ponses)</h4>", "<b>Rechercher :");
-        # self.page = self.page.decode('iso-8859-1')
+        self.page = gutils.trim(self.page,"Recherche : <b>", "<h3><b>Articles <h4>");
         
     def get_searches(self):
-        self.elements = string.split(self.page,"<h4><a href")
+        self.elements = string.split(self.page,"<td colspan=\"2\" height=\"1\" valign=\"top\"><hr /></td>")
         if (self.elements[0]<>''):
             for element in self.elements:
                 self.ids.append(gutils.trim(element,"/film/fichefilm_gen_cfilm=",".html"))
                 self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.trim(element,"link1\">","</a>"))))    
         else:
-            pass
+        	pass
