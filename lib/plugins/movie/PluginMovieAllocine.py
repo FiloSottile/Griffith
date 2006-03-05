@@ -36,7 +36,6 @@ plugin_version = "0.5"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        # self.encode='iso-8859-1'
         self.movie_id = id
         self.url = "http://www.allocine.fr/film/fichefilm_gen_cfilm=" + str(self.movie_id) + ".html"
         
@@ -62,10 +61,13 @@ class Plugin(movie.Movie):
         self.plot = gutils.after(self.plot,"<h4>")
         
     def year(self):
-        self.year = gutils.trim(self.page,"e de production : ","</h4>")
+        self.year = gutils.trim(self.page,"Année de production : ","</h4>")
         
     def running_time(self):
+	self.running_time = ""
         self.running_time = gutils.trim(self.page,"<h4>Durée : ","min.</h4>&nbsp;")
+        if self.running_time:
+        	self.running_time = str (int(gutils.before(self.running_time,"h"))*60 + int(gutils.after(self.running_time,"h")))
         
     def genre(self):
         self.genre = gutils.trim(self.page,"<h4>Genre : ","</h4>")
@@ -96,11 +98,10 @@ class Plugin(movie.Movie):
         self.country = gutils.trim(self.page,"<h4>Film ",".</h4>&nbsp;")
         
     def rating(self):
-        """Find the film's rating. From 0 to 10. 
-        Convert if needed when assigning."""
-        self.rating = gutils.trim(self.page, "http://a69.g.akamai.net/n/69/10688/v1/img5.allocine.fr/acmedia/skin/allocinev5/icone/etoile_", ".gif\" border=\"0\"")
+        self.rating = gutils.trim(self.page, "Spectateurs</a> ", "</h4>")
+        self.rating = gutils.trim(self.rating, "etoile_", ".gif")
         if self.rating:
-            self.rating = str(float(int(self.rating)*2))
+            self.rating = str(float(int(self.rating)*2.25))
         
 class SearchPlugin(movie.SearchMovie):
 
