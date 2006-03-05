@@ -176,7 +176,6 @@ class Movie:
 		#gdebug.debug( "rating: %s"%self.rating)
 		
 class SearchMovie:
-	
 	page = None
 	number_results = None
 	titles = [""]
@@ -196,7 +195,11 @@ class SearchMovie:
 		self.ids = [""]
 		self.url=string.replace(self.url+self.title,' ','%20')
 		progress = Progress(parent_window,_("Searching"),_("Wait a moment"))
-		retriever = Retriever(self.url, parent_window, progress)
+		try:
+			url = self.url.encode(self.encode)
+		except UnicodeEncodeError:
+			url = self.url.encode('utf-8')
+		retriever = Retriever(url, parent_window, progress)
 		retriever.start()
 		while retriever.isAlive():
 			progress.pulse()
@@ -224,6 +227,7 @@ class Retriever(threading.Thread):
 	def run(self):
 		try:
 			self.html = urlretrieve(self.URL, self.destination, self.hook)
+			#self.html = urlretrieve(self.URL.encode('utf-8'), self.destination, self.hook)
 			if self.progress.status:
 				self.html = []			   
 		except IOError:			 
