@@ -85,8 +85,12 @@ class Movie:
 	def fetch_picture(self):
 		if len(self.picture_url):
 			try:
+				if os.name == 'nt' or os.name == 'win32':
+					temp_dir = "c:\\tmp\\"
+				else:
+					temp_dir = "/tmp/"
 				tmp_dest = tempfile.mktemp(suffix=self.movie_id, prefix='poster_', \
-					dir=os.path.join(gglobals.griffith_dir,"posters"))
+					dir=temp_dir)
 				self.picture = "%s.jpg" % \
 					(string.replace(tmp_dest,os.path.join(gglobals.griffith_dir, \
 					"posters")+"/",""))
