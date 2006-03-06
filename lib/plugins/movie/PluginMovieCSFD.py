@@ -143,8 +143,8 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.encode = "WINDOWS-1250"
-		self.original_url_search   = "http://www.csfd.cz/search.php?search="
-		self.translated_url_search = "http://www.csfd.cz/search.php?search="
+		self.original_url_search   = "http://www.csfd.cz/search_pg.php?search="
+		self.translated_url_search = "http://www.csfd.cz/search_pg.php?search="
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
