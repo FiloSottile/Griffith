@@ -22,6 +22,7 @@ __revision__ = '$Id$'
 from gettext import gettext as _
 import gutils
 import movie,string
+import re
 
 plugin_name = "AnimeDB"
 plugin_description = "Anime DataBase"
@@ -29,11 +30,11 @@ plugin_url = "www.anidb.info"
 plugin_language = _("English")
 plugin_author = "Piotr Ozarowski"
 plugin_author_email = "<ozarow@gmail.com>"
-plugin_version = "1.3"
+plugin_version = "1.4"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-        	self.encode="iso-8859-1"
+		self.encode="iso-8859-1"
 		if string.find(id, "http://") != -1:
 			self.url = str(id)
 			self.movie_id = "anidb"
@@ -46,10 +47,9 @@ class Plugin(movie.Movie):
 		if self.movie_id == "anidb":
 			self.movie_id = gutils.trim(self.page, "animedb.pl?show=addgenren&aid=", "&")
 			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=" + self.movie_id
-		self.page = gutils.trim(self.page,"<h1>Show Anime - ","</table>\n<hr>")	# should go to sub_page function!
+		self.page = gutils.trim(self.page,"<h1>Show Anime - ","<table border=0>\n\t<tr>")	# should go to sub_page function!
 		
-		self.picture_url = gutils.trim(self.page,"<img src=\"http://img3.anidb.info/pics/anime/","\" border=0")
-		self.picture_url = "http://img3.anidb.info/pics/anime/" + self.picture_url
+		self.picture_url = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page).group()
 
 	def original_title(self):
 		self.original_title = gutils.trim(self.page,"<td> Title: </td>"," </td>")
@@ -165,7 +165,7 @@ class SearchPlugin(movie.SearchMovie):
 			self.elements = string.split(self.page,"<tr>")
 			self.number_results = self.elements[-1]
 
-        		if (len(self.elements[0])):
+			if (len(self.elements[0])):
 				for element in self.elements:
 					element = gutils.trim(element,"<td","</td>")
 					self.ids.append(gutils.trim(element,"animedb.pl?show=anime&aid=","\""))
