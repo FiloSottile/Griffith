@@ -81,7 +81,7 @@ class Movie:
 		except IOError:
 			pass
 		urlcleanup()
-		
+
 	def fetch_picture(self):
 		if len(self.picture_url):
 			try:
@@ -110,7 +110,7 @@ class Movie:
 				self.picture = ""
 		else:
 			self.picture = ""
-		
+
 	def parse_movie(self):
 		self.picture()
 		self.fetch_picture()
@@ -159,7 +159,7 @@ class Movie:
 		except:
 			pass
 		#self.debug_info()
-			
+
 	def debug_info(self):
 		pass
 		#gdebug.debug("movie number: %s"%self.number)
@@ -178,7 +178,7 @@ class Movie:
 		#gdebug.debug("trailer: %s"%self.trailer)
 		#gdebug.debug("country: %s"%self.country)
 		#gdebug.debug( "rating: %s"%self.rating)
-		
+
 class SearchMovie:
 	page = None
 	number_results = None
@@ -193,7 +193,7 @@ class SearchMovie:
 
 	def __init__(self):
 		pass
-	
+
 	def open_search(self,parent_window):
 		self.titles = [""]
 		self.ids = [""]
