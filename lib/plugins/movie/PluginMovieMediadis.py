@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# $Id: PluginMovieMediadis.py,v 1.1 2005/09/23 21:43:12 iznogoud Exp $
+# $Id$
 
 # Copyright (c) 2005 Vasco Nunes
 # You may use and distribute this software under the terms of the

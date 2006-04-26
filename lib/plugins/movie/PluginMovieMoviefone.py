@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# $Id: PluginMovieMoviefone.py,v 1.1 2005/09/18 14:37:08 iznogoud Exp $
+# $Id$
 
 # Copyright (c) 2005 Vasco Nunes
 # You may use and distribute this software under the terms of the

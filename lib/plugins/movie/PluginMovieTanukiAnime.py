@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-2 -*-
-__revision__ = '$Id: PluginMovieTanukiAnime.py,v 1.2 2005/09/22 21:47:46 pox Exp $'
+__revision__ = '$Id$'
 # Copyright (c) 2005 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
