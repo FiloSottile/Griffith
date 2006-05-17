@@ -124,15 +124,15 @@ class Plugin(movie.Movie):
 		self.with = self.with.replace("<TR  CLASS=\"dbtrefferdark\">", "\n")
 		self.with = self.with.replace("&nbsp;", "--flip--")
 		self.with = gutils.clean(self.with)
-		self.elements1 = self.with.split("\n")
+		elements = self.with.split("\n")
 		self.with = ''
-		for element1 in self.elements1:
-			self.elements2 = element1.split("--flip--")
-			if len(self.elements2) > 1:
-				self.with += self.elements2[1] + "--flip--" + self.elements2[0] + "\n"
+		for element in elements:
+			elements2 = element.split("--flip--")
+			if len(elements2) > 1:
+				self.with += elements2[1] + "--flip--" + elements2[0] + "\n"
 			else:
-				self.with = element1
-		self.with = self.with.replace("--flip--", _(" as "))
+				self.with = element
+		self.with = string.replace(self.with, "--flip--", _(" as "))
 
 	def classification(self):
 		self.classification = gutils.trim(self.page,"FSK: ","</b>")
