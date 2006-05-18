@@ -102,7 +102,7 @@ class Plugin(movie.Movie):
 	def country(self):
 		self.country = gutils.trim(self.page,">kraj:<","</b>")
 		self.country = gutils.after(self.country,"<b>")
-		
+
 	def rating(self):
 		self.rating = "0"
 
@@ -126,14 +126,13 @@ class SearchPlugin(movie.SearchMovie):
 		self.page = self.page.replace('¹','±')
 
 	def get_searches(self):
-		self.elements = string.split(self.page,"<li>")
-		self.number_results = self.elements[-1]
+		elements = string.split(self.page,"<li>")
+		self.number_results = elements[-1]
 
-		if (self.elements[0]<>''):
-			for element in self.elements:
+		if (elements[0]<>''):
+			for element in elements:
 				self.ids.append(gutils.trim(element,"/film/film.asp?fi=","\"><b>"))
 				self.titles.append(gutils.convert_entities(gutils.trim(element,"<b>","</b></a>")))
 		else:
 			self.number_results = 0
-
 # vim: encoding=iso-8859-2

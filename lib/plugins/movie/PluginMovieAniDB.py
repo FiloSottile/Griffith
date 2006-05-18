@@ -48,7 +48,7 @@ class Plugin(movie.Movie):
 			self.movie_id = gutils.trim(self.page, "animedb.pl?show=addgenren&aid=", "&")
 			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=" + self.movie_id
 		self.page = gutils.trim(self.page,"<h1>Show Anime - ","<table border=0>\n\t<tr>")	# should go to sub_page function!
-		
+
 		self.picture_url = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page).group()
 
 	def original_title(self):
@@ -150,23 +150,23 @@ class SearchPlugin(movie.SearchMovie):
 
 	def sub_search(self):
 		tmp = string.find(self.page,"<h1>Anime List - Search for: ")
-		if tmp == -1:		# already movie page
+		if tmp == -1:		# already a movie page
 			self.page = ''
 		else:			# multiple matches
 			self.page = gutils.trim(self.page,">hide synonyms</a><hr>", "<hr>");
 			self.page = gutils.after(self.page,"</tr>");
 
 	def get_searches(self):
-		if self.page == '':	# already movie page 
+		if self.page == '':	# already a movie page
 			self.number_results = 1
 			self.ids.append(self.url)
 			self.titles.append(self.title)
 		else:			# multiple matches
-			self.elements = string.split(self.page,"<tr>")
-			self.number_results = self.elements[-1]
+			elements = string.split(self.page,"<tr>")
+			self.number_results = elements[-1]
 
-			if (len(self.elements[0])):
-				for element in self.elements:
+			if (len(elements[0])):
+				for element in elements:
 					element = gutils.trim(element,"<td","</td>")
 					self.ids.append(gutils.trim(element,"animedb.pl?show=anime&aid=","\""))
 					element = gutils.after(element,"\">")

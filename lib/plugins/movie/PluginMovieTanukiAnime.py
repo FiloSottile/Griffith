@@ -110,19 +110,19 @@ class Plugin(movie.Movie):
 		t = self.page.find("<tr><th scope=\"row\">Autor:</th>")
 		if t != -1:
 			self.notes += "Autor: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
-		
+
 		t = self.page.find("<th scope=\"row\">Projekt:</th>")
 		if t != -1:
 			self.notes += "Projekt: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
-		
+
 		t = self.page.find("<tr><th scope=\"row\">Scenariusz:</th>")
 		if t != -1:
 			self.notes += "Scenariusz: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
-		
+
 		t = self.page.find("<th scope=\"row\">Muzyka:</th>")
 		if t != -1:
 			self.notes += "Muzyka: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
-		
+
 		self.notes += '\n' + gutils.trim(self.page,"<p class=\"dwazdania\">\n\t\t", "\n</p>")
 
 class SearchPlugin(movie.SearchMovie):
@@ -150,10 +150,10 @@ class SearchPlugin(movie.SearchMovie):
 			self.ids.append(self.url)
 			self.titles.append(gutils.convert_entities(self.title))
 		else:			# multiple matches
-			self.elements = string.split(self.page,"<tr")
-			self.number_results = self.elements[-1]
-			if (self.elements[0]<>''):
-				for element in self.elements:
+			elements = string.split(self.page,"<tr")
+			self.number_results = elements[-1]
+			if (elements[0]<>''):
+				for element in elements:
 					self.ids.append(gutils.trim(element,"href=\"/strony/anime/","\" >"))
 					element = gutils.after(element," >\n\t")
 					element = element.replace("</a>\n\t</td>\n", " (")

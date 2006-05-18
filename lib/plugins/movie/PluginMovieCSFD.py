@@ -39,7 +39,7 @@ class Plugin(movie.Movie):
 		self.url = "http://www.csfd.cz/film.php?text=1&rec=&top=&kom=1&id="+str(id)
 
 	def picture(self):
-		self.picture_url = gutils.trim(self.page, "img src=\"posters/", "_1.jpg") 
+		self.picture_url = gutils.trim(self.page, "img src=\"posters/", "_1.jpg")
 		self.picture_url = "http://www.csfd.cz/posters/%s_1.jpg" % self.picture_url
 
 	def original_title(self):

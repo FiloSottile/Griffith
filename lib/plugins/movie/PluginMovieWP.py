@@ -131,16 +131,15 @@ class SearchPlugin(movie.SearchMovie):
 		self.page = re.sub(r"<a href=\"http://film.wp.pl/h,1,id,[0-9]+,osoba.html\">", "", self.page)
 
 	def get_searches(self):
-		self.elements = string.split(self.page,"http://film.wp.pl/h,1")
-		self.number_results = self.elements[-1]
+		elements = string.split(self.page,"http://film.wp.pl/h,1")
+		self.number_results = elements[-1]
 
-		if (self.elements[0]<>''):
-			for element in self.elements:
+		if (elements[0]<>''):
+			for element in elements:
 				self.ids.append(gutils.trim(element,",id,",",film.html\">"))
 				element = gutils.trim(element,">","</")
 				element = gutils.strip_tags(element)
 				self.titles.append(element)
 		else:
 			self.number_results = 0
-
 # vim: encoding=iso-8859-2

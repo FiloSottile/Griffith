@@ -39,7 +39,7 @@ class Plugin(movie.Movie):
 
 	def picture(self):
 		self.movie_id = '' # problems with decoding polish characters in UTF8 => forget ID
-		
+
 		self.picture_url = ''
 		pos = string.find(self.page, "alt=\"Galeria\" border=1 src=\"")
 		if pos > 0:
@@ -146,11 +146,11 @@ class SearchPlugin(movie.SearchMovie):
 		self.page = gutils.after(self.page,"</SPAN></DIV><BR>");
 
 	def get_searches(self):
-		self.elements = string.split(self.page," class=pic")
-		self.number_results = self.elements[-1]
+		elements = string.split(self.page," class=pic")
+		self.number_results = elements[-1]
 
-		if (self.elements[0]<>''):
-			for element in self.elements:
+		if (elements[0]<>''):
+			for element in elements:
 				self.ids.append(gutils.trim(element,"class=a2 width=\"100%\"><A href=\"","\" class=u"))
 				element = gutils.trim(element,"class=u><B>","</B>")
 				element = gutils.strip_tags(element)

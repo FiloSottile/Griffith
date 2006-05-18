@@ -23,13 +23,13 @@ from gettext import gettext as _
 import gutils
 import movie,string
 
-plugin_name         = "Filmweb"
-plugin_description  = "Web pelen filmow"
-plugin_url          = "www.filmweb.pl"
-plugin_language     = _("Polish")
-plugin_author       = "Piotr Ozarowski"
-plugin_author_email = "<ozarow@gmail.com>"
-plugin_version      = "1.5"
+plugin_name		= "Filmweb"
+plugin_description	= "Web pelen filmow"
+plugin_url		= "www.filmweb.pl"
+plugin_language		= _("Polish")
+plugin_author		= "Piotr Ozarowski"
+plugin_author_email	= "<ozarow@gmail.com>"
+plugin_version		= "1.5"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -154,15 +154,14 @@ class SearchPlugin(movie.SearchMovie):
 			self.ids.append(self.url)
 			self.titles.append(gutils.convert_entities(self.title))
 		else:			# multiple matches
-			self.elements = string.split(self.page,"<a title=")
-			self.number_results = self.elements[-1]
-			if (self.elements[0]<>''):
-				for element in self.elements:
+			elements = string.split(self.page,"<a title=")
+			self.number_results = elements[-1]
+			if (elements[0]<>''):
+				for element in elements:
 					self.ids.append(gutils.trim(element,"href=\"","\">"))
 					element = gutils.trim(element,"'","' href=")
 					element = gutils.convert_entities(element)
 					self.titles.append(element)
 			else:
 				self.number_results = 0
-
 # vim: encoding=iso-8859-2
