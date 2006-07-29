@@ -32,7 +32,7 @@ plugin_url		= "www.imdb.com"
 plugin_language		= _("English")
 plugin_author		= "Vasco Nunes"
 plugin_author_email	= "<vasco.m.nunes@gmail.com>"
-plugin_version		= "0.6"
+plugin_version		= "0.7"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -75,6 +75,8 @@ class Plugin(movie.Movie):
 			self.with = gutils.trim(self.page,"cast: ","<a href=\"fullcredits\">")
 		self.with = string.replace(self.with," .... ",_(" as "))
 		self.with = string.replace(self.with,"</tr><tr>", "\n")
+		self.with = string.replace(self.with,'</tr><tr bgcolor="#FFFFFF">', "\n")
+		self.with = string.replace(self.with,'</tr><tr bgcolor="#F0F0F0">', "\n")
 		self.with = string.strip(gutils.strip_tags(self.with))
 
 	def classification(self):
