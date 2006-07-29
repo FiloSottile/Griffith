@@ -63,7 +63,7 @@ class Movie:
 	encode = 'iso-8859-1'
 	debug = False
 	rating = 0  
-	notes = ""	  
+	notes = ''
 	def open_page(self,parent_window):
 		self.parent_window = parent_window
 		progress = Progress(parent_window,_("Fetching data"),_("Wait a moment"))
@@ -233,8 +233,8 @@ class Retriever(threading.Thread):
 			self.html = urlretrieve(self.URL, self.destination, self.hook)
 			#self.html = urlretrieve(self.URL.encode('utf-8'), self.destination, self.hook)
 			if self.progress.status:
-				self.html = []			   
-		except IOError:			 
+				self.html = []
+		except IOError: 
 			self.progress.dialog.hide()
 			gutils.urllib_error(_("Connection error"), self.parent_window)
 			self.suspend()
