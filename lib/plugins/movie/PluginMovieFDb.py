@@ -33,13 +33,17 @@ plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ozarowski'
 plugin_author_email	= '<ozarow@gmail.com>'
-plugin_version		= '1.1'
+plugin_version		= '1.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, movie_id):
+		from md5 import md5
+		self.movie_id = md5(movie_id).hexdigest()
 		self.encode   = 'utf-8'
-		self.movie_id = movie_id
-		self.url      = "http://fdb.pl/%s" % str(self.movie_id)
+		if string.find(movie_id, 'http://') != -1:
+			self.url = str(movie_id)
+		else:
+			self.url = "http://fdb.pl/%s" % str(movie_id)
 
 	def picture(self):
 		self.picture_url = gutils.trim(self.page, 'class="moviePosterTable"', '</td>');
@@ -49,7 +53,7 @@ class Plugin(movie.Movie):
 	def original_title(self):
 		self.original_title = gutils.trim(self.page,"<div class=\"movieOtherTitle\">\n          ","\n")
 		if self.original_title[:4] == 'The ':
-			self.original_title = self.original_title[4:] + ", The"
+			self.original_title = self.original_title[4:] + ', The'
 
 	def title(self):
 		self.title = gutils.trim(self.page,'<div class="movieTitle" >','  ')
@@ -67,7 +71,7 @@ class Plugin(movie.Movie):
 				element = gutils.trim(element, '>', '</a')
 				if element != '':
 					self.director += ', ' + element
-			self.director = self.director[2:]
+			self.director = string.replace(self.director[2:], ', &nbsp;&nbsp;&nbsp;(więcej)', '')
 
 	def plot(self):
 		self.plot = gutils.trim(self.page,'>Opis filmu:</div>','</div>')
@@ -124,20 +128,29 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,'<div>Wyniki wyszukiwania dla', '<div id="mapaSerwisu">');
+		tmp = string.find(self.page,'<div>Wyniki wyszukiwania dla')
+		if tmp == -1:		# already a movie page
+			self.page = ''
+		else:			# multiple matches
+			self.page = gutils.before(self.page[tmp:],'<div id="mapaSerwisu">');
 		return self.page
 
 	def get_searches(self):
-		elements = string.split(self.page,'<div class="searchItem">')
-		if elements[0] != '':
-			for element in elements:
-				self.ids.append(gutils.trim(element,"<a href=\"/","\""))
-				element = gutils.strip_tags(
-							gutils.trim(element,"\">","</div>"))
-				element = element.replace("\n", '')
-				element = element.replace('   ', '')
-				element = element.replace('aka ', ' aka ')
-				element = element.replace(' - Oryginalny', '')
-				self.titles.append(element)
-		else:
-			self.number_results = 0
+		if self.page == '':	# movie page already
+			self.number_results = 1
+			self.ids.append(self.url)
+			self.titles.append(self.title)
+		else:			# multiple matches
+			elements = string.split(self.page,'<div class="searchItem">')
+			if len(elements)>0:
+				for element in elements:
+					self.ids.append(gutils.trim(element,"<a href=\"/","\""))
+					element = gutils.strip_tags(
+								gutils.trim(element,"\">","</div>"))
+					element = element.replace("\n", '')
+					element = element.replace('   ', '')
+					element = element.replace('aka ', ' aka ')
+					element = element.replace(' - Oryginalny', '')
+					self.titles.append(element)
+			else:
+				self.number_results = 0
