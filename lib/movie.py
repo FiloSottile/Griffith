@@ -86,7 +86,8 @@ class Movie:
 		if len(self.picture_url):
 			try:
 				if os.name == 'nt' or os.name == 'win32':
-					temp_dir = "C:\\windows\\temp\\"
+					temp_dir = tempfile.gettempdir()
+					temp_dir = temp_dir + "\\"
 				else:
 					temp_dir = "/tmp/"
 				tmp_dest = tempfile.mktemp(suffix=self.movie_id, prefix='poster_', \
