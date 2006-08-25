@@ -42,13 +42,13 @@ class Plugin(movie.Movie):
 			self.movie_id = str(id)
 			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=" + self.movie_id
 
-	def picture(self):
-		# TODO: move this to __init__
+	def initialize(self):
 		if self.movie_id == "anidb":
 			self.movie_id = gutils.trim(self.page, "animedb.pl?show=addgenren&aid=", "&")
 			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=" + self.movie_id
 		self.page = gutils.trim(self.page,"<h1>Show Anime - ","<table border=0>\n\t<tr>")	# should go to sub_page function!
 
+	def picture(self):
 		self.picture_url = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page).group()
 
 	def original_title(self):

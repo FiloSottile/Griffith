@@ -40,13 +40,13 @@ class Plugin(movie.Movie):
 			self.movie_id = str(id)
 			self.url = "http://anime.tanuki.pl/strony/anime/"+str(id)
 		self.encode='UTF-8'
-
-	def picture(self):
-		# TODO: move it to __init__
-		if self.movie_id == "TA":
+	
+	def initialize(self):
+		if self.movie_id == 'TA':
 			self.movie_id = gutils.trim(self.page, "\"><a href=\"/strony/anime/", "/oceny")
 			self.url = "http://anime.tanuki.pl/strony/anime/" + self.movie_id
 
+	def picture(self):
 		self.picture_url = gutils.trim(self.page,"<img src=\"/screens/","<br />")
 		self.picture_url = gutils.before(self.picture_url,"\"")
 		self.picture_url = "http://anime.tanuki.pl/screens/" + self.picture_url

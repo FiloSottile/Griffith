@@ -112,53 +112,74 @@ class Movie:
 		else:
 			self.picture = ""
 
-	def parse_movie(self):
-		self.picture()
-		self.fetch_picture()
-		self.original_title()
-		self.original_title = gutils.clean(self.original_title)
-		self.original_title = gutils.gdecode(self.original_title, self.encode)
-		self.title()
-		self.title = gutils.clean(self.title)
-		self.title = gutils.gdecode(self.title, self.encode)
-		self.director()
-		self.director = gutils.clean(self.director)
-		self.director = gutils.gdecode(self.director, self.encode)
-		self.plot()
-		self.plot = gutils.clean(self.plot)
-		self.plot = gutils.gdecode(self.plot, self.encode)
-		self.year()
-		self.year = gutils.clean(self.year)
-		self.running_time()
-		self.running_time = gutils.clean(self.running_time)
-		self.genre()
-		self.genre = gutils.clean(self.genre)
-		self.genre = gutils.gdecode(self.genre, self.encode)
-		self.with()
-		self.with = gutils.clean(self.with)
-		self.with = gutils.gdecode(self.with, self.encode)
-		self.classification()
-		self.classification = gutils.clean(self.classification)
-		self.classification = gutils.gdecode(self.classification, self.encode)
-		self.studio()
-		self.studio = gutils.clean(self.studio)
-		self.studio = gutils.gdecode(self.studio, self.encode)
-		self.site()
-		self.site = gutils.clean(self.site)
-		self.imdb()
-		self.imdb = gutils.clean(self.imdb)
-		self.trailer()
-		self.trailer = gutils.clean(self.trailer)
-		self.country()
-		self.country = gutils.clean(self.country)
-		self.country = gutils.gdecode(self.country, self.encode)
-		self.rating()
+	def parse_movie(self, config):
 		try:
-			self.notes()
-			self.notes = gutils.clean(self.notes)
-			self.notes = gutils.gdecode(self.notes, self.encode)
+			self.initialize()
 		except:
 			pass
+		if config.get('s_image'):
+			self.picture()
+			self.fetch_picture()
+		if config.get('s_o_title'):
+			self.original_title()
+			self.original_title = gutils.clean(self.original_title)
+			self.original_title = gutils.gdecode(self.original_title, self.encode)
+		if config.get('s_title'):
+			self.title()
+			self.title = gutils.clean(self.title)
+			self.title = gutils.gdecode(self.title, self.encode)
+		if config.get('s_director'):
+			self.director()
+			self.director = gutils.clean(self.director)
+			self.director = gutils.gdecode(self.director, self.encode)
+		if config.get('s_plot'):
+			self.plot()
+			self.plot = gutils.clean(self.plot)
+			self.plot = gutils.gdecode(self.plot, self.encode)
+		if config.get('s_year'):
+			self.year()
+			self.year = gutils.clean(self.year)
+		if config.get('s_runtime'):
+			self.running_time()
+			self.running_time = gutils.clean(self.running_time)
+		if config.get('s_genre'):
+			self.genre()
+			self.genre = gutils.clean(self.genre)
+			self.genre = gutils.gdecode(self.genre, self.encode)
+		if config.get('s_with'):
+			self.with()
+			self.with = gutils.clean(self.with)
+			self.with = gutils.gdecode(self.with, self.encode)
+		if config.get('s_classification'):
+			self.classification()
+			self.classification = gutils.clean(self.classification)
+			self.classification = gutils.gdecode(self.classification, self.encode)
+		if config.get('s_studio'):
+			self.studio()
+			self.studio = gutils.clean(self.studio)
+			self.studio = gutils.gdecode(self.studio, self.encode)
+		if config.get('s_o_site'):
+			self.site()
+			self.site = gutils.clean(self.site)
+		if config.get('s_site'):
+			self.imdb()
+			self.imdb = gutils.clean(self.imdb)
+		if config.get('s_trailer'):
+			self.trailer()
+			self.trailer = gutils.clean(self.trailer)
+		if config.get('s_country'):
+			self.country()
+			self.country = gutils.clean(self.country)
+			self.country = gutils.gdecode(self.country, self.encode)
+		if config.get('s_rating'):
+			self.rating()
+		if config.get('s_notes'):
+			try:
+				self.notes()
+				self.notes = gutils.clean(self.notes)
+				self.notes = gutils.gdecode(self.notes, self.encode)
+			except:
+				pass
 		#self.debug_info()
 
 	def debug_info(self):
@@ -235,7 +256,7 @@ class Retriever(threading.Thread):
 			#self.html = urlretrieve(self.URL.encode('utf-8'), self.destination, self.hook)
 			if self.progress.status:
 				self.html = []
-		except IOError: 
+		except IOError:
 			self.progress.dialog.hide()
 			gutils.urllib_error(_("Connection error"), self.parent_window)
 			self.suspend()

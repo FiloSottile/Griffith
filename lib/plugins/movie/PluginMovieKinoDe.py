@@ -50,11 +50,13 @@ class Plugin(movie.Movie):
 			self.url_type = "K"
 		self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
 
-	def picture(self):
+	def initialize(self):
 		if (gutils.trim(self.url, "typ=", "&") <> "film"):
 			self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
 			self.open_page(self.parent_window)
 		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
+	
+	def picture(self):
 		if (self.url_type == "V"):
 			self.picture_url = "http://www.kino.de/pix/MBBILDER/VIDEO/" + gutils.trim(self.tmp_page,"IMG SRC=\"/pix/MBBILDER/VIDEO/", "\"")
 		else:

@@ -37,11 +37,11 @@ class Plugin(movie.Movie):
 		self.url = "http://www.stopklatka.pl/film/film.asp?fi=" + str(self.movie_id)
 		self.encode='iso-8859-2'
 
-	def picture(self):
-		# TODO: move this to __init__
+	def initialize(self):
 		self.page = self.page.replace('\x9c','¶')
 		self.page = self.page.replace('¹','±')
 
+	def picture(self):
 		self.picture_url = gutils.trim(self.page,"http://img.stopklatka.pl/film/","' border=1")
 		self.picture_url = 'http://img.stopklatka.pl/film/' + self.picture_url
 

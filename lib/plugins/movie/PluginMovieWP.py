@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-2 -*-
 __revision__ = '$Id$'
-# Copyright (c) 2005 Piotr Ozarowski
+# Copyright (c) 2005-2006 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,13 +24,13 @@ import gutils
 import movie,string
 import re
 
-plugin_name = "Wirtualna Polska"
-plugin_description = "Serwis filmowy Wirtualnej Polski"
-plugin_url = "www.film.wp.pl"
-plugin_language = _("Polish")
-plugin_author = "Piotr Ozarowski"
-plugin_author_email = "<ozarow@gmail.com>"
-plugin_version = "1.4"
+plugin_name         = 'Wirtualna Polska'
+plugin_description  = 'Serwis filmowy Wirtualnej Polski'
+plugin_url          = 'www.film.wp.pl'
+plugin_language     = _('Polish')
+plugin_author       = 'Piotr Ozarowski'
+plugin_author_email = '<ozarow@gmail.com>'
+plugin_version      = '1.4'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -38,8 +38,10 @@ class Plugin(movie.Movie):
 		self.url = "http://film.wp.pl/h,1,id,%s,film.html" % str(self.movie_id)
 		self.encode='iso-8859-2'
 
-	def picture(self):
+	def initialize(self):
 		self.page = gutils.trim(self.page,"<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">","<script ")	# should go to sub_page function!
+
+	def picture(self):
 		if string.find(self.page,"http://film.wp.pl/f/no.gif") > -1:
 			self.picture_url = ""
 		else:
@@ -117,18 +119,15 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.encode='iso-8859-2'
-		self.original_url_search	= "http://film.wp.pl/p/szukaj.html?w="
-		self.translated_url_search	= "http://film.wp.pl/p/szukaj.html?w="
+		self.original_url_search	= 'http://film.wp.pl/p/szukaj.html?w='
+		self.translated_url_search	= 'http://film.wp.pl/p/szukaj.html?w='
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.sub_search()
-		return self.page
-
-	def sub_search(self):
 		self.page = gutils.trim(self.page,"<span class=\"btw\">&nbsp;Filmy</span>", "<span class=\"btw\">&nbsp;Ludzie</span>");
 		self.page = gutils.after(self.page,"<td valign=\"top\">");
 		self.page = re.sub(r"<a href=\"http://film.wp.pl/h,1,id,[0-9]+,osoba.html\">", "", self.page)
+		return self.page
 
 	def get_searches(self):
 		elements = string.split(self.page,"http://film.wp.pl/h,1")
