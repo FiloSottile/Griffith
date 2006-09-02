@@ -30,7 +30,7 @@ plugin_url          = 'www.film.wp.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ozarowski'
 plugin_author_email = '<ozarow@gmail.com>'
-plugin_version      = '1.4'
+plugin_version      = '1.5'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -59,7 +59,7 @@ class Plugin(movie.Movie):
 			self.tmp_year = self.title[tmp+2:tmp+6]	# save for later - see year()
 			self.title = self.title[:tmp]	# cut " (YEAR)"
 		if self.original_title == '':
-			self.original_title = self.title
+			self.original_title = gutils.gdecode(self.title, self.encode)
 
 	def director(self):
 		self.director = gutils.trim(self.page,"<b>Re¿yseria:</b>","<br>")

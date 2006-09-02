@@ -29,7 +29,7 @@ plugin_url          = "film.onet.pl"
 plugin_language     = _("Polish")
 plugin_author       = "Piotr Ozarowski"
 plugin_author_email = "<ozarow@gmail.com>"
-plugin_version      = "1.4"
+plugin_version      = "1.5"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -57,7 +57,7 @@ class Plugin(movie.Movie):
 	def title(self):
 		self.title = gutils.trim(self.page,"<TITLE>"," - Onet.pl Film</TITLE>")
 		if self.original_title == '':
-			self.original_title = self.title
+			self.original_title = gutils.gdecode(self.title, self.encode)
 
 	def director(self):
 		self.director = gutils.trim(self.page,"<BR>Re¿yseria:&nbsp;&nbsp;","<BR>")

@@ -29,7 +29,7 @@ plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ozarowski'
 plugin_author_email	= '<ozarow@gmail.com>'
-plugin_version		= '1.6'
+plugin_version		= '1.7'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -60,14 +60,14 @@ class Plugin(movie.Movie):
 		self.title = string.replace(self.title, "\t",'')
 		self.title = string.replace(self.title, "\n",'')
 		if self.original_title == '':
-			self.original_title = self.title
+			self.original_title = gutils.gdecode(self.title, self.encode)
 
 	def director(self):
 		self.director = gutils.trim(self.page,"yseria\t\t\t\t","\tscenariusz\t")
 		self.director = string.replace(self.director, "\t",'')
 		self.director = string.replace(self.director, "\n",'')
 		self.director = string.replace(self.director, ",",", ")
-		self.director = string.replace(self.director, ",  (więcej&#160;...)",'')
+		self.director = string.replace(self.director, ",  (wiÄcej&#160;...)",'')
 
 	def plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")

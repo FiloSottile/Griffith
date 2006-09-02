@@ -33,7 +33,7 @@ plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ozarowski'
 plugin_author_email	= '<ozarow@gmail.com>'
-plugin_version		= '1.2'
+plugin_version		= '1.3'
 
 class Plugin(movie.Movie):
 	def __init__(self, movie_id):
@@ -60,7 +60,7 @@ class Plugin(movie.Movie):
 		if self.title[:4] == 'The ':
 			self.title = self.title[4:] + ', The'
 		if self.original_title == '':
-			self.original_title = self.title
+			self.original_title = gutils.gdecode(self.title, self.encode)
 
 	def director(self):
 		self.director = ''
