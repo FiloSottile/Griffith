@@ -1,6 +1,7 @@
 # -*- coding: WINDOWS-1250 -*-
 __revision__ = '$Id: PluginMovieCSFD.py 12 2005-11-22 14:21:06Z blondak $'
 # Copyright (c) 2005 Blondak
+# Fixed 2006 by Ondra 'Kepi' Kudlík <kepi@igloonet.cz>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,7 +15,7 @@ __revision__ = '$Id: PluginMovieCSFD.py 12 2005-11-22 14:21:06Z blondak $'
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+# Foundation, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
@@ -25,12 +26,12 @@ import movie,string
 import re
 
 plugin_name = "CSFD"
-plugin_description = "esko-Slovensk Filmov Databze"
+plugin_description = "Česko-Slovenská Filmová Databáze"
 plugin_url = "www.csfd.cz"
 plugin_language = _("Czech")
-plugin_author = "Blonk"
-plugin_author_email = "<blondak@neser.cz>"
-plugin_version = "0.2"
+plugin_author = "Ondra 'Kepi' Kudlík"
+plugin_author_email = "<kepi@igloonet.cz>"
+plugin_version = "0.4.5"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -39,8 +40,11 @@ class Plugin(movie.Movie):
 		self.url = "http://www.csfd.cz/film.php?text=1&rec=&top=&kom=1&id="+str(id)
 
 	def picture(self):
-		self.picture_url = gutils.trim(self.page, "img src=\"posters/", "_1.jpg")
-		self.picture_url = "http://www.csfd.cz/posters/%s_1.jpg" % self.picture_url
+		self.picture_url = re.search(r"(http://img.csfd.cz/posters[^\"]*)",self.page)
+		if self.picture_url:
+			self.picture_url = self.picture_url.group(1)
+		else:
+			self.picture_url = ""
 
 	def original_title(self):
 		self.original_title = re.findall(r"/images/flag_[\d]+\.gif'[^>]*></td><td>([^<]*)",self.page)
@@ -59,7 +63,7 @@ class Plugin(movie.Movie):
 			self.original_title = self.title
 
 	def director(self):
-		self.director = re.search(r"Reie:(.*)<br",self.page)
+		self.director = re.search(r"Re.ie:(.*)<br",self.page)
 		if self.director:
 			self.director = gutils.strip_tags(self.director.group(1))
 		else:
@@ -73,47 +77,43 @@ class Plugin(movie.Movie):
 			self.year = ""
 
 	def running_time(self):
-		self.running_time = re.search(r"/images/flag_[\d]+.gif[^>].*/table>.*<br>.*&nbsp;<br>[^,]+,[^,]*,[^\d]*([\d]+)",self.page)
+		self.running_time = re.search(r"<br>\s+<b>\s+([^&]+)&nbsp;<br>([^,]+),\s+(\d+),\s+(\d+)\s+min[^<]*</b><BR><BR><b>Re",self.page)
 		if self.running_time:
-			self.running_time = gutils.strip_tags(self.running_time.group(1))
+			self.running_time = gutils.strip_tags(self.running_time.group(4))
 		else:
 			self.running_time = ""
 
 	def genre(self):
-		self.genre = re.search(r"/images/flag_[\d]+.gif[^>].*/table>.*<br>(.*)&nbsp;<br>",self.page)
+		self.genre = re.search(r"<br>\s+<b>\s+([^&]+)&nbsp;<br>([^,]+),\s+(\d+),\s+(\d+)\s+min[^<]*</b><BR><BR><b>Re",self.page)
 		if self.genre:
 			self.genre = gutils.strip_tags(self.genre.group(1))
 		else:
 			self.genre = ""
 
 	def country(self):
-		self.country = re.search(r"/images/flag_[\d]+.gif[^>].*/table>.*<br>.*&nbsp;<br>([^,]+)",self.page)
+		self.country = re.search(r"<br>\s+<b>\s+([^&]+)&nbsp;<br>([^,]+),\s+(\d+),\s+(\d+)\s+min[^<]*</b><BR><BR><b>Re",self.page)
 		if self.country:
-			self.country = gutils.strip_tags(self.country.group(1))
+			self.country = gutils.strip_tags(self.country.group(2))
 		else:
 			self.country = ""
 
 	def with(self):
-		self.with = re.search(r"Hraj:(.*)</div></td>",self.page)
+		self.with = re.search(r"Hraj.:(.*)</div></td>",self.page)
 		if self.with:
 			self.with = gutils.strip_tags(self.with.group(1))
 		else:
 			self.with = ""
 
 	def plot(self):
-		self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah/Info:","</td>"),"(oficiln text distributora)",""))
+		self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah/Info:","</td>"),"(oficilání text distributora)",""))
 
 	def imdb(self):
-		self.imdb = re.search(r"href=\"(http://.*\.imdb\.com[^\"]*)",self.page)
-		if self.imdb:
-			self.imdb = gutils.strip_tags(self.imdb.group(1))
-		else:
-			self.imdb = ""
+		self.imdb = self.url
 
 	def trailer(self):
-		self.trailer = re.search(r"onclick=\"newwin2\('([^']*)'\)[^>]*><img src=\"images/film/trailer.gif",self.page)
+		self.trailer = re.search(r"href=\"(film_trailer.php[^\"]*)",self.page)
 		if self.trailer:
-			self.trailer = gutils.strip_tags(self.trailer.group(1))
+			self.trailer = "http://www.csfd.cz/"+gutils.strip_tags(self.trailer.group(1))
 		else:
 			self.trailer = ""
 
@@ -125,7 +125,7 @@ class Plugin(movie.Movie):
 			self.rating = ""
 
 	def site(self):
-		self.site = re.search(r"href=\"([^\"]*)\"[^>]*><img src=\"images/film/www.gif",self.page)
+		self.site = re.search(r"href=\"([^\"]*)\"[^>]*><img src=\"http://img.csfd.cz/images/film/www.gif",self.page)
 		if self.site:
 			self.site = gutils.strip_tags(self.site.group(1))
 		else:
