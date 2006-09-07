@@ -31,7 +31,7 @@ plugin_url = "www.csfd.cz"
 plugin_language = _("Czech")
 plugin_author = "Ondra 'Kepi' Kudlík"
 plugin_author_email = "<kepi@igloonet.cz>"
-plugin_version = "0.4.5"
+plugin_version = "0.4.6"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -60,7 +60,7 @@ class Plugin(movie.Movie):
 		else:
 			self.title = ""
 		if self.original_title == "":
-			self.original_title = self.title
+			self.original_title = gutils.gdecode(self.title, self.encode)
 
 	def director(self):
 		self.director = re.search(r"Re.ie:(.*)<br",self.page)
