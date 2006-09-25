@@ -27,7 +27,6 @@ import sys
 import string
 import gutils
 import gtk
-import gglobals
 import os
 import os.path
 import threading
@@ -93,7 +92,7 @@ class Movie:
 				tmp_dest = tempfile.mktemp(suffix=self.movie_id, prefix='poster_', \
 					dir=temp_dir)
 				self.picture = "%s.jpg" % \
-					(string.replace(tmp_dest,os.path.join(gglobals.griffith_dir, \
+					(string.replace(tmp_dest,os.path.join(self.locations['home'], \
 					"posters")+"/",""))
 				dest = tmp_dest+".jpg" 
 				progress = Progress(self.parent_window,_("Fetching poster"),_("Wait a moment"))
