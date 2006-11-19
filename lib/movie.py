@@ -63,6 +63,7 @@ class Movie:
 	debug = False
 	rating = 0  
 	notes = ''
+	locations = None
 	def open_page(self,parent_window):
 		self.parent_window = parent_window
 		progress = Progress(parent_window,_("Fetching data"),_("Wait a moment"))
@@ -82,19 +83,11 @@ class Movie:
 		urlcleanup()
 
 	def fetch_picture(self):
-		if len(self.picture_url):
+		if self.picture_url:
+			tmp_dest = tempfile.mktemp(prefix='poster_', dir=self.locations['temp'])
+			self.picture = tmp_dest.split('poster_', 1)[1]
+			dest = "%s.jpg" % tmp_dest
 			try:
-				if os.name == 'nt' or os.name == 'win32':
-					temp_dir = tempfile.gettempdir()
-					temp_dir = temp_dir + "\\"
-				else:
-					temp_dir = "/tmp/"
-				tmp_dest = tempfile.mktemp(suffix=self.movie_id, prefix='poster_', \
-					dir=temp_dir)
-				self.picture = "%s.jpg" % \
-					(string.replace(tmp_dest,os.path.join(self.locations['home'], \
-					"posters")+"/",""))
-				dest = tmp_dest+".jpg" 
 				progress = Progress(self.parent_window,_("Fetching poster"),_("Wait a moment"))
 				retriever = Retriever(self.picture_url,self.parent_window,progress,dest)
 				retriever.start()
@@ -108,6 +101,10 @@ class Movie:
 				urlcleanup()
 			except:
 				self.picture = ""
+				try:
+					os.remove(tmp_dest)
+				except:
+					self.debug.show("Can't remove %s file" % tmp_dest)
 		else:
 			self.picture = ""
 
@@ -145,7 +142,7 @@ class Movie:
 			self.genre()
 			self.genre = gutils.clean(self.genre)
 			self.genre = gutils.gdecode(self.genre, self.encode)
-		if config.get('s_with'):
+		if config.get('s_cast'):
 			self.with()
 			self.with = gutils.clean(self.with)
 			self.with = gutils.gdecode(self.with, self.encode)
