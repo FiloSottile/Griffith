@@ -11,8 +11,8 @@ plugin_name = "OFDb"
 plugin_description = "Online-Filmdatenbank"
 plugin_url = "www.ofdb.de"
 plugin_language = _("German")
-plugin_author = "Christian Sagmueller, Jessica"
-plugin_author_email = ""
+plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
+plugin_author_email = "deepfly@gmx.net"
 plugin_version = "0.4"
 
 class Plugin(movie.Movie):
@@ -44,7 +44,15 @@ class Plugin(movie.Movie):
 		self.director = string.capwords(gutils.after(self.director,">"))
 
 	def plot(self):
-		self.plot = gutils.trim(self.page,"<b>Inhalt:</b>", "<")
+		oldpage = self.page
+		oldurl = self.url
+		storyid = gutils.trim(self.page, 'sid=', '">')
+		self.url = "http://www.ofdb.de/view.php?page=inhalt&fid=%s&sid=%s" % (str(self.movie_id),storyid)
+		self.open_page(self.parent_window)
+		self.plot = gutils.trim(self.page, "</b><br><br>","</")
+		self.page = oldpage
+		self.url = oldurl
+		#self.plot = gutils.trim(self.page,"<b>Inhalt:</b>", "<")
 
 	def year(self):
 		self.year = gutils.trim(self.page,"""Erscheinungsjahr: 
@@ -72,7 +80,6 @@ class Plugin(movie.Movie):
             <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","</b></font></td>")
 		self.with = string.replace(self.with,"</a><br>", "\n")
 		self.with = string.strip(gutils.strip_tags(self.with))
-		self.with = self.with[0:-1]
 
 	def classification(self):
 		self.classification = gutils.trim(self.page,"MPAA</a>:</b> ",".<br>")
@@ -111,11 +118,8 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.sub_search()
-		return self.page
-
-	def sub_search(self):
 		self.page = gutils.trim(self.page,"</font><br><br><br>", "<br></font></p>");
+		return self.page
 
 	def get_searches(self):
 		elements = string.split(self.page,"<br>")
