@@ -11,15 +11,15 @@ plugin_name = "OFDb"
 plugin_description = "Online-Filmdatenbank"
 plugin_url = "www.ofdb.de"
 plugin_language = _("German")
-plugin_author = "Christian Sagmueller"
+plugin_author = "Christian Sagmueller, Jessica"
 plugin_author_email = ""
-plugin_version = "0.3"
+plugin_version = "0.4"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.encode='iso-8859-1'
 		self.movie_id = id
-		self.url = "http://www.ofdb.de/view.php?page=film&fid=" + str(self.movie_id)
+		self.url = "http://www.ofdb.de/view.php?page=film&full=1&fid=%s" % str(self.movie_id)
 
 	def picture(self):
 		self.picture_url = "http://www.ofdb.de/images/film/" + gutils.trim( self.page, "<img src=\"images/film/", "\"" )
@@ -34,7 +34,7 @@ class Plugin(movie.Movie):
             <td width="99%"><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","<") )
 
 	def title(self):
-		self.title = self.original_title
+		self.title = gutils.trim(self.page,'size="3"><b>','<')
 
 	def director(self):
 		self.director = gutils.trim(self.page,"""Regie: 
@@ -62,7 +62,7 @@ class Plugin(movie.Movie):
             <td nowrap><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","</b></font></td>")
 		self.genre = string.replace( self.genre, "<br>", ", " )
 		self.genre = string.replace( self.genre, "/", ", " )
-		self.genre = string.capwords(self.genre)
+		self.genre = self.genre[0:-2]
 
 	def with(self):
 		self.with = ""
@@ -70,8 +70,9 @@ class Plugin(movie.Movie):
               </font></td>
             <td>&nbsp;&nbsp;</td>
             <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","</b></font></td>")
-		self.with = string.replace(self.with,"</a><br>", ", ")
+		self.with = string.replace(self.with,"</a><br>", "\n")
 		self.with = string.strip(gutils.strip_tags(self.with))
+		self.with = self.with[0:-1]
 
 	def classification(self):
 		self.classification = gutils.trim(self.page,"MPAA</a>:</b> ",".<br>")
