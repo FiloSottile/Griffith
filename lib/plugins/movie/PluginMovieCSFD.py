@@ -1,4 +1,4 @@
-# -*- coding: WINDOWS-1250 -*-
+# -*- coding: cp1250 -*-
 __revision__ = '$Id: PluginMovieCSFD.py 12 2005-11-22 14:21:06Z blondak $'
 # Copyright (c) 2005 Blondak
 # Fixed 2006 by Ondra 'Kepi' Kudlík <kepi@igloonet.cz>
@@ -36,7 +36,7 @@ plugin_version = "0.4.6"
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = id
-		self.encode = "WINDOWS-1250"
+		self.encode = "cp1250"
 		self.url = "http://www.csfd.cz/film.php?text=1&rec=&top=&kom=1&id="+str(id)
 
 	def picture(self):
@@ -142,7 +142,7 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.encode = "WINDOWS-1250"
+		self.encode = "cp1250"
 		self.original_url_search   = "http://www.csfd.cz/search_pg.php?search="
 		self.translated_url_search = "http://www.csfd.cz/search_pg.php?search="
 
