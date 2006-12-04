@@ -13,7 +13,7 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller"
 plugin_author_email = ""
-plugin_version = "0.2"
+plugin_version = "0.3"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -121,6 +121,6 @@ class SearchPlugin(movie.SearchMovie):
 
 		if (elements[0]<>''):
 			for element in elements:
-				self.ids.append(gutils.trim(element,"<a href='view.php?page=film&fid=","'>"))
+				self.ids.append(gutils.trim(element,'<a href="view.php?page=film&fid=','">'))
 				self.titles.append(gutils.trim(element,">","</a>"))
 
