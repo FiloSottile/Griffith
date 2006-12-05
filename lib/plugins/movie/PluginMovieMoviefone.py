@@ -2,7 +2,7 @@
 
 # $Id$
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 

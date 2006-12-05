@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# vim: encoding=utf-8
 
 __revision__ = '$Id$'
 
@@ -32,7 +31,7 @@ plugin_description	= 'Internetowa baza filmowa'
 plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ozarowski'
-plugin_author_email	= '<ozarow@gmail.com>'
+plugin_author_email	= '<ozarow+griffith@gmail.com>'
 plugin_version		= '1.3'
 
 class Plugin(movie.Movie):

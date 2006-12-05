@@ -1,5 +1,7 @@
 # -*- coding: cp1250 -*-
+
 __revision__ = '$Id: PluginMovieCSFD.py 12 2005-11-22 14:21:06Z blondak $'
+
 # Copyright (c) 2005 Blondak
 # Fixed 2006 by Ondra 'Kepi' Kudlík <kepi@igloonet.cz>
 #

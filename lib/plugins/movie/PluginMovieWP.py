@@ -1,5 +1,7 @@
 # -*- coding: iso-8859-2 -*-
+
 __revision__ = '$Id$'
+
 # Copyright (c) 2005-2006 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
@@ -39,7 +41,7 @@ class Plugin(movie.Movie):
 		self.encode='iso-8859-2'
 
 	def initialize(self):
-		self.page = gutils.trim(self.page,"<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">","<script ")	# should go to sub_page function!
+		self.page = gutils.trim(self.page,"<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">","<script ")
 
 	def picture(self):
 		if string.find(self.page,"http://film.wp.pl/f/no.gif") > -1:
@@ -62,7 +64,7 @@ class Plugin(movie.Movie):
 			self.original_title = gutils.gdecode(self.title, self.encode)
 
 	def director(self):
-		self.director = gutils.trim(self.page,"<b>Reżyseria:</b>","<br>")
+		self.director = gutils.trim(self.page,"<b>ReÂżyseria:</b>","<br>")
 		self.director = gutils.after(self.director,"\">")
 		self.director = gutils.strip_tags(self.director)
 
@@ -109,7 +111,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.trim(self.page,"<b>Kraj:</b> ","<br>")
 
 	def rating(self):
-		self.rating = gutils.trim(self.page,"<b>Ocena internautów: ","</b>")
+		self.rating = gutils.trim(self.page,"<b>Ocena internautĂłw: ","</b>")
 		if self.rating != '':
 			self.rating = str( float(self.rating) )
 

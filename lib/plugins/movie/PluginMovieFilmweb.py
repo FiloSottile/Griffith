@@ -1,5 +1,7 @@
 # -*- coding: iso-8859-2 -*-
+
 __revision__ = '$Id$'
+
 # Copyright (c) 2005, 2006 Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
@@ -28,7 +30,7 @@ plugin_description	= 'Web pelen filmow'
 plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ozarowski'
-plugin_author_email	= '<ozarow@gmail.com>'
+plugin_author_email	= '<ozarow+griffith@gmail.com>'
 plugin_version		= '1.7'
 
 class Plugin(movie.Movie):
@@ -67,7 +69,7 @@ class Plugin(movie.Movie):
 		self.director = string.replace(self.director, "\t",'')
 		self.director = string.replace(self.director, "\n",'')
 		self.director = string.replace(self.director, ",",", ")
-		self.director = string.replace(self.director, ",  (wiÄcej&#160;...)",'')
+		self.director = string.replace(self.director, ",  (wiĂÂcej&#160;...)",'')
 
 	def plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")

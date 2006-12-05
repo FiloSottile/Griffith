@@ -1,6 +1,8 @@
 # -*- coding: iso-8859-1 -*-
+
 __revision__ = '$Id$'
-# Copyright (c) 2005 Piotr Ozarowski
+
+# Copyright (c) 2005-2006 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,7 +31,7 @@ plugin_description  = 'Anime DataBase'
 plugin_url          = 'www.anidb.info'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ozarowski'
-plugin_author_email = '<ozarow@gmail.com>'
+plugin_author_email = '<ozarow+griffith@gmail.com>'
 plugin_version      = '2.0'
 
 class Plugin(movie.Movie):

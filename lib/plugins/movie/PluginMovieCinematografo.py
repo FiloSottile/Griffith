@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ plugin_name = "Cinematografo"
 plugin_description = "Rivista del Cinematografo dal 1928"
 plugin_url = "www.cinematografo.it"
 plugin_language = _("Italian")
-plugin_author = "Vasco Nunes" # & Piotr Ozarowski :)
+plugin_author = "Vasco Nunes, Piotr Ożarowski"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
 plugin_version = "1.0"
 
