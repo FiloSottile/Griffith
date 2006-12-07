@@ -12,7 +12,7 @@ plugin_description = "Online-Filmdatenbank"
 plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
-plugin_author_email = "deepfly@gmx.net"
+plugin_author_email = "Jessica.K.P@women-at-work.org"
 plugin_version = "0.4"
 
 class Plugin(movie.Movie):
