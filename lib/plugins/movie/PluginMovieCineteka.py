@@ -32,7 +32,7 @@ plugin_url = "cineteka.com"
 plugin_language = _("Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.1"
+plugin_version = "0.2"
 
 class Plugin(movie.Movie):
 	"""A movie plugin object"""
@@ -41,74 +41,74 @@ class Plugin(movie.Movie):
 		self.movie_id = id
 		self.url = "http://www.cineteka.com/index.php?op=Movie&id=" + str(self.movie_id)
 
-	def picture(self):
+	def get_image(self):
 		"""Finds the film's poster image"""
-		self.picture_url = "http://www.cineteka.com/img/filmes/" + str(self.movie_id) + "_big.jpg"
+		self.image_url = "http://www.cineteka.com/img/filmes/" + str(self.movie_id) + "_big.jpg"
 
-	def original_title(self):
+	def get_o_title(self):
 		"""Finds the film's original title"""
-		self.original_title = string.capwords(gutils.trim(self.page, """<nobr><span class="txt11">(""", ")"))
+		self.o_title = string.capwords(gutils.trim(self.page, """<nobr><span class="txt11">(""", ")"))
 
-	def title(self):
+	def get_title(self):
 		"""Finds the film's local title.
 		Probably the original title translation"""
 		self.title = string.capwords(gutils.trim(self.page, """<td class="txt12"><b>""", "</b>"))
 
-	def director(self):
+	def get_director(self):
 		"""Finds the film's director"""
 		self.director = gutils.strip_tags(gutils.trim(self.page, "<td><b>Realizador:</b>", "</a></td>"))
 
-	def plot(self):
+	def get_plot(self):
 		"""Finds the film's plot"""
 		self.plot = gutils.trim(self.page, "<b>Sinopse:</b> ", "</div>")
 
-	def year(self):
+	def get_year(self):
 		"""Finds the film's year"""
 		self.year = gutils.trim(self.page, "<td><b>Ano:</b> ", "</td>")
 
-	def running_time(self):
+	def get_runtime(self):
 		"""Finds the film's running time"""
-		self.running_time = gutils.trim(self.page, "<td><b>Duração:</b> ", " min.</td>")
+		self.runtime = gutils.trim(self.page, "<td><b>DuraÃ§Ã£o:</b> ", " min.</td>")
 
-	def genre(self):
+	def get_genre(self):
 		"""Finds the film's genre"""
-		self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>Género:</b> ", "</td>"))
+		self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>GÃ©nero:</b> ", "</td>"))
 
-	def with(self):
-		self.with = gutils.strip_tags(gutils.trim(self.page, "<b>Elenco:</b> ", "</td>"))
-		self.with = string.replace(self.with, ", ", "")
-		self.with = string.replace(self.with, "\t", "")
-		self.with = string.replace(self.with, "\n ", "\n")
+	def get_cast(self):
+		self.cast = gutils.strip_tags(gutils.trim(self.page, "<b>Elenco:</b> ", "</td>"))
+		self.cast = string.replace(self.cast, ", ", "")
+		self.cast = string.replace(self.cast, "\t", "")
+		self.cast = string.replace(self.cast, "\n ", "\n")
 
-	def classification(self):
+	def get_classification(self):
 		"""Find the film's classification"""
 		self.classification = gutils.trim(self.page, "<td><b>Idade:</b> ", "</td>")
 
-	def studio(self):
+	def get_studio(self):
 		"""Find the studio"""
 		self.studio = ""
 
-	def site(self):
+	def get_o_site(self):
 		"""Find the film's oficial site"""
-		self.site = gutils.trim(self.page, \
+		self.o_site = gutils.trim(self.page, \
 			"<a class=\"button\" href=\"", \
 			"""" title="Site Oficial""")
 
-	def imdb(self):
+	def get_site(self):
 		"""Find the film's imdb details page"""
-		self.imdb = gutils.trim(self.page, \
+		self.site = gutils.trim(self.page, \
 			"</td><td><a class=\"button\" href=\"", \
-			"""" title="Consultar título""")
+			"""" title="Consultar tÃ­tulo""")
 
-	def trailer(self):
+	def get_trailer(self):
 		"""Find the film's trailer page or location"""
 		self.trailer = ""
 
-	def country(self):
+	def get_country(self):
 		"""Find the film's country"""
-		self.country = gutils.trim(self.page, "<td><b>País:</b> ", "</td>")
+		self.country = gutils.trim(self.page, "<td><b>PaÃ­s:</b> ", "</td>")
 
-	def rating(self):
+	def get_rating(self):
 		"""Find the film's rating. From 0 to 10.
 		Convert if needed when assigning."""
 		self.rating = 0
@@ -129,7 +129,7 @@ class SearchPlugin(movie.SearchMovie):
 	def sub_search(self):
 		"""Isolating just a portion (with the data we want) of the results"""
 		self.page = gutils.trim(self.page, \
-			"""ordenados por data de aquisição:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
+			"""ordenados por data de aquisiÃ§Ã£o:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
 
 	def get_searches(self):
 		"""Try to find both id and film title for each search result"""

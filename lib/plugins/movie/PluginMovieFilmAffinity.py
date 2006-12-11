@@ -32,7 +32,7 @@ plugin_url		= 'www.filmaffinity.com'
 plugin_language		= _('Spanish')
 plugin_author		= 'Pedro D. Sánchez'
 plugin_author_email	= '<pedrodav@gmail.com>'
-plugin_version		= '0.1'
+plugin_version		= '0.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -40,27 +40,27 @@ class Plugin(movie.Movie):
 		self.movie_id = id
 		self.url = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
 
-	def picture(self):
+	def get_image(self):
 		tmp = string.find(self.page, '<img src="http://www.filmaffinity.com/imgs/movies/')
 		if tmp == -1:
-			self.picture_url = ''
+			self.image_url = ''
 		else:
-			self.picture_url = gutils.trim(self.page[tmp-1:], 'src="', '"')
+			self.image_url = gutils.trim(self.page[tmp-1:], 'src="', '"')
 
-	def original_title(self):
-		self.original_title = gutils.trim(self.page, '<b>TITULO ORIGINAL</b></td>', '</b></td>')
-		self.original_title = gutils.after(self.original_title, '<b>')
+	def get_o_title(self):
+		self.o_title = gutils.trim(self.page, '<b>TITULO ORIGINAL</b></td>', '</b></td>')
+		self.o_title = gutils.after(self.o_title, '<b>')
 
-	def title(self):
+	def get_title(self):
 		self.title = gutils.trim(self.page, '<img src="http://www.filmaffinity.com/images/movie.gif" border="0"> ', '</span>')
 
-	def director(self):
+	def get_director(self):
 		self.director = gutils.trim(self.page,'<b>DIRECTOR</b></td>', '</td>')
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page, '<b>GÉNERO Y CRÍTICA</b>', '<br />')
 		if self.plot == '':
-		    self.plot = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '<br />')
+			self.plot = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '<br />')
 		self.plot = gutils.after(self.plot, '<td valign="top">')
 		self.plot = gutils.after(self.plot, '/')
 		self.plot = string.replace(self.plot, ' SINOPSIS: ', '')
@@ -70,52 +70,52 @@ class Plugin(movie.Movie):
 		self.plot = string.replace(self.plot, ' (FILMAFFINITY)', '')
 		self.plot = string.replace(self.plot, '(FILMAFFINITY)', '')
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page, '<b>AÑO</b></td>', '</td>')
 		self.year = gutils.after(self.year, '<td >')
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page, '<b>DURACIÓN</b></td>', ' min.</td>')
-		if self.running_time == '':
-		    self.running_time = gutils.trim(self.page, '<b>DURACI&Oacute;N</b></td>', ' min.</td>')
-		self.running_time = gutils.after(self.running_time[-10:], '<td>')
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page, '<b>DURACIÓN</b></td>', ' min.</td>')
+		if self.runtime == '':
+			self.runtime = gutils.trim(self.page, '<b>DURACI&Oacute;N</b></td>', ' min.</td>')
+		self.runtime = gutils.after(self.runtime[-10:], '<td>')
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page, '<b>GÉNERO Y CRÍTICA</b>', '<br />')
 		if self.genre == '':
-		    self.genre = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '<br />')
+			self.genre = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '<br />')
 		self.genre = gutils.trim(self.genre, '<td valign="top">', '/')
 		self.genre = string.replace(self.genre, '.', " /")
 
-	def with(self):
-		self.with = ''
-		self.with = gutils.trim(self.page, '<b>REPARTO</b></td>', '</td>')
-		self.with = string.replace(self.with, '</a>,', '\n')
-		self.with = string.strip(gutils.strip_tags(self.with))
-		self.with = string.replace(self.with, '  ', '')
+	def get_cast(self):
+		self.cast = ''
+		self.cast = gutils.trim(self.page, '<b>REPARTO</b></td>', '</td>')
+		self.cast = string.replace(self.cast, '</a>,', '\n')
+		self.cast = string.strip(gutils.strip_tags(self.cast))
+		self.cast = string.replace(self.cast, '  ', '')
 
-	def classification(self):
-	    self.classification = ''
+	def get_classification(self):
+		self.classification = ''
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = gutils.trim(self.page, '<b>PRODUCTORA</b></td>', '</td>')
 		self.studio = gutils.after(self.studio, '<td  >')
 
-	def site(self):
-		self.site = gutils.trim(self.page, '<b>WEB OFICIAL</b></td>', '</a>')
-		self.site = gutils.after(self.site, '">')
+	def get_o_site(self):
+		self.o_site = gutils.trim(self.page, '<b>WEB OFICIAL</b></td>', '</a>')
+		self.o_site = gutils.after(self.o_site, '">')
 
-	def imdb(self):
-		self.imdb = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
+	def get_site(self):
+		self.site = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
 
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = ''
 
-	def country(self):
+	def get_country(self):
 		self.country = gutils.trim(self.page, '<b>PAÍS</b></td>', '</td>')
 		self.country = gutils.trim(self.country, 'alt="', '"')
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page, '<tr><td align="center" style="color:#990000; font-size:22px; font-weight: bold;">', '</td></tr>')
 		if self.rating:
 			self.rating = str(float(gutils.clean(string.replace(self.rating, ',', '.'))))

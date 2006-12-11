@@ -32,7 +32,7 @@ plugin_url		= 'www.culturalianet.com'
 plugin_language		= _('Spanish')
 plugin_author		= 'Pedro D. Sánchez'
 plugin_author_email	= '<pedrodav@gmail.com>'
-plugin_version		= '0.1'
+plugin_version		= '0.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -40,68 +40,68 @@ class Plugin(movie.Movie):
 		self.movie_id = id
 		self.url = "http://www.culturalianet.com/art/ver.php?art=%s" % str(self.movie_id)
 
-	def picture(self):
+	def get_image(self):
 		tmp = string.find(self.page, "<font class = 'titulo2'>")
 		if tmp == -1:
-			self.picture_url = ''
+			self.image_url = ''
 		else:
-			self.picture_url = 'http://www.culturalianet.com/art/'+gutils.trim(self.page[tmp:], '<img src = "', '"')
+			self.image_url = 'http://www.culturalianet.com/art/'+gutils.trim(self.page[tmp:], '<img src = "', '"')
 
-	def original_title(self):
-		self.original_title = gutils.trim(self.page, "<font class = 'titulo2'>", '</i>')
-		self.original_title = gutils.after(self.original_title, '<i>')
+	def get_o_title(self):
+		self.o_title = gutils.trim(self.page, "<font class = 'titulo2'>", '</i>')
+		self.o_title = gutils.after(self.o_title, '<i>')
 
-	def title(self):
+	def get_title(self):
 		self.title = gutils.trim(self.page, "<font class = 'titulo2'>", '. (')
 
-	def director(self):
+	def get_director(self):
 		self.director = gutils.trim(self.page,"<font class = 'titulo3'>Director:", '<br><br>')
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page, '<b>Sinopsis:</b><br>', '<br><br>')
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page, "<font class = 'titulo2'>", ')</font>')
 		self.year = gutils.after(self.year, '. (')
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page, "<font class = 'titulo3'>Duración:</font> ", ' minutos')
-		if self.running_time == '':
-		    self.running_time = gutils.trim(self.page, "<font class = 'titulo3'>Duraci&oacute;n:</font> ", ' minutos')
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page, "<font class = 'titulo3'>Duración:</font> ", ' minutos')
+		if self.runtime == '':
+			self.runtime = gutils.trim(self.page, "<font class = 'titulo3'>Duraci&oacute;n:</font> ", ' minutos')
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page, "<font class = 'titulo3'>Género:</font><br>", '<br><br>')
 
-	def with(self):
-		self.with = ''
-		self.with = gutils.trim(self.page, "<font class = 'titulo3'>Actores:</font><br>", '<br><br>')
-		self.with = string.replace(self.with, '<br>', "\n")
-		self.with = string.strip(gutils.strip_tags(self.with))
+	def get_cast(self):
+		self.cast = ''
+		self.cast = gutils.trim(self.page, "<font class = 'titulo3'>Actores:</font><br>", '<br><br>')
+		self.cast = string.replace(self.cast, '<br>', "\n")
+		self.cast = string.strip(gutils.strip_tags(self.cast))
 
-	def classification(self):
-	    self.classification = gutils.trim(self.page, "<font class = 'titulo3'>Calificación moral:</font> ", '<br>')
-	    if self.classification == '':
-	        self.classification = gutils.trim(self.page, "<font class = 'titulo3'>Calificaci&oacute;n moral:</font> ", '<br>')
+	def get_classification(self):
+		self.classification = gutils.trim(self.page, "<font class = 'titulo3'>Calificación moral:</font> ", '<br>')
+		if self.classification == '':
+			self.classification = gutils.trim(self.page, "<font class = 'titulo3'>Calificaci&oacute;n moral:</font> ", '<br>')
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = ''
 
-	def site(self):
-		self.site = ''
+	def get_o_site(self):
+		self.o_site = ''
 
-	def imdb(self):
-		self.imdb = "http://www.culturalianet.com/art/ver.php?art=%s" % str(self.movie_id)
+	def get_site(self):
+		self.site = "http://www.culturalianet.com/art/ver.php?art=%s" % str(self.movie_id)
 
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = ''
 
-	def country(self):
+	def get_country(self):
 		self.country = gutils.trim(self.page, "<font class = 'titulo3'>Nacionalidad:</font><br>", '<br>')
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page, "Puntuación: <font class = 'titulo3'>", '</font>')
 		if self.rating == '':
-		    self.rating = gutils.trim(self.page, "Puntuaci&oacute;n: <font class = 'titulo3'>", '</font>')
+			self.rating = gutils.trim(self.page, "Puntuaci&oacute;n: <font class = 'titulo3'>", '</font>')
 		if self.rating:
 			self.rating = str(float(gutils.clean(self.rating)))
 

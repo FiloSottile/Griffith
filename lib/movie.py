@@ -34,36 +34,75 @@ import time
 import tempfile
 
 class Movie:
-	number = None
-	original_title = None
-	title = None
-	director = None
-	year = None
-	running_time = None
-	genre = None
-	with = None
+	cast = None
 	classification = None
-	studio = None
-	site = None
-	imdb = None
-	trailer = None
 	country = None
-	page = None
-	url = None
+	director = None
+	genre = None
+	notes = ''
+	number = None
+	o_site = None
+	o_title = None
+	image = None
+	rating = 0  
 	rating = None
-	engine_name = None
+	runtime = None
+	site = None
+	studio = None
+	title = None
+	trailer = None
+	year = None
+	
+	movie_id = None
+	debug = False
+	locations = None
+	engine_author = None
 	engine_description = None
 	engine_language = None
-	engine_author = None
+	engine_name = None
 	engine_version = None
-	movie_id = None
-	picture_url = None
-	picture = None
+	page = None
+	url = None
+	image_url = None
 	encode = 'iso-8859-1'
-	debug = False
-	rating = 0  
-	notes = ''
-	locations = None
+	
+	# functions that plugin should implement: {{{
+	def initialize(self):
+		pass
+	def get_cast(self):
+		pass
+	def get_classification(self):
+		pass
+	def get_country(self):
+		pass
+	def get_director(self):
+		pass
+	def get_genre(self):
+		pass
+	def get_image(self):
+		pass
+	def get_notes(self):
+		pass
+	def get_o_site(self):
+		pass
+	def get_o_title(self):
+		pass
+	def get_plot(self):
+		pass
+	def get_runtime(self):
+		pass
+	def get_site(self):
+		pass
+	def get_studio(self):
+		pass
+	def get_title(self):
+		pass
+	def get_trailer(self):
+		pass
+	def get_year(self):
+		pass
+	#}}}
+
 	def open_page(self,parent_window):
 		self.parent_window = parent_window
 		progress = Progress(parent_window,_("Fetching data"),_("Wait a moment"))
@@ -83,13 +122,13 @@ class Movie:
 		urlcleanup()
 
 	def fetch_picture(self):
-		if self.picture_url:
+		if self.image_url:
 			tmp_dest = tempfile.mktemp(prefix='poster_', dir=self.locations['temp'])
-			self.picture = tmp_dest.split('poster_', 1)[1]
+			self.image = tmp_dest.split('poster_', 1)[1]
 			dest = "%s.jpg" % tmp_dest
 			try:
 				progress = Progress(self.parent_window,_("Fetching poster"),_("Wait a moment"))
-				retriever = Retriever(self.picture_url,self.parent_window,progress,dest)
+				retriever = Retriever(self.image_url,self.parent_window,progress,dest)
 				retriever.start()
 				while retriever.isAlive():
 					progress.pulse()
@@ -100,102 +139,80 @@ class Movie:
 				progress.close()
 				urlcleanup()
 			except:
-				self.picture = ""
+				self.image = ""
 				try:
 					os.remove(tmp_dest)
 				except:
 					self.debug.show("Can't remove %s file" % tmp_dest)
 		else:
-			self.picture = ""
+			self.image = ""
 
 	def parse_movie(self, config):
-		try:
-			self.initialize()
-		except:
-			pass
-		if config.get('s_image'):
-			self.picture()
-			self.fetch_picture()
+		self.initialize()
 		if config.get('s_o_title'):
-			self.original_title()
-			self.original_title = gutils.clean(self.original_title)
-			self.original_title = gutils.gdecode(self.original_title, self.encode)
+			self.get_o_title()
+			self.o_title = gutils.clean(self.o_title)
+			self.o_title = gutils.gdecode(self.o_title, self.encode)
+			if self.o_title[:4] == 'The ':
+				self.o_title = self.o_title[4:] + ', The'
 		if config.get('s_title'):
-			self.title()
+			self.get_title()
 			self.title = gutils.clean(self.title)
 			self.title = gutils.gdecode(self.title, self.encode)
+			if self.title[:4] == 'The ':
+				self.title = self.title[4:] + ', The'
 		if config.get('s_director'):
-			self.director()
+			self.get_director()
 			self.director = gutils.clean(self.director)
 			self.director = gutils.gdecode(self.director, self.encode)
 		if config.get('s_plot'):
-			self.plot()
+			self.get_plot()
 			self.plot = gutils.clean(self.plot)
 			self.plot = gutils.gdecode(self.plot, self.encode)
 		if config.get('s_year'):
-			self.year()
+			self.get_year()
 			self.year = gutils.clean(self.year)
 		if config.get('s_runtime'):
-			self.running_time()
-			self.running_time = gutils.clean(self.running_time)
+			self.get_runtime()
+			self.runtime = gutils.clean(self.runtime)
 		if config.get('s_genre'):
-			self.genre()
+			self.get_genre()
 			self.genre = gutils.clean(self.genre)
 			self.genre = gutils.gdecode(self.genre, self.encode)
 		if config.get('s_cast'):
-			self.with()
-			self.with = gutils.clean(self.with)
-			self.with = gutils.gdecode(self.with, self.encode)
+			self.get_cast()
+			self.cast = gutils.clean(self.cast)
+			self.cast = gutils.gdecode(self.cast, self.encode)
 		if config.get('s_classification'):
-			self.classification()
+			self.get_classification()
 			self.classification = gutils.clean(self.classification)
 			self.classification = gutils.gdecode(self.classification, self.encode)
 		if config.get('s_studio'):
-			self.studio()
+			self.get_studio()
 			self.studio = gutils.clean(self.studio)
 			self.studio = gutils.gdecode(self.studio, self.encode)
 		if config.get('s_o_site'):
-			self.site()
-			self.site = gutils.clean(self.site)
+			self.get_o_site()
+			self.o_site = gutils.clean(self.o_site)
 		if config.get('s_site'):
-			self.imdb()
-			self.imdb = gutils.clean(self.imdb)
+			self.get_site()
+			self.site = gutils.clean(self.site)
 		if config.get('s_trailer'):
-			self.trailer()
+			self.get_trailer()
 			self.trailer = gutils.clean(self.trailer)
 		if config.get('s_country'):
-			self.country()
+			self.get_country()
 			self.country = gutils.clean(self.country)
 			self.country = gutils.gdecode(self.country, self.encode)
 		if config.get('s_rating'):
-			self.rating()
+			self.get_rating()
 		if config.get('s_notes'):
-			try:
-				self.notes()
-				self.notes = gutils.clean(self.notes)
-				self.notes = gutils.gdecode(self.notes, self.encode)
-			except:
-				pass
-		#self.debug_info()
-
-	def debug_info(self):
-		pass
-		#gdebug.debug("movie number: %s"%self.number)
-		#gdebug.debug("original title: %s"%self.original_title)
-		#gdebug.debug("title: %s"%self.title)
-		#gdebug.debug("picture url: %s"%self.picture_url)
-		#gdebug.debug("director: %s"%self.director)
-		#gdebug.debug("year: %s"%self.year)
-		#gdebug.debug("running time: %s"%self.running_time)
-		#gdebug.debug("genre: %s"%self.genre)
-		#gdebug.debug("actors: %s"%self.with)
-		#gdebug.debug("classification: %s"%self.classification)
-		#gdebug.debug("studio: %s"%self.studio)
-		#gdebug.debug("imdb: %s"%self.imdb)
-		#gdebug.debug("site: %s"%self.site)
-		#gdebug.debug("trailer: %s"%self.trailer)
-		#gdebug.debug("country: %s"%self.country)
-		#gdebug.debug( "rating: %s"%self.rating)
+			self.get_notes()
+			self.notes = gutils.clean(self.notes)
+			self.notes = gutils.gdecode(self.notes, self.encode)
+		if config.get('s_image'):
+			self.get_image()
+			self.fetch_picture()
 
 class SearchMovie:
 	page = None
@@ -290,3 +307,4 @@ class Progress:
 		time.sleep(0.01)
 	def close(self):
 		self.dialog.destroy()
+# vim: fdm=marker

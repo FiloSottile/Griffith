@@ -15,30 +15,30 @@ plugin_description = "Entertaining People"
 plugin_url = "www.mediadis.com"
 plugin_language = _("English")
 plugin_author = "Vasco Nunes"
-plugin_version = "0.1"
+plugin_version = "0.2"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = id
 		self.url = "http://www.mediadis.com/dvd/detail.asp?id=" + str(self.movie_id)
 
-	def picture(self):
-		self.picture_url = gutils.trim(self.page,"<img src=\"http://www.mediadis.com/pictures/big/", ".jpg\" border=\"0\"")
-		self.picture_url = "http://www.mediadis.com/pictures/big/" + self.picture_url + ".jpg"
+	def get_image(self):
+		self.image_url = gutils.trim(self.page,"<img src=\"http://www.mediadis.com/pictures/big/", ".jpg\" border=\"0\"")
+		self.image_url = "http://www.mediadis.com/pictures/big/" + self.image_url + ".jpg"
 
-	def original_title(self):
-		self.original_title = string.capwords(gutils.trim(self.page,"<b>Original title</b>&nbsp;:&nbsp;","<br>") )
+	def get_o_title(self):
+		self.o_title = string.capwords(gutils.trim(self.page,"<b>Original title</b>&nbsp;:&nbsp;","<br>") )
 
-	def title(self):
-		self.title = self.original_title
+	def get_title(self):
+		self.title = self.o_title
 
-	def director(self):
+	def get_director(self):
 
 		self.director = gutils.trim(self.page,"<b>Director(s)</b>&nbsp;:&nbsp;","<br>")
 		self.director = string.replace(self.director, "&nbsp;-&nbsp;", ", ")
 		self.director = gutils.strip_tags(self.director)
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page,"<td valign=\"top\" align=\"left\">","</td>")
 		self.plot = string.strip(self.plot.decode('latin-1'))
 		self.plot = string.replace(self.plot,"<br>", " ")
@@ -46,41 +46,41 @@ class Plugin(movie.Movie):
 		self.plot = string.replace(self.plot,"'","_")
 		self.plot = string.strip(gutils.strip_tags(self.plot))
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page,"<b>Year</b>&nbsp;:&nbsp;","<br>")
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page,"<b>Duration</b>&nbsp;:&nbsp;","&nbsp;min")
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page,"<b>Duration</b>&nbsp;:&nbsp;","&nbsp;min")
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page,"<b>Genres</b>&nbsp;:&nbsp;","<br>")
 		self.genre = string.replace(self.genre,"&nbsp;-&nbsp;",", ")
 
-	def with(self):
-		self.with = ""
-		self.with = gutils.trim(self.page,"<b>Actors</b>&nbsp;:&nbsp;","<br>")
-		self.with = string.replace(self.with,"&nbsp;-&nbsp;", "\n")
-		self.with = string.strip(gutils.strip_tags(self.with))
+	def get_cast(self):
+		self.cast = ""
+		self.cast = gutils.trim(self.page,"<b>Actors</b>&nbsp;:&nbsp;","<br>")
+		self.cast = string.replace(self.cast,"&nbsp;-&nbsp;", "\n")
+		self.cast = string.strip(gutils.strip_tags(self.cast))
 
-	def classification(self):
+	def get_classification(self):
 		self.classification = ""
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = gutils.trim(self.page,"<b>Studio</b>&nbsp;:&nbsp;","<br>")
 
-	def site(self):
+	def get_o_site(self):
+		self.o_site = ""
+
+	def get_site(self):
 		self.site = ""
 
-	def imdb(self):
-		self.imdb = ""
-
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = ""
 
-	def country(self):
+	def get_country(self):
 		self.country = gutils.trim(self.page,"<b>Country</b>&nbsp;:&nbsp;","<br>")
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page, "Global rating :&nbsp;<b>","/10</b>&nbsp;")
 		if self.rating:
 			self.rating = string.replace(self.rating, ",", ".")

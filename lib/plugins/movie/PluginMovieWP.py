@@ -31,8 +31,8 @@ plugin_description  = 'Serwis filmowy Wirtualnej Polski'
 plugin_url          = 'www.film.wp.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ozarowski'
-plugin_author_email = '<ozarow@gmail.com>'
-plugin_version      = '1.5'
+plugin_author_email = '<ozarow+griffith@gmail.com>'
+plugin_version      = '1.6'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -43,79 +43,79 @@ class Plugin(movie.Movie):
 	def initialize(self):
 		self.page = gutils.trim(self.page,"<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">","<script ")
 
-	def picture(self):
+	def get_image(self):
 		if string.find(self.page,"http://film.wp.pl/f/no.gif") > -1:
-			self.picture_url = ""
+			self.image_url = ""
 		else:
-			self.picture_url = gutils.trim(self.page,"http://film.wp.pl/f/prev/","\" width=")
-			self.picture_url = 'http://film.wp.pl/f/prev/' + self.picture_url
+			self.image_url = gutils.trim(self.page,"http://film.wp.pl/f/prev/","\" width=")
+			self.image_url = 'http://film.wp.pl/f/prev/' + self.image_url
 
-	def original_title(self):
-		self.original_title = gutils.trim(self.page,"<i class=\"ti\" id=\"gr\" style=\"font-size: 14px\">","</i>")
+	def get_o_title(self):
+		self.o_title = gutils.trim(self.page,"<i class=\"ti\" id=\"gr\" style=\"font-size: 14px\">","</i>")
 
-	def title(self):
+	def get_title(self):
 		self.title = gutils.trim(self.page,"<b class=\"ti\"","</b>")
 		self.title = gutils.after(self.title, ">")
 		tmp = string.find(self.title," (")
 		if tmp != -1:
 			self.tmp_year = self.title[tmp+2:tmp+6]	# save for later - see year()
 			self.title = self.title[:tmp]	# cut " (YEAR)"
-		if self.original_title == '':
-			self.original_title = gutils.gdecode(self.title, self.encode)
+		if self.o_title == '':
+			self.o_title = gutils.gdecode(self.title, self.encode)
 
-	def director(self):
-		self.director = gutils.trim(self.page,"<b>Re¿yseria:</b>","<br>")
+	def get_director(self):
+		self.director = gutils.trim(self.page,"<b>ReÂżyseria:</b>","<br>")
 		self.director = gutils.after(self.director,"\">")
 		self.director = gutils.strip_tags(self.director)
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page,"<span id=\"mi\">","</span>")
 		self.plot = gutils.strip_tags(self.plot)
 		self.plot = string.replace(self.plot[1:],"\r\n\r\n","")
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page,"<b>Premiera ","<br>")
 		self.year = gutils.after(self.year,"</b> ")
 		if self.year == '' and self.tmp_year != '':	# if premiere date is not available, use header data
 			self.year = self.tmp_year
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page,"<b>Czas trwania:</b> "," min.<br>")
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page,"<b>Czas trwania:</b> "," min.<br>")
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page,"<b>Gatunek:</b> ","<br>")
 
-	def with(self):
-		self.with = gutils.trim(self.page,"<b>Obsada:</b><br>","<div ")
-		self.with = string.replace(self.with," ..... ", _(" as "))
-		self.with = string.replace(self.with,"<br>\n<a", "\n<a")
-		self.with = string.strip(gutils.strip_tags(self.with))
+	def get_cast(self):
+		self.cast = gutils.trim(self.page,"<b>Obsada:</b><br>","<div ")
+		self.cast = string.replace(self.cast," ..... ", _(" as "))
+		self.cast = string.replace(self.cast,"<br>\n<a", "\n<a")
+		self.cast = string.strip(gutils.strip_tags(self.cast))
 
 
-	def classification(self):
+	def get_classification(self):
 		self.classification = ''
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = ''
 
-	def site(self):
-		self.site = ''
+	def get_o_site(self):
+		self.o_site = ''
 
-	def imdb(self):
-		self.imdb = self.url
+	def get_site(self):
+		self.site = self.url
 
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = "http://film.wp.pl/p/id,%s,film_trailer.html" % self.movie_id
 
-	def country(self):
+	def get_country(self):
 		self.country = gutils.trim(self.page,"<b>Kraj:</b> ","<br>")
 
-	def rating(self):
-		self.rating = gutils.trim(self.page,"<b>Ocena internautów: ","</b>")
+	def get_rating(self):
+		self.rating = gutils.trim(self.page,"<b>Ocena internautĂłw: ","</b>")
 		if self.rating != '':
 			self.rating = str( float(self.rating) )
 
-	def notes(self):
+	def get_notes(self):
 		self.notes = ''
 
 class SearchPlugin(movie.SearchMovie):

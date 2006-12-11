@@ -30,7 +30,7 @@ plugin_url = "www.cinematografo.it"
 plugin_language = _("Italian")
 plugin_author = "Vasco Nunes, Piotr Ożarowski"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "1.0"
+plugin_version = "1.1"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -38,88 +38,87 @@ class Plugin(movie.Movie):
 		self.movie_id = id
 		self.url = "http://www.cinematografo.it/bancadati/consultazione/schedafilm.jsp?codice=%s" % str(self.movie_id)
 
-	def picture(self):
+	def get_image(self):
 		"Find the film's poster image"
 		tmp_poster = gutils.trim(self.page, "../images_locandine/%s/"%self.movie_id, ".JPG\"")
 		if tmp_poster != "":
-			self.picture_url = "http://www.cinematografo.it/bancadati/images_locandine/%s/%s.JPG" % (self.movie_id, tmp_poster)
+			self.image_url = "http://www.cinematografo.it/bancadati/images_locandine/%s/%s.JPG" % (self.movie_id, tmp_poster)
 		else:
-			self.picture_url=""
+			self.image_url=""
 
-	def original_title(self):
+	def get_o_title(self):
 		"Find the film's original title"
-		self.original_title = gutils.trim(self.page, ">Titolo Originale</font>", "</tr>")
-		self.original_title = string.capwords(self.original_title)
+		self.o_title = gutils.trim(self.page, ">Titolo Originale</font>", "</tr>")
+		self.o_title = string.capwords(self.o_title)
 
-	def title(self):
+	def get_title(self):
 		"""Find the film's local title.
 		Probably the original title translation"""
 		self.title = gutils.trim(self.page, "<!--TITOLO-->", "<!--FINE TITOLO-->")
 		self.title = gutils.trim(self.title, "<b>", "</b>")
 		self.title = string.capwords(self.title)
 
-	def director(self):
+	def get_director(self):
 		"Find the film's director"
 		self.director = gutils.trim(self.page, ">Regia", "Attori<")
 		self.director = self.director.replace("&nbsp;&nbsp;", "&nbsp;")
 		self.director = gutils.strip_tags(self.director)
 		self.director = string.strip(self.director)
 
-	def plot(self):
+	def get_plot(self):
 		"Find the film's plot"
 		self.plot = gutils.trim(self.page, "\"fontYellowB\">Trama</font>", "\n")
 
-	def year(self):
+	def get_year(self):
 		"Find the film's year"
 		self.year = gutils.trim(self.page, ">Anno</font>", "</tr>")
 		self.year = gutils.after(self.year, "\n                  ")
 		self.year = gutils.before(self.year, "\n")
 
-	def running_time(self):
+	def get_runtime(self):
 		"Find the film's running time"
-		self.running_time = gutils.trim(self.page, ">Durata</font>", "</tr>")
-		self.running_time = gutils.after(self.running_time, "\n                  ")
-		self.running_time = gutils.before(self.running_time, "\n")
-		print self.running_time
+		self.runtime = gutils.trim(self.page, ">Durata</font>", "</tr>")
+		self.runtime = gutils.after(self.runtime, "\n                  ")
+		self.runtime = gutils.before(self.runtime, "\n")
 
-	def genre(self):
+	def get_genre(self):
 		"Find the film's genre"
 		self.genre = gutils.trim(self.page, ">Genere</font>", "</tr>").lower()
 
-	def with(self):
+	def get_cast(self):
 		"Find the actors. Try to make it comma separated."
-		self.with = gutils.trim(self.page, ">Attori</font>", "\n")
-		self.with = string.replace(self.with, "target='_self'>", "\n>")
-		self.with = string.replace(self.with, "&nbsp;&nbsp;", ' ')
-		self.with = string.replace(self.with, "<a>",_(" as "))
-		self.with = string.replace(self.with, "</tr><tr>", '\n')
-		self.with = string.replace(self.with, "...vedi il resto del cast", '')
+		self.cast = gutils.trim(self.page, ">Attori</font>", "\n")
+		self.cast = string.replace(self.cast, "target='_self'>", "\n>")
+		self.cast = string.replace(self.cast, "&nbsp;&nbsp;", ' ')
+		self.cast = string.replace(self.cast, "<a>",_(" as "))
+		self.cast = string.replace(self.cast, "</tr><tr>", '\n')
+		self.cast = string.replace(self.cast, "...vedi il resto del cast", '')
 
-	def classification(self):
+	def get_classification(self):
 		"Find the film's classification"
 		self.classification = ""
 
-	def studio(self):
+	def get_studio(self):
 		"Find the studio"
 		self.studio = string.capwords(gutils.trim(self.page, ">Distribuzione</font>", "</tr>"))
 
-	def site(self):
+	def get_o_site(self):
 		"Find the film's oficial site"
-		self.site = ""
+		self.o_site = ""
 
-	def imdb(self):
+	def get_site(self):
 		"Find the film's imdb details page"
-		self.imdb = self.url
+		self.site = self.url
 
-	def trailer(self):
+	def get_trailer(self):
 		"Find the film's trailer page or location"
 		self.trailer = ""
 
-	def country(self):
+	def get_country(self):
 		"Find the film's country"
 		self.country = gutils.trim(self.page, ">Origine</font>", "</tr>")
 
-	def rating(self):
+	def get_rating(self):
 		"""Find the film's rating. From 0 to 10.
 		Convert if needed when assigning."""
 		self.rating = 0

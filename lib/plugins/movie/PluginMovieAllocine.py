@@ -32,72 +32,72 @@ plugin_url = "www.allocine.fr"
 plugin_language = _("French")
 plugin_author = "Pierre-Luc Levy"
 plugin_author_email = ""
-plugin_version = "0.5"
+plugin_version = "0.6"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = id
-		self.url = "http://www.allocine.fr/film/fichefilm_gen_cfilm=" + str(self.movie_id) + ".html"
+		self.url = "http://www.allocine.fr/film/fichefilm_gen_cfilm=%s.html" % str(self.movie_id)
 
-	def picture(self):
-		self.picture_url = gutils.trim(self.page,"Poster","Date de sor")
-		self.picture_url = gutils.after(self.picture_url,"activerlientexte.inc")
-		self.picture_url = gutils.trim(self.picture_url,"<img src=\"","\"")
+	def get_image(self):
+		self.image_url = gutils.trim(self.page,"Poster","Date de sor")
+		self.image_url = gutils.after(self.image_url,"activerlientexte.inc")
+		self.image_url = gutils.trim(self.image_url,"<img src=\"","\"")
 
-	def original_title(self):
-		self.original_title = ""
-		self.original_title = gutils.trim(self.page,"Titre original : <i>","</i>")
-		if (self.original_title==''):
-			self.original_title = gutils.trim(self.page,"<title>","</title>")
+	def get_o_title(self):
+		self.o_title = ""
+		self.o_title = gutils.trim(self.page,"Titre original : <i>","</i>")
+		if (self.o_title==''):
+			self.o_title = gutils.trim(self.page,"<title>","</title>")
 
-	def title(self):
+	def get_title(self):
 		self.title = gutils.trim(self.page,"<title>","</title>")
 
-	def director(self):
+	def get_director(self):
 		self.director = gutils.trim(self.page,"<h4>Réalisé par ","</a></h4>")
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page,"Synopsis</b></h3></td></tr></table>","</h4>")
 		self.plot = gutils.after(self.plot,"<h4>")
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page,"Année de production : ","</h4>")
 
-	def running_time(self):
-		self.running_time = ""
-		self.running_time = gutils.trim(self.page,"<h4>Durée : ","min.</h4>&nbsp;")
-		if self.running_time:
-			self.running_time = str (int(gutils.before(self.running_time,"h"))*60 + int(gutils.after(self.running_time,"h")))
+	def get_runtime(self):
+		self.runtime = ""
+		self.runtime = gutils.trim(self.page,"<h4>Durée : ","min.</h4>&nbsp;")
+		if self.runtime:
+			self.runtime = str (int(gutils.before(self.runtime,"h"))*60 + int(gutils.after(self.runtime,"h")))
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page,"<h4>Genre : ","</h4>")
 		self.genre = gutils.strip_tags(self.genre)
 
-	def with(self):
-		self.with = ""
-		self.with = gutils.trim(self.page,"<h4>Avec ","</h4>")
-		self.with = gutils.strip_tags(self.with)
-		self.with = string.replace(self.with,", ", "\n")
+	def get_cast(self):
+		self.cast = ""
+		self.cast = gutils.trim(self.page,"<h4>Avec ","</h4>")
+		self.cast = gutils.strip_tags(self.cast)
+		self.cast = string.replace(self.cast,", ", "\n")
 
-	def classification(self):
+	def get_image(self):
 		self.classification = ""
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = ""
 
-	def site(self):
-		self.site = ""
+	def get_o_site(self):
+		self.o_site = ""
 
-	def imdb(self):
-		self.imdb = "http://www.allocine.fr/film/fichefilm_gen_cfilm=" + self.movie_id + ".html";
+	def get_site(self):
+		self.site = "http://www.allocine.fr/film/fichefilm_gen_cfilm=%s.html" % self.movie_id
 
-	def trailer(self):
-		self.trailer = "http://www.allocine.fr/film/video_gen_cfilm=" + self.movie_id + ".html"
+	def get_trailer(self):
+		self.trailer = "http://www.allocine.fr/film/video_gen_cfilm=%s.html" % self.movie_id
 
-	def country(self):
+	def get_country(self):
 		self.country = gutils.trim(self.page,"<h4>Film ",".</h4>&nbsp;")
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page, "Spectateurs</a> ", "</h4>")
 		self.rating = gutils.trim(self.rating, "etoile_", ".gif")
 		if self.rating:

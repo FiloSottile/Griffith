@@ -32,7 +32,7 @@ plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ozarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.3'
+plugin_version		= '1.4'
 
 class Plugin(movie.Movie):
 	def __init__(self, movie_id):
@@ -44,24 +44,20 @@ class Plugin(movie.Movie):
 		else:
 			self.url = "http://fdb.pl/%s" % str(movie_id)
 
-	def picture(self):
-		self.picture_url = gutils.trim(self.page, 'class="moviePosterTable"', '</td>');
-		self.picture_url = gutils.trim(self.picture_url,' src="',"\"\n")
-		self.picture_url = "http://fdb.pl%s" % self.picture_url
+	def get_image(self):
+		self.image_url = gutils.trim(self.page, 'class="moviePosterTable"', '</td>');
+		self.image_url = gutils.trim(self.image_url,' src="',"\"\n")
+		self.image_url = "http://fdb.pl%s" % self.image_url
 
-	def original_title(self):
-		self.original_title = gutils.trim(self.page,"<div class=\"movieOtherTitle\">\n          ","\n")
-		if self.original_title[:4] == 'The ':
-			self.original_title = self.original_title[4:] + ', The'
+	def get_o_title(self):
+		self.o_title = gutils.trim(self.page,"<div class=\"movieOtherTitle\">\n          ","\n")
 
-	def title(self):
+	def get_title(self):
 		self.title = gutils.trim(self.page,'<div class="movieTitle" >','  ')
-		if self.title[:4] == 'The ':
-			self.title = self.title[4:] + ', The'
-		if self.original_title == '':
-			self.original_title = gutils.gdecode(self.title, self.encode)
+		if self.o_title == '':
+			self.o_title = gutils.gdecode(self.title, self.encode)
 
-	def director(self):
+	def get_director(self):
 		self.director = ''
 		elements = gutils.trim(self.page,'>Reżyseria</div>','<br />')
 		elements = string.split(elements, '<div>')
@@ -72,48 +68,48 @@ class Plugin(movie.Movie):
 					self.director += ', ' + element
 			self.director = string.replace(self.director[2:], ', &nbsp;&nbsp;&nbsp;(więcej)', '')
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page,'>Opis filmu:</div>','</div>')
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page,' class="movieYear">(', ')</span>')
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page,">Czas trwania:</span>\n        ",' min')
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page,">Czas trwania:</span>\n        ",' min')
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page,'>Gatunek:</span>','</div>')
 		self.genre = string.replace(self.genre, '   ', '')
 
-	def with(self):
-		self.with = gutils.trim(self.page,'>Obsada:</div>', """<tr>
+	def get_cast(self):
+		self.cast = gutils.trim(self.page,'>Obsada:</div>', """<tr>
             <td colspan""")
-		if self.with != '':
-			self.with = self.with.replace('....',_(' as '))
-			self.with = self.with.replace('  ', '')
-			self.with = self.with.replace("\n", '')
-			self.with = self.with.replace('</tr>', "\n")
+		if self.cast != '':
+			self.cast = self.cast.replace('....',_(' as '))
+			self.cast = self.cast.replace('  ', '')
+			self.cast = self.cast.replace("\n", '')
+			self.cast = self.cast.replace('</tr>', "\n")
 
-	def classification(self):
+	def get_classification(self):
 		self.classification = gutils.trim(self.page,">Od lat:</span>\n","\n")
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = ''
 
-	def site(self):
-		self.site = ''
+	def get_o_site(self):
+		self.o_site = ''
 
-	def imdb(self):
-		self.imdb = self.url
+	def get_site(self):
+		self.site = self.url
 
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = ''
 
-	def country(self):
+	def get_country(self):
 		self.country = gutils.trim(self.page,">Kraj:</span>\n",'</div>')
 		self.country = string.replace(self.country, "   ", '')
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page, '>Ocena:</span>','/10</span>')
 		self.rating = gutils.after(self.rating, 'bold">')
 		if self.rating:

@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr Ożarowski
+# Copyright (c) 2005-2006 Piotr OĹźarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,11 +32,11 @@ plugin_url          = 'www.anidb.info'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ozarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.0'
+plugin_version      = '2.1'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode="iso-8859-1"
+		self.encode = 'iso-8859-1'
 		if string.find(id, 'http://') != -1:
 			self.url = str(id)
 			self.movie_id = 'anidb'
@@ -51,40 +51,40 @@ class Plugin(movie.Movie):
 			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
 		self.page = gutils.trim(self.page, '<h1>Show Anime - ',"<table border=0>\n\t<tr>")
 
-	def picture(self):
-		self.picture_url = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page).group()
+	def get_image(self):
+		match = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page)
+		if match is not None:
+			self.image_url = match.group()
+		else:
+			self.image_url = ''
 
-	def original_title(self):
-		self.original_title = gutils.trim(self.page, '<td> Title: </td>', '</td>')
-		self.original_title = gutils.after(self.original_title, '<td> ')
-		self.original_title = re.sub(' \(\d*\)', '', self.original_title)
-		if self.original_title[:4] == 'The ':
-			self.original_title = self.original_title[4:] + ', The'
+	def get_o_title(self):
+		self.o_title = gutils.trim(self.page, '<td> Title: </td>', '</td>')
+		self.o_title = gutils.after(self.o_title, '<td> ')
+		self.o_title = re.sub(' \(\d*\)', '', self.o_title)
 
-	def title(self):
+	def get_title(self):
 		self.title = gutils.trim(self.page,'<td> English: </td>', ' </td>')
 		self.title = gutils.after(self.title, '<td> ')
 		if self.title == '':
-			self.title = gutils.gdecode(self.original_title, self.encode)
-		elif self.title[:4] == 'The ':
-			self.title = self.title[4:] + ', The'
+			self.title = gutils.gdecode(self.o_title, self.encode)
 
-	def director(self):
+	def get_director(self):
 		self.director = ''
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page,"<tr>\n\t<td>\n\t    ","\n\t</td>")
 		self.plot = string.replace(self.plot,"<br />","\n")
 		self.plot = gutils.strip_tags(self.plot)
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page, '<td> Year: </td>', '</td>')
 		self.year = gutils.after(self.year, '<td> ')[:4]
 
-	def running_time(self):
-		self.running_time = ''
+	def get_runtime(self):
+		self.runtime = ''
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page, '>Genre:<', '[similar]</a> </td>')
 		self.genre = gutils.after(self.genre, '<td> ')
 		self.genre = gutils.strip_tags(self.genre)
@@ -93,13 +93,13 @@ class Plugin(movie.Movie):
 		elif self.genre == '-':
 			self.genre = ''
 
-	def with(self):
-		self.with = ''
+	def get_cast(self):
+		self.cast = ''
 
-	def classification(self):
+	def get_classification(self):
 		self.classification = ''
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = gutils.trim(self.page, '<td> Companies: </td>', ' </td>')
 		self.studio = gutils.after(self.studio, '<td> ')
 		self.studio = gutils.strip_tags(self.studio)
@@ -108,27 +108,27 @@ class Plugin(movie.Movie):
 			if self.studio[len(self.studio)-1:] == ')':
 				self.studio = self.studio[:len(self.studio)-1]
 
-	def site(self):
-		self.site = gutils.trim(self.page, '<td> URL: </td>', ' </td>')
-		self.site = gutils.after(self.site, 'href="')
-		self.site = gutils.before(self.site, '" ')
+	def get_o_site(self):
+		self.o_site = gutils.trim(self.page, '<td> URL: </td>', ' </td>')
+		self.o_site = gutils.after(self.o_site, 'href="')
+		self.o_site = gutils.before(self.o_site, '" ')
 
-	def imdb(self):
-		self.imdb = self.url
+	def get_site(self):
+		self.site = self.url
 
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = ''
 
-	def country(self):
+	def get_country(self):
 		self.country = ''
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page, '<td> Rating: </td>', ' </td>')
 		self.rating = gutils.after(self.rating, '<td> ')
 		self.rating = gutils.before(self.rating,' ')
 		if self.rating != '':
 			self.rating = str( float(self.rating) )
-	def notes(self):
+	def get_notes(self):
 		self.notes = ''
 		# ...type
 		atype = gutils.trim(self.page, '<td> Type: </td>',' </td>')
@@ -143,7 +143,7 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.encode="iso-8859-1"
+		self.encode = "iso-8859-1"
 		self.original_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&adb.search='
 		self.translated_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&adb.search='
 

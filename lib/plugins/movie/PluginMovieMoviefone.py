@@ -15,65 +15,65 @@ plugin_description = "A Service of America Online"
 plugin_url = "movies.aol.com"
 plugin_language = _("English")
 plugin_author = "Vasco Nunes"
-plugin_version = "0.1"
+plugin_version = "0.2"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = id
 		self.url = "http://movies.aol.com/movie/main.adp?_pgtyp=pdct&mid=" + str(self.movie_id)
 
-	def picture(self):
-		self.picture_url = gutils.trim(self.page,"http://cdn.channel.aol.com/amgvideo/dvd/cov150/",".jpg")
-		self.picture_url = "http://cdn.channel.aol.com/amgvideo/dvd/cov150/" + self.picture_url + ".jpg"
+	def get_image(self):
+		self.image_url = gutils.trim(self.page,"http://cdn.channel.aol.com/amgvideo/dvd/cov150/",".jpg")
+		self.image_url = "http://cdn.channel.aol.com/amgvideo/dvd/cov150/" + self.image_url + ".jpg"
 
-	def original_title(self):
-		self.original_title = string.capwords(gutils.trim(self.page,"<title>Moviefone: ","</title>") )
+	def get_o_title(self):
+		self.o_title = string.capwords(gutils.trim(self.page,"<title>Moviefone: ","</title>") )
 
-	def title(self):
-		self.title = self.original_title
+	def get_title(self):
+		self.title = self.o_title
 
-	def director(self):
+	def get_director(self):
 		self.director = gutils.trim(self.page,"<strong>Directed By:</strong> ","<br />")
 		self.director = string.strip(gutils.strip_tags(self.director))
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page,"<strong>Synopsis:</strong> ","<br />")
 		self.plot = string.strip(gutils.strip_tags(self.plot))
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page,"<strong>DVD Release Date:</strong> ","<br />")
 		self.year = self.year[-4:]
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page,"<strong>Run Time:</strong> "," min.<br />")
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page,"<strong>Run Time:</strong> "," min.<br />")
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page,"<strong>Genre:</strong> ","<br />")
 
-	def with(self):
-		self.with = gutils.trim(self.page,"<strong>Starring:</strong> ","<br />")
-		self.with = string.strip(gutils.strip_tags(self.with))
+	def get_cast(self):
+		self.cast = gutils.trim(self.page,"<strong>Starring:</strong> ","<br />")
+		self.cast = string.strip(gutils.strip_tags(self.cast))
 
-	def classification(self):
+	def get_classification(self):
 		self.classification = gutils.trim(self.page,"<strong>Rating:</strong> ","<br />")
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = gutils.trim(self.page,"<strong>Released By:</strong> ","<br />")
 
-	def site(self):
+	def get_o_site(self):
+		self.o_site = ""
+
+	def get_site(self):
 		self.site = ""
 
-	def imdb(self):
-		self.imdb = ""
-
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = gutils.trim(self.page,"""onclick="setTrailerOmni();window.open('""", \
 			"','_dlplayer'")
 
-	def country(self):
+	def get_country(self):
 		self.country = ""
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = ""
 
 class SearchPlugin(movie.SearchMovie):

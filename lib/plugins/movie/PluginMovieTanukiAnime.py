@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr Ożarowski
+# Copyright (c) 2005-2006 Piotr O?arowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,13 +25,13 @@ from gettext import gettext as _
 import gutils
 import movie,string
 
-plugin_name = "Tanuki-Anime"
-plugin_description = "Dawniej Wszechbiblia Anime"
-plugin_url = "anime.tanuki.pl"
-plugin_language = _("Polish")
-plugin_author = "Piotr Ozarowski"
-plugin_author_email = "<ozarow+griffith@gmail.com>"
-plugin_version = "1.1"
+plugin_name         = 'Tanuki-Anime'
+plugin_description  = 'Największy zbiór recenzji anime w Polsce'
+plugin_url          = 'anime.tanuki.pl'
+plugin_language     = _('Polish')
+plugin_author       = 'Piotr Ozarowski'
+plugin_author_email = '<ozarow+griffith@gmail.com>'
+plugin_version      = '1.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -48,65 +48,65 @@ class Plugin(movie.Movie):
 			self.movie_id = gutils.trim(self.page, "\"><a href=\"/strony/anime/", "/oceny")
 			self.url = "http://anime.tanuki.pl/strony/anime/" + self.movie_id
 
-	def picture(self):
-		self.picture_url = gutils.trim(self.page,"<img src=\"/screens/","<br />")
-		self.picture_url = gutils.before(self.picture_url,"\"")
-		self.picture_url = "http://anime.tanuki.pl/screens/" + self.picture_url
+	def get_image(self):
+		self.image_url = gutils.trim(self.page,"<img src=\"/screens/","<br />")
+		self.image_url = gutils.before(self.image_url,"\"")
+		self.image_url = "http://anime.tanuki.pl/screens/%s" % self.image_url
 
-	def original_title(self):
-		self.original_title = gutils.trim(self.page, "<h3 class=\"animename\"", "</h3>")
-		self.original_title = gutils.after(self.original_title, ">")
+	def get_o_title(self):
+		self.o_title = gutils.trim(self.page, "<h3 class=\"animename\"", "</h3>")
+		self.o_title = gutils.after(self.o_title, ">")
 
-	def title(self):
-		self.title = self.original_title
+	def get_title(self):
+		self.title = self.o_title
 
-	def director(self):
-		self.director = gutils.trim(self.page, "<th scope=\"row\">Reżyser:</th>\n\t<td>","</td>")
+	def get_director(self):
+		self.director = gutils.trim(self.page, "<th scope=\"row\">Re?yser:</th>\n\t<td>","</td>")
 
-	def plot(self):
+	def get_plot(self):
 		self.plot = gutils.trim(self.page, "<div class=\"copycat\">\n", "</div>")
 
-	def year(self):
+	def get_year(self):
 		self.year = gutils.trim(self.page,"<div class=\"sitem\">Rok wydania: <","</a>")
 		self.year = gutils.after(self.year,">")
 
-	def running_time(self):
-		self.running_time = gutils.trim(self.page,"<div class=\"sitem\">Czas trwania: <b>\n\t\t","\n</b>")
-		if self.running_time.find("?") != -1:
-			self.running_time = ''
+	def get_runtime(self):
+		self.runtime = gutils.trim(self.page,"<div class=\"sitem\">Czas trwania: <b>\n\t\t","\n</b>")
+		if self.runtime.find("?") != -1:
+			self.runtime = ''
 		else:
-			self.running_time = gutils.after(self.running_time, "×")
-			self.running_time = gutils.before(self.running_time, " min")
+			self.runtime = gutils.after(self.runtime, "?")
+			self.runtime = gutils.before(self.runtime, " min")
 
-	def genre(self):
+	def get_genre(self):
 		self.genre = gutils.trim(self.page,"<div class=\"sitem\">Gatunki:\n\t\t","</div>")
 		self.genre = string.replace(self.genre, "\t\t"," ")
 
-	def with(self):
-		self.with = ''
+	def get_cast(self):
+		self.cast = ''
 
-	def classification(self):
+	def get_classification(self):
 		self.classification = ''
 
-	def studio(self):
+	def get_studio(self):
 		self.studio = gutils.trim(self.page, "<th scope=\"row\">Studio:</th>\n\t<td>\n", "\t</td>")
 
-	def site(self):
-		self.site = ''
+	def get_o_site(self):
+		self.o_site = ''
 
-	def imdb(self):
-		self.imdb = self.url
+	def get_site(self):
+		self.site = self.url
 
-	def trailer(self):
+	def get_trailer(self):
 		self.trailer = ''
 
-	def country(self):
+	def get_country(self):
 		self.country = ''
 
-	def rating(self):
+	def get_rating(self):
 		self.rating = gutils.trim(self.page," alt=\"Ocena ","/10")
 
-	def notes(self):
+	def get_notes(self):
 		self.notes = "Czas trwania: " + gutils.trim(self.page,"<div class=\"sitem\">Czas trwania: <b>\n\t\t","\n</b>") + '\n'
 
 		t = self.page.find("<tr><th scope=\"row\">Autor:</th>")
