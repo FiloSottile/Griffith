@@ -62,7 +62,7 @@ class Plugin(movie.Movie):
 			self.o_title = self.title
 
 	def get_director(self):
-		self.director = re.search(r"ReÂžie:(.*)<br><b>HrajÃ­:",self.page)
+		self.director = re.search(r"Režie:(.*)<br><b>Hrají:",self.page)
 		if self.director:
 			self.director = gutils.strip_tags(self.director.group(1))
 		else:
@@ -76,7 +76,7 @@ class Plugin(movie.Movie):
 			self.year = ""
 
 	def get_runtime(self):
-		self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>ReÂžie:",self.page)
+		self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>Režie:",self.page)
 		if self.runtime:
 			self.runtime = gutils.strip_tags(self.runtime.group(1))
 		else:
@@ -97,14 +97,14 @@ class Plugin(movie.Movie):
 			self.country = ""
 
 	def get_cast(self):
-		self.cast = re.search(r"HrajÃ­: (.*)</div><br>",self.page)
+		self.cast = re.search(r"Hrají: (.*)</div><br>",self.page)
 		if self.cast:
 			self.cast = gutils.strip_tags(self.cast.group(1))
 		else:
 			self.cast = ""
 
 	def get_plot(self):
-		self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah / Info:","</td>"),"(oficiÃ¡lnÃ­ text distributora)",""))
+		self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah / Info:","</td>"),"(oficiální text distributora)",""))
 
 	def get_site(self):
 		self.o_site = re.search(r"href=[\"'](http://.*imdb\.com/title[^\"']*)",self.page)

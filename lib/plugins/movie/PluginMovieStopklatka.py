@@ -40,8 +40,8 @@ class Plugin(movie.Movie):
 		self.encode = 'iso-8859-2'
 
 	def initialize(self):
-		self.page = self.page.replace('\x9c','?')
-		self.page = self.page.replace('?','?')
+		self.page = self.page.replace('\x9c','ś')
+		self.page = self.page.replace('š','ą')
 
 	def get_image(self):
 		self.image_url = gutils.trim(self.page,"http://img.stopklatka.pl/film/","' border=1")
@@ -56,7 +56,7 @@ class Plugin(movie.Movie):
 			self.o_title = self.title
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,">re?yseria:<","</font>")
+		self.director = gutils.trim(self.page,">reżyseria:<","</font>")
 		self.director = gutils.after(self.director,"<b>")
 		self.director = gutils.strip_tags(self.director)
 
@@ -81,7 +81,7 @@ class Plugin(movie.Movie):
 		self.cast = gutils.after(self.cast,"<b>")
 		self.cast = string.replace(self.cast,", ", "\n")
 		self.cast = string.strip(gutils.strip_tags(self.cast))
-		pos = string.find(self.cast,"Wi?cej &gt;")
+		pos = string.find(self.with,"Więcej &gt;")
 		if pos > 0:
 			self.cast = self.cast[0:pos]
 
@@ -124,8 +124,8 @@ class SearchPlugin(movie.SearchMovie):
 
 	def sub_search(self):
 		self.page = gutils.trim(self.page,"<blockquote>", "</blockquote>");
-		self.page = self.page.replace('\x9c','?')
-		self.page = self.page.replace('?','?')
+		self.page = self.page.replace('\x9c','ś')
+		self.page = self.page.replace('š','ą')
 
 	def get_searches(self):
 		elements = string.split(self.page,"<li>")

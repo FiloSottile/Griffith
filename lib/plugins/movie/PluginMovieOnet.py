@@ -69,7 +69,7 @@ class Plugin(movie.Movie):
 			self.director = gutils.before(self.director,"</B>")
 
 	def get_plot(self):
-		pos = string.find(self.page, "<TD class=tym>Tre??</TD>")
+		pos = string.find(self.page, "<TD class=tym>Treść</TD>")
 		if pos > 0:
 			self.plot = self.page[pos:]
 			self.plot = gutils.trim(self.plot, "<DIV class=a2>", "</DIV>")
@@ -121,7 +121,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.before(self.country,",")
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page,">Ocena filmu</TD>","g?os?w)")
+		self.rating = gutils.trim(self.page,">Ocena filmu</TD>","głosów)")
 		self.rating = gutils.after(self.rating,"<BR><B>")
 		self.rating = gutils.before(self.rating,"/5</B>")
 		if self.rating <> "":

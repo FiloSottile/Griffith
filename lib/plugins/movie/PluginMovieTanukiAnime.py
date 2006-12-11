@@ -75,7 +75,7 @@ class Plugin(movie.Movie):
 		if self.runtime.find("?") != -1:
 			self.runtime = ''
 		else:
-			self.runtime = gutils.after(self.runtime, "?")
+			self.runtime = gutils.after(self.runtime, "×")
 			self.runtime = gutils.before(self.runtime, " min")
 
 	def get_genre(self):

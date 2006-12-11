@@ -64,7 +64,7 @@ class Plugin(movie.Movie):
 			self.o_title = gutils.gdecode(self.title, self.encode)
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"<b>ReÂżyseria:</b>","<br>")
+		self.director = gutils.trim(self.page,"<b>Re¿yseria:</b>","<br>")
 		self.director = gutils.after(self.director,"\">")
 		self.director = gutils.strip_tags(self.director)
 
@@ -111,7 +111,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.trim(self.page,"<b>Kraj:</b> ","<br>")
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page,"<b>Ocena internautĂłw: ","</b>")
+		self.rating = gutils.trim(self.page,"<b>Ocena internautów: ","</b>")
 		if self.rating != '':
 			self.rating = str( float(self.rating) )
 

@@ -68,7 +68,7 @@ class Plugin(movie.Movie):
 
 	def get_runtime(self):
 		"""Finds the film's running time"""
-		self.runtime = gutils.trim(self.page, "<td><b>Duração:</b> ", " min.</td>")
+		self.runntime = gutils.trim(self.page, "<td><b>Duraçăo:</b> ", " min.</td>")
 
 	def get_genre(self):
 		"""Finds the film's genre"""
@@ -129,7 +129,7 @@ class SearchPlugin(movie.SearchMovie):
 	def sub_search(self):
 		"""Isolating just a portion (with the data we want) of the results"""
 		self.page = gutils.trim(self.page, \
-			"""ordenados por data de aquisição:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
+			"""ordenados por data de aquisiçăo:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
 
 	def get_searches(self):
 		"""Try to find both id and film title for each search result"""

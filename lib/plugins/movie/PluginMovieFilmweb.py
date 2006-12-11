@@ -69,7 +69,7 @@ class Plugin(movie.Movie):
 		self.director = string.replace(self.director, "\t",'')
 		self.director = string.replace(self.director, "\n",'')
 		self.director = string.replace(self.director, ",",", ")
-		self.director = string.replace(self.director, ",  (wiÄÂĂÂcej&#160;...)",'')
+		self.director = string.replace(self.director, ",  (wiĂÂcej&#160;...)",'')
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")
