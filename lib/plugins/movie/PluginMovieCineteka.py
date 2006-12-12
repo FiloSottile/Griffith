@@ -68,7 +68,7 @@ class Plugin(movie.Movie):
 
 	def get_runtime(self):
 		"""Finds the film's running time"""
-		self.runntime = gutils.trim(self.page, "<td><b>Duraçăo:</b> ", " min.</td>")
+		self.runtime = gutils.trim(self.page, "<td><b>Duraçăo:</b> ", " min.</td>")
 
 	def get_genre(self):
 		"""Finds the film's genre"""
