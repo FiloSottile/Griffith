@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: delete.py,v 1.11 2005/08/13 09:59:58 iznogoud Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,32 +16,59 @@ __revision__ = '$Id: delete.py,v 1.11 2005/08/13 09:59:58 iznogoud Exp $'
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
 import gutils
+import os
 
 def delete_movie(self):
-    m_id = None
-    try:
-        m_id, m_iter = self.get_maintree_selection()
-        response = gutils.question(self,_("Are you sure you want to delete this movie?"), \
-            1, self.main_window)
-        if response == -8:
-            delete_movie_from_db(self, m_id, m_iter)
-        else:
-            pass
-    except:
-        pass
-        
-def delete_movie_from_db(self, m_id, m_iter):
-    self.total -= 1
-    self.db.remove_movie_by_num(m_id)
-    self.treemodel.remove(m_iter)
-    self.clear_details()
-    self.select_last_row(self.total)
-    #update statusbar
-    self.count_statusbar()
+	m_id = None
+	number, m_iter = self.get_maintree_selection()
+	movie = self.db.Movie.get_by(number=number)
+	if int(movie.loaned)==1:
+		gutils.warning(self, msg=_("You can't delete movie while it is loaned."))
+		return False
+	response = gutils.question(self, _("Are you sure you want to delete this movie?"), \
+		1, self.widgets['window'])
+	if response == -8:	# gtk.RESPONSE_YES == -8
+		# try to delete poster image as well
+		if movie.image is not None:
+			delete_poster(self, movie.image)
+		if movie.remove_from_db():
+			# update main treelist
+			self.total -= 1
+			self.treemodel.remove(m_iter)
+			self.go_prev()
+			self.clear_details()
+			self.count_statusbar()
+	else:
+		return False
+
+def delete_poster(self, poster):
+	if not poster:
+		self.debug.show('Delete poster: no poster to delete')
+		return False
+	posters_dir = os.path.join(self.locations['posters'])
+	image_thumbnail = os.path.join(posters_dir, "t_" + poster + ".jpg")
+	image_mini = os.path.join(posters_dir, "m_" + poster + ".jpg")
+	image_full = os.path.join(posters_dir, poster + ".jpg")
+	if os.path.isfile(image_mini):
+		try:
+			os.remove(image_mini)
+		except:
+			self.debug.show("Can't remove %s file"%image_mini)
+	if os.path.isfile(image_full):
+		try:
+			os.remove(image_full)
+		except:
+			self.debug.show("Can't remove %s file"%image_full)
+	if os.path.isfile(image_thumbnail):
+		try:
+			os.remove(image_thumbnail)
+		except:
+			self.debug.show("Can't remove %s file"%image_thumbnail)
+

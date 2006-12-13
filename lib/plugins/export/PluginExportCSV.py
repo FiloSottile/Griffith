@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginExportCSV.py,v 1.6 2005/09/26 22:49:57 iznogoud Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@ __revision__ = '$Id: PluginExportCSV.py,v 1.6 2005/09/26 22:49:57 iznogoud Exp $
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
@@ -31,11 +31,11 @@ plugin_name = "CSV"
 plugin_description = _("Full CSV list export plugin")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.1"
+plugin_version = "0.2"
 
 class ExportPlugin:
 
-    def __init__(self, database, locations, parent):
+    def __init__(self, database, locations, parent, debug):
         self.db = database
         self.locations = locations
         self.parent = parent
@@ -53,15 +53,13 @@ class ExportPlugin:
                 else:
                     overwrite = False
                     
-            if overwrite == True or overwrite == None:
-                writer = csv.writer(file(filename[0], "w"), dialect=csv.excel)        
-                data = self.db.get_all_data()
-                for row in data:
+            if overwrite == True or overwrite is None:
+                writer = csv.writer(file(filename[0], 'w'), dialect=csv.excel)
+		for movie in self.db.Movie.select():
                     t = []
-                    for s in row:
-                        try:
-                            t.append(s.encode('latin-1'))
-                        except:
-                            t.append(s)
-                    writer.writerow(t) 
+                    for s in ('number', 'o_title', 'title', 'director', 'year', 'classification', 'country',
+                            'genre', 'rating', 'runtime', 'studio', 'seen', 'loaned', 'o_site', 'site', 'trailer',
+                            'plot', 'cast', 'notes','image'):
+                        t.append(movie[s])
+                    writer.writerow(t)
                 gutils.info(self, _("%s file has been created.")%"CSV", self.parent)

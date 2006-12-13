@@ -1,0 +1,1752 @@
+# Swedish translation for griffith.
+# Copyright (C) 2005 Vasco Nunes
+# This file is distributed under the same license as the griffith package.
+# Daniel Nylander <po@danielnylander.se>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: Griffith 0.6.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-12-09 00:12+0000\n"
+"PO-Revision-Date: 2006-09-23 18:34+0100\n"
+"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../griffith:272
+msgid "You saw all movies in your collection!"
+msgstr "Du har sett alla filmer i din samling!"
+
+#: ../griffith:392 ../griffith:397 ../lib/initialize.py:253
+#: ../lib/initialize.py:504
+msgid "subtitles"
+msgstr "undertexter"
+
+#: ../griffith:675
+msgid ""
+"Are you sure you want to restore?\n"
+"Your current movie collection will be replaced.\n"
+"You can't undo this operation."
+msgstr ""
+"Är du säker på att du till återställa?\n"
+"Din aktuell filmsamling kommer att ersättas.\n"
+"Du kan inte ångra den här åtgärden."
+
+#: ../griffith:684
+#, fuzzy
+msgid ""
+"Are you sure you want to mix?\n"
+"Your current movie collection will be mixed with a backup.\n"
+"You can't undo this operation."
+msgstr ""
+"Är du säker på att du till återställa?\n"
+"Din aktuell filmsamling kommer att ersättas.\n"
+"Du kan inte ångra den här åtgärden."
+
+#: ../griffith:763
+msgid " movie(s) in collection. "
+msgstr " film(er) i samlingen. "
+
+#: ../griffith:764
+msgid " movie(s) loaned. "
+msgstr " film(er) utlånade. "
+
+#: ../griffith:765
+msgid "You haven't seen "
+msgstr "Du har inte sett "
+
+#: ../griffith:765
+msgid " movie(s)"
+msgstr " film(er)"
+
+#: ../griffith:896
+msgid ""
+"Are you sure you want to create a new database?\n"
+"You will lose ALL your current data!"
+msgstr ""
+"Är du säker på att du vill skapa en ny databas?\n"
+"Du kommer att förlora ALL aktuell data!"
+
+#: ../griffith:900
+msgid ""
+"Last chance!\n"
+"Do you confirm that you want\n"
+"to lose your current data?"
+msgstr ""
+"Sista chansen!\n"
+"Bekräfta att du verkligen vill\n"
+"förlora ditt aktuella data."
+
+#: ../lib/about.py:38
+#, fuzzy
+msgid "Main Authors"
+msgstr "Upphovsman"
+
+#: ../lib/about.py:40
+msgid "Programmer"
+msgstr "Programmerare"
+
+#: ../lib/about.py:42
+msgid "Contributors:"
+msgstr "Bidragsgivare:"
+
+#: ../lib/about.py:46
+msgid "Logo, icon and general artwork "
+msgstr "Logo, ikon och allmän grafik "
+
+#: ../lib/about.py:50
+msgid "Bulgarian"
+msgstr "Bulgariska"
+
+#: ../lib/about.py:52
+#, fuzzy
+msgid "Brasilian Portuguese"
+msgstr "Brasiliansk portugisiska"
+
+#: ../lib/about.py:54 ../lib/plugins/movie/PluginMovieCSFD.py:30
+msgid "Czech"
+msgstr "Tjeckiska"
+
+#: ../lib/about.py:57 ../lib/plugins/movie/PluginMovieAllocine.py:32
+#: ../lib/plugins/movie/PluginMovieCineMovies.py:31
+msgid "French"
+msgstr "Franska"
+
+#: ../lib/about.py:59 ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:32
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:32
+#: ../lib/plugins/movie/PluginMovieOFDb.py:13
+msgid "German"
+msgstr "Tyska"
+
+#: ../lib/about.py:62 ../lib/plugins/movie/PluginMovieCinematografo.py:30
+msgid "Italian"
+msgstr "Italienska"
+
+#: ../lib/about.py:64 ../lib/plugins/movie/PluginMovieFDb.py:32
+#: ../lib/plugins/movie/PluginMovieFilmweb.py:31
+#: ../lib/plugins/movie/PluginMovieOnet.py:31
+#: ../lib/plugins/movie/PluginMovieStopklatka.py:31
+#: ../lib/plugins/movie/PluginMovieTanukiAnime.py:31
+#: ../lib/plugins/movie/PluginMovieWP.py:32
+msgid "Polish"
+msgstr "Polska"
+
+#: ../lib/about.py:66 ../lib/plugins/movie/PluginMovie7arte.py:32
+#: ../lib/plugins/movie/PluginMovieCineteka.py:32
+#: ../lib/plugins/movie/PluginMoviePTGate.py:32
+msgid "Portuguese"
+msgstr "Portugisiska"
+
+#: ../lib/about.py:68
+msgid "Spanish"
+msgstr "Spanska"
+
+#: ../lib/about.py:70
+msgid "Swedish"
+msgstr ""
+
+#: ../lib/about.py:76
+msgid "This program is released under the GNU"
+msgstr "Det här programmet är utgivet under GNU"
+
+#: ../lib/add.py:347
+msgid "Movie information has been updated"
+msgstr "Filminformationen har uppdaterats"
+
+#: ../lib/add.py:363 ../lib/add.py:562
+msgid ""
+"You should fill the original title\n"
+"or the movie title."
+msgstr ""
+"Du bör fylla i ursprungliga titeln\n"
+"eller filmens titel."
+
+#: ../lib/add.py:369 ../lib/add.py:375
+msgid "Movie with that title already exists, are you sure you want to add?"
+msgstr ""
+
+#: ../lib/add.py:539
+msgid "No results"
+msgstr "Inga träffar"
+
+#: ../lib/add.py:570
+msgid "Url: "
+msgstr "Url: "
+
+#: ../lib/add.py:571
+msgid "Language: "
+msgstr "Språk: "
+
+#: ../lib/backup.py:32
+msgid "Save Griffith backup"
+msgstr "Spara säkerhetskopia"
+
+#: ../lib/backup.py:40 ../lib/plugins/export/PluginExportCSV.py:50
+#: ../lib/plugins/export/PluginExportPDF.py:72
+#: ../lib/plugins/export/PluginExportXML.py:51
+msgid "File exists. Do you want to overwrite it?"
+msgstr "Filen finns redan. Vill du skriva över den?"
+
+#: ../lib/backup.py:51
+msgid "Error creating backup"
+msgstr "Fel vid skapande av säkerhetskopia"
+
+#: ../lib/backup.py:98
+msgid "Backup has been created"
+msgstr "Säkerhetskopia har skapats"
+
+#: ../lib/backup.py:102 ../lib/backup.py:157
+msgid "Restore Griffith backup"
+msgstr "Återställ säkerhetskopia"
+
+#: ../lib/backup.py:110 ../lib/backup.py:173
+msgid "Can't read backup file"
+msgstr "Kan inte läsa säkerhetskopia"
+
+#: ../lib/backup.py:148
+msgid "Backup restored"
+msgstr "Säkerhetskopia återställd"
+
+#: ../lib/backup.py:239
+#, python-format
+msgid ""
+"Databases merged!\n"
+"\n"
+"Processed movies: %s\n"
+"Merged movies: %s"
+msgstr ""
+
+#: ../lib/cover.py:42 ../lib/edit.py:44
+msgid "Select image"
+msgstr "Välj bild"
+
+#: ../lib/cover.py:86 ../lib/cover.py:149
+msgid "Cover generated by Griffith v"
+msgstr "Omslagsbild genererad av Griffith v"
+
+#: ../lib/cover.py:88 ../lib/cover.py:151
+#: ../lib/plugins/export/PluginExportHTML.py:628
+#: ../lib/plugins/export/PluginExportPDF.py:119
+msgid "Released Under the GNU/GPL License"
+msgstr "Utgiven under GNU/GPL License"
+
+#: ../lib/cover.py:176 ../lib/initialize.py:186 ../lib/initialize.py:477
+#: ../lib/plugins/export/PluginExportHTML.py:105 ../glade/griffith.glade.h:91
+msgid "Original Title"
+msgstr "Ursprunglig titel"
+
+#: ../lib/cover.py:177 ../lib/initialize.py:192 ../lib/initialize.py:478
+#: ../lib/plugins/export/PluginExportHTML.py:111 ../glade/griffith.glade.h:143
+msgid "Title"
+msgstr "Titel"
+
+#: ../lib/cover.py:179 ../lib/initialize.py:198 ../lib/initialize.py:484
+#: ../lib/plugins/export/PluginExportHTML.py:96 ../glade/griffith.glade.h:44
+msgid "Director"
+msgstr "Regissör"
+
+#: ../lib/cover.py:181
+msgid "Running Time"
+msgstr "Speltid"
+
+#: ../lib/cover.py:181
+msgid " min"
+msgstr " min"
+
+#: ../lib/cover.py:182 ../lib/initialize.py:482
+#: ../lib/plugins/export/PluginExportHTML.py:95 ../glade/griffith.glade.h:38
+msgid "Country"
+msgstr "Land"
+
+#: ../lib/cover.py:183 ../lib/initialize.py:483
+#: ../lib/plugins/export/PluginExportHTML.py:97 ../glade/griffith.glade.h:57
+msgid "Genre"
+msgstr "Genre"
+
+#: ../lib/delete.py:33
+msgid "You can't delete movie while it is loaned."
+msgstr "Du kan inte ta bort filmen när den är utlånad."
+
+#: ../lib/delete.py:35
+msgid "Are you sure you want to delete this movie?"
+msgstr "Är du säker på att du vill ta bort den här filmen?"
+
+#: ../lib/edit.py:55
+msgid "Image not valid."
+msgstr "Bilden är inte giltig."
+
+#: ../lib/edit.py:62
+msgid "Are you sure you want to delete this poster?"
+msgstr "Är du säker på att du vill ta bort den här postern?"
+
+#: ../lib/edit.py:73 ../lib/update.py:34
+msgid "Image has been updated"
+msgstr "Bilden har uppdaterats"
+
+#: ../lib/edit.py:103 ../lib/edit.py:110
+msgid "No posters found for this movie."
+msgstr "Ingen poster hittades för den här filmen."
+
+#: ../lib/edit.py:149 ../lib/movie.py:91
+msgid "Fetching poster"
+msgstr "Hämtar poster"
+
+#: ../lib/edit.py:149 ../lib/movie.py:69 ../lib/movie.py:91
+#: ../lib/movie.py:219
+msgid "Wait a moment"
+msgstr "Var god vänta"
+
+#: ../lib/edit.py:161
+msgid "Sorry. A connection error was occurred."
+msgstr "Tyvärr, ett anslutningsfel inträffade."
+
+#: ../lib/edit.py:173
+msgid "Sorry. This poster image format is not supported."
+msgstr "Tyvärr, formatet på den här posterbilden stöds inte."
+
+#: ../lib/edit.py:179
+msgid "Do you want to use this poster instead?"
+msgstr "Vill du använda den här postern istället?"
+
+#: ../lib/edit.py:201
+msgid "Sorry. This movie is listed but have no poster available at Amazon.com."
+msgstr ""
+"Tyvärr, den här filmen är listad men saknar en tillgänglig poster på Amazon."
+"com."
+
+#: ../lib/gconsole.py:117
+msgid "No movie found"
+msgstr "Ingen film hittades"
+
+#: ../lib/gemail.py:38 ../lib/gemail.py:48
+#, python-format
+msgid "Error sending e-mail: %s"
+msgstr "Fel vid sändning av e-post: %s"
+
+#: ../lib/gemail.py:45
+msgid "E-mail sent sucessuly"
+msgstr "E-post skickat"
+
+#: ../lib/gemail.py:60
+msgid "Movie loan reminder"
+msgstr "Påminnelse om filmlån"
+
+#: ../lib/gemail.py:60
+#, python-format
+msgid ""
+"Hi, %s!\n"
+"\n"
+"Just to reminder you "
+msgstr ""
+"Hej, %s!\n"
+"\n"
+"Vill bara påminna dig om "
+
+#: ../lib/gemail.py:66
+msgid "This person has no e-mail address defined."
+msgstr "Den här personen har ingen definierad e-postadress."
+
+#: ../lib/gutils.py:259
+msgid "Images"
+msgstr "Bilder"
+
+#: ../lib/gutils.py:270
+msgid "All files"
+msgstr "Alla filer"
+
+#: ../lib/initialize.py:175
+msgid "N."
+msgstr "Nr"
+
+#: ../lib/initialize.py:181 ../lib/plugins/export/PluginExportHTML.py:98
+#: ../glade/griffith.glade.h:63
+msgid "Image"
+msgstr "Bild"
+
+#: ../lib/initialize.py:211
+msgid "Loan Date"
+msgstr "Utlåningsdatum"
+
+#: ../lib/initialize.py:217
+msgid "Return Date"
+msgstr "Återlämningsdatum"
+
+#: ../lib/initialize.py:222
+msgid "Loaned To"
+msgstr "Utlånad till"
+
+# VAD?
+#: ../lib/initialize.py:251 ../lib/initialize.py:504
+msgid "lector"
+msgstr "lektor"
+
+#: ../lib/initialize.py:252 ../lib/initialize.py:504
+msgid "dubbing"
+msgstr "dubbning"
+
+#: ../lib/initialize.py:401 ../glade/griffith.glade.h:84
+msgid "Name"
+msgstr "Namn"
+
+#: ../lib/initialize.py:407 ../glade/exporthtml.glade.h:17
+#: ../glade/griffith.glade.h:46 ../glade/import.glade.h:4
+msgid "E-mail"
+msgstr "E-post"
+
+#: ../lib/initialize.py:476 ../lib/plugins/export/PluginExportHTML.py:104
+#: ../glade/griffith.glade.h:88
+msgid "Number"
+msgstr "Nummer"
+
+#: ../lib/initialize.py:479 ../lib/plugins/export/PluginExportHTML.py:112
+#: ../glade/griffith.glade.h:157
+msgid "Year"
+msgstr "År"
+
+#: ../lib/initialize.py:480 ../lib/plugins/export/PluginExportHTML.py:93
+#: ../glade/griffith.glade.h:30
+msgid "Cast"
+msgstr "Med"
+
+#: ../lib/initialize.py:481 ../lib/plugins/export/PluginExportHTML.py:94
+#: ../glade/griffith.glade.h:32
+msgid "Classification"
+msgstr "Klassificering"
+
+#: ../lib/initialize.py:485 ../lib/plugins/export/PluginExportHTML.py:99
+#: ../glade/griffith.glade.h:90
+msgid "Official site"
+msgstr "Officiell webbsida"
+
+#: ../lib/initialize.py:486 ../lib/plugins/export/PluginExportHTML.py:100
+#: ../glade/griffith.glade.h:131
+#, fuzzy
+msgid "Site"
+msgstr "Storlek"
+
+#: ../lib/initialize.py:487 ../lib/plugins/export/PluginExportHTML.py:101
+#: ../glade/griffith.glade.h:145
+msgid "Trailer"
+msgstr "Förhandsvisning"
+
+#: ../lib/initialize.py:488 ../lib/plugins/export/PluginExportHTML.py:102
+msgid "Loaned"
+msgstr "Utlånad"
+
+#: ../lib/initialize.py:489 ../lib/plugins/export/PluginExportHTML.py:107
+#: ../glade/griffith.glade.h:107
+msgid "Rating"
+msgstr "Betyg"
+
+#: ../lib/initialize.py:490 ../lib/plugins/export/PluginExportHTML.py:108
+#: ../glade/griffith.glade.h:117
+msgid "Runtime"
+msgstr "Speltid"
+
+#: ../lib/initialize.py:491 ../lib/plugins/export/PluginExportHTML.py:109
+#: ../glade/griffith.glade.h:138
+msgid "Studio"
+msgstr "Filmstudio"
+
+#: ../lib/initialize.py:492 ../lib/plugins/export/PluginExportHTML.py:110
+#: ../glade/griffith.glade.h:120
+msgid "Seen it"
+msgstr "Har sett den"
+
+#: ../lib/initialize.py:493 ../glade/griffith.glade.h:109
+msgid "Region"
+msgstr "Region"
+
+#: ../lib/initialize.py:494 ../glade/griffith.glade.h:67
+msgid "Layers"
+msgstr "Lager"
+
+#: ../lib/initialize.py:495 ../glade/griffith.glade.h:37
+msgid "Condition"
+msgstr "Tillstånd"
+
+#: ../lib/initialize.py:496 ../lib/initialize.py:503
+#: ../glade/griffith.glade.h:36
+msgid "Color"
+msgstr "Färg"
+
+#: ../lib/initialize.py:497 ../glade/griffith.glade.h:155
+msgid "Volume"
+msgstr "Volym"
+
+#: ../lib/initialize.py:498 ../glade/griffith.glade.h:35
+msgid "Collection"
+msgstr "Samling"
+
+#: ../lib/initialize.py:499 ../lib/plugins/export/PluginExportHTML.py:106
+#: ../glade/griffith.glade.h:99
+msgid "Plot"
+msgstr "Handling"
+
+#: ../lib/initialize.py:500 ../glade/griffith.glade.h:45
+msgid "Discs"
+msgstr "Skivor"
+
+#: ../lib/initialize.py:501 ../lib/plugins/export/PluginExportHTML.py:113
+#: ../glade/griffith.glade.h:87
+msgid "Notes"
+msgstr "Anteckningar"
+
+#: ../lib/initialize.py:502
+msgid "Damaged"
+msgstr "Skadad"
+
+#: ../lib/initialize.py:502
+msgid "Poor"
+msgstr "Dålig"
+
+#: ../lib/initialize.py:502
+msgid "Fair"
+msgstr "OK"
+
+#: ../lib/initialize.py:502
+msgid "Good"
+msgstr "Bra"
+
+#: ../lib/initialize.py:502
+msgid "Excellent"
+msgstr "Mycket bra"
+
+#: ../lib/initialize.py:502 ../lib/initialize.py:503 ../lib/initialize.py:505
+#: ../lib/initialize.py:515
+msgid "N/A"
+msgstr "-"
+
+#: ../lib/initialize.py:503
+msgid "Black and White"
+msgstr "Svart och vit"
+
+#: ../lib/initialize.py:503
+msgid "Mixed"
+msgstr "Blandad"
+
+#: ../lib/initialize.py:505
+msgid "Single Side, Single Layer"
+msgstr "Enkelsidig, ett lager"
+
+#: ../lib/initialize.py:505
+msgid "Single Side, Dual Layer"
+msgstr "Enkelsidig, dubbla lager"
+
+#: ../lib/initialize.py:505
+msgid "Dual Side, Single Layer"
+msgstr "Dubbelsidig, ett lager"
+
+#: ../lib/initialize.py:505
+msgid "Dual Side, Dual Layer"
+msgstr "Dubbelsidig, dubbla lager"
+
+#: ../lib/initialize.py:506
+msgid "Region 0 (No Region Coding)"
+msgstr "Region 0 (Ingen regionskodning)"
+
+#: ../lib/initialize.py:507
+msgid "Region 1 (United States of America, Canada)"
+msgstr "Region 1 (USA, Kanada)"
+
+#: ../lib/initialize.py:508
+msgid ""
+"Region 2 (Europe,including France, Greece, Turkey, Egypt, Arabia, Japan and "
+"South Africa)"
+msgstr ""
+"Region 2 (Europa, inklusive Frankrike, Grekland, Turkiet, Egypten, "
+"Arabstaterna, Japan och Sydafrika)"
+
+#: ../lib/initialize.py:509
+msgid "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
+msgstr "Region 3 (Korea, Thailand, Vietnam, Borneo och Indonesien)"
+
+#: ../lib/initialize.py:510
+msgid ""
+"Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
+"America)"
+msgstr "Region 4 (Australien och Nya Zeeland, Mexiko, Karibien och Sydamerika)"
+
+#: ../lib/initialize.py:511
+msgid "Region 5 (India, Africa, Russia and former USSR countries)"
+msgstr "Region 5 (Indien, Afrika, Ryssland och tidigare USSR-länder)"
+
+#: ../lib/initialize.py:512
+msgid "Region 6 (Popular Republic of China)"
+msgstr "Region 6 (Kina)"
+
+#: ../lib/initialize.py:513
+msgid "Region 8 (Airlines/Cruise Ships)"
+msgstr "Region 8 (Flygbolag/Kryssningsskepp)"
+
+#: ../lib/initialize.py:514
+msgid "Region 9 (Often used as region free)"
+msgstr "Region 9 (Används ofta som regionsfri)"
+
+#: ../lib/initialize.py:553
+msgid "Dictionary not available. Spellcheck will be disabled. \n"
+msgstr ""
+"Ordboken är inte tillgänglig. Stavningskontroll kommer att inaktiveras. \n"
+
+#: ../lib/loan.py:40
+msgid "No person is defined yet."
+msgstr "Ingen person har definierats ännu."
+
+#: ../lib/loan.py:67
+msgid "Do you want to loan whole collection?"
+msgstr "Vill du låna hela samlingen?"
+
+#: ../lib/loan.py:79
+msgid "Movie loaned"
+msgstr "Filmen utlånad"
+
+#: ../lib/main_treeview.py:215
+msgid "This movie has been loaned to "
+msgstr "Den här filmen har lånats ut till "
+
+#: ../lib/main_treeview.py:215
+msgid " on "
+msgstr " den "
+
+#: ../lib/main_treeview.py:224
+msgid "Movie not loaned"
+msgstr "Filmen inte utlånad"
+
+#: ../lib/movie.py:69
+msgid "Fetching data"
+msgstr "Hämtar data"
+
+#: ../lib/movie.py:219
+msgid "Searching"
+msgstr "Söker"
+
+#: ../lib/movie.py:257
+msgid "Connection error"
+msgstr "Anslutningsfel"
+
+#: ../lib/movie.py:281 ../glade/exporthtml.glade.h:11
+#: ../glade/griffith.glade.h:29
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../lib/people.py:59
+msgid "You should fill the person name"
+msgstr "Du bör fylla i personnamnet"
+
+#: ../lib/people.py:88
+msgid "Record updated"
+msgstr "Posten uppdaterades"
+
+#: ../lib/people.py:111
+#, fuzzy
+msgid "This person has loaned films from you. Return them first."
+msgstr "Den här personen har lånat filmer av dig. Återlämna dem först."
+
+#: ../lib/people.py:116
+msgid ""
+"This person has data in the loan history. This data will be erased if you "
+"continue."
+msgstr ""
+"Den här personen har information i utlåningshistoriken. Den här "
+"informationen kommer att raderas om du fortsätter."
+
+#: ../lib/people.py:117
+#, python-format
+msgid ""
+"%s\n"
+"Are you sure you want to delete this person?"
+msgstr ""
+"%s\n"
+"Är du säker på att du vill ta bort den här personen?"
+
+#: ../lib/sql.py:57 ../lib/sql.py:109
+msgid ""
+"This item is in use.\n"
+"Operation aborted!"
+msgstr ""
+
+#: ../lib/sql.py:73
+#, fuzzy
+msgid "This name is already in use!"
+msgstr ""
+"Det här numret har redan tilldelats till:\n"
+" %s!"
+
+#: ../lib/sql.py:308
+msgid "Database connection failed."
+msgstr ""
+
+#: ../lib/sql.py:568 ../lib/plugins/movie/PluginMovieAniDB.py:32
+#: ../lib/plugins/movie/PluginMovieIMDB.py:32
+#: ../lib/plugins/movie/PluginMovieMediadis.py:16
+#: ../lib/plugins/movie/PluginMovieMoviefone.py:16
+msgid "English"
+msgstr "Engelska"
+
+#: ../lib/sql.py:571
+msgid "Favourite"
+msgstr "Favorit"
+
+#: ../lib/sql.py:572
+#, fuzzy
+msgid "To buy"
+msgstr " av "
+
+#: ../lib/version.py:30
+msgid "Griffith is a film collection manager."
+msgstr "Griffith är en filmsamlingshanterare."
+
+#: ../lib/view.py:28
+msgid "Filter activated. Showing only not seen movies."
+msgstr "Filter aktiverat. Visar endast filmer som inte setts."
+
+#: ../lib/view.py:33
+msgid "Filter activated. Showing only loaned movies."
+msgstr "Filter aktiverat. Visar endast utlånade filmer."
+
+#: ../lib/view.py:46
+#, python-format
+msgid "Filter activated. Showing only movies from volume: %s"
+msgstr "Filter aktiverat. Visar endast filmer från volymen: %s"
+
+#: ../lib/view.py:54
+#, python-format
+msgid "Filter activated. Showing only movies from collection: %s"
+msgstr "Filter aktiverat. Visar endast filmer från samlingen: %s"
+
+#: ../lib/widgets.py:285
+msgid ""
+"Define here the PDF reader you want to use within Griffith. Popular choices "
+"are xpdf, gpdf, evince or kpdf. Make sure you have this program installed "
+"and working first."
+msgstr ""
+"Definiera den PDF-läsare som du vill använda med Griffith här. Populära val "
+"är xpdf, gpdf, evince eller kpdf. Se först till att du har det här "
+"programmet installerat och att det fungerar."
+
+#: ../lib/widgets.py:286
+msgid ""
+"Here you can define the desired language to use while spell checking some "
+"fields. Use you locale setting. For example, to use european portuguese "
+"spell checking enter 'pt'"
+msgstr ""
+"Här kan du definiera det önskade språket som ska användas för "
+"stavningskontroll för vissa fält. Använd din lokalinställning. För att till "
+"exempel använda svensk stavningskontroll, ange \"sv\""
+
+#: ../lib/widgets.py:287
+msgid ""
+"Use this entry to define the SMTP server you want to use to send e-mails. On "
+"*nix systems, 'localhost' should work. Alternatively, you can use your "
+"Internet Service Provider's SMTP server address."
+msgstr ""
+"Använd den här för att definiera SMTP-servern som du vill använda för att "
+"skicka e-postmeddelanden. På *nix-system bör \"localhost\" fungera. "
+"Alternativt kan du använda adressen till din Internetleverantörs SMTP-server."
+
+#: ../lib/widgets.py:288
+msgid ""
+"This is the from e-mail address that should be used to all outgoing e-mail. "
+"You want to include your own e-mail address here probably."
+msgstr ""
+"Det här är avsändarens e-postadress som ska användas för alla utgående e-"
+"postmeddelanden. Du vill antagligen inkludera din egna e-postadress här."
+
+#: ../lib/plugins/movie/PluginMovieCinematografo.py:94
+#: ../lib/plugins/movie/PluginMovieFDb.py:92
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:78
+#: ../lib/plugins/movie/PluginMovieFilmweb.py:98
+#: ../lib/plugins/movie/PluginMovieFilmweb.py:99
+#: ../lib/plugins/movie/PluginMovieFilmweb.py:105
+#: ../lib/plugins/movie/PluginMovieIMDB.py:80
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:137
+#: ../lib/plugins/movie/PluginMovieOnet.py:100
+#: ../lib/plugins/movie/PluginMovieWP.py:90
+msgid " as "
+msgstr " som "
+
+#: ../lib/plugins/movie/PluginMovieE-Pipoca.py:30
+msgid "Brazilian Portuguese"
+msgstr "Brasiliansk portugisiska"
+
+#: ../lib/plugins/export/PluginExportCSV.py:31
+msgid "Full CSV list export plugin"
+msgstr "Exportinsticksmodul för fullständig CSV-lista"
+
+#: ../lib/plugins/export/PluginExportCSV.py:45
+#: ../lib/plugins/export/PluginExportXML.py:46
+#, python-format
+msgid "Export a %s document"
+msgstr "Exportera ett %s-dokument"
+
+#: ../lib/plugins/export/PluginExportCSV.py:65
+#: ../lib/plugins/export/PluginExportXML.py:83
+#, python-format
+msgid "%s file has been created."
+msgstr "Filen %s har skapats."
+
+#: ../lib/plugins/export/PluginExportHTML.py:36
+msgid "Plugin exports data using templates"
+msgstr "Insticksmodulen exporterar data med mallar"
+
+#: ../lib/plugins/export/PluginExportHTML.py:48
+msgid "Griffith's movies list"
+msgstr "Griffiths filmlista"
+
+#: ../lib/plugins/export/PluginExportHTML.py:103 ../glade/griffith.glade.h:77
+msgid "Media"
+msgstr "Media"
+
+#: ../lib/plugins/export/PluginExportHTML.py:438
+#: ../lib/plugins/export/PluginExportHTML.py:440
+msgid "previous"
+msgstr "föregående"
+
+#: ../lib/plugins/export/PluginExportHTML.py:451
+#: ../lib/plugins/export/PluginExportHTML.py:453
+msgid "next"
+msgstr "nästa"
+
+#: ../lib/plugins/export/PluginExportHTML.py:545
+#: ../lib/plugins/export/PluginExportHTML.py:575
+#: ../lib/plugins/export/PluginExportHTML.py:668
+#, python-format
+msgid "Can't create %s!"
+msgstr "Kan inte skapa %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:564
+#, python-format
+msgid ""
+"Directory %s already exists.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Katalogen %s finns redan.\n"
+"Vill du skriva över den?"
+
+#: ../lib/plugins/export/PluginExportHTML.py:568
+#, python-format
+msgid "Can't remove %s!"
+msgstr "Kan inte ta bort %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:583
+#: ../lib/plugins/export/PluginExportHTML.py:596
+#, python-format
+msgid "Can't copy %s!"
+msgstr "Kan inte kopiera %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:618
+#, python-format
+msgid "Can't open %s!"
+msgstr "Kan inte öppna %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:626
+#: ../lib/plugins/export/PluginExportPDF.py:117
+msgid "Document generated by Griffith v"
+msgstr "Dokumentet genererades av Griffith v"
+
+#: ../lib/plugins/export/PluginExportHTML.py:689
+msgid "Yes"
+msgstr "Ja"
+
+#: ../lib/plugins/export/PluginExportHTML.py:691
+msgid "No"
+msgstr "Nej"
+
+#: ../lib/plugins/export/PluginExportHTML.py:743
+msgid "Document has been generated."
+msgstr "Dokumentet har genererats."
+
+#: ../lib/plugins/export/PluginExportPDF.py:44
+msgid "PDF export plugin"
+msgstr "Insticksmodul för PDF-export"
+
+#: ../lib/plugins/export/PluginExportPDF.py:68
+msgid "Export a PDF"
+msgstr "Exportera en PDF"
+
+#: ../lib/plugins/export/PluginExportPDF.py:84
+msgid "List of films"
+msgstr "Lista av filmer"
+
+#: ../lib/plugins/export/PluginExportPDF.py:87
+#, python-format
+msgid "Total Movies: %s"
+msgstr "Totalt antal filmer: %s"
+
+#: ../lib/plugins/export/PluginExportPDF.py:110
+msgid "PDF has been created."
+msgstr "PDF har skapats."
+
+#: ../lib/plugins/export/PluginExportPDF.py:115
+#, python-format
+msgid "Page %d"
+msgstr "Sida %d"
+
+#: ../lib/plugins/export/PluginExportXML.py:32
+msgid "Full XML list export plugin"
+msgstr "Exportinsticksmodul för fullständig XML-lista"
+
+#: ../glade/exporthtml.glade.h:1
+msgid "<b>Example</b>"
+msgstr "<b>Exempel</b>"
+
+#: ../glade/exporthtml.glade.h:2
+msgid "<b>Export</b>"
+msgstr "<b>Exportera</b>"
+
+#: ../glade/exporthtml.glade.h:3
+msgid "<b>Header</b>"
+msgstr "<b>Huvud</b>"
+
+#: ../glade/exporthtml.glade.h:4
+msgid "<b>Limits</b>"
+msgstr "<b>Gränser</b>"
+
+#: ../glade/exporthtml.glade.h:5 ../glade/griffith.glade.h:13
+msgid "<b>Sort by</b>"
+msgstr "<b>Sortera efter</b>"
+
+#: ../glade/exporthtml.glade.h:6
+msgid "<b>Split into</b>"
+msgstr "<b>Dela upp i</b>"
+
+#: ../glade/exporthtml.glade.h:7
+msgid "<b>Style</b>"
+msgstr "<b>Stil</b>"
+
+#: ../glade/exporthtml.glade.h:8
+msgid "<b>Template</b>"
+msgstr "<b>Mall</b>"
+
+#: ../glade/exporthtml.glade.h:9 ../glade/import.glade.h:2
+msgid "Author"
+msgstr "Upphovsman"
+
+#: ../glade/exporthtml.glade.h:10
+msgid "Black and white"
+msgstr "Svart-vitt"
+
+#: ../glade/exporthtml.glade.h:12
+msgid "Choose style file"
+msgstr "Välj stilfil"
+
+#: ../glade/exporthtml.glade.h:13
+msgid "Convert images"
+msgstr "Konvertera bilder"
+
+#: ../glade/exporthtml.glade.h:14
+msgid "Data"
+msgstr "Data"
+
+#: ../glade/exporthtml.glade.h:15 ../glade/import.glade.h:3
+msgid "Description"
+msgstr "Beskrivning"
+
+#: ../glade/exporthtml.glade.h:16
+msgid "Destination"
+msgstr "Mål"
+
+#: ../glade/exporthtml.glade.h:18
+msgid "Export"
+msgstr "Exportera"
+
+#: ../glade/exporthtml.glade.h:19
+msgid "Export data"
+msgstr "Exportera data"
+
+#: ../glade/exporthtml.glade.h:20
+msgid "Format"
+msgstr "Format"
+
+#: ../glade/exporthtml.glade.h:21
+msgid "Maximal height"
+msgstr "Maximal höjd"
+
+#: ../glade/exporthtml.glade.h:22
+msgid "Maximal width"
+msgstr "Maximal bredd"
+
+#: ../glade/exporthtml.glade.h:23
+msgid "Posters"
+msgstr "Poster"
+
+#: ../glade/exporthtml.glade.h:24 ../glade/griffith.glade.h:116
+msgid "Reverse"
+msgstr "Omvänd"
+
+#: ../glade/exporthtml.glade.h:25
+msgid "Template"
+msgstr "Mall"
+
+#: ../glade/exporthtml.glade.h:26
+msgid "Use custom file"
+msgstr "Använd anpassad fil"
+
+#: ../glade/exporthtml.glade.h:27 ../glade/import.glade.h:9
+msgid "Version"
+msgstr "Version"
+
+#: ../glade/exporthtml.glade.h:28
+msgid "entries per page"
+msgstr "objekt per sida"
+
+#: ../glade/exporthtml.glade.h:29
+msgid "files"
+msgstr "filer"
+
+#: ../glade/exporthtml.glade.h:30
+msgid "loaned only"
+msgstr "endast utlånade"
+
+#: ../glade/exporthtml.glade.h:31
+msgid "none"
+msgstr "inget"
+
+#: ../glade/exporthtml.glade.h:32
+msgid "not loaned only"
+msgstr "endast inte utlånade"
+
+#: ../glade/exporthtml.glade.h:33
+msgid "seen only"
+msgstr "endast sedda"
+
+#: ../glade/exporthtml.glade.h:34
+msgid "unseen only"
+msgstr "endast osedda"
+
+#: ../glade/griffith.glade.h:1
+msgid "<b>Audio channels</b>"
+msgstr ""
+
+#: ../glade/griffith.glade.h:2
+msgid "<b>Audio codecs</b>"
+msgstr ""
+
+#: ../glade/griffith.glade.h:3
+#, fuzzy
+msgid "<b>Audio</b>"
+msgstr "<b>Exportera</b>"
+
+#: ../glade/griffith.glade.h:4
+msgid "<b>Collection</b>"
+msgstr "<b>Samling</b>"
+
+#: ../glade/griffith.glade.h:5
+msgid "<b>Defaults</b>"
+msgstr "<b>Standardvärden</b>"
+
+#: ../glade/griffith.glade.h:6
+msgid "<b>E-mail reminder</b>"
+msgstr "<b>E-postpåminnare</b>"
+
+#: ../glade/griffith.glade.h:7
+msgid "<b>Languages</b>"
+msgstr "<b>Språk</b>"
+
+#: ../glade/griffith.glade.h:8
+msgid "<b>Loan History</b>"
+msgstr "<b>Utlåningshistorik</b>"
+
+#: ../glade/griffith.glade.h:9
+#, fuzzy
+msgid "<b>Media</b>"
+msgstr "<b>Huvud</b>"
+
+#: ../glade/griffith.glade.h:10
+#, fuzzy
+msgid "<b>Search for:</b>"
+msgstr "<b>Huvud</b>"
+
+#: ../glade/griffith.glade.h:11
+msgid "<b>Select database to use</b>"
+msgstr ""
+
+#: ../glade/griffith.glade.h:12
+msgid "<b>Show only the following columns</b>"
+msgstr "<b>Visa endast följande kolumner</b>"
+
+#: ../glade/griffith.glade.h:14
+#, fuzzy
+msgid "<b>Subtitle formats</b>"
+msgstr "<b>Standardvärden</b>"
+
+#: ../glade/griffith.glade.h:15
+#, fuzzy
+msgid "<b>Subtitles</b>"
+msgstr "<b>Stil</b>"
+
+#: ../glade/griffith.glade.h:16
+msgid "<b>Tags</b>"
+msgstr "<b>Taggar</b>"
+
+#: ../glade/griffith.glade.h:17
+msgid "<b>Use spell checking on the following fields:</b>"
+msgstr "<b>Använd stavningskontroll på följande fält:</b>"
+
+#: ../glade/griffith.glade.h:18
+#, fuzzy
+msgid "<b>Video codecs</b>"
+msgstr "<b>Huvud</b>"
+
+#: ../glade/griffith.glade.h:19
+msgid "<b>Volume</b>"
+msgstr "<b>Volym</b>"
+
+#: ../glade/griffith.glade.h:20
+msgid "Add"
+msgstr "Lägg till"
+
+#: ../glade/griffith.glade.h:21
+msgid "Add a new movie"
+msgstr "Lägg till en ny film"
+
+#: ../glade/griffith.glade.h:22
+msgid "Add a new person"
+msgstr "Lägg till en ny person"
+
+#: ../glade/griffith.glade.h:23
+msgid "Add movie"
+msgstr "Lägg till film"
+
+#: ../glade/griffith.glade.h:24
+msgid "Add movie and close"
+msgstr "Lägg till film och stäng"
+
+#: ../glade/griffith.glade.h:25
+msgid "Add new movie"
+msgstr "Lägg till ny film"
+
+#: ../glade/griffith.glade.h:26
+msgid "Add person"
+msgstr "Lägg till person"
+
+#: ../glade/griffith.glade.h:27
+msgid "All Movies"
+msgstr "Alla filmer"
+
+#: ../glade/griffith.glade.h:28
+msgid "By Collection"
+msgstr "Efter samling"
+
+#: ../glade/griffith.glade.h:31
+msgid "Choose Image"
+msgstr "Välj bild"
+
+#: ../glade/griffith.glade.h:33
+msgid "Clears filter"
+msgstr "Tömmer filter"
+
+#: ../glade/griffith.glade.h:34
+msgid "Clone"
+msgstr "Klona"
+
+#: ../glade/griffith.glade.h:39
+#, fuzzy
+msgid "DVD layers"
+msgstr "DVD-lager"
+
+#: ../glade/griffith.glade.h:40
+#, fuzzy
+msgid "DVD region"
+msgstr "DVD-region"
+
+#: ../glade/griffith.glade.h:41
+#, fuzzy
+msgid "Database"
+msgstr "Data"
+
+#: ../glade/griffith.glade.h:42
+msgid "Details"
+msgstr "Detaljer"
+
+#: ../glade/griffith.glade.h:43
+msgid "Dictionaries"
+msgstr "Ordböcker"
+
+#: ../glade/griffith.glade.h:47
+msgid "E-mail reminder"
+msgstr "E-postpåminnare"
+
+#: ../glade/griffith.glade.h:48
+msgid "E_xport"
+msgstr "E_xportera"
+
+#: ../glade/griffith.glade.h:49
+msgid "Edit a person"
+msgstr "Redigera en person"
+
+#: ../glade/griffith.glade.h:50
+#, fuzzy
+msgid "Edit movie details"
+msgstr "Filmdetaljer"
+
+#: ../glade/griffith.glade.h:51
+msgid "Favorite Movie Plugin"
+msgstr "Favoritfilm-insticksmodul"
+
+#: ../glade/griffith.glade.h:52
+msgid "Fetch from Amazon"
+msgstr ""
+
+#: ../glade/griffith.glade.h:53
+msgid "Filter "
+msgstr "Filter "
+
+#: ../glade/griffith.glade.h:54
+msgid "Font for reports"
+msgstr "Typsnitt för rapporter"
+
+#: ../glade/griffith.glade.h:55
+msgid "Forum"
+msgstr "Forum"
+
+#: ../glade/griffith.glade.h:56
+msgid "Found Results"
+msgstr "Resultat hittade"
+
+#: ../glade/griffith.glade.h:58
+msgid "Get from web"
+msgstr "Hämta från webben"
+
+#: ../glade/griffith.glade.h:59
+msgid "Get movie data from:"
+msgstr "Hämta filmdata från:"
+
+#: ../glade/griffith.glade.h:60
+msgid "Griffith"
+msgstr "Griffith"
+
+#: ../glade/griffith.glade.h:61
+msgid "Homepage"
+msgstr "Webbplats"
+
+#: ../glade/griffith.glade.h:62
+msgid "Host"
+msgstr ""
+
+#: ../glade/griffith.glade.h:64
+msgid "Include Front Image"
+msgstr "Inkludera framsidebild"
+
+#: ../glade/griffith.glade.h:65
+msgid "Include movie number"
+msgstr "Inkludera filmnummer"
+
+#: ../glade/griffith.glade.h:66
+msgid "Languages"
+msgstr "Språk"
+
+#: ../glade/griffith.glade.h:68
+msgid "Load poster from disk"
+msgstr "Läs in poster från disk"
+
+#: ../glade/griffith.glade.h:69
+msgid "Loan"
+msgstr "Låna"
+
+#: ../glade/griffith.glade.h:70
+msgid "Loan Management"
+msgstr "Hantera utlån"
+
+#: ../glade/griffith.glade.h:71
+msgid "Loan movie"
+msgstr "Låna film"
+
+#: ../glade/griffith.glade.h:72
+msgid "Loan to"
+msgstr "Låna ut till"
+
+#: ../glade/griffith.glade.h:73
+msgid "Loaned Movies"
+msgstr "Utlånade filmer"
+
+#: ../glade/griffith.glade.h:74
+msgid "Loans"
+msgstr "Utlåningar"
+
+#: ../glade/griffith.glade.h:75
+msgid "Main list"
+msgstr "Huvudlista"
+
+#: ../glade/griffith.glade.h:76
+msgid "Manage People"
+msgstr "Hantera personer"
+
+#: ../glade/griffith.glade.h:78
+#, fuzzy
+msgid "Medium"
+msgstr "Media"
+
+#: ../glade/griffith.glade.h:79
+#, fuzzy
+msgid "Merge"
+msgstr "Genre"
+
+#: ../glade/griffith.glade.h:80
+msgid ""
+"Meter\n"
+"Stars"
+msgstr ""
+"Mätare\n"
+"Stjärnor"
+
+#: ../glade/griffith.glade.h:82
+msgid "Movie details"
+msgstr "Filmdetaljer"
+
+#: ../glade/griffith.glade.h:83
+msgid "Movie information"
+msgstr "Filminformation"
+
+#: ../glade/griffith.glade.h:85
+msgid "Needs authentication"
+msgstr "Kräver autentisering"
+
+#: ../glade/griffith.glade.h:86
+msgid "Not Seen Movies"
+msgstr "Inte sedda filmer"
+
+#: ../glade/griffith.glade.h:89
+msgid "OK"
+msgstr "OK"
+
+#: ../glade/griffith.glade.h:92
+msgid "Original title"
+msgstr "Ursprunglig titel"
+
+#: ../glade/griffith.glade.h:93
+msgid "PDF"
+msgstr "PDF"
+
+#: ../glade/griffith.glade.h:94
+msgid "PDF reader"
+msgstr "PDF-läsare"
+
+#: ../glade/griffith.glade.h:95
+msgid "Password"
+msgstr "Lösenord"
+
+#: ../glade/griffith.glade.h:96
+msgid "People"
+msgstr "Personer"
+
+#: ../glade/griffith.glade.h:97
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../glade/griffith.glade.h:98
+msgid "Please wait a moment..."
+msgstr "Var god vänta..."
+
+#: ../glade/griffith.glade.h:100
+msgid "Plugins"
+msgstr "Insticksmoduler"
+
+#: ../glade/griffith.glade.h:101
+#, fuzzy
+msgid "Port"
+msgstr "Dålig"
+
+#: ../glade/griffith.glade.h:102
+#, fuzzy
+msgid "Poster image"
+msgstr "Postervisare"
+
+#: ../glade/griffith.glade.h:103
+msgid "Poster viewer"
+msgstr "Postervisare"
+
+#: ../glade/griffith.glade.h:104
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: ../glade/griffith.glade.h:105
+msgid "Print Cover"
+msgstr "Skriv ut omslagsbild"
+
+#: ../glade/griffith.glade.h:106
+msgid "Print cover"
+msgstr "Skriv ut omslagsbild"
+
+#: ../glade/griffith.glade.h:108
+msgid "Rating image"
+msgstr "Betygsbild"
+
+#: ../glade/griffith.glade.h:110
+msgid "Remove"
+msgstr "Ta bort"
+
+#: ../glade/griffith.glade.h:111
+msgid "Remove selected movie"
+msgstr "Ta bort vald film"
+
+#: ../glade/griffith.glade.h:112
+msgid "Removes poster"
+msgstr "Tar bort poster"
+
+#: ../glade/griffith.glade.h:113
+msgid "Rename"
+msgstr "Byt namn"
+
+#: ../glade/griffith.glade.h:114
+msgid "Report bug"
+msgstr "Rapportera fel"
+
+#: ../glade/griffith.glade.h:115
+msgid "Return"
+msgstr "Återgå"
+
+#: ../glade/griffith.glade.h:118
+msgid "SMTP server"
+msgstr "SMTP-server"
+
+#: ../glade/griffith.glade.h:119
+msgid "Searching on the web"
+msgstr "Söker på webben"
+
+#: ../glade/griffith.glade.h:121
+msgid "Select"
+msgstr "Välj"
+
+#: ../glade/griffith.glade.h:122
+msgid "Select A File"
+msgstr "Välj en fil"
+
+#: ../glade/griffith.glade.h:123
+msgid "Select first movie"
+msgstr "Välj första filmen"
+
+#: ../glade/griffith.glade.h:124
+msgid "Select last movie"
+msgstr "Välj sista filmen"
+
+#: ../glade/griffith.glade.h:125
+#, fuzzy
+msgid "Select next movie"
+msgstr "Välj sista filmen"
+
+#: ../glade/griffith.glade.h:126
+#, fuzzy
+msgid "Select previous movie"
+msgstr "Välj första filmen"
+
+#: ../glade/griffith.glade.h:127
+msgid "Sender E-mail address"
+msgstr "Avsändarens e-postadress"
+
+#: ../glade/griffith.glade.h:128
+#, fuzzy
+msgid "Show other movies in this collection"
+msgstr "Visa filmer i vald samling"
+
+#: ../glade/griffith.glade.h:129
+#, fuzzy
+msgid "Show other movies in this volume"
+msgstr "Visa filmer i vald volym"
+
+#: ../glade/griffith.glade.h:130
+msgid "Simple"
+msgstr "Enkel"
+
+#: ../glade/griffith.glade.h:132
+msgid "Size"
+msgstr "Storlek"
+
+#: ../glade/griffith.glade.h:133
+msgid "Spell Checker"
+msgstr "Stavningskontroll"
+
+#: ../glade/griffith.glade.h:134
+msgid "Spell check the following language"
+msgstr "Stavningskontrollera följande språk"
+
+#: ../glade/griffith.glade.h:135
+msgid ""
+"Standard\n"
+"Slim\n"
+"Double Slim"
+msgstr ""
+"Standard\n"
+"Slim\n"
+"Double Slim"
+
+#: ../glade/griffith.glade.h:139
+msgid "Suggest an unseen movie"
+msgstr "Föreslå en film som du inte har sett"
+
+#: ../glade/griffith.glade.h:140
+msgid "Tags"
+msgstr "Taggar"
+
+#: ../glade/griffith.glade.h:141
+msgid "Technical information"
+msgstr "Teknisk information"
+
+#: ../glade/griffith.glade.h:142
+msgid "This movie is part of..."
+msgstr "Den här filmen är en del av..."
+
+#: ../glade/griffith.glade.h:144
+msgid "Toolbar"
+msgstr "Verktygsrad"
+
+#: ../glade/griffith.glade.h:146
+msgid "Try to fetch a big poster from Amazon services website"
+msgstr "Försök att hämta en stor poster från Amazons webbplats"
+
+#: ../glade/griffith.glade.h:147
+msgid "Type"
+msgstr ""
+
+#: ../glade/griffith.glade.h:148
+msgid ""
+"Type in the original film tile, select source and choose <i>Get from web</"
+"i>. Griffith will try to fetch all the related information from the Web."
+msgstr ""
+"Ange filmens ursprunliga titel, välj källa och välj <i>Hämta från webben</"
+"i>. Griffith kommer att försöka hämta all relaterad information från webben."
+
+#: ../glade/griffith.glade.h:149
+msgid "Update"
+msgstr "Uppdatera"
+
+#: ../glade/griffith.glade.h:150
+msgid "Use Spellchecker"
+msgstr "Använd stavningskontroll"
+
+#: ../glade/griffith.glade.h:151
+msgid "Username"
+msgstr "Användarnamn"
+
+#: ../glade/griffith.glade.h:152
+msgid "Video codec"
+msgstr ""
+
+#: ../glade/griffith.glade.h:153
+#, fuzzy
+msgid "Visit movie web site"
+msgstr "Besök den officiella webbsidan"
+
+#: ../glade/griffith.glade.h:154
+msgid "Visit the oficial web site"
+msgstr "Besök den officiella webbsidan"
+
+#: ../glade/griffith.glade.h:156
+msgid "Watch the trailer"
+msgstr "Se förhandsvisning"
+
+#: ../glade/griffith.glade.h:158
+msgid "_Edit"
+msgstr "R_edigera"
+
+#: ../glade/griffith.glade.h:159
+msgid "_File"
+msgstr "_Arkiv"
+
+#: ../glade/griffith.glade.h:160
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../glade/griffith.glade.h:161
+msgid "_Loans"
+msgstr "_Utlåningar"
+
+#: ../glade/griffith.glade.h:162
+#, fuzzy
+msgid "_Tools"
+msgstr "Verktygsrad"
+
+#: ../glade/griffith.glade.h:163
+msgid "_View"
+msgstr "_Visa"
+
+#: ../glade/griffith.glade.h:164
+msgid "add entered name to collections list"
+msgstr "lägg till angivet namn till samlingslistan"
+
+#: ../glade/griffith.glade.h:165
+msgid "add entered name to volumes list"
+msgstr "lägg till angivet namn till volymlistan"
+
+#: ../glade/griffith.glade.h:166
+#, fuzzy
+msgid "classification"
+msgstr "Klassificering"
+
+#: ../glade/griffith.glade.h:167
+msgid "click here if movie was returned"
+msgstr "klicka här om filmen har återlämnats"
+
+#: ../glade/griffith.glade.h:168
+#, fuzzy
+msgid "collection details"
+msgstr "Filmdetaljer"
+
+#: ../glade/griffith.glade.h:169
+msgid "loans movie or volume"
+msgstr "lånar film eller volym"
+
+#: ../glade/griffith.glade.h:170
+msgid "min."
+msgstr "min."
+
+#: ../glade/griffith.glade.h:171
+msgid "minutes"
+msgstr ""
+
+#: ../glade/griffith.glade.h:172
+msgid "remove selected collection"
+msgstr "ta bort vald samling"
+
+#: ../glade/griffith.glade.h:173
+msgid "remove selected volume"
+msgstr "ta bort vald volym"
+
+#: ../glade/griffith.glade.h:174
+#, fuzzy
+msgid "tags"
+msgstr "Taggar"
+
+#: ../glade/griffith.glade.h:175
+#, fuzzy
+msgid "volume details"
+msgstr "Filmdetaljer"
+
+#: ../glade/import.glade.h:1
+msgid "<b>Import only fields selected below</b>"
+msgstr ""
+
+#: ../glade/import.glade.h:5
+msgid "Fields"
+msgstr ""
+
+#: ../glade/import.glade.h:6
+msgid "Import window"
+msgstr ""
+
+#: ../glade/import.glade.h:7
+#, fuzzy
+msgid "Plugin"
+msgstr "Insticksmoduler"
+
+#: ../glade/import.glade.h:8
+msgid "Source"
+msgstr ""
+
+#~ msgid "by Peek <peekpt@gmail.com>."
+#~ msgstr "av Peek <peekpt@gmail.com>."
+
+#~ msgid ""
+#~ "\n"
+#~ "Please visit http://www.peekmambo.com/"
+#~ msgstr ""
+#~ "\n"
+#~ "Besök http://www.peekmambo.com/"
+
+#~ msgid "General Public License.\n"
+#~ msgstr "General Public License.\n"
+
+#~ msgid "Please visit http://www.gnu.org/copyleft/gpl.html for details."
+#~ msgstr "Besök http://www.gnu.org/copyleft/gpl.html för detaljer."
+
+#~ msgid "that I'm really needing the following movie I have loaned you "
+#~ msgstr "att jag verkligen behöver följande filmer som jag har lånat "
+
+#~ msgid ""
+#~ "recently:\n"
+#~ "\n"
+#~ "%s (%s)\n"
+#~ "\n"
+#~ "Loaned on %s"
+#~ msgstr ""
+#~ "ut till dig:\n"
+#~ "\n"
+#~ "%s (%s)\n"
+#~ "\n"
+#~ "Lånades ut den %s"
+
+#~ msgid "IMDb page"
+#~ msgstr "IMDb-sida"
+
+#~ msgid ""
+#~ "Please install the aspell-%s package or adjust the spellchekcer "
+#~ "preferences."
+#~ msgstr ""
+#~ "Installera paketet aspell-%s eller justera inställningarna för "
+#~ "stavningskontroll."
+
+#~ msgid "You have to fill in languages list in preferences window"
+#~ msgstr "Du behöver fylla i språklistan i inställningsfönstret"
+
+#~ msgid "Movie returned"
+#~ msgstr "Filmen tillbakalämnad"
+
+#~ msgid "You can't change collection while it is loaned!"
+#~ msgstr "Du kan inte ändra samlingen när den är utlånad!"
+
+#~ msgid "You can't change volume while it is loaned!"
+#~ msgstr "Du kan inte ändra volymen när den är utlånad!"
+
+#~ msgid "You should fill the original title"
+#~ msgstr "Du bör fylla i den ursprungliga titeln"
+
+#~ msgid "Add language"
+#~ msgstr "Lägg till språk"
+
+#~ msgid "Add new language entry"
+#~ msgstr "Lägg till nytt språkobjekt"
+
+#~ msgid "Backup"
+#~ msgstr "Säkerhetskopia"
+
+#~ msgid "Delete"
+#~ msgstr "Ta bort"
+
+#~ msgid "IMDB page"
+#~ msgstr "IMDB-sida"
+
+#~ msgid "Oficial Site"
+#~ msgstr "Officiell webbsida"
+
+#~ msgid "Open image in poster window"
+#~ msgstr "Öppna bild i posterfönster"
+
+#~ msgid "Remove language"
+#~ msgstr "Ta bort språk"
+
+#~ msgid "Remove last language entry"
+#~ msgstr "Ta bort sista språkobjektet"
+
+#~ msgid "Restore"
+#~ msgstr "Återskapa"
+
+#~ msgid "Save preferences"
+#~ msgstr "Spara inställningar"
+
+#~ msgid "Technical info"
+#~ msgstr "Teknisk information"
+
+#~ msgid "Visit the Internet Movie Database (IMDB) related page"
+#~ msgstr "Besök relaterad sida på Internet Movie Database (IMDB)"
+
+#~ msgid "_Movies"
+#~ msgstr "_Filmer"
+
+#~ msgid "add entered name to languages list"
+#~ msgstr "lägg till angivet namn till språklistan"
+
+#~ msgid "remove selected language"
+#~ msgstr "ta bort valt språk"
+
+#~ msgid "rename collection assigned to movie"
+#~ msgstr "byt namn på samlingen tilldelad till filmen"
+
+#~ msgid "rename selected language"
+#~ msgstr "byt namn på valt språk"
+
+#~ msgid "rename volume assigned to movie"
+#~ msgstr "byt namn på volymen tilldelad till filmen"
+
+#~ msgid "Actors"
+#~ msgstr "Skådespelare"

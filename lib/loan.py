@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: loan.py,v 1.21 2005/10/04 19:43:24 pox Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@ __revision__ = '$Id: loan.py,v 1.21 2005/10/04 19:43:24 pox Exp $'
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
@@ -24,133 +24,104 @@ __revision__ = '$Id: loan.py,v 1.21 2005/10/04 19:43:24 pox Exp $'
 from gettext import gettext as _
 import gutils
 import gtk
-import os.path
 import datetime
-import update
 
 def loan_movie(self):
-	data = self.db.get_all_data("people","name ASC")
+	people = self.db.Person.select(order_by='name ASC')
 	model = gtk.ListStore(str)
-	if data:
-		for row in data:
-			model.append([row['name']])
-		self.loan_to.set_model(model)
-		self.loan_to.set_text_column(0)
-		self.loan_to.set_active(0)
-		self.w_loan_to.show()
+	if len(people)>0:
+		for person in people:
+			model.append([person.name])
+		self.widgets['movie']['loan_to'].set_model(model)
+		self.widgets['movie']['loan_to'].set_text_column(0)
+		self.widgets['movie']['loan_to'].set_active(0)
+		self.widgets['w_loan_to'].show()
 	else:
-		gutils.info(self, _("No person is defined yet."), self.main_window)
-		
+		gutils.info(self, _("No person is defined yet."), self.widgets['window'])
+
 def cancel_loan(self):
-	self.w_loan_to.hide()
-	
+	self.widgets['w_loan_to'].hide()
+
 def commit_loan(self):
-	person = gutils.on_combo_box_entry_changed(self.loan_to)
-	if person == '' or person == None:
-		return
-	self.w_loan_to.hide()
-	# add a flag on the list
-	treeselection = self.main_treeview.get_selection()
-	(tmp_model, tmp_iter) = treeselection.get_selected()
-	self.Image.set_from_file(self.locations['images']  + "/loaned.png")
-	Pixbuf = self.Image.get_pixbuf()
-	self.treemodel.set_value(tmp_iter, 0, Pixbuf)
-	
-	# movie is now loaned. change db
-	movie_id = self.e_number.get_text()
-	self.db.cursor.execute("SELECT volume_id, collection_id FROM movies WHERE number='%s'"%movie_id)
-	volume_id, collection_id = self.db.cursor.fetchall()[0]
-	data_person = self.db.select_person_by_name(person)
+	person_name = gutils.on_combo_box_entry_changed(self.widgets['movie']['loan_to'])
+	if person_name == '' or person_name is None:
+		return False
+	self.widgets['w_loan_to'].hide()
+
+	person = self.db.Person.get_by(name=person_name)
+	if person is None:
+		self.debug.show("commit_loan: person doesn't exist")
+		return False
+	if self._movie_id:
+		movie = self.db.Movie.get_by(movie_id=self._movie_id)
+		if not movie:
+			self.debug.show("commit_loan: wrong movie_id")
+			return False
+	else:
+		self.debug.show("commit_loan: movie not selected")
+		return False
 
 	# ask if user wants to loan whole collection
-	if collection_id>0:
-		loan_whole_collection = False
-		response = gutils.question(self, msg="Do you want to loan whole collection?", parent=self.main_window)
+	loan_whole_collection = False
+	if movie.collection_id>0:
+		response = gutils.question(self, msg=_("Do you want to loan whole collection?"), parent=self.widgets['window'])
 		if response == gtk.RESPONSE_YES:
 			loan_whole_collection = True
 		elif response == gtk.RESPONSE_CANCEL:
 			return False
-
-	if volume_id>0 and collection_id>0:
-		if loan_whole_collection:
-			update.update_collection(self, id=collection_id, volume_id=volume_id, loaned=1)
-		else:
-			update.update_volume(self, id=volume_id, loaned=1)
-	elif collection_id>0:
-		if loan_whole_collection:
-			update.update_collection(self, id=collection_id, loaned=1)
-		else:
-			self.db.cursor.execute("UPDATE movies SET loaned='1' WHERE number='%s';" % movie_id)
-	elif volume_id>0:
-		update.update_volume(self, id=volume_id, loaned=1)
-	else:
-		self.db.cursor.execute("UPDATE movies SET loaned='1' WHERE number='%s';" % movie_id)
-	self.update_statusbar(_("Movie loaned"))
-
-	# next, we insert a new row on the loans table
-	data_movie=self.db.select_movie_by_num(movie_id)
-	query = "INSERT INTO 'loans'('id', 'person_id','"
-	if collection_id>0:
-		query +="collection_id"
-	elif volume_id>0:
-		query +="volume_id"
-	else:
-		query +="movie_id"
-	query += "', 'date', 'return_date') VALUES (Null, '" + str(data_person[0]['id']) + "', '"
-	if collection_id>0:
-		query += str(collection_id)
-	elif volume_id>0:
-		query += str(volume_id)
-	else:
-		query += str(movie_id)
-	query += "', '" + str(datetime.date.today()) + "', '');"
-	self.db.cursor.execute(query)
-	self.db.con.commit()
-	# finally, force a refresh
-	self.treeview_clicked()
-	self.main_treeview.set_cursor(int(movie_id)-1, None, False)
 	
-def return_loan(self):
-	movie_id = self.e_number.get_text()
-	if movie_id:
-		self.db.cursor.execute("SELECT volume_id, collection_id FROM movies WHERE number='%s'"%movie_id)
-		volume_id, collection_id = self.db.cursor.fetchall()[0]
-	
-		collection_is_loaned = False
-		if collection_id>0:
-			# if all movies in collection are loaned, ask if whole collection was returned
-			self.db.cursor.execute("SELECT loaned FROM collections WHERE id='%s'"%collection_id)
-			collection_is_loaned = self.db.cursor.fetchall()[0][0]
-		
-		if volume_id>0 and collection_is_loaned == True:
-			update.update_collection(self, id=collection_id, volume_id=volume_id, loaned=0)
-		elif collection_is_loaned == True:
-			update.update_collection(self, id=collection_id, loaned=0)
-		elif volume_id>0:
-			update.update_volume(self, id=volume_id, loaned=0)
-		else:
-			self.db.cursor.execute("UPDATE movies SET loaned='0' WHERE number='%s';" % movie_id)
-		
-		self.update_statusbar(_("Movie returned"))	
-		
-		data_movie=self.db.select_movie_by_num(movie_id)
-		# fill return information on loans table
-		query = "UPDATE loans SET return_date='%s' WHERE " % str(datetime.date.today())
-		if collection_id>0:
-			query +="collection_id='%s'" % collection_id
-		elif volume_id>0:
-			query +="volume_id"
-		else:
-			query +="movie_id"
-		query += " AND return_date = ''"
-		self.db.cursor.execute(query)
-		self.db.con.commit()			
-		
-		# remove the flag on the list
-		treeselection = self.main_treeview.get_selection()
-		(tmp_model, tmp_iter) = treeselection.get_selected()
-		self.Image.set_from_file(self.locations['images']  + "/not_loaned.png")		
-		Pixbuf = self.Image.get_pixbuf()
-		self.treemodel.set_value(tmp_iter, 0, Pixbuf)
+	loan = self.db.Loan(movie_id=movie.movie_id, person_id=person.person_id)
+	if loan_whole_collection:
+		loan.collection_id = movie.collection_id
+	if movie.volume_id>0:
+		loan.volume_id = movie.volume_id
+	if loan.set_loaned():
+		self.update_statusbar(_("Movie loaned"))
 		self.treeview_clicked()
-		self.main_treeview.set_cursor(int(movie_id)-1, None, False)
+
+def return_loan(self):
+	if self._movie_id:
+		loan = self.db.Loan.get_by(movie_id=self._movie_id, return_date=None)
+		if loan and loan.set_returned():
+			self.treeview_clicked()
+
+def get_loan_info(db, movie_id, volume_id=None, collection_id=None):
+	"""Returns current collection/volume/movie loan data"""
+	from sqlalchemy import and_, or_
+	if collection_id>0 and volume_id>0:
+		return db.Loan.get_by(
+				and_(or_(db.Loan.c.collection_id==collection_id,
+						db.Loan.c.volume_id==volume_id,
+						db.Loan.c.movie_id==movie_id),
+					db.Loan.c.return_date==None))
+	elif collection_id>0:
+		return db.Loan.get_by(
+				and_(or_(db.Loan.c.collection_id==collection_id,
+						db.Loan.c.movie_id==movie_id)),
+					db.Loan.c.return_date==None)
+	elif volume_id>0:
+		return db.Loan.get_by(and_(or_(db.Loan.c.volume_id==volume_id,
+							db.Loan.c.movie_id==movie_id)),
+						db.Loan.c.return_date==None)
+	else:
+		return db.Loan.get_by(db.Loan.c.movie_id==movie_id,db.Loan.c.return_date==None)
+
+def get_loan_history(db, movie_id, volume_id=None, collection_id=None):
+	"""Returns collection/volume/movie loan history"""
+	from sqlalchemy import and_, or_, not_
+	if collection_id>0 and volume_id>0:
+		return db.Loan.select_by(and_(or_(db.Loan.c.collection_id==collection_id,
+							db.Loan.c.volume_id==volume_id,
+							db.Loan.c.movie_id==movie_id),
+						not_(db.Loan.c.return_date==None)))
+	elif collection_id>0:
+		return db.Loan.select_by(and_(or_(db.Loan.c.collection_id==collection_id,
+							db.Loan.c.movie_id==movie_id),
+						not_(db.Loan.c.return_date==None)))
+	elif volume_id>0:
+		return db.Loan.select_by(and_(or_(db.Loan.c.volume_id==volume_id,
+							db.Loan.c.movie_id==movie_id),
+						not_(db.Loan.c.return_date==None)))
+	else:
+		return db.Loan.select_by(db.Loan.c.movie_id==movie_id,not_(db.Loan.c.return_date==None))
+

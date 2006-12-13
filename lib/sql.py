@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: sql.py,v 1.50 2005/10/04 19:43:24 pox Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,497 +16,475 @@ __revision__ = '$Id: sql.py,v 1.50 2005/10/04 19:43:24 pox Exp $'
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
-import sqlite
+from sqlalchemy import *
 import os.path
-import gdebug
 import gutils
 import gtk
 
+class DBTable(object):#{{{
+	def __repr__(self):
+		return "%s:%s" % (self.__class__.__name__, self.name)
+	def add_to_db(self):
+		if self.name is None or len(self.name)==0:
+			debug.show("%s: name can't be empty" % self.__class__.__name__)
+			return False
+		# check if achannel already exists
+		if self.get_by(name=self.name) is not None:
+			debug.show("%s: '%s' already exists" % (self.__class__.__name__, self.name))
+			return False
+		debug.show("%s: adding '%s' to database..." % (self.__class__.__name__, self.name))
+		self.save()
+		try:
+			self.flush()
+		except exceptions.SQLError, e:
+			debug.show("%s: add_to_db: %s" % (self.__class__.__name__, e))
+			return False
+		self.refresh()
+		return True
+	def remove_from_db(self):
+		dbtable_id = self.__dict__[self.__class__.__name__.lower() + '_id']
+		if dbtable_id<1:
+			debug.show("%s: none selected => none removed" % self.__class__.__name__)
+			return False
+		tmp = None
+		if hasattr(self,'movies'):
+			tmp = getattr(self,'movies')
+		elif hasattr(self,'movielangs'):
+			tmp = getattr(self,'movielangs')
+		if tmp and len(tmp)>0:
+			gutils.warning(self, msg=_("This item is in use.\nOperation aborted!"))
+			return False
+		debug.show("%s: removing '%s' (id=%s) from database..."%(self.__class__.__name__, self.name, dbtable_id))
+		self.delete()
+		try:
+			self.flush()
+		except exceptions.SQLError, e:
+			debug.show("%s: remove_from_db: %s" % (self.__class__.__name__, e))
+			return False
+		#self.refresh()
+		return True
+	def update_in_db(self):
+		dbtable_id = self.__dict__[self.__class__.__name__.lower() + '_id']
+		if dbtable_id<1:
+			debug.show("%s: none selected => none updated" % self.__class__.__name__)
+			return False
+		if self.name is None or len(self.name)==0:
+			debug.show("%s: name can't be empty" % self.__class__.__name__)
+			return False
+		if self.get_by(name=self.name) is not None:
+			gutils.warning(self, msg=_("This name is already in use!"))
+			return False
+		self.update()
+		try:
+			self.flush()
+		except exceptions.SQLError, e:
+			debug.show("%s: update_in_db: %s" % (self.__class__.__name__, e))
+			return False
+		self.refresh()
+		return True#}}}
+
 class GriffithSQL:
+	version = 1	# database format version, incrase after any changes in data structures
+	metadata = None
+	class Configuration(object):
+		def __repr__(self):
+			return "Config:%s=%s" % (self.param, self.value)
+	class AChannel(DBTable):
+		pass
+	class ACodec(DBTable):
+		pass
+	class Collection(DBTable):
+		pass
+	class Lang(DBTable):
+		pass
+	class Medium(DBTable):
+		pass
+	class MovieLang(object):
+		def __repr__(self):
+			return "MovieLang:%s-%s (Type:%s ACodec:%s AChannel:%s SubFormat:%s)" % \
+				(self.movie_id, self.lang_id, self.type, self.acodec_id, self.achannel_id, self.subformat_id)
+	class MovieTag(object):
+		def __repr__(self):
+			return "MovieTag:%s-%s" % (self.movie_id, self.tag_id)
+	class Person(DBTable):
+		pass
+	class SubFormat(DBTable):
+		pass
+	class Tag(DBTable):
+		def remove_from_db(self):
+			if len(self.movietags) > 0:
+				gutils.warning(self, msg=_("This item is in use.\nOperation aborted!"))
+				return False
+			return DBTable.remove_from_db(self)
+	class VCodec(DBTable):
+		pass
+	class Volume(DBTable):
+		pass
+	class Loan(object):#{{{
+		def __repr__(self):
+			return "Loan:%s (movie:%s person:%s)" % (self.loan_id, self.movie_id, self.person_id)
+		def __setitem__(self, key, value):
+			if key == 'movie_id' and value:
+				if GriffithSQL.Movie.get_by(movie_id=value) is None:
+					raise Exception('wrong movie_id')
+			elif key == 'person_id' and value:
+				if GriffithSQL.Person.get_by(person_id=value) is None:
+					raise Exception('wrong movie_id')
+			self[key] = value
+		def _validate(self):
+			if self.movie_id is None:
+				raise Exception('movie_id is not set')
+			if self.person_id is None:
+				raise Exception('person_id is not set')
+			if self.movie is None:
+				self.movie = GriffithSQL.Movie.get_by(movie_id=self.movie_id)
+				if self.movie is None:
+					raise Exception('wrong movie_id')
+			if self.person is None:
+				self.person = GriffithSQL.Person.get_by(person_id=self.person_id)
+				if self.person is None:
+					raise Exception('wrong person_id')
+			if self.collection_id>0 and self.collection is None:
+				self.collection = GriffithSQL.Collection.get_by(collection_id=self.collection_id)
+				if self.collection is None:
+					raise Exception('wrong collection_id')
+			if self.volume_id>0 and self.volume is None:
+				self.volume = GriffithSQL.Volume.get_by(volume_id=self.volume_id)
+				if self.volume is None:
+					raise Exception('wrong volume_id')
+			return True
+		def set_loaned(self):
+			"""
+			Set loaned=True for all movies in volume/collection and for movie itself
+			Set loan's date to today's date
+			"""
+			self._validate()
 
-	con = None
-	cursor = None
-	
-	def __init__(self, config, griffith_dir):
-		self.griffith_dir = griffith_dir
-		self.config = config
-		try:
-			self.con = sqlite.connect(os.path.join(griffith_dir, \
-				config.get('default_db')), autocommit=1)
-			self.cursor = self.con.cursor()
-		except:
-			gdebug.debug("Error reading database file")
-			import sys
-			sys.exit()
-			
-		self.check_if_table_exists()
-			
-	def check_if_table_exists(self):
-		try:
-			self.cursor.execute("SELECT id FROM movies LIMIT 1")
-		except:
-			self.create_db()
-		try:
-			self.cursor.execute("SELECT id FROM volumes LIMIT 1")
-		except:
-			self.create_table_volumes()
-		try:
-			self.cursor.execute("SELECT id FROM collections LIMIT 1")
-		except:
-			self.create_table_collections()
-			
-		# see if a db update is needed...
-		# a) movie table
-		columns = {
-			'id'             : 1,
-			'volume_id'      : 1,
-			'collection_id'  : 1,
-			'original_title' : 1,
-			'title'          : 1,
-			'director'       : 1,
-			'number'         : 1,
-			'image'          : 1,
-			'plot'           : 1,
-			'country'        : 1,
-			'year'           : 1,
-			'runtime'        : 1,
-			'classification' : 1,
-			'genre'          : 1,
-			'studio'         : 1,
-			'site'           : 1,
-			'imdb'           : 1,
-			'actors'         : 1,
-			'trailer'        : 1,
-			'rating'         : 1,
-			'loaned'         : 1,
-			'media'          : 1,
-			'num_media'      : 1,
-			'obs'            : 1,
-			'seen'           : 1,
-			'region'         : 1,
-			'condition'      : 1,
-			'color'          : 1,
-			'layers'         : 1
-		}
-		need_upgrade = False
-		for column in columns:
+			if self.collection is not None:
+				self.movie.mapper.mapped_table.update(self.movie.c.collection_id==self.collection_id).execute(loaned=True)
+				self.collection.loaned = True
+				self.collection.update()
+			if self.volume is not None:
+				self.movie.mapper.mapped_table.update(self.movie.c.volume_id==self.volume_id).execute(loaned=True)
+				self.volume.loaned = True
+				self.volume.update()
+			if self.movie is None:
+				self.movie = Movie.get_by(movie_id=self.movie_id)
+			self.movie.loaned = True
+			self.movie.update()
+			if self.date is None:
+				self.date = func.current_date()	# update loan date
+			self.return_date is None
+			self.save_or_update()
 			try:
-				self.cursor.execute("SELECT %s FROM movies LIMIT 1"%column)
-			except:
-				columns[column] = 0	# column is missing
-				need_upgrade = True
-		if need_upgrade == True:
-			self.upgrade_table("movies", columns)
-
-		# a) loans table
-		columns = {
-			'id'            : 1,
-			'movie_id'      : 1,
-			'volume_id'     : 1,
-			'collection_id' : 1,
-			'person_id'     : 1,
-			'date'          : 1,
-			'return_date'   : 1 
-		}
-		need_upgrade = False
-		for column in columns:
+				self.mapper.get_session().flush()
+				self.refresh()
+			except exceptions.SQLError, e:
+				debug.show("set_loaned: %s" % e)
+				return False
+			return True
+		def set_returned(self):
+			"""
+			Set loaned=False for all movies in volume/collection and for movie itself.
+			Set return_date to today's date
+			"""
+			self._validate()
+			if self.collection is not None:
+				self.movie.mapper.mapped_table.update(self.movie.c.collection_id==self.collection_id).execute(loaned=False)
+				self.collection.loaned = False
+				self.collection.update()
+			if self.volume_id is not None:
+				self.movie.mapper.mapped_table.update(self.movie.c.volume_id==self.volume_id).execute(loaned=False)
+				self.volume.loaned = False
+				self.volume.update()
+			self.movie.loaned = False
+			self.movie.update()
+			if self.return_date is None:
+				self.return_date = func.current_date()
+			self.save_or_update()
 			try:
-				self.cursor.execute("SELECT %s FROM loans LIMIT 1"%column)
-			except:
-				columns[column] = 0	# column is missing
-				need_upgrade = True
-		if need_upgrade == True:
-			self.upgrade_table("loans", columns)
-			
-	def upgrade_table(self, table, columns):
-		gdebug.debug("Upgrading database: processing %s table..." % table)
-		eval("self.create_table_%s(backup=True)"%table)
-		sql_query = "INSERT INTO %s_backup ("%table
-		i = 0
-		for column in columns:
-			i = i+1
-			sql_query += column
-			if i == len(columns):
-				sql_query += ' '
-			else:
-				sql_query += ', '
-		sql_query += ") SELECT "
-		i = 0
-		for column in columns:
-			i = i+1
-			if columns[column] == 1:
-				sql_query += column
-			else:
-				sql_query += "''"
-			if i == len(columns):
-				sql_query += ' '
-			else:
-				sql_query += ', '
-				
-		sql_query += " FROM %s" % table
-		self.cursor.execute (sql_query)
-		self.cursor.execute ("DROP TABLE %s" % table)
-		eval("self.create_table_%s()"%table)
-		self.cursor.execute ("INSERT INTO %s SELECT * FROM %s_backup" % (table, table))
-		self.cursor.execute ("DROP TABLE %s_backup"%table)
-		self.con.commit()
-		
-	def create_db(self):
-		self.create_table_movies()
-		self.create_table_volumes()
-		self.create_table_loans()
-		self.create_table_people()
-
-	def create_table_movies(self, backup=False):
-		if backup == True:
-			gdebug.debug("Creating 'movies' temporary table...")
-			query = "CREATE TEMPORARY TABLE movies_backup"
-		else:
-			gdebug.debug("Creating 'movies' table...")
-			query = "CREATE TABLE movies"
-		query += """
-			(
-				'id' INTEGER PRIMARY KEY,
-				'volume_id' INT NOT NULL DEFAULT '0',
-				'collection_id' INT NOT NULL DEFAULT '0',
-				'original_title' VARCHAR(255) NOT NULL,
-				'title' VARCHAR(255),
-				'director' VARCHAR(100),
-				'number' INT(11) NOT NULL,
-				'image' TEXT,
-				'plot' TEXT,
-				'country' VARCHAR(100),
-				'year' INT(4),
-				'runtime' INT(4),
-				'classification' VARCHAR(50),
-				'genre' VARCHAR(100),
-				'studio' VARCHAR(50),
-				'site' VARCHAR(100),
-				'imdb' VARCHAR(100),
-				'actors' TEXT,
-				'trailer' VARCHAR(100),
-				'rating' VARCHAR(50),
-				'loaned' INT(1) NOT NULL DEFAULT '0',
-				'media' VARCHAR(10),
-				'num_media' INT(2),
-				'obs' TEXT,
-				'seen' INT(1) NOT NULL DEFAULT '0',
-				'region' INT DEFAULT 2,
-				'condition' INT DEFAULT 3,
-				'color' INT DEFAULT 0,
-				'layers' INT DEFAULT 4
-			)
-		"""
-		self.cursor.execute(query)
-
-	def create_table_loans(self, backup=False):
-		if backup == True:
-			gdebug.debug("Creating 'loans' temporary table...")
-			query = "CREATE TEMPORARY TABLE loans_backup"
-		else:
-			gdebug.debug("Creating 'loans' table...")
-			query = "CREATE TABLE loans"
-		query += """
-			(
-				id INTEGER PRIMARY KEY,
-				person_id INT(11) NOT NULL default '0',
-				movie_id INTEGER default '0',
-				volume_id INTEGER default '0',
-				collection_id INTEGER default '0',
-				date DATE NOT NULL default '0000-00-00',
-				return_date DATE
-			)
-		"""
-		self.cursor.execute(query)
-			
-	def create_table_people(self, backup=False):
-		if backup == True:
-			gdebug.debug("Creating 'people' temporary table...")
-			query = "CREATE TEMPORARY TABLE people_backup"
-		else:
-			gdebug.debug("Creating 'people' table...")
-			query = "CREATE TABLE people"
-		query += """
-			(
-				id INTEGER PRIMARY KEY,
-				name VARCHAR(200) NOT NULL,
-				email VARCHAR(150),
-				phone VARCHAR(50)
-			)
-		"""
-		self.cursor.execute(query)
-
-
-	def get_all_data(self, table_name="movies", order_by="number ASC",where=None):
-		sql="SELECT * FROM %s" % table_name
-		if where:
-			sql = sql + " WHERE %s" % where
-		sql = sql + " ORDER BY %s" % order_by
-		self.cursor.execute(sql)
-		return self.cursor.fetchall()
-	
-	def get_loaned_movies(self):
-		self.cursor.execute("SELECT * FROM movies WHERE loaned='1' ORDER BY number")
-		return self.cursor.fetchall()
-		
-	def get_not_seen_movies(self):
-		self.cursor.execute("SELECT * FROM movies WHERE seen='0' ORDER BY number")
-		return self.cursor.fetchall()
-		
-	def get_loan_info(self, movie_id=None, volume_id=None, collection_id=None):
-		query = "SELECT * FROM loans WHERE "
-		if collection_id>0:
-			query += "collection_id='%s'" % str(collection_id)
-		elif volume_id>0:
-			query += "volume_id='%s'" % str(volume_id)
-		else:
-			query += "movie_id='%s'" % str(movie_id)
-		query +=  " AND return_date = ''"
-		self.cursor.execute(query)
-		return self.cursor.fetchall()
-	
-	def count_records(self,table_name, where='1'):
-		self.cursor.execute("SELECT COUNT(id) FROM %s" % (table_name) + " WHERE %s" % (where))
-		return int(self.cursor.fetchone()[0])
-		
-	def remove_movie_by_num(self,number):
-		self.cursor.execute("DELETE FROM movies WHERE number = '"+number+"'")
-		self.con.commit()
-		
-	def select_movie_by_num(self,number):
-		self.cursor.execute("SELECT * FROM movies WHERE number = '"+number+"' ORDER BY number ASC")
-		return self.cursor.fetchall()
-	
-	def select_movie_by_original_title(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE original_title LIKE '%"+txt+"%' ORDER BY number ASC")
-		return self.cursor.fetchall()
-		
-	def select_movie_by_title(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE title LIKE '%"+txt+"%' ORDER BY number ASC")
-		return self.cursor.fetchall()
-		
-	def select_movie_by_director(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE director LIKE '%"+txt+"%' ORDER BY number ASC")
-		return self.cursor.fetchall()
-
-	def select_movie_by_rating(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE rating LIKE '"+txt+"' ORDER BY number ASC")
-		return self.cursor.fetchall()
-		
-	def select_movie_by_year(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE year = '"+txt+"' ORDER BY number ASC")
-		return self.cursor.fetchall()
-
-	def select_movie_by_genre(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE genre LIKE '%"+txt+"%' ORDER BY number ASC")
-		return self.cursor.fetchall()
-		
-	def select_movie_by_actors(self,txt):
-		self.cursor.execute("SELECT * FROM movies WHERE actors LIKE '%"+txt+"%' ORDER BY number ASC")
-		return self.cursor.fetchall()
-
-	def remove_person_by_name(self, number):
-		self.cursor.execute("DELETE FROM people WHERE name = '"+number+"'")
-		
-	def select_person_by_name(self, name):
-		self.cursor.execute("SELECT * FROM people WHERE name = '"+name+"'")
-		return self.cursor.fetchall()
-		
-	def select_person_by_id(self, p_id):
-		self.cursor.execute("SELECT * FROM people WHERE id = '"+str(p_id)+"'")
-		return self.cursor.fetchall()
-		
-	def add_movie(self, data):
-		media = gutils.on_combo_box_entry_changed(data.am_media)
-		plot_buffer = data.am_plot.get_buffer()
-		with_buffer = data.am_with.get_buffer()
-		obs_buffer = data.am_obs.get_buffer()
-		self.cursor.execute(
-			"""INSERT INTO 'movies'
-			('id', 'original_title', 'title', 'director', 'plot', 'image', 'year',
-			'runtime', 'actors', 'country', 'genre', 'media', 'classification',
-			'studio', 'site', 'color', 'region', 'layers', 'condition', 'imdb',
-			'trailer', 'obs', 'num_media', 'loaned', 'rating', 'seen','number')
-			VALUES (Null,'"""
-			+gutils.gescape(data.am_original_title.get_text())+"','"
-			+gutils.gescape(data.am_title.get_text())+"','"
-			+gutils.gescape(data.am_director.get_text())+"','"
-			+gutils.gescape(plot_buffer.get_text(plot_buffer.get_start_iter(),
-			plot_buffer.get_end_iter()))+"','"
-			+data.am_picture_name.get_text()+"','"
-			+data.am_year.get_text()+"','"
-			+data.am_runtime.get_text()+"','"
-			+gutils.gescape(with_buffer.get_text(with_buffer.get_start_iter(),
-			with_buffer.get_end_iter()))+"','"
-			+gutils.gescape(data.am_country.get_text())+"','"
-			+gutils.gescape(data.am_genre.get_text())+"','"
-			+media+"','"
-			+gutils.gescape(data.am_classification.get_text())+"','"
-			+gutils.gescape(data.am_studio.get_text())+"','"
-			+data.am_site.get_text()+"','"
-			+str(int(data.am_color.get_active()))+"','"
-			+str(int(data.am_region.get_active()))+"','"
-			+str(int(data.am_layers.get_active()))+"','"
-			+str(int(data.am_condition.get_active()))+"','"
-			+data.am_imdb.get_text()+"','"
-			+data.am_trailer.get_text()+"','"
-			+gutils.gescape(obs_buffer.get_text(obs_buffer.get_start_iter(),
-			obs_buffer.get_end_iter()))+"','"
-			+data.am_discs.get_text()+"','"
-			+"0','"
-			+str(int(data.rating_slider_add.get_value()))+"','"
-			+str(int(data.am_seen.get_active()))+"','"
-			+data.am_number.get_text()+"')")
-				
-	def new_db(self, parent):
-		"""initializes a new griffith database file"""
-		response = gutils.question(self, \
-			_("Are you sure you want to create a new database?\nYou will lose ALL your current data!"), \
-			1, parent.main_window)
-		if response == gtk.RESPONSE_YES:
-			response_sec = gutils.question(self, \
-				_("Last chance!\nDo you confirm that you want\nto lose your current data?"), \
-				1, parent.main_window)
-			if response_sec == gtk.RESPONSE_YES:
-				# delete images
-				for root, dirs, files in os.walk(os.path.join(self.griffith_dir,"posters"), topdown=False):
-					for name in files:
-						os.remove(os.path.join(root, name))
-				# delete db
-				parent.db.con.close()
-				import sql
-				os.unlink(os.path.join(self.griffith_dir,self.config.get('default_db')))
-				# create/connect db
-				parent.db = sql.GriffithSQL(self.config, self.griffith_dir)
-				parent.clear_details()
-				parent.total = 0
-				parent.count_statusbar()
-				parent.treemodel.clear()
-				import edit
-				edit.fill_volumes_combo(parent)
-				edit.fill_collections_combo(parent)
-			else:
-				pass
-		else:
-			pass
-
-	# volumes/collections
-	def create_table_volumes(self):
-		gdebug.debug("Creating 'volumes' table...")
-		self.cursor.execute ("""
-			CREATE TABLE volumes
-			(
-				'id' INTEGER PRIMARY KEY,
-				'name' STRING NOT NULL,
-				'loaned' INT(1) NOT NULL default '0'
-			);
-			INSERT INTO 'volumes' VALUES (0,'None','0');
-			""")
-			
-	def create_table_collections(self):
-		gdebug.debug("Creating 'collections' table...")
-		self.cursor.execute ("""
-			CREATE TABLE collections
-			(
-				'id' INTEGER PRIMARY KEY,
-				'name' STRING NOT NULL,
-				'loaned' INT(1) NOT NULL default '0'
-			);
-			INSERT INTO 'collections' VALUES (0,'None','0');
-			""")
-
-	def get_all_volumes_data(self):
-		self.cursor.execute("SELECT * FROM volumes ORDER BY name")
-		return self.cursor.fetchall()
-		
-	def get_all_collections_data(self):
-		self.cursor.execute("SELECT * FROM collections ORDER BY name")
-		return self.cursor.fetchall()
-	
-	def select_movies_by_volume(self,volume_id):
-		self.cursor.execute("SELECT * FROM movies WHERE volume_id = '%s' ORDER BY number ASC" % volume_id)
-		return self.cursor.fetchall()
-
-	def select_movies_by_collection(self,collection):
-		self.cursor.execute("SELECT * FROM movies WHERE collection_id = '%s' ORDER BY number ASC" % collection)
-		return self.cursor.fetchall()
-	
-	def add_volume(self, name):
-		# check if volume already exists
-		for volume in self.get_all_volumes_data():
-			if name == volume['name']:
+				self.mapper.get_session().flush()
+				self.refresh()
+			except exceptions.SQLError, e:
+				debug.show("set_returned: %s" % e)
 				return False
-		gdebug.debug("Adding '%s' volume to database..."%name)
-		try:
-			self.cursor.execute("INSERT INTO 'volumes'('id', 'name', 'loaned') VALUES (Null,'"+
-			gutils.gescape(name)+"','0');")
-		except:
-			return False
-		return True
+			return True
+			#}}}
+	class Movie(object):#{{{
+		def __repr__(self):
+			return "Movie:%s (number=%s)" % (self.movie_id, self.number)
+		def __setitem__(self, key, value):
+			setattr(self,key,value)
+		def __getitem__(self, key):
+			return getattr(self,key)
+		def has_key(self, key):
+			if key in ('volume','collection','medium','vcodec','loans','tags','languages','lectors','dubbings','subtitles'):
+				return True
+			else:
+				return self.c.has_key(key)
+		def remove_from_db(self):
+			if self.loaned == True:
+				debug.show("You can't remove loaned movie!")
+				return False
+			self.delete()
+			try:
+				self.flush()
+			except exceptions.SQLError, e:
+				debug.show("remove_from_db: %s" % e)
+				return False
+			return True
+		def update_in_db(self, t_movies=None):
+			if self.movie_id < 1:
+				raise Exception('movie_id is not set')
+			if t_movies is not None:
+				self.languages.clear()
+				self.tags.clear()
+				#self.mapper.mapped_table.update(self.c.movie_id==t_movies['movie_id']).execute(t_movies)
+			return self.add_to_db(t_movies)
+		def add_to_db(self, t_movies=None):
+			if t_movies is not None:
+				t_tags = t_languages = None
+				if t_movies.has_key('tags'):
+					t_tags = t_movies.pop('tags')
+				if t_movies.has_key('languages'):
+					t_languages = t_movies.pop('languages')
+				for i in self.c.keys():
+					if t_movies.has_key(i):
+						self[i] = t_movies[i]
+				# languages
+				if t_languages is not None:
+					for lang in t_languages:
+						if lang[0]>0:
+							ml = GriffithSQL.MovieLang(lang_id=lang[0], type=lang[1],
+								acodec_id=lang[2], achannel_id=lang[3], subformat_id=lang[4])
+							self.languages.append(ml)
+				# tags
+				if t_tags is not None:
+					for tag in t_tags.keys():
+						self.tags.append(GriffithSQL.Tag(tag_id=tag))
+			self.update()
+			try:
+				self.flush()
+			except exceptions.SQLError, e:
+				debug.show("add_to_db: %s" % e)
+				if e.args[0][:16] == '(IntegrityError)':
+					gutils.error(None, _('Column "%s" is not unique') % _('Number'))
+				return False
+			self.refresh()
+			return True
+		#}}}
 
-	def add_collection(self, name):
-		# check if volume already exists
-		for collection in self.get_all_collections_data():
-			if name == collection['name']:
-				return False
-		gdebug.debug("Adding '%s' collection to database..."%name)
-		try:
-			self.cursor.execute("INSERT INTO 'collections'('id', 'name', 'loaned') VALUES (Null,'"+
-			gutils.gescape(name)+"','0');")
-		except:
-			return False
-		return True
+	def __init__(self, config, gdebug, griffith_dir):
+		from sqlalchemy.mods.threadlocal import assign_mapper
+		global debug
+		debug = gdebug
+		if not config.has_key('db_type'):
+			config['db_type'] = 'sqlite'
 
-	def remove_volume(self, id=None, name=None):
-		if id != None:
-			id = gutils.gescape(id)
-			self.cursor.execute("SELECT name FROM volumes WHERE id = '%s'" % id)
-			name = self.cursor.fetchone()[0]
-		elif name != None:
-			name =	gutils.gescape(name)
-			self.cursor.execute("SELECT id FROM volumes WHERE name = '%s'" % name)
-			id = str(int(self.cursor.fetchone()[0]))
-		if id == "0":
-			# "None" value can't be removed!
-			return False
-		self.cursor.execute("SELECT count(id) FROM movies WHERE volume_id = '%s'" % id)
-		movies = int(self.cursor.fetchone()[0])
-		if movies > 0:
-			gutils.warning(self, msg="%s movie(s) in this volume.\nRemoval is possible only if there is no movie assigned to volume"%str(movies))
-			return False
-		gdebug.debug("Removing '%s' volume (id=%s) from database..."%(name, id))
+		if config['db_type'] != 'sqlite':
+			if not config.has_key('db_host'):
+				config['db_host'] = '127.0.0.1'
+			if not config.has_key('db_user'):
+				config['db_user'] = 'griffith'
+			if not config.has_key('db_passwd'):
+				config['db_passwd'] = 'gRiFiTh'
+			if not config.has_key('db_name'):
+				config['db_name'] = 'griffith'
+
+		# connect to database --------------------------------------{{{
+		if config['db_type'] == 'sqlite':
+			url = "sqlite:///%s" % os.path.join(griffith_dir, config['default_db'])
+		elif config['db_type'] == 'postgres':
+			if not config.has_key('db_port') or config['db_port']==0:
+				config['db_port'] = 5432
+			url = "postgres://%s:%s@%s:%d/%s" % (
+				config['db_user'],
+				config['db_passwd'],
+				config['db_host'],
+				int(config['db_port']),
+				config['db_name'])
+		elif config['db_type'] == 'mysql':
+			if not config.has_key('db_port') or config['db_port']==0:
+				config['db_port'] = 3306
+			url = "mysql://%s:%s@%s:%d/%s" % (
+				config['db_user'],
+				config['db_passwd'],
+				config['db_host'],
+				int(config['db_port']),
+				config['db_name'])
+		self.metadata = BoundMetaData(url)
+		# try to establish a db connection
 		try:
-			self.cursor.execute("DELETE FROM volumes WHERE id = '%s'" % id)
+			self.metadata.engine.connect()
 		except:
-				return False
-		return True
-	
-	def remove_collection(self, id=None, name=None):
-		if id != None:
-			id = gutils.gescape(id)
-			self.cursor.execute("SELECT name FROM collections WHERE id = '%s'" % id)
-			name = self.cursor.fetchone()[0]
-		elif name != None:
-			name =	gutils.gescape(name)
-			self.cursor.execute("SELECT id FROM collections WHERE name = '%s'" % name)
-			id = str(int(self.cursor.fetchone()[0]))
-		if id == "0":
-			# "None" value can't be removed!
-			return False
-		self.cursor.execute("SELECT count(id) FROM movies WHERE collection_id = '%s'" % id)
-		movies = int(self.cursor.fetchone()[0])
-		if movies > 0:
-			gutils.warning(self, msg="%s movie(s) in this collection.\nRemoval is possible only if there is no movie assigned to collection"%str(movies))
-			return False
-		gdebug.debug("Removing '%s' collection (id=%s) from database..."%(name, id))
+			gutils.error(self, _('Database connection failed.'))
+			self.config['db_type'] = 'sqlite'
+			url = "sqlite:///%s" % os.path.join(griffith_dir, 'griffith.db')
+			self.metadata = BoundMetaData(url)
+			self.metadata.engine.connect()
+		#}}}
+
+		# prepare tables interface ---------------------------------{{{
+		movies = Table('movies', self.metadata,
+			Column('movie_id', Integer, primary_key = True),
+			Column('number', Integer, nullable=False, unique=True),
+			Column('collection_id', Integer, ForeignKey('collections.collection_id'), default=None),
+			Column('volume_id', Integer, ForeignKey('volumes.volume_id'), default=None),
+			Column('medium_id', Smallinteger, ForeignKey('media.medium_id'), default=None),
+			Column('vcodec_id', Smallinteger, ForeignKey('vcodecs.vcodec_id'), default=None),
+			Column('loaned', Boolean, nullable=False, default=False),
+			Column('seen', Boolean, nullable=False, default=False),
+			Column('rating', Smallinteger(2), nullable=False, default=0),
+			Column('color', Smallinteger, default=3),
+			Column('cond', Smallinteger, default=5),	# MySQL will not accept name "condition"
+			Column('layers', Smallinteger, default=4),
+			Column('region', Smallinteger, default=9),
+			Column('media_num', Smallinteger),
+			Column('runtime', Integer),
+			Column('year', Integer),
+			Column('o_title', VARCHAR(255)),
+			Column('title', VARCHAR(255)),
+			Column('director', VARCHAR(255)),
+			Column('o_site', VARCHAR(255)),
+			Column('site', VARCHAR(255)),
+			Column('trailer', VARCHAR(256)),
+			Column('country', VARCHAR(128)),
+			Column('genre', VARCHAR(128)),
+			Column('image', VARCHAR(128)),
+			Column('studio', VARCHAR(128)),
+			Column('classification', VARCHAR(128)),
+			Column('cast', TEXT),
+			Column('plot', TEXT),
+			Column('notes', TEXT))
+		loans = Table('loans', self.metadata,
+			Column('loan_id', Integer, primary_key=True),
+			Column('person_id', Integer, ForeignKey('people.person_id'), nullable=False),
+			Column('movie_id', Integer, ForeignKey('movies.movie_id'), nullable=False),
+			Column('volume_id', Integer, ForeignKey('volumes.volume_id')),
+			Column('collection_id', Integer, ForeignKey('collections.collection_id')),
+			Column('date', Date, nullable=False, default=func.current_date()),
+			Column('return_date', Date, nullable=True))
+		people = Table('people', self.metadata,
+			Column('person_id', Integer, primary_key=True),
+			Column('name', VARCHAR(255), nullable=False, unique=True),
+			Column('email', VARCHAR(128)),
+			Column('phone', VARCHAR(64)))
+		volumes = Table('volumes', self.metadata,
+			Column('volume_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True),
+			Column('loaned', Boolean, nullable=False, default=False))
+		collections = Table('collections', self.metadata,
+			Column('collection_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True),
+			Column('loaned', Boolean, nullable=False, default=False))
+		media = Table('media', self.metadata,
+			Column('medium_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		languages = Table('languages', self.metadata,
+			Column('lang_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		vcodecs = Table('vcodecs', self.metadata,
+			Column('vcodec_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		acodecs = Table('acodecs', self.metadata,
+			Column('acodec_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		achannels = Table('achannels', self.metadata,
+			Column('achannel_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		subformats = Table('subformats', self.metadata,
+			Column('subformat_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		tags = Table('tags', self.metadata,
+			Column('tag_id', Integer, primary_key=True),
+			Column('name', VARCHAR(64), nullable=False, unique=True))
+		movie_lang = Table('movie_lang', self.metadata,
+			Column('ml_id', Integer, primary_key=True),
+			Column('type', Smallinteger), # 0: Original, 1:lector, 2:dubbing, 3:subtitle 
+			Column('movie_id', Integer, ForeignKey('movies.movie_id'), nullable=False),
+			Column('lang_id', Integer, ForeignKey('languages.lang_id'), nullable=False),
+			Column('acodec_id', Integer, ForeignKey('acodecs.acodec_id'), nullable=True),
+			Column('achannel_id', Integer, ForeignKey('achannels.achannel_id'), nullable=True),
+			Column('subformat_id', Integer, ForeignKey('subformats.subformat_id'), nullable=True))
+		movie_tag = Table('movie_tag', self.metadata,
+			Column('mt_id', Integer, primary_key=True),
+			Column('movie_id', Integer, ForeignKey('movies.movie_id')),
+			Column('tag_id', Integer, ForeignKey('tags.tag_id')))
+		configuration = Table('configuration', self.metadata,
+			Column('param', VARCHAR(16), primary_key=True),
+			Column('value', VARCHAR(128), nullable=False))#}}}
+
+		# mappers -------------------------------------------------#{{{
+		assign_mapper(self.Configuration, configuration)
+		assign_mapper(self.Volume,volumes, properties={
+			'movies': relation(self.Movie, backref='volume')})
+		assign_mapper(self.Collection, collections, properties={
+			'movies': relation(self.Movie, backref='collection')})
+		assign_mapper(self.Medium, media, properties={
+			'movies': relation(self.Movie, backref='medium')})
+		assign_mapper(self.VCodec, vcodecs, properties={
+			'movies': relation(self.Movie, backref='vcodec')})
+		assign_mapper(self.Person, people)
+		assign_mapper(self.MovieLang, movie_lang, primary_key=[movie_lang.c.ml_id], properties = {
+			'movie'    : relation(self.Movie, lazy=False),
+			'language' : relation(self.Lang, lazy=False),
+			'achannel' : relation(self.AChannel),
+			'acodec'   : relation(self.ACodec),
+			'subformat': relation(self.SubFormat)})
+		assign_mapper(self.ACodec, acodecs, properties={
+			'movielangs': relation(self.MovieLang, lazy=False)})
+		assign_mapper(self.AChannel, achannels, properties={
+			'movielangs': relation(self.MovieLang, lazy=False)})
+		assign_mapper(self.SubFormat, subformats, properties={
+			'movielangs': relation(self.MovieLang, lazy=False)})
+		assign_mapper(self.Lang, languages, properties={
+			'movielangs': relation(self.MovieLang, lazy=False)})
+		assign_mapper(self.MovieTag, movie_tag)
+		assign_mapper(self.Tag, tags, properties={'movietags': relation(self.MovieTag, backref='tag')})
+		assign_mapper(self.Loan, loans, properties = {
+			'person'     : relation(self.Person),
+			'volume'     : relation(self.Volume),
+			'collection' : relation(self.Collection)})
+		assign_mapper(self.Movie, movies, order_by=movies.c.number , properties = {
+			'loans'      : relation(self.Loan, backref='movie', cascade='all, delete-orphan'),
+			#'tags'       : relation(self.Tag, cascade='all, delete-orphan', secondary=movie_tag,
+			'tags'       : relation(self.Tag, secondary=movie_tag,
+					primaryjoin=movies.c.movie_id==movie_tag.c.movie_id,
+					secondaryjoin=movie_tag.c.tag_id==tags.c.tag_id),
+			'languages'  : relation(self.MovieLang, cascade='all, delete-orphan')})#}}}
+		
+		# check if database needs upgrade
 		try:
-			self.cursor.execute("DELETE FROM collections WHERE id = '%s'" % id)
-		except:
-				return False
-		return True
+			v = self.Configuration.get_by(param='version')	# returns None if table exists && param ISNULL
+		except exceptions.SQLError:	# table doesn't exist
+			v = 0
+
+		if v is not None and v>1:
+			v = v.value
+		if v<self.version:
+			from dbupgrade import upgrade_database
+			upgrade_database(self, v)
+
+# for debugging (run: ipython sql.py)
+if __name__ == '__main__':
+	import sys
+	import config, gdebug
+	from initialize import locations, location_posters
+	locations = locations()
+	conf = config.Config(os.path.join(locations['home'], 'griffith.conf'))
+	location_posters(locations, conf)
+	db = GriffithSQL(conf, gdebug.GriffithDebug(True), locations['home'])
+	if len(sys.argv)>1:
+		if sys.argv[1] == 'echo':
+			db.metadata.engine.echo = True # print SQL queries
+	print '\nGriffithSQL test drive\n======================'
+	print "Engine: %s" % (db.metadata.engine.name)
+	print 'Database object name: db\n'
+
+# vim: fdm=marker

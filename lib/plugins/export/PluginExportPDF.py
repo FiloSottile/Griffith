@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginExportPDF.py,v 1.7 2005/09/21 11:02:06 iznogoud Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@ __revision__ = '$Id: PluginExportPDF.py,v 1.7 2005/09/21 11:02:06 iznogoud Exp $
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
@@ -36,33 +36,34 @@ import version
 import gutils
 import string
 import sys
+import config
 
-fontName = "Lucida"
 exec_location = os.path.abspath(os.path.dirname(sys.argv[0]))
-
-if os.name=="nt":
-    font = "%s/fonts/Lucida.TTF"%exec_location
-else:
-    font = string.replace(exec_location, "/bin","/share/griffith/fonts/Lucida.TTF")
-    
-pdfmetrics.registerFont(TTFont(fontName, font))
 
 plugin_name = "PDF"
 plugin_description = _("PDF export plugin")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.1"
+plugin_version = "0.3"
 
 class ExportPlugin:
-    def __init__(self, database, locations, parent):
+    def __init__(self, database, locations, parent, debug):
         self.db = database
         self.locations = locations
         self.parent = parent
         self.styles = getSampleStyleSheet()
         self.export_simple_pdf()
+        self.fontName = ""
 
     def export_simple_pdf(self):
         """exports a simple movie list to a pdf file"""
+        
+        myconfig = config.Config(os.path.join(self.locations['home'], 'griffith.conf'))
+        if myconfig.get('font', '')!='':
+                self.fontName = "custom_font"
+                pdfmetrics.registerFont(TTFont(self.fontName, myconfig.get('font', '')))
+        else:
+                self.fontName = "Helvetica"
 
         filename = gutils.file_chooser(_("Export a PDF"), action=gtk.FILE_CHOOSER_ACTION_SAVE, buttons=(gtk.STOCK_CANCEL,gtk.RESPONSE_CANCEL,gtk.STOCK_SAVE,gtk.RESPONSE_OK),name="griffith_simple_list.pdf")
         if filename[0]:
@@ -74,47 +75,46 @@ class ExportPlugin:
                 else:
                     overwrite = False
                     
-            if overwrite == True or overwrite == None:        
-                c = SimpleDocTemplate(filename[0])    
-                style = self.styles["Normal"]        
+            if overwrite == True or overwrite is None:
+                c = SimpleDocTemplate(filename[0])
+                style = self.styles["Normal"]
                 Story = [Spacer(1,2*inch)]
-                # define some custom stylesheet
-                total = self.db.count_records('movies')
-                p = Paragraph("<font name='" + fontName +"' size=\"18\">" + saxutils.escape((_("List of films")).encode('utf-8')) + '</font>', self.styles["Heading1"] )
+                # define some custom stylesheetfont
+                total = self.db.Movie.count()
+                p = Paragraph("<font name='" + self.fontName +"' size=\"18\">" + saxutils.escape((_("List of films")).encode('utf-8')) + '</font>', self.styles["Heading1"] )
                 Story.append(p)
                 Story.append(Paragraph(" ",style))
-                p = Paragraph("<font name='" + fontName +"' size=\"10\">" + saxutils.escape((_("Total Movies: %s") % str(total)).encode('utf-8'))  + '</font>', self.styles["Heading3"])
+                p = Paragraph("<font name='" + self.fontName +"' size=\"10\">" + saxutils.escape((_("Total Movies: %s") % str(total)).encode('utf-8'))  + '</font>', self.styles["Heading3"])
                 Story.append(p)
                 Story.append(Paragraph(" ",style))
-                data = self.db.get_all_data()
-                for row in data:
-                    number = str(row['number'])
-		    number = number.encode('utf-8')
-                    original_title = str(row['original_title'])
-                    original_title = original_title.encode('utf-8')
-                    title = str(row['title'])
-                    title = title.encode('utf-8')
-                    if row['year']:
-                        year = ' - ' + str(row['year'])
+                movies = self.db.Movie.select()
+		for movie in movies:
+                    number = movie.number
+                    original_title = str(movie.o_title)
+                    title = str(movie.title)
+                    if movie.year:
+                        year = ' - ' + str(movie.year)
                     else:
                         year = ""
-		    year = year.encode('utf-8')
-                    if row['director']:
-                        director = ' - ' + str(row['director'])
+                    if movie.director:
+                        director = ' - ' + str(movie.director)
                     else:
                         director = ""
-                    director = director.encode('utf-8')
-                    p = Paragraph("<font name=" + fontName + " size=\"7\">" + saxutils.escape(number + " | " + original_title + " (" + title + ")" + year + director) + "</font>", self.styles["Normal"])
+                    p = Paragraph("<font name=" + self.fontName + " size=\"7\">" + \
+                        saxutils.escape(str(number) + " | " + original_title) + \
+                        "</font><font name=" + self.fontName + " size=\"7\">" + \
+                        saxutils.escape(" (" + title + ")" + year + director) + \
+                        "</font>", self.styles["Normal"])
                     Story.append(p)
                 c.build(Story, onFirstPage=self.page_template, onLaterPages=self.page_template)
                 gutils.info(self, _("PDF has been created."), self.parent)
             
     def page_template(self, canvas, doc):
         canvas.saveState()
-        canvas.setFont(fontName,7)
+        canvas.setFont(self.fontName,7)
         canvas.drawCentredString(defaultPageSize[0]/2, 40,_("Page %d") % doc.page)
-        canvas.setFont(fontName,5)
+        canvas.setFont(self.fontName,5)
         canvas.drawCentredString(defaultPageSize[0]/2, 20, (_("Document generated by Griffith v")+
             version.pversion+" - Copyright (C) "+version.pyear+" "+
-            version.pauthor+" - " + _("Released Under the GNU/GPL License")).encode('utf-8'))                
+            version.pauthor+" - " + _("Released Under the GNU/GPL License")).encode('utf-8'))
         canvas.restoreState()

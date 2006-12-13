@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: gutils.py,v 1.45 2005/09/27 13:46:52 pox Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@ __revision__ = '$Id: gutils.py,v 1.45 2005/09/27 13:46:52 pox Exp $'
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
@@ -27,57 +27,54 @@ import os
 import gtk
 import htmlentitydefs
 import re
-import zipfile
 import webbrowser
-import pango
-import gdebug
 import gobject
 
 url_re = re.compile('^\w+://')
 entity = re.compile(r'\&.\w*?\;')
 html_tags = re.compile(r'\<.*?\>')
-	 
+
 def remove_accents(txt, encoding='iso-8859-1'):
 	d = {192: u'A', 193: u'A', 194: u'A', 195: u'A', 196: u'A', 197: u'A',
-		 199: u'C', 200: u'E', 201: u'E', 202: u'E', 203: u'E', 204: u'I',
-		 205: u'I', 206: u'I', 207: u'I', 209: u'N', 210: u'O', 211: u'O',
-		 212: u'O', 213: u'O', 214: u'O', 216: u'O', 217: u'U', 218: u'U',
-		 219: u'U', 220: u'U', 221: u'Y', 224: u'a', 225: u'a', 226: u'a',
-		 227: u'a', 228: u'a', 229: u'a', 231: u'c', 232: u'e', 233: u'e',
-		 234: u'e', 235: u'e', 236: u'i', 237: u'i', 238: u'i', 239: u'i',
-		 241: u'n', 242: u'o', 243: u'o', 244: u'o', 245: u'o', 246: u'o',
-		 248: u'o', 249: u'u', 250: u'u', 251: u'u', 252: u'u', 253: u'y',
-		 255: u'y'}
+			199: u'C', 200: u'E', 201: u'E', 202: u'E', 203: u'E', 204: u'I',
+			205: u'I', 206: u'I', 207: u'I', 209: u'N', 210: u'O', 211: u'O',
+			212: u'O', 213: u'O', 214: u'O', 216: u'O', 217: u'U', 218: u'U',
+			219: u'U', 220: u'U', 221: u'Y', 224: u'a', 225: u'a', 226: u'a',
+			227: u'a', 228: u'a', 229: u'a', 231: u'c', 232: u'e', 233: u'e',
+			234: u'e', 235: u'e', 236: u'i', 237: u'i', 238: u'i', 239: u'i',
+			241: u'n', 242: u'o', 243: u'o', 244: u'o', 245: u'o', 246: u'o',
+			248: u'o', 249: u'u', 250: u'u', 251: u'u', 252: u'u', 253: u'y',
+			255: u'y'}
 	return unicode(txt, encoding).translate(d)
 
 def is_number(x):
-	try:
-		return(x==x-0)
-	except:
-		return False
-		
-def find_next_available(self):
-	"""finds next available movie number.
+	return isinstance(x, int)
+
+def find_next_available(db):
+	"""
+	finds next available movie number.
 	This is the first empty position.
-	If none is empty then increments the last position."""
+	If none is empty then increments the last position.
+	"""
 	a = first = 0
 	row = None
 
-	for row in self.db.get_all_data():
-		second = row['number']
-		if second == None:
+	movies = db.Movie.select(order_by="number ASC")
+	for movie in movies:
+		second = int(movie.number)
+		if second is None:
 			second = 0
 		if (second>first+1):
 			break
 		first = second
 		a += a
-		
-	if first == None:
+
+	if first is None:
 		return 1
 	else:
 		number = first+1
 		return number
-		
+
 def trim(text,key1,key2):
 	p1 = string.find(text,key1)
 	if p1 == -1:
@@ -90,20 +87,20 @@ def trim(text,key1,key2):
 	else:
 		p2 = p1+p2
 	return text[p1:p2]
-	
+
 def after(text,key):
 	p1 = string.find(text,key)
 	return text[p1+len(key):]
-	
+
 def before(text,key):
 	p1 = string.find(text,key)
 	return text[:p1]
-	
+
 def gescape(text):
 	text=string.replace(text,"'", "''")
 	text=string.replace(text,"--", "-")
 	return text
-	
+
 def progress(blocks,size_block,size):
 	transfered = blocks * size_block
 	if size > 0 and transfered > size:
@@ -113,7 +110,7 @@ def progress(blocks,size_block,size):
 	print transfered, '/', size, 'bytes'
 
 # functions to handle comboboxentry stuff
-	
+
 def set_model_from_list (cb, items):
 	"""Setup a ComboBox or ComboBoxEntry based on a list of strings."""
 	model = gtk.ListStore(str)
@@ -126,18 +123,18 @@ def set_model_from_list (cb, items):
 		cell = gtk.CellRendererText()
 		cb.pack_start(cell, True)
 		cb.add_attribute(cell, 'text', 0)
-		
+
 def on_combo_box_entry_changed(widget):
-	 model = widget.get_model()
-	 m_iter = widget.get_active_iter()
-	 if m_iter:
-		 return model.get_value(m_iter, 0)
-	 else:
+	model = widget.get_model()
+	m_iter = widget.get_active_iter()
+	if m_iter:
+		return model.get_value(m_iter, 0)
+	else:
 		return 0
- 
+
 def on_combo_box_entry_changed_name(widget):
-	 return widget.get_active_text()
-		 
+	return widget.get_active_text()
+
 def convert_entities(text):
 	def conv(ents):
 		entities = htmlentitydefs.entitydefs
@@ -149,7 +146,7 @@ def convert_entities(text):
 			except UnicodeDecodeError:
 				ents = unicode(ent_code, 'latin-1')
 			except Exception, ex:
-				gdebug.debug("error occurred while converting entity %s: %s" % (ents, ex))
+				print("error occurred while converting entity %s: %s" % (ents, ex))
 
 			# check if it still needs conversion
 			if not entity.search(ents):
@@ -171,8 +168,10 @@ def convert_entities(text):
 	else:
 		ctext = in_entity.re.sub(conv, text)
 		return ctext
-		
+
 def strip_tags(text):
+	if text is None:
+		return ''
 	finished = 0
 	while not finished:
 		finished = 1
@@ -186,67 +185,22 @@ def strip_tags(text):
 				text = text[:start] + text[start+stop+1:]
 				finished = 0
 	return text
-	
+
 def save_pixmap(self, pixmap, filename):
 	pixmap.save(filename, "jpeg", {"quality":"70"})
 
 def clean(text):
 	t = strip_tags(text)
 	t = string.replace(t, "&nbsp;", " ")
+	t = string.replace(t,'&#34;',"")
 	return string.strip(t)
-	
+
 def gdecode(txt, encode):
 	try:
 		return txt.decode(encode)
 	except:
 		return txt
-	
-# I/O functions
-def backup(source, target):
 
-	try:
-		mzip = zipfile.ZipFile(target, 'w')
-		mzip.write(os.path.join(source,'griffith.gri'))
-		mzip.write(os.path.join(source,'griffith.conf'))
-		tmp_path=os.path.join(source,'posters')
-		for each in os.listdir(tmp_path):
-			mzip.write(os.path.join(tmp_path,each))
-	except:
-		return 0
-	mzip.close()
-	return 1
-		
-def restore(file, dir):
-	try:
-		zip = zipfile.ZipFile(file, 'r')
-		for each in zip.namelist():
-			file_to_restore = os.path.split(each)
-			if os.path.isdir(file_to_restore[1]):
-				pass
-			if file_to_restore[1].endswith('.gri'):
-				myfile = os.path.join(dir,file_to_restore[1])
-				outfile = open(myfile, 'wb')
-				outfile.write(zip.read(each))
-				outfile.flush()
-				outfile.close()
-			elif file_to_restore[1].endswith('config'):
-				myfile = os.path.join(dir,file_to_restore[1])
-				outfile = open(myfile, 'wb')
-				outfile.write(zip.read(each))
-				outfile.flush()
-				outfile.close()
-			elif file_to_restore[1].endswith('.jpg'):
-				mypath = os.path.join(dir,'posters')
-				myfile = os.path.join(mypath,file_to_restore[1])
-				outfile = open(myfile, 'wb')
-				outfile.write(zip.read(each))
-				outfile.flush()
-				outfile.close()	
-		return 1
-	except:
-		return 0
-	zip.close()
-		 
 # Messages
 
 def error(self, msg, parent=None):
@@ -255,28 +209,28 @@ def error(self, msg, parent=None):
 			gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, msg)
 	dialog.run()
 	dialog.destroy()
-	
+
 def urllib_error(msg, parent=None):
 	dialog = gtk.MessageDialog(parent,
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 			gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, msg)
 	dialog.run()
 	dialog.destroy()
-	
+
 def warning(self, msg, parent=None):
 	dialog = gtk.MessageDialog(parent,
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 			gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, msg)
 	dialog.run()
 	dialog.destroy()
-	
+
 def info(self, msg, parent=None):
 	dialog = gtk.MessageDialog(parent,
 			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
 			gtk.MESSAGE_INFO, gtk.BUTTONS_OK, msg)
 	dialog.run()
 	dialog.destroy()
-	
+
 def question(self, msg, cancel=1, parent=None):
 	if not parent: parent = self
 	dialog = gtk.MessageDialog(parent,
@@ -284,12 +238,11 @@ def question(self, msg, cancel=1, parent=None):
 			gtk.MESSAGE_QUESTION, gtk.BUTTONS_NONE, msg)
 	dialog.add_buttons(gtk.STOCK_YES, gtk.RESPONSE_YES,
 			gtk.STOCK_NO, gtk.RESPONSE_NO)
-	if cancel: dialog.add_buttons(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL)
-	dialog.set_default_response(gtk.RESPONSE_CANCEL)
+	dialog.set_default_response(gtk.RESPONSE_NO)
 	response = dialog.run()
 	dialog.destroy()
 	return response
-	
+
 def file_chooser(title, action=None, buttons=None, name="", folder=os.path.expanduser("~"), picture = False):
 	dialog = gtk.FileChooserDialog(title=title, action=action, buttons=buttons)
 	dialog.set_default_response(gtk.RESPONSE_OK)
@@ -316,13 +269,15 @@ def file_chooser(title, action=None, buttons=None, name="", folder=os.path.expan
 	mfilter.set_name(_("All files"))
 	mfilter.add_pattern("*")
 	dialog.add_filter(mfilter)
-	
+
 
 	response = dialog.run()
 	if response == gtk.RESPONSE_OK:
 		filename = dialog.get_filename()
 	elif response == gtk.RESPONSE_CANCEL:
 		filename = None
+	else:
+		return False
 	path = dialog.get_current_folder()
 	dialog.destroy()
 	return filename, path
@@ -330,25 +285,18 @@ def file_chooser(title, action=None, buttons=None, name="", folder=os.path.expan
 def update_preview_cb(file_chooser, preview):
 	filename = file_chooser.get_preview_filename()
 	try:
-	  pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
-	  preview.set_from_pixbuf(pixbuf)
-	  have_preview = True
+		pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128, 128)
+		preview.set_from_pixbuf(pixbuf)
+		have_preview = True
 	except:
-	  have_preview = False
+		have_preview = False
 	file_chooser.set_preview_widget_active(have_preview)
 	return
-   
+
 def run_browser(url):
+	webbrowser.register('open', webbrowser.GenericBrowser("open '%s'"))
+	webbrowser._tryorder.append('open')
 	webbrowser.open(url)
-	
-def get_media_list_index(media):
-	media_desc = {"DVD":0,"DVD-R":1, "DVD-RW":2, "DVD+R":3, "DVD+RW":4, \
-		"DVD-RAM":5, "VHS":6, "BETACAM":7, "WMV":8, "DIVX":9, "XVID":10, \
-		"VCD":11, "SVCD":12 }
-	for k, v in media_desc.items():
-		if media == k:
-			return v
-	return 0
 
 def read_plugins(prefix,directory):
 	"""returns available plugins"""
@@ -359,3 +307,194 @@ def findKey(val, dict):
 	for key, value in dict.items():
 		if value == val: return key
 	return None
+
+def garbage(handler):
+	pass
+
+def make_thumbnail(self, file_name):
+	source = os.path.join(self.locations['posters'], file_name)
+	if os.path.isfile(source):
+		self.Image.set_from_file(source)
+		pixbuf = self.Image.get_pixbuf()
+		pixbuf = pixbuf.scale_simple(30, 40, 'bilinear')
+		save_pixmap(self, pixbuf, os.path.join(self.locations['posters'], "t_%s"%file_name))
+	else:
+		return 0
+
+def make_medium_image(self, file_name):
+	source = os.path.join(self.locations['posters'], file_name)
+	if os.path.isfile(source):
+		self.Image.set_from_file(source)
+		pixbuf = self.Image.get_pixbuf()
+		pixbuf = pixbuf.scale_simple(100, 140, 'bilinear')
+		save_pixmap(self, pixbuf, os.path.join(self.locations['posters'], "m_%s"%file_name))
+	else:
+		return 0
+
+def clean_posters_dir(self):
+	posters_dir = self.locations['posters']
+
+	counter = 0
+
+	for files in os.walk(posters_dir):
+		for names in files:
+			for name in names:
+				if name.startswith('poster'):
+					# lets check if this poster is orphan
+					used = self.db.Movie.count_by(image=string.replace(name,".jpg",""))
+					if not used:
+						counter += 1
+						os.unlink(os.path.join(posters_dir, name))
+						m_file = os.path.join(posters_dir, "m_"+name)
+						if os.path.isfile(m_file):
+							os.unlink(m_file)
+						t_file = os.path.join(posters_dir, "t_"+name)
+						if os.path.isfile(t_file):
+							os.unlink(t_file)
+
+	if counter:
+		print "%d orphan files cleaned."%counter
+	else:
+		print "No orphan files found."
+
+def decompress(data):
+	import gzip, StringIO
+	try:
+		compressedStream = StringIO.StringIO(data)
+		gzipper = gzip.GzipFile(fileobj=compressedStream)
+		data = gzipper.read()
+	except:
+		pass
+	return data
+
+def get_dependencies():
+	depend = []
+	try:
+		import gtk
+		version	= '.'.join([str(i) for i in gtk.pygtk_version])
+		if gtk.pygtk_version <= (2, 6, 0):
+			version = '-%s' % version
+			raise
+	except:
+		version = False
+	depend.append({'module': 'gtk',
+		'version'	: version,
+		'module_req'	: '2.6',
+		'url'		: 'http://www.pygtk.org/',
+		'debian'	: 'python-gtk2',
+		'debian_req'	: '2.8.6-1'
+		# TODO: 'fedora', 'suse', etc.
+	})
+	try:
+		import gtk.glade
+		# (version == gtk.pygtk_version)
+	except:
+		version = False
+	depend.append({'module': 'gtk.glade',
+		'version'	: version,
+		'module_req'	: '2.6',
+		'url'		: 'http://www.pygtk.org/',
+		'debian'	: 'python-glade2',
+		'debian_req'	: '2.8.6-1'
+	})
+	try:
+		import sqlalchemy
+		version = True
+	except:
+		version = False
+	depend.append({'module': 'sqlalchemy',
+		'version'	: version,
+		'module_req'	: '0.3',
+		'url'		: 'http://www.sqlalchemy.org/',
+		'debian'	: 'python-sqlalchemy',
+		'debian_req'	: '0.3.0-1'
+	})
+	try:
+		import pysqlite2
+		version = True
+		# TODO: check if "pysqlite" is in version >= 2
+	except:
+		version = False
+	depend.append({'module': 'pysqlite2',
+		'version'	: version,
+		'url'		: 'http://initd.org/tracker/pysqlite',
+		'debian'	: 'python-pysqlite2',
+		'debian_req'	: '2.3.0-1'
+	})
+	try:
+		import reportlab
+		version = reportlab.Version
+	except:
+		version = False
+	depend.append({'module': 'reportlab',
+		'version'	: version,
+		'url'		: 'http://www.reportlab.org/',
+		'debian'	: 'python-reportlab',
+		'debian_req'	: '1.20debian-6'
+	})
+	try:
+		import PIL
+		version = True
+	except:
+		version = False
+	depend.append({'module': 'PIL',
+		'version'	: version,
+		'url'		: 'http://www.pythonware.com/products/pil/',
+		'debian'	: 'python-imaging',
+		'debian_req'	: '1.1.5-6'
+	})
+	try:
+		import xml
+		version	= '.'.join([str(i) for i in xml.version_info])
+	except:
+		version = False
+	depend.append({'module': 'xml',
+		'version'	: version,
+		'url'		: 'http://pyxml.sf.net/',
+		'debian'	: 'python-xml'
+	})
+	# extra dependencies:
+	optional = []
+	try:
+		import psycopg2
+		version = psycopg2.__version__
+	except:
+		version = False
+	optional.append({'module': 'psycopg2',
+		'version'	: version,
+		'url'		: 'http://initd.org/tracker/psycopg/wiki/PsycopgTwo',
+		'debian'	: 'python-psycopg2',
+		'debian_req'	: '1.1.21-6'
+	})
+	try:
+		import MySQLdb
+		version	= '.'.join([str(i) for i in MySQLdb.version_info])
+	except:
+		version = False
+	optional.append({'module': 'MySQLdb',
+		'version'	: version,
+		'url'		: 'http://sourceforge.net/projects/mysql-python',
+		'debian'	: 'python-mysqldb',
+		'debian_req'	: '1.2.1-p2-2'
+	})
+	try:
+		import sqlite
+		version	= sqlite.version
+	except:
+		version = False
+	optional.append({'module': 'sqlite',
+		'version'	: version,
+		'url'		: 'http://initd.org/tracker/pysqlite',
+		'debian'	: 'python-sqlite'
+	})
+	return depend, optional
+
+
+def html_encode(s):
+	if not isinstance(s, str):
+		s = str(s)
+	s = s.replace('&', '&amp;')
+	s = s.replace('<', '&lt;')
+	s = s.replace('>', '&gt;')
+	s = s.replace('=', '&quot;')
+	return s

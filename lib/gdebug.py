@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: gdebug.py,v 1.7 2005/09/13 13:50:43 pox Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,31 +16,20 @@ __revision__ = '$Id: gdebug.py,v 1.7 2005/09/13 13:50:43 pox Exp $'
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import getopt, sys
+class GriffithDebug:
+	debug_mode = None
+	
+	def __init__(self, mode=False):
+		self.debug_mode = mode
 
-def usage():
-    print "USAGE:", sys.argv[0], "[-h|d]"
+	def set_debug(self, mode=True):
+		self.debug_mode = mode
 
-try:
-	opts, args = getopt.getopt(sys.argv[1:], "hd", ["help", "debug"])
-except getopt.GetoptError:
-	# print help information and exit:
-	usage()
-	sys.exit(2)
-
-debug_mode = False
-for o, a in opts:
-	if o in ("-d", "--debug"):
-		debug_mode = True
-	if o in ("-h", "--help"):
-		usage()
-		sys.exit()
-
-def debug(txt):
-    if debug_mode:
-        print txt.encode('utf8')
+	def show(self, txt):
+		if self.debug_mode:
+			print txt.encode('utf8')

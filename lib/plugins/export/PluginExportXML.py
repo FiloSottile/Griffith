@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginExportXML.py,v 1.1 2005/09/26 22:45:01 iznogoud Exp $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005 Vasco Nunes
+# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@ __revision__ = '$Id: PluginExportXML.py,v 1.1 2005/09/26 22:45:01 iznogoud Exp $
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
@@ -36,7 +36,7 @@ plugin_version = "0.1"
 
 class ExportPlugin:
 
-	def __init__(self, database, locations, parent):
+	def __init__(self, database, locations, parent, debug):
 		self.db = database
 		self.locations = locations
 		self.parent = parent
@@ -54,20 +54,25 @@ class ExportPlugin:
 				else:
 					overwrite = False
 					
-			if overwrite == True or overwrite == None:
+			if overwrite == True or overwrite is None:
 				# create document
 				impl = xml.dom.minidom.getDOMImplementation()
 				doc  = impl.createDocument(None, "root", None)
 				root = doc.documentElement
 				
 				# create object
-				data = self.db.get_all_data()
-				for row in data:
+				for movie in self.db.Movie.select():
 					e = doc.createElement('movie')
 					root.appendChild(e)
-					for key,value in row.items():
+					for key in movie.c.keys():
 						e2 = doc.createElement(key)
-						t = doc.createTextNode(str(value))
+						if movie[key] is None:
+							value = ''
+						elif movie[key] in (True, False):
+							value = str(int(movie[key]))
+						else:
+							value = str(movie[key])
+						t = doc.createTextNode(value)
 						e2.appendChild(t)
 						e.appendChild(e2)
 					
