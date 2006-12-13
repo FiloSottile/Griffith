@@ -1,0 +1,66 @@
+UNIX systems
+============
+
+1.1 Installing on some Linux distributions
+
+	1.1.1 Debian GNU/Linux
+		Griffith is available from official repository,
+		all you have to do is execute:
+			# aptitude install griffith
+	1.1.2 Arch Linux
+		Download PKGBUILD file from:
+			http://aur.archlinux.org/packages.php?K=griffith
+		and follow this guide:
+			http://wiki.archlinux.org/index.php/New_AUR_user_guidelines
+
+1.1 Installing from source
+
+	Unpack the Griffith tarball using these commands:
+
+	$ tar -zxf griffith-<version>.tar.gz
+
+	Switch to the newly created directory and type 'make install' as root
+	(or 'sudo make install') and the Makefile will copy the files to the
+	correct location in your system. You do not need to configure or
+	compile Griffith as it is written in interpreted Python code.
+
+1.2 Installing from downloaded package
+
+	If you have downloaded Griffith package, just do as root:
+
+	* deb packages (Debian, Ubuntu, ...)
+
+		# dpkg -i griffith_<version>_all.deb
+	
+	* rpm packages (Redhat, Fedora, Mandrake, ...)
+
+		# rpm -Uvh griffith_<version>.rpm
+
+1.3 Installing on Debian/GNU Linux
+
+	Griffith is available in Debian and Ubuntu:
+	http://packages.debian.org/griffith
+	http://packages.ubunty.com/griffith
+
+	To install it, run as root these commands:
+
+		# aptitude install griffith
+	or
+		# apt-get install griffith
+
+1.4 Making Debian package
+
+	If you want to make your own Debian package, follow these steps:
+	* change your working directory to griffith source
+	* edit debian/changelog file, f.e. like this:
+		$ dch -v <version> -D UNRELEASED -i NOT RELEASED YET
+	* type `debuild` or `dpkg-buildpackage -rfakeroot` to build package
+	* install new package (`dpkg -i ../griffith_<version>_all.deb`)
+
+Microsoft Windows systems
+=========================
+
+Just run the griffith installer available for your system.
+A separated GTK+ Runtime Environment for Win32 is NOT necessary.
+For now, Griffith is only known to work under Microsoft Windows XP
+Professional Edition but should work on other windows flavours too.
