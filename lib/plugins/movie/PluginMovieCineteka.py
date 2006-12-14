@@ -134,8 +134,8 @@ class SearchPlugin(movie.SearchMovie):
 	def get_searches(self):
 		"""Try to find both id and film title for each search result"""
 		elements = string.split(self.page, "</a>]</td>")
-		print elements
 		self.number_results = elements[-1]
+
 		if (elements[0]<>''):
 			for element in elements:
 				self.ids.append(gutils.trim(element, "?op=Movie&id=", "\""))
@@ -143,3 +143,4 @@ class SearchPlugin(movie.SearchMovie):
 					(gutils.trim(element, """<td class="txt12"><b>""", "</span></nobr></td>"))))
 		else:
 			self.number_results = 0
+
