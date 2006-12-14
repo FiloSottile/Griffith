@@ -129,18 +129,17 @@ class SearchPlugin(movie.SearchMovie):
 	def sub_search(self):
 		"""Isolating just a portion (with the data we want) of the results"""
 		self.page = gutils.trim(self.page, \
-			"""ordenados por data de aquisiçăo:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
+			"""o:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
 
 	def get_searches(self):
 		"""Try to find both id and film title for each search result"""
 		elements = string.split(self.page, "</a>]</td>")
+		print elements
 		self.number_results = elements[-1]
-
-		if (len(elements[0])):
+		if (elements[0]<>''):
 			for element in elements:
 				self.ids.append(gutils.trim(element, "?op=Movie&id=", "\""))
 				self.titles.append(gutils.strip_tags(gutils.convert_entities \
 					(gutils.trim(element, """<td class="txt12"><b>""", "</span></nobr></td>"))))
 		else:
 			self.number_results = 0
-

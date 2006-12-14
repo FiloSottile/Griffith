@@ -30,20 +30,20 @@ plugin_url = "epipoca.cidadeinternet.com.br"
 plugin_language = _("Brazilian Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email="<vasco.m.nunes@gmail.com>"
-plugin_version = "0.3"
+plugin_version = "0.4"
 
 class Plugin(movie.Movie):
 	"A movie plugin object"
 	def __init__(self, id):
 		self.encode='iso-8859-1'
 		self.movie_id = id
-		self.url = "http://epipoca.cidadeinternet.com.br/filmes_zoom.cfm?id=" + str(self.movie_id)
+		self.url = "http://epipoca.uol.com.br/filmes_zoom.cfm?id=" + str(self.movie_id)
 
 	def get_image(self):
 		"Find the film's poster image"
 		tmp_pic = gutils.trim(self.page, "/images/filmes/capa_", "\"")
 		self.image_url = \
-			"http://epipoca.cidadeinternet.com.br/images/filmes/capa_" + tmp_pic
+			"http://epipoca.uol.com.br/images/filmes/capa_" + tmp_pic
 
 	def get_o_title(self):
 		"Find the film's original title"
@@ -128,9 +128,9 @@ class SearchPlugin(movie.SearchMovie):
 	"A movie search object"
 	def __init__(self):
 		self.original_url_search = \
-			"http://epipoca.cidadeinternet.com.br/search/?Ordenado=Popular&busca="
+			"http://epipoca.uol.com.br/search/?Ordenado=Popular&busca="
 		self.translated_url_search = \
-			"http://epipoca.cidadeinternet.com.br/search/?Ordenado=Popular&busca="
+			"http://epipoca.uol.com.br/search/?Ordenado=Popular&busca="
 		self.encode='iso-8859-1'
 
 	def search(self, parent_window):
