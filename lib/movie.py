@@ -39,11 +39,12 @@ class Movie:
 	country = None
 	director = None
 	genre = None
-	notes = ''
+	image = None
+	notes = None
 	number = None
 	o_site = None
 	o_title = None
-	image = None
+	plot = None
 	rating = 0  
 	rating = None
 	runtime = None
@@ -65,6 +66,7 @@ class Movie:
 	url = None
 	image_url = None
 	encode = 'iso-8859-1'
+	fields_to_fetch = []
 	
 	# functions that plugin should implement: {{{
 	def initialize(self):
@@ -103,6 +105,11 @@ class Movie:
 		pass
 	#}}}
 
+	def __getitem__(self, key):
+		return getattr(self,key)
+	def __setitem__(self, key, value):
+		setattr(self,key,value)
+	
 	def open_page(self,parent_window):
 		self.parent_window = parent_window
 		progress = Progress(parent_window,_("Fetching data"),_("Wait a moment"))
@@ -148,71 +155,53 @@ class Movie:
 			self.image = ""
 
 	def parse_movie(self, config):
+		from copy import deepcopy
+		fields = deepcopy(self.fields_to_fetch)
+
 		self.initialize()
-		if config.get('s_o_title'):
-			self.get_o_title()
-			self.o_title = gutils.clean(self.o_title)
-			self.o_title = gutils.gdecode(self.o_title, self.encode)
-			if self.o_title[:4] == 'The ':
-				self.o_title = self.o_title[4:] + ', The'
-		if config.get('s_title'):
-			self.get_title()
-			self.title = gutils.clean(self.title)
-			self.title = gutils.gdecode(self.title, self.encode)
-			if self.title[:4] == 'The ':
-				self.title = self.title[4:] + ', The'
-		if config.get('s_director'):
-			self.get_director()
-			self.director = gutils.clean(self.director)
-			self.director = gutils.gdecode(self.director, self.encode)
-		if config.get('s_plot'):
-			self.get_plot()
-			self.plot = gutils.clean(self.plot)
-			self.plot = gutils.gdecode(self.plot, self.encode)
-		if config.get('s_year'):
+
+		if 'year' in fields:
 			self.get_year()
 			self.year = gutils.clean(self.year)
-		if config.get('s_runtime'):
+			fields.pop(fields.index('year'))
+		if 'runtime' in fields:
 			self.get_runtime()
 			self.runtime = gutils.clean(self.runtime)
-		if config.get('s_genre'):
-			self.get_genre()
-			self.genre = gutils.clean(self.genre)
-			self.genre = gutils.gdecode(self.genre, self.encode)
-		if config.get('s_cast'):
+			fields.pop(fields.index('runtime'))
+		if 'rating' in fields:
+			self.get_rating()
+			fields.pop(fields.index('rating'))
+		if 'cast' in fields:
 			self.get_cast()
 			self.cast = gutils.clean(self.cast)
 			self.cast = gutils.gdecode(self.cast, self.encode)
-		if config.get('s_classification'):
-			self.get_classification()
-			self.classification = gutils.clean(self.classification)
-			self.classification = gutils.gdecode(self.classification, self.encode)
-		if config.get('s_studio'):
-			self.get_studio()
-			self.studio = gutils.clean(self.studio)
-			self.studio = gutils.gdecode(self.studio, self.encode)
-		if config.get('s_o_site'):
-			self.get_o_site()
-			self.o_site = gutils.clean(self.o_site)
-		if config.get('s_site'):
-			self.get_site()
-			self.site = gutils.clean(self.site)
-		if config.get('s_trailer'):
-			self.get_trailer()
-			self.trailer = gutils.clean(self.trailer)
-		if config.get('s_country'):
-			self.get_country()
-			self.country = gutils.clean(self.country)
-			self.country = gutils.gdecode(self.country, self.encode)
-		if config.get('s_rating'):
-			self.get_rating()
-		if config.get('s_notes'):
+			fields.pop(fields.index('cast'))
+		if 'plot' in fields:
+			self.get_plot()
+			self.plot = gutils.clean(self.plot)
+			self.plot = gutils.gdecode(self.plot, self.encode)
+			fields.pop(fields.index('plot'))
+		if 'notes' in fields:
 			self.get_notes()
 			self.notes = gutils.clean(self.notes)
 			self.notes = gutils.gdecode(self.notes, self.encode)
-		if config.get('s_image'):
+			fields.pop(fields.index('notes'))
+		if 'image' in fields:
 			self.get_image()
 			self.fetch_picture()
+			fields.pop(fields.index('image'))
+
+		for i in fields:
+			getattr(self, "get_%s" % i)()
+			self[i] = gutils.clean(self[i])
+			self[i] = gutils.gdecode(self[i], self.encode)
+		
+		if 'o_title' in self.fields_to_fetch and self.o_title is not None:
+			if self.o_title[:4] == 'The ':
+				self.o_title = self.o_title[4:] + ', The'
+		if 'title' in self.fields_to_fetch and self.title is not None:
+			if self.title[:4] == 'The ':
+				self.title = self.title[4:] + ', The'
 
 class SearchMovie:
 	page = None

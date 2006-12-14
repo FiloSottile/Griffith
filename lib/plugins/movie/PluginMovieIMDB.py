@@ -51,7 +51,7 @@ class Plugin(movie.Movie):
 		self.o_title = gutils.trim(self.page, '<strong class="title">', ' <small>')
 
 	def get_title(self):
-		self.title = self.o_title
+		self.title = gutils.trim(self.page, '<strong class="title">', ' <small>')
 
 	def get_director(self):
 		self.director = gutils.trim(self.page,'Directed by</b><br>', '<br>')
