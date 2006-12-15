@@ -154,7 +154,7 @@ class Movie:
 		else:
 			self.image = ""
 
-	def parse_movie(self, config):
+	def parse_movie(self):
 		from copy import deepcopy
 		fields = deepcopy(self.fields_to_fetch)
 
