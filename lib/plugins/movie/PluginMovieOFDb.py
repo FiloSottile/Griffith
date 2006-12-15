@@ -13,7 +13,7 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.5"
+plugin_version = "0.6"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -23,11 +23,7 @@ class Plugin(movie.Movie):
 
 	def get_image(self):
 		self.image_url = "http://www.ofdb.de/images/film/" + gutils.trim( self.page, "<img src=\"images/film/", "\"" )
-#		self.image_url = "http://www.ofdb.de/" + gutils.trim(self.page,"""<td><!-- Linke Spalte -->
-#	<table border="0" cellspacing="0" cellpadding="0">
-#	<tr valign="top">
-#	<td>
-#	  <img src=\"""","\"")
+		
 	def get_o_title(self):
 		self.o_title = string.capwords(gutils.trim(self.page,"""Originaltitel:</font></td>
             <td>&nbsp;&nbsp;</td>
@@ -82,7 +78,8 @@ class Plugin(movie.Movie):
 		self.cast = string.strip(gutils.strip_tags(self.cast))
 
 	def get_classification(self):
-		self.classification = gutils.trim(self.page,"MPAA</a>:</b> ",".<br>")
+		#self.classification = gutils.trim(self.page,"MPAA</a>:</b> ",".<br>")
+		# ofdb.de got no classification
 		self.classification = ""
 
 	def get_studio(self):
@@ -112,13 +109,18 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.original_url_search    = "http://www.ofdb.de/view.php?page=erwblaettern&Kat=Film&Land=-&Alter=-&Titel="
-		self.translated_url_search    = "http://www.ofdb.de/view.php?page=erwblaettern&Kat=Film&Land=-&Alter=-&Titel="
+		self.original_url_search    = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=Titel&SText="
+		self.translated_url_search    = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=Titel&SText="
+		# old url
+#		self.original_url_search    = "http://www.ofdb.de/view.php?page=erwblaettern&Kat=Film&Land=-&Alter=-&Titel="
+#		self.translated_url_search    = "http://www.ofdb.de/view.php?page=erwblaettern&Kat=Film&Land=-&Alter=-&Titel="
 		self.encode='iso-8859-1'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,"</font><br><br><br>", "<br></font></p>");
+		self.page = gutils.trim(self.page,"</font><br><br><br>", "<br><br><br>");
+		self.page = string.replace( self.page, '<font size="1">', '' )
+		self.page = string.replace( self.page, '</font>', '' )
 		return self.page
 
 	def get_searches(self):

@@ -159,7 +159,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.before(self.country," ")
 
 	def get_rating(self):
-		self.rating = 0
+		self.rating = "0"
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -170,43 +170,34 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,"align=center><B>Kinofilm 1", "<!-- PRINT-CONTENT-ENDE-->");
-		self.page = self.page.decode('iso-8859-1')
-		if (self.page<>''):
-			return self.page
+		self.page = gutils.trim(self.page,'</B></div><br>', "<!-- PRINT-CONTENT-ENDE-->");
+		tmp_page = self.page.decode('iso-8859-1')
 		self.url = "http://www.kino.de/megasuche.php4?typ=video&wort="
 		self.open_search(parent_window)
 		self.page = gutils.trim(self.page,"align=center><B>Video/DVD 1", "<!-- PRINT-CONTENT-ENDE-->");
-		self.page = self.page.decode('iso-8859-1')
+		self.page = tmp_page + self.page.decode('iso-8859-1')
 		return self.page
 
 	def get_searches(self):
-		elements_tmp = string.split(self.page,"kinofilm.php4")
-
-		if (elements_tmp[0]<>self.page):
-			elements = string.split(self.page,"headline3\"><A HREF=\"/kinofilm.php4?nr=")
-			if (elements[0]<>''):
-				elements[0] = ''
-				for element in elements:
-					if (element <> ''):
-						self.ids.append("K_" + gutils.before(element,"&"))
-						self.titles.append(gutils.strip_tags(
-							gutils.trim(element,">","</A>") + " " +
-							gutils.trim(element, "<span CLASS=\"standardsmall\"><br>", "</SPAN>") + " (" +
-							string.replace(
-								gutils.trim(element, "<span class=\"standardsmall\"><b>", "</span>"), "<b>", ", ")
+		elements1 = string.split(self.page,'headline3"><A HREF="/kinofilm.php4?nr=')
+		elements1[0] = ''
+		for element in elements1:
+			if element <> '':
+				self.ids.append("K_" + gutils.before(element,'&'))
+				self.titles.append(gutils.strip_tags(
+					gutils.trim(element,">","</A>") + " " +
+					gutils.trim(element, "<span CLASS=\"standardsmall\"><br>", "</SPAN>") + " (" +
+					string.replace(
+						gutils.trim(element, "<span class=\"standardsmall\"><b>", "</span>"), "<b>", ", ")
 							+ ")"))
-		else:
-			elements_tmp2 = string.split(self.page, "videofilm.php4")
-			if (elements_tmp2[0]<>self.page):
-				elements = string.split(self.page,"headline3\"><A HREF=\"/videofilm.php4?nr=")
-				if (elements[0]<>''):
-					elements[0] = ''
-					for element in elements:
-						if (element <> ''):
-							self.ids.append("V_" + gutils.before(element,"&"))
-							self.titles.append(gutils.strip_tags(
-								gutils.trim(element,">","</A>") + " " +
-								gutils.trim(element, "<span CLASS=\"standardsmall\"><br>", "</SPAN>") + " (" +
-								string.replace(
-									gutils.trim(element, "<span class=\"standardsmall\"><b>", "</span>"), "<b>", ", ") + ")"))
+							
+		elements2 = string.split(self.page,'headline3"><A HREF="/videofilm.php4?nr=')
+		elements2[0] = ''
+		for element in elements2:
+			if element <> '':
+				self.ids.append("V_" + gutils.before(element,'&'))
+				self.titles.append(gutils.strip_tags( 
+					gutils.trim(element,">","</A>") + " " +
+					gutils.trim(element, '<span CLASS="standardsmall"><br>', '</SPAN>') + " (" +
+					string.replace(
+						gutils.trim(element, '<span class="standardsmall"><br><b>', "</span>"), "<b>", ", ") + ")"))
