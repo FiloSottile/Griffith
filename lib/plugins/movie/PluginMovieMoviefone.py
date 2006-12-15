@@ -15,7 +15,7 @@ plugin_description = "A Service of America Online"
 plugin_url = "movies.aol.com"
 plugin_language = _("English")
 plugin_author = "Vasco Nunes"
-plugin_version = "0.2"
+plugin_version = "0.3"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
