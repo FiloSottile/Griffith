@@ -27,7 +27,7 @@ class Plugin(movie.Movie):
 		self.image_url = "http://cdn.channel.aol.com/amgvideo/dvd/cov150/" + self.image_url + ".jpg"
 
 	def get_o_title(self):
-		self.o_title = string.capwords(gutils.trim(self.page,"<title>Moviefone: ","</title>") )
+		self.o_title = string.capwords(gutils.trim(self.page,"<title>"," - Moviefone</title>") )
 
 	def get_title(self):
 		self.title = self.o_title
@@ -74,12 +74,12 @@ class Plugin(movie.Movie):
 		self.country = ""
 
 	def get_rating(self):
-		self.rating = ""
+		self.rating = "0"
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.original_url_search	= "http://movies.aol.com/search/dvdresults.adp?query=";
-		self.translated_url_search	= "http://movies.aol.com/search/dvdresults.adp?query=";
+		self.original_url_search	= "http://movies.aol.com/search/encyresults.adp?query=";
+		self.translated_url_search	= "http://movies.aol.com/search/encyresults.adp?query=";
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -87,15 +87,14 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def sub_search(self):
-		self.page = gutils.trim(self.page,"--start LT_MultiColumn_1.0 module-->", """<div class="pagnationleft">Results   """)
+		self.page = gutils.trim(self.page,"--start LT_MultiColumn_1.0 module-->", 'pagnationleft">Results   ')
 
 	def get_searches(self):
-		elements = string.split(self.page,"</br>")
-		self.number_results = elements[-1]
+		elements = string.split(self.page,'class="dvdtitle">')
+		elements[0] = ''
 
-		if (elements[0]<>''):
-			for element in elements:
-				self.ids.append(gutils.trim(element,"26mid%3d","\">"))
-				self.titles.append(gutils.convert_entities(gutils.trim(element,(gutils.trim(element,"26mid%3d","\">"))+"\">","""</a></span>""")))	
-		else:
-			self.number_results = 0
+		for element in elements:
+			element = gutils.trim( element, '<a href="', '<br/>' )
+			if element != '':
+				self.ids.append( gutils.after( gutils.trim( element, 'movie/','/main') , '/' ) )
+				self.titles.append( string.replace( gutils.after( element, '">' ), '</a></span>', '' ) )
