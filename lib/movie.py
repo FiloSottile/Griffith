@@ -45,7 +45,6 @@ class Movie:
 	o_site = None
 	o_title = None
 	plot = None
-	rating = 0  
 	rating = None
 	runtime = None
 	site = None
@@ -110,22 +109,29 @@ class Movie:
 	def __setitem__(self, key, value):
 		setattr(self,key,value)
 	
-	def open_page(self,parent_window):
+	def open_page(self, parent_window, url=None):
+		if url is None:
+			url_to_fetch = self.url
+		else:
+			url_to_fetch = url
 		self.parent_window = parent_window
 		progress = Progress(parent_window,_("Fetching data"),_("Wait a moment"))
-		retriever = Retriever(self.url,parent_window,progress)
+		retriever = Retriever(url_to_fetch, parent_window,progress)
 		retriever.start()
 		while retriever.isAlive():
 			progress.pulse()
 			if progress.status:
 				retriever.suspend()
 			while gtk.events_pending():
-						gtk.main_iteration()
+				gtk.main_iteration()
 		progress.close()
 		try:
-			self.page = file (retriever.html[0]).read()
+			data = file (retriever.html[0]).read()
 		except IOError:
 			pass
+		if url is None:
+			self.page = data
+		return data
 		urlcleanup()
 
 	def fetch_picture(self):
@@ -142,7 +148,7 @@ class Movie:
 					if progress.status:
 						retriever.suspend()
 					while gtk.events_pending():
-								gtk.main_iteration()
+						gtk.main_iteration()
 				progress.close()
 				urlcleanup()
 			except:
@@ -163,6 +169,8 @@ class Movie:
 		if 'year' in fields:
 			self.get_year()
 			self.year = gutils.clean(self.year)
+			if self.year is str:
+				self.year = int(self.year)
 			fields.pop(fields.index('year'))
 		if 'runtime' in fields:
 			self.get_runtime()
@@ -221,7 +229,11 @@ class SearchMovie:
 	def open_search(self,parent_window):
 		self.titles = [""]
 		self.ids = [""]
-		self.url=string.replace(self.url+self.title,' ','%20')
+		if self.url.find('%s') > 0:
+			self.url = self.url % self.title
+			self.url = string.replace(self.url, ' ', '%20')
+		else:
+			self.url = string.replace(self.url+self.title,' ','%20')
 		progress = Progress(parent_window,_("Searching"),_("Wait a moment"))
 		try:
 			url = self.url.encode(self.encode)
