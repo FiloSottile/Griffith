@@ -109,14 +109,15 @@ class Movie:
 	def __setitem__(self, key, value):
 		setattr(self,key,value)
 	
-	def open_page(self, parent_window, url=None):
+	def open_page(self, parent_window=None, url=None):
 		if url is None:
 			url_to_fetch = self.url
 		else:
 			url_to_fetch = url
-		self.parent_window = parent_window
-		progress = Progress(parent_window,_("Fetching data"),_("Wait a moment"))
-		retriever = Retriever(url_to_fetch, parent_window,progress)
+		if parent_window is not None:
+			self.parent_window = parent_window
+		progress = Progress(self.parent_window,_("Fetching data"),_("Wait a moment"))
+		retriever = Retriever(url_to_fetch, self.parent_window,progress)
 		retriever.start()
 		while retriever.isAlive():
 			progress.pulse()

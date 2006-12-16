@@ -42,7 +42,7 @@ class Plugin(movie.Movie):
 
 	def initialize(self):
 		self.page = gutils.trim(self.page, '<h1 class="mp0">', '</div>\n</div>')
-		self.cast_page = self.open_page(self.parent_window, url="http://film.wp.pl/id,%s,film_obsada_i_tworcy.html" % self.movie_id)
+		self.cast_page = self.open_page(url="http://film.wp.pl/id,%s,film_obsada_i_tworcy.html" % self.movie_id)
 		self.cast_page = gutils.trim(self.cast_page, '<h1 class="mp0">', "</div>\n\n\t</div>\r\n")
 
 	def get_image(self):
