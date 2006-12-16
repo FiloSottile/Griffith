@@ -169,16 +169,24 @@ class Movie:
 
 		if 'year' in fields:
 			self.get_year()
-			self.year = gutils.clean(self.year)
-			if self.year is str:
-				self.year = int(self.year)
+			try:	# in case it's int
+				self.year = gutils.clean(self.year)
+			except:
+				pass
 			fields.pop(fields.index('year'))
 		if 'runtime' in fields:
 			self.get_runtime()
-			self.runtime = gutils.clean(self.runtime)
+			try:
+				self.runtime = gutils.clean(self.runtime)
+			except:
+				pass
 			fields.pop(fields.index('runtime'))
 		if 'rating' in fields:
 			self.get_rating()
+			try:
+				self.rating = gutils.clean(self.rating)
+			except:
+				pass
 			fields.pop(fields.index('rating'))
 		if 'cast' in fields:
 			self.get_cast()

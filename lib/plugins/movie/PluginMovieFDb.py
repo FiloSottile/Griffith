@@ -30,9 +30,9 @@ plugin_name		= 'FDb'
 plugin_description	= 'Internetowa baza filmowa'
 plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
-plugin_author		= 'Piotr Ozarowski'
+plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.4'
+plugin_version		= '1.5'
 
 class Plugin(movie.Movie):
 	def __init__(self, movie_id):
@@ -50,12 +50,17 @@ class Plugin(movie.Movie):
 		self.image_url = "http://fdb.pl%s" % self.image_url
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page,"<div class=\"movieOtherTitle\">\n          ","\n")
+		self.o_title = gutils.trim(self.page, '<h2>', '</h2>')
 
-	def get_title(self):
-		self.title = gutils.trim(self.page,'<div class="movieTitle" >','  ')
-		if self.o_title == '':
-			self.o_title = gutils.gdecode(self.title, self.encode)
+	def get_title(self, extra=False):
+		data = gutils.trim(self.page,'<title>', '</title>')
+		tmp = string.find(data, '(')
+		if tmp != -1:
+			data = data[:tmp]
+		if extra is False:
+			self.title = data
+		else:
+			return data
 
 	def get_director(self):
 		self.director = ''
@@ -118,8 +123,8 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.encode = 'utf-8'
-		self.original_url_search	= 'http://fdb.pl/szukaj.php?s='
-		self.translated_url_search	= 'http://fdb.pl/szukaj.php?s='
+		self.original_url_search	= 'http://fdb.pl/szukaj.php?t=f&s='
+		self.translated_url_search	= 'http://fdb.pl/szukaj.php?t=f&s='
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -139,9 +144,9 @@ class SearchPlugin(movie.SearchMovie):
 			elements = string.split(self.page,'<div class="searchItem">')
 			if len(elements)>0:
 				for element in elements:
-					self.ids.append(gutils.trim(element,"<a href=\"/","\""))
+					self.ids.append(gutils.trim(element, '<a href="', '"'))
 					element = gutils.strip_tags(
-								gutils.trim(element,"\">","</div>"))
+						gutils.trim(element, '">', '</div>'))
 					element = element.replace("\n", '')
 					element = element.replace('   ', '')
 					element = element.replace('aka ', ' aka ')
