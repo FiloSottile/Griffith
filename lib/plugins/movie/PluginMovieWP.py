@@ -1,8 +1,8 @@
-# -*- coding: iso-8859-2 -*-
+# -*- coding: utf-8 -*-
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr Ozarowski
+# Copyright (c) 2005-2006 Piotr O¿arowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,9 +30,9 @@ plugin_name         = 'Wirtualna Polska'
 plugin_description  = 'Serwis filmowy Wirtualnej Polski'
 plugin_url          = 'www.film.wp.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr Ozarowski'
+plugin_author       = 'Piotr O¿arowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.0'
+plugin_version      = '2.1'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -49,13 +49,21 @@ class Plugin(movie.Movie):
 		self.image_url = gutils.trim(self.page, '<img src="', '" name="o')
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, '<b>Tytu³ orygina³u:</b>', "\t\t</div><div")
+		self.o_title = gutils.trim(self.page, '<b>Tytu\xB3 orygina\xB3u:</b>', "\t\t</div><div")
+		self.o_title = gutils.clean(self.o_title)
+		if self.o_title == '':
+			self.o_title = gutils.trim(self.page, '</h1>', '<div')
 
 	def get_title(self):
-		self.title = gutils.trim(self.page, '<b>Tytu³ polski:</b>', "\t\t</div><div")
+		self.title = gutils.trim(self.page, '<b>Tytu\xB3 polski:</b>', "\t\t</div><div")
+		if self.title == '':
+			self.title = gutils.before(self.page, '</h1>')
+			pos = string.find(self.title, '(')
+			if pos > -1:
+				self.title = self.title[:pos]
 
 	def get_director(self):
-		self.director = gutils.trim(self.cast_page, '>re¿yser	</div>', '</div>')
+		self.director = gutils.trim(self.cast_page, '>re\xBFyser	</div>', '</div>')
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page, ' />', '\t\t<div class="clr">')
@@ -63,11 +71,15 @@ class Plugin(movie.Movie):
 
 	def get_year(self):
 		self.year = gutils.trim(self.page, '<b>Rok produkcji:</b>', "\t\t</div><div")
-		self.year = re.findall(r'\d+', self.year)[0]
+		year = re.findall(r'\d+', self.year)
+		if len(year)>0:
+			self.year = year[0]
 
 	def get_runtime(self):
 		self.runtime = gutils.trim(self.page, '<b>Czas trwania:</b>', 'min')
-		self.runtime = re.findall(r'\d+', self.runtime)[0]
+		runtime =  re.findall(r'\d+', self.runtime)
+		if len(runtime)>0:
+			self.runtime = runtime
 
 	def get_genre(self):
 		self.genre = gutils.trim(self.page, '<b>Gatunek:</b>', "\t\t</div><div")
@@ -83,11 +95,11 @@ class Plugin(movie.Movie):
 		self.cast = string.replace(self.cast,  "%s\n" % _(' as '), "\n")
 
 	def get_classification(self):
-		self.classification = gutils.trim(self.page, '<b>Przedzia³ wiekowy:</b>', "\t\t</div><div")
+		self.classification = gutils.trim(self.page, '<b>Przedzia\xB3 wiekowy:</b>', "\t\t</div><div")
 		self.classification = gutils.trim(self.classification, 'od ', ' ')
 
 	def get_studio(self):
-		self.studio = gutils.trim(self.page, '<b>Wytówrnia:</b>', "\t\t</div><div")
+		self.studio = gutils.trim(self.page, '<b>Wytw\xF3rnia:</b>', "\t\t</div><div")
 
 	def get_o_site(self):
 		self.o_site = ''
@@ -130,4 +142,3 @@ class SearchPlugin(movie.SearchMovie):
 				self.titles.append(tmp_title)
 		else:
 			self.number_results = 0
-# vim: fenc=latin2
