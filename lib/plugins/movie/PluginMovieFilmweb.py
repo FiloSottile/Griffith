@@ -1,8 +1,8 @@
-# -*- coding: iso-8859-2 -*-
+# -*- coding: utf-8 -*-
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005, 2006 Piotr Ozarowski
+# Copyright (c) 2005, 2006 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
-import gutils
-import movie,string
+import gutils, movie
+import re,string
 
 plugin_name		= 'Filmweb'
 plugin_description	= 'Web pelen filmow'
 plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
-plugin_author		= 'Piotr Ozarowski'
+plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
 plugin_version		= '1.8'
 
@@ -37,39 +37,34 @@ class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = 'filmweb'
 		self.url      = str(id)
-		self.encode   = 'iso-8859-2'
+		self.encode   = 'utf-8'
 
 	def get_image(self):
 		if string.find(self.page,'http://gfx.filmweb.pl/gf/bf.gif') > -1:
 			self.image_url = ''
 		else:
-			self.image_url = gutils.trim(self.page,' class="k1"','<br />')
-			self.image_url = gutils.after(self.image_url,'<img  src="')
-			self.image_url = gutils.before(self.image_url,'" alt=')
+			self.image_url = gutils.trim(self.page, '<div id="filmPhoto">', '</div')
+			self.image_url = gutils.trim(self.image_url, 'src="', '"')
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, '<span class="styt">', '</span>')
-		tmp = len(self.o_title) - 1
-		if self.o_title[tmp:] == ' ':
-			self.o_title = self.o_title[:tmp]
+		self.o_title = gutils.trim(self.page, '<div id="filmTitle">', '<span')
 		self.o_title = string.replace(self.o_title, "\t", '')
 		self.o_title = string.replace(self.o_title, "\n", '')
 		if string.find(self.o_title, '(') > -1:
 			self.o_title = gutils.before(self.o_title, '(')
 
 	def get_title(self):
-		self.title = gutils.trim(self.page,"<div class=\"tyt\">","<span")
+		self.title = gutils.trim(self.page, '<span class="otherTitle">', '<span')
 		self.title = string.replace(self.title, "\t",'')
 		self.title = string.replace(self.title, "\n",'')
-		if self.o_title == '':
-			self.o_title = gutils.gdecode(self.title, self.encode)
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"yseria\t\t\t\t","\tscenariusz\t")
+		self.director = re.findall(r'yseria\t+(.*)\t+scenariusz', self.page)
+		if len(self.director)>0:
+			self.director = self.director[0]
 		self.director = string.replace(self.director, "\t",'')
-		self.director = string.replace(self.director, "\n",'')
 		self.director = string.replace(self.director, ",",", ")
-		self.director = string.replace(self.director, ",  (wiĂÂcej&#160;...)",'')
+		self.director = string.replace(self.director, ",  (wi\xeacej&#160;...)",'')
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")
@@ -78,7 +73,9 @@ class Plugin(movie.Movie):
 		self.plot = string.replace(self.plot, "\t",'')
 		self.plot = gutils.strip_tags(self.plot)
 		if url != '':
-			self.plot = self.plot[:len(self.plot)-1] + ": " + url
+			#self.plot = self.plot[:len(self.plot)-1] + ": " + url
+			plot_page = self.open_page(url=url)
+			self.plot = gutils.trim(plot_page, '<div class="filmContent">', '</li>')
 
 	def get_year(self):
 		self.year = gutils.trim(self.page, "\tdata premiery:", '</td>')
@@ -89,20 +86,17 @@ class Plugin(movie.Movie):
 		self.runtime = gutils.trim(self.page,"\tczas trwania: ","\n")
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page,"\tgatunek: ","\t")
+		self.genre = gutils.trim(self.page,"\tgatunek:", '</td>')
 		self.genre = string.replace(self.genre, "\t",'')
 		self.genre = string.replace(self.genre, "\n",'')
 
 	def get_cast(self):
-		self.cast = gutils.trim(self.page,"alt=\"obsada\" />","</table>")
-		self.cast = string.replace(self.cast,":&#160;", _(" as "))
-		self.cast = string.replace(self.cast,_(" as ")+"</td>",_(" as "))
+		self.cast = "<%s" % gutils.trim(self.page, '/ob.gif"',"<br/>\n\t")
 		self.cast = string.replace(self.cast, "\n",'')
-		self.cast = string.replace(self.cast,"</td>","\n")
-		self.cast = string.replace(self.cast,"valign=\"top\"", "\n")
 		self.cast = string.replace(self.cast, "\t",'')
+		self.cast = string.replace(self.cast, '<div class="filmActor">', "\n")
+		self.cast = string.replace(self.cast, ":", _(" as "))
 		self.cast = gutils.strip_tags(self.cast)
-		self.cast = string.replace(self.cast, _(" as ")+"\n","\n")
 
 	def get_classification(self):
 		self.classification = gutils.trim(self.page,"\tod lat: ","\t")
@@ -122,7 +116,7 @@ class Plugin(movie.Movie):
 		self.trailer = ''
 
 	def get_country(self):
-		self.country = gutils.trim(self.page,"\tprodukcja: ","\t")
+		self.country = gutils.trim(self.page,"\tprodukcja:", '</a>')
 		self.country = string.replace(self.country, "\t",'')
 
 	def get_rating(self):
@@ -136,7 +130,7 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.encode='iso-8859-2'
+		self.encode='utf-8'
 		self.original_url_search   = "http://www.filmweb.pl/Find?category=1&query="
 		self.translated_url_search = "http://www.filmweb.pl/Find?category=1&query="
 
@@ -168,4 +162,3 @@ class SearchPlugin(movie.SearchMovie):
 					self.titles.append(element)
 			else:
 				self.number_results = 0
-# vim: encoding=iso-8859-2

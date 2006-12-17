@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr O¿arowski
+# Copyright (c) 2005-2006 Piotr OÅ¼arowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ plugin_name         = 'Wirtualna Polska'
 plugin_description  = 'Serwis filmowy Wirtualnej Polski'
 plugin_url          = 'www.film.wp.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr O¿arowski'
+plugin_author       = 'Piotr OÅ¼arowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
 plugin_version      = '2.1'
 
