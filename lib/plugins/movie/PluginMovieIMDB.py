@@ -32,11 +32,11 @@ plugin_url		= 'www.imdb.com'
 plugin_language		= _('English')
 plugin_author		= 'Vasco Nunes'
 plugin_author_email	= '<vasco.m.nunes@gmail.com>'
-plugin_version		= '0.10'
+plugin_version		= '1.0'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode='iso-8859-1'
+		self.encode = 'utf-8'
 		self.movie_id = id
 		self.url = "http://imdb.com/title/tt%s" % str(self.movie_id)
 
@@ -113,7 +113,7 @@ class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.original_url_search	= 'http://imdb.com/find?more=tt;q='
 		self.translated_url_search	= 'http://imdb.com/find?more=tt;q='
-		self.encode = 'iso-8859-1'
+		self.encode = 'utf-8'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
