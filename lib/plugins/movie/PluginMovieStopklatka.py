@@ -1,8 +1,8 @@
-# -*- coding: iso-8859-2 -*-
+# -*- coding: utf-8 -*-
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr O?arowski
+# Copyright (c) 2005-2006 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,15 +29,15 @@ plugin_name         = 'Stopklatka'
 plugin_description  = 'Internetowy Serwis Filmowy'
 plugin_url          = 'www.stopklatka.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr Ozarowski'
+plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '1.6'
+plugin_version      = '1.7'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = id
 		self.url = "http://www.stopklatka.pl/film/film.asp?fi=%s" % str(self.movie_id)
-		self.encode = 'iso-8859-2'
+		self.encode = 'iso-8859-2' # with some cp-1250 data (sic!)
 
 	def initialize(self):
 		self.page = self.page.replace('\x9c','ś')
@@ -49,14 +49,18 @@ class Plugin(movie.Movie):
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page,"<h2>(",")</h2>")
+		if self.o_title == '':
+			self.o_title = self.get_title(True)
 
-	def get_title(self):
-		self.title = gutils.trim(self.page,"<i><h1>","</h1>")
-		if self.o_title == "":
-			self.o_title = self.title
+	def get_title(self, ret=False):
+		data = gutils.trim(self.page,"<i><h1>","</h1>")
+		if ret is True:
+			return data
+		else:
+			self.title = data
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,">reżyseria:<","</font>")
+		self.director = gutils.trim(self.page,">re\xbfyseria:<","</font>")
 		self.director = gutils.after(self.director,"<b>")
 		self.director = gutils.strip_tags(self.director)
 
@@ -81,7 +85,7 @@ class Plugin(movie.Movie):
 		self.cast = gutils.after(self.cast,"<b>")
 		self.cast = string.replace(self.cast,", ", "\n")
 		self.cast = string.strip(gutils.strip_tags(self.cast))
-		pos = string.find(self.with,"Więcej &gt;")
+		pos = string.find(self.cast, 'Więcej &gt;')
 		if pos > 0:
 			self.cast = self.cast[0:pos]
 
@@ -137,4 +141,3 @@ class SearchPlugin(movie.SearchMovie):
 				self.titles.append(gutils.convert_entities(gutils.trim(element,"<b>","</b></a>")))
 		else:
 			self.number_results = 0
-# vim: encoding=iso-8859-2
