@@ -1,8 +1,8 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr OĹźarowski
+# Copyright (c) 2005-2006 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,9 +30,9 @@ plugin_name         = 'AnimeDB'
 plugin_description  = 'Anime DataBase'
 plugin_url          = 'www.anidb.info'
 plugin_language     = _('English')
-plugin_author       = 'Piotr Ozarowski'
+plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.1'
+plugin_version      = '2.3'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -47,9 +47,9 @@ class Plugin(movie.Movie):
 	def initialize(self):
 		self.page = decompress(self.page)
 		if self.movie_id == 'anidb':
-			self.movie_id = gutils.trim(self.page, 'animedb.pl?show=addgenren&aid=', '&')
+			self.movie_id = gutils.trim(self.page, 'animedb.pl?show=addgenren&amp;aid=', '&')
 			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
-		self.page = gutils.trim(self.page, '<h1>Show Anime - ',"<table border=0>\n\t<tr>")
+		self.page = gutils.trim(self.page, 'id="layout-content">','class="g_section anime_episodes">')
 
 	def get_image(self):
 		match = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page)
@@ -59,37 +59,31 @@ class Plugin(movie.Movie):
 			self.image_url = ''
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, '<td> Title: </td>', '</td>')
-		self.o_title = gutils.after(self.o_title, '<td> ')
+		self.o_title = gutils.trim(self.page, '"field">Title', '</td>')
+		self.o_title = gutils.after(self.o_title, '"value">')
 		self.o_title = re.sub(' \(\d*\)', '', self.o_title)
 
 	def get_title(self):
-		self.title = gutils.trim(self.page,'<td> English: </td>', ' </td>')
-		self.title = gutils.after(self.title, '<td> ')
-		if self.title == '':
-			self.title = gutils.gdecode(self.o_title, self.encode)
+		self.title = gutils.trim(self.page,'"field">English', '</td>')
 
 	def get_director(self):
 		self.director = ''
 
 	def get_plot(self):
-		self.plot = gutils.trim(self.page,"<tr>\n\t<td>\n\t    ","\n\t</td>")
-		self.plot = string.replace(self.plot,"<br />","\n")
-		self.plot = gutils.strip_tags(self.plot)
+		self.plot = gutils.trim(self.page, 'class="g_description">', '</p>')
 
 	def get_year(self):
-		self.year = gutils.trim(self.page, '<td> Year: </td>', '</td>')
-		self.year = gutils.after(self.year, '<td> ')[:4]
+		self.year = gutils.trim(self.page, '"field">Year', '</td>')
+		self.year = gutils.after(self.year, '"value">')[:4]
 
 	def get_runtime(self):
 		self.runtime = ''
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page, '>Genre:<', '[similar]</a> </td>')
-		self.genre = gutils.after(self.genre, '<td> ')
+		self.genre = gutils.trim(self.page, '"field">Genre', '</td>')
 		self.genre = gutils.strip_tags(self.genre)
-		if self.genre[len(self.genre)-3:] == ' - ':
-			self.genre =  self.genre[:-3]
+		if self.genre[-11] == ' -[similar]':
+			self.genre =  self.genre[:-11]
 		elif self.genre == '-':
 			self.genre = ''
 
@@ -100,8 +94,7 @@ class Plugin(movie.Movie):
 		self.classification = ''
 
 	def get_studio(self):
-		self.studio = gutils.trim(self.page, '<td> Companies: </td>', ' </td>')
-		self.studio = gutils.after(self.studio, '<td> ')
+		self.studio = gutils.trim(self.page, '"field">Producers', '</td>')
 		self.studio = gutils.strip_tags(self.studio)
 		if self.studio[:2] == " (":
 			self.studio = self.studio[2:]
@@ -109,9 +102,8 @@ class Plugin(movie.Movie):
 				self.studio = self.studio[:len(self.studio)-1]
 
 	def get_o_site(self):
-		self.o_site = gutils.trim(self.page, '<td> URL: </td>', ' </td>')
-		self.o_site = gutils.after(self.o_site, 'href="')
-		self.o_site = gutils.before(self.o_site, '" ')
+		self.o_site = gutils.trim(self.page, '"field">URL', '</td>')
+		self.o_site = gutils.trim(self.o_site, 'href="', '"')
 
 	def get_site(self):
 		self.site = self.url
@@ -123,29 +115,26 @@ class Plugin(movie.Movie):
 		self.country = ''
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page, '<td> Rating: </td>', ' </td>')
-		self.rating = gutils.after(self.rating, '<td> ')
-		self.rating = gutils.before(self.rating,' ')
-		if self.rating != '':
-			self.rating = str( float(self.rating) )
+		self.rating = gutils.trim(self.page, '"field">Rating', '</td>')
+
 	def get_notes(self):
 		self.notes = ''
 		# ...type
-		atype = gutils.trim(self.page, '<td> Type: </td>',' </td>')
-		atype = gutils.after(atype, '<td> ')
+		atype = gutils.trim(self.page, '"field">Type', '</td>')
+		atype = gutils.clean(atype)
 		if atype != '':
 			self.notes += "Type: %s\n" % atype
 		# ...number of episodes
-		episodes = gutils.trim(self.page, '<td> Episodes: </td>', ' </td>')
-		episodes = gutils.after(episodes, '<td> ')
+		episodes = gutils.trim(self.page, '"field">Episodes', '</td>')
+		episodes = gutils.clean(episodes)
 		if episodes != '':
 			self.notes += "Episodes: %s\n" % episodes
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.encode = "iso-8859-1"
-		self.original_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&adb.search='
-		self.translated_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&adb.search='
+		self.encode = 'iso-8859-1'
+		self.original_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+		self.translated_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -155,7 +144,7 @@ class SearchPlugin(movie.SearchMovie):
 		if tmp == -1:		# already a movie page
 			self.page = ''
 		else:			# multiple matches
-			self.page = gutils.trim(self.page, '>hide synonyms</a><hr>', '<hr>');
+			self.page = gutils.trim(self.page, 'class="anime_list"', '</table>');
 			self.page = gutils.after(self.page, '</tr>');
 
 		return self.page
@@ -166,13 +155,13 @@ class SearchPlugin(movie.SearchMovie):
 			self.ids.append(self.url)
 			self.titles.append(self.title)
 		else:			# multiple matches
-			elements = string.split(self.page,"<tr>")
+			elements = string.split(self.page,"</tr>")
 			self.number_results = elements[-1]
 
 			if len(elements[0]):
 				for element in elements:
 					element = gutils.trim(element, '<td', '</td>')
-					self.ids.append(gutils.trim(element, 'animedb.pl?show=anime&aid=','"'))
+					self.ids.append(gutils.trim(element, '&amp;aid=','"'))
 					element = gutils.after(element, '">')
 					element = gutils.strip_tags(element)
 					self.titles.append(element)
