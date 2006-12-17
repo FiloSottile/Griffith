@@ -1,8 +1,8 @@
-# -*- coding: iso-8859-2 -*-
+# -*- coding: utf-8 -*-
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr O?arowski
+# Copyright (c) 2005-2006 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,56 +31,56 @@ plugin_url          = 'anime.tanuki.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ozarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '1.2'
+plugin_version      = '1.3'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		if str(id).find("http://") != -1:
-			self.movie_id = "TA"
+		if str(id).find('http://') != -1:
+			self.movie_id = 'TA'
 			self.url = str(id)
 		else:
 			self.movie_id = str(id)
-			self.url = "http://anime.tanuki.pl/strony/anime/"+str(id)
+			self.url = "http://anime.tanuki.pl/strony/anime/%s" % str(id)
 		self.encode='UTF-8'
 	
 	def initialize(self):
 		if self.movie_id == 'TA':
-			self.movie_id = gutils.trim(self.page, "\"><a href=\"/strony/anime/", "/oceny")
-			self.url = "http://anime.tanuki.pl/strony/anime/" + self.movie_id
+			self.movie_id = gutils.trim(self.page, '"><a href="/strony/anime/', '/oceny')
+			self.url = "http://anime.tanuki.pl/strony/anime/%s" % self.movie_id
 
 	def get_image(self):
-		self.image_url = gutils.trim(self.page,"<img src=\"/screens/","<br />")
-		self.image_url = gutils.before(self.image_url,"\"")
+		self.image_url = gutils.trim(self.page, '<img src="/screens/', '<br />')
+		self.image_url = gutils.before(self.image_url, '"')
 		self.image_url = "http://anime.tanuki.pl/screens/%s" % self.image_url
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, "<h3 class=\"animename\"", "</h3>")
-		self.o_title = gutils.after(self.o_title, ">")
+		self.o_title = gutils.trim(self.page, '<h3 class="animename"', '</h3>')
+		self.o_title = gutils.after(self.o_title, '>')
 
 	def get_title(self):
 		self.title = self.o_title
 
 	def get_director(self):
-		self.director = gutils.trim(self.page, "<th scope=\"row\">Re?yser:</th>\n\t<td>","</td>")
+		self.director = gutils.trim(self.page, "<th scope=\"row\">Reżyser:</th>\n\t<td>", '</td>')
 
 	def get_plot(self):
-		self.plot = gutils.trim(self.page, "<div class=\"copycat\">\n", "</div>")
+		self.plot = gutils.trim(self.page, "<div class=\"copycat\">\n", '</div>')
 
 	def get_year(self):
-		self.year = gutils.trim(self.page,"<div class=\"sitem\">Rok wydania: <","</a>")
-		self.year = gutils.after(self.year,">")
+		self.year = gutils.trim(self.page,'<div class=\"sitem\">Rok wydania: <', '</a>')
+		self.year = gutils.after(self.year, '>')
 
 	def get_runtime(self):
-		self.runtime = gutils.trim(self.page,"<div class=\"sitem\">Czas trwania: <b>\n\t\t","\n</b>")
-		if self.runtime.find("?") != -1:
+		self.runtime = gutils.trim(self.page, "<div class=\"sitem\">Czas trwania: <b>\n\t\t", '\n</b>')
+		if self.runtime.find('?') != -1:
 			self.runtime = ''
 		else:
-			self.runtime = gutils.after(self.runtime, "×")
-			self.runtime = gutils.before(self.runtime, " min")
+			self.runtime = gutils.after(self.runtime, '×')
+			self.runtime = gutils.before(self.runtime, ' min')
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page,"<div class=\"sitem\">Gatunki:\n\t\t","</div>")
-		self.genre = string.replace(self.genre, "\t\t"," ")
+		self.genre = gutils.trim(self.page, "<div class=\"sitem\">Gatunki:\n\t\t", '</div>')
+		self.genre = string.replace(self.genre, "\t\t", ' ')
 
 	def get_cast(self):
 		self.cast = ''
@@ -104,50 +104,47 @@ class Plugin(movie.Movie):
 		self.country = ''
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page," alt=\"Ocena ","/10")
+		self.rating = gutils.trim(self.page, ' alt="Ocena ', '/10')
 
 	def get_notes(self):
 		self.notes = "Czas trwania: " + gutils.trim(self.page,"<div class=\"sitem\">Czas trwania: <b>\n\t\t","\n</b>") + '\n'
 
 		t = self.page.find("<tr><th scope=\"row\">Autor:</th>")
 		if t != -1:
-			self.notes += "Autor: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
+			self.notes += "Autor: %s\n" % gutils.trim(self.page[t:], "<td>\n", "\t</td>")
 
 		t = self.page.find("<th scope=\"row\">Projekt:</th>")
 		if t != -1:
-			self.notes += "Projekt: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
+			self.notes += "Projekt: %s\n" % gutils.trim(self.page[t:], "<td>\n", "\t</td>")
 
 		t = self.page.find("<tr><th scope=\"row\">Scenariusz:</th>")
 		if t != -1:
-			self.notes += "Scenariusz: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
+			self.notes += "Scenariusz: %s\n" % gutils.trim(self.page[t:], "<td>\n", "\t</td>")
 
 		t = self.page.find("<th scope=\"row\">Muzyka:</th>")
 		if t != -1:
-			self.notes += "Muzyka: " + gutils.trim(self.page[t:], "<td>\n", "\t</td>") + '\n'
+			self.notes += "Muzyka: %s\n" % gutils.trim(self.page[t:], "<td>\n", "\t</td>")
 
-		self.notes += '\n' + gutils.trim(self.page,"<p class=\"dwazdania\">\n\t\t", "\n</p>")
+		self.notes += "\n%s"  % gutils.trim(self.page,"<p class=\"dwazdania\">\n\t\t", "\n</p>")
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.encode='UTF-8'
-		self.original_url_search   = "http://anime.tanuki.pl/strony/anime/lista/title/1/?&title="
-		self.translated_url_search = "http://anime.tanuki.pl/strony/anime/lista/title/1/?&title="
+		self.original_url_search   = 'http://anime.tanuki.pl/strony/anime/lista/title/1/?&title='
+		self.translated_url_search = 'http://anime.tanuki.pl/strony/anime/lista/title/1/?&title='
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.sub_search()
-		return self.page
-
-	def sub_search(self):
-		tmp = string.find(self.page,"<table class=\"animelist strippedlist\"")
+		tmp = string.find(self.page, "<table class=\"animelist strippedlist\"")
 		if tmp == -1:	# only one match!
 			self.page = ''
 		else:		# multiple matches
 			self.page = gutils.trim(self.page,"<table class=\"animelist strippedlist\"", "</tbody>");
 			self.page = gutils.after(self.page, "<tbody>")
+		return self.page
 
 	def get_searches(self):
-		if self.page == '':	# immidietly redirection to movie page
+		if self.page == '':	# immediately redirection to movie page
 			self.number_results = 1
 			self.ids.append(self.url)
 			self.titles.append(gutils.convert_entities(self.title))
@@ -156,7 +153,7 @@ class SearchPlugin(movie.SearchMovie):
 			self.number_results = elements[-1]
 			if (elements[0]<>''):
 				for element in elements:
-					self.ids.append(gutils.trim(element,"href=\"/strony/anime/","\" >"))
+					self.ids.append(gutils.trim(element, 'href="/strony/anime/', '" >'))
 					element = gutils.after(element," >\n\t")
 					element = element.replace("</a>\n\t</td>\n", " (")
 					element = element.replace("\t<td>", "")
@@ -166,5 +163,3 @@ class SearchPlugin(movie.SearchMovie):
 					self.titles.append(element)
 			else:
 				self.number_results = 0
-
-# vim: encoding=iso-8859-2
