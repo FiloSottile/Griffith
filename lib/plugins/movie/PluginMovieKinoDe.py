@@ -166,7 +166,7 @@ class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.original_url_search    = "http://www.kino.de/megasuche.php4?typ=filme&wort="
 		self.translated_url_search    = "http://www.kino.de/megasuche.php4?typ=filme&wort="
-		self.encode='iso-8859-1'
+		self.encode='utf-8'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
