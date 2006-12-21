@@ -119,9 +119,9 @@ class SearchPlugin(movie.SearchMovie):
 	def search(self,parent_window):
 		self.open_search(parent_window)
 		self.page = gutils.trim(self.page,"</font><br><br><br>", "<br><br><br>");
+		self.page = string.replace( self.page, "'", '"' )
 		self.page = string.replace( self.page, '<font size="1">', '' )
 		self.page = string.replace( self.page, '</font>', '' )
-		self.page = string.replace( self.page, "'", '"' )
 		return self.page
 
 	def get_searches(self):

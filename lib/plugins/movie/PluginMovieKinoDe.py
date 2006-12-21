@@ -170,16 +170,21 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,'</B></div><br>', "<!-- PRINT-CONTENT-ENDE-->");
 		tmp_page = self.page.decode('iso-8859-1')
+		tmp_page = string.replace( tmp_page, "</B>", "</b>" )
+		tmp_page = string.replace( tmp_page, "A HREF", "a href" )
+		tmp_page = gutils.trim(tmp_page,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
+		
 		self.url = "http://www.kino.de/megasuche.php4?typ=video&wort="
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,"align=center><B>Video/DVD 1", "<!-- PRINT-CONTENT-ENDE-->");
+		self.page = string.replace( self.page, "<B>", "<b>" )
+		self.page = string.replace( self.page, "A HREF", "a href" )
+		self.page = gutils.trim(self.page,"align=center><b>Video/DVD 1", '<!-- PRINT-CONTENT-ENDE-->');
 		self.page = tmp_page + self.page.decode('iso-8859-1')
 		return self.page
 
 	def get_searches(self):
-		elements1 = string.split(self.page,'headline3"><A HREF="/kinofilm.php4?nr=')
+		elements1 = string.split(self.page,'headline3"><a href="/kinofilm.php4?nr=')
 		elements1[0] = ''
 		for element in elements1:
 			if element <> '':
@@ -191,7 +196,7 @@ class SearchPlugin(movie.SearchMovie):
 						gutils.trim(element, "<span class=\"standardsmall\"><b>", "</span>"), "<b>", ", ")
 							+ ")"))
 							
-		elements2 = string.split(self.page,'headline3"><A HREF="/videofilm.php4?nr=')
+		elements2 = string.split(self.page,'headline3"><a href="/videofilm.php4?nr=')
 		elements2[0] = ''
 		for element in elements2:
 			if element <> '':
