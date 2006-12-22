@@ -111,14 +111,11 @@ class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.original_url_search    = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=Titel&SText="
 		self.translated_url_search    = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=Titel&SText="
-		# old url
-#		self.original_url_search    = "http://www.ofdb.de/view.php?page=erwblaettern&Kat=Film&Land=-&Alter=-&Titel="
-#		self.translated_url_search    = "http://www.ofdb.de/view.php?page=erwblaettern&Kat=Film&Land=-&Alter=-&Titel="
 		self.encode='iso-8859-1'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,"</font><br><br><br>", "<br><br><br>");
+		self.page = gutils.trim(self.page,"</b><br><br>", "<br><br><br>");
 		self.page = string.replace( self.page, "'", '"' )
 		self.page = string.replace( self.page, '<font size="1">', '' )
 		self.page = string.replace( self.page, '</font>', '' )
