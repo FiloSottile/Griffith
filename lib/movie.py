@@ -155,9 +155,9 @@ class Movie:
 			except:
 				self.image = ""
 				try:
-					os.remove(tmp_dest)
+					os.remove("%s.jpg" % tmp_dest )
 				except:
-					self.debug.show("Can't remove %s file" % tmp_dest)
+					print "Can't remove %s file" % tmp_dest # FIXME: use debug.show()
 		else:
 			self.image = ""
 
