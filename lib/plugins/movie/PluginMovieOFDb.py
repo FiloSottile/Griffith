@@ -25,9 +25,9 @@ class Plugin(movie.Movie):
 		self.image_url = "http://www.ofdb.de/images/film/" + gutils.trim( self.page, "<img src=\"images/film/", "\"" )
 		
 	def get_o_title(self):
-		self.o_title = string.capwords(gutils.trim(self.page,"""Originaltitel:</font></td>
+		self.o_title = gutils.trim(self.page,"""Originaltitel:</font></td>
             <td>&nbsp;&nbsp;</td>
-            <td width="99%"><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","<") )
+            <td width="99%"><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","<")
 
 	def get_title(self):
 		self.title = gutils.trim(self.page,'size="3"><b>','<')
@@ -99,13 +99,13 @@ class Plugin(movie.Movie):
               </font></td>
             <td>&nbsp;&nbsp;</td>
             <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b><a href="view.php?page=blaettern&Kat=Land&Text=""","</a>")
-		self.country = string.capwords(gutils.after(self.country,"\">"))
+		self.country = gutils.after(self.country,"\">")
 
 	def get_rating(self):
 		self.rating = gutils.trim(self.page,"<br>Note: ","&nbsp;")
 		if self.rating == '':
 			self.rating = "0"
-		self.rating = str(float(self.rating))
+		self.rating = str(round(float(self.rating)))
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
