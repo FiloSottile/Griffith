@@ -126,6 +126,8 @@ class SearchPlugin(movie.SearchMovie):
 
 		if (elements[0]<>''):
 			for element in elements:
-				self.ids.append(gutils.trim(element,'<a href="view.php?page=film&fid=','">'))
-				self.titles.append(gutils.trim(element,">","</a>"))
+				elementid = gutils.digits_only( gutils.trim(element,'<a href="view.php?page=film&fid=','">') )
+				if elementid != 0:
+					self.ids.append(elementid)
+					self.titles.append(gutils.trim(element,">","</a>"))
 
