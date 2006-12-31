@@ -47,16 +47,16 @@ class Plugin(movie.Movie):
 			self.image_url = gutils.trim(self.image_url, 'src="', '"')
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, '<div id="filmTitle">', '<span')
-		self.o_title = string.replace(self.o_title, "\t", '')
-		self.o_title = string.replace(self.o_title, "\n", '')
-		if string.find(self.o_title, '(') > -1:
-			self.o_title = gutils.before(self.o_title, '(')
+		self.o_title = gutils.trim(self.page, '<span class="otherTitle">', '<span')
+		self.o_title = string.replace(self.o_title, "\t",'')
+		self.o_title = string.replace(self.o_title, "\n",'')
 
 	def get_title(self):
-		self.title = gutils.trim(self.page, '<span class="otherTitle">', '<span')
-		self.title = string.replace(self.title, "\t",'')
-		self.title = string.replace(self.title, "\n",'')
+		self.title = gutils.trim(self.page, '<div id="filmTitle">', '<span')
+		self.title = string.replace(self.title, "\t", '')
+		self.title = string.replace(self.title, "\n", '')
+		if string.find(self.title, '(') > -1:
+			self.title = gutils.before(self.title, '(')
 
 	def get_director(self):
 		self.director = re.findall(r'yseria\t+(.*)\t+scenariusz', self.page)
