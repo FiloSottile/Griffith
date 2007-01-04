@@ -1,5 +1,5 @@
 # -*- coding: cp1250 -*-
-__revision__ = '$Id: PluginMovieCSFD.py 12 2006-12-08 09:08:06Z blondak $'
+__revision__ = '$Id: PluginMovieCSFD.py 12 2007-01-05 09:08:06Z blondak $'
 # Copyright (c) 2005 Blondak
 #
 # This program is free software; you can redistribute it and/or modify
@@ -30,13 +30,13 @@ plugin_url = "www.csfd.cz"
 plugin_language = _("Czech")
 plugin_author = "Blondak"
 plugin_author_email = "<blondak@neser.cz>"
-plugin_version = "0.6"
+plugin_version = "0.7"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.movie_id = id
 		self.encode = "cp1250"
-		self.url = "http://www.csfd.cz/film.php?text=1&rec=&top=&kom=1&id="+str(id)
+		self.url = "http://www.csfd.cz/"+str(id)
 
 	def get_image(self):
 		self.image_url = re.search(r"background=\"http://img.csfd.cz/posters/([^\"]*)\"",self.page)
@@ -53,7 +53,7 @@ class Plugin(movie.Movie):
 			self.o_title = ""
 
 	def get_title(self):
-		self.title = re.search(r"<title>(.*) \(",self.page)
+		self.title = re.search(r"<title>([^,]*), ",self.page)
 		if self.title:
 			self.title = self.title.group(1)
 		else:
@@ -107,11 +107,11 @@ class Plugin(movie.Movie):
 		self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah / Info:","</td>"),"(oficiální text distributora)",""))
 
 	def get_site(self):
-		self.o_site = re.search(r"href=[\"'](http://.*imdb\.com/title[^\"']*)",self.page)
-		if self.o_site:
-			self.o_site = gutils.strip_tags(self.site.group(1))
+		self.site = re.search(r"href=[\"'](http://.*imdb\.com/title/[^\"']*)",self.page)
+		if self.site:
+			self.site = gutils.strip_tags(self.site.group(1))
 		else:
-			self.o_site = ""
+			self.site = ""
 
 	def get_trailer(self):
 		self.trailer = re.search(r"<a href=\"([^\"]*)\"[^>]*>trailer<br><img src=\"http://img.csfd.cz/images/new/film/ikona_trailer",self.page)
@@ -155,14 +155,15 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		self.id = self.re_items=re.search(r"window.location.href='http://www.csfd.cz/film.php\?([^']*)'",self.page)
+		self.id = self.re_items=re.search(r"window.location.href='http://www.csfd.cz/(/film/[^']*)'",self.page)
 		if self.id:
 			self.ids.append(self.id.group(1))
 		else:
-			self.re_items=re.findall(r"href=[\"]{1}film\.php\?([^\"]+)[^>]*>([^<]+)</a>[ ]*([^<]*)",self.page)
+			self.re_items=re.findall(r"href=\"(/film/[^\"]+)[^>]*>([^<]+)</a>([^<]*)",self.page)
 			self.number_results = len(self.re_items)
 			if (self.number_results > 0):
 				for item in self.re_items:
 					self.ids.append(item[0])
-					self.titles.append(gutils.convert_entities(item[1])+' '+item[2])
+#					self.titles.append(gutils.convert_entities(item[1])+' '+item[2])
+					self.titles.append(item[1]+' '+item[2])
 
