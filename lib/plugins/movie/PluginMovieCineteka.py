@@ -2,7 +2,7 @@
 
 __revision__ = '$Id: PluginMovie7arte.py 478 2006-12-05 21:14:51Z piotrek $'
 
-# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ozarowski
+# Copyright (c) 2005-2007 Vasco Nunes, Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
