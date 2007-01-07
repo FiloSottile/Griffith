@@ -32,7 +32,7 @@ plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.5'
+plugin_version		= '1.6'
 
 class Plugin(movie.Movie):
 	def __init__(self, movie_id):
@@ -51,6 +51,9 @@ class Plugin(movie.Movie):
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page, '<h2>', '</h2>')
+		self.o_title = gutils.strip_tags(self.o_title)
+		if self.o_title == '':
+			self.o_title = self.get_title(True)
 
 	def get_title(self, extra=False):
 		data = gutils.trim(self.page,'<title>', '</title>')
