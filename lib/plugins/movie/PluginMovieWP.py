@@ -32,7 +32,7 @@ plugin_url          = 'www.film.wp.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.1'
+plugin_version      = '2.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -43,7 +43,7 @@ class Plugin(movie.Movie):
 	def initialize(self):
 		self.page = gutils.trim(self.page, '<h1 class="mp0">', '</div>\n</div>')
 		self.cast_page = self.open_page(url="http://film.wp.pl/id,%s,film_obsada_i_tworcy.html" % self.movie_id)
-		self.cast_page = gutils.trim(self.cast_page, '<h1 class="mp0">', "</div>\n\n\t</div>\r\n")
+		self.cast_page = gutils.trim(self.cast_page, '<h1 class="mp0">', "</div>\r\n</div>\r\n")
 
 	def get_image(self):
 		self.image_url = gutils.trim(self.page, '<img src="', '" name="o')
@@ -63,10 +63,13 @@ class Plugin(movie.Movie):
 				self.title = self.title[:pos]
 
 	def get_director(self):
-		self.director = gutils.trim(self.cast_page, '>re\xBFyser	</div>', '</div>')
+		self.director = gutils.trim(self.cast_page, '>re\xBFyser\t</div>', '</div>')
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page, ' />', '\t\t<div class="clr">')
+		pos = string.find(self.plot, "<br>Zobacz tak\xBFe:<br>")
+		if pos > 0:
+			self.plot = self.plot[:pos]
 		self.plot = string.replace(self.plot,"\r\n\r\n", '')
 
 	def get_year(self):
@@ -90,8 +93,8 @@ class Plugin(movie.Movie):
 		self.cast = gutils.trim(self.cast_page, '<h2>OBSADA:</h2>', '<div class="b')
 		self.cast = gutils.after(self.cast, '<div class="clr"></div>')
 		self.cast = string.replace(self.cast, '\t', '')
+		self.cast = string.replace(self.cast, '\n</div>\n<', _(' as ')+'<')
 		self.cast = gutils.strip_tags(self.cast)
-		self.cast = string.replace(self.cast, '\n\n                ', _(' as '))
 		self.cast = string.replace(self.cast,  "%s\n" % _(' as '), "\n")
 
 	def get_classification(self):
