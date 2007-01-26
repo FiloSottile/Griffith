@@ -26,12 +26,12 @@ import gutils, movie
 import re,string
 
 plugin_name		= 'Filmweb'
-plugin_description	= 'Web pelen filmow'
+plugin_description	= 'Web pełen filmów'
 plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.8'
+plugin_version		= '1.9'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -62,9 +62,11 @@ class Plugin(movie.Movie):
 		self.director = re.findall(r'yseria\t+(.*)\t+scenariusz', self.page)
 		if len(self.director)>0:
 			self.director = self.director[0]
-		self.director = string.replace(self.director, "\t",'')
-		self.director = string.replace(self.director, ",",", ")
-		self.director = string.replace(self.director, ",  (wi\xeacej&#160;...)",'')
+			self.director = string.replace(self.director, "\t",'')
+			self.director = string.replace(self.director, ",",", ")
+			self.director = string.replace(self.director, ",  (wi\xeacej&#160;...)",'')
+		else:
+			self.director = None
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")
@@ -131,34 +133,34 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.encode='utf-8'
-		self.original_url_search   = "http://www.filmweb.pl/Find?category=1&query="
-		self.translated_url_search = "http://www.filmweb.pl/Find?category=1&query="
+		self.original_url_search   = "http://www.filmweb.pl/szukaj?c=film&q="
+		self.translated_url_search = "http://www.filmweb.pl/szukaj?c=film&q="
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.sub_search()
+		pos = string.find(self.page, 'szukana fraza')
+		if pos == -1:	# only one match!
+			self.page = None
+		else:		# multiple matches
+			self.page = gutils.before(self.page[pos:], 'id="sitemap"');
+			self.page = gutils.after(self.page, '<li ')
 		return self.page
 
-	def sub_search(self):
-		tmp = string.find(self.page,"szukana fraza")
-		if tmp == -1:	# only one match!
-			self.page = ''
-		else:		# multiple matches
-			self.page = gutils.trim(self.page,"szukana fraza:", "</form>");
-
 	def get_searches(self):
-		if self.page == "":	# immidietly redirection to movie page
+		if self.page is None:	# immidietly redirection to movie page
 			self.number_results = 1
 			self.ids.append(self.url)
 			self.titles.append(gutils.convert_entities(self.title))
 		else:			# multiple matches
-			elements = string.split(self.page,"<a title=")
+			elements = string.split(self.page, '<li ')
 			self.number_results = elements[-1]
 			if (elements[0]<>''):
 				for element in elements:
-					self.ids.append(gutils.trim(element,"href=\"","\">"))
-					element = gutils.trim(element,"'","' href=")
+					element = gutils.after(element, '<a class="searchResultTitle" href="')
+					self.ids.append(gutils.before(element, '">'))
+					element = gutils.trim(element, '">', '</a>')
 					element = gutils.convert_entities(element)
+					element = gutils.strip_tags(element)
 					self.titles.append(element)
 			else:
 				self.number_results = 0
