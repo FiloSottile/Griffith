@@ -127,7 +127,8 @@ class Movie:
 				gtk.main_iteration()
 		progress.close()
 		try:
-			data = file (retriever.html[0]).read()
+			ifile = file(retriever.html[0], "rb")
+			data = ifile.read()
 		except IOError:
 			pass
 		if url is None:
@@ -249,7 +250,8 @@ class SearchMovie:
 				gtk.main_iteration()
 		progress.close()
 		try:
-			self.page = file (retriever.html[0]).read()
+			ifile = file(retriever.html[0], "rb")
+			self.page = ifile.read()
 		except IOError:
 			pass
 		urlcleanup()
