@@ -13,13 +13,13 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.6"
+plugin_version = "0.7"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.encode='iso-8859-1'
 		self.movie_id = id
-		self.url = "http://www.ofdb.de/view.php?page=film&full=1&fid=%s" % str(self.movie_id)
+		self.url = "http://www.ofdb.de/view.php?page=film&fid=%s" % str(self.movie_id)
 
 	def get_image(self):
 		self.image_url = "http://www.ofdb.de/images/film/" + gutils.trim( self.page, "<img src=\"images/film/", "\"" )
@@ -40,15 +40,9 @@ class Plugin(movie.Movie):
 		self.director = string.capwords(gutils.after(self.director,">"))
 
 	def get_plot(self):
-		oldpage = self.page
-		oldurl = self.url
 		storyid = gutils.trim(self.page, 'sid=', '">')
-		self.url = "http://www.ofdb.de/view.php?page=inhalt&fid=%s&sid=%s" % (str(self.movie_id),storyid)
-		self.open_page(self.parent_window)
-		self.plot = gutils.trim(self.page, "</b><br><br>","</")
-		self.page = oldpage
-		self.url = oldurl
-		#self.plot = gutils.trim(self.page,"<b>Inhalt:</b>", "<")
+		story_page = self.open_page(url="http://www.ofdb.de/view.php?page=inhalt&fid=%s&sid=%s" % (str(self.movie_id),storyid))
+		self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
 	def get_year(self):
 		self.year = gutils.trim(self.page,"""Erscheinungsjahr: 
@@ -69,16 +63,17 @@ class Plugin(movie.Movie):
 		self.genre = self.genre[0:-2]
 
 	def get_cast(self):
+		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(self.movie_id) )
 		self.cast = ""
-		self.cast = gutils.trim(self.page,"""Darsteller: 
-              </font></td>
-            <td>&nbsp;&nbsp;</td>
-            <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","</b></font></td>")
-		self.cast = string.replace(self.cast,"</a><br>", "\n")
+		self.cast = gutils.trim(cast_page,"Darsteller</i>","<td></td>\n</tr>\n</table>\n<br>")
 		self.cast = string.strip(gutils.strip_tags(self.cast))
+		self.cast = string.replace(self.cast,"&nbsp;", "")
+		self.cast = string.replace(self.cast, "  ", "")
+		self.cast = string.replace(self.cast, "\t", "")
+		self.cast = string.replace(self.cast, "\n\n", "\n")
+		self.cast = string.replace(self.cast, "\n\n", "")
 
 	def get_classification(self):
-		#self.classification = gutils.trim(self.page,"MPAA</a>:</b> ",".<br>")
 		# ofdb.de got no classification
 		self.classification = ""
 
