@@ -32,7 +32,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.3"
+plugin_version = "1.4"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm.php4?"
@@ -57,14 +57,11 @@ class Plugin(movie.Movie):
 		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
 	
 	def get_image(self):
-		if (self.url_type == "V"):
-			self.image_url = "http://www.kino.de/pix/MBBILDER/VIDEO/" + gutils.trim(self.tmp_page,"IMG SRC=\"/pix/MBBILDER/VIDEO/", "\"")
-		else:
-			self.image_url = gutils.trim(self.tmp_page,"IMG SRC=\"/pix/MBBILDER/KINOPLAK/", "\"")
-			if self.image_url <> '':
-				self.image_url = "http://www.kino.de/pix/MBBILDER/KINOPLAK/" + self.image_url
-			else:
-				self.image_url = "http://www.kino.de/pix/MBBILDER/KINO/" + gutils.trim(self.tmp_page,"IMG SRC=\"/pix/MBBILDER/KINO/", "\"")
+		# first, try to get the second picture before the JavaScript block (it should be the original poster)
+		# if there is no second picture, use the first picture (it should be a picture from the film)
+		self.image_url = "http://images.kino.de/flbilder/" + gutils.trim(gutils.after(gutils.before(self.tmp_page, "<script language="), "img src=\"http://images.kino.de/flbilder/"),"img src=\"http://images.kino.de/flbilder/", "\"")
+		if (self.image_url == "http://images.kino.de/flbilder/"):
+			self.image_url = "http://images.kino.de/flbilder/" + gutils.trim(self.tmp_page,"img src=\"http://images.kino.de/flbilder/", "\"")
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page,"span CLASS=\"standardsmall\"><br>(",")<")
@@ -88,14 +85,8 @@ class Plugin(movie.Movie):
 			self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
 			self.open_page(self.parent_window)
 		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
-		if (self.url_type == "V"):
-			self.plot = gutils.after(self.tmp_page,"IMG SRC=\"/pix/MBBILDER/VIDEO")
-			self.plot = gutils.trim(self.plot,"</TABLE>", "</TD>")
-		else:
-			self.plot = gutils.after(self.tmp_page,"IMG SRC=\"/pix/MBBILDER/KINOPLAK")
-			self.plot = gutils.trim(self.plot,"</TABLE>", "</TD>")
-			if self.plot == '':
-				self.plot = gutils.trim(self.tmp_page, "BORDER=\"0\" align=\"left\" ><TR><TD>", "</TD>")
+		self.plot = gutils.after(self.tmp_page,"<TABLE width=\"100%\" CELLPADDING=\"0\" CELLSPACING=\"0\" BORDER=\"0\" align=\"left\" ><TR><TD>")
+		self.plot = gutils.before(self.plot, "<TR><TD  valign=\"top\"")
 
 	def get_year(self):
 		self.year = gutils.trim(self.page,"class=\"standardsmall\"><br><b>DVD</b> - <b>","<BR>")
