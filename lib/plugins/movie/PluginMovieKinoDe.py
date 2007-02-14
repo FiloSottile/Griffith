@@ -32,7 +32,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.4"
+plugin_version = "1.5"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm.php4?"
@@ -85,8 +85,16 @@ class Plugin(movie.Movie):
 			self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
 			self.open_page(self.parent_window)
 		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
-		self.plot = gutils.after(self.tmp_page,"<TABLE width=\"100%\" CELLPADDING=\"0\" CELLSPACING=\"0\" BORDER=\"0\" align=\"left\" ><TR><TD>")
-		self.plot = gutils.before(self.plot, "<TR><TD  valign=\"top\"")
+		# little steps to perfect plot (I hope ... it's a terrible structured content ... )
+		self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "</TD></TR><tr><td></td></tr><TR>")
+		if (self.plot == ""):
+			self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "<script language=\"JavaScript\">")
+		self.plot = gutils.after(self.plot, "Fotoshow</A>")
+		self.plot = gutils.after(self.plot, "Filmpreise</A>")
+		self.plot = gutils.after(self.plot, "Games zum Film</A>")
+		self.plot = gutils.after(self.plot, " Crew</A>")
+		self.plot = gutils.before(self.plot, "FOTOSHOW</SPAN>")
+		self.plot = gutils.after(self.plot, "</TABLE>")
 
 	def get_year(self):
 		self.year = gutils.trim(self.page,"class=\"standardsmall\"><br><b>DVD</b> - <b>","<BR>")
@@ -132,6 +140,8 @@ class Plugin(movie.Movie):
 
 	def get_studio(self):
 		self.studio = gutils.trim(self.page,"Verleih: ", "</b>")
+		if (self.studio == ""):
+			self.studio = gutils.trim(self.page,"Anbieter: ", "</b>")
 
 	def get_o_site(self):
 		self.o_site = ""
@@ -152,26 +162,89 @@ class Plugin(movie.Movie):
 	def get_rating(self):
 		self.rating = "0"
 
+	def get_notes(self):
+		self.notes = ""
+		self.url = self.url_to_use + "typ=features&nr=" + str(self.movie_id)
+		self.open_page(self.parent_window)
+		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
+		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Sprache</b>", "</TD></TR>")), "&nbsp;", "")
+		if (self.tmp_notes != ""):
+			self.notes = self.notes + "Sprachen:\n" + self.tmp_notes + "\n\n"
+		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Untertitel</b>", "</TD></TR>")), "&nbsp;", "")
+		if (self.tmp_notes != ""):
+			self.notes = self.notes + "Untertitel:\n" + self.tmp_notes + "\n\n"
+		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Mehrkanalton</b>", "</TD></TR>")), "&nbsp;", "")
+		if (self.tmp_notes != ""):
+			self.notes = self.notes + "Mehrkanalton:\n" + self.tmp_notes + "\n\n"
+		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>EAN</b>", "</TD></TR>")), "&nbsp;", "")
+		if (self.tmp_notes != ""):
+			self.notes = self.notes + "EAN:\n" + self.tmp_notes + "\n\n"
+
+#
+# kino.de use iso-8859-1
+# it's not necessary to decode the page
+# in fact if utf-8 is used you can't search for movies with german umlaut
+# and if you use the decode call you get a terrible formatted result list
+#
+
 class SearchPlugin(movie.SearchMovie):
 
 	def __init__(self):
 		self.original_url_search    = "http://www.kino.de/megasuche.php4?typ=filme&wort="
 		self.translated_url_search    = "http://www.kino.de/megasuche.php4?typ=filme&wort="
-		self.encode='utf-8'
+#		self.encode='utf-8'
+		self.encode='iso-8859-1'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		tmp_page = self.page.decode('iso-8859-1')
-		tmp_page = string.replace( tmp_page, "</B>", "</b>" )
-		tmp_page = string.replace( tmp_page, "A HREF", "a href" )
-		tmp_page = gutils.trim(tmp_page,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
-		
+		self.tmp_pagemovie = string.replace( self.page, "</B>", "</b>" )
+		self.tmp_pagemovie = string.replace( self.tmp_pagemovie, "A HREF", "a href" )
+		self.tmp_pagemovie = gutils.trim(self.tmp_pagemovie,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
+		#
+		# try to get all result pages (not so nice, but it works)
+		#
+		self.tmp_pagecount = gutils.trim(self.tmp_pagemovie, "&nbsp;von ", "</SPAN>")
+		try:
+			self.tmp_pagecountint = int(self.tmp_pagecount)
+		except:
+			self.tmp_pagecountint = 1
+		self.tmp_pagecountintcurrent = 1
+		while (self.tmp_pagecountint > self.tmp_pagecountintcurrent):
+			self.tmp_pagecountintcurrent = self.tmp_pagecountintcurrent + 1
+			self.url = "http://www.kino.de/megasuche.php4?typ=filme&page=" + str(self.tmp_pagecountintcurrent) + "&wort="
+			self.open_search(parent_window)
+			self.tmp_page = string.replace( self.page, "</B>", "</b>" )
+			self.tmp_page = string.replace( self.tmp_page, "A HREF", "a href" )
+			self.tmp_page = gutils.trim(self.tmp_page,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
+			self.tmp_pagemovie = self.tmp_pagemovie + self.tmp_page
+		#
+		# Look for DVD and VHS
+		#
 		self.url = "http://www.kino.de/megasuche.php4?typ=video&wort="
 		self.open_search(parent_window)
-		self.page = string.replace( self.page, "<B>", "<b>" )
-		self.page = string.replace( self.page, "A HREF", "a href" )
-		self.page = gutils.trim(self.page,"align=center><b>Video/DVD 1", '<!-- PRINT-CONTENT-ENDE-->');
-		self.page = tmp_page + self.page.decode('iso-8859-1')
+		self.tmp_pagevideo = string.replace( self.page, "<B>", "<b>" )
+		self.tmp_pagevideo = string.replace( self.tmp_pagevideo, "A HREF", "a href" )
+		self.tmp_pagevideo = gutils.trim(self.tmp_pagevideo,"align=center><b>Video/DVD 1", '<!-- PRINT-CONTENT-ENDE-->');
+		self.tmp_pagevideo = self.tmp_pagemovie + self.tmp_pagevideo
+		#
+		# try to get all result pages (not so nice, but it works)
+		#
+		self.tmp_pagecount = gutils.trim(self.page, "&nbsp;von ", "</SPAN>")
+		try:
+			self.tmp_pagecountint = int(self.tmp_pagecount)
+		except:
+			self.tmp_pagecountint = 1
+		self.tmp_pagecountintcurrent = 1
+		while (self.tmp_pagecountint > self.tmp_pagecountintcurrent):
+			self.tmp_pagecountintcurrent = self.tmp_pagecountintcurrent + 1
+			self.url = "http://www.kino.de/megasuche.php4?typ=video&page=" + str(self.tmp_pagecountintcurrent) + "&wort="
+			self.open_search(parent_window)
+			self.tmp_page = string.replace( self.page, "<B>", "<b>" )
+			self.tmp_page = string.replace( self.tmp_page, "A HREF", "a href" )
+			self.tmp_page = gutils.trim(self.tmp_page,"align=center><b>Video/DVD ", '<!-- PRINT-CONTENT-ENDE-->');
+			self.tmp_pagevideo = self.tmp_pagevideo + self.tmp_page
+
+		self.page = self.tmp_pagevideo
 		return self.page
 
 	def get_searches(self):
