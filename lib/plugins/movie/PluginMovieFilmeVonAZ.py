@@ -32,11 +32,11 @@ plugin_url = "www.filmevona-z.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.1"
+plugin_version = "1.2"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode='iso-8859-1'
+		self.encode='utf-8'
 		self.movie_id = id
 		self.url = "http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&wert=" + str(self.movie_id)
 
@@ -73,11 +73,11 @@ class Plugin(movie.Movie):
 					self.delimiter = ", "
 
 	def get_cast(self):
-		self.cast = gutils.trim(self.page, "(Darsteller)", "\n\n\n")
+		self.cast = gutils.trim(self.page, "(Darsteller)", "</span> \r\n\t\t\r\n")
 		self.cast = gutils.clean(self.cast)
 		self.cast = self.cast.replace(" als ", _(" as "))
 		self.cast = self.cast.replace("			", "")
-		self.cast = self.cast.replace("\n", "")
+		self.cast = self.cast.replace("\r\n", "")
 		self.cast = self.cast.replace(", ", "\n")
 		self.cast = self.cast.replace(",", "")
 
@@ -106,11 +106,29 @@ class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.original_url_search	= "http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&wert="
 		self.translated_url_search	= "http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&wert="
-		self.encode='iso-8859-1'
+		self.encode='utf-8'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,"Alle Treffer aus der Kategorie", "<!-- ENDE ErgebnissAusgabe -->");
+		# used for looking for subpages
+		tmp_page = gutils.trim(self.page, "<!-- Blaettern -->", "<!-- ErgebnissAusgabe -->");
+		elements = string.split(tmp_page, '" class="text_navi">')
+		# first results
+		self.tmp_page = gutils.trim(self.page,"Alle Treffer aus der Kategorie", "<!-- ENDE ErgebnissAusgabe -->");
+		# look for subpages
+		for element in elements:
+			element = gutils.before(element, "</a>")
+			try:
+				tmp_element = int(element)
+			except:
+				tmp_element = 1
+			if (tmp_element <> 1):
+				self.url = "http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&currentPage=" + str(tmp_element) + "&wert="
+				self.open_search(parent_window)
+				tmp_page2 = gutils.trim(self.page,"Alle Treffer aus der Kategorie", "<!-- ENDE ErgebnissAusgabe -->");
+				tmp_page = tmp_page + tmp_page2
+		self.page = tmp_page
+
 		return self.page
 
 	def get_searches(self):

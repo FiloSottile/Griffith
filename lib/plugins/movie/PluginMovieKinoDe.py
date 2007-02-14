@@ -167,18 +167,18 @@ class Plugin(movie.Movie):
 		self.url = self.url_to_use + "typ=features&nr=" + str(self.movie_id)
 		self.open_page(self.parent_window)
 		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
-		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Sprache</b>", "</TD></TR>")), "&nbsp;", "")
-		if (self.tmp_notes != ""):
-			self.notes = self.notes + "Sprachen:\n" + self.tmp_notes + "\n\n"
-		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Untertitel</b>", "</TD></TR>")), "&nbsp;", "")
-		if (self.tmp_notes != ""):
-			self.notes = self.notes + "Untertitel:\n" + self.tmp_notes + "\n\n"
-		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Mehrkanalton</b>", "</TD></TR>")), "&nbsp;", "")
-		if (self.tmp_notes != ""):
-			self.notes = self.notes + "Mehrkanalton:\n" + self.tmp_notes + "\n\n"
-		self.tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>EAN</b>", "</TD></TR>")), "&nbsp;", "")
-		if (self.tmp_notes != ""):
-			self.notes = self.notes + "EAN:\n" + self.tmp_notes + "\n\n"
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Sprache</b>", "</TD></TR>")), "&nbsp;", "")
+		if (tmp_notes != ""):
+			self.notes = self.notes + "Sprachen:\n" + tmp_notes + "\n\n"
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Untertitel</b>", "</TD></TR>")), "&nbsp;", "")
+		if (tmp_notes != ""):
+			self.notes = self.notes + "Untertitel:\n" + tmp_notes + "\n\n"
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Mehrkanalton</b>", "</TD></TR>")), "&nbsp;", "")
+		if (tmp_notes != ""):
+			self.notes = self.notes + "Mehrkanalton:\n" + tmp_notes + "\n\n"
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>EAN</b>", "</TD></TR>")), "&nbsp;", "")
+		if (tmp_notes != ""):
+			self.notes = self.notes + "EAN:\n" + tmp_notes + "\n\n"
 
 #
 # kino.de use iso-8859-1
@@ -197,54 +197,54 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.tmp_pagemovie = string.replace( self.page, "</B>", "</b>" )
-		self.tmp_pagemovie = string.replace( self.tmp_pagemovie, "A HREF", "a href" )
-		self.tmp_pagemovie = gutils.trim(self.tmp_pagemovie,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
+		tmp_pagemovie = string.replace( self.page, "</B>", "</b>" )
+		tmp_pagemovie = string.replace( tmp_pagemovie, "A HREF", "a href" )
+		tmp_pagemovie = gutils.trim(tmp_pagemovie,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
 		#
 		# try to get all result pages (not so nice, but it works)
 		#
-		self.tmp_pagecount = gutils.trim(self.tmp_pagemovie, "&nbsp;von ", "</SPAN>")
+		tmp_pagecount = gutils.trim(tmp_pagemovie, "&nbsp;von ", "</SPAN>")
 		try:
-			self.tmp_pagecountint = int(self.tmp_pagecount)
+			tmp_pagecountint = int(tmp_pagecount)
 		except:
-			self.tmp_pagecountint = 1
-		self.tmp_pagecountintcurrent = 1
-		while (self.tmp_pagecountint > self.tmp_pagecountintcurrent):
-			self.tmp_pagecountintcurrent = self.tmp_pagecountintcurrent + 1
-			self.url = "http://www.kino.de/megasuche.php4?typ=filme&page=" + str(self.tmp_pagecountintcurrent) + "&wort="
+			tmp_pagecountint = 1
+		tmp_pagecountintcurrent = 1
+		while (tmp_pagecountint > tmp_pagecountintcurrent):
+			tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
+			self.url = "http://www.kino.de/megasuche.php4?typ=filme&page=" + str(tmp_pagecountintcurrent) + "&wort="
 			self.open_search(parent_window)
-			self.tmp_page = string.replace( self.page, "</B>", "</b>" )
-			self.tmp_page = string.replace( self.tmp_page, "A HREF", "a href" )
-			self.tmp_page = gutils.trim(self.tmp_page,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
-			self.tmp_pagemovie = self.tmp_pagemovie + self.tmp_page
+			tmp_page = string.replace( self.page, "</B>", "</b>" )
+			tmp_page = string.replace( tmp_page, "A HREF", "a href" )
+			tmp_page = gutils.trim(tmp_page,'</b></div><br>', '<!-- PRINT-CONTENT-ENDE-->');
+			tmp_pagemovie = tmp_pagemovie + tmp_page
 		#
 		# Look for DVD and VHS
 		#
 		self.url = "http://www.kino.de/megasuche.php4?typ=video&wort="
 		self.open_search(parent_window)
-		self.tmp_pagevideo = string.replace( self.page, "<B>", "<b>" )
-		self.tmp_pagevideo = string.replace( self.tmp_pagevideo, "A HREF", "a href" )
-		self.tmp_pagevideo = gutils.trim(self.tmp_pagevideo,"align=center><b>Video/DVD 1", '<!-- PRINT-CONTENT-ENDE-->');
-		self.tmp_pagevideo = self.tmp_pagemovie + self.tmp_pagevideo
+		tmp_pagevideo = string.replace( self.page, "<B>", "<b>" )
+		tmp_pagevideo = string.replace( tmp_pagevideo, "A HREF", "a href" )
+		tmp_pagevideo = gutils.trim(tmp_pagevideo,"align=center><b>Video/DVD 1", '<!-- PRINT-CONTENT-ENDE-->');
+		tmp_pagevideo = tmp_pagemovie + tmp_pagevideo
 		#
 		# try to get all result pages (not so nice, but it works)
 		#
-		self.tmp_pagecount = gutils.trim(self.page, "&nbsp;von ", "</SPAN>")
+		tmp_pagecount = gutils.trim(self.page, "&nbsp;von ", "</SPAN>")
 		try:
-			self.tmp_pagecountint = int(self.tmp_pagecount)
+			tmp_pagecountint = int(tmp_pagecount)
 		except:
-			self.tmp_pagecountint = 1
-		self.tmp_pagecountintcurrent = 1
-		while (self.tmp_pagecountint > self.tmp_pagecountintcurrent):
-			self.tmp_pagecountintcurrent = self.tmp_pagecountintcurrent + 1
-			self.url = "http://www.kino.de/megasuche.php4?typ=video&page=" + str(self.tmp_pagecountintcurrent) + "&wort="
+			tmp_pagecountint = 1
+		tmp_pagecountintcurrent = 1
+		while (tmp_pagecountint > tmp_pagecountintcurrent):
+			tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
+			self.url = "http://www.kino.de/megasuche.php4?typ=video&page=" + str(tmp_pagecountintcurrent) + "&wort="
 			self.open_search(parent_window)
-			self.tmp_page = string.replace( self.page, "<B>", "<b>" )
-			self.tmp_page = string.replace( self.tmp_page, "A HREF", "a href" )
-			self.tmp_page = gutils.trim(self.tmp_page,"align=center><b>Video/DVD ", '<!-- PRINT-CONTENT-ENDE-->');
-			self.tmp_pagevideo = self.tmp_pagevideo + self.tmp_page
+			tmp_page = string.replace( self.page, "<B>", "<b>" )
+			tmp_page = string.replace( tmp_page, "A HREF", "a href" )
+			tmp_page = gutils.trim(tmp_page,"align=center><b>Video/DVD ", '<!-- PRINT-CONTENT-ENDE-->');
+			tmp_pagevideo = tmp_pagevideo + tmp_page
 
-		self.page = self.tmp_pagevideo
+		self.page = tmp_pagevideo
 		return self.page
 
 	def get_searches(self):
