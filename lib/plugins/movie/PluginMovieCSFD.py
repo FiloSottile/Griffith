@@ -30,7 +30,7 @@ plugin_url = "www.csfd.cz"
 plugin_language = _("Czech")
 plugin_author = "Blondak"
 plugin_author_email = "<blondak@neser.cz>"
-plugin_version = "0.7"
+plugin_version = "0.8"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -51,15 +51,19 @@ class Plugin(movie.Movie):
 			self.o_title = self.o_title[len(self.o_title)-1]
 		else:
 			self.o_title = ""
-
-	def get_title(self):
-		self.title = re.search(r"<title>([^,]*), ",self.page)
-		if self.title:
-			self.title = self.title.group(1)
-		else:
-			self.title = ""
 		if self.o_title == "":
-			self.o_title = self.title
+			self.o_title = self.get_title(True)
+
+	def get_title(self, ret=False):
+		data = re.search(r"<title>([^,]*), ",self.page)
+		if data:
+			data = data.group(1)
+		else:
+			data = ""
+		if ret is True:
+			return data
+		else:
+			self.title = data
 
 	def get_director(self):
 		self.director = re.search(r"Režie:(.*)<br><b>Hrají:",self.page)
@@ -155,9 +159,9 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		self.id = self.re_items=re.search(r"window.location.href='http://www.csfd.cz/(/film/[^']*)'",self.page)
-		if self.id:
-			self.ids.append(self.id.group(1))
+		tmp_id = self.re_items=re.search(r"window.location.href='http://www.csfd.cz/(/film/[^']*)'",self.page)
+		if tmp_id:
+			self.ids.append(tmp_id.group(1))
 		else:
 			self.re_items=re.findall(r"href=\"(/film/[^\"]+)[^>]*>([^<]+)</a>([^<]*)",self.page)
 			self.number_results = len(self.re_items)
