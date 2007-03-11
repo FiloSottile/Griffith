@@ -31,7 +31,7 @@ plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.9'
+plugin_version		= '1.10'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -138,19 +138,25 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		pos = string.find(self.page, 'szukana fraza')
-		if pos == -1:	# only one match!
+		pos = string.find(self.page, 'Znaleziono <b>')
+		if pos == -1:	# movie page
 			self.page = None
-		else:		# multiple matches
-			self.page = gutils.before(self.page[pos:], 'id="sitemap"');
-			self.page = gutils.after(self.page, '<li ')
+		else:		# search results
+			items = gutils.trim(self.page[pos:], '<b>', '</b>')
+			if items == '0':
+				self.page = False
+			else:
+				self.page = gutils.before(self.page[pos:], 'id="sitemap"')
+				self.page = gutils.after(self.page, '<li ')
 		return self.page
 
 	def get_searches(self):
-		if self.page is None:	# immidietly redirection to movie page
+		if self.page is None:	# movie page
 			self.number_results = 1
 			self.ids.append(self.url)
 			self.titles.append(gutils.convert_entities(self.title))
+		elif self.page is False: # no movie found
+			self.number_results = 0
 		else:			# multiple matches
 			elements = string.split(self.page, '<li ')
 			self.number_results = elements[-1]
