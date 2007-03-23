@@ -90,6 +90,8 @@ class Movie:
 		pass
 	def get_plot(self):
 		pass
+	def get_rating(self):
+		pass
 	def get_runtime(self):
 		pass
 	def get_site(self):
