@@ -32,7 +32,7 @@ plugin_url		= 'www.imdb.com'
 plugin_language		= _('English')
 plugin_author		= 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email	= 'griffith-private@lists.berlios.de'
-plugin_version		= '1.1'
+plugin_version		= '1.1.1'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -106,6 +106,7 @@ class Plugin(movie.Movie):
 			self.rating = str(float(gutils.clean(self.rating)))
 
 	def get_notes(self):
+		self.notes = ''
 		language = gutils.trim(self.page, '<h5>Language:</h5>', '</div>')
 		language = gutils.strip_tags(language)
 		color = gutils.trim(self.page, '<h5>Color:</h5>', '</div>')
