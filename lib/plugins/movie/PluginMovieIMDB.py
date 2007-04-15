@@ -22,9 +22,8 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
-import gutils
-import movie
-import string
+import gutils, movie
+import string, re
 
 plugin_name		= 'IMDb'
 plugin_description	= 'Internet Movie Database'
@@ -32,7 +31,7 @@ plugin_url		= 'www.imdb.com'
 plugin_language		= _('English')
 plugin_author		= 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email	= 'griffith-private@lists.berlios.de'
-plugin_version		= '1.1.1'
+plugin_version		= '1.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -54,8 +53,11 @@ class Plugin(movie.Movie):
 		self.title = gutils.trim(self.page, '<h1>', ' <span')
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,'<h5>Directed by</h5>', '<br/>\n<br/>')
-		self.director = self.director.replace('<br/>', ', ')
+		pattern = re.compile('<h5>Directors?:</h5>[\n\s\r]*(.*?)(?:<br/>)?(?:<a[^>]+>more</a>)?\n</div')
+		result = pattern.search(self.page)
+		if result:
+			self.director = result.groups()[0]
+			self.director = self.director.replace('<br/>', ', ')
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page, '<h5>Plot Outline:</h5>', '</div>')
