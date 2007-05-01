@@ -21,12 +21,16 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
+# Updated on 04/29/2007 by Djohnson "Joe" Lima
+# joe1310@terra.com.br - São Paulo/Brasil
+
+
 from gettext import gettext as _
 import gutils, movie, string
 
 plugin_name = "E-Pipoca"
 plugin_description = "E-Pipoca Brasil"
-plugin_url = "epipoca.cidadeinternet.com.br"
+plugin_url = "epipoca.uol.com.br"
 plugin_language = _("Brazilian Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email="<vasco.m.nunes@gmail.com>"
@@ -37,49 +41,48 @@ class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.encode='iso-8859-1'
 		self.movie_id = id
-		self.url = "http://epipoca.uol.com.br/filmes_zoom.cfm?id=" + str(self.movie_id)
+		self.url = "http://epipoca.uol.com.br/filmes_detalhes.php?idf=" + str(self.movie_id)
 
 	def get_image(self):
 		"Find the film's poster image"
-		tmp_pic = gutils.trim(self.page, "/images/filmes/capa_", "\"")
+		tmp_pic = gutils.trim(self.page, "images/filmes/poster/poster_", "\"")
 		self.image_url = \
-			"http://epipoca.uol.com.br/images/filmes/capa_" + tmp_pic
+			"http://epipoca.uol.com.br/images/filmes/poster/poster_" + tmp_pic
 
 	def get_o_title(self):
 		"Find the film's original title"
-		self.o_title = string.capwords(gutils.trim(self.page, "</font><br>(<i>", "</i>, "))
+		self.o_title = string.capwords(gutils.trim(self.page, "</font><br>(", ", "))
 
 	def get_title(self):
 		"""Find the film's local title.
 		Probably the original title translation"""
-		self.title = gutils.trim(self.page, "'votar');\">", "</b></font><br>(")
+		self.title = gutils.trim(self.page, "<TITLE>", " (")
 
 	def get_director(self):
 		"Find the film's director"
-		self.director = gutils.trim(self.page, "<b>Diretor(es)</b>:", "</a>  <br>")
+		self.director = gutils.trim(self.page, "<b>Diretor(es): </b>", "</a></td>")
 
 	def get_plot(self):
 		"Find the film's plot"
-		self.plot = gutils.trim(self.page, "<b>Sinopse</b><br>", "</td></tr></table>")
+		self.plot = gutils.trim(self.page, "<b>SINOPSE</b></font><br><br>", "</td></tr>")
 
 	def get_year(self):
 		"Find the film's year"
-		self.year = gutils.trim(self.page, "</i>, ", ")<br><img")
-		self.year = gutils.after(self.year,", ")
+		self.year = gutils.trim(self.page, "<a href=\"busca_mais.php?opc=ano&busca=", "\">")
 
 	def get_runtime(self):
 		"Find the film's running time"
-		self.runtime = gutils.trim(self.page, "<br> <b>Dura", " min<br>")
+		self.runtime = gutils.trim(self.page, "<td><b>Dura", " min.</td>")
 		self.runtime = self.runtime[9:]
 
 	def get_genre(self):
 		"Find the film's genre"
-		self.genre = gutils.trim(self.page, "nero</b>: ", "<br>")
+		self.genre = gutils.trim(self.page, "<a href=\"busca_mais.php?opc=genero&busca=", "\">")
 
 	def get_cast(self):
 		"Find the actors. Try to make it line separated."
 		self.cast = ""
-		self.cast = gutils.trim(self.page, "<b>Elenco:</b>", "<b>mais...</b>")
+		self.cast = gutils.trim(self.page, "<b>Elenco: </b>", "<b>mais...</b>")
 		self.cast = gutils.strip_tags(self.cast)
 		self.cast = self.cast[:-2]
 
@@ -89,35 +92,29 @@ class Plugin(movie.Movie):
 
 	def get_studio(self):
 		"Find the studio"
-		self.studio = gutils.trim(self.page, "<b>Distribuidora</b>: ", "<br> <b>")
+		self.studio = gutils.trim(self.page, "<b>Distribuidora(s): </b>", "</a></td>")
 
 	def get_o_site(self):
 		"Find the film's oficial site"
-		self.o_site = gutils.trim(self.page, "<A HREF='", \
-			"' TARGET=_blank><IMG SRC='/imagens/bf_siteoficial.gif'")
+		self.o_site = "http://epipoca.uol.com.br/filmes_web.php?idf=" + str(self.movie_id)
 
 	def get_site(self):
 		"Find the film's imdb details page"
-		self.site = gutils.trim(self.page, \
-			"/imagens/bf_siteoficial.gif' WIDTH=89 HEIGHT=18 BORDER=0 ALT=''>", \
-			"' TARGET=_blank><IMG SRC='/imagens/bf_imdb.gif'")
-		self.site = gutils.after(self.site, "<A HREF='")
-		self.site = string.replace(self.site, "'", "")
+		self.site = "http://epipoca.uol.com.br/filmes_ficha.php?idf=" + str(self.movie_id)
 
 	def get_trailer(self):
 		"Find the film's trailer page or location"
-		self.trailer = gutils.trim(self.page, "onclick=\"popup('/", "', 600, 400,")
-		if self.trailer:
-			self.trailer = "http://epipoca.cidadeinternet.com.br/" + self.trailer
-
+		self.trailer = "http://epipoca.uol.com.br/filmes_trailer.php?idf=" + str(self.movie_id)
+			
 	def get_country(self):
 		"Find the film's country"
-		self.country = gutils.trim(self.page, "</i>, ", ", ")
+		self.country = gutils.trim(self.page, "<a href=\"busca_mais.php?opc=pais&busca=", "\">")
 
 	def get_rating(self):
 		"""Find the film's rating. From 0 to 10.
 		Convert if needed when assigning."""
-		tmp_rating = gutils.trim(self.page, "<font size=\"3\"><b> ", "</b></font><br>")
+		tmp_rating = gutils.trim(self.page, "<br><b>Cota", " (")
+		tmp_rating = gutils.after(tmp_rating, "</b>")
 		if tmp_rating <> "":
 			tmp_rating = string.replace(tmp_rating,',','.')
 			self.rating = str( float(string.strip(tmp_rating)) )
@@ -128,9 +125,9 @@ class SearchPlugin(movie.SearchMovie):
 	"A movie search object"
 	def __init__(self):
 		self.original_url_search = \
-			"http://epipoca.uol.com.br/search/?Ordenado=Popular&busca="
+			"http://epipoca.uol.com.br/busca.php?opc=todos&busca="
 		self.translated_url_search = \
-			"http://epipoca.uol.com.br/search/?Ordenado=Popular&busca="
+			"http://epipoca.uol.com.br/busca.php?opc=todos&busca="
 		self.encode='iso-8859-1'
 
 	def search(self, parent_window):
@@ -142,17 +139,17 @@ class SearchPlugin(movie.SearchMovie):
 	def sub_search(self):
 		"Isolating just a portion (with the data we want) of the results"
 		self.page = gutils.trim(self.page, \
-			"<tr><td valign=\"top\" width=\"100%\">", "&nbsp;&nbsp;<b>Resu")
+			"&nbsp;Resul","><b>Not") 
 
 	def get_searches(self):
 		"Try to find both id and film title for each search result"
-		elements = string.split(self.page, "<td valign=\"bottom\">&nbsp;</td>")
+		elements = string.split(self.page, "<td width=\"55\" align=\"center\" bgcolor=")
 		self.number_results = elements[-1]
 
 		if (elements[0] != ''):
 			for element in elements:
-				self.ids.append(gutils.trim(element, "<b><a href=\"/filmes_zoom.cfm?id=", "\"><font size=\"2\""))
+				self.ids.append(gutils.trim(element, "<a href=\"filmes_detalhes.php?idf=", "\"><img src=\"images/"))
 				self.titles.append(gutils.convert_entities \
-					(gutils.trim(element, "color=\"FF8000\">", "</font></a></b></a><br>") ))
+					(gutils.trim(element, "</a></font> <br>(<i>", "</i>, <a href=") ))
 		else:
 			self.number_results = 0
