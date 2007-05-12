@@ -5,7 +5,7 @@
 
 from gettext import gettext as _
 import gutils
-import movie,string
+import movie,string,re
 
 plugin_name = "OFDb"
 plugin_description = "Online-Filmdatenbank"
@@ -13,7 +13,7 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.7"
+plugin_version = "0.75"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -70,8 +70,14 @@ class Plugin(movie.Movie):
 		self.cast = string.replace(self.cast,"&nbsp;", "")
 		self.cast = string.replace(self.cast, "  ", "")
 		self.cast = string.replace(self.cast, "\t", "")
-		self.cast = string.replace(self.cast, "\n\n", "\n")
-		self.cast = string.replace(self.cast, "\n\n", "")
+		
+		elements = string.split(self.cast,"\n")
+		cast = ""
+		for element in elements:
+			if (element != ''):
+				cast += element + "\n"
+		cast = string.replace( cast, "\n... ", " als ")
+		self.cast = cast
 
 	def get_classification(self):
 		# ofdb.de got no classification
