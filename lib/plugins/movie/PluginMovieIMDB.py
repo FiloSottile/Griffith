@@ -31,7 +31,7 @@ plugin_url		= 'www.imdb.com'
 plugin_language		= _('English')
 plugin_author		= 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email	= 'griffith-private@lists.berlios.de'
-plugin_version		= '1.3'
+plugin_version		= '1.4'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -103,7 +103,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.trim(self.page, '<h5>Country:</h5>', '</div>')
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page, '<b>User Rating:</b>', '/10')
+		self.rating = gutils.trim(self.page, '<b>User Rating:</b> \n<b>', '/10')
 		if self.rating and self.rating.find('awaiting') == -1:
 			try:
 				self.rating = float(self.rating)
