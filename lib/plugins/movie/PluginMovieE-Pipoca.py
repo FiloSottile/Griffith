@@ -34,7 +34,7 @@ plugin_url = "epipoca.uol.com.br"
 plugin_language = _("Brazilian Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email="<vasco.m.nunes@gmail.com>"
-plugin_version = "0.4"
+plugin_version = "0.5"
 
 class Plugin(movie.Movie):
 	"A movie plugin object"
@@ -148,8 +148,7 @@ class SearchPlugin(movie.SearchMovie):
 
 		if (elements[0] != ''):
 			for element in elements:
-				self.ids.append(gutils.trim(element, "<a href=\"filmes_detalhes.php?idf=", "\"><img src=\"images/"))
-				self.titles.append(gutils.convert_entities \
-					(gutils.trim(element, "</a></font> <br>(<i>", "</i>, <a href=") ))
+				self.ids.append(gutils.trim(element, "<a href=\"filmes_detalhes.php?idf=", "\">"))
+				self.titles.append(gutils.strip_tags(gutils.trim(element, "<font class=\"titulo\">", "<b>Adicionar aos meus filmes favoritos</b>") ))
 		else:
 			self.number_results = 0

@@ -32,7 +32,7 @@ plugin_url = "www.cinema.ptgate.pt"
 plugin_language = _("Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email="<vasco.m.nunes@gmail.com>"
-plugin_version = "0.3"
+plugin_version = "0.4"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -50,7 +50,7 @@ class Plugin(movie.Movie):
 		self.title = string.capwords(gutils.trim(self.page,"class=subtitle>","</b><br>") )
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"<b>realizaÃ§Ã£o</b><br>","<br><br><b>")
+		self.director = gutils.trim(self.page,"<b>realização</b><br>","<br><br><b>")
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page,"<b>sinopse</b><br>","<br><br>")
