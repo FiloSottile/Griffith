@@ -32,13 +32,17 @@ plugin_url          = 'german.imdb.com'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'mikej06@hotmail.com'
-plugin_version      = '1.0'
+plugin_version      = '1.1'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
 		self.encode = 'utf-8'
 		self.movie_id = id
 		self.url = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
+
+	def initialize(self):
+		self.cast_page = self.open_page(url=self.url + '/fullcredits')
+		self.plot_page = self.open_page(url=self.url + '/plotsummary')
 
 	def get_image(self):
 		tmp = string.find(self.page, 'a name="poster"')
@@ -61,15 +65,22 @@ class Plugin(movie.Movie):
 					break
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,'<h5>Regie</h5>', '<br/>\n<br/>')
+		self.director = gutils.trim(self.page,'<h5>Regie</h5>', '<br/>\n')
+		if self.director == '':
+			self.director = gutils.trim(self.page,'<h5>Regisseur:</h5>', '<br/>\n')
 		self.director = self.__before_more(self.director)
 		self.director = self.director.replace('<br/>', ', ')
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page, '<h5>Kurzbeschreibung:</h5>', '</div>')
 		self.plot = self.__before_more(self.plot)
-		plot_page = self.open_page(url="http://german.imdb.com/title/tt" + str(self.movie_id) + "/plotsummary")
-		self.plot = self.plot + '\n\n' + gutils.strip_tags(gutils.trim(plot_page, '<p class="plotpar">', '<div'))
+		elements = string.split(self.plot_page, '<p class="plotpar">')
+		if len(elements) > 1:
+			self.plot = self.plot + '\n\n'
+			elements[0] = ''
+			for element in elements:
+				if element != '':
+					self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n'
 
 	def get_year(self):
 		self.year = gutils.trim(self.page, '<a href="/Sections/Years/', '</a>')
@@ -84,7 +95,9 @@ class Plugin(movie.Movie):
 
 	def get_cast(self):
 		self.cast = ''
-		self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
+		self.cast = gutils.trim(self.cast_page, '<table class="cast">', '</table>')
+		if self.cast == '':
+			self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
 		self.cast = string.replace(self.cast, ' ... ', _(' as '))
 		self.cast = string.replace(self.cast, '</tr><tr>', "\n")
 		self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
@@ -110,7 +123,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.trim(self.page, '<h5>Produktionsland:</h5>', '</div>')
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page, '<b>Ihre Bewertung:</b>', '/10')
+		self.rating = gutils.trim(self.page, '<b>Nutzer-Bewertung:</b>', '/10')
 		if self.rating:
 			try:
 				self.rating = str(float(gutils.clean(self.rating)))
@@ -119,13 +132,13 @@ class Plugin(movie.Movie):
 
 	def get_notes(self):
 		self.notes = ''
-		language = gutils.trim(self.page, '<h5>Language:</h5>', '</div>')
+		language = gutils.trim(self.page, '<h5>Sprache:</h5>', '</div>')
 		language = gutils.strip_tags(language)
-		color = gutils.trim(self.page, '<h5>Color:</h5>', '</div>')
+		color = gutils.trim(self.page, '<h5>Farbe:</h5>', '</div>')
 		color = gutils.strip_tags(color)
-		sound = gutils.trim(self.page, '<h5>Sound Mix:</h5>', '</div>')
+		sound = gutils.trim(self.page, '<h5>Tonverfahren:</h5>', '</div>')
 		sound = gutils.strip_tags(sound)
-		tagline = gutils.trim(self.page, '<h5>Tagline:</h5>', '</div>')
+		tagline = gutils.trim(self.page, '<h5>Werbezeile:</h5>', '</div>')
 		tagline = self.__before_more(tagline)
 		tagline = gutils.strip_tags(tagline)
 		if len(language)>0:

@@ -32,10 +32,10 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.5"
+plugin_version = "1.6"
 
 class Plugin(movie.Movie):
-	url_to_use = "http://www.kino.de/kinofilm.php4?"
+	url_to_use = "http://www.kino.de/kinofilm/"
 	url_type = "K"
 
 	def __init__(self, id):
@@ -43,19 +43,22 @@ class Plugin(movie.Movie):
 		elements = string.split(id, "_")
 		self.movie_id = elements[1]
 		if (elements[0] == "V"):
-			self.url_to_use = "http://www.kino.de/videofilm.php4?"
+			self.url_to_use = "http://www.kino.de/videofilm/"
 			self.url_type = "V"
 		else:
-			self.url_to_use = "http://www.kino.de/kinofilm.php4?"
+			self.url_to_use = "http://www.kino.de/kinofilm/"
 			self.url_type = "K"
-		self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
+		self.url = self.url_to_use + str(self.movie_id)
 
 	def initialize(self):
-		if (gutils.trim(self.url, "typ=", "&") <> "film"):
-			self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
-			self.open_page(self.parent_window)
 		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
-	
+		self.url = self.url_to_use + string.replace(str(self.movie_id), '/', '/credits/')
+		self.open_page(self.parent_window)
+		self.tmp_creditspage = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
+		self.url = self.url_to_use + string.replace(str(self.movie_id), "/", "/features/")
+		self.open_page(self.parent_window)
+		self.tmp_dvdfeaturespage = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
+
 	def get_image(self):
 		# first, try to get the second picture before the JavaScript block (it should be the original poster)
 		# if there is no second picture, use the first picture (it should be a picture from the film)
@@ -64,65 +67,67 @@ class Plugin(movie.Movie):
 			self.image_url = "http://images.kino.de/flbilder/" + gutils.trim(self.tmp_page,"img src=\"http://images.kino.de/flbilder/", "\"")
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page,"span CLASS=\"standardsmall\"><br>(",")<")
+		self.o_title = gutils.trim(self.tmp_page,"span class=\"standardsmall\"><br />(",")<")
+		if (self.plot == ""):
+			self.o_title = self.title
 
 	def get_title(self):
 		if (self.url_type == "V"):
-			self.title = gutils.after(gutils.trim(self.page,"\"headline2\"><A HREF=\"/videofilm.php4?nr=", "</A>"), ">")
+			self.title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"http://www.kino.de/videofilm", "</a>"), ">")
 		else:
-			self.title = gutils.after(gutils.trim(self.page,"\"headline2\"><A HREF=\"/kinofilm.php4?nr=", "</A>"), ">")
+			self.title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"http://www.kino.de/kinofilm", "</a>"), ">")
+		if (self.o_title == ""):
+			self.o_title = self.title
 
 	def get_director(self):
-		if (gutils.trim(self.url, "typ=", "&") <> "credits"):
-			self.url = self.url_to_use + "typ=credits&nr=" + str(self.movie_id)
-			self.open_page(self.parent_window)
-		self.director = gutils.trim(self.page,"Regie","</a>")
-		self.director = gutils.after(self.director,"mitwirk.php4")
+		self.director = gutils.trim(self.tmp_creditspage,"Regie","</a>")
+		self.director = gutils.after(self.director,"/star/")
 		self.director = gutils.after(self.director,">")
 
 	def get_plot(self):
-		if (gutils.trim(self.url, "typ=", "&") <> "film"):
-			self.url = self.url_to_use + "typ=film&nr=" + str(self.movie_id)
-			self.open_page(self.parent_window)
-		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
 		# little steps to perfect plot (I hope ... it's a terrible structured content ... )
-		self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "</TD></TR><tr><td></td></tr><TR>")
+		self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "</td></tr><tr><td></td></tr><tr>")
 		if (self.plot == ""):
 			self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "<script language=\"JavaScript\">")
 		self.plot = gutils.after(self.plot, "Fotoshow</A>")
 		self.plot = gutils.after(self.plot, "Filmpreise</A>")
 		self.plot = gutils.after(self.plot, "Games zum Film</A>")
 		self.plot = gutils.after(self.plot, " Crew</A>")
-		self.plot = gutils.before(self.plot, "FOTOSHOW</SPAN>")
+		self.plot = gutils.after(self.plot, "Soundtracks</A>")
+		self.plot = gutils.after(self.plot, "DVD-Features</A>")
+		self.plot = gutils.after(self.plot, " Fassungen</A>")
+		self.plot = gutils.before(self.plot, "FOTOSHOW</span>")
 		self.plot = gutils.after(self.plot, "</TABLE>")
+		self.plot = gutils.before(self.plot, "</span>")
 
 	def get_year(self):
-		self.year = gutils.trim(self.page,"class=\"standardsmall\"><br><b>DVD</b> - <b>","<BR>")
+		self.year = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>DVD</b> - <b>","<br />")
 		if self.year == "":
-			self.year = gutils.trim(self.page,"class=\"standardsmall\"><b>","<BR>")
+			self.year = gutils.trim(self.tmp_page,"class=\"standardsmall\"><b>","<br />")
 		self.year = gutils.trim(self.year,"<b>","</b>")
 		self.year = gutils.after(self.year," ")
 
 	def get_runtime(self):
-		self.runtime = gutils.trim(self.page,"Jahren</b> - <b>"," Min.")
+		self.runtime = gutils.trim(self.tmp_page,"Jahren</b> - <b>"," Min.")
 		if (self.runtime == ''):
-			self.runtime = gutils.trim(self.page,"Jahren</b></b> - <b>"," Min.")
+			self.runtime = gutils.trim(self.tmp_page,"Jahren</b></b> - <b>"," Min.")
 		if (self.runtime == ''):
-			self.runtime = gutils.trim(self.page,"</b><BR><b>"," Min.")
+			self.runtime = gutils.trim(self.tmp_page,"</b><br /><b>"," Min.")
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page,"class=\"standardsmall\"><br><b>DVD</b> - <b>","</b>")
+		self.genre = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>DVD</b> - <b>","</b>")
 		if self.genre == "":
-			self.genre = gutils.trim(self.page,"class=\"standardsmall\"><b>","</b>")
+			self.genre = gutils.trim(self.tmp_page,"class=\"standardsmall\"><b>","</b>")
 
 	def get_cast(self):
-		if (gutils.trim(self.url, "typ=", "&") <> "credits"):
-			self.url = self.url_to_use + "typ=credits&nr=" + str(self.movie_id)
-			self.open_page(self.parent_window)
-		self.cast = gutils.trim(self.page,"</TD></TR><TR  CLASS=\"dbtreffer", "\n")
+		self.cast = gutils.trim(self.tmp_creditspage,"</td></tr><tr  class=\"dbtrefferlight", "</table>")
+		if (self.cast == ""):
+			self.cast = gutils.trim(self.tmp_creditspage,"</td></tr><tr class=\"dbtrefferlight", "</table>")
 		self.cast = gutils.after(self.cast, "\">")
-		self.cast = self.cast.replace("<TR  CLASS=\"dbtrefferlight\">", "\n")
-		self.cast = self.cast.replace("<TR  CLASS=\"dbtrefferdark\">", "\n")
+		self.cast = self.cast.replace("<tr class=\"dbtrefferlight\">", "\n")
+		self.cast = self.cast.replace("<tr class=\"dbtrefferdark\">", "\n")
+		self.cast = self.cast.replace("<tr  class=\"dbtrefferlight\">", "\n")
+		self.cast = self.cast.replace("<tr  class=\"dbtrefferdark\">", "\n")
 		self.cast = self.cast.replace("&nbsp;", "--flip--")
 		self.cast = gutils.clean(self.cast)
 		elements = self.cast.split("\n")
@@ -136,26 +141,34 @@ class Plugin(movie.Movie):
 		self.cast = string.replace(self.cast, "--flip--", _(" as "))
 
 	def get_classification(self):
-		self.classification = gutils.trim(self.page,"FSK: ","</b>")
+		self.classification = gutils.trim(self.tmp_page,"FSK: ","</b>")
 
 	def get_studio(self):
-		self.studio = gutils.trim(self.page,"Verleih: ", "</b>")
+		self.studio = gutils.trim(self.tmp_page,"Verleih: ", "</b>")
 		if (self.studio == ""):
-			self.studio = gutils.trim(self.page,"Anbieter: ", "</b>")
+			self.studio = gutils.trim(self.tmp_page,"Anbieter: ", "</b>")
 
 	def get_o_site(self):
 		self.o_site = ""
 
 	def get_site(self):
-		self.site = self.url_to_use + "nr=" + self.movie_id;
+		self.site = self.url_to_use + self.movie_id;
 
 	def get_trailer(self):
 		self.trailer = ""
 
 	def get_country(self):
-		self.country = gutils.trim(self.page,"class=\"standardsmall\"><br><b>DVD</b> - <b>","<BR>")
+		self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>DVD</b> - <b>","<br />")
 		if self.country == "":
-			self.country = gutils.trim(self.page,"class=\"standardsmall\"><b>","<BR>")
+			self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>VHS</b> - <b>","<br />")
+		if self.country == "":
+			self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>Laser Disc</b> - <b>","<br />")
+		if self.country == "":
+			self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>Video CD</b> - <b>","<br />")
+		if self.country == "":
+			self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><br /><b>Blue-ray Disc</b> - <b>","<br />")
+		if self.country == "":
+			self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><b>","<br />")
 		self.country = gutils.trim(self.country,"<b>","</b>")
 		self.country = gutils.before(self.country," ")
 
@@ -164,19 +177,16 @@ class Plugin(movie.Movie):
 
 	def get_notes(self):
 		self.notes = ""
-		self.url = self.url_to_use + "typ=features&nr=" + str(self.movie_id)
-		self.open_page(self.parent_window)
-		self.tmp_page = gutils.trim(self.page, "<!-- PRINT-CONTENT-START-->", "<!-- PRINT-CONTENT-ENDE-->")
-		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Sprache</b>", "</TD></TR>")), "&nbsp;", "")
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Sprache</b>", "</td></tr>")), "&nbsp;", "")
 		if (tmp_notes != ""):
 			self.notes = self.notes + "Sprachen:\n" + tmp_notes + "\n\n"
-		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Untertitel</b>", "</TD></TR>")), "&nbsp;", "")
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Untertitel</b>", "</td></tr>")), "&nbsp;", "")
 		if (tmp_notes != ""):
 			self.notes = self.notes + "Untertitel:\n" + tmp_notes + "\n\n"
-		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>Mehrkanalton</b>", "</TD></TR>")), "&nbsp;", "")
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Mehrkanalton</b>", "</td></tr>")), "&nbsp;", "")
 		if (tmp_notes != ""):
 			self.notes = self.notes + "Mehrkanalton:\n" + tmp_notes + "\n\n"
-		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_page, "<b>EAN</b>", "</TD></TR>")), "&nbsp;", "")
+		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>EAN</b>", "</td></tr>")), "&nbsp;", "")
 		if (tmp_notes != ""):
 			self.notes = self.notes + "EAN:\n" + tmp_notes + "\n\n"
 
@@ -209,7 +219,7 @@ class SearchPlugin(movie.SearchMovie):
 		except:
 			tmp_pagecountint = 1
 		tmp_pagecountintcurrent = 1
-		while (tmp_pagecountint > tmp_pagecountintcurrent):
+		while (tmp_pagecountint > tmp_pagecountintcurrent and tmp_pagecountintcurrent < 5):
 			tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
 			self.url = "http://www.kino.de/megasuche.php4?typ=filme&page=" + str(tmp_pagecountintcurrent) + "&wort="
 			self.open_search(parent_window)
@@ -235,7 +245,7 @@ class SearchPlugin(movie.SearchMovie):
 		except:
 			tmp_pagecountint = 1
 		tmp_pagecountintcurrent = 1
-		while (tmp_pagecountint > tmp_pagecountintcurrent):
+		while (tmp_pagecountint > tmp_pagecountintcurrent and tmp_pagecountintcurrent < 5):
 			tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
 			self.url = "http://www.kino.de/megasuche.php4?typ=video&page=" + str(tmp_pagecountintcurrent) + "&wort="
 			self.open_search(parent_window)
@@ -248,25 +258,24 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		elements1 = string.split(self.page,'headline3"><a href="/kinofilm.php4?nr=')
+		elements1 = string.split(self.page,'headline3"><a href="http://www.kino.de/kinofilm/')
 		elements1[0] = ''
 		for element in elements1:
 			if element <> '':
-				self.ids.append("K_" + gutils.before(element,'&'))
+				self.ids.append("K_" + gutils.before(element,'"'))
 				self.titles.append(gutils.strip_tags(
-					gutils.trim(element,">","</A>") + " " +
-					gutils.trim(element, "<span CLASS=\"standardsmall\"><br>", "</SPAN>") + " (" +
-					string.replace(
-						gutils.trim(element, "<span class=\"standardsmall\"><b>", "</span>"), "<b>", ", ")
-							+ ")"))
-							
-		elements2 = string.split(self.page,'headline3"><a href="/videofilm.php4?nr=')
+					gutils.trim(element,">","</a>") + " (" +
+					gutils.trim(element, '<span class="standardsmall">', "</span>") + ")"
+					)
+				)
+
+		elements2 = string.split(self.page,'headline3"><a href="http://www.kino.de/videofilm/')
 		elements2[0] = ''
 		for element in elements2:
 			if element <> '':
-				self.ids.append("V_" + gutils.before(element,'&'))
-				self.titles.append(gutils.strip_tags( 
-					gutils.trim(element,">","</A>") + " " +
-					gutils.trim(element, '<span CLASS="standardsmall"><br>', '</SPAN>') + " (" +
-					string.replace(
-						gutils.trim(element, '<span class="standardsmall"><br><b>', "</span>"), "<b>", ", ") + ")"))
+				self.ids.append("V_" + gutils.before(element,'"'))
+				self.titles.append(gutils.strip_tags(
+					gutils.trim(element,">","</a>") + " (" +
+					gutils.trim(element, '<span class="standardsmall">', '</span>') + ")"
+					)
+				)

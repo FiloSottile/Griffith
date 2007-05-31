@@ -39,6 +39,10 @@ class Plugin(movie.Movie):
 		self.movie_id = id
 		self.url = "http://imdb.com/title/tt%s" % str(self.movie_id)
 
+	def initialize(self):
+		self.cast_page = self.open_page(url=self.url + '/fullcredits')
+		self.plot_page = self.open_page(url=self.url + '/plotsummary')
+
 	def get_image(self):
 		tmp = string.find(self.page, 'a name="poster"')
 		if tmp == -1:		# poster not available
@@ -62,6 +66,13 @@ class Plugin(movie.Movie):
 	def get_plot(self):
 		self.plot = gutils.trim(self.page, '<h5>Plot Outline:</h5>', '</div>')
 		self.plot = self.__before_more(self.plot)
+		elements = string.split(self.plot_page, '<p class="plotpar">')
+		if len(elements) > 1:
+			self.plot = self.plot + '\n\n'
+			elements[0] = ''
+			for element in elements:
+				if element <> '':
+					self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n'
 
 	def get_year(self):
 		self.year = gutils.trim(self.page, '<a href="/Sections/Years/', '</a>')
@@ -76,7 +87,9 @@ class Plugin(movie.Movie):
 
 	def get_cast(self):
 		self.cast = ''
-		self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
+		self.cast = gutils.trim(self.cast_page, '<table class="cast">', '</table>')
+		if self.cast == '':
+			self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
 		self.cast = string.replace(self.cast, ' ... ', _(' as '))
 		self.cast = string.replace(self.cast, '</tr><tr>', "\n")
 		self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
@@ -88,7 +101,7 @@ class Plugin(movie.Movie):
 		self.classification = gutils.trim(self.classification, 'Rated ', ' ')
 
 	def get_studio(self):
-		self.studio = ''
+		self.studio = gutils.trim(self.page, '<h5>Company:</h5>', '</a>')
 
 	def get_o_site(self):
 		self.o_site = ''
