@@ -32,7 +32,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.6"
+plugin_version = "1.7"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm/"
@@ -68,16 +68,17 @@ class Plugin(movie.Movie):
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.tmp_page,"span class=\"standardsmall\"><br />(",")<")
-		if (self.plot == ""):
-			self.o_title = self.title
+		if self.o_title == "":
+			if self.url_type == "V":
+				self.o_title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"http://www.kino.de/videofilm", "</a>"), ">")
+			else:
+				self.o_title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"http://www.kino.de/kinofilm", "</a>"), ">")
 
 	def get_title(self):
-		if (self.url_type == "V"):
+		if self.url_type == "V":
 			self.title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"http://www.kino.de/videofilm", "</a>"), ">")
 		else:
 			self.title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"http://www.kino.de/kinofilm", "</a>"), ">")
-		if (self.o_title == ""):
-			self.o_title = self.title
 
 	def get_director(self):
 		self.director = gutils.trim(self.tmp_creditspage,"Regie","</a>")
