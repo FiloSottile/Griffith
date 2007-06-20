@@ -31,9 +31,13 @@ plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.10'
+plugin_version		= '1.11'
 
 class Plugin(movie.Movie):
+	TRAILER_PATTERN     = re.compile("""<a class=["']notSelected["'].*?href=["'](.*?)["']>zwiastuny</a>\s*\[\d+\]\s*&raquo;""")
+	DIRECTOR_PATTERN    = re.compile('yseria\s+(.*)\s+scenariusz', re.MULTILINE)
+	O_TITLE_AKA_PATTERN = re.compile('\(AKA\s+(.*?)\)')
+
 	def __init__(self, id):
 		self.movie_id = 'filmweb'
 		self.url      = str(id)
@@ -48,8 +52,12 @@ class Plugin(movie.Movie):
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page, '<span class="otherTitle">', '<span')
-		self.o_title = string.replace(self.o_title, "\t",'')
-		self.o_title = string.replace(self.o_title, "\n",'')
+		tmp = self.O_TITLE_AKA_PATTERN.findall(self.o_title)
+		if tmp:
+			self.o_title = tmp[0]
+		else:
+			self.o_title = string.replace(self.o_title, "\t",'')
+			self.o_title = string.replace(self.o_title, "\n",'')
 
 	def get_title(self):
 		self.title = gutils.trim(self.page, '<div id="filmTitle">', '<span')
@@ -59,14 +67,14 @@ class Plugin(movie.Movie):
 			self.title = gutils.before(self.title, '(')
 
 	def get_director(self):
-		self.director = re.findall(r'yseria\t+(.*)\t+scenariusz', self.page)
-		if len(self.director)>0:
-			self.director = self.director[0]
+		director = self.DIRECTOR_PATTERN.findall(self.page)
+		if len(director)>0:
+			self.director = director[0]
 			self.director = string.replace(self.director, "\t",'')
+			self.director = re.sub('\s+', ' ', self.director)
 			self.director = string.replace(self.director, ",",", ")
+			self.director = string.replace(self.director, " ,  ",", ")
 			self.director = string.replace(self.director, ",  (wi\xeacej&#160;...)",'')
-		else:
-			self.director = None
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page," alt=\"o filmie\"/></div>","</div>")
@@ -115,7 +123,9 @@ class Plugin(movie.Movie):
 		self.site = self.url
 
 	def get_trailer(self):
-		self.trailer = ''
+		trailer = self.TRAILER_PATTERN.findall(self.page)
+		if trailer:
+			self.trailer = trailer[0]
 
 	def get_country(self):
 		self.country = gutils.trim(self.page,"\tprodukcja:", '</a>')

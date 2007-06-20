@@ -25,6 +25,7 @@ from gettext import gettext as _
 import gutils
 import movie
 import string
+import re
 
 plugin_name		= 'FDb'
 plugin_description	= 'Internetowa baza filmowa'
@@ -32,9 +33,11 @@ plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.6'
+plugin_version		= '1.7'
 
 class Plugin(movie.Movie):
+	TRAILER_PATTERN = re.compile('\s*<a\shref=[\'"](.*?)["\'].*?>\(zobacz\szwiastun\)</a>')
+	
 	def __init__(self, movie_id):
 		from md5 import md5
 		self.movie_id = md5(movie_id).hexdigest()
@@ -78,6 +81,7 @@ class Plugin(movie.Movie):
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page,'>Opis filmu:</div>','</div>')
+		self.plot = self.TRAILER_PATTERN.sub('', self.plot)
 
 	def get_year(self):
 		self.year = gutils.trim(self.page,' class="movieYear">(', ')</span>')
@@ -111,7 +115,9 @@ class Plugin(movie.Movie):
 		self.site = self.url
 
 	def get_trailer(self):
-		self.trailer = ''
+		trailer_url = self.TRAILER_PATTERN.findall(self.page)
+		if trailer_url:
+			self.trailer = trailer_url[0]
 
 	def get_country(self):
 		self.country = gutils.trim(self.page,">Kraj:</span>\n",'</div>')

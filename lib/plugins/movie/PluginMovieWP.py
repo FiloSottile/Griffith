@@ -32,7 +32,7 @@ plugin_url          = 'www.film.wp.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.2'
+plugin_version      = '2.3'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -114,7 +114,11 @@ class Plugin(movie.Movie):
 		self.trailer = "http://film.wp.pl/id,%s,film_trailer.html" % self.movie_id
 
 	def get_country(self):
-		self.country = gutils.trim(self.page, '<b>Kraj(e) produkcji:</b>', "\t\t</div><div")
+		pos = self.page.find('<b>Kraj produkcji:</b>')
+		if pos == -1:
+			pos = self.page.find('<b>Kraje produkcji:</b>')
+		if pos > -1:
+			self.country = gutils.trim(self.page[pos:], '</b>', "\t\t</div><div")
 
 	def get_rating(self):
 		self.rating = None
