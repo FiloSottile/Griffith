@@ -123,21 +123,18 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.sub_search()
-		return self.page
-
-	def sub_search(self):
-		self.page = gutils.trim(self.page,"<blockquote>", "</blockquote>");
+		self.page = gutils.trim(self.page, '<ul>', '</ul>');
 		self.page = self.page.replace('\x9c','ś')
 		self.page = self.page.replace('š','ą')
+		return self.page
 
 	def get_searches(self):
-		elements = string.split(self.page,"<li>")
+		elements = string.split(self.page, '<li>')
 		self.number_results = elements[-1]
 
-		if (elements[0]<>''):
+		if len(elements):
 			for element in elements:
-				self.ids.append(gutils.trim(element,"/film/film.asp?fi=","\"><b>"))
-				self.titles.append(gutils.convert_entities(gutils.trim(element,"<b>","</b></a>")))
+				self.ids.append(gutils.trim(element,"/film/film.asp?fi=", '"><'))
+				self.titles.append(gutils.convert_entities(gutils.trim(element, '"bold">', '</span>')))
 		else:
 			self.number_results = 0

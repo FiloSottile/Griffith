@@ -31,7 +31,7 @@ plugin_url		= 'www.imdb.com'
 plugin_language		= _('English')
 plugin_author		= 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email	= 'griffith-private@lists.berlios.de'
-plugin_version		= '1.4'
+plugin_version		= '1.5'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -152,7 +152,7 @@ class Plugin(movie.Movie):
 		return data
 
 class SearchPlugin(movie.SearchMovie):
-
+	PATTERN = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["']>(.*?)</td>""")
 	def __init__(self):
 		self.original_url_search	= 'http://imdb.com/find?more=tt;q='
 		self.translated_url_search	= 'http://imdb.com/find?more=tt;q='
@@ -160,17 +160,17 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.sub_search()
+		self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>');
+		self.page = self.page.decode('iso-8859-1')
 		return self.page
 
-	def sub_search(self):
-		self.page = gutils.trim(self.page, '</b> found the following results:', '<b>Suggestions For Improving Your Results</b>');
-		self.page = self.page.decode('iso-8859-1')
-
 	def get_searches(self):
-		elements = string.split(self.page, '<li>')
+		elements = string.split(self.page, '<tr>')
 
-		if (elements[0]<>''):
-			for element in elements:
-				self.ids.append(gutils.trim(element, '/title/tt','/?fr='))
-				self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.trim(element, ';fm=1">', '</li>'))))
+		if len(elements):
+			for element in elements[1:]:
+				match = self.PATTERN.findall(element)
+				if len(match):
+					tmp  = gutils.clean(match[0][1])
+					self.ids.append(match[0][0])
+					self.titles.append(tmp)
