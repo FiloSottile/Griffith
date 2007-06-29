@@ -32,7 +32,7 @@ plugin_url = "cineteka.com"
 plugin_language = _("Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.2"
+plugin_version = "0.3"
 
 class Plugin(movie.Movie):
 	"""A movie plugin object"""
@@ -56,23 +56,27 @@ class Plugin(movie.Movie):
 
 	def get_director(self):
 		"""Finds the film's director"""
-		self.director = gutils.strip_tags(gutils.trim(self.page, "<td><b>Realizador:</b>", "</a></td>"))
+		self.director = gutils.strip_tags(gutils.trim(self.page, "<div><b>Realização:</b><br>", "</div>"))
+		self.director = string.replace(self.director,"<br>", ", ")
+		self.director = gutils.strip_tags(self.director)
 
 	def get_plot(self):
 		"""Finds the film's plot"""
-		self.plot = gutils.trim(self.page, "<b>Sinopse:</b> ", "</div>")
+		self.plot = gutils.trim(self.page, """<div class="txt-normal" style="margin-top: 10px;">""", "</td></tr></table>")
 
 	def get_year(self):
 		"""Finds the film's year"""
-		self.year = gutils.trim(self.page, "<td><b>Ano:</b> ", "</td>")
+		self.year = gutils.trim(self.page, "<b>Ano:</b> ", "</div>")
 
 	def get_runtime(self):
 		"""Finds the film's running time"""
-		self.runtime = gutils.trim(self.page, "<td><b>DuraÃ§Äƒo:</b> ", " min.</td>")
+		self.runtime = gutils.trim(self.page, "<td><b>Duração:</b> ", " min.</td>")
 
 	def get_genre(self):
 		"""Finds the film's genre"""
-		self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>GÃ©nero:</b> ", "</td>"))
+		self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>Género:</b><br>", "</div>"))
+		self.genre = string.replace(self.genre,"<br>", ", ")
+		self.genre = gutils.strip_tags(self.genre)
 
 	def get_cast(self):
 		self.cast = gutils.strip_tags(gutils.trim(self.page, "<b>Elenco:</b> ", "</td>"))
@@ -82,7 +86,7 @@ class Plugin(movie.Movie):
 
 	def get_classification(self):
 		"""Find the film's classification"""
-		self.classification = gutils.trim(self.page, "<td><b>Idade:</b> ", "</td>")
+		self.classification = gutils.trim(self.page, "<b>Idade:</b> ", "</div>")
 
 	def get_studio(self):
 		"""Find the studio"""
@@ -92,7 +96,7 @@ class Plugin(movie.Movie):
 		"""Find the film's oficial site"""
 		self.o_site = gutils.trim(self.page, \
 			"<a class=\"button\" href=\"", \
-			"""" title="Site Oficial""")
+			" title=\"Consultar título no Internet Movie Data Base\"")
 
 	def get_site(self):
 		"""Find the film's imdb details page"""
@@ -106,7 +110,9 @@ class Plugin(movie.Movie):
 
 	def get_country(self):
 		"""Find the film's country"""
-		self.country = gutils.trim(self.page, "<td><b>PaÃ­s:</b> ", "</td>")
+		self.country = gutils.trim(self.page, "<b>País:</b><br>", "</div>")
+		self.country = string.replace(self.country,"<br>", ", ")
+		self.country = gutils.strip_tags(self.country)
 
 	def get_rating(self):
 		"""Find the film's rating. From 0 to 10.

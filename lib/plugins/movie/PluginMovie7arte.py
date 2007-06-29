@@ -32,7 +32,7 @@ plugin_url = "7arte.net"
 plugin_language = _("Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.5"
+plugin_version = "0.6"
 
 class Plugin(movie.Movie):
 	"""A movie plugin object"""
@@ -56,8 +56,8 @@ class Plugin(movie.Movie):
 
 	def get_director(self):
 		"""Finds the film's director"""
-		self.director = gutils.trim(self.page, "<B>Realizador:</B>", "</A></FONT><TABLE><TR>")
-		self.director = gutils.after(self.director, ")\">")
+		self.director = gutils.trim(self.page, "<B>Realizador:</B> <FONT SIze=-1>", "</FONT><TABLE><TR>")
+		self.director = gutils.strip_tags(self.director)
 
 	def get_plot(self):
 		"""Finds the film's plot"""
