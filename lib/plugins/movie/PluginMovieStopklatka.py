@@ -22,8 +22,8 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
-import gutils
-import movie,string
+import gutils, movie
+import string, re
 
 plugin_name         = 'Stopklatka'
 plugin_description  = 'Internetowy Serwis Filmowy'
@@ -31,9 +31,11 @@ plugin_url          = 'www.stopklatka.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '1.7'
+plugin_version      = '1.8'
 
 class Plugin(movie.Movie):
+	IMAGE_PATTERN = re.compile('(http://img.stopklatka.pl/film/.*?)"')
+
 	def __init__(self, id):
 		self.movie_id = id
 		self.url = "http://www.stopklatka.pl/film/film.asp?fi=%s" % str(self.movie_id)
@@ -44,53 +46,50 @@ class Plugin(movie.Movie):
 		self.page = self.page.replace('š','ą')
 
 	def get_image(self):
-		self.image_url = gutils.trim(self.page,"http://img.stopklatka.pl/film/","' border=1")
-		self.image_url = 'http://img.stopklatka.pl/film/' + self.image_url
+		image = self.IMAGE_PATTERN.findall(self.page)
+		if len(image):
+			self.image_url = image[0]
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page,"<h2>(",")</h2>")
+		self.o_title = gutils.trim(self.page, '<h2> (', ')</h2>')
 		if self.o_title == '':
 			self.o_title = self.get_title(True)
 
 	def get_title(self, ret=False):
-		data = gutils.trim(self.page,"<i><h1>","</h1>")
+		data = gutils.trim(self.page, '<h1>', '</h1>')
 		if ret is True:
 			return data
 		else:
 			self.title = data
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,">re\xbfyseria:<","</font>")
-		self.director = gutils.after(self.director,"<b>")
-		self.director = gutils.strip_tags(self.director)
+		self.director = gutils.trim(self.page, '>re\xbfyseria:<', '</td></tr>')
+		self.director = gutils.after(self.director, '>')
 
 	def get_plot(self):
-		self.plot = gutils.trim(self.page,"class='zdjecie'","</font></td></tr>")
-		self.plot = gutils.after(self.plot,"\"text2\">")
+		self.plot = gutils.trim(self.page, '<p>', '</p>')
+		self.plot = gutils.before(self.plot, '<b>Wi\xEAcej ')
 
 	def get_year(self):
-		self.year = gutils.trim(self.page,">rok produkcji:<","</b>")
-		self.year = gutils.after(self.year,"<b>")
+		self.year = gutils.trim(self.page, '>rok produkcji:<', '</span>')
+		self.year = gutils.after(self.year, '>')
 
 	def get_runtime(self):
-		self.runtime = gutils.trim(self.page,"trwania:<"," min</b>")
-		self.runtime = gutils.after(self.runtime,"<b>")
+		self.runtime = gutils.trim(self.page, 'trwania:<', ' min<')
+		self.runtime = gutils.after(self.runtime, '>')
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page,">gatunek:<","</b>")
-		self.genre = gutils.after(self.genre,"<b>")
+		self.genre = gutils.trim(self.page, '>gatunek:<', '</span>')
+		self.genre = gutils.after(self.genre, '>')
 
 	def get_cast(self):
-		self.cast = gutils.trim(self.page,">obsada:</font>","</font>")
-		self.cast = gutils.after(self.cast,"<b>")
-		self.cast = string.replace(self.cast,", ", "\n")
-		self.cast = string.strip(gutils.strip_tags(self.cast))
-		pos = string.find(self.cast, 'Więcej &gt;')
-		if pos > 0:
-			self.cast = self.cast[0:pos]
+		self.cast = gutils.trim(self.page, '>obsada:<', '</td></tr>')
+		self.cast = gutils.after(self.cast, '>')
+		self.cast = string.replace(self.cast, ', ', "\n")
+		self.cast = gutils.before(self.cast, '<b>Wi\xEAcej ')
 
 	def get_classification(self):
-		self.classification = ""
+		self.classification = ''
 
 	def get_studio(self):
 		self.studio = ""
@@ -106,11 +105,11 @@ class Plugin(movie.Movie):
 		self.trailer = "http://www.stopklatka.pl/film/film.asp?fi=" + self.movie_id + "&sekcja=mmedia"
 
 	def get_country(self):
-		self.country = gutils.trim(self.page,">kraj:<","</b>")
-		self.country = gutils.after(self.country,"<b>")
+		self.country = gutils.trim(self.page, '>kraj:<', '</span>')
+		self.country = gutils.after(self.country, '>')
 
 	def get_rating(self):
-		self.rating = "0"
+		self.rating = '0'
 
 	def get_notes(self):
 		self.notes = ''
