@@ -107,15 +107,33 @@ class Plugin(movie.Movie):
 
 	def get_notes(self):
 		self.notes = ""
-		tmp_notes = gutils.strip_tags(string.replace(gutils.trim(self.page, 'Bildformat(e)', '</TR>'), '<br />', '\n'))
+		tmp_notes = re.sub('^[ \t]+', '',
+			gutils.strip_tags(
+			re.sub('(<br>|<br />)', '\r\n',
+			re.sub('[\r\n]+', '',
+			re.sub('[ \t][ \t\r\n]+', ' ',
+			gutils.trim(self.page, 'Bildformat(e)', '</TR>')))))
+		)
 		if (tmp_notes != ""):
 			self.notes = self.notes + "Bildformat(e):\n" + tmp_notes + "\n"
-		tmp_notes = gutils.strip_tags(string.replace(gutils.trim(self.page, 'Untertitel', '</TR>'), '<br>', '\n'))
-		if (tmp_notes != ""):
-			self.notes = self.notes + "Untertitel:" + tmp_notes + "\n\n"
-		tmp_notes = gutils.strip_tags(string.replace(gutils.trim(self.page, 'Tonformat(e)', '</TR>'), '<br />', '\n'))
+		tmp_notes = re.sub('^[ \t]+', '',
+			gutils.strip_tags(
+			re.sub('(<br>|<br />)', '\r\n',
+			re.sub('[\r\n]+', '',
+			re.sub('[ \t][ \t\r\n]+', ' ',
+			gutils.trim(self.page, 'Tonformat(e)', '</TR>')))))
+		)
 		if (tmp_notes != ""):
 			self.notes = self.notes + "Tonformat(e):\n" + tmp_notes + "\n\n"
+		tmp_notes = re.sub('^[ \t]+', '',
+			gutils.strip_tags(
+			re.sub('(<br>|<br />)', '\r\n',
+			re.sub('[\r\n]+', '',
+			re.sub('[ \t][ \t\r\n]+', ' ',
+			gutils.trim(self.page, 'Untertitel', '</TR>')))))
+		)
+		if (tmp_notes != ""):
+			self.notes = self.notes + "Untertitel:" + tmp_notes + "\n\n"
 			
 	def regextrim(self,text,key1,key2):
 		obj = re.search(key1, text)
@@ -158,7 +176,7 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		elements1 = re.split('&nbsp;<a href="/dvd-datenbank/', self.page)
+		elements1 = re.split('&nbsp;<a title="[^"]+" href="/dvd-datenbank/', self.page)
 		elements1[0] = None
 		for element in elements1:
 			if element <> None:
@@ -167,9 +185,12 @@ class SearchPlugin(movie.SearchMovie):
 					gutils.trim(element, '>', '</a>') +
 					gutils.strip_tags(
 						' (' +
+						re.sub('[ \t\n][ \t\n]+', ' ',
+						string.replace(
 						string.replace(
 							self.regextrim(element, '<div [^>]*>', '</div>'),
-							'<br>', ' - ')
+							'<br>', ' - '),
+							'&nbsp;', ''))
 						+ ')'
 					)
 				)
