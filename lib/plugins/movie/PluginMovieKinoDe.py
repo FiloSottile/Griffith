@@ -33,7 +33,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.8"
+plugin_version = "1.9"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm/"
@@ -61,13 +61,17 @@ class Plugin(movie.Movie):
 		self.tmp_dvdfeaturespage = gutils.before(self.page, 'kinode_navi1')
 
 	def get_image(self):
-		self.image_url = gutils.trim(self.tmp_page, 'class="navi', '.jpg"')
-		if self.image_url <> '':
-			self.image_url = 'http://images.kino.de/flbilder/' + gutils.after(self.image_url, 'http://images.kino.de/flbilder/') + '.jpg'
-		else:
-			self.image_url = self.regextrim(self.tmp_page, 'http://images.kino.de/flbilder/', 'headline2')
-			if self.image_url <> '':
-				self.image_url = 'http://images.kino.de/flbilder/' + gutils.before(self.image_url, '"')
+		self.image_url = ''
+		tmpdata = self.regextrim(self.tmp_page, '(PRINT[-]CONTENT[-]START|<td class="content">)', '(Dieser Film wurde |>FOTOSHOW<|>KRITIK<)')
+		tmpdatasplit = re.split('src="http://images.kino.de/flbilder', tmpdata)
+		if len(tmpdatasplit) > 2:
+			tmpdata = gutils.before(tmpdatasplit[2], '.jpg')
+			if tmpdata <> '':
+				self.image_url = 'http://images.kino.de/flbilder' + tmpdata + '.jpg'
+		elif len(tmpdatasplit) > 1:
+			tmpdata = gutils.before(tmpdatasplit[1], '.jpg')
+			if tmpdata <> '':
+				self.image_url = 'http://images.kino.de/flbilder' + tmpdata + '.jpg'
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.tmp_page,"span class=\"standardsmall\"><br />(",")<")
@@ -135,7 +139,10 @@ class Plugin(movie.Movie):
 			for element in elements:
 				elements2 = element.split("--flip--")
 				if len(elements2) > 1:
-					self.cast += elements2[1] + "--flip--" + elements2[0] + "\n"
+					if elements2[0] <> '':
+						self.cast += elements2[1] + "--flip--" + elements2[0] + "\n"
+					else:
+						self.cast += elements2[1] + "\n"
 				else:
 					self.cast = element
 			self.cast = string.replace(self.cast, "--flip--", _(" as "))
@@ -257,7 +264,7 @@ class SearchPlugin(movie.SearchMovie):
 		for element in elements1:
 			if element <> None:
 				self.ids.append("K_" + re.sub('[?].*', '', gutils.before(element,'"')))
-				self.titles.append(string.replace(string.replace(
+				self.titles.append('Kino: ' + string.replace(string.replace(
 					gutils.strip_tags(
 						gutils.trim(element,'>','</a>') + ' (' +
 						string.replace(
@@ -273,7 +280,7 @@ class SearchPlugin(movie.SearchMovie):
 		for element in elements2:
 			if element <> None:
 				self.ids.append("V_" + re.sub('[?].*', '', gutils.before(element,'"')))
-				self.titles.append(string.replace(string.replace(
+				self.titles.append('Video: ' + string.replace(string.replace(
 					gutils.strip_tags(
 						gutils.trim(element,'>','</a>') + ' (' +
 						string.replace(
