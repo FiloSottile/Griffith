@@ -32,7 +32,7 @@ plugin_url = "www.cinema.ptgate.pt"
 plugin_language = _("Portuguese")
 plugin_author = "Vasco Nunes"
 plugin_author_email="<vasco.m.nunes@gmail.com>"
-plugin_version = "0.4"
+plugin_version = "0.4.1"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -70,6 +70,7 @@ class Plugin(movie.Movie):
 	def get_cast(self):
 		self.cast = ""
 		self.cast = gutils.trim(self.page,"pretes</b><br>","<br><br><b>data de estreia</b><br>")
+		self.cast = string.replace(self.cast,"<br> ","\n")
 		self.cast = string.replace(self.cast,"<br>", "\n")
 		self.cast = gutils.strip_tags(self.cast)
 
@@ -90,9 +91,13 @@ class Plugin(movie.Movie):
 
 	def get_country(self):
 		self.country = gutils.trim(self.page,"s</b><br>","<br><br><b>g")
+		
+	def get_notes(self):
+		self.notes = gutils.trim(self.page,"prémios e nomeações</b><br><b>", "<td width=6 background='Images/group_r.gif'")
+		self.notes = gutils.strip_tags(self.notes)
 
 	def get_rating(self):
-		tmp=gutils.trim(self.page,"img src='Images/ustar",".gif")
+		tmp=gutils.trim(self.page,"'Images/mstar",".gif")
 		if(tmp):
 			self.rating = float(tmp)
 			if (self.rating>10):
