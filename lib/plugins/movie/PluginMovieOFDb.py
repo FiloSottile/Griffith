@@ -13,7 +13,7 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.75"
+plugin_version = "0.8"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -21,23 +21,28 @@ class Plugin(movie.Movie):
 		self.movie_id = id
 		self.url = "http://www.ofdb.de/view.php?page=film&fid=%s" % str(self.movie_id)
 
+	def initialize(self):
+		# OFDb didn't provide the runtime, studio and classification but it provide a link to the german imdb entry
+		# lets use the imdb page, why not
+		imdb_nr = gutils.trim(self.page, 'http://german.imdb.com/Title?', '"')
+		if imdb_nr != '':
+			self.imdb_page = self.open_page(url='http://german.imdb.com/Title?' + imdb_nr)
+		else:
+			self.imdb_page = ''
+
 	def get_image(self):
 		self.image_url = "http://www.ofdb.de/images/film/" + gutils.trim( self.page, "<img src=\"images/film/", "\"" )
 		
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page,"""Originaltitel:</font></td>
-            <td>&nbsp;&nbsp;</td>
-            <td width="99%"><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","<")
+		self.o_title = gutils.trim(self.page, 'Originaltitel:', '</tr>')
+		if self.o_title == '':
+			self.o_title = gutils.trim(self.page,'size="3"><b>','<')
 
 	def get_title(self):
 		self.title = gutils.trim(self.page,'size="3"><b>','<')
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"""Regie: 
-              </font></td>
-            <td>&nbsp;&nbsp;</td>
-            <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b><a href="view.php?page=liste&Name=""","</a><br>")
-		self.director = string.capwords(gutils.after(self.director,">"))
+		self.director = gutils.trim(self.page,"Regie: ","</a><br>")
 
 	def get_plot(self):
 		storyid = gutils.trim(self.page, 'sid=', '">')
@@ -45,46 +50,36 @@ class Plugin(movie.Movie):
 		self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
 	def get_year(self):
-		self.year = gutils.trim(self.page,"""Erscheinungsjahr: 
-              </font></td>
-            <td>&nbsp;&nbsp;</td>
-            <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b><a href="view.php?page=blaettern&Kat=Jahr&Text=""","</a></b></font></td>")
-		self.year = string.capwords(gutils.after(self.year,"\">"))
+		self.year = gutils.trim(self.page,"Erscheinungsjahr: ","</a>")
+		self.year = gutils.strip_tags(self.year)
 
 	def get_runtime(self):
-		self.runtime = string.capwords(gutils.trim(self.page,"<b class=\"ch\">Runtime:</b>"," min") )
+		# from imdb
+		self.runtime = gutils.trim(self.imdb_page, '<h5>L&auml;nge:</h5>', ' min')
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page,"""Genre(s):</font></td>
-            <td>&nbsp;&nbsp;</td>
-            <td nowrap><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b>""","</b></font></td>")
+		self.genre = gutils.trim(self.page,"Genre(s):","</table>")
 		self.genre = string.replace( self.genre, "<br>", ", " )
+		self.genre = gutils.strip_tags(self.genre)
 		self.genre = string.replace( self.genre, "/", ", " )
 		self.genre = self.genre[0:-2]
 
 	def get_cast(self):
+		self.cast = ''
 		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(self.movie_id) )
-		self.cast = ""
-		self.cast = gutils.trim(cast_page,"Darsteller</i>","<td></td>\n</tr>\n</table>\n<br>")
+		self.cast = gutils.trim(cast_page, 'Darsteller</i>', '<i>')
+		self.cast = string.replace(self.cast, 'class="Daten">', '>\n')
 		self.cast = string.strip(gutils.strip_tags(self.cast))
-		self.cast = string.replace(self.cast,"&nbsp;", "")
-		self.cast = string.replace(self.cast, "  ", "")
-		self.cast = string.replace(self.cast, "\t", "")
-		
-		elements = string.split(self.cast,"\n")
-		cast = ""
-		for element in elements:
-			if (element != ''):
-				cast += element + "\n"
-		cast = string.replace( cast, "\n... ", " als ")
-		self.cast = cast
+		self.cast = string.replace(self.cast, '... ', _(' as '))
+		self.cast = string.replace(self.cast, '&nbsp;', '')
 
 	def get_classification(self):
-		# ofdb.de got no classification
-		self.classification = ""
+		# from imdb
+		self.classification = gutils.trim(gutils.trim(self.imdb_page, 'Altersfreigabe:', '</div>'), 'Germany:', '&')
 
 	def get_studio(self):
-		self.studio = ""
+		# from imdb
+		self.studio = gutils.trim(self.imdb_page, '<h5>Company:</h5>', '</a>')
 
 	def get_o_site(self):
 		self.o_site = ""
@@ -96,11 +91,7 @@ class Plugin(movie.Movie):
 		self.trailer = ""
 
 	def get_country(self):
-		self.country = gutils.trim(self.page,"""Herstellungsland: 
-              </font></td>
-            <td>&nbsp;&nbsp;</td>
-            <td><font face="Arial,Helvetica,sans-serif" size="2" class="Daten"><b><a href="view.php?page=blaettern&Kat=Land&Text=""","</a>")
-		self.country = gutils.after(self.country,"\">")
+		self.country = gutils.trim(self.page,"Herstellungsland: ","</a>")
 
 	def get_rating(self):
 		self.rating = gutils.trim(self.page,"<br>Note: ","&nbsp;")
