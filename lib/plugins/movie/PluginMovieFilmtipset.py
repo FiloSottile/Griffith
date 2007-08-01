@@ -27,8 +27,8 @@ import movie
 import string
 import re
 
-plugin_name = "FilmTipset.se"
-plugin_description = "FilmTipset.se"
+plugin_name = "Filmtipset.se"
+plugin_description = "Filmtipset.se"
 plugin_url = "www.filmtipset.se"
 plugin_language = _("Swedish")
 plugin_author = "Michael Jahn"
@@ -82,7 +82,10 @@ class Plugin(movie.Movie):
 		self.studio = ''
 
 	def get_o_site(self):
-		self.o_site = ""
+		self.o_site = ''
+		tmp = gutils.trim(self.page, 'http://akas.imdb.com', '"')
+		if tmp != '':
+			self.o_site = 'http://akas.imdb.com' + tmp
 
 	def get_site(self):
 		self.site = self.url
@@ -112,7 +115,10 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page, 'Matchning', 'Hittade')
+		tmp_page = gutils.trim(self.page, 'Matchning', 'Hittade')
+		if tmp_page == '':
+			tmp_page = gutils.trim(self.page, 'Matchning', 'Visa fler')
+		self.page = tmp_page
 		return self.page
 
 	def get_searches(self):
@@ -120,8 +126,9 @@ class SearchPlugin(movie.SearchMovie):
 		elements1[0] = None
 		for element in elements1:
 			if element <> None:
-				self.ids.append(gutils.before(element,'"'))
+				self.ids.append(gutils.trim(element, '/', '"'))
 				self.titles.append(
+					gutils.strip_tags(gutils.trim(element, '>', '</a>')) + ' / ' +
 					string.replace(gutils.trim(element, 'title="', '"'), '&nbsp;', ' ')
 				)
 
