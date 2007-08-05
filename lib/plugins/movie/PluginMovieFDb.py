@@ -33,7 +33,7 @@ plugin_url		= 'fdb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.7'
+plugin_version		= '1.8'
 
 class Plugin(movie.Movie):
 	TRAILER_PATTERN = re.compile('\s*<a\shref=[\'"](.*?)["\'].*?>\(zobacz\szwiastun\)</a>')
@@ -50,7 +50,10 @@ class Plugin(movie.Movie):
 	def get_image(self):
 		self.image_url = gutils.trim(self.page, 'class="moviePosterTable"', '</td>');
 		self.image_url = gutils.trim(self.image_url,' src="',"\"\n")
-		self.image_url = "http://fdb.pl%s" % self.image_url
+		if self.image_url.endswith('no_picture.png'):
+			self.image_url = ''
+		else:
+			self.image_url = "http://fdb.pl%s" % self.image_url
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page, '<h2>', '</h2>')
@@ -153,7 +156,10 @@ class SearchPlugin(movie.SearchMovie):
 			elements = string.split(self.page,'<div class="searchItem">')
 			if len(elements)>0:
 				for element in elements:
-					self.ids.append(gutils.trim(element, '<a href="', '"'))
+					tmpId = gutils.trim(element, '<a href="', '"')
+					if tmpId.endswith('dodajNowy.php'):
+						continue
+					self.ids.append(tmpId)
 					element = gutils.strip_tags(
 						gutils.trim(element, '">', '</div>'))
 					element = element.replace("\n", '')
