@@ -35,7 +35,7 @@ plugin_version      = '1.2'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode = 'utf-8'
+		self.encode = 'iso8859-1'
 		self.movie_id = id
 		self.url = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
 
@@ -98,6 +98,7 @@ class Plugin(movie.Movie):
 		if self.cast == '':
 			self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
 		self.cast = string.replace(self.cast, ' ... ', _(' as '))
+		self.cast = string.replace(self.cast, '...', _(' as '))
 		self.cast = string.replace(self.cast, '</tr><tr>', "\n")
 		self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
 		self.cast = string.replace(self.cast, '</tr><tr class="odd">', "\n")
@@ -160,7 +161,7 @@ class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.original_url_search	= 'http://german.imdb.com/find?more=tt&q='
 		self.translated_url_search	= 'http://german.imdb.com/find?more=tt&q='
-		self.encode = 'utf-8'
+		self.encode = 'iso8859-1'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
