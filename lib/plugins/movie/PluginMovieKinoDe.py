@@ -33,7 +33,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.9"
+plugin_version = "1.10"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm/"
@@ -94,17 +94,27 @@ class Plugin(movie.Movie):
 
 	def get_plot(self):
 		# little steps to perfect plot (I hope ... it's a terrible structured content ... )
-		self.plot = gutils.trim(self.tmp_page, '<span style="line-height:', '</spa')
-		if self.plot == '':
-			self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "</td></tr><tr><td></td>")
-			if (self.plot == ''):
-				self.plot = gutils.trim(self.tmp_page,"Kurzinfo", '<script ')
-				self.plot = gutils.after(self.plot, '>')
-			while len(self.plot) and string.find(self.plot, '</A>') > -1:
-				self.plot = gutils.after(self.plot, '</A>');
-			self.plot = gutils.after(gutils.after(self.plot, '</table>'), '>')
+		self.plot = gutils.before(self.tmp_page, '<!-- PRINT-CONTENT-ENDE-->')
+		self.plot = gutils.trim(self.plot, 'Kurzinfo', '</td></tr>\n')
+		if self.plot != '':
+			lastpos = self.plot.rfind('>')
+			if lastpos == -1:
+				self.plot = 'a'
+			else:
+				lastpos = lastpos + 1
+				self.plot = self.plot[lastpos:]
 		else:
-			self.plot = gutils.after(self.plot, '>')
+			self.plot = gutils.trim(self.tmp_page, '<span style="line-height:', '</spa')
+			if self.plot == '':
+				self.plot = gutils.trim(self.tmp_page,"Kurzinfo", "</td></tr><tr><td></td>")
+				if (self.plot == ''):
+					self.plot = gutils.trim(self.tmp_page,"Kurzinfo", '<script ')
+					self.plot = gutils.after(self.plot, '>')
+				while len(self.plot) and string.find(self.plot, '</A>') > -1:
+					self.plot = gutils.after(self.plot, '</A>');
+				self.plot = gutils.after(gutils.after(self.plot, '</table>'), '>')
+			else:
+				self.plot = gutils.after(self.plot, '>')
 
 	def get_year(self):
 		self.year = self.regextrim(self.tmp_page,"class=\"standardsmall\"><br /><b>(DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</b> - <b>","<br />")
