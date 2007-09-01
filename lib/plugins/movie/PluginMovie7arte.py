@@ -56,7 +56,8 @@ class Plugin(movie.Movie):
 
 	def get_director(self):
 		"""Finds the film's director"""
-		self.director = gutils.trim(self.page, "<B>Realizador:</B> <FONT SIze=-1>", "</FONT><TABLE><TR>")
+		self.director = gutils.trim(self.page, "</B> <FONT SIze=-1>", "</FONT><TABLE><TR>")
+		print self.director
 		self.director = gutils.strip_tags(self.director)
 
 	def get_plot(self):
