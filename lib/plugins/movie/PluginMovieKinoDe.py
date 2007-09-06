@@ -300,3 +300,135 @@ class SearchPlugin(movie.SearchMovie):
 					),
 					'( - (', '('), '))', ')')
 				)
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> expected result count }
+	#
+	test_configuration = {
+		'Rocky Balboa'			: 6,
+		'Arahan'				: 5,
+		'Ein glückliches Jahr'	: 3
+	}
+
+class PluginTest:
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> dict { arribute -> value } }
+	#
+	# value: * True/False if attribute only should be tested for any value
+	#        * or the expected value
+	#
+	test_configuration = {
+		'K_rocky-balboa/96132.html' : { 
+			'title' 			: 'Rocky Balboa',
+			'o_title' 			: 'Rocky Balboa',
+			'director'			: 'Sylvester Stallone',
+			'plot' 				: True,
+			'cast'				: 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+Antonio Traver' + _(' as ') + 'Mason "The Line" Dixon\n\
+Burt Young' + _(' as ') + 'Paulie\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+Milo Ventimiglia' + _(' as ') + 'Rocky Jr.\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
+Tony Burton' + _(' as ') + 'Duke\n\
+A.J. Benza' + _(' as ') + 'L.C.',
+			'country'			: 'USA',
+			'genre'				: 'Drama',
+			'classification'	: 'Freigegeben ab 12 Jahren',
+			'studio'			: 'Fox',
+			'o_site'			: False,
+			'site'				: 'http://www.kino.de/kinofilm/rocky-balboa/96132.html',
+			'trailer'			: False,
+			'year'				: 2006,
+			'notes'				: False,
+			'runtime'			: 102,
+			'image'				: True,
+			'rating'			: False
+		},
+		'K_ein-glueckliches-jahr/28675.html' : { 
+			'title' 			: 'Ein glückliches Jahr',
+			'o_title' 			: 'La bonne année',
+			'director'			: 'Claude Lelouch',
+			'plot' 				: True,
+			'cast'				: 'Lino Ventura\n\
+Françoise Fabian\n\
+Charles Gérard\n\
+André Falcon',
+			'country'			: 'Frankreich/Italien',
+			'genre'				: 'Drama',
+			'classification'	: 'Freigegeben ab 12 Jahren',
+			'studio'			: 'Columbia TriStar',
+			'o_site'			: False,
+			'site'				: 'http://www.kino.de/kinofilm/ein-glueckliches-jahr/28675.html',
+			'trailer'			: False,
+			'year'				: 1973,
+			'notes'				: False,
+			'runtime'			: 115,
+			'image'				: False,
+			'rating'			: False
+		},
+		'V_ein-glueckliches-jahr-dvd/85546.html' : { 
+			'title' 			: 'Ein glückliches Jahr',
+			'o_title' 			: 'La bonne année',
+			'director'			: 'Claude Lelouch',
+			'plot' 				: True,
+			'cast'				: 'Lino Ventura\n\
+Françoise Fabian\n\
+Charles Gérard\n\
+André Falcon',
+			'country'			: 'Frankreich/Italien',
+			'genre'				: 'Drama',
+			'classification'	: 'Freigegeben ab 12 Jahren',
+			'studio'			: 'Black Hill Pictures',
+			'o_site'			: False,
+			'site'				: 'http://www.kino.de/videofilm/ein-glueckliches-jahr-dvd/85546.html',
+			'trailer'			: False,
+			'year'				: 1973,
+			'notes'				: 'Sprachen:\n\
+Deutsch DD 2.0, Französisch DD 2.0\n\
+\n\
+Mehrkanalton:\n\
+Dolby Digital 2.0\n\
+\n\
+EAN:\n\
+7321921998843',
+			'runtime'			: 110,
+			'image'				: True,
+			'rating'			: False
+		},
+		'V_arahan-vanilla-dvd/90405.html' : { 
+			'title' 			: 'Arahan (Vanilla-DVD)',
+			'o_title' 			: 'Arahan jangpung dae jakjeon',
+			'director'			: 'Ryoo Seung-wan',
+			'plot' 				: True,
+			'cast'				: 'Ryu Seung-beom' + _(' as ') + 'Sang-hwan\n\
+Yoon So-yi' + _(' as ') + 'Wi-jin\n\
+Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
+Jung Doo-hong' + _(' as ') + 'Heuk-woon\n\
+Yun Ju-sang' + _(' as ') + 'Mu-woon',
+			'country'			: 'Südkorea',
+			'genre'				: 'Action/Komödie',
+			'classification'	: 'Freigegeben ab 16 Jahren',
+			'studio'			: 'Splendid',
+			'o_site'			: False,
+			'site'				: 'http://www.kino.de/videofilm/arahan-vanilla-dvd/90405.html',
+			'trailer'			: False,
+			'year'				: 2004,
+			'notes'				: 'Sprachen:\n\
+Deutsch DD 5.1\n\
+\n\
+Mehrkanalton:\n\
+Dolby Digital 5.1\n\
+\n\
+EAN:\n\
+4013549871105',
+			'runtime'			: 108,
+			'image'				: True,
+			'rating'			: False
+		}
+	}
