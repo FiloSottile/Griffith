@@ -1,3 +1,7 @@
+# -*- coding: UTF-8 -*-
+
+__revision__ = '$Id$'
+
 # Written by Christian Sagmueller <christian@sagmueller.net>
 # based on PluginMovieIMDB.py, Copyright (c) 2005 Vasco Nunes
 # You may use and distribute this software under the terms of the
@@ -67,7 +71,7 @@ class Plugin(movie.Movie):
 	def get_cast(self):
 		self.cast = ''
 		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(self.movie_id) )
-		self.cast = gutils.trim(cast_page, 'Darsteller</i>', '<i>')
+		self.cast = gutils.trim(cast_page, 'Darsteller</i>', '</table>')
 		self.cast = string.replace(self.cast, 'class="Daten">', '>\n')
 		self.cast = string.strip(gutils.strip_tags(self.cast))
 		self.cast = string.replace(self.cast, '... ', _(' as '))
@@ -123,3 +127,177 @@ class SearchPlugin(movie.SearchMovie):
 					self.ids.append(elementid)
 					self.titles.append(gutils.trim(element,">","</a>"))
 
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> expected result count }
+	#
+	test_configuration = {
+		'Rocky Balboa'			: 1,
+		'Arahan'				: 3,
+		'Ein glückliches Jahr'	: 1
+	}
+
+class PluginTest:
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> dict { arribute -> value } }
+	#
+	# value: * True/False if attribute only should be tested for any value
+	#        * or the expected value
+	#
+	test_configuration = {
+		'103013' : { 
+			'title' 			: 'Rocky Balboa',
+			'o_title' 			: 'Rocky Balboa',
+			'director'			: 'Sylvester Stallone',
+			'plot' 				: True,
+			'cast'				: 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+Burt Young' + _(' as ') + 'Paulie\n\
+Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
+Geraldine Hughes\n\
+James Francis Kelly III\n\
+Tony Burton\n\
+A.J. Benza\n\
+Henry G. Sanders\n\
+Antonio Tarver\n\
+Pedro Lovell\n\
+Ana Gerena\n\
+Angela Boyd\n\
+Louis Giansante\n\
+Maureen Schilling\n\
+Carter Mitchell\n\
+Vinod Kumar\n\
+Tobias Segal\n\
+Tim Carr\n\
+Paul Dion Monte\n\
+Kevin King Templeton\n\
+Robert Michael Kelly\n\
+Don Sherman\n\
+Nick Baker\n\
+Rick Buchborn\n\
+Stu Nahan\n\
+Gary Compton\n\
+Jody Giambelluca\n\
+Frank Stallone\n\
+Fran Pultro\n\
+Michael Buffer\n\
+Jack Lazzarado\n\
+Marc Ratner\n\
+Anthony Lato Jr.\n\
+Yahya\n\
+Gunnar Peterson\n\
+Bernard Fernández\n\
+Bert Randolph Sugar\n\
+Jim Lampley\n\
+Larry Merchant\n\
+Max Kellerman\n\
+James Binns\n\
+Johnnie Hobbs Jr.\n\
+Barney Fitzpatrick\n\
+Brian Kenny\n\
+Dana Jacobson\n\
+Skip Bayless\n\
+Charles Johnson\n\
+Matt Frack\n\
+Woody Paige\n\
+Jay Crawford\n\
+Lahmard J. Tate\n\
+LeRoy Neiman\n\
+Mike Tyson' + _(' as ') + 'Himself\n\
+Lou DiBella\n\
+Joe Cortez\n\
+Ricky Cavazos',
+			'country'			: 'USA',
+			'genre'				: 'Action, Drama, Sportfilm',
+			'classification'	: False,
+			'studio'			: 'Metro-Goldwyn-Mayer (MGM)',
+			'o_site'			: False,
+			'site'				: 'http://www.ofdb.de/view.php?page=film&fid=103013',
+			'trailer'			: False,
+			'year'				: 2006,
+			'notes'				: False,
+			'runtime'			: 102,
+			'image'				: True,
+			'rating'			: 8
+		},
+		'22489' : { 
+			'title' 			: 'Glückliches Jahr, Ein',
+			'o_title' 			: 'Bonne année, La',
+			'director'			: 'Claude Lelouch',
+			'plot' 				: False,
+			'cast'				: 'Lino Ventura\n\
+Françoise Fabian\n\
+Charles Gérard\n\
+André Falcon\n\
+Mireille Mathieu\n\
+Lilo\n\
+Claude Mann\n\
+Frédéric de Pasquale\n\
+Gérard Sire\n\
+Silvano Tranquilli\n\
+André Barello\n\
+Michel Bertay\n\
+Norman de la Chesnaye\n\
+Pierre Edeline\n\
+Pierre Pontiche\n\
+Michou\n\
+Bettina Rheims\n\
+Joseph Rythmann\n\
+Georges Staquet\n\
+Jacques Villedieu\n\
+Harry Walter\n\
+Elie Chouraqui',
+			'country'			: 'Frankreich',
+			'genre'				: 'Komödie, Krimi',
+			'classification'	: False,
+			'studio'			: 'Les Films 13',
+			'o_site'			: False,
+			'site'				: 'http://www.ofdb.de/view.php?page=film&fid=22489',
+			'trailer'			: False,
+			'year'				: 1973,
+			'notes'				: False,
+			'runtime'			: 90,
+			'image'				: True,
+			'rating'			: 7
+		},
+		'54088' : { 
+			'title' 			: 'Arahan',
+			'o_title' 			: 'Arahan jangpung daejakjeon',
+			'director'			: 'Ryoo Seung-wan',
+			'plot' 				: True,
+			'cast'				: 'Ryoo Seung-beom\n\
+Yoon So-yi' + _(' as ') + 'Wi-jin\n\
+Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
+Jung Doo-hong' + _(' as ') + 'Heuk-Woon\n\
+Yun Ju-sang\n\
+Kim Ji-yeong\n\
+Baek Chan-gi\n\
+Kim Jae-man\n\
+Lee Dae-yeon\n\
+Kim Dong-ju\n\
+Kim Su-hyeon\n\
+Geum Dong-hyeon\n\
+Lee Jae-goo\n\
+Ahn Kil-kang\n\
+Bong Tae-gyu\n\
+Im Ha-ryong\n\
+Yoon Do-hyeon\n\
+Lee Choon-yeon',
+			'country'			: 'Südkorea',
+			'genre'				: 'Action, Fantasy, Komödie',
+			'classification'	: '16',
+			'studio'			: 'Fun and Happiness',
+			'o_site'			: False,
+			'site'				: 'http://www.ofdb.de/view.php?page=film&fid=54088',
+			'trailer'			: False,
+			'year'				: 2004,
+			'notes'				: False,
+			'runtime'			: 114,
+			'image'				: True,
+			'rating'			: 7
+		}
+	}

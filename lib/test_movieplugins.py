@@ -60,7 +60,8 @@ sys.path.append('plugins/movie')
 class PluginTester:
 	test_plugins = [
 		'PluginMovieKinoDe',
-		'PluginMovieFilmeVonAZ'
+		'PluginMovieFilmeVonAZ',
+		'PluginMovieOFDb'
 	]
 
 	#
