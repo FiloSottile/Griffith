@@ -83,8 +83,7 @@ class Plugin(movie.Movie):
 		self.cast = self.regextrim(self.page, '[(]Darsteller[)]', '<[pP]>')
 		self.cast = gutils.clean(self.cast)
 		self.cast = self.cast.replace(' als ', _(' as '))
-		self.cast = self.cast.replace('		', '')
-		self.cast = self.cast.replace('\r\n', '')
+		self.cast = re.sub('( \t|\t|\r|\n)', '', self.cast)
 		self.cast = self.cast.replace(', ', '\n')
 		self.cast = self.cast.replace(',', '')
 

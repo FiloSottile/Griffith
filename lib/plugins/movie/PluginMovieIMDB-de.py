@@ -64,9 +64,9 @@ class Plugin(movie.Movie):
 					break
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,'<h5>Regie</h5>', '<br/>\n')
+		self.director = gutils.trim(self.page,'<h5>Regie</h5>', '<br/>')
 		if self.director == '':
-			self.director = gutils.trim(self.page,'<h5>Regisseur:</h5>', '<br/>\n')
+			self.director = gutils.trim(self.page,'<h5>Regisseur:</h5>', '</div>')
 		self.director = self.__before_more(self.director)
 		self.director = self.director.replace('<br/>', ', ')
 

@@ -63,19 +63,22 @@ class Plugin(movie.Movie):
 
 	def get_genre(self):
 		self.genre = gutils.trim(self.page,"Genre(s):","</table>")
-		self.genre = string.replace( self.genre, "<br>", ", " )
+		self.genre = string.replace(self.genre, "<br>", ", ")
 		self.genre = gutils.strip_tags(self.genre)
-		self.genre = string.replace( self.genre, "/", ", " )
-		self.genre = self.genre[0:-2]
+		self.genre = string.replace(self.genre, "/", ", ")
+		self.genre = gutils.clean(self.genre)
+		self.genre = self.genre[0:-1]
 
 	def get_cast(self):
 		self.cast = ''
 		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(self.movie_id) )
 		self.cast = gutils.trim(cast_page, 'Darsteller</i>', '</table>')
+		self.cast = re.sub('(\n|\t|&nbsp;)', '', self.cast)
+		self.cast = string.replace(self.cast, '\t', '')
 		self.cast = string.replace(self.cast, 'class="Daten">', '>\n')
 		self.cast = string.strip(gutils.strip_tags(self.cast))
 		self.cast = string.replace(self.cast, '... ', _(' as '))
-		self.cast = string.replace(self.cast, '&nbsp;', '')
+		self.cast = gutils.clean(self.cast)
 
 	def get_classification(self):
 		# from imdb
