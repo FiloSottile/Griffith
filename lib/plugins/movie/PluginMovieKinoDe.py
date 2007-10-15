@@ -95,13 +95,12 @@ class Plugin(movie.Movie):
 	def get_plot(self):
 		# little steps to perfect plot (I hope ... it's a terrible structured content ... )
 		self.plot = gutils.before(self.tmp_page, '<!-- PRINT-CONTENT-ENDE-->')
-		self.plot = gutils.trim(self.plot, 'Kurzinfo', '</td></tr>\n')
+		self.plot = gutils.trim(self.plot, 'Kurzinfo', '</span></td></tr>')
 		if self.plot != '':
-			lastpos = self.plot.rfind('>')
+			lastpos = self.plot.rfind('</table>')
 			if lastpos == -1:
-				self.plot = 'a'
+				self.plot = ''
 			else:
-				lastpos = lastpos + 1
 				self.plot = self.plot[lastpos:]
 		else:
 			self.plot = gutils.trim(self.tmp_page, '<span style="line-height:', '</spa')
