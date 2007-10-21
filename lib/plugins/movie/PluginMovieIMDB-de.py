@@ -165,7 +165,7 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>');
+		self.page = gutils.trim(self.page, ' angezeigt)', ' Treffergenauigkeit');
 		self.page = self.page.decode('iso-8859-1')
 		return self.page
 
