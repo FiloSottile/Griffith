@@ -33,7 +33,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.10"
+plugin_version = "1.11"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm/"
@@ -74,18 +74,18 @@ class Plugin(movie.Movie):
 				self.image_url = 'http://images.kino.de/flbilder' + tmpdata + '.jpg'
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.tmp_page,"span class=\"standardsmall\"><br />(",")<")
-		if self.o_title == "":
-			if self.url_type == "V":
-				self.o_title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"/videofilm", "</a>"), ">")
+		self.o_title = gutils.trim(self.tmp_page, 'span class="standardsmall">(', ')<')
+		if self.o_title == '':
+			if self.url_type == 'V':
+				self.o_title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/videofilm', '</a>'), '>')
 			else:
-				self.o_title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"/kinofilm", "</a>"), ">")
+				self.o_title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
 
 	def get_title(self):
 		if self.url_type == "V":
-			self.title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"/videofilm", "</a>"), ">")
+			self.title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/videofilm', '</a>'), '>')
 		else:
-			self.title = gutils.after(gutils.trim(self.tmp_page,"\"headline2\"><a href=\"/kinofilm", "</a>"), ">")
+			self.title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
 
 	def get_director(self):
 		self.director = gutils.trim(self.tmp_creditspage,"Regie","</a>")
@@ -95,7 +95,7 @@ class Plugin(movie.Movie):
 	def get_plot(self):
 		# little steps to perfect plot (I hope ... it's a terrible structured content ... )
 		self.plot = gutils.before(self.tmp_page, '<!-- PRINT-CONTENT-ENDE-->')
-		self.plot = gutils.trim(self.plot, 'Kurzinfo', '</span></td></tr>')
+		self.plot = self.regextrim(self.plot, 'Kurzinfo', '</td></tr>[ \t\r\n]*<tr><td></td></tr>')
 		if self.plot != '':
 			lastpos = self.plot.rfind('</table>')
 			if lastpos == -1:
@@ -116,23 +116,21 @@ class Plugin(movie.Movie):
 				self.plot = gutils.after(self.plot, '>')
 
 	def get_year(self):
-		self.year = self.regextrim(self.tmp_page,"class=\"standardsmall\"><br /><b>(DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</b> - <b>","<br />")
-		if self.year == "":
-			self.year = gutils.trim(self.tmp_page,"class=\"standardsmall\"><b>","<br />")
-		self.year = gutils.trim(self.year,"<b>","</b>")
-		self.year = gutils.after(self.year," ")
+		self.year = ''
+		tmp = self.regextrim(self.tmp_page, 'span class="standardsmall"[^>]*><strong>', '</span>')
+		if tmp <> None:
+			srchresult = re.search('[0-9][0-9][0-9][0-9]</strong>', tmp)
+			if srchresult <> None:
+				self.year = srchresult.string[srchresult.start():srchresult.end()]
 
 	def get_runtime(self):
-		self.runtime = gutils.trim(self.tmp_page,"Jahren</b> - <b>"," Min.")
-		if (self.runtime == ''):
-			self.runtime = gutils.trim(self.tmp_page,"Jahren</b></b> - <b>"," Min.")
-		if (self.runtime == ''):
-			self.runtime = gutils.trim(self.tmp_page,"</b><br /><b>"," Min.")
+		self.runtime = ''
+		srchresult = re.search('>[0-9]+[ \t]Min[.]<', self.tmp_page)
+		if srchresult <> None:
+			self.runtime = self.regextrim(srchresult.string[srchresult.start():srchresult.end()], '>', '[^0-9]')
 
 	def get_genre(self):
-		self.genre = self.regextrim(self.tmp_page,"class=\"standardsmall\"><br /><b>(DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</b> - <b>","</b>")
-		if self.genre == "":
-			self.genre = gutils.trim(self.tmp_page,"class=\"standardsmall\"><b>","</b>")
+		self.genre = self.regextrim(self.tmp_page,'span class="standardsmall"[^>]*>[ \t\r\n]*<strong>((DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</strong>[ \t]-[ \t]<strong>)*', '</strong>[ \t]-[ \t]<strong>')
 
 	def get_cast(self):
 		self.cast = gutils.trim(self.tmp_creditspage,'>Cast<', '</table><br')
@@ -157,12 +155,12 @@ class Plugin(movie.Movie):
 			self.cast = string.replace(self.cast, "--flip--", _(" as "))
 
 	def get_classification(self):
-		self.classification = gutils.trim(self.tmp_page,"FSK: ","</b>")
+		self.classification = gutils.trim(self.tmp_page,'FSK: ', '</strong>')
 
 	def get_studio(self):
-		self.studio = gutils.trim(self.tmp_page,"Verleih: ", "</b>")
+		self.studio = gutils.trim(self.tmp_page, 'Verleih: ', '</strong>')
 		if (self.studio == ""):
-			self.studio = gutils.trim(self.tmp_page,"Anbieter: ", "</b>")
+			self.studio = gutils.trim(self.tmp_page, 'Anbieter: ', '</strong>')
 
 	def get_o_site(self):
 		self.o_site = ""
@@ -174,11 +172,12 @@ class Plugin(movie.Movie):
 		self.trailer = ""
 
 	def get_country(self):
-		self.country = self.regextrim(self.tmp_page,"class=\"standardsmall\"><br /><b>(DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</b> - <b>","<br />")
-		if self.country == "":
-			self.country = gutils.trim(self.tmp_page,"class=\"standardsmall\"><b>","<br />")
-		self.country = gutils.trim(self.country,"<b>","</b>")
-		self.country = gutils.before(self.country," ")
+		self.country = self.regextrim(self.tmp_page, 'span class="standardsmall"[^>]*><strong>((DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</strong>[ \t]-[ \t]<strong>)*', '</span>')
+		if self.country <> None:
+			self.country = self.regextrim(self.country, '-[ \t]<strong>', '</strong>')
+			self.country = re.sub('[0-9]+$', '', self.country)
+		else:
+			self.country = ''
 
 	def get_rating(self):
 		self.rating = "0"
@@ -208,7 +207,7 @@ class Plugin(movie.Movie):
 		if obj is None:
 			return ''
 		else:
-			p2 = p1 + obj.end()
+			p2 = p1 + obj.start()
 		return text[p1:p2]
 
 #
@@ -268,7 +267,7 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		elements1 = re.split('headline3"><a href="(http://www.kino.de)*/kinofilm/', self.page)
+		elements1 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(http://www.kino.de)*/kinofilm/', self.page)
 		elements1[0] = None
 		for element in elements1:
 			if element <> None:
@@ -284,7 +283,7 @@ class SearchPlugin(movie.SearchMovie):
 					'( - (', '('), '))', ')')
 				)
 
-		elements2 = re.split('headline3"><a href="(http://www.kino.de)*/videofilm/', self.page)
+		elements2 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(http://www.kino.de)*/videofilm/', self.page)
 		elements2[0] = None
 		for element in elements2:
 			if element <> None:
