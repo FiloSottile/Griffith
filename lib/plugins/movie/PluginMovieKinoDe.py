@@ -155,12 +155,12 @@ class Plugin(movie.Movie):
 			self.cast = string.replace(self.cast, "--flip--", _(" as "))
 
 	def get_classification(self):
-		self.classification = gutils.trim(self.tmp_page,'FSK: ', '</strong>')
+		self.classification = self.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
 
 	def get_studio(self):
-		self.studio = gutils.trim(self.tmp_page, 'Verleih: ', '</strong>')
+		self.studio = self.regextrim(self.tmp_page, 'Verleih:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
 		if (self.studio == ""):
-			self.studio = gutils.trim(self.tmp_page, 'Anbieter: ', '</strong>')
+			self.studio = self.regextrim(self.tmp_page, 'Anbieter:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
 
 	def get_o_site(self):
 		self.o_site = ""
