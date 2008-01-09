@@ -49,7 +49,7 @@ class Plugin(movie.Movie):
 		self.director = gutils.trim(self.page,"Regie: ","</a><br>")
 
 	def get_plot(self):
-		storyid = gutils.trim(self.page, 'sid=', '">')
+		storyid = self.regextrim(self.page, '([?]|[&])sid=', '(">|[&])')
 		story_page = self.open_page(url="http://www.ofdb.de/view.php?page=inhalt&fid=%s&sid=%s" % (str(self.movie_id),storyid))
 		self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
@@ -86,7 +86,7 @@ class Plugin(movie.Movie):
 
 	def get_studio(self):
 		# from imdb
-		self.studio = gutils.trim(self.imdb_page, '<h5>Company:</h5>', '</a>')
+		self.studio = gutils.trim(self.imdb_page, '<h5>Firma:</h5>', '</a>')
 
 	def get_o_site(self):
 		self.o_site = ""
@@ -105,6 +105,19 @@ class Plugin(movie.Movie):
 		if self.rating == '':
 			self.rating = "0"
 		self.rating = str(round(float(self.rating)))
+
+	def regextrim(self,text,key1,key2):
+		obj = re.search(key1, text)
+		if obj is None:
+			return ''
+		else:
+			p1 = obj.end()
+		obj = re.search(key2, text[p1:])
+		if obj is None:
+			return ''
+		else:
+			p2 = p1 + obj.start()
+		return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
@@ -128,7 +141,7 @@ class SearchPlugin(movie.SearchMovie):
 				elementid = gutils.digits_only( gutils.trim(element,'<a href="view.php?page=film&fid=','">') )
 				if elementid != 0:
 					self.ids.append(elementid)
-					self.titles.append(gutils.trim(element,">","</a>"))
+					self.titles.append(gutils.trim(element,'">', '</a>'))
 
 #
 # Plugin Test
@@ -235,7 +248,7 @@ Ricky Cavazos',
 			'cast'				: 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard\n\
-André Falcon\n\
+André Falcon as Le bijoutier\n\
 Mireille Mathieu\n\
 Lilo\n\
 Claude Mann\n\
