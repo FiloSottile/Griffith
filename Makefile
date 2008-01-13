@@ -65,6 +65,16 @@ install:
 	$(INSTALL) -m 644 images/griffith.png $(ICONDIR)
 	$(INSTALL) -m 644 images/griffith.xpm $(ICONDIR)
 	$(INSTALL) -m 644 data/griffith.desktop $(APPLICATIONSDIR)
+	# SQLAlchemy
+	$(INSTALL) -m 755 -d $(LIBDIR)/sqlalchemy $(LIBDIR)/sqlalchemy/databases \
+		$(LIBDIR)/sqlalchemy/engine $(LIBDIR)/sqlalchemy/ext \
+		$(LIBDIR)/sqlalchemy/mods $(LIBDIR)/sqlalchemy/orm
+	$(INSTALL) -m 644 lib/sqlalchemy/*.py $(LIBDIR)/sqlalchemy/
+	$(INSTALL) -m 644 lib/sqlalchemy/databases/*.py $(LIBDIR)/sqlalchemy/databases/
+	$(INSTALL) -m 644 lib/sqlalchemy/engine/*.py $(LIBDIR)/sqlalchemy/engine/
+	$(INSTALL) -m 644 lib/sqlalchemy/ext/*.py $(LIBDIR)/sqlalchemy/ext/
+	$(INSTALL) -m 644 lib/sqlalchemy/mods/*.py $(LIBDIR)/sqlalchemy/mods/
+	$(INSTALL) -m 644 lib/sqlalchemy/orm/*.py $(LIBDIR)/sqlalchemy/orm/
 	
 	# installing language files
 	for lang in $(LANGUAGES); do \
