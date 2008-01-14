@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the griffith package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 23:38+0200\n"
-"PO-Revision-Date: 2007-09-02 23:35+0200\n"
+"POT-Creation-Date: 2007-09-02 23:43+0200\n"
+"PO-Revision-Date: 2007-09-03 02:29+0000\n"
 "Last-Translator: Jack Nihil <jnihil@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-09-01 18:58:54+0000\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
@@ -386,7 +386,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr ""
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 
 #: ../lib/edit.py:243
@@ -1630,8 +1631,8 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 
 #: ../glade/griffith.glade.h:150

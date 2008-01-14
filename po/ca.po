@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 23:38+0200\n"
-"PO-Revision-Date: 2007-09-02 23:36+0200\n"
+"POT-Creation-Date: 2007-09-02 23:43+0200\n"
+"PO-Revision-Date: 2007-11-06 00:46+0000\n"
 "Last-Translator: el_libre <el.libre@gmail.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-09-01 18:58:26+0000\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
@@ -47,25 +48,27 @@ msgstr ""
 
 #: ../griffith:874
 msgid " movie(s) in collection. "
-msgstr ""
+msgstr " pel·lícula/es en la col·lecció. "
 
 #: ../griffith:875
 msgid " movie(s) loaned. "
-msgstr ""
+msgstr " pel·lícula/es prestada. "
 
 #: ../griffith:876
 msgid "You haven't seen "
-msgstr ""
+msgstr "Vosté no ha vist "
 
 #: ../griffith:876
 msgid " movie(s)"
-msgstr ""
+msgstr " pel·lícula/es"
 
 #: ../griffith:1012
 msgid ""
 "Are you sure you want to create a new database?\n"
 "You will lose ALL your current data!"
 msgstr ""
+"Segur que vol crear una nova base de dades?\n"
+"Perdrà TOTES les seues dades!"
 
 #: ../griffith:1016
 msgid ""
@@ -73,6 +76,9 @@ msgid ""
 "Do you confirm that you want\n"
 "to lose your current data?"
 msgstr ""
+"Última oportunitat!\n"
+"Confirma que vosté vol\n"
+"perdre les seues dades actuals?"
 
 #: ../lib/about.py:39
 msgid "Main Authors"
@@ -212,18 +218,21 @@ msgid ""
 "You should fill the original title\n"
 "or the movie title."
 msgstr ""
+"Hauria d'omplir el títol original\n"
+"o el títol de la pel·lícula."
 
 #: ../lib/add.py:380 ../lib/add.py:386
 msgid "Movie with that title already exists, are you sure you want to add?"
 msgstr ""
+"Una pel·lícula amb eixe títol ja existeix, està segur de que vol anyadirla?"
 
 #: ../lib/add.py:555
 msgid "No results"
-msgstr ""
+msgstr "Sense resultats"
 
 #: ../lib/add.py:592
 msgid "Url: "
-msgstr ""
+msgstr "Url: "
 
 #: ../lib/add.py:593
 msgid "Language: "
@@ -231,7 +240,7 @@ msgstr "Idioma: "
 
 #: ../lib/backup.py:32
 msgid "Save Griffith backup"
-msgstr ""
+msgstr "Guardar copia de seguretat de Griffith"
 
 #: ../lib/backup.py:40 ../lib/plugins/export/PluginExportCSV.py:50
 #: ../lib/plugins/export/PluginExportiPod.py:111
@@ -242,15 +251,17 @@ msgstr "El fitxer ja existeix. Voleu sobreescriure'l?"
 
 #: ../lib/backup.py:51
 msgid "Error creating backup"
-msgstr ""
+msgstr "Error en la creació de la copia de seguretat"
 
 #: ../lib/backup.py:58
 msgid "Backup function is available only for SQLite engine for now"
 msgstr ""
+"Funció de copia de seguretat només disponible amb l'enginy SQLite per el "
+"moment."
 
 #: ../lib/backup.py:101
 msgid "Backup has been created"
-msgstr ""
+msgstr "S'ha creat la copia de seguretat."
 
 #: ../lib/backup.py:105 ../lib/backup.py:180
 msgid "Restore Griffith backup"
@@ -1628,8 +1639,8 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 
 #: ../glade/griffith.glade.h:150

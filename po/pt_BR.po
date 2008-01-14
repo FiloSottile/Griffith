@@ -3,21 +3,23 @@
 # This file is distributed under the same license as the Griffith package.
 # Vasco Nunes <vasco.m.nunes@gmail.com>, 2005.
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2007.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 23:38+0200\n"
-"PO-Revision-Date: 2007-09-02 23:40+0200\n"
+"POT-Creation-Date: 2007-09-02 23:43+0200\n"
+"PO-Revision-Date: 2007-12-22 13:49+0000\n"
 "Last-Translator: Fábio Nogueira <deb-user-ba@ubuntu.com>\n"
 "Language-Team: Portuguese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Portuguese\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: BRAZIL\n"
+"X-Poedit-Language: Portuguese\n"
 "X-Poedit-KeywordsList: pt_BR\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
@@ -93,7 +95,6 @@ msgid "Main Authors"
 msgstr "Autores Principais"
 
 #: ../lib/about.py:41
-#, fuzzy
 msgid "Programmers"
 msgstr "Programadores"
 
@@ -114,9 +115,8 @@ msgid "Bulgarian"
 msgstr "Búlgaro"
 
 #: ../lib/about.py:61
-#, fuzzy
 msgid "Catalan"
-msgstr "Italiano"
+msgstr "Catalão"
 
 #: ../lib/about.py:63 ../lib/dbupgrade.py:88
 #: ../lib/plugins/movie/PluginMovieCSFD.py:30
@@ -163,7 +163,7 @@ msgstr "Japonês"
 
 #: ../lib/about.py:93
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "Bokmal Norueguês"
 
 #: ../lib/about.py:95 ../lib/dbupgrade.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:33
@@ -405,7 +405,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr "Desculpe. Ocorreu um erro de conexão."
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 "Desculpe. Este filme está listado na Amazon mas não tem nenhum pôster "
 "disponível."
@@ -419,9 +420,8 @@ msgid "No movie found"
 msgstr "Nenhum filme encontrado"
 
 #: ../lib/gemail.py:39
-#, fuzzy
 msgid "Connection timed out"
-msgstr "Erro de conexão"
+msgstr "Tempo de conexão esgotado"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
@@ -430,7 +430,7 @@ msgstr "Erro enviando o e-mail: %s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr ""
+msgstr "falha no login"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
@@ -453,7 +453,7 @@ msgstr ""
 
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
-msgstr ""
+msgstr "E-mail não pôde ser enviado. Verifique as preferências de e-mail."
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
@@ -718,7 +718,8 @@ msgstr "Região 3 (Coréia, Tailāndia, Vietnam, Borneo e Indonésia)"
 msgid ""
 "Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
 "America)"
-msgstr "Região 4 (Austrália e Nova Zelândia, México, Caribe e América do Sul)"
+msgstr ""
+"Região 4 (Austrália e Nova Zelândia, México, Caribe e América do Sul)"
 
 #: ../lib/initialize.py:546
 msgid "Region 5 (India, Africa, Russia and former USSR countries)"
@@ -738,7 +739,8 @@ msgstr "Região 8 (Linhas Aéreas/Cruzeiros Marítimos)"
 
 #: ../lib/initialize.py:586
 msgid "Dictionary not available. Spellcheck will be disabled. \n"
-msgstr "Dicionário não disponível. Corretor ortográfico será desabilitado. \n"
+msgstr ""
+"Dicionário não disponível. Corretor ortográfico será desabilitado. \n"
 
 #: ../lib/loan.py:40
 msgid "No person is defined yet."
@@ -910,12 +912,18 @@ msgid ""
 "gmail account service to send e-mails, try to enter '587' here. Default (and "
 "the most common one) is '25'"
 msgstr ""
+"Aqui você pode definir a porta do servidor smpt a ser usada. Se você quer "
+"usar sua conta do gmail para enviar e-mails, tente colocar '578' aqui. "
+"Padrão ( e a mais comum) é '25'"
 
 #: ../lib/widgets.py:310
 msgid ""
 "If you need TLS support, please check this checkbox. This is needed, for "
 "example, when using gmail service to send your reminder e-mails."
 msgstr ""
+"Se você precisa de suporte TLS, por favor marque essa caixa. Isso é "
+"necessário, por exemplo, quando estiver usando o serviço gmail para enviar "
+"seus e-mail de lembrete."
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:103
@@ -1596,9 +1604,8 @@ msgid "Return"
 msgstr "Devolver filme"
 
 #: ../glade/griffith.glade.h:120
-#, fuzzy
 msgid "SMTP port"
-msgstr "Importar CSV"
+msgstr "porta SMTP"
 
 #: ../glade/griffith.glade.h:121
 msgid "SMTP server"
@@ -1688,8 +1695,8 @@ msgstr "Tentar obter um pôster grande utilizando os serviços web da Amazon"
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 "Escreva o título original do filme, selecione a fonte e clique em <i>Obter "
 "da web</i>. O Griffith irá tentar obter automaticamente informações sobre o "
@@ -1701,7 +1708,7 @@ msgstr "Utilizar a Verificação Ortográfica"
 
 #: ../glade/griffith.glade.h:151
 msgid "Use TLS?"
-msgstr ""
+msgstr "Usar TLS?"
 
 #: ../glade/griffith.glade.h:152
 msgid "Use locale:"

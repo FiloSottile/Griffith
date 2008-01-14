@@ -6,19 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 23:38+0200\n"
-"PO-Revision-Date: 2007-09-02 23:41+0200\n"
+"POT-Creation-Date: 2007-09-02 23:43+0200\n"
+"PO-Revision-Date: 2007-11-30 09:44+0000\n"
 "Last-Translator: antou <antoou+inscriptions@gmail.com>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-09-01 18:58:23+0000\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
 msgid "You have no movies in your database"
-msgstr "Vous avez vus tous les films dans votre base de donnée !"
+msgstr "Vous n'avez pas de film dans votre collection"
 
 #: ../griffith:358
 msgid "You saw all movies in your collection!"
@@ -88,13 +89,12 @@ msgid "Main Authors"
 msgstr "Auteurs principaux"
 
 #: ../lib/about.py:41
-#, fuzzy
 msgid "Programmers"
-msgstr "Programmeur"
+msgstr "Programmeurs"
 
 #: ../lib/about.py:44
 msgid "Contributors:"
-msgstr "Contributeurs:"
+msgstr "Contributeurs :"
 
 #: ../lib/about.py:48
 msgid "Logo, icon and general artwork "
@@ -109,9 +109,8 @@ msgid "Bulgarian"
 msgstr "Bulgare"
 
 #: ../lib/about.py:61
-#, fuzzy
 msgid "Catalan"
-msgstr "Italien"
+msgstr "Catalan"
 
 #: ../lib/about.py:63 ../lib/dbupgrade.py:88
 #: ../lib/plugins/movie/PluginMovieCSFD.py:30
@@ -158,7 +157,7 @@ msgstr "Japonais"
 
 #: ../lib/about.py:93
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "Norvégien « Bokmal »"
 
 #: ../lib/about.py:95 ../lib/dbupgrade.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:33
@@ -198,7 +197,7 @@ msgstr "Suèdois"
 
 #: ../lib/about.py:108
 msgid "Turkish"
-msgstr ""
+msgstr "turc"
 
 #: ../lib/about.py:117
 msgid "This program is released under the GNU"
@@ -354,6 +353,8 @@ msgstr ""
 #: ../lib/dbupgrade.py:133
 msgid "Old DB conversion: please install pysqlite legacy (v1.0)"
 msgstr ""
+"Conversion de l'ancienne base de données: merci d'installer \"pysqlite "
+"legacy\" version 1.0"
 
 #: ../lib/dbupgrade.py:162
 msgid ""
@@ -401,7 +402,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr "Désolé. Une erreur de connexion a eu lieu"
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 "Désolé. Ce film est listé mais n'a pas d'affiche disponible chez Amazon.com"
 
@@ -414,9 +416,8 @@ msgid "No movie found"
 msgstr "Aucun film trouvé"
 
 #: ../lib/gemail.py:39
-#, fuzzy
 msgid "Connection timed out"
-msgstr "Erreur de connexion"
+msgstr "Temps de connexion dépassé"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
@@ -425,7 +426,7 @@ msgstr "Erreur d'envoie du courriel: %s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr ""
+msgstr "échec de l'authentification"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
@@ -450,6 +451,7 @@ msgstr ""
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
 msgstr ""
+"L'email n'a pas pu être envoyé. Merci de vérifier les préférenes d'email"
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
@@ -909,12 +911,19 @@ msgid ""
 "gmail account service to send e-mails, try to enter '587' here. Default (and "
 "the most common one) is '25'"
 msgstr ""
+"Ici vous pouvez définir le port à utiliser pour le serveur smtp. Si vous "
+"souhaitez utiliser votre compte Gmail pour envoyer les emails, essayez "
+"d'entrer '587'. La valeur par défaut (et la plus communément utilisée) est "
+"'25'"
 
 #: ../lib/widgets.py:310
 msgid ""
 "If you need TLS support, please check this checkbox. This is needed, for "
 "example, when using gmail service to send your reminder e-mails."
 msgstr ""
+"Si vous avez besoin du support TLS, merci de cocher cette option. Elle est "
+"nécessaire, entre autres, pour utiliser Gmail afin d'envoyer vos emails de "
+"rappel."
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:103
@@ -1027,9 +1036,8 @@ msgid "Document has been generated."
 msgstr "Le document a été généré."
 
 #: ../lib/plugins/export/PluginExportiPod.py:36
-#, fuzzy
 msgid "iPod Notes export plugin"
-msgstr "Plugin d'export PDF"
+msgstr "Plugin d'export pour iPod"
 
 #: ../lib/plugins/export/PluginExportiPod.py:85
 msgid "My Movies List"
@@ -1596,9 +1604,8 @@ msgid "Return"
 msgstr "Retour"
 
 #: ../glade/griffith.glade.h:120
-#, fuzzy
 msgid "SMTP port"
-msgstr "Import CSV"
+msgstr "Port SMTP"
 
 #: ../glade/griffith.glade.h:121
 msgid "SMTP server"
@@ -1688,8 +1695,8 @@ msgstr "Essayer de récupérer une grande affiche du site web Amazon"
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 "Entrer le titre original du film, sélectionner la source et choisir "
 "<i>Extraire du web</i>. Griffith va essayer de rappatrier toutes les "
@@ -1701,7 +1708,7 @@ msgstr "Utiliser le correcteur orthographique"
 
 #: ../glade/griffith.glade.h:151
 msgid "Use TLS?"
-msgstr ""
+msgstr "Utiliser TLS?"
 
 #: ../glade/griffith.glade.h:152
 msgid "Use locale:"

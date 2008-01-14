@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 23:38+0200\n"
-"PO-Revision-Date: 2007-09-02 23:37+0200\n"
+"POT-Creation-Date: 2007-09-02 23:43+0200\n"
+"PO-Revision-Date: 2007-11-20 17:20+0000\n"
 "Last-Translator: Tominator <lambik+launchpad@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-09-01 18:58:11+0000\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
@@ -89,9 +90,8 @@ msgid "Main Authors"
 msgstr "Geschreven door"
 
 #: ../lib/about.py:41
-#, fuzzy
 msgid "Programmers"
-msgstr "Programmeur"
+msgstr "Programmeurs"
 
 #: ../lib/about.py:44
 msgid "Contributors:"
@@ -110,9 +110,8 @@ msgid "Bulgarian"
 msgstr "Bulgaars"
 
 #: ../lib/about.py:61
-#, fuzzy
 msgid "Catalan"
-msgstr "Italiaans"
+msgstr "Catalaans"
 
 #: ../lib/about.py:63 ../lib/dbupgrade.py:88
 #: ../lib/plugins/movie/PluginMovieCSFD.py:30
@@ -159,7 +158,7 @@ msgstr "Japans"
 
 #: ../lib/about.py:93
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "Noors Bokmål"
 
 #: ../lib/about.py:95 ../lib/dbupgrade.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:33
@@ -398,7 +397,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr "Sorry. Er heeft zich een verbindingsprobleem voorgedaan."
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr "Sorry. Voor deze film is geen poster gevonden op Amazon.com."
 
 #: ../lib/edit.py:243
@@ -410,9 +410,8 @@ msgid "No movie found"
 msgstr "Film niet gevonden"
 
 #: ../lib/gemail.py:39
-#, fuzzy
 msgid "Connection timed out"
-msgstr "Verbindingsfout"
+msgstr "Verbinding verbroken door tijdslimiet"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
@@ -421,7 +420,7 @@ msgstr "Fout bij het versturen van e-mail: %s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr ""
+msgstr "er is een fout opgetreden bij het inloggen"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
@@ -432,19 +431,19 @@ msgid "Movie loan reminder"
 msgstr "Uitleen herinnering"
 
 #: ../lib/gemail.py:77
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi, %s!\n"
 "\n"
 "Just to remind you "
 msgstr ""
-"Hey, %s!\n"
+"Hallo %s!\n"
 "\n"
 "Om je er even aan te herinneren. "
 
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
-msgstr ""
+msgstr "De e-mail kon niet verzonden worden.  Kijk uw e-mail opties na."
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
@@ -887,8 +886,9 @@ msgid ""
 "Internet Service Provider's SMTP server address."
 msgstr ""
 "Gebruik dit veld om in te stellen welke SMTP server gebruikt moet worden "
-"voor het versturen van e-mails. Op *nix systemen is dit vaak 'localhost'."
-"Anders kunt u gebruik maken van het SMTP adres van uw Internet Provider."
+"voor het versturen van e-mails. Op *nix systemen is dit vaak "
+"'localhost'.Anders kunt u gebruik maken van het SMTP adres van uw Internet "
+"Provider."
 
 #: ../lib/widgets.py:308
 msgid ""
@@ -904,12 +904,18 @@ msgid ""
 "gmail account service to send e-mails, try to enter '587' here. Default (and "
 "the most common one) is '25'"
 msgstr ""
+"Hier kan u de smtp server poort die u gebruikt invullen. Wilt u gmail "
+"gebruiken om uw e-mails te verzenden, zul hier dan '587' in.  De standaard "
+"(en de meest gebruikte) waarde is '25'"
 
 #: ../lib/widgets.py:310
 msgid ""
 "If you need TLS support, please check this checkbox. This is needed, for "
 "example, when using gmail service to send your reminder e-mails."
 msgstr ""
+"Indien u TLS-ondersteuning nodig heeft, kunt u deze vinkruimte aanvinken. "
+"Dit is nodig voor als u bijvoorbeeld gebruik maakt van de Gmail-service om "
+"uw herinnerings-e-mails te sturen."
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:103
@@ -1590,9 +1596,8 @@ msgid "Return"
 msgstr "Terugbrengen"
 
 #: ../glade/griffith.glade.h:120
-#, fuzzy
 msgid "SMTP port"
-msgstr "CSV Importeren"
+msgstr "SMTP-poort"
 
 #: ../glade/griffith.glade.h:121
 msgid "SMTP server"
@@ -1682,8 +1687,8 @@ msgstr "Download grote filmposter van Amazon"
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 "Voer de originele filmtitel in, selecteer een bron en klik op <i>'Download "
 "van</i> <i>internet</i>'. Griffith haalt vervolgens de benodigde gegevens "
@@ -1695,7 +1700,7 @@ msgstr "Gebruik spellingscontrole"
 
 #: ../glade/griffith.glade.h:151
 msgid "Use TLS?"
-msgstr ""
+msgstr "Gebruik TLS?"
 
 #: ../glade/griffith.glade.h:152
 msgid "Use locale:"

@@ -6,14 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 23:38+0200\n"
-"PO-Revision-Date: 2007-09-02 23:41+0200\n"
+"POT-Creation-Date: 2007-09-02 23:43+0200\n"
+"PO-Revision-Date: 2007-09-09 08:23+0000\n"
 "Last-Translator: Sebastian Wallroth <sebastian@wallroth.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-09-01 18:58:20+0000\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
@@ -88,7 +89,6 @@ msgid "Main Authors"
 msgstr "Haupt-Autoren"
 
 #: ../lib/about.py:41
-#, fuzzy
 msgid "Programmers"
 msgstr "Programmierer"
 
@@ -109,9 +109,8 @@ msgid "Bulgarian"
 msgstr "Bulgarisch"
 
 #: ../lib/about.py:61
-#, fuzzy
 msgid "Catalan"
-msgstr "Italienisch"
+msgstr "Katalanisch"
 
 #: ../lib/about.py:63 ../lib/dbupgrade.py:88
 #: ../lib/plugins/movie/PluginMovieCSFD.py:30
@@ -158,7 +157,7 @@ msgstr "Japanisch"
 
 #: ../lib/about.py:93
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "Norwegisch Bokmal"
 
 #: ../lib/about.py:95 ../lib/dbupgrade.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:33
@@ -399,7 +398,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr "Es ist ein Verbindungsfehler aufgetreten."
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 "Der Film wurde gefunden, es existiert jedoch kein Poster auf Amazon.com."
 
@@ -412,9 +412,8 @@ msgid "No movie found"
 msgstr "Keinen Film gefunden"
 
 #: ../lib/gemail.py:39
-#, fuzzy
 msgid "Connection timed out"
-msgstr "Verbindungsfehler"
+msgstr "Verbindungsabbruch wegen Zeitüberschreitung"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
@@ -423,7 +422,7 @@ msgstr "Fehler beim Versenden der E-Mail: %s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr ""
+msgstr "Anmeldung fehlgeschlagen!"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
@@ -434,7 +433,7 @@ msgid "Movie loan reminder"
 msgstr "Filmausleih Erinnerung"
 
 #: ../lib/gemail.py:77
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Hi, %s!\n"
 "\n"
@@ -447,6 +446,9 @@ msgstr ""
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
 msgstr ""
+"Die E-Mail konnte nicht versendet werden.
+\n"
+"Bitte überprüfen Sie Ihre E-Mail Einstellungen."
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
@@ -825,6 +827,8 @@ msgid ""
 "Cannot connect to database.\n"
 "Falling back to SQLite."
 msgstr ""
+"Kann nicht zur Datenbank verbinden.\n"
+"Benutze SQLite."
 
 #: ../lib/sql.py:348
 msgid "Please check debug output for more informations."
@@ -899,12 +903,18 @@ msgid ""
 "gmail account service to send e-mails, try to enter '587' here. Default (and "
 "the most common one) is '25'"
 msgstr ""
+"Hier können Sie den SMTP-Server Port definieren. Wenn Sie Ihren GMail "
+"Account zum E-Mail Versand verwenden wollen, versuchen Sie hier \"587\" "
+"einzugeben. Standard (und am üblichsten) ist \"25\"."
 
 #: ../lib/widgets.py:310
 msgid ""
 "If you need TLS support, please check this checkbox. This is needed, for "
 "example, when using gmail service to send your reminder e-mails."
 msgstr ""
+"Wenn Sie TLS nutzen wollen, dann aktivieren Sie diese Checkbox. Dieses wird "
+"gebraucht, um zum Beispiel den GMail Service zum Senden von Erinnerungsmails "
+"zu verwenden."
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:103
@@ -1585,9 +1595,8 @@ msgid "Return"
 msgstr "Zurückerhalten"
 
 #: ../glade/griffith.glade.h:120
-#, fuzzy
 msgid "SMTP port"
-msgstr "CSV Import"
+msgstr "SMTP Port"
 
 #: ../glade/griffith.glade.h:121
 msgid "SMTP server"
@@ -1677,8 +1686,8 @@ msgstr "Großes Poster von der Amazon Seite holen."
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 "Geben sie den Originaltitel des Filmes ein und\n"
 " wählen sie eine Quelle aus.\n"
@@ -1691,7 +1700,7 @@ msgstr "Rechtschreibprüfung verwenden"
 
 #: ../glade/griffith.glade.h:151
 msgid "Use TLS?"
-msgstr ""
+msgstr "TLS verwenden?"
 
 #: ../glade/griffith.glade.h:152
 msgid "Use locale:"

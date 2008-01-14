@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the griffith package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-02 23:43+0200\n"
-"PO-Revision-Date: 2007-09-02 23:39+0200\n"
+"PO-Revision-Date: 2007-11-04 11:42+0000\n"
 "Last-Translator: kempson <kempson.chen@gmail.com>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Rosetta-Export-Date: 2007-09-02 21:08:19+0000\n"
+"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
@@ -162,7 +162,7 @@ msgstr "日语"
 
 #: ../lib/about.py:93
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "挪威博克马尔语"
 
 #: ../lib/about.py:95 ../lib/dbupgrade.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:33
@@ -371,15 +371,15 @@ msgstr "图片不正确"
 
 #: ../lib/edit.py:88 ../lib/edit.py:106
 msgid "Image has been updated"
-msgstr ""
+msgstr "图片已更新"
 
 #: ../lib/edit.py:95
 msgid "Are you sure you want to delete this poster?"
-msgstr ""
+msgstr "你确定要删除这张海报吗？"
 
 #: ../lib/edit.py:148 ../lib/edit.py:155
 msgid "No posters found for this movie."
-msgstr ""
+msgstr "没有找到这部电影的海报。"
 
 #: ../lib/edit.py:199 ../lib/movie.py:147
 msgid "Fetching poster"
@@ -395,7 +395,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr "对不起。出现了一个连接问题。"
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr "对不起。Amazon.com没有这个电影的海报。"
 
 #: ../lib/edit.py:243
@@ -408,7 +409,7 @@ msgstr "没有发现电影"
 
 #: ../lib/gemail.py:39
 msgid "Connection timed out"
-msgstr ""
+msgstr "连接超时"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
@@ -417,7 +418,7 @@ msgstr "发送电子邮件失败：%s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr ""
+msgstr "登录失败"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
@@ -440,7 +441,7 @@ msgstr ""
 
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
-msgstr ""
+msgstr "无法发送邮件。请检查电子邮件设置。"
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
@@ -506,7 +507,7 @@ msgstr "声道"
 
 #: ../lib/initialize.py:313
 msgid "Subtitle format"
-msgstr ""
+msgstr "字幕格式"
 
 #: ../lib/initialize.py:429 ../glade/griffith.glade.h:87
 msgid "Name"
@@ -557,11 +558,11 @@ msgstr ""
 #: ../lib/initialize.py:518 ../lib/plugins/export/PluginExportHTML.py:139
 #: ../glade/griffith.glade.h:46
 msgid "Discs"
-msgstr ""
+msgstr "光盘"
 
 #: ../lib/initialize.py:519 ../glade/griffith.glade.h:82
 msgid "Medium"
-msgstr ""
+msgstr "媒体"
 
 #: ../lib/initialize.py:520 ../lib/plugins/export/PluginExportHTML.py:149
 #: ../glade/griffith.glade.h:90
@@ -576,7 +577,7 @@ msgstr "数字："
 #: ../lib/initialize.py:522 ../lib/plugins/export/PluginExportHTML.py:135
 #: ../glade/griffith.glade.h:92
 msgid "Official site"
-msgstr ""
+msgstr "官方网站"
 
 #: ../lib/initialize.py:524 ../lib/plugins/export/PluginExportHTML.py:142
 #: ../glade/griffith.glade.h:101
@@ -667,19 +668,19 @@ msgstr "混合"
 
 #: ../lib/initialize.py:539
 msgid "Single Side, Single Layer"
-msgstr ""
+msgstr "单面，单层"
 
 #: ../lib/initialize.py:539
 msgid "Single Side, Dual Layer"
-msgstr ""
+msgstr "单面，双层"
 
 #: ../lib/initialize.py:539
 msgid "Dual Side, Single Layer"
-msgstr ""
+msgstr "双面，单层"
 
 #: ../lib/initialize.py:539
 msgid "Dual Side, Dual Layer"
-msgstr ""
+msgstr "双面，双层"
 
 #: ../lib/initialize.py:541
 msgid "Region 0 (No Region Coding)"
@@ -815,10 +816,12 @@ msgid ""
 "Cannot connect to database.\n"
 "Falling back to SQLite."
 msgstr ""
+"无法链接数据库。\n"
+"返回SQLite失败。"
 
 #: ../lib/sql.py:348
 msgid "Please check debug output for more informations."
-msgstr ""
+msgstr "请查看调试输出以获得更多信息。"
 
 #: ../lib/sql.py:356
 msgid "Database connection failed."
@@ -852,6 +855,8 @@ msgid ""
 "are xpdf, gpdf, evince or kpdf. Make sure you have this program installed "
 "and working first."
 msgstr ""
+"在这里定义你想在Griffith里使用的PDF阅读器。xpdf，gpdf，evice或kpdf都是受欢迎的选择。你应该先确定这些程序已经正确安装并正常运行"
+"。"
 
 #: ../lib/widgets.py:306
 msgid ""
@@ -917,21 +922,21 @@ msgstr ""
 #: ../lib/plugins/export/PluginExportXML.py:46
 #, python-format
 msgid "Export a %s document"
-msgstr ""
+msgstr "输出一个 %s 档案"
 
 #: ../lib/plugins/export/PluginExportCSV.py:65
 #: ../lib/plugins/export/PluginExportXML.py:83
 #, python-format
 msgid "%s file has been created."
-msgstr ""
+msgstr "%s 文件已经生成。"
 
 #: ../lib/plugins/export/PluginExportHTML.py:36
 msgid "Plugin exports data using templates"
-msgstr ""
+msgstr "插件使用模板输出数据。"
 
 #: ../lib/plugins/export/PluginExportHTML.py:48
 msgid "Griffith's movies list"
-msgstr ""
+msgstr "Griffith电影列表"
 
 #: ../lib/plugins/export/PluginExportHTML.py:156 ../glade/griffith.glade.h:81
 msgid "Media"
@@ -940,19 +945,19 @@ msgstr ""
 #: ../lib/plugins/export/PluginExportHTML.py:486
 #: ../lib/plugins/export/PluginExportHTML.py:488
 msgid "previous"
-msgstr ""
+msgstr "上一个"
 
 #: ../lib/plugins/export/PluginExportHTML.py:499
 #: ../lib/plugins/export/PluginExportHTML.py:501
 msgid "next"
-msgstr ""
+msgstr "下一个"
 
 #: ../lib/plugins/export/PluginExportHTML.py:612
 #: ../lib/plugins/export/PluginExportHTML.py:649
 #: ../lib/plugins/export/PluginExportHTML.py:740
 #, python-format
 msgid "Can't create %s!"
-msgstr ""
+msgstr "无法生成 %s！"
 
 #: ../lib/plugins/export/PluginExportHTML.py:638
 #, python-format
@@ -964,18 +969,18 @@ msgstr ""
 #: ../lib/plugins/export/PluginExportHTML.py:642
 #, python-format
 msgid "Can't remove %s!"
-msgstr ""
+msgstr "无法去除 %s！"
 
 #: ../lib/plugins/export/PluginExportHTML.py:657
 #: ../lib/plugins/export/PluginExportHTML.py:670
 #, python-format
 msgid "Can't copy %s!"
-msgstr ""
+msgstr "无法复制 %s！"
 
 #: ../lib/plugins/export/PluginExportHTML.py:692
 #, python-format
 msgid "Can't open %s!"
-msgstr ""
+msgstr "无法打开 %s！"
 
 #: ../lib/plugins/export/PluginExportHTML.py:700
 #: ../lib/plugins/export/PluginExportPDF.py:117
@@ -992,7 +997,7 @@ msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:815
 msgid "Document has been generated."
-msgstr ""
+msgstr "档案已生成。"
 
 #: ../lib/plugins/export/PluginExportiPod.py:36
 msgid "iPod Notes export plugin"
@@ -1000,15 +1005,15 @@ msgstr ""
 
 #: ../lib/plugins/export/PluginExportiPod.py:85
 msgid "My Movies List"
-msgstr ""
+msgstr "我的电影列表"
 
 #: ../lib/plugins/export/PluginExportiPod.py:101
 msgid "List was successful exported to iPod."
-msgstr ""
+msgstr "列表成功输出到iPod。"
 
 #: ../lib/plugins/export/PluginExportiPod.py:103
 msgid "iPod is not connected."
-msgstr ""
+msgstr "iPod没有连接。"
 
 #: ../lib/plugins/export/PluginExportiPod.py:118
 msgid ""
@@ -1018,24 +1023,24 @@ msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:44
 msgid "PDF export plugin"
-msgstr ""
+msgstr "PDF输出插件"
 
 #: ../lib/plugins/export/PluginExportPDF.py:68
 msgid "Export a PDF"
-msgstr ""
+msgstr "输出到PDF"
 
 #: ../lib/plugins/export/PluginExportPDF.py:84
 msgid "List of films"
-msgstr ""
+msgstr "影片列表"
 
 #: ../lib/plugins/export/PluginExportPDF.py:87
 #, python-format
 msgid "Total Movies: %s"
-msgstr ""
+msgstr "所有电影： %s"
 
 #: ../lib/plugins/export/PluginExportPDF.py:110
 msgid "PDF has been created."
-msgstr ""
+msgstr "PDF 已经生成。"
 
 #: ../lib/plugins/export/PluginExportPDF.py:115
 #, python-format
@@ -1078,83 +1083,83 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:4
 msgid "<b>Limits</b>"
-msgstr ""
+msgstr "<b>限制</b>"
 
 #: ../glade/exporthtml.glade.h:5 ../glade/griffith.glade.h:15
 msgid "<b>Sort by</b>"
-msgstr ""
+msgstr "<b>排列</b>"
 
 #: ../glade/exporthtml.glade.h:6
 msgid "<b>Split into</b>"
-msgstr ""
+msgstr "<b>分割到</b>"
 
 #: ../glade/exporthtml.glade.h:7
 msgid "<b>Style</b>"
-msgstr ""
+msgstr "<b>风格</b>"
 
 #: ../glade/exporthtml.glade.h:8
 msgid "<b>Template</b>"
-msgstr ""
+msgstr "<b>模板</b>"
 
 #: ../glade/exporthtml.glade.h:9 ../glade/import.glade.h:3
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: ../glade/exporthtml.glade.h:10
 msgid "Black and white"
-msgstr ""
+msgstr "黑白"
 
 #: ../glade/exporthtml.glade.h:11
 msgid "Choose style file"
-msgstr ""
+msgstr "选择风格文件"
 
 #: ../glade/exporthtml.glade.h:12
 msgid "Convert images"
-msgstr ""
+msgstr "转换图像"
 
 #: ../glade/exporthtml.glade.h:13
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
 #: ../glade/exporthtml.glade.h:14 ../glade/import.glade.h:4
 msgid "Description"
-msgstr ""
+msgstr "说明"
 
 #: ../glade/exporthtml.glade.h:15
 msgid "Destination"
-msgstr ""
+msgstr "目标位置"
 
 #: ../glade/exporthtml.glade.h:17
 msgid "Export"
-msgstr ""
+msgstr "输出"
 
 #: ../glade/exporthtml.glade.h:18
 msgid "Export data"
-msgstr ""
+msgstr "输出数据"
 
 #: ../glade/exporthtml.glade.h:19
 msgid "Format"
-msgstr ""
+msgstr "格式"
 
 #: ../glade/exporthtml.glade.h:20
 msgid "Maximal height"
-msgstr ""
+msgstr "最大高度"
 
 #: ../glade/exporthtml.glade.h:21
 msgid "Maximal width"
-msgstr ""
+msgstr "最大宽度"
 
 #: ../glade/exporthtml.glade.h:22
 msgid "Posters"
-msgstr ""
+msgstr "海报"
 
 #: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:118
 msgid "Reverse"
-msgstr ""
+msgstr "反转"
 
 #: ../glade/exporthtml.glade.h:24
 msgid "Template"
-msgstr ""
+msgstr "模板"
 
 #: ../glade/exporthtml.glade.h:25
 msgid "Use custom file"
@@ -1162,7 +1167,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:26 ../glade/import.glade.h:10
 msgid "Version"
-msgstr ""
+msgstr "版本"
 
 #: ../glade/exporthtml.glade.h:27
 msgid "entries per page"
@@ -1170,7 +1175,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:28
 msgid "files"
-msgstr ""
+msgstr "文件"
 
 #: ../glade/exporthtml.glade.h:29
 msgid "loaned only"
@@ -1178,7 +1183,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:30
 msgid "none"
-msgstr ""
+msgstr "无"
 
 #: ../glade/exporthtml.glade.h:31
 msgid "not loaned only"
@@ -1198,27 +1203,27 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:2
 msgid "<b>Audio channels</b>"
-msgstr ""
+msgstr "<b>声道</b>"
 
 #: ../glade/griffith.glade.h:3
 msgid "<b>Audio codecs</b>"
-msgstr ""
+msgstr "<b>声频编码</b>"
 
 #: ../glade/griffith.glade.h:5
 msgid "<b>Collection</b>"
-msgstr ""
+msgstr "<b>收藏</b>"
 
 #: ../glade/griffith.glade.h:6
 msgid "<b>Defaults</b>"
-msgstr ""
+msgstr "<b>默认</b>"
 
 #: ../glade/griffith.glade.h:7
 msgid "<b>E-mail reminder</b>"
-msgstr ""
+msgstr "<b>电子邮件提醒</b>"
 
 #: ../glade/griffith.glade.h:8
 msgid "<b>Languages</b>"
-msgstr ""
+msgstr "<b>语言</b>"
 
 #: ../glade/griffith.glade.h:9
 msgid "<b>Loan History</b>"
@@ -1230,15 +1235,15 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:11
 msgid "<b>Search for:</b>"
-msgstr ""
+msgstr "<b>搜索:</b>"
 
 #: ../glade/griffith.glade.h:12
 msgid "<b>Search results</b>"
-msgstr ""
+msgstr "<b>搜索结果</b>"
 
 #: ../glade/griffith.glade.h:13
 msgid "<b>Select database to use</b>"
-msgstr ""
+msgstr "<b>选择要使用的数据库</b>"
 
 #: ../glade/griffith.glade.h:14
 msgid "<b>Show only the following columns</b>"
@@ -1246,15 +1251,15 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:16
 msgid "<b>Subtitle formats</b>"
-msgstr ""
+msgstr "<b>字幕格式</b>"
 
 #: ../glade/griffith.glade.h:17
 msgid "<b>Subtitles</b>"
-msgstr ""
+msgstr "<b>字幕</b>"
 
 #: ../glade/griffith.glade.h:18
 msgid "<b>Tags</b>"
-msgstr ""
+msgstr "<b>标签</b>"
 
 #: ../glade/griffith.glade.h:19
 msgid "<b>Use spell checking on the following fields:</b>"
@@ -1262,7 +1267,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:20
 msgid "<b>Video codecs</b>"
-msgstr ""
+msgstr "<b>视频编码</b>"
 
 #: ../glade/griffith.glade.h:21
 msgid "<b>Volume</b>"
@@ -1270,7 +1275,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:22
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: ../glade/griffith.glade.h:24
 msgid "Add a new person"
@@ -1278,39 +1283,39 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:25
 msgid "Add movie"
-msgstr ""
+msgstr "添加电影"
 
 #: ../glade/griffith.glade.h:26
 msgid "Add movie and close"
-msgstr ""
+msgstr "添加电影并关闭"
 
 #: ../glade/griffith.glade.h:27
 msgid "Add new movie"
-msgstr ""
+msgstr "添加新电影"
 
 #: ../glade/griffith.glade.h:28
 msgid "All Movies"
-msgstr ""
+msgstr "所有电影"
 
 #: ../glade/griffith.glade.h:29
 msgid "By Collection"
-msgstr ""
+msgstr "按收藏"
 
 #: ../glade/griffith.glade.h:31
 msgid "Choose Image"
-msgstr ""
+msgstr "选择图像"
 
 #: ../glade/griffith.glade.h:33
 msgid "Clears filter"
-msgstr ""
+msgstr "清除过滤器"
 
 #: ../glade/griffith.glade.h:34
 msgid "Clone"
-msgstr ""
+msgstr "复制"
 
 #: ../glade/griffith.glade.h:39
 msgid "DVD layers"
-msgstr ""
+msgstr "DVD层"
 
 #: ../glade/griffith.glade.h:40
 msgid "DVD region"
@@ -1318,7 +1323,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:41
 msgid "Database"
-msgstr ""
+msgstr "数据库"
 
 #: ../glade/griffith.glade.h:42
 msgid "Delete a person"
@@ -1326,19 +1331,19 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:43
 msgid "Details"
-msgstr ""
+msgstr "详情"
 
 #: ../glade/griffith.glade.h:44
 msgid "Dictionaries"
-msgstr ""
+msgstr "字典"
 
 #: ../glade/griffith.glade.h:48
 msgid "E-mail reminder"
-msgstr ""
+msgstr "电子邮件提醒"
 
 #: ../glade/griffith.glade.h:49
 msgid "E_xport"
-msgstr ""
+msgstr "导出(_x)"
 
 #: ../glade/griffith.glade.h:50
 msgid "Edit a person"
@@ -1350,7 +1355,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:52
 msgid "Favorite Movie Plugin"
-msgstr ""
+msgstr "收藏电影插件"
 
 #: ../glade/griffith.glade.h:53
 msgid "Fetch from Amazon"
@@ -1362,23 +1367,23 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:55
 msgid "Filter "
-msgstr ""
+msgstr "过滤器 "
 
 #: ../glade/griffith.glade.h:56
 msgid "Font for reports"
-msgstr ""
+msgstr "报告的字体"
 
 #: ../glade/griffith.glade.h:57
 msgid "Forum"
-msgstr ""
+msgstr "论坛"
 
 #: ../glade/griffith.glade.h:58
 msgid "Found Results"
-msgstr ""
+msgstr "发现结果"
 
 #: ../glade/griffith.glade.h:60
 msgid "Get from web"
-msgstr ""
+msgstr "从网络获取"
 
 #: ../glade/griffith.glade.h:61
 msgid "Get movie data from:"
@@ -1386,11 +1391,11 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:62
 msgid "Griffith"
-msgstr ""
+msgstr "Griffith"
 
 #: ../glade/griffith.glade.h:63
 msgid "Homepage"
-msgstr ""
+msgstr "主页"
 
 #: ../glade/griffith.glade.h:64
 msgid "Host"
@@ -1410,7 +1415,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:69
 msgid "Languages"
-msgstr ""
+msgstr "语言"
 
 #: ../glade/griffith.glade.h:71
 msgid "Limit search results to"
@@ -1647,8 +1652,8 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 
 #: ../glade/griffith.glade.h:150
@@ -1771,31 +1776,31 @@ msgstr ""
 
 #: ../glade/importcsv.glade.h:8
 msgid "CSV Import"
-msgstr ""
+msgstr "CSV导入"
 
 #: ../glade/importcsv.glade.h:9
 msgid "Delimiter"
-msgstr ""
+msgstr "分隔符"
 
 #: ../glade/importcsv.glade.h:10
 msgid "Encoding"
-msgstr ""
+msgstr "正在编码"
 
 #: ../glade/importcsv.glade.h:11 ../glade/import.glade.h:6
 msgid "Fields"
-msgstr ""
+msgstr "字段"
 
 #: ../glade/importcsv.glade.h:12
 msgid "File-Options"
-msgstr ""
+msgstr "文件选项"
 
 #: ../glade/importcsv.glade.h:13
 msgid "From Row"
-msgstr ""
+msgstr "起始行号"
 
 #: ../glade/importcsv.glade.h:14
 msgid "Griffith Fields"
-msgstr ""
+msgstr "Griffith字段"
 
 #: ../glade/importcsv.glade.h:15
 msgid "If your file has no column headers then you should import from row 0."
@@ -1897,6 +1902,91 @@ msgid ""
 "utf_7 (all languages)\n"
 "utf_8 (all languages)"
 msgstr ""
+"ascii (English)\n"
+"big5 (Traditional Chinese)\n"
+"big5hkscs (Traditional Chinese)\n"
+"cp037 (English)\n"
+"cp424 (Hebrew)\n"
+"cp437 (English)\n"
+"cp500 (Western Europe)\n"
+"cp737 (Greek)\n"
+"cp775 (Baltic languages)\n"
+"cp850 (Western Europe)\n"
+"cp852 (Central and Eastern Europe)\n"
+"cp855 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"cp856 (Hebrew)\n"
+"cp857 (Turkish)\n"
+"cp860 (Portuguese)\n"
+"cp861 (Icelandic)\n"
+"cp862 (Hebrew)\n"
+"cp863 (Canadian)\n"
+"cp864 (Arabic)\n"
+"cp865 (Danish, Norwegian)\n"
+"cp866 (Russian)\n"
+"cp869 (Greek)\n"
+"cp874 (Thai)\n"
+"cp875 (Greek)\n"
+"cp932 (Japanese)\n"
+"cp949 (Korean)\n"
+"cp950 (Traditional Chinese)\n"
+"cp1006 (Urdu)\n"
+"cp1026 (Turkish)\n"
+"cp1140 (Western Europe)\n"
+"cp1250 (Central and Eastern Europe)\n"
+"cp1251 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"cp1252 (Western Europe)\n"
+"cp1253 (Greek)\n"
+"cp1254 (Turkish)\n"
+"cp1255 (Hebrew)\n"
+"cp1256 (Arabic)\n"
+"cp1257 (Baltic languages)\n"
+"cp1258 (Vietnamese)\n"
+"euc_jp (Japanese)\n"
+"euc_jis_2004 (Japanese)\n"
+"euc_jisx0213 (Japanese)\n"
+"euc_kr (Korean)\n"
+"gb2312 (Simplified Chinese)\n"
+"gbk (Unified Chinese)\n"
+"gb18030 (Unified Chinese)\n"
+"hz (Simplified Chinese)\n"
+"iso2022_jp (Japanese)\n"
+"iso2022_jp_1 (Japanese)\n"
+"iso2022_jp_2 (Japanese, Korean, Simplified Chinese, Western Europe, Greek)\n"
+"iso2022_jp_2004 (Japanese)\n"
+"iso2022_jp_3 (Japanese)\n"
+"iso2022_jp_ext (Japanese)\n"
+"iso2022_kr (Korean)\n"
+"latin_1 (West Europe)\n"
+"iso8859_2 (Central and Eastern Europe)\n"
+"iso8859_3 (Esperanto, Maltese)\n"
+"iso8859_4 (Baltic languagues)\n"
+"iso8859_5 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"iso8859_6 (Arabic)\n"
+"iso8859_7 (Greek)\n"
+"iso8859_8 (Hebrew)\n"
+"iso8859_9 (Turkish)\n"
+"iso8859_10 (Nordic languages)\n"
+"iso8859_13 (Baltic languages)\n"
+"iso8859_14 (Celtic languages)\n"
+"iso8859_15 (Western Europe)\n"
+"johab (Korean)\n"
+"koi8_r (Russian)\n"
+"koi8_u (Ukrainian)\n"
+"mac_cyrillic (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"mac_greek (Greek)\n"
+"mac_iceland (Icelandic)\n"
+"mac_latin2 (Central and Eastern Europe)\n"
+"mac_roman (Western Europe)\n"
+"mac_turkish (Turkish)\n"
+"ptcp154 (Kazakh)\n"
+"shift_jis (Japanese)\n"
+"shift_jis_2004 (Japanese)\n"
+"shift_jisx0213 (Japanese)\n"
+"utf_16 (all languages)\n"
+"utf_16_be (all languages (BMP only))\n"
+"utf_16_le (all languages (BMP only))\n"
+"utf_7 (all languages)\n"
+"utf_8 (all languages)"
 
 #: ../glade/import.glade.h:1
 msgid "<b>Import only fields selected below</b>"
@@ -1904,16 +1994,16 @@ msgstr ""
 
 #: ../glade/import.glade.h:2
 msgid "<b>Importing...</b>"
-msgstr ""
+msgstr "<b>导入中……</b>"
 
 #: ../glade/import.glade.h:7
 msgid "Import window"
-msgstr ""
+msgstr "导入窗口"
 
 #: ../glade/import.glade.h:8
 msgid "Plugin"
-msgstr ""
+msgstr "插件"
 
 #: ../glade/import.glade.h:9
 msgid "Source"
-msgstr ""
+msgstr "来源"
