@@ -196,7 +196,7 @@ class Griffith:
 
 	def about_dialog(self, *args):
 		from about import AboutDialog
-		about_dialog = AboutDialog(self.locations['images'])
+		about_dialog = AboutDialog(self.locations)
 
 	# add movie -----------------------------------------------------------
 
