@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-26 21:22+0100\n"
+"POT-Creation-Date: 2008-01-26 22:09+0100\n"
 "PO-Revision-Date: 2008-01-13 16:06+0000\n"
 "Last-Translator: Taras Cavin <tasctasc@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -23,7 +23,7 @@ msgid "You have no movies in your database"
 msgstr "В вашей базе данных нет фильмов"
 
 #: ../griffith:385
-msgid "You saw all movies in your collection!"
+msgid "You have seen all films in your collection!"
 msgstr "Вы просмотрели все фильмы в коллекции!"
 
 #: ../griffith:511 ../griffith:516 ../lib/initialize.py:338
@@ -202,17 +202,17 @@ msgstr "Выпушено под лицензией GNU/GPL"
 
 #: ../lib/cover.py:176 ../lib/initialize.py:200 ../lib/initialize.py:606
 #: ../lib/plugins/export/PluginExportHTML.py:145
-#: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:94
+#: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:95
 msgid "Original Title"
 msgstr "Оригинальное название"
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:614
-#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:145
+#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:146
 msgid "Title"
 msgstr "Название"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:596
-#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:46
+#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:47
 msgid "Director"
 msgstr "Режиссер"
 
@@ -221,12 +221,12 @@ msgid "Running Time"
 msgstr "Продолжительность"
 
 #: ../lib/cover.py:182 ../lib/initialize.py:595
-#: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:39
+#: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:40
 msgid "Country"
 msgstr "Страна"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:597
-#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:60
+#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:61
 msgid "Genre"
 msgstr "Жанр"
 
@@ -487,12 +487,12 @@ msgid "N."
 msgstr "N."
 
 #: ../lib/initialize.py:194 ../lib/initialize.py:598
-#: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:67
+#: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:68
 msgid "Image"
 msgstr "Изображение"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:611
-#: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:124
+#: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:125
 msgid "Seen it"
 msgstr "Смотрел"
 
@@ -502,7 +502,7 @@ msgid "Year"
 msgstr "Год"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:610
-#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:120
+#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:121
 msgid "Runtime"
 msgstr "Время"
 
@@ -551,12 +551,12 @@ msgstr "Каналы"
 msgid "Subtitle format"
 msgstr "Формат субтитров"
 
-#: ../lib/initialize.py:507 ../glade/griffith.glade.h:88
+#: ../lib/initialize.py:507 ../glade/griffith.glade.h:89
 msgid "Name"
 msgstr "Имя"
 
 #: ../lib/initialize.py:513 ../glade/exporthtml.glade.h:16
-#: ../glade/griffith.glade.h:48 ../glade/import.glade.h:5
+#: ../glade/griffith.glade.h:49 ../glade/import.glade.h:5
 msgid "E-mail"
 msgstr "Электронная почта"
 
@@ -565,31 +565,31 @@ msgid "Last added"
 msgstr "Последний добавленный"
 
 #: ../lib/initialize.py:590 ../lib/plugins/export/PluginExportHTML.py:133
-#: ../glade/griffith.glade.h:31
+#: ../glade/griffith.glade.h:32
 msgid "Cast"
 msgstr "В ролях"
 
 #: ../lib/initialize.py:591 ../lib/plugins/export/PluginExportHTML.py:134
-#: ../glade/griffith.glade.h:33
+#: ../glade/griffith.glade.h:34
 msgid "Classification"
 msgstr "Классификация"
 
 #: ../lib/initialize.py:592 ../lib/plugins/export/PluginExportHTML.py:161
-#: ../glade/griffith.glade.h:36
+#: ../glade/griffith.glade.h:37
 msgid "Collection"
 msgstr "Коллекция"
 
 #: ../lib/initialize.py:593 ../lib/initialize.py:620
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
-#: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:37
+#: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:38
 msgid "Color"
 msgstr "Цвет"
 
-#: ../lib/initialize.py:594 ../glade/griffith.glade.h:38
+#: ../lib/initialize.py:594 ../glade/griffith.glade.h:39
 msgid "Condition"
 msgstr "Состояние"
 
-#: ../lib/initialize.py:599 ../glade/griffith.glade.h:71
+#: ../lib/initialize.py:599 ../glade/griffith.glade.h:72
 msgid "Layers"
 msgstr "Слои"
 
@@ -598,55 +598,55 @@ msgid "Loaned"
 msgstr "Одолжен"
 
 #: ../lib/initialize.py:601 ../lib/plugins/export/PluginExportHTML.py:143
-#: ../glade/griffith.glade.h:47
+#: ../glade/griffith.glade.h:48
 msgid "Discs"
 msgstr "Диски"
 
-#: ../lib/initialize.py:602 ../glade/griffith.glade.h:83
+#: ../lib/initialize.py:602 ../glade/griffith.glade.h:84
 msgid "Medium"
 msgstr "Средний"
 
 #: ../lib/initialize.py:603 ../lib/plugins/export/PluginExportHTML.py:153
-#: ../glade/griffith.glade.h:91
+#: ../glade/griffith.glade.h:92
 msgid "Notes"
 msgstr "Заметки"
 
 #: ../lib/initialize.py:604 ../lib/sql.py:278
-#: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:92
+#: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:93
 msgid "Number"
 msgstr "Число"
 
 #: ../lib/initialize.py:605 ../lib/plugins/export/PluginExportHTML.py:139
-#: ../glade/griffith.glade.h:93
+#: ../glade/griffith.glade.h:94
 msgid "Official site"
 msgstr "Официальный сайт"
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:146
-#: ../glade/griffith.glade.h:102
+#: ../glade/griffith.glade.h:103
 msgid "Plot"
 msgstr "Диаграмма"
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:147
-#: ../glade/griffith.glade.h:110
+#: ../glade/griffith.glade.h:111
 msgid "Rating"
 msgstr "Оценка"
 
-#: ../lib/initialize.py:609 ../glade/griffith.glade.h:112
+#: ../lib/initialize.py:609 ../glade/griffith.glade.h:113
 msgid "Region"
 msgstr "Регион"
 
 #: ../lib/initialize.py:612 ../lib/plugins/export/PluginExportHTML.py:140
-#: ../glade/griffith.glade.h:134
+#: ../glade/griffith.glade.h:135
 msgid "Site"
 msgstr "Сайт"
 
 #: ../lib/initialize.py:613 ../lib/plugins/export/PluginExportHTML.py:149
-#: ../glade/griffith.glade.h:140
+#: ../glade/griffith.glade.h:141
 msgid "Studio"
 msgstr "Студия"
 
 #: ../lib/initialize.py:615 ../lib/plugins/export/PluginExportHTML.py:141
-#: ../glade/griffith.glade.h:147
+#: ../glade/griffith.glade.h:148
 msgid "Trailer"
 msgstr "Трейлер"
 
@@ -1026,7 +1026,7 @@ msgstr "Плугин экспортирует данные, используя �
 msgid "Griffith's movies list"
 msgstr "Список фильмов Griffith"
 
-#: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:82
+#: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:83
 msgid "Media"
 msgstr "Носитель"
 
@@ -1246,7 +1246,7 @@ msgstr "Максимальная ширина"
 msgid "Posters"
 msgstr "Постеры"
 
-#: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:119
+#: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:120
 msgid "Reverse"
 msgstr "Обратный порядок"
 
@@ -1391,171 +1391,175 @@ msgid "All Movies"
 msgstr "Все фильмы"
 
 #: ../glade/griffith.glade.h:29
+msgid "Attempt to fetch a big poster from Amazon services Web site"
+msgstr "Попытаться получть большой постер с сервера Amazon"
+
+#: ../glade/griffith.glade.h:30
 msgid "By Collection"
 msgstr "По коллекции"
 
-#: ../glade/griffith.glade.h:30
+#: ../glade/griffith.glade.h:31
 #, fuzzy
 msgid "By Volume"
 msgstr "Громкость"
 
-#: ../glade/griffith.glade.h:32
+#: ../glade/griffith.glade.h:33
 msgid "Choose Image"
 msgstr "Выбрать изображение"
 
-#: ../glade/griffith.glade.h:34
+#: ../glade/griffith.glade.h:35
 msgid "Clears filter"
 msgstr "Очистить фильтр"
 
-#: ../glade/griffith.glade.h:35
+#: ../glade/griffith.glade.h:36
 msgid "Clone"
 msgstr "Клонировать"
 
-#: ../glade/griffith.glade.h:40
+#: ../glade/griffith.glade.h:41
 msgid "DVD layers"
 msgstr "Слои DVD"
 
-#: ../glade/griffith.glade.h:41
+#: ../glade/griffith.glade.h:42
 msgid "DVD region"
 msgstr "Регион DVD"
 
-#: ../glade/griffith.glade.h:42
+#: ../glade/griffith.glade.h:43
 msgid "Database"
 msgstr "База данных"
 
-#: ../glade/griffith.glade.h:43
+#: ../glade/griffith.glade.h:44
 msgid "Delete a person"
 msgstr "Удалить человека"
 
-#: ../glade/griffith.glade.h:44
+#: ../glade/griffith.glade.h:45
 msgid "Details"
 msgstr "Подробнее"
 
-#: ../glade/griffith.glade.h:45
+#: ../glade/griffith.glade.h:46
 msgid "Dictionaries"
 msgstr "Словари"
 
-#: ../glade/griffith.glade.h:49
+#: ../glade/griffith.glade.h:50
 msgid "E-mail reminder"
 msgstr "Напоминание по E-mail"
 
-#: ../glade/griffith.glade.h:50
+#: ../glade/griffith.glade.h:51
 msgid "E_xport"
 msgstr "Э_кспорт"
 
-#: ../glade/griffith.glade.h:51
+#: ../glade/griffith.glade.h:52
 msgid "Edit a person"
 msgstr "Редактировать человека"
 
-#: ../glade/griffith.glade.h:52
+#: ../glade/griffith.glade.h:53
 msgid "Edit movie details"
 msgstr "Изменить сведения о фильме"
 
-#: ../glade/griffith.glade.h:53
+#: ../glade/griffith.glade.h:54
 msgid "Favorite Movie Plugin"
 msgstr "Плугин Любимые фильмы"
 
-#: ../glade/griffith.glade.h:54
+#: ../glade/griffith.glade.h:55
 msgid "Fetch from Amazon"
 msgstr "Получить с Amazon"
 
-#: ../glade/griffith.glade.h:55
+#: ../glade/griffith.glade.h:56
 msgid "Fill empty fields only"
 msgstr "Заполнить только пустые поля"
 
-#: ../glade/griffith.glade.h:56
+#: ../glade/griffith.glade.h:57
 msgid "Filter "
 msgstr "Фильтр "
 
-#: ../glade/griffith.glade.h:57
+#: ../glade/griffith.glade.h:58
 msgid "Font for reports"
 msgstr "Шрифт отчётов"
 
-#: ../glade/griffith.glade.h:58
+#: ../glade/griffith.glade.h:59
 msgid "Forum"
 msgstr "Форум"
 
-#: ../glade/griffith.glade.h:59
+#: ../glade/griffith.glade.h:60
 msgid "Found Results"
 msgstr "Найденные результаты"
 
-#: ../glade/griffith.glade.h:61
+#: ../glade/griffith.glade.h:62
 msgid "Get from web"
 msgstr "Получить из интернета"
 
-#: ../glade/griffith.glade.h:62
+#: ../glade/griffith.glade.h:63
 msgid "Get movie data from:"
 msgstr "Получить данных о фильме с:"
 
-#: ../glade/griffith.glade.h:63
+#: ../glade/griffith.glade.h:64
 msgid "Griffith"
 msgstr "Griffith"
 
-#: ../glade/griffith.glade.h:64
+#: ../glade/griffith.glade.h:65
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: ../glade/griffith.glade.h:65
+#: ../glade/griffith.glade.h:66
 msgid "Host"
 msgstr "Имя машины"
 
-#: ../glade/griffith.glade.h:66
+#: ../glade/griffith.glade.h:67
 msgid "I_mport"
 msgstr "И_мпорт"
 
-#: ../glade/griffith.glade.h:68
+#: ../glade/griffith.glade.h:69
 msgid "Include Front Image"
 msgstr "Включая изображение обложки"
 
-#: ../glade/griffith.glade.h:69
+#: ../glade/griffith.glade.h:70
 msgid "Include movie number"
 msgstr "Включая номер фильма"
 
-#: ../glade/griffith.glade.h:70
+#: ../glade/griffith.glade.h:71
 msgid "Languages"
 msgstr "Языки"
 
-#: ../glade/griffith.glade.h:72
+#: ../glade/griffith.glade.h:73
 msgid "Limit search results to"
 msgstr "Ограничить результаты поиска до"
 
-#: ../glade/griffith.glade.h:73
+#: ../glade/griffith.glade.h:74
 msgid "Load poster from disk"
 msgstr "Загрузить постер с диска"
 
-#: ../glade/griffith.glade.h:74
+#: ../glade/griffith.glade.h:75
 msgid "Loan"
 msgstr "Одалживание"
 
-#: ../glade/griffith.glade.h:75
+#: ../glade/griffith.glade.h:76
 msgid "Loan Management"
 msgstr "Управление одалживанием"
 
-#: ../glade/griffith.glade.h:76
+#: ../glade/griffith.glade.h:77
 msgid "Loan movie"
 msgstr "Одолжить фильм"
 
-#: ../glade/griffith.glade.h:77
+#: ../glade/griffith.glade.h:78
 msgid "Loan to"
 msgstr "Одолжен"
 
-#: ../glade/griffith.glade.h:78
+#: ../glade/griffith.glade.h:79
 msgid "Loaned Movies"
 msgstr "Одолженные фильмы"
 
-#: ../glade/griffith.glade.h:79
+#: ../glade/griffith.glade.h:80
 msgid "Loans"
 msgstr "Одолжены"
 
-#: ../glade/griffith.glade.h:80
+#: ../glade/griffith.glade.h:81
 msgid "Main list"
 msgstr "Главный список"
 
-#: ../glade/griffith.glade.h:81
+#: ../glade/griffith.glade.h:82
 msgid "Manage People"
 msgstr "Управление людьми"
 
-#: ../glade/griffith.glade.h:84
+#: ../glade/griffith.glade.h:85
 msgid ""
 "Meter\n"
 "Stars"
@@ -1563,163 +1567,163 @@ msgstr ""
 "Измеритель\n"
 "Звёзд"
 
-#: ../glade/griffith.glade.h:86
+#: ../glade/griffith.glade.h:87
 msgid "Movie details"
 msgstr "Сведения о фильме"
 
-#: ../glade/griffith.glade.h:87
+#: ../glade/griffith.glade.h:88
 msgid "Movie information"
 msgstr "Информация о фильме"
 
-#: ../glade/griffith.glade.h:89
+#: ../glade/griffith.glade.h:90
 msgid "Needs authentication"
 msgstr "Требуется аутентификация"
 
-#: ../glade/griffith.glade.h:90
+#: ../glade/griffith.glade.h:91
 msgid "Not Seen Movies"
 msgstr "Непросмотренные фильмы"
 
-#: ../glade/griffith.glade.h:95
+#: ../glade/griffith.glade.h:96
 msgid "Original title"
 msgstr "Оригинальное название"
 
-#: ../glade/griffith.glade.h:96
+#: ../glade/griffith.glade.h:97
 msgid "Other"
 msgstr "Прочие"
 
-#: ../glade/griffith.glade.h:97
+#: ../glade/griffith.glade.h:98
 msgid "PDF reader"
 msgstr "просмотрщик PDF"
 
-#: ../glade/griffith.glade.h:98
+#: ../glade/griffith.glade.h:99
 msgid "Password"
 msgstr "Пaроль"
 
-#: ../glade/griffith.glade.h:99
+#: ../glade/griffith.glade.h:100
 msgid "People"
 msgstr "Люди"
 
-#: ../glade/griffith.glade.h:100
+#: ../glade/griffith.glade.h:101
 msgid "Phone"
 msgstr "Телефон"
 
-#: ../glade/griffith.glade.h:101
+#: ../glade/griffith.glade.h:102
 msgid "Please wait a moment..."
 msgstr "Пожалуйста, подождите..."
 
-#: ../glade/griffith.glade.h:103
+#: ../glade/griffith.glade.h:104
 msgid "Plugins"
 msgstr "Плугины"
 
-#: ../glade/griffith.glade.h:104
+#: ../glade/griffith.glade.h:105
 msgid "Port"
 msgstr "Порт"
 
-#: ../glade/griffith.glade.h:105
+#: ../glade/griffith.glade.h:106
 msgid "Poster image"
 msgstr "Изображение постера"
 
-#: ../glade/griffith.glade.h:106
+#: ../glade/griffith.glade.h:107
 msgid "Poster viewer"
 msgstr "Просмотр постеров"
 
-#: ../glade/griffith.glade.h:107
+#: ../glade/griffith.glade.h:108
 msgid "Preferences"
 msgstr "Установки"
 
-#: ../glade/griffith.glade.h:108
+#: ../glade/griffith.glade.h:109
 msgid "Print Cover"
 msgstr "Печать обложки"
 
-#: ../glade/griffith.glade.h:109
+#: ../glade/griffith.glade.h:110
 msgid "Print cover"
 msgstr "Печать обложки"
 
-#: ../glade/griffith.glade.h:111
+#: ../glade/griffith.glade.h:112
 msgid "Rating image"
 msgstr "Рейтинговое изображение"
 
-#: ../glade/griffith.glade.h:113
+#: ../glade/griffith.glade.h:114
 msgid "Remove"
 msgstr "Удалить"
 
-#: ../glade/griffith.glade.h:114
+#: ../glade/griffith.glade.h:115
 msgid "Remove selected movie"
 msgstr "Удалить выбранные фильмы"
 
-#: ../glade/griffith.glade.h:115
+#: ../glade/griffith.glade.h:116
 msgid "Removes poster"
 msgstr "Удалить постер"
 
-#: ../glade/griffith.glade.h:116
+#: ../glade/griffith.glade.h:117
 msgid "Rename"
 msgstr "Переименовать"
 
-#: ../glade/griffith.glade.h:117
+#: ../glade/griffith.glade.h:118
 msgid "Report bug"
 msgstr "Сообщить об ошибке"
 
-#: ../glade/griffith.glade.h:118
+#: ../glade/griffith.glade.h:119
 msgid "Return"
 msgstr "Вернуться"
 
-#: ../glade/griffith.glade.h:121
+#: ../glade/griffith.glade.h:122
 msgid "SMTP port"
 msgstr "порт SMTP"
 
-#: ../glade/griffith.glade.h:122
+#: ../glade/griffith.glade.h:123
 msgid "SMTP server"
 msgstr "SMTP сервер"
 
-#: ../glade/griffith.glade.h:123
+#: ../glade/griffith.glade.h:124
 msgid "Searching on the web"
 msgstr "Поиск в интернете"
 
-#: ../glade/griffith.glade.h:125
+#: ../glade/griffith.glade.h:126
 msgid "Select A File"
 msgstr "Выберите файл"
 
-#: ../glade/griffith.glade.h:126
+#: ../glade/griffith.glade.h:127
 msgid "Select first movie"
 msgstr "Выберите первый фильм"
 
-#: ../glade/griffith.glade.h:127
+#: ../glade/griffith.glade.h:128
 msgid "Select last movie"
 msgstr "Выберите последний фильм"
 
-#: ../glade/griffith.glade.h:128
+#: ../glade/griffith.glade.h:129
 msgid "Select next movie"
 msgstr "Выбрать следующий фильм"
 
-#: ../glade/griffith.glade.h:129
+#: ../glade/griffith.glade.h:130
 msgid "Select previous movie"
 msgstr "Выбрать предыдущий фильм"
 
-#: ../glade/griffith.glade.h:130
+#: ../glade/griffith.glade.h:131
 msgid "Sender E-mail address"
 msgstr "E-mail адрес отправителя"
 
-#: ../glade/griffith.glade.h:131
+#: ../glade/griffith.glade.h:132
 msgid "Show other movies in this collection"
 msgstr "Показать другие фильмы в этой коллекции"
 
-#: ../glade/griffith.glade.h:132
+#: ../glade/griffith.glade.h:133
 msgid "Show other movies in this volume"
 msgstr "Показать другие фильмы в этом томе"
 
-#: ../glade/griffith.glade.h:133
+#: ../glade/griffith.glade.h:134
 msgid "Simple"
 msgstr "Простой"
 
-#: ../glade/griffith.glade.h:135
+#: ../glade/griffith.glade.h:136
 msgid "Size"
 msgstr "Размер"
 
-#: ../glade/griffith.glade.h:136
+#: ../glade/griffith.glade.h:137
 msgid "Spell check the following language"
 msgstr "Проверка орфографии для языка"
 
-#: ../glade/griffith.glade.h:137
+#: ../glade/griffith.glade.h:138
 msgid ""
 "Standard\n"
 "Slim\n"
@@ -1729,29 +1733,25 @@ msgstr ""
 "Слим\n"
 "Двойной слим"
 
-#: ../glade/griffith.glade.h:141
+#: ../glade/griffith.glade.h:142
 msgid "Suggest an unseen movie"
 msgstr "Предложить непросмотренный фильм"
 
-#: ../glade/griffith.glade.h:142
+#: ../glade/griffith.glade.h:143
 msgid "Tags"
 msgstr "Тэги"
 
-#: ../glade/griffith.glade.h:143
+#: ../glade/griffith.glade.h:144
 msgid "Technical information"
 msgstr "Техническая информация"
 
-#: ../glade/griffith.glade.h:144
+#: ../glade/griffith.glade.h:145
 msgid "This movie is part of..."
 msgstr "Этот фильм является частью ..."
 
-#: ../glade/griffith.glade.h:146
+#: ../glade/griffith.glade.h:147
 msgid "Toolbar"
 msgstr "Панель"
-
-#: ../glade/griffith.glade.h:148
-msgid "Try to fetch a big poster from Amazon services website"
-msgstr "Попытаться получть большой постер с сервера Amazon"
 
 #: ../glade/griffith.glade.h:150
 msgid ""

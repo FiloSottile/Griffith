@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-26 21:22+0100\n"
+"POT-Creation-Date: 2008-01-26 22:09+0100\n"
 "PO-Revision-Date: 2007-10-27 08:41+0000\n"
 "Last-Translator: Ioannis Koniaris <ikoniari@csd.auth.gr>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -23,7 +23,7 @@ msgid "You have no movies in your database"
 msgstr "Η βάση δεδομένων είναι άδεια"
 
 #: ../griffith:385
-msgid "You saw all movies in your collection!"
+msgid "You have seen all films in your collection!"
 msgstr "Είδατε όλες τις ταινίες της συλλογή σας!"
 
 #: ../griffith:511 ../griffith:516 ../lib/initialize.py:338
@@ -206,17 +206,17 @@ msgstr "Κυκλοφορία υπό την  άδεια χρήσης GNU/GPL"
 
 #: ../lib/cover.py:176 ../lib/initialize.py:200 ../lib/initialize.py:606
 #: ../lib/plugins/export/PluginExportHTML.py:145
-#: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:94
+#: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:95
 msgid "Original Title"
 msgstr "Πρωτότυπος τίτλος"
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:614
-#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:145
+#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:146
 msgid "Title"
 msgstr "Τίτλος"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:596
-#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:46
+#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:47
 msgid "Director"
 msgstr "Σκηνοθέτης"
 
@@ -225,12 +225,12 @@ msgid "Running Time"
 msgstr "Συνολικός Χρόνος"
 
 #: ../lib/cover.py:182 ../lib/initialize.py:595
-#: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:39
+#: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:40
 msgid "Country"
 msgstr "Χώρα"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:597
-#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:60
+#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:61
 msgid "Genre"
 msgstr "Είδος"
 
@@ -496,12 +496,12 @@ msgid "N."
 msgstr "Ν."
 
 #: ../lib/initialize.py:194 ../lib/initialize.py:598
-#: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:67
+#: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:68
 msgid "Image"
 msgstr "Εικόνα"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:611
-#: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:124
+#: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:125
 msgid "Seen it"
 msgstr "Το έχετε δει"
 
@@ -511,7 +511,7 @@ msgid "Year"
 msgstr "Χρονιά"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:610
-#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:120
+#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:121
 msgid "Runtime"
 msgstr "Διάρκεια χρόνου"
 
@@ -560,12 +560,12 @@ msgstr "Κανάλια"
 msgid "Subtitle format"
 msgstr "Τύπος υπότιτλων"
 
-#: ../lib/initialize.py:507 ../glade/griffith.glade.h:88
+#: ../lib/initialize.py:507 ../glade/griffith.glade.h:89
 msgid "Name"
 msgstr "Όνομα"
 
 #: ../lib/initialize.py:513 ../glade/exporthtml.glade.h:16
-#: ../glade/griffith.glade.h:48 ../glade/import.glade.h:5
+#: ../glade/griffith.glade.h:49 ../glade/import.glade.h:5
 msgid "E-mail"
 msgstr "Ηλ. Διεύθυνση"
 
@@ -574,31 +574,31 @@ msgid "Last added"
 msgstr "Τελευταία Προσθήκη"
 
 #: ../lib/initialize.py:590 ../lib/plugins/export/PluginExportHTML.py:133
-#: ../glade/griffith.glade.h:31
+#: ../glade/griffith.glade.h:32
 msgid "Cast"
 msgstr "Ηθοποιοί"
 
 #: ../lib/initialize.py:591 ../lib/plugins/export/PluginExportHTML.py:134
-#: ../glade/griffith.glade.h:33
+#: ../glade/griffith.glade.h:34
 msgid "Classification"
 msgstr "Ταξινόμιση"
 
 #: ../lib/initialize.py:592 ../lib/plugins/export/PluginExportHTML.py:161
-#: ../glade/griffith.glade.h:36
+#: ../glade/griffith.glade.h:37
 msgid "Collection"
 msgstr "Συλλογή"
 
 #: ../lib/initialize.py:593 ../lib/initialize.py:620
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
-#: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:37
+#: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:38
 msgid "Color"
 msgstr "Έγχρωμη"
 
-#: ../lib/initialize.py:594 ../glade/griffith.glade.h:38
+#: ../lib/initialize.py:594 ../glade/griffith.glade.h:39
 msgid "Condition"
 msgstr "Κατάσταση"
 
-#: ../lib/initialize.py:599 ../glade/griffith.glade.h:71
+#: ../lib/initialize.py:599 ../glade/griffith.glade.h:72
 msgid "Layers"
 msgstr "Επίπεδα"
 
@@ -607,55 +607,55 @@ msgid "Loaned"
 msgstr "Δανεισμένη"
 
 #: ../lib/initialize.py:601 ../lib/plugins/export/PluginExportHTML.py:143
-#: ../glade/griffith.glade.h:47
+#: ../glade/griffith.glade.h:48
 msgid "Discs"
 msgstr "Δίσκοι"
 
-#: ../lib/initialize.py:602 ../glade/griffith.glade.h:83
+#: ../lib/initialize.py:602 ../glade/griffith.glade.h:84
 msgid "Medium"
 msgstr "Μέσο"
 
 #: ../lib/initialize.py:603 ../lib/plugins/export/PluginExportHTML.py:153
-#: ../glade/griffith.glade.h:91
+#: ../glade/griffith.glade.h:92
 msgid "Notes"
 msgstr "Σημειώσεις"
 
 #: ../lib/initialize.py:604 ../lib/sql.py:278
-#: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:92
+#: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:93
 msgid "Number"
 msgstr "Αριθμός"
 
 #: ../lib/initialize.py:605 ../lib/plugins/export/PluginExportHTML.py:139
-#: ../glade/griffith.glade.h:93
+#: ../glade/griffith.glade.h:94
 msgid "Official site"
 msgstr "Επίσημος δικτιακός χώρος"
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:146
-#: ../glade/griffith.glade.h:102
+#: ../glade/griffith.glade.h:103
 msgid "Plot"
 msgstr "Πλοκή"
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:147
-#: ../glade/griffith.glade.h:110
+#: ../glade/griffith.glade.h:111
 msgid "Rating"
 msgstr "Αξιολόγηση"
 
-#: ../lib/initialize.py:609 ../glade/griffith.glade.h:112
+#: ../lib/initialize.py:609 ../glade/griffith.glade.h:113
 msgid "Region"
 msgstr "Περιοχή"
 
 #: ../lib/initialize.py:612 ../lib/plugins/export/PluginExportHTML.py:140
-#: ../glade/griffith.glade.h:134
+#: ../glade/griffith.glade.h:135
 msgid "Site"
 msgstr "Ιστοσελίδα"
 
 #: ../lib/initialize.py:613 ../lib/plugins/export/PluginExportHTML.py:149
-#: ../glade/griffith.glade.h:140
+#: ../glade/griffith.glade.h:141
 msgid "Studio"
 msgstr "Θάλαμος"
 
 #: ../lib/initialize.py:615 ../lib/plugins/export/PluginExportHTML.py:141
-#: ../glade/griffith.glade.h:147
+#: ../glade/griffith.glade.h:148
 msgid "Trailer"
 msgstr "Διαφημιστικό"
 
@@ -1049,7 +1049,7 @@ msgstr "Πρόσθετο που εξάγει δεδομένα χρησιμοπο
 msgid "Griffith's movies list"
 msgstr "Λίστα ταινιών του Griffith"
 
-#: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:82
+#: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:83
 msgid "Media"
 msgstr "Μέσο"
 
@@ -1269,7 +1269,7 @@ msgstr "Μέγιστο πλάτος"
 msgid "Posters"
 msgstr "Αφίσες"
 
-#: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:119
+#: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:120
 msgid "Reverse"
 msgstr "Αναστροφή"
 
@@ -1414,171 +1414,177 @@ msgid "All Movies"
 msgstr "Όλες οι Ταινίες"
 
 #: ../glade/griffith.glade.h:29
+msgid "Attempt to fetch a big poster from Amazon services Web site"
+msgstr ""
+"Προσπάθησε να λάβεις μια μεγαλύτερη αφίσα από την ιστοσελίδα των υπηρεσιών "
+"Amazon"
+
+#: ../glade/griffith.glade.h:30
 msgid "By Collection"
 msgstr "Κατά Συλλογή"
 
-#: ../glade/griffith.glade.h:30
+#: ../glade/griffith.glade.h:31
 #, fuzzy
 msgid "By Volume"
 msgstr "Ένταση ήχου"
 
-#: ../glade/griffith.glade.h:32
+#: ../glade/griffith.glade.h:33
 msgid "Choose Image"
 msgstr "Επιλογή εικόνας"
 
-#: ../glade/griffith.glade.h:34
+#: ../glade/griffith.glade.h:35
 msgid "Clears filter"
 msgstr "Εκκαθάριση φίλτρου"
 
-#: ../glade/griffith.glade.h:35
+#: ../glade/griffith.glade.h:36
 msgid "Clone"
 msgstr "Αντίγραφο"
 
-#: ../glade/griffith.glade.h:40
+#: ../glade/griffith.glade.h:41
 msgid "DVD layers"
 msgstr "Στρώματα DVD"
 
-#: ../glade/griffith.glade.h:41
+#: ../glade/griffith.glade.h:42
 msgid "DVD region"
 msgstr "Περιοχή DVD"
 
-#: ../glade/griffith.glade.h:42
+#: ../glade/griffith.glade.h:43
 msgid "Database"
 msgstr "Βάση Δεδομένων"
 
-#: ../glade/griffith.glade.h:43
+#: ../glade/griffith.glade.h:44
 msgid "Delete a person"
 msgstr "Αφαίρεση ατόμου"
 
-#: ../glade/griffith.glade.h:44
+#: ../glade/griffith.glade.h:45
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: ../glade/griffith.glade.h:45
+#: ../glade/griffith.glade.h:46
 msgid "Dictionaries"
 msgstr "Λεξικά"
 
-#: ../glade/griffith.glade.h:49
+#: ../glade/griffith.glade.h:50
 msgid "E-mail reminder"
 msgstr "Υπενθύμιση ηλεκτρονικού ταχυδρομείου"
 
-#: ../glade/griffith.glade.h:50
+#: ../glade/griffith.glade.h:51
 msgid "E_xport"
 msgstr "Ε_ξαγωγή"
 
-#: ../glade/griffith.glade.h:51
+#: ../glade/griffith.glade.h:52
 msgid "Edit a person"
 msgstr "Επεξεργασία ενός προσώπου"
 
-#: ../glade/griffith.glade.h:52
+#: ../glade/griffith.glade.h:53
 msgid "Edit movie details"
 msgstr "Επεξεργασία λεπτομερειών ταινίας"
 
-#: ../glade/griffith.glade.h:53
+#: ../glade/griffith.glade.h:54
 msgid "Favorite Movie Plugin"
 msgstr "Αγαπημένο πρόσθετο ταινίας"
 
-#: ../glade/griffith.glade.h:54
+#: ../glade/griffith.glade.h:55
 msgid "Fetch from Amazon"
 msgstr "Λήψη από το Amazon"
 
-#: ../glade/griffith.glade.h:55
+#: ../glade/griffith.glade.h:56
 msgid "Fill empty fields only"
 msgstr "Συμπληρώστε μόνο τα κενά πεδία"
 
-#: ../glade/griffith.glade.h:56
+#: ../glade/griffith.glade.h:57
 msgid "Filter "
 msgstr "Φίλτρο "
 
-#: ../glade/griffith.glade.h:57
+#: ../glade/griffith.glade.h:58
 msgid "Font for reports"
 msgstr "Γραμματοσειρά για αναφορές"
 
-#: ../glade/griffith.glade.h:58
+#: ../glade/griffith.glade.h:59
 msgid "Forum"
 msgstr "Φόρουμ"
 
-#: ../glade/griffith.glade.h:59
+#: ../glade/griffith.glade.h:60
 msgid "Found Results"
 msgstr "Αποτελέσματα"
 
-#: ../glade/griffith.glade.h:61
+#: ../glade/griffith.glade.h:62
 msgid "Get from web"
 msgstr "Βρείτε απο το διαδύκτιο"
 
-#: ../glade/griffith.glade.h:62
+#: ../glade/griffith.glade.h:63
 msgid "Get movie data from:"
 msgstr "Βρείτε δεδομένα ταινίων απο:"
 
-#: ../glade/griffith.glade.h:63
+#: ../glade/griffith.glade.h:64
 msgid "Griffith"
 msgstr "Griffith"
 
-#: ../glade/griffith.glade.h:64
+#: ../glade/griffith.glade.h:65
 msgid "Homepage"
 msgstr "Αρχική σελίδα"
 
-#: ../glade/griffith.glade.h:65
+#: ../glade/griffith.glade.h:66
 msgid "Host"
 msgstr "Κόμβος δικτύου"
 
-#: ../glade/griffith.glade.h:66
+#: ../glade/griffith.glade.h:67
 msgid "I_mport"
 msgstr "_Εισαγωγή"
 
-#: ../glade/griffith.glade.h:68
+#: ../glade/griffith.glade.h:69
 msgid "Include Front Image"
 msgstr "Να συμπεριληφθεί το Εξώφυλλο"
 
-#: ../glade/griffith.glade.h:69
+#: ../glade/griffith.glade.h:70
 msgid "Include movie number"
 msgstr "Συμπερίληψη αριθμού ταινίας"
 
-#: ../glade/griffith.glade.h:70
+#: ../glade/griffith.glade.h:71
 msgid "Languages"
 msgstr "Γλώσσες"
 
-#: ../glade/griffith.glade.h:72
+#: ../glade/griffith.glade.h:73
 msgid "Limit search results to"
 msgstr "Περιορισμός αποτελεσμάτων αναζήτησης σε"
 
-#: ../glade/griffith.glade.h:73
+#: ../glade/griffith.glade.h:74
 msgid "Load poster from disk"
 msgstr "Ανάκτηση αφίσας από το δίσκο"
 
-#: ../glade/griffith.glade.h:74
+#: ../glade/griffith.glade.h:75
 msgid "Loan"
 msgstr "Δανεισμός"
 
-#: ../glade/griffith.glade.h:75
+#: ../glade/griffith.glade.h:76
 msgid "Loan Management"
 msgstr "Διαχείρηση Δανείων"
 
-#: ../glade/griffith.glade.h:76
+#: ../glade/griffith.glade.h:77
 msgid "Loan movie"
 msgstr "Δανεισμός ταινίας"
 
-#: ../glade/griffith.glade.h:77
+#: ../glade/griffith.glade.h:78
 msgid "Loan to"
 msgstr "Δανεισμός σε"
 
-#: ../glade/griffith.glade.h:78
+#: ../glade/griffith.glade.h:79
 msgid "Loaned Movies"
 msgstr "Δανεισμένες ταινίες"
 
-#: ../glade/griffith.glade.h:79
+#: ../glade/griffith.glade.h:80
 msgid "Loans"
 msgstr "Δανεισμοί"
 
-#: ../glade/griffith.glade.h:80
+#: ../glade/griffith.glade.h:81
 msgid "Main list"
 msgstr "Κεντρική Λίστα"
 
-#: ../glade/griffith.glade.h:81
+#: ../glade/griffith.glade.h:82
 msgid "Manage People"
 msgstr "Διαχείριση Προσώπων"
 
-#: ../glade/griffith.glade.h:84
+#: ../glade/griffith.glade.h:85
 msgid ""
 "Meter\n"
 "Stars"
@@ -1586,164 +1592,164 @@ msgstr ""
 "Ο Μετρητής\n"
 "Ξεκινάει"
 
-#: ../glade/griffith.glade.h:86
+#: ../glade/griffith.glade.h:87
 msgid "Movie details"
 msgstr "Λεπτομέριες ταινίας"
 
-#: ../glade/griffith.glade.h:87
+#: ../glade/griffith.glade.h:88
 msgid "Movie information"
 msgstr "Πληροφορίες ταινίας"
 
-#: ../glade/griffith.glade.h:89
+#: ../glade/griffith.glade.h:90
 msgid "Needs authentication"
 msgstr "Χρειάζεται πιστοποίηση"
 
-#: ../glade/griffith.glade.h:90
+#: ../glade/griffith.glade.h:91
 msgid "Not Seen Movies"
 msgstr "Ταινίες που δεν έχουν προβληθεί"
 
-#: ../glade/griffith.glade.h:95
+#: ../glade/griffith.glade.h:96
 msgid "Original title"
 msgstr "Πρωτότυπος τίτλος"
 
-#: ../glade/griffith.glade.h:96
+#: ../glade/griffith.glade.h:97
 msgid "Other"
 msgstr "ΆΛΛες"
 
-#: ../glade/griffith.glade.h:97
+#: ../glade/griffith.glade.h:98
 msgid "PDF reader"
 msgstr "Πρόγραμμα ανάγνωσης PDF"
 
-#: ../glade/griffith.glade.h:98
+#: ../glade/griffith.glade.h:99
 msgid "Password"
 msgstr "Κωδικός πρόσβασης"
 
-#: ../glade/griffith.glade.h:99
+#: ../glade/griffith.glade.h:100
 msgid "People"
 msgstr "Πρόσωπα"
 
-#: ../glade/griffith.glade.h:100
+#: ../glade/griffith.glade.h:101
 msgid "Phone"
 msgstr "Τηλέφωνο:"
 
-#: ../glade/griffith.glade.h:101
+#: ../glade/griffith.glade.h:102
 msgid "Please wait a moment..."
 msgstr "Παρακαλώ αναμείνατε..."
 
-#: ../glade/griffith.glade.h:103
+#: ../glade/griffith.glade.h:104
 msgid "Plugins"
 msgstr "Πρόσθετες Λειτουργίες"
 
-#: ../glade/griffith.glade.h:104
+#: ../glade/griffith.glade.h:105
 msgid "Port"
 msgstr "Θύρα"
 
-#: ../glade/griffith.glade.h:105
+#: ../glade/griffith.glade.h:106
 msgid "Poster image"
 msgstr "Εικόνα αφίσας"
 
-#: ../glade/griffith.glade.h:106
+#: ../glade/griffith.glade.h:107
 msgid "Poster viewer"
 msgstr "Προβολή αφίσας"
 
-#: ../glade/griffith.glade.h:107
+#: ../glade/griffith.glade.h:108
 msgid "Preferences"
 msgstr "Προτιμήσεις..."
 
-#: ../glade/griffith.glade.h:108
+#: ../glade/griffith.glade.h:109
 msgid "Print Cover"
 msgstr "Εκτύπωση Εξωφύλλου"
 
-#: ../glade/griffith.glade.h:109
+#: ../glade/griffith.glade.h:110
 msgid "Print cover"
 msgstr "Εκτύπωση εξωφύλλου"
 
-#: ../glade/griffith.glade.h:111
+#: ../glade/griffith.glade.h:112
 msgid "Rating image"
 msgstr "Βαθμολογική κατάταξη εικόνας"
 
-#: ../glade/griffith.glade.h:113
+#: ../glade/griffith.glade.h:114
 msgid "Remove"
 msgstr "Αφαίρεση"
 
-#: ../glade/griffith.glade.h:114
+#: ../glade/griffith.glade.h:115
 msgid "Remove selected movie"
 msgstr "Απομάκρυνση επιλεγμένης ταινίας"
 
-#: ../glade/griffith.glade.h:115
+#: ../glade/griffith.glade.h:116
 msgid "Removes poster"
 msgstr "Αφαίρεση αφίσας"
 
-#: ../glade/griffith.glade.h:116
+#: ../glade/griffith.glade.h:117
 msgid "Rename"
 msgstr "Μετοναμασία"
 
-#: ../glade/griffith.glade.h:117
+#: ../glade/griffith.glade.h:118
 msgid "Report bug"
 msgstr "Αναφορά σφάλματος"
 
-#: ../glade/griffith.glade.h:118
+#: ../glade/griffith.glade.h:119
 msgid "Return"
 msgstr "Επιστροφή"
 
-#: ../glade/griffith.glade.h:121
+#: ../glade/griffith.glade.h:122
 #, fuzzy
 msgid "SMTP port"
 msgstr "Εισαγωγή CSV"
 
-#: ../glade/griffith.glade.h:122
+#: ../glade/griffith.glade.h:123
 msgid "SMTP server"
 msgstr "Διακομιστής SMTP"
 
-#: ../glade/griffith.glade.h:123
+#: ../glade/griffith.glade.h:124
 msgid "Searching on the web"
 msgstr "Αναζήτηση στο διαδύκτιο"
 
-#: ../glade/griffith.glade.h:125
+#: ../glade/griffith.glade.h:126
 msgid "Select A File"
 msgstr "Επιλογή αρχείου"
 
-#: ../glade/griffith.glade.h:126
+#: ../glade/griffith.glade.h:127
 msgid "Select first movie"
 msgstr "Επιλογή πρώτης ταινίας"
 
-#: ../glade/griffith.glade.h:127
+#: ../glade/griffith.glade.h:128
 msgid "Select last movie"
 msgstr "Επιλογή τελευταίας ταινίας"
 
-#: ../glade/griffith.glade.h:128
+#: ../glade/griffith.glade.h:129
 msgid "Select next movie"
 msgstr "Επιλέξτε επόμενη ταινία"
 
-#: ../glade/griffith.glade.h:129
+#: ../glade/griffith.glade.h:130
 msgid "Select previous movie"
 msgstr "Επιλέξτε προηγούμενη ταινία"
 
-#: ../glade/griffith.glade.h:130
+#: ../glade/griffith.glade.h:131
 msgid "Sender E-mail address"
 msgstr "Αποστολέας ηλεκτρονικής διεύθυνσης"
 
-#: ../glade/griffith.glade.h:131
+#: ../glade/griffith.glade.h:132
 msgid "Show other movies in this collection"
 msgstr "Προβολή άλλων ταινιών σε αυτή την συλλογή"
 
-#: ../glade/griffith.glade.h:132
+#: ../glade/griffith.glade.h:133
 msgid "Show other movies in this volume"
 msgstr "Προβολή άλλων ταινιών σε αυτό το αρχείο"
 
-#: ../glade/griffith.glade.h:133
+#: ../glade/griffith.glade.h:134
 msgid "Simple"
 msgstr "Απλό"
 
-#: ../glade/griffith.glade.h:135
+#: ../glade/griffith.glade.h:136
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: ../glade/griffith.glade.h:136
+#: ../glade/griffith.glade.h:137
 msgid "Spell check the following language"
 msgstr "Έλεγχος ορθογραφίας της ακόλουθης γλώσσας"
 
-#: ../glade/griffith.glade.h:137
+#: ../glade/griffith.glade.h:138
 msgid ""
 "Standard\n"
 "Slim\n"
@@ -1753,31 +1759,25 @@ msgstr ""
 "Λεπτό\n"
 "Διπλά λεπτό"
 
-#: ../glade/griffith.glade.h:141
+#: ../glade/griffith.glade.h:142
 msgid "Suggest an unseen movie"
 msgstr "Πρόταση ταινίας που δεν έχω δει"
 
-#: ../glade/griffith.glade.h:142
+#: ../glade/griffith.glade.h:143
 msgid "Tags"
 msgstr "Ετικέτες"
 
-#: ../glade/griffith.glade.h:143
+#: ../glade/griffith.glade.h:144
 msgid "Technical information"
 msgstr "Τεχνικές πληροφορίες"
 
-#: ../glade/griffith.glade.h:144
+#: ../glade/griffith.glade.h:145
 msgid "This movie is part of..."
 msgstr "Αυτή η ταινία είναι μέρος της/του"
 
-#: ../glade/griffith.glade.h:146
+#: ../glade/griffith.glade.h:147
 msgid "Toolbar"
 msgstr "Γραμμή εργαλείων"
-
-#: ../glade/griffith.glade.h:148
-msgid "Try to fetch a big poster from Amazon services website"
-msgstr ""
-"Προσπάθησε να λάβεις μια μεγαλύτερη αφίσα από την ιστοσελίδα των υπηρεσιών "
-"Amazon"
 
 #: ../glade/griffith.glade.h:150
 msgid ""

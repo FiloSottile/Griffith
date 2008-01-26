@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-26 21:22+0100\n"
+"POT-Creation-Date: 2008-01-26 22:09+0100\n"
 "PO-Revision-Date: 2007-12-07 06:54+0000\n"
 "Last-Translator: 강태혁 <ssalki77@gmail.com>\n"
 "Language-Team: Korean\n"
@@ -23,7 +23,7 @@ msgid "You have no movies in your database"
 msgstr "데이터베이스에 영화가 없습니다."
 
 #: ../griffith:385
-msgid "You saw all movies in your collection!"
+msgid "You have seen all films in your collection!"
 msgstr "소장품 안에 모든 영화를 보았습니다."
 
 #: ../griffith:511 ../griffith:516 ../lib/initialize.py:338
@@ -202,17 +202,17 @@ msgstr "GNU/GPL 라이센스에 의해 개방됩니다"
 
 #: ../lib/cover.py:176 ../lib/initialize.py:200 ../lib/initialize.py:606
 #: ../lib/plugins/export/PluginExportHTML.py:145
-#: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:94
+#: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:95
 msgid "Original Title"
 msgstr "원제목"
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:614
-#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:145
+#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:146
 msgid "Title"
 msgstr "제목"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:596
-#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:46
+#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:47
 msgid "Director"
 msgstr "감독"
 
@@ -221,12 +221,12 @@ msgid "Running Time"
 msgstr "재생 시간"
 
 #: ../lib/cover.py:182 ../lib/initialize.py:595
-#: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:39
+#: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:40
 msgid "Country"
 msgstr "국가"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:597
-#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:60
+#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:61
 msgid "Genre"
 msgstr "장르"
 
@@ -487,12 +487,12 @@ msgid "N."
 msgstr "N."
 
 #: ../lib/initialize.py:194 ../lib/initialize.py:598
-#: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:67
+#: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:68
 msgid "Image"
 msgstr "이미지"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:611
-#: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:124
+#: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:125
 msgid "Seen it"
 msgstr ""
 
@@ -502,7 +502,7 @@ msgid "Year"
 msgstr "년도"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:610
-#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:120
+#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:121
 msgid "Runtime"
 msgstr "재생시간"
 
@@ -552,12 +552,12 @@ msgstr "채널"
 msgid "Subtitle format"
 msgstr "부제목 포맷"
 
-#: ../lib/initialize.py:507 ../glade/griffith.glade.h:88
+#: ../lib/initialize.py:507 ../glade/griffith.glade.h:89
 msgid "Name"
 msgstr "이름"
 
 #: ../lib/initialize.py:513 ../glade/exporthtml.glade.h:16
-#: ../glade/griffith.glade.h:48 ../glade/import.glade.h:5
+#: ../glade/griffith.glade.h:49 ../glade/import.glade.h:5
 msgid "E-mail"
 msgstr "E-mail"
 
@@ -566,31 +566,31 @@ msgid "Last added"
 msgstr "최근 추가된 사항"
 
 #: ../lib/initialize.py:590 ../lib/plugins/export/PluginExportHTML.py:133
-#: ../glade/griffith.glade.h:31
+#: ../glade/griffith.glade.h:32
 msgid "Cast"
 msgstr "출연배우"
 
 #: ../lib/initialize.py:591 ../lib/plugins/export/PluginExportHTML.py:134
-#: ../glade/griffith.glade.h:33
+#: ../glade/griffith.glade.h:34
 msgid "Classification"
 msgstr "분류"
 
 #: ../lib/initialize.py:592 ../lib/plugins/export/PluginExportHTML.py:161
-#: ../glade/griffith.glade.h:36
+#: ../glade/griffith.glade.h:37
 msgid "Collection"
 msgstr "소장품"
 
 #: ../lib/initialize.py:593 ../lib/initialize.py:620
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
-#: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:37
+#: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:38
 msgid "Color"
 msgstr "색깔"
 
-#: ../lib/initialize.py:594 ../glade/griffith.glade.h:38
+#: ../lib/initialize.py:594 ../glade/griffith.glade.h:39
 msgid "Condition"
 msgstr "상태"
 
-#: ../lib/initialize.py:599 ../glade/griffith.glade.h:71
+#: ../lib/initialize.py:599 ../glade/griffith.glade.h:72
 msgid "Layers"
 msgstr "레이어"
 
@@ -599,55 +599,55 @@ msgid "Loaned"
 msgstr "대여"
 
 #: ../lib/initialize.py:601 ../lib/plugins/export/PluginExportHTML.py:143
-#: ../glade/griffith.glade.h:47
+#: ../glade/griffith.glade.h:48
 msgid "Discs"
 msgstr "디스크"
 
-#: ../lib/initialize.py:602 ../glade/griffith.glade.h:83
+#: ../lib/initialize.py:602 ../glade/griffith.glade.h:84
 msgid "Medium"
 msgstr "매체"
 
 #: ../lib/initialize.py:603 ../lib/plugins/export/PluginExportHTML.py:153
-#: ../glade/griffith.glade.h:91
+#: ../glade/griffith.glade.h:92
 msgid "Notes"
 msgstr "메모"
 
 #: ../lib/initialize.py:604 ../lib/sql.py:278
-#: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:92
+#: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:93
 msgid "Number"
 msgstr "번호"
 
 #: ../lib/initialize.py:605 ../lib/plugins/export/PluginExportHTML.py:139
-#: ../glade/griffith.glade.h:93
+#: ../glade/griffith.glade.h:94
 msgid "Official site"
 msgstr "공식 사이트"
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:146
-#: ../glade/griffith.glade.h:102
+#: ../glade/griffith.glade.h:103
 msgid "Plot"
 msgstr "줄거리"
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:147
-#: ../glade/griffith.glade.h:110
+#: ../glade/griffith.glade.h:111
 msgid "Rating"
 msgstr "평점"
 
-#: ../lib/initialize.py:609 ../glade/griffith.glade.h:112
+#: ../lib/initialize.py:609 ../glade/griffith.glade.h:113
 msgid "Region"
 msgstr "지역"
 
 #: ../lib/initialize.py:612 ../lib/plugins/export/PluginExportHTML.py:140
-#: ../glade/griffith.glade.h:134
+#: ../glade/griffith.glade.h:135
 msgid "Site"
 msgstr "사이트"
 
 #: ../lib/initialize.py:613 ../lib/plugins/export/PluginExportHTML.py:149
-#: ../glade/griffith.glade.h:140
+#: ../glade/griffith.glade.h:141
 msgid "Studio"
 msgstr "스튜디오"
 
 #: ../lib/initialize.py:615 ../lib/plugins/export/PluginExportHTML.py:141
-#: ../glade/griffith.glade.h:147
+#: ../glade/griffith.glade.h:148
 msgid "Trailer"
 msgstr "예고편"
 
@@ -1006,7 +1006,7 @@ msgstr "플러그인을 템플릿에서 사용할수 있는 자료로 보냅니�
 msgid "Griffith's movies list"
 msgstr "Griffith 영화 리스트"
 
-#: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:82
+#: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:83
 msgid "Media"
 msgstr "미디어"
 
@@ -1226,7 +1226,7 @@ msgstr "최대 너비"
 msgid "Posters"
 msgstr "포스터"
 
-#: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:119
+#: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:120
 msgid "Reverse"
 msgstr "반전"
 
@@ -1371,171 +1371,175 @@ msgid "All Movies"
 msgstr "모든 영화"
 
 #: ../glade/griffith.glade.h:29
+msgid "Attempt to fetch a big poster from Amazon services Web site"
+msgstr "Amazon 웹사이트 서비스에서 중요 포스터 가져오기를 시도하고 있습니다"
+
+#: ../glade/griffith.glade.h:30
 msgid "By Collection"
 msgstr "소장품의"
 
-#: ../glade/griffith.glade.h:30
+#: ../glade/griffith.glade.h:31
 #, fuzzy
 msgid "By Volume"
 msgstr "볼륨"
 
-#: ../glade/griffith.glade.h:32
+#: ../glade/griffith.glade.h:33
 msgid "Choose Image"
 msgstr "이미지 선택"
 
-#: ../glade/griffith.glade.h:34
+#: ../glade/griffith.glade.h:35
 msgid "Clears filter"
 msgstr "필터 클리어"
 
-#: ../glade/griffith.glade.h:35
+#: ../glade/griffith.glade.h:36
 msgid "Clone"
 msgstr "복제"
 
-#: ../glade/griffith.glade.h:40
+#: ../glade/griffith.glade.h:41
 msgid "DVD layers"
 msgstr "DVD 층"
 
-#: ../glade/griffith.glade.h:41
+#: ../glade/griffith.glade.h:42
 msgid "DVD region"
 msgstr "DVD 지역번호"
 
-#: ../glade/griffith.glade.h:42
+#: ../glade/griffith.glade.h:43
 msgid "Database"
 msgstr "데이터베이스"
 
-#: ../glade/griffith.glade.h:43
+#: ../glade/griffith.glade.h:44
 msgid "Delete a person"
 msgstr "사람을 제거합니다"
 
-#: ../glade/griffith.glade.h:44
+#: ../glade/griffith.glade.h:45
 msgid "Details"
 msgstr "상세정보"
 
-#: ../glade/griffith.glade.h:45
+#: ../glade/griffith.glade.h:46
 msgid "Dictionaries"
 msgstr "사전"
 
-#: ../glade/griffith.glade.h:49
+#: ../glade/griffith.glade.h:50
 msgid "E-mail reminder"
 msgstr "E-Mail 알림기"
 
-#: ../glade/griffith.glade.h:50
+#: ../glade/griffith.glade.h:51
 msgid "E_xport"
 msgstr "E_x포트"
 
-#: ../glade/griffith.glade.h:51
+#: ../glade/griffith.glade.h:52
 msgid "Edit a person"
 msgstr "사람 편집"
 
-#: ../glade/griffith.glade.h:52
+#: ../glade/griffith.glade.h:53
 msgid "Edit movie details"
 msgstr "영화 상세정보 편집"
 
-#: ../glade/griffith.glade.h:53
+#: ../glade/griffith.glade.h:54
 msgid "Favorite Movie Plugin"
 msgstr "인기있는 영화 플러그인"
 
-#: ../glade/griffith.glade.h:54
+#: ../glade/griffith.glade.h:55
 msgid "Fetch from Amazon"
 msgstr "아마존에서 가져옵니다"
 
-#: ../glade/griffith.glade.h:55
+#: ../glade/griffith.glade.h:56
 msgid "Fill empty fields only"
 msgstr "비어있는 필드를 채웁니다"
 
-#: ../glade/griffith.glade.h:56
+#: ../glade/griffith.glade.h:57
 msgid "Filter "
 msgstr "필터 "
 
-#: ../glade/griffith.glade.h:57
+#: ../glade/griffith.glade.h:58
 msgid "Font for reports"
 msgstr "리포트 폰트"
 
-#: ../glade/griffith.glade.h:58
+#: ../glade/griffith.glade.h:59
 msgid "Forum"
 msgstr "포럼"
 
-#: ../glade/griffith.glade.h:59
+#: ../glade/griffith.glade.h:60
 msgid "Found Results"
 msgstr "결과를 찾았습니다"
 
-#: ../glade/griffith.glade.h:61
+#: ../glade/griffith.glade.h:62
 msgid "Get from web"
 msgstr "웹에서 받아옵니다"
 
-#: ../glade/griffith.glade.h:62
+#: ../glade/griffith.glade.h:63
 msgid "Get movie data from:"
 msgstr "영화 자료를 받아옵니다:"
 
-#: ../glade/griffith.glade.h:63
+#: ../glade/griffith.glade.h:64
 msgid "Griffith"
 msgstr "Griffith"
 
-#: ../glade/griffith.glade.h:64
+#: ../glade/griffith.glade.h:65
 msgid "Homepage"
 msgstr "홈페이지"
 
-#: ../glade/griffith.glade.h:65
+#: ../glade/griffith.glade.h:66
 msgid "Host"
 msgstr "호스트"
 
-#: ../glade/griffith.glade.h:66
+#: ../glade/griffith.glade.h:67
 msgid "I_mport"
 msgstr "I_m포트"
 
-#: ../glade/griffith.glade.h:68
+#: ../glade/griffith.glade.h:69
 msgid "Include Front Image"
 msgstr "처음 이미지 포함"
 
-#: ../glade/griffith.glade.h:69
+#: ../glade/griffith.glade.h:70
 msgid "Include movie number"
 msgstr "영화번호 포함"
 
-#: ../glade/griffith.glade.h:70
+#: ../glade/griffith.glade.h:71
 msgid "Languages"
 msgstr "언어"
 
-#: ../glade/griffith.glade.h:72
+#: ../glade/griffith.glade.h:73
 msgid "Limit search results to"
 msgstr ""
 
-#: ../glade/griffith.glade.h:73
+#: ../glade/griffith.glade.h:74
 msgid "Load poster from disk"
 msgstr "디스크에서 포스터 불러오기"
 
-#: ../glade/griffith.glade.h:74
+#: ../glade/griffith.glade.h:75
 msgid "Loan"
 msgstr "대여"
 
-#: ../glade/griffith.glade.h:75
+#: ../glade/griffith.glade.h:76
 msgid "Loan Management"
 msgstr "대여 관리"
 
-#: ../glade/griffith.glade.h:76
+#: ../glade/griffith.glade.h:77
 msgid "Loan movie"
 msgstr "영화 대여하기"
 
-#: ../glade/griffith.glade.h:77
+#: ../glade/griffith.glade.h:78
 msgid "Loan to"
 msgstr ""
 
-#: ../glade/griffith.glade.h:78
+#: ../glade/griffith.glade.h:79
 msgid "Loaned Movies"
 msgstr "대여한 영화"
 
-#: ../glade/griffith.glade.h:79
+#: ../glade/griffith.glade.h:80
 msgid "Loans"
 msgstr "대여"
 
-#: ../glade/griffith.glade.h:80
+#: ../glade/griffith.glade.h:81
 msgid "Main list"
 msgstr "주요 목록"
 
-#: ../glade/griffith.glade.h:81
+#: ../glade/griffith.glade.h:82
 msgid "Manage People"
 msgstr "사람을 관리합니다"
 
-#: ../glade/griffith.glade.h:84
+#: ../glade/griffith.glade.h:85
 msgid ""
 "Meter\n"
 "Stars"
@@ -1543,163 +1547,163 @@ msgstr ""
 "Meter\n"
 "Stars"
 
-#: ../glade/griffith.glade.h:86
+#: ../glade/griffith.glade.h:87
 msgid "Movie details"
 msgstr "영화 상세정보"
 
-#: ../glade/griffith.glade.h:87
+#: ../glade/griffith.glade.h:88
 msgid "Movie information"
 msgstr "영화 정보"
 
-#: ../glade/griffith.glade.h:89
+#: ../glade/griffith.glade.h:90
 msgid "Needs authentication"
 msgstr "법적인증이 필요합니다"
 
-#: ../glade/griffith.glade.h:90
+#: ../glade/griffith.glade.h:91
 msgid "Not Seen Movies"
 msgstr "보지않은 영화"
 
-#: ../glade/griffith.glade.h:95
+#: ../glade/griffith.glade.h:96
 msgid "Original title"
 msgstr "원 제목"
 
-#: ../glade/griffith.glade.h:96
+#: ../glade/griffith.glade.h:97
 msgid "Other"
 msgstr "다른것"
 
-#: ../glade/griffith.glade.h:97
+#: ../glade/griffith.glade.h:98
 msgid "PDF reader"
 msgstr "PDF 리더"
 
-#: ../glade/griffith.glade.h:98
+#: ../glade/griffith.glade.h:99
 msgid "Password"
 msgstr "암호"
 
-#: ../glade/griffith.glade.h:99
+#: ../glade/griffith.glade.h:100
 msgid "People"
 msgstr "사람"
 
-#: ../glade/griffith.glade.h:100
+#: ../glade/griffith.glade.h:101
 msgid "Phone"
 msgstr "전화"
 
-#: ../glade/griffith.glade.h:101
+#: ../glade/griffith.glade.h:102
 msgid "Please wait a moment..."
 msgstr "잠시만 기다려주십시요..."
 
-#: ../glade/griffith.glade.h:103
+#: ../glade/griffith.glade.h:104
 msgid "Plugins"
 msgstr "플러그인"
 
-#: ../glade/griffith.glade.h:104
+#: ../glade/griffith.glade.h:105
 msgid "Port"
 msgstr "포트"
 
-#: ../glade/griffith.glade.h:105
+#: ../glade/griffith.glade.h:106
 msgid "Poster image"
 msgstr "포스터 이미지"
 
-#: ../glade/griffith.glade.h:106
+#: ../glade/griffith.glade.h:107
 msgid "Poster viewer"
 msgstr "포스터 뷰어"
 
-#: ../glade/griffith.glade.h:107
+#: ../glade/griffith.glade.h:108
 msgid "Preferences"
 msgstr ""
 
-#: ../glade/griffith.glade.h:108
+#: ../glade/griffith.glade.h:109
 msgid "Print Cover"
 msgstr "표지 인쇄"
 
-#: ../glade/griffith.glade.h:109
+#: ../glade/griffith.glade.h:110
 msgid "Print cover"
 msgstr "표지 인쇄"
 
-#: ../glade/griffith.glade.h:111
+#: ../glade/griffith.glade.h:112
 msgid "Rating image"
 msgstr "이미지 평점"
 
-#: ../glade/griffith.glade.h:113
+#: ../glade/griffith.glade.h:114
 msgid "Remove"
 msgstr "제거"
 
-#: ../glade/griffith.glade.h:114
+#: ../glade/griffith.glade.h:115
 msgid "Remove selected movie"
 msgstr "선택한 영화 제거"
 
-#: ../glade/griffith.glade.h:115
+#: ../glade/griffith.glade.h:116
 msgid "Removes poster"
 msgstr "포스터 제거"
 
-#: ../glade/griffith.glade.h:116
+#: ../glade/griffith.glade.h:117
 msgid "Rename"
 msgstr "새이름"
 
-#: ../glade/griffith.glade.h:117
+#: ../glade/griffith.glade.h:118
 msgid "Report bug"
 msgstr "보고서 버그"
 
-#: ../glade/griffith.glade.h:118
+#: ../glade/griffith.glade.h:119
 msgid "Return"
 msgstr "반납"
 
-#: ../glade/griffith.glade.h:121
+#: ../glade/griffith.glade.h:122
 msgid "SMTP port"
 msgstr "SMTP 포트"
 
-#: ../glade/griffith.glade.h:122
+#: ../glade/griffith.glade.h:123
 msgid "SMTP server"
 msgstr "SMTP 서버"
 
-#: ../glade/griffith.glade.h:123
+#: ../glade/griffith.glade.h:124
 msgid "Searching on the web"
 msgstr "웹에서 찾기"
 
-#: ../glade/griffith.glade.h:125
+#: ../glade/griffith.glade.h:126
 msgid "Select A File"
 msgstr "파일 선택"
 
-#: ../glade/griffith.glade.h:126
+#: ../glade/griffith.glade.h:127
 msgid "Select first movie"
 msgstr "첫영화 선택"
 
-#: ../glade/griffith.glade.h:127
+#: ../glade/griffith.glade.h:128
 msgid "Select last movie"
 msgstr "마지막 영화 선택"
 
-#: ../glade/griffith.glade.h:128
+#: ../glade/griffith.glade.h:129
 msgid "Select next movie"
 msgstr "다음 영화 선택"
 
-#: ../glade/griffith.glade.h:129
+#: ../glade/griffith.glade.h:130
 msgid "Select previous movie"
 msgstr "이전 영화 선택"
 
-#: ../glade/griffith.glade.h:130
+#: ../glade/griffith.glade.h:131
 msgid "Sender E-mail address"
 msgstr "발송인 E-Mail 주소"
 
-#: ../glade/griffith.glade.h:131
+#: ../glade/griffith.glade.h:132
 msgid "Show other movies in this collection"
 msgstr "소장품에 다른 영화들을 보여줍니다."
 
-#: ../glade/griffith.glade.h:132
+#: ../glade/griffith.glade.h:133
 msgid "Show other movies in this volume"
 msgstr "볼륨에 다른 영화들을 보여줍니다"
 
-#: ../glade/griffith.glade.h:133
+#: ../glade/griffith.glade.h:134
 msgid "Simple"
 msgstr ""
 
-#: ../glade/griffith.glade.h:135
+#: ../glade/griffith.glade.h:136
 msgid "Size"
 msgstr "크기"
 
-#: ../glade/griffith.glade.h:136
+#: ../glade/griffith.glade.h:137
 msgid "Spell check the following language"
 msgstr "아래 언어의 철자 확인합니다."
 
-#: ../glade/griffith.glade.h:137
+#: ../glade/griffith.glade.h:138
 msgid ""
 "Standard\n"
 "Slim\n"
@@ -1709,29 +1713,25 @@ msgstr ""
 "슬림\n"
 "더블슬림"
 
-#: ../glade/griffith.glade.h:141
+#: ../glade/griffith.glade.h:142
 msgid "Suggest an unseen movie"
 msgstr "보지않은 영화를 제안합니다."
 
-#: ../glade/griffith.glade.h:142
+#: ../glade/griffith.glade.h:143
 msgid "Tags"
 msgstr "태그"
 
-#: ../glade/griffith.glade.h:143
+#: ../glade/griffith.glade.h:144
 msgid "Technical information"
 msgstr "기술적 정보"
 
-#: ../glade/griffith.glade.h:144
+#: ../glade/griffith.glade.h:145
 msgid "This movie is part of..."
 msgstr ""
 
-#: ../glade/griffith.glade.h:146
+#: ../glade/griffith.glade.h:147
 msgid "Toolbar"
 msgstr "툴바"
-
-#: ../glade/griffith.glade.h:148
-msgid "Try to fetch a big poster from Amazon services website"
-msgstr "Amazon 웹사이트 서비스에서 중요 포스터 가져오기를 시도하고 있습니다"
 
 #: ../glade/griffith.glade.h:150
 msgid ""

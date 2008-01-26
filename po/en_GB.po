@@ -1,35 +1,35 @@
-# Turkish translation for griffith
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# English (United Kingdom) translation for griffith
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the griffith package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: griffith 0.9.5\n"
+"Project-Id-Version: griffith\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-01-26 22:09+0100\n"
-"PO-Revision-Date: 2007-12-08 11:58+0000\n"
-"Last-Translator: transorlate <iloveshorts@hotmail.com>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"PO-Revision-Date: 2008-01-18 23:38+0000\n"
+"Last-Translator: John Drinkwater <jdrinkwater@gmail.com>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Launchpad-Export-Date: 2008-01-26 12:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:211 ../griffith:826 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
 msgid "You have no movies in your database"
-msgstr "Veritabanında film mevcut değil."
+msgstr "You have no films in your database"
 
 #: ../griffith:385
 msgid "You have seen all films in your collection!"
-msgstr "Koleksiyonunuzda bulunan tüm filmleri gördünüz!"
+msgstr "You have seen all films in your collection!"
 
 #: ../griffith:511 ../griffith:516 ../lib/initialize.py:338
 #: ../lib/initialize.py:621
 msgid "subtitles"
-msgstr "altyazılar"
+msgstr "subtitles"
 
 #: ../griffith:793
 msgid ""
@@ -37,9 +37,9 @@ msgid ""
 "Your current movie collection will be replaced.\n"
 "You can't undo this operation."
 msgstr ""
-"Geri yükleme yapmak istediğinize emin misiz?\n"
-"Şu anki mevcut koleksiyon üzerine yazılacak.\n"
-"Bu işlemi geri alamazsınız."
+"Are you sure you want to restore?\n"
+"Your current film collection will be replaced.\n"
+"You can't undo this operation."
 
 #: ../griffith:803
 msgid ""
@@ -47,33 +47,33 @@ msgid ""
 "Your current movie collection will be mixed with a backup.\n"
 "You can't undo this operation."
 msgstr ""
-"Mix yapmak istediğinize emin misiniz?\n"
-"Mevcut koleksiyon bir yedekle mix edilecek.\n"
-"Bu işlem geri alınamaz."
+"Are you sure you want to mix?\n"
+"Your current film collection will be mixed with a backup.\n"
+"You can't undo this operation."
 
 #: ../griffith:901
 msgid " movie(s) in collection. "
-msgstr " adet film kolleksiyonda. "
+msgstr " film(s) in collection. "
 
 #: ../griffith:902
 msgid " movie(s) loaned. "
-msgstr " adet film ölünç alındı. "
+msgstr " film(s) loaned. "
 
 #: ../griffith:903
 msgid "You haven't seen "
-msgstr "Görmediğiniz "
+msgstr "You haven't seen "
 
 #: ../griffith:903
 msgid " movie(s)"
-msgstr " film(ler)"
+msgstr " film(s)"
 
 #: ../griffith:1096
 msgid ""
 "Are you sure you want to create a new database?\n"
 "You will lose ALL your current data!"
 msgstr ""
-"Yeni bir veritabanı oluşturmak istediğinize emin misiniz?\n"
-"Kayıtlı tüm bilgileri kaybedeceksiniz!"
+"Are you sure you want to create a new database?\n"
+"You will lose ALL your current data!"
 
 #: ../griffith:1100
 msgid ""
@@ -81,25 +81,25 @@ msgid ""
 "Do you confirm that you want\n"
 "to lose your current data?"
 msgstr ""
-"Son şansınız!\n"
-"Mevut bilgi kaybedilecek.\n"
-"Onaylıyor musunuz?"
+"Last chance!\n"
+"Do you confirm that you want\n"
+"to lose your current data?"
 
 #: ../lib/about.py:41
 msgid "Main Authors"
-msgstr "Baş Yazarlar"
+msgstr "Main Authors"
 
 #: ../lib/about.py:43
 msgid "Programmers"
-msgstr "Programcılar"
+msgstr "Programmers"
 
 #: ../lib/about.py:46
 msgid "Contributors:"
-msgstr "Katkıda Bulunanlar:"
+msgstr "Contributors:"
 
 #: ../lib/about.py:50
 msgid "Logo, icon and general artwork "
-msgstr "Logo, simge ve genel mimari "
+msgstr "Logo, icon and general artwork "
 
 #: ../lib/about.py:70
 msgid "See TRANSLATORS file"
@@ -107,151 +107,152 @@ msgstr ""
 
 #: ../lib/about.py:78
 msgid "This program is released under the GNU"
-msgstr "Bu program GNU lisansı altında yayınlanmıştır"
+msgstr "This program is released under the GNU"
 
 #: ../lib/add.py:45 ../glade/griffith.glade.h:23
 msgid "Add a new movie"
-msgstr "Yeni bir film ekle"
+msgstr "Add a new film"
 
 #: ../lib/add.py:56
 msgid "Edit movie"
-msgstr "Filimi düzenle"
+msgstr "Edit film"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
 #: ../lib/main_treeview.py:469
 msgid " min"
-msgstr " dakika"
+msgstr " min"
 
 #: ../lib/add.py:379
 msgid "Movie information has been updated"
-msgstr "Film bilgileri güncellendi"
+msgstr "Film information has been updated"
 
 #: ../lib/add.py:384 ../lib/add.py:604
 msgid ""
 "You should fill the original title\n"
 "or the movie title."
 msgstr ""
-"Orjinal başlığı veya film\n"
-"başlığını doldurmalısınız."
+"You should fill in the original title\n"
+"or the film title."
 
 #: ../lib/add.py:390 ../lib/add.py:396
 msgid "Movie with that title already exists, are you sure you want to add?"
-msgstr "Bu isimde bir film mevcut, eklemek istediğinize emin misiniz?"
+msgstr ""
+"A film with that title already exists, are you sure you want to add it?"
 
 #: ../lib/add.py:575
 msgid "No results"
-msgstr "Sonuç yok"
+msgstr "No results"
 
 #: ../lib/add.py:612
 msgid "Url: "
-msgstr "Url: "
+msgstr "URL: "
 
 #: ../lib/add.py:613
 msgid "Language: "
-msgstr "Dil: "
+msgstr "Language: "
 
 #: ../lib/backup.py:32
 msgid "Save Griffith backup"
-msgstr "Griffith yedeğini kaydet"
+msgstr "Save Griffith backup"
 
 #: ../lib/backup.py:41 ../lib/plugins/export/PluginExportCSV.py:64
 #: ../lib/plugins/export/PluginExportiPod.py:111
 #: ../lib/plugins/export/PluginExportPDF.py:85
 #: ../lib/plugins/export/PluginExportXML.py:65
 msgid "File exists. Do you want to overwrite it?"
-msgstr "Dosya mevcut. Var olan dosyanın üzerine yazmak ister misiniz?"
+msgstr "File exists. Do you want to overwrite it?"
 
 #: ../lib/backup.py:55
 msgid "Error creating backup"
-msgstr "Yedek oluşturlurken hata oluştu"
+msgstr "Error creating backup"
 
 #: ../lib/backup.py:62
 msgid "Backup function is available only for SQLite engine for now"
-msgstr "Yedekleme fonksiyonu sadece SQLite moturu için mevcut."
+msgstr "Backup function is available only for SQLite engine for now"
 
 #: ../lib/backup.py:105
 msgid "Backup has been created"
-msgstr "Yedek oluşturuldu"
+msgstr "Backup has been created"
 
 #: ../lib/backup.py:109 ../lib/backup.py:183
 msgid "Restore Griffith backup"
-msgstr "Griffith yedeğini yeniden yükle"
+msgstr "Restore Griffith backup"
 
 #: ../lib/backup.py:117 ../lib/backup.py:199
 msgid "Can't read backup file"
-msgstr "Yedek dosyası okunamıyor"
+msgstr "Can't read backup file"
 
 #: ../lib/backup.py:174
 msgid "Backup restored"
-msgstr "Yedek geri yüklendi"
+msgstr "Backup restored"
 
 #: ../lib/cover.py:42 ../lib/edit.py:46
 msgid "Select image"
-msgstr "Resim seç"
+msgstr "Select image"
 
 #: ../lib/cover.py:86 ../lib/cover.py:149
 msgid "Cover generated by Griffith v"
-msgstr "Kapak Griffith v tarafından oluşturuldu"
+msgstr "Cover generated by Griffith v"
 
 #: ../lib/cover.py:88 ../lib/cover.py:151
 #: ../lib/plugins/export/PluginExportHTML.py:742
 #: ../lib/plugins/export/PluginExportPDF.py:152
 msgid "Released Under the GNU/GPL License"
-msgstr "GNU/GPL Lisansı altında yayınlanmıştır"
+msgstr "Released under the GNU/GPL Licence"
 
 #: ../lib/cover.py:176 ../lib/initialize.py:200 ../lib/initialize.py:606
 #: ../lib/plugins/export/PluginExportHTML.py:145
 #: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:95
 msgid "Original Title"
-msgstr "Orjinal Başlık"
+msgstr "Original Title"
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:614
 #: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:146
 msgid "Title"
-msgstr "Başlık"
+msgstr "Title"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:596
 #: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:47
 msgid "Director"
-msgstr "Yönetmen"
+msgstr "Director"
 
 #: ../lib/cover.py:181
 msgid "Running Time"
-msgstr "Süre"
+msgstr "Running Time"
 
 #: ../lib/cover.py:182 ../lib/initialize.py:595
 #: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:40
 msgid "Country"
-msgstr "Ülke"
+msgstr "Country"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:597
 #: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:61
 msgid "Genre"
-msgstr "Tür"
+msgstr "Genre"
 
 #: ../lib/dbupgrade.py:86 ../lib/plugins/movie/PluginMovieE-Pipoca.py:34
 msgid "Brazilian Portuguese"
-msgstr "Brezilya Portekizcesi"
+msgstr "Brazilian Portuguese"
 
 #: ../lib/dbupgrade.py:87
 msgid "Bulgarian"
-msgstr "Bulgarca"
+msgstr "Bulgarian"
 
 #: ../lib/dbupgrade.py:88
 msgid "Catalan"
-msgstr "Katalonca"
+msgstr "Catalan"
 
 #: ../lib/dbupgrade.py:89 ../lib/plugins/movie/PluginMovieCSFD.py:30
 msgid "Czech"
-msgstr "Çekce"
+msgstr "Czech"
 
 #: ../lib/dbupgrade.py:90
 msgid "Danish"
-msgstr "Danirmarkaca"
+msgstr "Danish"
 
 #: ../lib/dbupgrade.py:91
 msgid "Dutch"
-msgstr "Felemenkçe"
+msgstr "Dutch"
 
 #: ../lib/dbupgrade.py:92 ../lib/plugins/movie/PluginMovieAniDB.py:32
 #: ../lib/plugins/movie/PluginMovieDVDEmpire.py:32
@@ -259,7 +260,7 @@ msgstr "Felemenkçe"
 #: ../lib/plugins/movie/PluginMovieMediadis.py:16
 #: ../lib/plugins/movie/PluginMovieMoviefone.py:16
 msgid "English"
-msgstr "İngilizce"
+msgstr "English"
 
 #: ../lib/dbupgrade.py:93
 msgid "Estonian"
@@ -268,7 +269,7 @@ msgstr ""
 #: ../lib/dbupgrade.py:94 ../lib/plugins/movie/PluginMovieAllocine.py:32
 #: ../lib/plugins/movie/PluginMovieCineMovies.py:31
 msgid "French"
-msgstr "Fransızca"
+msgstr "French"
 
 #: ../lib/dbupgrade.py:95 ../lib/plugins/movie/PluginMovieDVDPalace.py:33
 #: ../lib/plugins/movie/PluginMovieFilmDb.py:32
@@ -278,16 +279,16 @@ msgstr "Fransızca"
 #: ../lib/plugins/movie/PluginMovieOFDb.py:17
 #: ../lib/plugins/movie/PluginMovieZelluloid.py:33
 msgid "German"
-msgstr "Almanca"
+msgstr "German"
 
 #: ../lib/dbupgrade.py:96
 msgid "Greek"
-msgstr "Yunanca"
+msgstr "Greek"
 
 #: ../lib/dbupgrade.py:97
 #, fuzzy
 msgid "Hungarian"
-msgstr "Bulgarca"
+msgstr "Bulgarian"
 
 #: ../lib/dbupgrade.py:98
 msgid "Indonesian"
@@ -295,20 +296,20 @@ msgstr ""
 
 #: ../lib/dbupgrade.py:99 ../lib/plugins/movie/PluginMovieCinematografo.py:30
 msgid "Italian"
-msgstr "İtalyanca"
+msgstr "Italian"
 
 #: ../lib/dbupgrade.py:100
 msgid "Japanese"
-msgstr "Japonca"
+msgstr "Japanese"
 
 #: ../lib/dbupgrade.py:101
 #, fuzzy
 msgid "Korean"
-msgstr "Ödünç ver"
+msgstr "Loan"
 
 #: ../lib/dbupgrade.py:102
 msgid "Norwegian Bokmal"
-msgstr "Norveççe"
+msgstr "Norwegian Bokmal"
 
 #: ../lib/dbupgrade.py:103
 msgid "Occitan"
@@ -317,7 +318,7 @@ msgstr ""
 #: ../lib/dbupgrade.py:104
 #, fuzzy
 msgid "Pashto"
-msgstr "Oyuncular"
+msgstr "Cast"
 
 #: ../lib/dbupgrade.py:105 ../lib/plugins/movie/PluginMovieFDb.py:33
 #: ../lib/plugins/movie/PluginMovieFilmweb.py:31
@@ -326,21 +327,21 @@ msgstr "Oyuncular"
 #: ../lib/plugins/movie/PluginMovieTanukiAnime.py:31
 #: ../lib/plugins/movie/PluginMovieWP.py:32
 msgid "Polish"
-msgstr "Polonyaca"
+msgstr "Polish"
 
 #: ../lib/dbupgrade.py:106 ../lib/plugins/movie/PluginMovie7arte.py:32
 #: ../lib/plugins/movie/PluginMovieCineteka.py:32
 #: ../lib/plugins/movie/PluginMoviePTGate.py:32
 msgid "Portuguese"
-msgstr "Portekizce"
+msgstr "Portuguese"
 
 #: ../lib/dbupgrade.py:107
 msgid "Russian"
-msgstr "Rusça"
+msgstr "Russian"
 
 #: ../lib/dbupgrade.py:108
 msgid "Simplified Chinese"
-msgstr "Basitleştirilmiş Çince"
+msgstr "Simplified Chinese"
 
 #: ../lib/dbupgrade.py:109
 msgid "Slovak"
@@ -350,109 +351,109 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieFilmAffinity.py:32
 #: ../lib/plugins/movie/PluginMovieIMDB-es.py:32
 msgid "Spanish"
-msgstr "İspanyolca"
+msgstr "Spanish"
 
 #: ../lib/dbupgrade.py:111 ../lib/plugins/movie/PluginMovieFilmtipset.py:33
 msgid "Swedish"
-msgstr "İsveççe"
+msgstr "Swedish"
 
 #: ../lib/dbupgrade.py:112
 msgid "Turkish"
-msgstr "Türkçe"
+msgstr "Turkish"
 
 #: ../lib/dbupgrade.py:115
 msgid "Favourite"
-msgstr "Favori"
+msgstr "Favourite"
 
 #: ../lib/dbupgrade.py:137
 msgid ""
 "Griffith will now convert your database to the new format. This can take "
 "several minutes if you have a large database."
 msgstr ""
-"Griffith, veritabanını yeni bir formata dönüştürecek. Eğer büyük bir "
-"veritabanınız varsa bu işlem birkaç dakika sürebilir."
+"Griffith will now convert your database to the new format. This can take "
+"several minutes if you have a large database."
 
 #: ../lib/dbupgrade.py:151
 msgid "Old DB conversion: please install pysqlite legacy (v1.0)"
-msgstr "Eski database dönüştürme: Lütfen pysqlite kuralları (v1.0) yükleyin"
+msgstr "Old DB conversion: please install pysqlite legacy (v1.0)"
 
 #: ../lib/dbupgrade.py:180
 msgid ""
 "Your database is most probably in SQLite2 format, please convert it to "
 "SQLite3"
 msgstr ""
-"Veritabanı muhtemelen SQLite2 formatında, SQLite3 formatına dönüştürün."
+"Your database is most probably in SQLite2 format, please convert it to "
+"SQLite3"
 
 #: ../lib/delete.py:37
 msgid "You can't delete movie while it is loaned."
-msgstr "Ödünç alınan filmi silemezsiniz."
+msgstr "You can't delete a film while it is loaned."
 
 #: ../lib/delete.py:39
 msgid "Are you sure you want to delete this movie?"
-msgstr "Bu filmi silmek istediğinize emin misiniz?"
+msgstr "Are you sure you want to delete this film?"
 
 #: ../lib/edit.py:58
 msgid "Image not valid."
-msgstr "Resim geçerli değil."
+msgstr "Image not valid."
 
 #: ../lib/edit.py:88 ../lib/edit.py:106
 msgid "Image has been updated"
-msgstr "Resim güncellendi"
+msgstr "Image has been updated"
 
 #: ../lib/edit.py:95
 msgid "Are you sure you want to delete this poster?"
-msgstr "Posteri silmek istediğinize emin misiniz?"
+msgstr "Are you sure you want to delete this poster?"
 
 #: ../lib/edit.py:148 ../lib/edit.py:155
 msgid "No posters found for this movie."
-msgstr "Film için poster bulunamadı."
+msgstr "No posters found for this movie."
 
 #: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
-msgstr "Poster alınıyor"
+msgstr "Fetching poster"
 
 #: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:240
 msgid "Wait a moment"
-msgstr "Lütfen bekleyiniz"
+msgstr "Wait a moment"
 
 #: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
-msgstr "Üzgünüm. Bir bağlantı hatası oluştu."
+msgstr "Sorry. A connection error has occurred."
 
 #: ../lib/edit.py:225 ../lib/edit.py:258
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
-msgstr ""
-"Üzgünüm. Amazon.com 'da filim listelenmiş ancak filmin posteri mevcut değil."
+msgstr "Sorry. This film is listed but has no poster available at Amazon.com."
 
 #: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
-msgstr "Yerine bu posteri kullanmak ister misiniz?"
+msgstr "Do you want to use this poster instead?"
 
 #: ../lib/gconsole.py:133
 msgid "No movie found"
-msgstr "Film bulunamadı"
+msgstr "No film found"
 
 #: ../lib/gemail.py:39
 msgid "Connection timed out"
-msgstr "Bağlantı zamanaşımına uğradı"
+msgstr "Connection timed out"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
 msgid "Error sending e-mail: %s"
-msgstr "E-mail gönderme işlemi başarısız: %s"
+msgstr "Error sending e-mail: %s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr "giriş başarısız"
+msgstr "log-in failure"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
-msgstr "E-mail gönderildi."
+msgstr "E-mail sent successfully"
 
 #: ../lib/gemail.py:77
 msgid "Movie loan reminder"
-msgstr "Sinema ödünç hatırlatıcı"
+msgstr "Film loan reminder"
 
 #: ../lib/gemail.py:77
 #, python-format
@@ -461,25 +462,25 @@ msgid ""
 "\n"
 "Just to remind you "
 msgstr ""
-"Merhaba, %s\n"
+"Hi, %s!\n"
 "\n"
-"Sadece hatırlatmak istedim! "
+"Just to remind you "
 
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
-msgstr "Mail gönderilemedi. Lütfen e-mail ayarlarınızı kontrol ediniz."
+msgstr "Mail could not be sent. Please check e-mail preferences."
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
-msgstr "Bu kiiye ait e-mail adresi belirtilmemiş!"
+msgstr "This person has no e-mail address defined."
 
 #: ../lib/gutils.py:265
 msgid "Images"
-msgstr "Resimler"
+msgstr "Images"
 
 #: ../lib/gutils.py:276 ../lib/plugins/imp/__init__.py:202
 msgid "All files"
-msgstr "Tüm Dosyalar"
+msgstr "All files"
 
 #: ../lib/initialize.py:187
 msgid "N."
@@ -488,55 +489,55 @@ msgstr "N."
 #: ../lib/initialize.py:194 ../lib/initialize.py:598
 #: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:68
 msgid "Image"
-msgstr "Resim"
+msgstr "Image"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:611
 #: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:125
 msgid "Seen it"
-msgstr "İzledim"
+msgstr "Seen it"
 
 #: ../lib/initialize.py:236 ../lib/initialize.py:618
 #: ../lib/plugins/export/PluginExportHTML.py:152 ../glade/griffith.glade.h:160
 msgid "Year"
-msgstr "Yıl"
+msgstr "Year"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:610
 #: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:121
 msgid "Runtime"
-msgstr "Süre"
+msgstr "Runtime"
 
 #: ../lib/initialize.py:294
 msgid "Loan Date"
-msgstr "Ödünç Alma Tarihi"
+msgstr "Loan Date"
 
 #: ../lib/initialize.py:300
 msgid "Return Date"
-msgstr "Dönüş Tarihi"
+msgstr "Return Date"
 
 #: ../lib/initialize.py:305
 msgid "Loaned To"
-msgstr "Ödünç Verilen"
+msgstr "Loaned To"
 
 #: ../lib/initialize.py:324 ../lib/plugins/movie/PluginMovieIMDB-de.py:145
 #: ../lib/plugins/movie/PluginMovieIMDB.py:140
 msgid "Language"
-msgstr "Dil"
+msgstr "Language"
 
 #: ../lib/initialize.py:336 ../lib/initialize.py:621
 msgid "lector"
-msgstr "profesör"
+msgstr "lector"
 
 #: ../lib/initialize.py:337 ../lib/initialize.py:621
 msgid "dubbing"
-msgstr "dublaj"
+msgstr "dubbing"
 
 #: ../lib/initialize.py:339 ../lib/initialize.py:621
 msgid "commentary"
-msgstr "yorum"
+msgstr "commentary"
 
 #: ../lib/initialize.py:346 ../glade/griffith.glade.h:149
 msgid "Type"
-msgstr "Tür:"
+msgstr "Type"
 
 #: ../lib/initialize.py:361
 msgid "Codec"
@@ -544,95 +545,95 @@ msgstr "Codec"
 
 #: ../lib/initialize.py:376
 msgid "Channels"
-msgstr "Kanallar"
+msgstr "Channels"
 
 #: ../lib/initialize.py:391
 msgid "Subtitle format"
-msgstr "Altyazı formatı"
+msgstr "Subtitle format"
 
 #: ../lib/initialize.py:507 ../glade/griffith.glade.h:89
 msgid "Name"
-msgstr "isim"
+msgstr "Name"
 
 #: ../lib/initialize.py:513 ../glade/exporthtml.glade.h:16
 #: ../glade/griffith.glade.h:49 ../glade/import.glade.h:5
 msgid "E-mail"
-msgstr "E-posta"
+msgstr "E-mail"
 
 #: ../lib/initialize.py:561
 msgid "Last added"
-msgstr "Son eklenen"
+msgstr "Last added"
 
 #: ../lib/initialize.py:590 ../lib/plugins/export/PluginExportHTML.py:133
 #: ../glade/griffith.glade.h:32
 msgid "Cast"
-msgstr "Oyuncular"
+msgstr "Cast"
 
 #: ../lib/initialize.py:591 ../lib/plugins/export/PluginExportHTML.py:134
 #: ../glade/griffith.glade.h:34
 msgid "Classification"
-msgstr "Sınıflandırma"
+msgstr "Classification"
 
 #: ../lib/initialize.py:592 ../lib/plugins/export/PluginExportHTML.py:161
 #: ../glade/griffith.glade.h:37
 msgid "Collection"
-msgstr "Arşiv"
+msgstr "Collection"
 
 #: ../lib/initialize.py:593 ../lib/initialize.py:620
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
 #: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:38
 msgid "Color"
-msgstr "Renk"
+msgstr "Colour"
 
 #: ../lib/initialize.py:594 ../glade/griffith.glade.h:39
 msgid "Condition"
-msgstr "Durum"
+msgstr "Condition"
 
 #: ../lib/initialize.py:599 ../glade/griffith.glade.h:72
 msgid "Layers"
-msgstr "Katmanlar"
+msgstr "Layers"
 
 #: ../lib/initialize.py:600 ../lib/plugins/export/PluginExportHTML.py:142
 msgid "Loaned"
-msgstr "Ödünç alınmış"
+msgstr "Loaned"
 
 #: ../lib/initialize.py:601 ../lib/plugins/export/PluginExportHTML.py:143
 #: ../glade/griffith.glade.h:48
 msgid "Discs"
-msgstr "Diskler"
+msgstr "Discs"
 
 #: ../lib/initialize.py:602 ../glade/griffith.glade.h:84
 msgid "Medium"
-msgstr "Orta düzey"
+msgstr "Medium"
 
 #: ../lib/initialize.py:603 ../lib/plugins/export/PluginExportHTML.py:153
 #: ../glade/griffith.glade.h:92
 msgid "Notes"
-msgstr "Notlar"
+msgstr "Notes"
 
 #: ../lib/initialize.py:604 ../lib/sql.py:278
 #: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:93
 msgid "Number"
-msgstr "Numara"
+msgstr "Number"
 
 #: ../lib/initialize.py:605 ../lib/plugins/export/PluginExportHTML.py:139
 #: ../glade/griffith.glade.h:94
 msgid "Official site"
-msgstr "Resmi web sitesi"
+msgstr "Official site"
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:146
 #: ../glade/griffith.glade.h:103
 msgid "Plot"
-msgstr "Çizim"
+msgstr "Plot"
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:147
 #: ../glade/griffith.glade.h:111
 msgid "Rating"
-msgstr "Değerlendirme"
+msgstr "Rating"
 
 #: ../lib/initialize.py:609 ../glade/griffith.glade.h:113
 msgid "Region"
-msgstr "Bölge"
+msgstr "Region"
 
 #: ../lib/initialize.py:612 ../lib/plugins/export/PluginExportHTML.py:140
 #: ../glade/griffith.glade.h:135
@@ -642,12 +643,12 @@ msgstr "Site"
 #: ../lib/initialize.py:613 ../lib/plugins/export/PluginExportHTML.py:149
 #: ../glade/griffith.glade.h:141
 msgid "Studio"
-msgstr "Stüdyo"
+msgstr "Studio"
 
 #: ../lib/initialize.py:615 ../lib/plugins/export/PluginExportHTML.py:141
 #: ../glade/griffith.glade.h:148
 msgid "Trailer"
-msgstr "Fragman"
+msgstr "Trailer"
 
 #: ../lib/initialize.py:616 ../lib/plugins/export/PluginExportHTML.py:164
 #: ../glade/griffith.glade.h:155
@@ -657,164 +658,165 @@ msgstr "Video codec"
 #: ../lib/initialize.py:617 ../lib/plugins/export/PluginExportHTML.py:162
 #: ../glade/griffith.glade.h:158
 msgid "Volume"
-msgstr "Ses Seviyesi"
+msgstr "Volume"
 
 #: ../lib/initialize.py:619 ../lib/initialize.py:620 ../lib/initialize.py:622
 #: ../lib/initialize.py:816 ../lib/initialize.py:817 ../lib/initialize.py:848
 #: ../lib/initialize.py:849
 msgid "N/A"
-msgstr "(yok)"
+msgstr "N/A"
 
 #: ../lib/initialize.py:619
 msgid "Damaged"
-msgstr "Hasar görmüş"
+msgstr "Damaged"
 
 #: ../lib/initialize.py:619
 msgid "Poor"
-msgstr "Zayıf"
+msgstr "Poor"
 
 #: ../lib/initialize.py:619
 msgid "Fair"
-msgstr "Uygun"
+msgstr "Fair"
 
 #: ../lib/initialize.py:619
 msgid "Good"
-msgstr "İyi"
+msgstr "Good"
 
 #: ../lib/initialize.py:619
 msgid "Excellent"
-msgstr "Mükemmel"
+msgstr "Excellent"
 
 #: ../lib/initialize.py:620
 msgid "Black and White"
-msgstr "Siyah Beyaz"
+msgstr "Black and White"
 
 #: ../lib/initialize.py:620
 msgid "Mixed"
-msgstr "Karışık"
+msgstr "Mixed"
 
 #: ../lib/initialize.py:622
 msgid "Single Side, Single Layer"
-msgstr "Tek Yönlü, Tek Katmanlı"
+msgstr "Single Side, Single Layer"
 
 #: ../lib/initialize.py:622
 msgid "Single Side, Dual Layer"
-msgstr "Tek Yönlü, Çift Katmanlı"
+msgstr "Single Side, Dual Layer"
 
 #: ../lib/initialize.py:622
 msgid "Dual Side, Single Layer"
-msgstr "Çİft Yönlü, Tek Katmanlı"
+msgstr "Dual Side, Single Layer"
 
 #: ../lib/initialize.py:622
 msgid "Dual Side, Dual Layer"
-msgstr "Çift Yönlü, Çift Katmanlı"
+msgstr "Dual Side, Dual Layer"
 
 #: ../lib/initialize.py:624
 msgid "Region 0 (No Region Coding)"
-msgstr "Bölge 0 (Bölge Belirtilmemiş)"
+msgstr "Region 0 (No Region Coding)"
 
 #: ../lib/initialize.py:625
 msgid "Region 1 (United States of America, Canada)"
-msgstr "Bölge 1 (ABD, Kanada)"
+msgstr "Region 1 (United States of America, Canada)"
 
 #: ../lib/initialize.py:626
 msgid ""
 "Region 2 (Europe,including France, Greece, Turkey, Egypt, Arabia, Japan and "
 "South Africa)"
 msgstr ""
-"Bölge 2 (Avrupa, Fransa, Yunanistan, Türkiye, Mısır,  Arabistan, Japonya ve "
-"Güney Afrika)"
+"Region 2 (Europe, including Britain, Greece, Turkey, Egypt, Arabia, Japan "
+"and South Africa)"
 
 #: ../lib/initialize.py:627
 msgid "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
-msgstr "Bölge 3 (Kore, Tayland,  Vietnam, Borneo ve Endonezya)"
+msgstr "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
 
 #: ../lib/initialize.py:628
 msgid ""
 "Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
 "America)"
 msgstr ""
-"Bölge 4 (Avusturalya ve Yeni Zellanda, Meksika, Karayip ve Güney America)"
+"Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
+"America)"
 
 #: ../lib/initialize.py:629
 msgid "Region 5 (India, Africa, Russia and former USSR countries)"
-msgstr "Bölge 5 (Hindistan, Afrika, Rusya ve Rusya Fedarasyonu ülkeleri)"
+msgstr "Region 5 (India, Africa, Russia and former USSR countries)"
 
 #: ../lib/initialize.py:630
 msgid "Region 6 (Popular Republic of China)"
-msgstr "Bölge 6 (Çin)"
+msgstr "Region 6 (Popular Republic of China)"
 
 #: ../lib/initialize.py:631
 msgid "Region 7 (Reserved for Unspecified Special Use)"
-msgstr "Bölge 7 (Özel Kullanımlar İçin Ayrılmış)"
+msgstr "Region 7 (Reserved for Unspecified Special Use)"
 
 #: ../lib/initialize.py:632
 msgid "Region 8 (Airlines/Cruise Ships)"
-msgstr "Bölge 8 (Havayolları / Yolcu Gemileri)"
+msgstr "Region 8 (Airlines/Cruise Ships)"
 
 #: ../lib/initialize.py:669
 msgid "Dictionary not available. Spellcheck will be disabled. \n"
-msgstr "Sözlük kullanılabilir değil. Yazım denetimi devre dışı bırakılacak. \n"
+msgstr "Dictionary not available. Spell-check will be disabled. \n"
 
 #: ../lib/loan.py:40
 msgid "No person is defined yet."
-msgstr "Henüz tanımlanmış bir kişi yok."
+msgstr "No person is defined yet."
 
 #: ../lib/loan.py:67
 msgid "Do you want to loan whole collection?"
-msgstr "Tüm koleksiyonu ödünç vermek istiyor musunuz?"
+msgstr "Do you want to loan whole collection?"
 
 #: ../lib/loan.py:79
 msgid "Movie loaned"
-msgstr "Fim ödünç alınmış"
+msgstr "Film loaned"
 
 #: ../lib/main_treeview.py:244
 msgid "This movie has been loaned to "
-msgstr "Bu film ödünç verildiği kişi "
+msgstr "This film has been loaned to "
 
 #: ../lib/main_treeview.py:244
 msgid " on "
-msgstr " aktif "
+msgstr " on "
 
 #: ../lib/main_treeview.py:255
 msgid "Movie not loaned"
-msgstr "Film ödünç alınmamış"
+msgstr "Film not loaned"
 
 #: ../lib/movie.py:121
 msgid "Fetching data"
-msgstr "Bilgi alınıyor"
+msgstr "Fetching data"
 
 #: ../lib/movie.py:240
 msgid "Searching"
-msgstr "Aranıyor"
+msgstr "Searching"
 
 #: ../lib/movie.py:279
 msgid "Connection error"
-msgstr "Bağlantı hatası"
+msgstr "Connection error"
 
 #: ../lib/movie.py:303
 msgid "Cancel"
-msgstr "İptal"
+msgstr "Cancel"
 
 #: ../lib/people.py:59
 msgid "You should fill the person name"
-msgstr "Kişi adı alanını doldurmalısınız."
+msgstr "You should fill the person name"
 
 #: ../lib/people.py:88
 msgid "Record updated"
-msgstr "Kayıt güncellendi"
+msgstr "Record updated"
 
 #: ../lib/people.py:111
 msgid "This person has loaned films from you. Return them first."
-msgstr ""
-"Bu kişi filimleri sizden ödünç almış. Öncelikle onları geri almalısınız."
+msgstr "This person has loaned films from you. Receive them first."
 
 #: ../lib/people.py:116
 msgid ""
 "This person has data in the loan history. This data will be erased if you "
 "continue."
 msgstr ""
-"Bu kişinin ödünç alma geçmişi var. Devam edeseniz bu bilgi silinecektir."
+"This person has data in the loan history. This data will be erased if you "
+"continue."
 
 #: ../lib/people.py:117
 #, python-format
@@ -823,62 +825,62 @@ msgid ""
 "Are you sure you want to delete this person?"
 msgstr ""
 "%s\n"
-"Bu kişiyi silmek istediğinizden emin misiniz?"
+"Are you sure you want to delete this person?"
 
 #: ../lib/sql.py:61 ../lib/sql.py:123
 msgid ""
 "This item is in use.\n"
 "Operation aborted!"
 msgstr ""
-"Bü nesne kullanımda.\n"
-"İşlem sonlandırıldı!"
+"This item is in use.\n"
+"Operation aborted!"
 
 #: ../lib/sql.py:82
 msgid "This name is already in use!"
-msgstr "Bu isim halihazırda kullanılıyor!"
+msgstr "This name is already in use!"
 
 #: ../lib/sql.py:278
 #, python-format
 msgid "Column \"%s\" is not unique"
-msgstr "\"%s\" nolu kolon eşsiz değil"
+msgstr "Column \"%s\" is not unique"
 
 #: ../lib/sql.py:348
 msgid ""
 "Cannot connect to database.\n"
 "Falling back to SQLite."
 msgstr ""
-"Veritabanına bağlanılamıyor.\n"
-"SQLite'ye dönülüyor."
+"Cannot connect to database.\n"
+"Falling back to SQLite."
 
 #: ../lib/sql.py:348
 msgid "Please check debug output for more informations."
-msgstr "Daha fazla bilgi için hata çıktısını kontrol ediniz."
+msgstr "Please check debug output for more information."
 
 #: ../lib/sql.py:356
 msgid "Database connection failed."
-msgstr "Veritabanına bağlanılamadı."
+msgstr "Database connection failed."
 
 #: ../lib/version.py:30
 msgid "Griffith is a film collection manager."
-msgstr "Giffith film arşivi yönetim programıdır."
+msgstr "Griffith is a film collection manager."
 
 #: ../lib/view.py:28
 msgid "Filter activated. Showing only not seen movies."
-msgstr "Filtre aktif. Sadece henüz izlenmemiş filmler görüntüleniyor."
+msgstr "Filter activated. Showing only unseen films."
 
 #: ../lib/view.py:32
 msgid "Filter activated. Showing only loaned movies."
-msgstr "Filtre aktif. Sadece ödünç alınan filmler görüntüleniyor."
+msgstr "Filter activated. Showing only loaned films."
 
 #: ../lib/view.py:42
 #, python-format
 msgid "Filter activated. Showing only movies from volume: %s"
-msgstr "Filte aktif. Yalnız %s bölümündeki flimler görüntüleniyor."
+msgstr "Filter activated. Showing only films from volume: %s"
 
 #: ../lib/view.py:49
 #, python-format
 msgid "Filter activated. Showing only movies from collection: %s"
-msgstr "Filtre etkin. Sadece %s koleksiyonundaki filmler görüntüleniyor."
+msgstr "Filter activated. Showing only films from collection: %s"
 
 #: ../lib/widgets.py:312
 msgid ""
@@ -886,10 +888,9 @@ msgid ""
 "are xpdf, gpdf, evince or kpdf. Make sure you have this program installed "
 "and working first."
 msgstr ""
-"Burada Griffith'in kullanmasını istediği PDF gösteriyici "
-"tanımalayabilirsiniz. xpdf, gpdf ve kpdf en fazla tercih edilen "
-"uygulamalardır. Bu programların yüklü ve çalışır durumda olduğuna emin "
-"olunuz."
+"Define here the PDF reader you want to use within Griffith. Popular choices "
+"are xpdf, gpdf, evince or kpdf. Make sure you have this program installed "
+"and working first."
 
 #: ../lib/widgets.py:313
 msgid ""
@@ -897,8 +898,9 @@ msgid ""
 "fields. Use you locale setting. For example, to use european portuguese "
 "spell checking enter 'pt'"
 msgstr ""
-"Bu alanda yazım denetimde kullanılcak dili belilrleyebilirsiniz. Yerel "
-"ayarları kullanınız. Örneğin, Türkçe kullanmak için 'tr' giriniz."
+"Here you can define the desired language to use while spell checking some "
+"fields. Use your locale setting. For example, to use European Portuguese "
+"spell checking enter 'pt'"
 
 #: ../lib/widgets.py:314
 msgid ""
@@ -906,19 +908,17 @@ msgid ""
 "*nix systems, 'localhost' should work. Alternatively, you can use your "
 "Internet Service Provider's SMTP server address."
 msgstr ""
-"Bu alanda e-posta göndermek için kullanmak isteğiniz SMTP sunucusunu "
-"belirtiniz. *nix sistem yerel sunucu üzerinde 'localhost' çalışabilir. "
-"Alternatif olarak Internet Servis Sağlayıcı'nıza ait SMTP sunucu adresini "
-"kullanabilirsiniz."
+"Use this entry to define the SMTP server you want to use to send e-mails. On "
+"*nix systems, 'localhost' should work. Alternatively, you can use your "
+"Internet Service Provider's SMTP server address."
 
 #: ../lib/widgets.py:315
 msgid ""
 "This is the from e-mail address that should be used to all outgoing e-mail. "
 "You want to include your own e-mail address here probably."
 msgstr ""
-"Giden e-postalar için kullanılacak 'Kimden:' alanında görüntülenmesini "
-"istediğiniz e-posta adresi. Kendi e-posta adresinizi eklemek "
-"isteyebilirsiniz."
+"This is the e-mail address that should be used for all outgoing e-mail. You "
+"want to include your own e-mail address here."
 
 #: ../lib/widgets.py:316
 msgid ""
@@ -926,17 +926,16 @@ msgid ""
 "gmail account service to send e-mails, try to enter '587' here. Default (and "
 "the most common one) is '25'"
 msgstr ""
-"Buradan kullanacağınız SMTP portunu ayarlayabilirsiniz. Eğer e-mail "
-"göndermek için gmail servisini kullanmak istiyorsanız, buraya '587' giriniz. "
-"Varsayılan (ve en çok kullanılan) '25'tir."
+"Here you can define the SMTP server port to use. If you want to use your "
+"gmail account to send e-mails, enter '587' here. Default (common) is '25'"
 
 #: ../lib/widgets.py:317
 msgid ""
 "If you need TLS support, please check this checkbox. This is needed, for "
 "example, when using gmail service to send your reminder e-mails."
 msgstr ""
-"Eğer TLS desteği gerekliyse, burayı seçin. Bu işlem, örneğin, hatırlatma e-"
-"maillerini gmail servisini kullanarak alıyorsanız gereklidir."
+"If you need TLS support, please tick this tickbox. This is needed, for "
+"example, when using gmail to send your reminder e-mails."
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:103
@@ -993,16 +992,16 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieWP.py:98
 #: ../lib/plugins/movie/PluginMovieZelluloid.py:103
 msgid " as "
-msgstr " gibi "
+msgstr " as "
 
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:147
 #: ../lib/plugins/movie/PluginMovieIMDB.py:142 ../glade/griffith.glade.h:4
 msgid "<b>Audio</b>"
-msgstr "<b>Ses</b>"
+msgstr "<b>Audio</b>"
 
 #: ../lib/plugins/export/PluginExportCSV.py:31
 msgid "Full CSV list export plugin"
-msgstr "Tam CSV listesi aktarma eklentisi"
+msgstr "Full CSV list export plug-in"
 
 #: ../lib/plugins/export/PluginExportCSV.py:53
 #: ../lib/plugins/export/PluginExportCSV.py:56
@@ -1011,42 +1010,42 @@ msgstr "Tam CSV listesi aktarma eklentisi"
 #: ../lib/plugins/export/PluginExportXML.py:57
 #, python-format
 msgid "Export a %s document"
-msgstr "%s dökümanına aktar"
+msgstr "Export a %s document"
 
 #: ../lib/plugins/export/PluginExportCSV.py:79
 #: ../lib/plugins/export/PluginExportXML.py:97
 #, python-format
 msgid "%s file has been created."
-msgstr "%s isimli dosya oluşturuldu."
+msgstr "%s file has been created."
 
 #: ../lib/plugins/export/PluginExportHTML.py:36
 msgid "Plugin exports data using templates"
-msgstr "Temalar kullanılarak aktarım yapan eklenti"
+msgstr "Plug-in exports data using templates"
 
 #: ../lib/plugins/export/PluginExportHTML.py:48
 msgid "Griffith's movies list"
-msgstr "Griffith film listesi"
+msgstr "Griffith's film list"
 
 #: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:83
 msgid "Media"
-msgstr "Medya"
+msgstr "Media"
 
 #: ../lib/plugins/export/PluginExportHTML.py:504
 #: ../lib/plugins/export/PluginExportHTML.py:506
 msgid "previous"
-msgstr "önceki"
+msgstr "previous"
 
 #: ../lib/plugins/export/PluginExportHTML.py:517
 #: ../lib/plugins/export/PluginExportHTML.py:519
 msgid "next"
-msgstr "sonraki"
+msgstr "next"
 
 #: ../lib/plugins/export/PluginExportHTML.py:647
 #: ../lib/plugins/export/PluginExportHTML.py:689
 #: ../lib/plugins/export/PluginExportHTML.py:780
 #, python-format
 msgid "Can't create %s!"
-msgstr "%s oluşturulamadı!"
+msgstr "Can't create %s!"
 
 #: ../lib/plugins/export/PluginExportHTML.py:678
 #, python-format
@@ -1054,182 +1053,182 @@ msgid ""
 "Directory %s already exists.\n"
 "Do you want to overwrite it?"
 msgstr ""
-"%s isimli dizin mevcut.\n"
-"Üzerine yazmak istiyor musunuz?"
+"Directory %s already exists.\n"
+"Do you want to overwrite it?"
 
 #: ../lib/plugins/export/PluginExportHTML.py:682
 #, python-format
 msgid "Can't remove %s!"
-msgstr "%s kaldırılamıyor!"
+msgstr "Can't remove %s!"
 
 #: ../lib/plugins/export/PluginExportHTML.py:697
 #: ../lib/plugins/export/PluginExportHTML.py:710
 #, python-format
 msgid "Can't copy %s!"
-msgstr "%s kopyalanamıyor!"
+msgstr "Can't copy %s!"
 
 #: ../lib/plugins/export/PluginExportHTML.py:732
 #, python-format
 msgid "Can't open %s!"
-msgstr "%s açılamıyor!"
+msgstr "Can't open %s!"
 
 #: ../lib/plugins/export/PluginExportHTML.py:740
 #: ../lib/plugins/export/PluginExportPDF.py:150
 msgid "Document generated by Griffith v"
-msgstr "Griffith v tarafından oluşturuldu"
+msgstr "Document generated by Griffith v"
 
 #: ../lib/plugins/export/PluginExportHTML.py:802
 msgid "Yes"
-msgstr "Evet"
+msgstr "Yes"
 
 #: ../lib/plugins/export/PluginExportHTML.py:804
 msgid "No"
-msgstr "Hayır"
+msgstr "No"
 
 #: ../lib/plugins/export/PluginExportHTML.py:869
 msgid "Document has been generated."
-msgstr "Belge oluşturulmuş."
+msgstr "Document has been generated."
 
 #: ../lib/plugins/export/PluginExportiPod.py:36
 msgid "iPod Notes export plugin"
-msgstr "iPod Notları aktarma eklentisi."
+msgstr "iPod Notes export plug-in"
 
 #: ../lib/plugins/export/PluginExportiPod.py:85
 msgid "My Movies List"
-msgstr "Filmlerim Listesi"
+msgstr "My Film List"
 
 #: ../lib/plugins/export/PluginExportiPod.py:101
 msgid "List was successful exported to iPod."
-msgstr "Liste başarıyla iPod'a aktarıldı."
+msgstr "List was successfully exported to iPod."
 
 #: ../lib/plugins/export/PluginExportiPod.py:103
 msgid "iPod is not connected."
-msgstr "iPod'a bağlanılamadı."
+msgstr "iPod is not connected."
 
 #: ../lib/plugins/export/PluginExportiPod.py:118
 msgid ""
 "List was successful exported. Now you should move it to the 'Notes' folder "
 "on your iPod."
 msgstr ""
-"Listeniz başarılı bir şekilde aktarıldı. Şimdi 'Notlar' klasörünüzü "
-"iPod'unuza taşımanız gerek."
+"List was successfully exported. Now you should move it to the 'Notes' folder "
+"on your iPod."
 
 #: ../lib/plugins/export/PluginExportPDF.py:47
 msgid "PDF export plugin"
-msgstr "PDF aktarma eklentisi"
+msgstr "PDF export plug-in"
 
 #: ../lib/plugins/export/PluginExportPDF.py:75
 #: ../lib/plugins/export/PluginExportPDF.py:77
 msgid "Export a PDF"
-msgstr "PDF olarak aktar"
+msgstr "Export a PDF"
 
 #: ../lib/plugins/export/PluginExportPDF.py:106
 msgid "List of films"
-msgstr "Filimlerin listesi"
+msgstr "List of films"
 
 #: ../lib/plugins/export/PluginExportPDF.py:109
 #, python-format
 msgid "Total Movies: %s"
-msgstr "Tüm Filmler: %s"
+msgstr "Total Films: %s"
 
 #: ../lib/plugins/export/PluginExportPDF.py:143
 msgid "PDF has been created."
-msgstr "PDF dosyası oluşturuldu."
+msgstr "PDF has been created."
 
 #: ../lib/plugins/export/PluginExportPDF.py:148
 #, python-format
 msgid "Page %d"
-msgstr "Sayfa %d"
+msgstr "Page %d"
 
 #: ../lib/plugins/export/PluginExportXML.py:32
 msgid "Full XML list export plugin"
-msgstr "Tam XML listesi aktarma eklentisi."
+msgstr "Full XML list export plug-in"
 
 #: ../lib/plugins/imp/CSV.py:43
 msgid "Full CSV list import plugin"
-msgstr "Tam CSV listesi aktarma eklentisi."
+msgstr "Full CSV list import plug-in"
 
 #: ../lib/plugins/imp/CSV.py:192
 msgid "Please assign at least one field first!"
-msgstr "Lütfen en az bir alanı doldurunuz."
+msgstr "Please assign at least one field first!"
 
 #: ../lib/plugins/imp/CSV.py:310
 #, python-format
 msgid "Can't open the file %s"
-msgstr "%s isimli dosya açılamadı."
+msgstr "Can't open the file %s"
 
 #: ../lib/plugins/imp/__init__.py:227
 #, python-format
 msgid "%s file has been imported. %s movies added."
-msgstr "%s dosyası alındı. %s filmleri eklendi."
+msgstr "%s file has been imported. %s films added."
 
 #: ../glade/exporthtml.glade.h:1
 msgid "<b>Example</b>"
-msgstr "<b>Örnek</b>"
+msgstr "<b>Example</b>"
 
 #: ../glade/exporthtml.glade.h:2
 msgid "<b>Export</b>"
-msgstr "<b>Aktar</b>"
+msgstr "<b>Export</b>"
 
 #: ../glade/exporthtml.glade.h:3
 msgid "<b>Header</b>"
-msgstr "<b>Sayfa başlığı</b>"
+msgstr "<b>Header</b>"
 
 #: ../glade/exporthtml.glade.h:4
 msgid "<b>Limits</b>"
-msgstr "<b>Azami</b>"
+msgstr "<b>Limits</b>"
 
 #: ../glade/exporthtml.glade.h:5 ../glade/griffith.glade.h:15
 msgid "<b>Sort by</b>"
-msgstr "<b>Sırala</b>"
+msgstr "<b>Sort by</b>"
 
 #: ../glade/exporthtml.glade.h:6
 msgid "<b>Split into</b>"
-msgstr "<b>Ayır</b>"
+msgstr "<b>Split into</b>"
 
 #: ../glade/exporthtml.glade.h:7
 msgid "<b>Style</b>"
-msgstr "<b>Biçim</b>"
+msgstr "<b>Style</b>"
 
 #: ../glade/exporthtml.glade.h:8
 msgid "<b>Template</b>"
-msgstr "<b>Şablon</b>"
+msgstr "<b>Template</b>"
 
 #: ../glade/exporthtml.glade.h:9 ../glade/import.glade.h:3
 msgid "Author"
-msgstr "Yazar:"
+msgstr "Author"
 
 #: ../glade/exporthtml.glade.h:10
 msgid "Black and white"
-msgstr "Siyah Beyaz"
+msgstr "Black and white"
 
 #: ../glade/exporthtml.glade.h:11
 msgid "Choose style file"
-msgstr "Dosya stilini seç"
+msgstr "Choose style file"
 
 #: ../glade/exporthtml.glade.h:12
 msgid "Convert images"
-msgstr "Resmi dönüştür"
+msgstr "Convert images"
 
 #: ../glade/exporthtml.glade.h:13
 msgid "Data"
-msgstr "Veri"
+msgstr "Data"
 
 #: ../glade/exporthtml.glade.h:14 ../glade/import.glade.h:4
 msgid "Description"
-msgstr "Tanım"
+msgstr "Description"
 
 #: ../glade/exporthtml.glade.h:15
 msgid "Destination"
-msgstr "Hedef"
+msgstr "Destination"
 
 #: ../glade/exporthtml.glade.h:17
 msgid "Export"
-msgstr "Dışa Aktar"
+msgstr "Export"
 
 #: ../glade/exporthtml.glade.h:18
 msgid "Export data"
-msgstr "Veriyi dışa aktar"
+msgstr "Export data"
 
 #: ../glade/exporthtml.glade.h:19
 msgid "Format"
@@ -1237,244 +1236,244 @@ msgstr "Format"
 
 #: ../glade/exporthtml.glade.h:20
 msgid "Maximal height"
-msgstr "Azami Yükseklik"
+msgstr "Maximal height"
 
 #: ../glade/exporthtml.glade.h:21
 msgid "Maximal width"
-msgstr "Azami Genişlik"
+msgstr "Maximal width"
 
 #: ../glade/exporthtml.glade.h:22
 msgid "Posters"
-msgstr "Posterler"
+msgstr "Posters"
 
 #: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:120
 msgid "Reverse"
-msgstr "Tersine Çevir"
+msgstr "Reverse"
 
 #: ../glade/exporthtml.glade.h:24
 msgid "Template"
-msgstr "Şablon"
+msgstr "Template"
 
 #: ../glade/exporthtml.glade.h:25
 msgid "Use custom file"
-msgstr "Özel dosya kullan"
+msgstr "Use custom file"
 
 #: ../glade/exporthtml.glade.h:26 ../glade/import.glade.h:10
 msgid "Version"
-msgstr "Sürüm"
+msgstr "Version"
 
 #: ../glade/exporthtml.glade.h:27
 msgid "entries per page"
-msgstr "sayfa başına girdi"
+msgstr "entries per page"
 
 #: ../glade/exporthtml.glade.h:28
 msgid "files"
-msgstr "dosyalar"
+msgstr "files"
 
 #: ../glade/exporthtml.glade.h:29
 msgid "loaned only"
-msgstr "yalnız ödünç alınan"
+msgstr "loaned only"
 
 #: ../glade/exporthtml.glade.h:30
 msgid "none"
-msgstr "Hiçbiri"
+msgstr "none"
 
 #: ../glade/exporthtml.glade.h:31
 msgid "not loaned only"
-msgstr "yalnız ödünç alınmayanlar"
+msgstr "unloaned only"
 
 #: ../glade/exporthtml.glade.h:32
 msgid "seen only"
-msgstr "sadece izlendi"
+msgstr "seen only"
 
 #: ../glade/exporthtml.glade.h:33
 msgid "unseen only"
-msgstr "sadece izlenmedi"
+msgstr "unseen only"
 
 #: ../glade/griffith.glade.h:1
 msgid "0 means no limits"
-msgstr "0 limit yok demektir"
+msgstr "0 means no limits"
 
 #: ../glade/griffith.glade.h:2
 msgid "<b>Audio channels</b>"
-msgstr "<b>Ses Kanalaları</b>"
+msgstr "<b>Audio channels</b>"
 
 #: ../glade/griffith.glade.h:3
 msgid "<b>Audio codecs</b>"
-msgstr "<b>Ses Kodekleri</b>"
+msgstr "<b>Audio codecs</b>"
 
 #: ../glade/griffith.glade.h:5
 msgid "<b>Collection</b>"
-msgstr "<b>Koleksiyon</b>"
+msgstr "<b>Collection</b>"
 
 #: ../glade/griffith.glade.h:6
 msgid "<b>Defaults</b>"
-msgstr "<b>Varsayılan Değerler</b>"
+msgstr "<b>Defaults</b>"
 
 #: ../glade/griffith.glade.h:7
 msgid "<b>E-mail reminder</b>"
-msgstr "<b>E-posta hatırlatıcı</b>"
+msgstr "<b>E-mail reminder</b>"
 
 #: ../glade/griffith.glade.h:8
 msgid "<b>Languages</b>"
-msgstr "<b>Diller</b>"
+msgstr "<b>Languages</b>"
 
 #: ../glade/griffith.glade.h:9
 msgid "<b>Loan History</b>"
-msgstr "<b>Ödünç Geçmişi</b>"
+msgstr "<b>Loan History</b>"
 
 #: ../glade/griffith.glade.h:10
 msgid "<b>Media</b>"
-msgstr "<b>Medya</b>"
+msgstr "<b>Media</b>"
 
 #: ../glade/griffith.glade.h:11
 msgid "<b>Search for:</b>"
-msgstr "<b>Ara:</b>"
+msgstr "<b>Search for:</b>"
 
 #: ../glade/griffith.glade.h:12
 msgid "<b>Search results</b>"
-msgstr "<b>Arama sonuçları</b>"
+msgstr "<b>Search results</b>"
 
 #: ../glade/griffith.glade.h:13
 msgid "<b>Select database to use</b>"
-msgstr "<b>Kullanılacak veritabanını seçin</b>"
+msgstr "<b>Select database to use</b>"
 
 #: ../glade/griffith.glade.h:14
 msgid "<b>Show only the following columns</b>"
-msgstr "<b>Sadece aşağıdaki sütunları görüntüle</b>"
+msgstr "<b>Show only the following columns</b>"
 
 #: ../glade/griffith.glade.h:16
 msgid "<b>Subtitle formats</b>"
-msgstr "<b>Altyazı formatları</b>"
+msgstr "<b>Subtitle formats</b>"
 
 #: ../glade/griffith.glade.h:17
 msgid "<b>Subtitles</b>"
-msgstr "<b>Altyazılar</b>"
+msgstr "<b>Subtitles</b>"
 
 #: ../glade/griffith.glade.h:18
 msgid "<b>Tags</b>"
-msgstr "<b>Etiketler</b>"
+msgstr "<b>Tags</b>"
 
 #: ../glade/griffith.glade.h:19
 msgid "<b>Use spell checking on the following fields:</b>"
-msgstr "Aşağıdaki alanlar için dilbilgisi kontrolü uygula:"
+msgstr "<b>Check spelling on the following fields:</b>"
 
 #: ../glade/griffith.glade.h:20
 msgid "<b>Video codecs</b>"
-msgstr "<b>Video kodekleri</b>"
+msgstr "<b>Video codecs</b>"
 
 #: ../glade/griffith.glade.h:21
 msgid "<b>Volume</b>"
-msgstr "Ses"
+msgstr "<b>Volume</b>"
 
 #: ../glade/griffith.glade.h:22
 msgid "Add"
-msgstr "Ekle"
+msgstr "Add"
 
 #: ../glade/griffith.glade.h:24
 msgid "Add a new person"
-msgstr "Yeni kişi ekle"
+msgstr "Add a new person"
 
 #: ../glade/griffith.glade.h:25
 msgid "Add movie"
-msgstr "Film ekle"
+msgstr "Add film"
 
 #: ../glade/griffith.glade.h:26
 msgid "Add movie and close"
-msgstr "Film ekle ve kapat"
+msgstr "Add film and close"
 
 #: ../glade/griffith.glade.h:27
 msgid "Add new movie"
-msgstr "Yeni film ekle"
+msgstr "Add new film"
 
 #: ../glade/griffith.glade.h:28
 msgid "All Movies"
-msgstr "Tüm Fimler"
+msgstr "All Films"
 
 #: ../glade/griffith.glade.h:29
 msgid "Attempt to fetch a big poster from Amazon services Web site"
-msgstr "Amazon websitesinden büyük posteri almayı dene"
+msgstr "Attempt to fetch a big poster from Amazon services Web site"
 
 #: ../glade/griffith.glade.h:30
 msgid "By Collection"
-msgstr "Koleksiyona Göre"
+msgstr "By Collection"
 
 #: ../glade/griffith.glade.h:31
 #, fuzzy
 msgid "By Volume"
-msgstr "Ses Seviyesi"
+msgstr "Volume"
 
 #: ../glade/griffith.glade.h:33
 msgid "Choose Image"
-msgstr "Resim Seç"
+msgstr "Choose Image"
 
 #: ../glade/griffith.glade.h:35
 msgid "Clears filter"
-msgstr "Filtreyi temizler"
+msgstr "Clears filter"
 
 #: ../glade/griffith.glade.h:36
 msgid "Clone"
-msgstr "Kopyala"
+msgstr "Clone"
 
 #: ../glade/griffith.glade.h:41
 msgid "DVD layers"
-msgstr "DVD katmanları"
+msgstr "DVD layers"
 
 #: ../glade/griffith.glade.h:42
 msgid "DVD region"
-msgstr "DVD bölgesi"
+msgstr "DVD region"
 
 #: ../glade/griffith.glade.h:43
 msgid "Database"
-msgstr "Veritabanı"
+msgstr "Database"
 
 #: ../glade/griffith.glade.h:44
 msgid "Delete a person"
-msgstr "Kişi sil"
+msgstr "Delete a person"
 
 #: ../glade/griffith.glade.h:45
 msgid "Details"
-msgstr "Ayrıntılar"
+msgstr "Details"
 
 #: ../glade/griffith.glade.h:46
 msgid "Dictionaries"
-msgstr "Sözlükler"
+msgstr "Dictionaries"
 
 #: ../glade/griffith.glade.h:50
 msgid "E-mail reminder"
-msgstr "E-posta Hatırlatıcısı"
+msgstr "E-mail reminder"
 
 #: ../glade/griffith.glade.h:51
 msgid "E_xport"
-msgstr "D_ışa Aktar"
+msgstr "E_xport"
 
 #: ../glade/griffith.glade.h:52
 msgid "Edit a person"
-msgstr "Bir kişiyi düzenle"
+msgstr "Edit a person"
 
 #: ../glade/griffith.glade.h:53
 msgid "Edit movie details"
-msgstr "Film ayrıntılarını düzenle"
+msgstr "Edit film details"
 
 #: ../glade/griffith.glade.h:54
 msgid "Favorite Movie Plugin"
-msgstr "Favori Film Eklentisi"
+msgstr "Favourite Film Plug-in"
 
 #: ../glade/griffith.glade.h:55
 msgid "Fetch from Amazon"
-msgstr "Amazon'la eşitle"
+msgstr "Fetch from Amazon"
 
 #: ../glade/griffith.glade.h:56
 msgid "Fill empty fields only"
-msgstr "Sadece boş alanları doldurun"
+msgstr "Fill empty fields only"
 
 #: ../glade/griffith.glade.h:57
 msgid "Filter "
-msgstr "Filtre "
+msgstr "Filter "
 
 #: ../glade/griffith.glade.h:58
 msgid "Font for reports"
-msgstr "Rapor yazıtipi"
+msgstr "Font for reports"
 
 #: ../glade/griffith.glade.h:59
 msgid "Forum"
@@ -1482,15 +1481,15 @@ msgstr "Forum"
 
 #: ../glade/griffith.glade.h:60
 msgid "Found Results"
-msgstr "Bulunan Sonuçlar"
+msgstr "Found Results"
 
 #: ../glade/griffith.glade.h:62
 msgid "Get from web"
-msgstr "Web'den Al"
+msgstr "Get from Web"
 
 #: ../glade/griffith.glade.h:63
 msgid "Get movie data from:"
-msgstr "Film bilgisini şuradan al:"
+msgstr "Get film data from:"
 
 #: ../glade/griffith.glade.h:64
 msgid "Griffith"
@@ -1498,231 +1497,231 @@ msgstr "Griffith"
 
 #: ../glade/griffith.glade.h:65
 msgid "Homepage"
-msgstr "Ana Sayfa"
+msgstr "Homepage"
 
 #: ../glade/griffith.glade.h:66
 msgid "Host"
-msgstr "Sunucu"
+msgstr "Host"
 
 #: ../glade/griffith.glade.h:67
 msgid "I_mport"
-msgstr "İçe _Aktar"
+msgstr "I_mport"
 
 #: ../glade/griffith.glade.h:69
 msgid "Include Front Image"
-msgstr "Ön Resmini Dahil Et"
+msgstr "Include Front Image"
 
 #: ../glade/griffith.glade.h:70
 msgid "Include movie number"
-msgstr "Film numarasını dahil et"
+msgstr "Include film number"
 
 #: ../glade/griffith.glade.h:71
 msgid "Languages"
-msgstr "Diller"
+msgstr "Languages"
 
 #: ../glade/griffith.glade.h:73
 msgid "Limit search results to"
-msgstr "Arama sonuçlarını sınırla"
+msgstr "Limit search results to"
 
 #: ../glade/griffith.glade.h:74
 msgid "Load poster from disk"
-msgstr "Posteri sürücüden yükle"
+msgstr "Load poster from disk"
 
 #: ../glade/griffith.glade.h:75
 msgid "Loan"
-msgstr "Ödünç ver"
+msgstr "Loan"
 
 #: ../glade/griffith.glade.h:76
 msgid "Loan Management"
-msgstr "Ödünç Yönetimi"
+msgstr "Loan Management"
 
 #: ../glade/griffith.glade.h:77
 msgid "Loan movie"
-msgstr "Filmi ödünç al"
+msgstr "Loan film"
 
 #: ../glade/griffith.glade.h:78
 msgid "Loan to"
-msgstr "Şuna ödünç ver"
+msgstr "Loan to"
 
 #: ../glade/griffith.glade.h:79
 msgid "Loaned Movies"
-msgstr "Ödünç verilen Filmler"
+msgstr "Loaned Films"
 
 #: ../glade/griffith.glade.h:80
 msgid "Loans"
-msgstr "Ödünç Listesi"
+msgstr "Loans"
 
 #: ../glade/griffith.glade.h:81
 msgid "Main list"
-msgstr "Ana liste"
+msgstr "Main list"
 
 #: ../glade/griffith.glade.h:82
 msgid "Manage People"
-msgstr "Kişileri Yönet"
+msgstr "Manage People"
 
 #: ../glade/griffith.glade.h:85
 msgid ""
 "Meter\n"
 "Stars"
 msgstr ""
-"Metre\n"
-"Yıldızlar"
+"Meter\n"
+"Stars"
 
 #: ../glade/griffith.glade.h:87
 msgid "Movie details"
-msgstr "Film ayrıntıları"
+msgstr "Film details"
 
 #: ../glade/griffith.glade.h:88
 msgid "Movie information"
-msgstr "Film bilgisi"
+msgstr "Film information"
 
 #: ../glade/griffith.glade.h:90
 msgid "Needs authentication"
-msgstr "Doğrulanması gerek"
+msgstr "Needs authentication"
 
 #: ../glade/griffith.glade.h:91
 msgid "Not Seen Movies"
-msgstr "İzlenmemiş Filmler"
+msgstr "Unseen Films"
 
 #: ../glade/griffith.glade.h:96
 msgid "Original title"
-msgstr "Orjinal başlık"
+msgstr "Original title"
 
 #: ../glade/griffith.glade.h:97
 msgid "Other"
-msgstr "Diğer"
+msgstr "Other"
 
 #: ../glade/griffith.glade.h:98
 msgid "PDF reader"
-msgstr "PDF okuyucu"
+msgstr "PDF reader"
 
 #: ../glade/griffith.glade.h:99
 msgid "Password"
-msgstr "Şifre"
+msgstr "Password"
 
 #: ../glade/griffith.glade.h:100
 msgid "People"
-msgstr "Kişiler"
+msgstr "People"
 
 #: ../glade/griffith.glade.h:101
 msgid "Phone"
-msgstr "Telefon"
+msgstr "Phone"
 
 #: ../glade/griffith.glade.h:102
 msgid "Please wait a moment..."
-msgstr "Lütfen kısa bir süre bekleyin..."
+msgstr "Please wait a moment..."
 
 #: ../glade/griffith.glade.h:104
 msgid "Plugins"
-msgstr "Eklentiler"
+msgstr "Plug-ins"
 
 #: ../glade/griffith.glade.h:105
 msgid "Port"
-msgstr "Port:"
+msgstr "Port"
 
 #: ../glade/griffith.glade.h:106
 msgid "Poster image"
-msgstr "Poster resmi"
+msgstr "Poster image"
 
 #: ../glade/griffith.glade.h:107
 msgid "Poster viewer"
-msgstr "Poster görüntüleyicisi"
+msgstr "Poster viewer"
 
 #: ../glade/griffith.glade.h:108
 msgid "Preferences"
-msgstr "Seçenekler"
+msgstr "Preferences"
 
 #: ../glade/griffith.glade.h:109
 msgid "Print Cover"
-msgstr "Kapak Resmini Yazdır"
+msgstr "Print Cover"
 
 #: ../glade/griffith.glade.h:110
 msgid "Print cover"
-msgstr "Kapak resmini yazdır"
+msgstr "Print cover"
 
 #: ../glade/griffith.glade.h:112
 msgid "Rating image"
-msgstr "Oylama resmi"
+msgstr "Rating image"
 
 #: ../glade/griffith.glade.h:114
 msgid "Remove"
-msgstr "Kaldır"
+msgstr "Remove"
 
 #: ../glade/griffith.glade.h:115
 msgid "Remove selected movie"
-msgstr "Seçili filmi kaldır"
+msgstr "Remove selected film"
 
 #: ../glade/griffith.glade.h:116
 msgid "Removes poster"
-msgstr "Posteri kaldırır"
+msgstr "Removes poster"
 
 #: ../glade/griffith.glade.h:117
 msgid "Rename"
-msgstr "Yeniden Adlandır"
+msgstr "Rename"
 
 #: ../glade/griffith.glade.h:118
 msgid "Report bug"
-msgstr "Hata Raporla"
+msgstr "Report bug"
 
 #: ../glade/griffith.glade.h:119
 msgid "Return"
-msgstr "Geri Dön"
+msgstr "Return"
 
 #: ../glade/griffith.glade.h:122
 msgid "SMTP port"
-msgstr "SMTP portu"
+msgstr "SMTP port"
 
 #: ../glade/griffith.glade.h:123
 msgid "SMTP server"
-msgstr "SMTP sunucusu"
+msgstr "SMTP server"
 
 #: ../glade/griffith.glade.h:124
 msgid "Searching on the web"
-msgstr "Web'de aranıyor"
+msgstr "Searching on the Web"
 
 #: ../glade/griffith.glade.h:126
 msgid "Select A File"
-msgstr "Dosya Seç"
+msgstr "Select a File"
 
 #: ../glade/griffith.glade.h:127
 msgid "Select first movie"
-msgstr "İlk filmi seçin"
+msgstr "Select first film"
 
 #: ../glade/griffith.glade.h:128
 msgid "Select last movie"
-msgstr "Son filmi seçin"
+msgstr "Select last film"
 
 #: ../glade/griffith.glade.h:129
 msgid "Select next movie"
-msgstr "Sonraki filmi seçin"
+msgstr "Select next film"
 
 #: ../glade/griffith.glade.h:130
 msgid "Select previous movie"
-msgstr "Önceki filmi seçin"
+msgstr "Select previous film"
 
 #: ../glade/griffith.glade.h:131
 msgid "Sender E-mail address"
-msgstr "Gönderici E-posta adresi"
+msgstr "Sender E-mail address"
 
 #: ../glade/griffith.glade.h:132
 msgid "Show other movies in this collection"
-msgstr "Bu koleksiyondaki diğer filmleri göster"
+msgstr "Show other films in this collection"
 
 #: ../glade/griffith.glade.h:133
 msgid "Show other movies in this volume"
-msgstr "Bu bölümdeki diğer filmleri göster"
+msgstr "Show other films in this volume"
 
 #: ../glade/griffith.glade.h:134
 msgid "Simple"
-msgstr "Basit"
+msgstr "Simple"
 
 #: ../glade/griffith.glade.h:136
 msgid "Size"
-msgstr "Boyut"
+msgstr "Size"
 
 #: ../glade/griffith.glade.h:137
 msgid "Spell check the following language"
-msgstr "Dilbilgisi kontrolü için kullanılacak dil"
+msgstr "Spell check for the following language"
 
 #: ../glade/griffith.glade.h:138
 msgid ""
@@ -1730,137 +1729,137 @@ msgid ""
 "Slim\n"
 "Double Slim"
 msgstr ""
-"Standart\n"
-"İnce\n"
-"Çift İnce"
+"Standard\n"
+"Slim\n"
+"Double Slim"
 
 #: ../glade/griffith.glade.h:142
 msgid "Suggest an unseen movie"
-msgstr "İzlenmemiş bir film öner"
+msgstr "Suggest an unseen film"
 
 #: ../glade/griffith.glade.h:143
 msgid "Tags"
-msgstr "Etiketler"
+msgstr "Tags"
 
 #: ../glade/griffith.glade.h:144
 msgid "Technical information"
-msgstr "Teknik bilgi"
+msgstr "Technical information"
 
 #: ../glade/griffith.glade.h:145
 msgid "This movie is part of..."
-msgstr "Bu film şuna dahildir:"
+msgstr "This film is part of..."
 
 #: ../glade/griffith.glade.h:147
 msgid "Toolbar"
-msgstr "Araç Çubuğu"
+msgstr "Toolbar"
 
 #: ../glade/griffith.glade.h:150
 msgid ""
 "Type in the original film tile, select source and choose <i>Get from web</"
 "i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
-"Orjinal film dosyasını giriniz, kaynağı seçtikten sonra <b>Web'den Al</b>'ı "
-"seçiniz. Griffith tüm ilgili bilgiyi Web üzerinden eşitlemeyi deneyecektir."
+"Type in the original film tile, select source and choose <i>Get from Web</"
+"i>. Griffith will try to fetch all the related information from the Web."
 
 #: ../glade/griffith.glade.h:151
 msgid "Use Spellchecker"
-msgstr "Yazım Denetimi Kullan"
+msgstr "Use Spell-checker"
 
 #: ../glade/griffith.glade.h:152
 msgid "Use TLS?"
-msgstr "TLS Kullan?"
+msgstr "Use TLS?"
 
 #: ../glade/griffith.glade.h:153
 msgid "Use locale:"
-msgstr "Yerel Ayarları Kullan:"
+msgstr "Use locale:"
 
 #: ../glade/griffith.glade.h:154
 msgid "Username"
-msgstr "Kullanıcı adı:"
+msgstr "Username"
 
 #: ../glade/griffith.glade.h:156
 msgid "Visit movie web site"
-msgstr "Filmin websitesini ziyaret et"
+msgstr "Visit film Web site"
 
 #: ../glade/griffith.glade.h:157
 msgid "Visit the oficial web site"
-msgstr "Resmi web sitesini ziyaret et"
+msgstr "Visit the official Web site"
 
 #: ../glade/griffith.glade.h:159
 msgid "Watch the trailer"
-msgstr "Fragmanı izle"
+msgstr "Watch the advertisement"
 
 #: ../glade/griffith.glade.h:161
 msgid "_Edit"
-msgstr "_Düzen"
+msgstr "_Edit"
 
 #: ../glade/griffith.glade.h:162
 msgid "_File"
-msgstr "D_osya"
+msgstr "_File"
 
 #: ../glade/griffith.glade.h:163
 msgid "_Help"
-msgstr "_Yardım"
+msgstr "_Help"
 
 #: ../glade/griffith.glade.h:164
 msgid "_Loans"
-msgstr "Ödü_nç"
+msgstr "_Loans"
 
 #: ../glade/griffith.glade.h:165
 msgid "_Tools"
-msgstr "Araç_lar"
+msgstr "_Tools"
 
 #: ../glade/griffith.glade.h:166
 msgid "_View"
-msgstr "Görünü_m"
+msgstr "_View"
 
 #: ../glade/griffith.glade.h:167
 msgid "add entered name to collections list"
-msgstr "girilen ismi koleksiyonlar listesine ekle"
+msgstr "add entered name to collections list"
 
 #: ../glade/griffith.glade.h:168
 msgid "add entered name to volumes list"
-msgstr "girilen ismi birimler listesine ekle"
+msgstr "add entered name to volumes list"
 
 #: ../glade/griffith.glade.h:169
 msgid "classification"
-msgstr "sınıflandırma"
+msgstr "classification"
 
 #: ../glade/griffith.glade.h:170
 msgid "click here if movie was returned"
-msgstr "eğer film geri getirilmişse buraya tıklayın"
+msgstr "click here if film was returned"
 
 #: ../glade/griffith.glade.h:171
 msgid "collection details"
-msgstr "koleksiyon detayları"
+msgstr "collection details"
 
 #: ../glade/griffith.glade.h:172
 msgid "loans movie or volume"
-msgstr "filmi ya da birimi ödünç verir"
+msgstr "loans film or volume"
 
 #: ../glade/griffith.glade.h:173
 msgid "minutes"
-msgstr "dakika"
+msgstr "minutes"
 
 #: ../glade/griffith.glade.h:174
 msgid "movies"
-msgstr "filmler"
+msgstr "films"
 
 #: ../glade/griffith.glade.h:175
 msgid "remove selected collection"
-msgstr "seçili koleksiyonu kaldır"
+msgstr "remove selected collection"
 
 #: ../glade/griffith.glade.h:176
 msgid "remove selected volume"
-msgstr "seçili birimi kaldır"
+msgstr "remove selected volume"
 
 #: ../glade/griffith.glade.h:177
 msgid "tags"
-msgstr "etiketler"
+msgstr "tags"
 
 #: ../glade/griffith.glade.h:178
 msgid "volume details"
-msgstr "birim detayları"
+msgstr "volume details"
 
 #: ../glade/importcsv.glade.h:1
 msgid ""
@@ -1871,63 +1870,60 @@ msgid ""
 "only one title.\n"
 "Your cast-list should be comma-seperated to break it apart in multiple lines."
 msgstr ""
-"<b>Bazı İpuçları</b>\n"
+"<b>Some Hints</b>:\n"
 "\n"
-"Bir sonraki adımda CSV alanlarınızı Griffith'in kullandığına "
-"atayabilirsiniz.\n"
-"Bir CSV-alanı birden fazla griffith-alanına aktarılabilir, örneğin, eğer "
-"sadece bir başlığınız varsa.\n"
-"Oyuncu listenizi satırlara bölmek için virgül kullanarak ayırmalısınız."
+"On the next step you can assign your CSV fields with the one in Griffith.\n"
+"One CSV field can be assigned to multiple griffith fields, i.e. if you have "
+"only one title.\n"
+"Your cast-list should be comma-separated to break it apart in multiple lines."
 
 #: ../glade/importcsv.glade.h:6
 msgid "Assigned Fields (CSV > Griffith)"
-msgstr "Alanları ata (CSV > Griffith)"
+msgstr "Assigned Fields (CSV -> Griffith)"
 
 #: ../glade/importcsv.glade.h:7
 msgid "CSV Fields"
-msgstr "CSV alanları"
+msgstr "CSV Fields"
 
 #: ../glade/importcsv.glade.h:8
 msgid "CSV Import"
-msgstr "CSV Ekle"
+msgstr "CSV Import"
 
 #: ../glade/importcsv.glade.h:9
 msgid "Delimiter"
-msgstr "Sınırlayıcı"
+msgstr "Delimiter"
 
 #: ../glade/importcsv.glade.h:10
 msgid "Encoding"
-msgstr "Karakter Kodlama"
+msgstr "Encoding"
 
 #: ../glade/importcsv.glade.h:11 ../glade/import.glade.h:6
 msgid "Fields"
-msgstr "Alanlar"
+msgstr "Fields"
 
 #: ../glade/importcsv.glade.h:12
 msgid "File-Options"
-msgstr "Dosya-Seçenekleri"
+msgstr "File-Options"
 
 #: ../glade/importcsv.glade.h:13
 msgid "From Row"
-msgstr "Satırdan"
+msgstr "From Row"
 
 #: ../glade/importcsv.glade.h:14
 msgid "Griffith Fields"
-msgstr "Griffith Alanları"
+msgstr "Griffith Fields"
 
 #: ../glade/importcsv.glade.h:15
 msgid "If your file has no column headers then you should import from row 0."
-msgstr ""
-"Eğer dosyanızın sütun başlıkları bulunmuyorsa, 0 numaralı satırdan "
-"başlamalısınız."
+msgstr "If your file has no column headers then you should import from row 0."
 
 #: ../glade/importcsv.glade.h:16
 msgid "Lineterminator"
-msgstr "Satır sonlandırıcı"
+msgstr "Line terminator"
 
 #: ../glade/importcsv.glade.h:17
 msgid "Quotechar"
-msgstr "Quotechar"
+msgstr "Quote char"
 
 #: ../glade/importcsv.glade.h:18
 msgid ""
@@ -2017,112 +2013,111 @@ msgid ""
 "utf_7 (all languages)\n"
 "utf_8 (all languages)"
 msgstr ""
-"ascii (İngillizce)\n"
-"big5 (Yerel Çince)\n"
-"big5hkscs (Yerel Çince)\n"
-"cp037 (İngilizce)\n"
-"cp424 (İbranice)\n"
-"cp437 (İngilizce)\n"
-"cp500 (Batı Avrupa)\n"
-"cp737 (Yunanca)\n"
-"cp775 (Baltık dilleri)\n"
-"cp850 (Batı Avrupa)\n"
-"cp852 (Orta ve Doğu Avrupa)\n"
-"cp855 (Bulgarca, Beyaz Rusça, Makedonca, Rusça, Sırpça)\n"
-"cp856 (İbranice)\n"
-"cp857 (Türkçe)\n"
-"cp860 (Portekizce)\n"
-"cp861 (İzlandaca)\n"
-"cp862 (İbranice)\n"
-"cp863 (Kanadaca)\n"
-"cp864 (Arapça)\n"
-"cp865 (Danimarkaca, Norveççe)\n"
-"cp866 (Rusça)\n"
-"cp869 (Yunanca)\n"
-"cp874 (Tayca)\n"
-"cp875 (Yunanca)\n"
-"cp932 (Japonca)\n"
-"cp949 (Korece)\n"
-"cp950 (Yerel Çince)\n"
-"cp1006 (Ürdünce)\n"
-"cp1026 (Turkçe)\n"
-"cp1140 (Batı Avrupa)\n"
-"cp1250 (Orta ve Doğu Avrupa)\n"
-"cp1251 (Bulgarca, Beyaz Rusça, Makedonca, Rusça, Sırpça)\n"
-"cp1252 (Batı Avrupa)\n"
-"cp1253 (Yunanca)\n"
-"cp1254 (Türkçe)\n"
-"cp1255 (İbranice)\n"
-"cp1256 (Arapça)\n"
-"cp1257 (Baltık dilleri)\n"
-"cp1258 (Vietnamca)\n"
-"euc_jp (Japonca)\n"
-"euc_jis_2004 (Japonca)\n"
-"euc_jisx0213 (Japonca)\n"
-"euc_kr (Korece)\n"
-"gb2312 (Basitleştirilmiş Çince)\n"
-"gbk (Birleştirilmiş Çince)\n"
-"gb18030 (Birleştirilmiş Çince)\n"
-"hz (Basitleştirilmiş Çince)\n"
-"iso2022_jp (Japonca)\n"
-"iso2022_jp_1 (Japonca)\n"
-"iso2022_jp_2 (Japonca, Korece, Basitleştirilmiş Çince, Batı Avrupa, "
-"Yunanca)\n"
-"iso2022_jp_2004 (Japonca)\n"
-"iso2022_jp_3 (Japonca)\n"
-"iso2022_jp_ext (Japonca)\n"
-"iso2022_kr (Korece)\n"
-"latin_1 (Batı Avrupa)\n"
-"iso8859_2 (Orta ve Doğu Avrupa)\n"
-"iso8859_3 (Esperanto, Maltaca)\n"
-"iso8859_4 (Baltık dilleri)\n"
-"iso8859_5 (Bulgarca, Beyaz Rusça, Makedonca, Rusça, Sırpça)\n"
-"iso8859_6 (Arapça)\n"
-"iso8859_7 (Yunanca)\n"
-"iso8859_8 (İbranice)\n"
-"iso8859_9 (Türkçe)\n"
-"iso8859_10 (Kuzey dilleri)\n"
-"iso8859_13 (Baltık dilleri)\n"
-"iso8859_14 (Keltik diller)\n"
-"iso8859_15 (Batı Avrupa)\n"
-"johab (Korece)\n"
-"koi8_r (Rusça)\n"
-"koi8_u (Ukraynaca)\n"
-"mac_cyrillic (Bulgarca, Beyaz Rusça, Makedonca, Rusça, Sırpça)\n"
-"mac_greek (Yunanca)\n"
-"mac_iceland (İzlandaca)\n"
-"mac_latin2 (Orta ve Doğu Avrupa)\n"
-"mac_roman (Batı Avrupa)\n"
-"mac_turkish (Türkçe)\n"
-"ptcp154 (Kazakça)\n"
-"shift_jis (Japonca)\n"
-"shift_jis_2004 (Japonca)\n"
-"shift_jisx0213 (Japonca)\n"
-"utf_16 (tüm diller)\n"
-"utf_16_be (tüm diller (sadece BMP))\n"
-"utf_16_le (tüm diller (sadece BMP))\n"
-"utf_7 (tüm diller)\n"
-"utf_8 (tüm diller)"
+"ascii (English)\n"
+"big5 (Traditional Chinese)\n"
+"big5hkscs (Traditional Chinese)\n"
+"cp037 (English)\n"
+"cp424 (Hebrew)\n"
+"cp437 (English)\n"
+"cp500 (Western Europe)\n"
+"cp737 (Greek)\n"
+"cp775 (Baltic languages)\n"
+"cp850 (Western Europe)\n"
+"cp852 (Central and Eastern Europe)\n"
+"cp855 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"cp856 (Hebrew)\n"
+"cp857 (Turkish)\n"
+"cp860 (Portuguese)\n"
+"cp861 (Icelandic)\n"
+"cp862 (Hebrew)\n"
+"cp863 (Canadian)\n"
+"cp864 (Arabic)\n"
+"cp865 (Danish, Norwegian)\n"
+"cp866 (Russian)\n"
+"cp869 (Greek)\n"
+"cp874 (Thai)\n"
+"cp875 (Greek)\n"
+"cp932 (Japanese)\n"
+"cp949 (Korean)\n"
+"cp950 (Traditional Chinese)\n"
+"cp1006 (Urdu)\n"
+"cp1026 (Turkish)\n"
+"cp1140 (Western Europe)\n"
+"cp1250 (Central and Eastern Europe)\n"
+"cp1251 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"cp1252 (Western Europe)\n"
+"cp1253 (Greek)\n"
+"cp1254 (Turkish)\n"
+"cp1255 (Hebrew)\n"
+"cp1256 (Arabic)\n"
+"cp1257 (Baltic languages)\n"
+"cp1258 (Vietnamese)\n"
+"euc_jp (Japanese)\n"
+"euc_jis_2004 (Japanese)\n"
+"euc_jisx0213 (Japanese)\n"
+"euc_kr (Korean)\n"
+"gb2312 (Simplified Chinese)\n"
+"gbk (Unified Chinese)\n"
+"gb18030 (Unified Chinese)\n"
+"hz (Simplified Chinese)\n"
+"iso2022_jp (Japanese)\n"
+"iso2022_jp_1 (Japanese)\n"
+"iso2022_jp_2 (Japanese, Korean, Simplified Chinese, Western Europe, Greek)\n"
+"iso2022_jp_2004 (Japanese)\n"
+"iso2022_jp_3 (Japanese)\n"
+"iso2022_jp_ext (Japanese)\n"
+"iso2022_kr (Korean)\n"
+"latin_1 (West Europe)\n"
+"iso8859_2 (Central and Eastern Europe)\n"
+"iso8859_3 (Esperanto, Maltese)\n"
+"iso8859_4 (Baltic languagues)\n"
+"iso8859_5 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"iso8859_6 (Arabic)\n"
+"iso8859_7 (Greek)\n"
+"iso8859_8 (Hebrew)\n"
+"iso8859_9 (Turkish)\n"
+"iso8859_10 (Nordic languages)\n"
+"iso8859_13 (Baltic languages)\n"
+"iso8859_14 (Celtic languages)\n"
+"iso8859_15 (Western Europe)\n"
+"johab (Korean)\n"
+"koi8_r (Russian)\n"
+"koi8_u (Ukrainian)\n"
+"mac_cyrillic (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"mac_greek (Greek)\n"
+"mac_iceland (Icelandic)\n"
+"mac_latin2 (Central and Eastern Europe)\n"
+"mac_roman (Western Europe)\n"
+"mac_turkish (Turkish)\n"
+"ptcp154 (Kazakh)\n"
+"shift_jis (Japanese)\n"
+"shift_jis_2004 (Japanese)\n"
+"shift_jisx0213 (Japanese)\n"
+"utf_16 (all languages)\n"
+"utf_16_be (all languages (BMP only))\n"
+"utf_16_le (all languages (BMP only))\n"
+"utf_7 (all languages)\n"
+"utf_8 (all languages)"
 
 #: ../glade/import.glade.h:1
 msgid "<b>Import only fields selected below</b>"
-msgstr "<b>Sadece aşağıda seçili olan alanları dahil et</b>"
+msgstr "<b>Import only fields selected below</b>"
 
 #: ../glade/import.glade.h:2
 msgid "<b>Importing...</b>"
-msgstr "<b>Dahil ediliyor...</b>"
+msgstr "<b>Importing...</b>"
 
 #: ../glade/import.glade.h:7
 msgid "Import window"
-msgstr "Dahil etme penceresi"
+msgstr "Import window"
 
 #: ../glade/import.glade.h:8
 msgid "Plugin"
-msgstr "Eklenti"
+msgstr "Plug-in"
 
 #: ../glade/import.glade.h:9
 msgid "Source"
-msgstr "Kaynak"
+msgstr "Source"
 
 #~ msgid "Brasilian Portuguese"
-#~ msgstr "Brezilya Portekizcesi"
+#~ msgstr "Brazilian Portuguese"
