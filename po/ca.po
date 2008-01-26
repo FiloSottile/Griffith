@@ -15,17 +15,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-01-14 20:28+0000\n"
+"X-Launchpad-Export-Date: 2008-01-26 12:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../griffith:189 ../griffith:799 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
 msgid "You have no movies in your database"
-msgstr ""
+msgstr "No té pel·lícules a la seua base de dades."
 
 #: ../griffith:358
 msgid "You saw all movies in your collection!"
-msgstr ""
+msgstr "Ja ha vist totes les pel·lícules de la seua col·lecció!"
 
 #: ../griffith:484 ../griffith:489 ../lib/initialize.py:260
 #: ../lib/initialize.py:538
@@ -393,7 +393,8 @@ msgid "Sorry. A connection error has occurred."
 msgstr ""
 
 #: ../lib/edit.py:224 ../lib/edit.py:257
-msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgid ""
+"Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 
 #: ../lib/edit.py:243

@@ -50,7 +50,7 @@ msgstr ""
 
 #: ../griffith:874
 msgid " movie(s) in collection. "
-msgstr " filmów w kolekcji. "
+msgstr " film(ów) w kolekcji. "
 
 #: ../griffith:875
 msgid " movie(s) loaned. "
@@ -1677,8 +1677,8 @@ msgstr "Spróbuj pobrać duży plakat z serwisu Amazon"
 
 #: ../glade/griffith.glade.h:149
 msgid ""
-"Type in the original film tile, select source and choose <i>Get from web</"
-"i>. Griffith will try to fetch all the related information from the Web."
+"Type in the original film tile, select source and choose <i>Get from "
+"web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
 "Wprowadź tytuł oryginalny, wybierz plugin źródłowy i kliknij na <i>Pobierz z "
 "Internetu</i>. Griffith następnie sam uzupełni informacje o filmie."
