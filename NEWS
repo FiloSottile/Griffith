@@ -2,7 +2,9 @@ Griffith 0.9.6
 ==============
 * Distribute local copy of SQLAlchemy 0.3.11 (Griffith 0.10 which will work with SQLAlchemy 0.4.x is not ready yet)
 * Updated movie plugins: OFDb, Kino.de, FilmeVonAZ
-* Translation files updated: Danish, Spanish, Russian, Italian
+* Translation changes:
+  + new: Estonian, Hungarian, Indonesian, Korean, Occitan (post 1500), Pashto, Slovak
+  + updated: almost all :-)
 * Quick filter for volumes
 * Added columns genre, seen, runtime and year to the mainlist
 * See ChangeLog for more changes
