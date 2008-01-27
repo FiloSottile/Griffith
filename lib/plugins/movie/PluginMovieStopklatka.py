@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Piotr Ożarowski
+# Copyright (c) 2005-2008 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ plugin_url          = 'www.stopklatka.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '1.8'
+plugin_version      = '1.9'
 
 class Plugin(movie.Movie):
 	IMAGE_PATTERN = re.compile('(http://img.stopklatka.pl/film/.*?)"')
@@ -122,18 +122,15 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		self.page = gutils.trim(self.page, '<ul>', '</ul>');
+		self.page = gutils.trim(self.page, '>Wyniki poszukiwania frazy:', '</div>');
 		self.page = self.page.replace('\x9c','ś')
 		self.page = self.page.replace('š','ą')
 		return self.page
 
 	def get_searches(self):
-		elements = string.split(self.page, '<li>')
-		self.number_results = elements[-1]
+		elements = re.findall("""/film/film.asp\?fi=(\d+)">.*?searchTitle\s*textB">(.*?)</span""", self.page)
+		self.number_results = len(elements)
 
-		if len(elements):
-			for element in elements:
-				self.ids.append(gutils.trim(element,"/film/film.asp?fi=", '"><'))
-				self.titles.append(gutils.convert_entities(gutils.trim(element, '"bold">', '</span>')))
-		else:
-			self.number_results = 0
+		for element in elements:
+			self.ids.append(element[0])
+			self.titles.append(element[1])
