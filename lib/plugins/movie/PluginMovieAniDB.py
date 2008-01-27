@@ -32,7 +32,7 @@ plugin_url          = 'www.anidb.info'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.4'
+plugin_version      = '2.5'
 
 aid_pattern = re.compile('[?&;]aid=(\d+)')
 
@@ -68,31 +68,31 @@ class Plugin(movie.Movie):
 			self.image_url = ''
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, '"field">Title', '</td>')
-		self.o_title = gutils.after(self.o_title, '"value">')
-		self.o_title = re.sub(' \(\d*\)', '', self.o_title)
+		self.o_title = gutils.trim(self.page, '<h1>Anime: ', '</h1>')
 
 	def get_title(self):
-		self.title = gutils.trim(self.page,'"field">English', '</td>')
+		self.title = gutils.trim(self.page, '"field">Official Title', '</td>')
+		self.title = gutils.trim(self.title, '<span>', '</span>')
 
 	def get_director(self):
 		self.director = ''
 
 	def get_plot(self):
-		self.plot = gutils.trim(self.page, 'class="desc">', '</p>')
+		self.plot = gutils.trim(self.page, 'class="desc">', '</div>')
 
 	def get_year(self):
 		self.year = gutils.trim(self.page, '"field">Year', '</td>')
-		self.year = gutils.after(self.year, '"value">')[:4]
+		self.year = gutils.after(self.year, '"value">')[-4:]
 
 	def get_runtime(self):
 		self.runtime = ''
 
 	def get_genre(self):
-		self.genre = gutils.trim(self.page, '"field">Genre', '</td>')
+		self.genre = gutils.trim(self.page, '>Categories<', '</td>')
+		self.genre = gutils.after(self.genre, 'value">')
 		self.genre = gutils.strip_tags(self.genre)
-		if len(self.genre) and self.genre.endswith('[similar]'):
-			self.genre =  self.genre[:-11]
+		if len(self.genre) and self.genre.endswith('- similar'):
+			self.genre =  self.genre[:-9]
 		elif self.genre == '-':
 			self.genre = ''
 		self.genre = string.replace(self.genre, '\n', '')
