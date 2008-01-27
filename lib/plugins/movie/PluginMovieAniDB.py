@@ -28,7 +28,7 @@ from gutils import decompress
 
 plugin_name         = 'AnimeDB'
 plugin_description  = 'Anime DataBase'
-plugin_url          = 'www.anidb.info'
+plugin_url          = 'www.anidb.net'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
@@ -44,7 +44,7 @@ class Plugin(movie.Movie):
 			self.movie_id = 'anidb'
 		else:
 			self.movie_id = str(id)
-			self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
+			self.url = "http://anidb.net/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
 
 	def initialize(self):
 		self.page = decompress(self.page)
@@ -52,7 +52,7 @@ class Plugin(movie.Movie):
 			aid =  aid_pattern.search(self.page)
 			if aid:
 				self.movie_id = aid.groups()[0]
-				self.url = "http://anidb.info/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
+				self.url = "http://anidb.net/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
 			else:
 				return False
 		self.page = gutils.after(self.page, 'id="layout-content"')
@@ -61,7 +61,7 @@ class Plugin(movie.Movie):
 			self.page = self.page[:pos]
 
 	def get_image(self):
-		match = re.search('http://img\d*.anidb.info/pics/anime/\d*.jpg', self.page)
+		match = re.search('http://img\d*.anidb.net/pics/anime/\d*.jpg', self.page)
 		if match is not None:
 			self.image_url = match.group()
 		else:
@@ -144,8 +144,8 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.encode = 'utf-8'
-		self.original_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
-		self.translated_url_search	= 'http://anidb.info/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+		self.original_url_search	= 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+		self.translated_url_search	= 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
