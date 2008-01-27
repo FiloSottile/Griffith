@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Vasco Nunes, Piotr Ożarowski
+# Copyright (c) 2005-2008 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ class AboutDialog:
 		dialog = gtk.AboutDialog()
 		dialog.set_name(version.pname)
 		dialog.set_version(version.pversion)
-		dialog.set_copyright("Copyright © 2005-2007 Vasco Nunes. Piotr Ożarowski")
+		dialog.set_copyright("Copyright © 2005-2008 Vasco Nunes. Piotr Ożarowski")
 		dialog.set_website(version.pwebsite)
 		dialog.set_authors([
 			_("Main Authors") + ':',
@@ -58,6 +58,12 @@ class AboutDialog:
 		elif os.path.isfile(TRANSLATORS_FILE+'.gz'):
 			from gutils import decompress
 			data = decompress(open(TRANSLATORS_FILE + '.gz').read())
+		elif os.name == 'posix':
+			if os.path.isfile('/usr/share/doc/griffith/TRANSLATORS'):
+				data = open('/usr/share/doc/griffith/TRANSLATORS').read()
+			elif os.path.isfile('/usr/share/doc/griffith/TRANSLATORS.gz'):
+				from gutils import decompress
+				data = decompress(open('/usr/share/doc/griffith/TRANSLATORS.gz').read())
 		translator_credits = ''
 		if data:
 			for line in data.split('\n'):
