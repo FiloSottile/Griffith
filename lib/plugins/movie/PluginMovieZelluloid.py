@@ -89,9 +89,10 @@ class Plugin(movie.Movie):
 				delimiter = ', '
 
 	def get_cast(self):
-		self.cast = gutils.trim(self.detail_page, '<B>Besetzung</B>', '<TD COLSPAN=')
+		self.cast = gutils.trim(self.detail_page, 'alt="Besetzung"', '<TD COLSPAN=')
 		self.cast = self.cast.replace('<A HREF=', '--flip--' + '<A HREF=')
 		self.cast = gutils.strip_tags(self.cast)
+		self.cast = gutils.after(self.cast, '>')
 		elements = self.cast.split('\n')
 		self.cast = ''
 		for element in elements:
@@ -107,9 +108,10 @@ class Plugin(movie.Movie):
 		self.classification = re.sub(',.*', '', self.classification)
 
 	def get_studio(self):
-		self.studio = gutils.strip_tags(gutils.trim(self.detail_page, '<B>Produktion</B>', '&nbsp;'))
+		self.studio = gutils.strip_tags(gutils.trim(self.detail_page, 'alt="Produktion"', '&nbsp;'))
 		if self.studio == '':
-			self.studio = gutils.trim(self.detail_page, '<B>Produktion</B>', '</TABLE>')
+			self.studio = gutils.trim(self.detail_page, 'alt="Produktion"', '</TABLE>')
+		self.studio = gutils.after(self.studio, '>')
 		self.studio = self.studio.replace('\n', ', ')
 		self.studio = re.sub('((^, )|(, $))', '', self.studio)
 		
@@ -136,8 +138,9 @@ class Plugin(movie.Movie):
 		self.rating = gutils.strip_tags(gutils.trim(self.page, 'User-Wertung:', '</TABLE>'))
 		self.rating = self.rating.replace('%', '')
 		self.rating = self.rating.replace('&nbsp;', '')
+		self.rating = self.rating.replace('\n', '')
 		try:
-			ratingint = int(self.rating) / 10
+			ratingint = round(float(self.rating) / 10.0)
 		except:
 			ratingint = 0
 		self.rating = str(ratingint)
@@ -164,5 +167,104 @@ class SearchPlugin(movie.SearchMovie):
 		elements[0] = ''
 		for element in elements:
 			if element <> '':
-				self.ids.append(gutils.trim(element, 'movie-', '-'))
-				self.titles.append(gutils.strip_tags(gutils.trim(element, '>', '</A>')))
+				id = gutils.trim(element, 'movie-', '-')
+				if id <> '':
+					self.ids.append(id)
+					self.titles.append(gutils.strip_tags(gutils.trim(element, '>', '</A>')))
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> expected result count }
+	#
+	test_configuration = {
+		'Rocky Balboa'		: 1,
+		'Die wilden Hühner'	: 2
+	}
+
+class PluginTest:
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> dict { arribute -> value } }
+	#
+	# value: * True/False if attribute only should be tested for any value
+	#        * or the expected value
+	#
+	test_configuration = {
+		'2835' : { 
+			'title' 			: 'Rocky Balboa',
+			'o_title' 			: 'Rocky Balboa',
+			'director'			: 'Sylvester Stallone',
+			'plot' 				: True,
+			'cast'				: 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+Burt Young' + _(' as ') + 'Paulie\n\
+Antonio Tarver' + _(' as ') + 'Mason Dixon\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+Milo Ventimiglia' + _(' as ') + 'Rocky Jr.\n\
+Tony Burton' + _(' as ') + 'Duke\n\
+A.J. Benza' + _(' as ') + 'L.C.\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
+Talia Shire' + _(' as ') + 'Adrian\n\
+Lou DiBella' + _(' as ') + 'Lou DiBella\n\
+Mike Tyson' + _(' as ') + 'Mike Tyson\n\
+Henry G. Sanders' + _(' as ') + 'Martin',
+			'country'			: 'USA',
+			'genre'				: 'Drama, Sport',
+			'classification'	: 'ab 12',
+			'studio'			: 'Chartoff-Winkler Productions, Columbia Pictures Corporation, Metro-Goldwyn-Mayer, Revolution Studios, Rogue Marble',
+			'o_site'			: False,
+			'site'				: 'http://www.zelluloid.de/filme/details.php3?id=2835',
+			'trailer'			: False,
+			'year'				: 2006,
+			'notes'				: False,
+			'runtime'			: 102,
+			'image'				: True,
+			'rating'			: 8.0
+		},
+		'6342' : { 
+			'title' 			: 'Die wilden Hühner',
+			'o_title' 			: 'Die wilden Hühner',
+			'director'			: 'Vivian Naefe',
+			'plot' 				: True,
+			'cast'				: 'Michelle von Treuberg' + _(' as ') + 'Sprotte\n\
+Lucie Hollmann' + _(' as ') + 'Frieda\n\
+Paula Riemann' + _(' as ') + 'Melanie\n\
+Zsa Zsa Inci Bürkle' + _(' as ') + 'Trude\n\
+Jette Hering' + _(' as ') + 'Wilma\n\
+Jeremy Mockridge' + _(' as ') + 'Fred\n\
+Philip Wiegratz' + _(' as ') + 'Steve\n\
+Martin Kurz' + _(' as ') + 'Torte\n\
+Vincent Redetzki' + _(' as ') + 'Willi\n\
+Veronica Ferres' + _(' as ') + 'Sprottes Mutter Sibylle\n\
+Doris Schade' + _(' as ') + 'Oma Slättberg\n\
+Jessica Schwarz' + _(' as ') + 'Frau Rose\n\
+Benno Fürmann' + _(' as ') + 'Herr Grünbaum\n\
+Axel Prahl' + _(' as ') + 'Willis Vater\n\
+Lukas Steimel' + _(' as ') + 'Luki\n\
+Lukas Engel' + _(' as ') + 'Titus\n\
+Pino Severino Geyssen' + _(' as ') + 'Paolo\n\
+Christine Rose' + _(' as ') + 'Jutta\n\
+Herbert Meurer' + _(' as ') + 'Herr Feistkorn\n\
+Marius Fischer' + _(' as ') + 'Bo\n\
+Anya Hoffmann' + _(' as ') + 'Melanies Mutter\n\
+Frank Wickermann' + _(' as ') + 'Melanies Vater\n\
+Axel Häfner' + _(' as ') + 'Schrottplatzwärter\n\
+Simon Gosejohann' + _(' as ') + 'junger Mann\n\
+Piet Klocke' + _(' as ') + 'Junggeselle',
+			'country'			: 'Deutschland',
+			'genre'				: 'Kinder',
+			'classification'	: 'ohne',
+			'studio'			: 'Bavaria Film, Constantin Film',
+			'o_site'			: False,
+			'site'				: 'http://www.zelluloid.de/filme/details.php3?id=6342',
+			'trailer'			: False,
+			'year'				: 2006,
+			'notes'				: False,
+			'runtime'			: 109,
+			'image'				: True,
+			'rating'			: 8.0
+		}
+	}

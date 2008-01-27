@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id'
+__revision__ = '$Id$'
 
 # Copyright (c) 2006-2007
 #
@@ -59,9 +59,10 @@ sys.path.append('plugins/movie')
 #
 class PluginTester:
 	test_plugins = [
-		'PluginMovieKinoDe',
 		'PluginMovieFilmeVonAZ',
-		'PluginMovieOFDb'
+		'PluginMovieKinoDe',
+		'PluginMovieOFDb',
+		'PluginMovieZelluloid',
 	]
 
 	#
