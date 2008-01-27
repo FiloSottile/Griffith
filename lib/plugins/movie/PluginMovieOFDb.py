@@ -174,12 +174,12 @@ class PluginTest:
 			'cast'				: 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
-Geraldine Hughes\n\
+Geraldine Hughes' + (' as ') + 'Marie\n\
 James Francis Kelly III\n\
 Tony Burton\n\
 A.J. Benza\n\
 Henry G. Sanders\n\
-Antonio Tarver\n\
+Antonio Tarver' + (' as ') + 'Mason \'The Line\' Dixon\n\
 Pedro Lovell\n\
 Ana Gerena\n\
 Angela Boyd\n\

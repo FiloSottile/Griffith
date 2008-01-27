@@ -211,7 +211,7 @@ Tony Burton' + _(' as ') + 'Duke',
 			'year'				: 2006,
 			'notes'				: False,
 			'runtime'			: 102,
-			'image'				: True,
+			'image'				: False,
 			'rating'			: False
 		},
 		'26956' : { 
@@ -260,7 +260,7 @@ Ryu Seung-beom' + _(' as ') + 'Sang-hwan',
 			'year'				: 2004,
 			'notes'				: False,
 			'runtime'			: 108,
-			'image'				: True,
+			'image'				: False,
 			'rating'			: False
 		}
 	}
