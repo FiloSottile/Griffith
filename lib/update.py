@@ -22,22 +22,25 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
+from sqlalchemy import Select, desc
 import gutils
 import os
 
 def update_volume_combo_ids(self):
-	self.volume_combo_ids = {}
-	self.volume_combo_ids[0] = 0
-	i = 1
-	for volume in self.db.Volume.select():
-		self.volume_combo_ids[i] = volume.volume_id
-		i += 1
+    self.volume_combo_ids = {}
+    self.volume_combo_ids[0] = 0
+    i = 1
+    volumes = Select(self.db.Volume.c, order_by='name')
+    for volume in volumes.execute().fetchall():
+        self.volume_combo_ids[i] = volume.volume_id
+        i += 1
 
 def update_collection_combo_ids(self):
 	self.collection_combo_ids = {}
 	self.collection_combo_ids[0] = 0
 	i = 1
-	for collection in self.db.Collection.select():
+	collections = Select(self.db.Collection.c, order_by='name')
+	for collection in collections.execute().fetchall():
 		self.collection_combo_ids[i] = collection.collection_id
 		i += 1
 
