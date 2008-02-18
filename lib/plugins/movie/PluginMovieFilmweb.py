@@ -31,7 +31,7 @@ plugin_url		= 'www.filmweb.pl'
 plugin_language		= _('Polish')
 plugin_author		= 'Piotr Ożarowski'
 plugin_author_email	= '<ozarow+griffith@gmail.com>'
-plugin_version		= '1.11'
+plugin_version		= '1.12'
 
 class Plugin(movie.Movie):
 	TRAILER_PATTERN     = re.compile("""<a class=["']notSelected["'].*?href=["'](.*?)["']>zwiastuny</a>\s*\[\d+\]\s*&raquo;""")
@@ -101,11 +101,11 @@ class Plugin(movie.Movie):
 		self.genre = string.replace(self.genre, "\n",'')
 
 	def get_cast(self):
-		self.cast = "<%s" % gutils.trim(self.page, '/ob.gif"',"<br/>\n\t")
+		self.cast = "<%s" % gutils.trim(self.page, '/ob.gif"',"zobacz więcej")
 		self.cast = string.replace(self.cast, "\n",'')
 		self.cast = string.replace(self.cast, "\t",'')
-		self.cast = string.replace(self.cast, '<div class="filmActor">', "\n")
 		self.cast = string.replace(self.cast, ":", _(" as "))
+		self.cast = string.replace(self.cast, '</span>', "\n")
 		self.cast = gutils.strip_tags(self.cast)
 
 	def get_classification(self):
@@ -128,11 +128,11 @@ class Plugin(movie.Movie):
 			self.trailer = trailer[0]
 
 	def get_country(self):
-		self.country = gutils.trim(self.page,"\tprodukcja:", '</a>')
+		self.country = gutils.trim(self.page,"\tprodukcja:", '</b>')
 		self.country = string.replace(self.country, "\t",'')
 
 	def get_rating(self):
-		self.rating = gutils.trim(self.page, '<b class="rating">', '</b>')
+		self.rating = gutils.trim(self.page, '<b id="filmRating" class="rating">', '</b>')
 		self.rating = string.replace(self.rating, ',', '.')
 		if self.rating != '':
 			self.rating = str( float(string.strip(self.rating)) )
