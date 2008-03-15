@@ -22,9 +22,8 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 from gettext import gettext as _
-import gutils
-import os
-import wx
+import gutils, statusbar
+import os, wx
 
 def treeview_clicked(self, number=None):
     if self.initialized is False:
@@ -148,7 +147,7 @@ def populate(self, movies=None, where=None):#{{{
         self.main_listcontrol.SetStringItem(index, 6, str(movie.year))
         self.main_listcontrol.SetStringItem(index, 7, str(movie.runtime))
    
-    self.count_statusbar()
+    statusbar.count_statusbar(self)
         
     self.main_listcontrol.SetColumnWidth(0, 40)
     self.main_listcontrol.SetColumnWidth(1, wx.LIST_AUTOSIZE)

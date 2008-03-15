@@ -346,18 +346,6 @@ class MainFrame(wx.Frame):
         self.Centre()
         # end wxGlade
 
-    def count_statusbar(self):
-        allmovies = self.db.Movie.count_by()
-        loaned = self.db.Movie.count_by(loaned=True)
-        not_seen = self.db.Movie.count_by(seen=False)
-        self.update_statusbar(_("Listing")+" "+str(self.main_listcontrol.GetItemCount())+"/"+str(allmovies) + _(' movie(s) in collection. ')
-            + str(loaned) + _(' movie(s) loaned. ')
-            + _('You haven\'t seen ')+"%s"%str(not_seen)+ _(" movie(s)")
-        )
-
-    def update_statusbar(self, text):
-        self.main_frame_statusbar.SetStatusText(text)
-
     def OnNew(self, event): # wxGlade: MainFrame.<event_handler>
         print "Event handler `OnNew' not implemented"
         event.Skip()
