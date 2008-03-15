@@ -55,10 +55,38 @@ del missing
 
 # other imports
 import wx
-import add, config, gconsole, gutils, gdebug, initialize, main_treeview, quick_filter
+import add, config, gconsole, gutils, gdebug, initialize, main_treeview, quick_filter, poster
 
 # begin wxGlade: extracode
 # end wxGlade
+
+class ViewerFrame(wx.Frame):
+    def __init__(self, *args, **kwds):
+        # begin wxGlade: ViewerFrame.__init__
+        kwds["style"] = wx.CAPTION|wx.CLOSE_BOX|wx.MINIMIZE_BOX|wx.MAXIMIZE_BOX|wx.STAY_ON_TOP|wx.SYSTEM_MENU|wx.RESIZE_BORDER|wx.FRAME_TOOL_WINDOW|wx.FRAME_FLOAT_ON_PARENT|wx.CLIP_CHILDREN
+        wx.Frame.__init__(self, *args, **kwds)
+        self.poster = wx.StaticBitmap(self, -1, wx.NullBitmap)
+
+        self.__set_properties()
+        self.__do_layout()
+        # end wxGlade
+
+    def __set_properties(self):
+        # begin wxGlade: ViewerFrame.__set_properties
+        self.SetTitle(_("Poster Viewer"))
+        # end wxGlade
+
+    def __do_layout(self):
+        # begin wxGlade: ViewerFrame.__do_layout
+        sizer_6 = wx.BoxSizer(wx.VERTICAL)
+        sizer_6.Add(self.poster, 0, wx.EXPAND, 0)
+        self.SetSizer(sizer_6)
+        sizer_6.Fit(self)
+        self.Layout()
+        # end wxGlade
+
+# end of class ViewerFrame
+
 
 class MainFrame(wx.Frame):
     def __init__(self, *args, **kwds):
@@ -275,6 +303,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_LIST_DELETE_ITEM, self.OnMainListDelete, self.main_listcontrol)
         self.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnMainListSelected, self.main_listcontrol)
         self.Bind(wx.EVT_LIST_COL_CLICK, self.OnMainLColumnClicked, self.main_listcontrol)
+        self.Bind(wx.EVT_BUTTON, self.OnPosterClick, self.poster)
         # end wxGlade
         
         initialize.locations_misc(self)
@@ -300,7 +329,7 @@ class MainFrame(wx.Frame):
         _icon = wx.EmptyIcon()
         _icon.CopyFromBitmap(wx.Bitmap("images/griffith.xpm", wx.BITMAP_TYPE_ANY))
         self.SetIcon(_icon)
-        self.SetSize((795, 750))
+        self.SetSize((795, 796))
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.main_frame_statusbar.SetStatusWidths([-1])
         # statusbar fields
@@ -533,6 +562,10 @@ class MainFrame(wx.Frame):
 
     def OnMainLColumnClicked(self, event): # wxGlade: MainFrame.<event_handler>
         print "not implemented"
+
+    def OnPosterClick(self, event): # wxGlade: MainFrame.<event_handler>
+        self.viewer_frame = ViewerFrame(None, -1, "")
+        poster.display_poster_viewer(self)
 
 # end of class MainFrame
 
