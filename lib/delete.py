@@ -24,58 +24,36 @@ __revision__ = '$Id$'
 from gettext import gettext as _
 import gutils
 import os
+import wx
 
 def delete_movie(self):
-	m_id = None
-	number, m_iter = self.get_maintree_selection()
-	movie = self.db.Movie.query.filter_by(number=number).first()
-	if movie is None:
-		gutils.error(self,_("You have no movies in your database"), self.widgets['window'])
-		return False
-	
-	if int(movie.loaned)==1:
-		gutils.warning(self, msg=_("You can't delete movie while it is loaned."))
-		return False
-	response = gutils.question(self, _("Are you sure you want to delete this movie?"), \
-		1, self.widgets['window'])
-	if response == -8:	# gtk.RESPONSE_YES == -8
-		# try to delete poster image as well
-		if movie.image is not None:
-			delete_poster(self, movie.image)
-		if movie.remove_from_db():
-			# update main treelist
-			self.total -= 1
-			self.clear_details()
-			self.initialized = False
-			self.go_prev()
-			self.treemodel.remove(m_iter)
-			self.initialized = True
-			self.go_next()
-			self.count_statusbar()
-	else:
-		return False
+    index = self.main_listcontrol.GetFirstSelected()
+    if index == -1:
+        return
+    while index != -1:
+        item = self.main_listcontrol.GetItem(index)
+        number = item.GetText()
+        movie = self.db.Movie.get_by(number=number) 
+        try:
+            delete_poster(self, movie.image)
+        except:
+            pass
+        try:
+            movie.remove_from_db()
+            # update main treelist
+            self.main_listcontrol.DeleteItem(index)
+        except:
+            pass
+        index = self.main_listcontrol.GetNextSelected(index)    
 
 def delete_poster(self, poster):
-	if not poster:
-		self.debug.show('Delete poster: no poster to delete')
-		return False
-	posters_dir = os.path.join(self.locations['posters'])
-	image_thumbnail = os.path.join(posters_dir, "t_" + poster + ".jpg")
-	image_mini = os.path.join(posters_dir, "m_" + poster + ".jpg")
-	image_full = os.path.join(posters_dir, poster + ".jpg")
-	if os.path.isfile(image_mini):
-		try:
-			os.remove(image_mini)
-		except:
-			self.debug.show("Can't remove %s file"%image_mini)
-	if os.path.isfile(image_full):
-		try:
-			os.remove(image_full)
-		except:
-			self.debug.show("Can't remove %s file"%image_full)
-	if os.path.isfile(image_thumbnail):
-		try:
-			os.remove(image_thumbnail)
-		except:
-			self.debug.show("Can't remove %s file"%image_thumbnail)
-
+    if not poster:
+        self.debug.show('Delete poster: no poster to delete')
+        return False
+    posters_dir = os.path.join(self.locations['posters'])
+    image_full = os.path.join(posters_dir, poster + ".jpg")
+    if os.path.isfile(image_full):
+        try:
+            os.remove(image_full)
+        except:
+            self.debug.show("Can't remove %s file"%image_full)

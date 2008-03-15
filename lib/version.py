@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: UTF-8 -*-
 
 __revision__ = '$Id$'
 
@@ -23,8 +23,11 @@ __revision__ = '$Id$'
 
 from gettext import gettext as _
 pname        = "Griffith"
-pversion     = "0.10~svn"
-pauthor      = "Vasco Nunes, Piotr Ożarowski <griffith-private@lists.berlios.de>"
+pversion     = "0.10dev"
+pauthor      = "Vasco Nunes, Piotr Ozarowski\n<griffith-private@lists.berlios.de>"
 pyear        = "2005-2008"
-pwebsite     = "http://griffith.berlios.de/"
-pdescription = _("Griffith is a film collection manager.")
+pwebsite     = "http://www.griffith.cc/"
+pforum     = "http://forum.griffith.cc/"
+pbugtracker     = "https://bugs.launchpad.net/griffith/"
+plicense	 = _("Released under the GNU/GPL license")
+pdescription = _("A media collection manager")

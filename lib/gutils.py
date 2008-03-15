@@ -24,11 +24,7 @@ __revision__ = '$Id$'
 from gettext import gettext as _
 import string
 import os
-try:
-	import gtk
-	import gobject
-except:
-	pass
+import wx
 import htmlentitydefs
 import re
 import webbrowser
@@ -205,13 +201,11 @@ def gdecode(txt, encode):
 
 # Messages
 
-def error(self, msg, parent=None):
-	dialog = gtk.MessageDialog(parent,
-			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-			gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, msg)
-	dialog.set_skip_taskbar_hint(False)
-	dialog.run()
-	dialog.destroy()
+def error(self, msg, title=""):
+	dialog = wx.MessageDialog(None, unicode(msg),
+		unicode(title), wx.OK | wx.ICON_ERROR)
+	response = dialog.ShowModal()
+	dialog.Destroy()
 
 def urllib_error(msg, parent=None):
 	dialog = gtk.MessageDialog(parent,
@@ -221,13 +215,12 @@ def urllib_error(msg, parent=None):
 	dialog.run()
 	dialog.destroy()
 
-def warning(self, msg, parent=None):
-	dialog = gtk.MessageDialog(parent,
-			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-			gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, msg)
-	dialog.set_skip_taskbar_hint(False)
-	dialog.run()
-	dialog.destroy()
+def warning(self, msg, title=""):
+	dialog = wx.MessageDialog(None, unicode(msg),
+		unicode(title), wx.OK | wx.ICON_EXCLAMATION)
+	response = dialog.ShowModal()
+	dialog.Destroy()
+	return response
 
 def info(self, msg, parent=None):
 	dialog = gtk.MessageDialog(parent,
@@ -237,17 +230,11 @@ def info(self, msg, parent=None):
 	dialog.run()
 	dialog.destroy()
 
-def question(self, msg, cancel=1, parent=None):
-	if not parent: parent = self
-	dialog = gtk.MessageDialog(parent,
-			gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-			gtk.MESSAGE_QUESTION, gtk.BUTTONS_NONE, msg)
-	dialog.add_buttons(gtk.STOCK_YES, gtk.RESPONSE_YES,
-			gtk.STOCK_NO, gtk.RESPONSE_NO)
-	dialog.set_default_response(gtk.RESPONSE_NO)
-	dialog.set_skip_taskbar_hint(False)
-	response = dialog.run()
-	dialog.destroy()
+def question(self, msg, title = ""):
+	dialog = wx.MessageDialog(None, unicode(msg),
+		unicode(title), wx.YES_NO | wx.ICON_QUESTION)
+	response = dialog.ShowModal()
+	dialog.Destroy()
 	return response
 
 def file_chooser(title, action=None, buttons=None, name="", folder=os.path.expanduser("~"), picture = False):
@@ -315,9 +302,6 @@ def findKey(val, dict):
 		if value == val: return key
 	return None
 
-def garbage(handler):
-	pass
-
 def make_thumbnail(self, file_name):
 	source = os.path.join(self.locations['posters'], file_name)
 	if os.path.isfile(source):
@@ -377,31 +361,17 @@ def decompress(data):
 def get_dependencies():
 	depend = []
 	try:
-		import gtk
-		version	= '.'.join([str(i) for i in gtk.pygtk_version])
-		if gtk.pygtk_version <= (2, 6, 0):
-			version = '-%s' % version
+		import wx
+		version	= True
 	except:
 		version = False
-	depend.append({'module': 'gtk',
+	depend.append({'module': 'wx',
 		'version'	: version,
-		'module_req'	: '2.6',
-		'url'		: 'http://www.pygtk.org/',
-		'debian'	: 'python-gtk2',
-		'debian_req'	: '2.8.6-1'
+		'module_req'	: '2.8.7.1',
+		'url'		: 'http://www.wxpython.org/',
+		'debian'	: 'python-wxpython',
+		'debian_req'	: '2.8.7.1-1'
 		# TODO: 'fedora', 'suse', etc.
-	})
-	try:
-		import gtk.glade
-		# (version == gtk.pygtk_version)
-	except:
-		version = False
-	depend.append({'module': 'gtk.glade',
-		'version'	: version,
-		'module_req'	: '2.6',
-		'url'		: 'http://www.pygtk.org/',
-		'debian'	: 'python-glade2',
-		'debian_req'	: '2.8.6-1'
 	})
 	try:
 		import sqlalchemy
@@ -410,10 +380,10 @@ def get_dependencies():
 		version = False
 	depend.append({'module': 'sqlalchemy',
 		'version'	: version,
-		'module_req'	: '0.4',
+		'module_req'	: '0.3.11',
 		'url'		: 'http://www.sqlalchemy.org/',
 		'debian'	: 'python-sqlalchemy',
-		'debian_req'	: '0.4.0-1'
+		'debian_req'	: '0.3.11-1'
 	})
 	try:
 		import sqlite3
@@ -463,7 +433,7 @@ def get_dependencies():
 	})
 	try:
 		import xml
-		version	= '.'.join([str(i) for i in xml.version_info])
+		version	= True
 	except:
 		version = False
 	depend.append({'module': 'xml',

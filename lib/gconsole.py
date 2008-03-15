@@ -205,4 +205,3 @@ def con_usage():
 	print "-t <expr>, --title=<expr>"
 	print "-y <number>, --year=<number>"
 	print "-s <columns>, --sort=<columns>"
-

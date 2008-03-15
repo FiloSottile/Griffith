@@ -5,7 +5,7 @@ __revision__ = '$Id$'
 # Copyright (c) 2005-2008 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
+# it under the terms of the GNU General Public License as published byp
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 #
@@ -21,69 +21,23 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-from gettext import gettext as _
-import gtk
-import version
-import os
-import sys
+# these are the only to be "true" cross-platform
+# other like license, icon, homepage...
+# have different behaviors under different platforms
 
-class AboutDialog:
-	"""Shows a gtk about dialog"""
-	def __init__(self, locations):
-		TRANSLATORS_FILE = os.path.join(locations['share'], 'TRANSLATORS') # remember to encode this file in UTF-8
-		IMAGES_DIR = locations['images']
-		dialog = gtk.AboutDialog()
-		dialog.set_name(version.pname)
-		dialog.set_version(version.pversion)
-		dialog.set_copyright("Copyright © 2005-2008 Vasco Nunes. Piotr Ożarowski")
-		dialog.set_website(version.pwebsite)
-		dialog.set_authors([
-			_("Main Authors") + ':',
-			version.pauthor.replace(', ', '\n') + "\n",
-			_("Programmers") + ':',
-			'Jessica Katharina Parth <Jessica.K.P@women-at-work.org>',
-			'Michael Jahn <mikej06@hotmail.com>\n',
-			_('Contributors:'), # FIXME: remove ":"
-			'Christian Sagmueller <christian@sagmueller.net>\n' \
-			'Arjen Schwarz <arjen.schwarz@gmail.com>'
-		])
-		dialog.set_artists([_("Logo, icon and general artwork " + \
-			"by Peek <peekpt@gmail.com>." + \
-			"\nPlease visit http://www.peekmambo.com/\n"),
-			'seen / unseen icons by dragonskulle <dragonskulle@gmail.com>'
-		])
-		data = None
-		if os.path.isfile(TRANSLATORS_FILE):
-			data = open(TRANSLATORS_FILE).read()
-		elif os.path.isfile(TRANSLATORS_FILE+'.gz'):
-			from gutils import decompress
-			data = decompress(open(TRANSLATORS_FILE + '.gz').read())
-		elif os.name == 'posix':
-			if os.path.isfile('/usr/share/doc/griffith/TRANSLATORS'):
-				data = open('/usr/share/doc/griffith/TRANSLATORS').read()
-			elif os.path.isfile('/usr/share/doc/griffith/TRANSLATORS.gz'):
-				from gutils import decompress
-				data = decompress(open('/usr/share/doc/griffith/TRANSLATORS.gz').read())
-		translator_credits = ''
-		if data:
-			for line in data.split('\n'):
-				if line.startswith('* '):
-					lang = line[2:]
-					if _(lang) != lang:
-						line = "* %s:" % _(lang)
-				translator_credits += "%s\n" % line
-		else:
-			translator_credits = _("See TRANSLATORS file")
-		dialog.set_translator_credits(translator_credits)
-		logo_file = os.path.abspath(os.path.join(IMAGES_DIR, 'griffith.png'))
-		logo = gtk.gdk.pixbuf_new_from_file(logo_file)
-		dialog.set_logo(logo)
-		if os.path.isfile('/usr/share/common-licenses/GPL-2'):
-			dialog.set_license(open('/usr/share/common-licenses/GPL-2').read())
-		else:
-			dialog.set_license(_("This program is released under the GNU" + \
-				"General Public License.\n" + \
-				"Please visit http://www.gnu.org/copyleft/gpl.html for details."))
-		dialog.set_comments(version.pdescription)
-		dialog.run()
-		dialog.destroy()
+import version, wx
+
+def display_about():
+	info = wx.AboutDialogInfo()
+	info.SetName(version.pname)
+	info.SetVersion(version.pversion)
+	info.SetDescription(version.pdescription)
+	info.SetCopyright(u"\u00A9" + version.pyear + "\n" + version.pauthor)
+	info.AddDeveloper("Vasco Nunes")
+	info.AddDeveloper("Piotr Ozarowski")
+	info.AddDeveloper("Jessica Katharina Parth")
+	info.AddDeveloper("Michael Jahn")
+	info.AddArtist('Paulo Bruckmann')
+	info.AddArtist('dragonskulle')
+	info.AddTranslator(_("See TRANSLATORS file"))
+	wx.AboutBox(info)
