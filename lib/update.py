@@ -44,3 +44,12 @@ def update_collection_combo_ids(self):
 		self.collection_combo_ids[i] = collection.collection_id
 		i += 1
 
+def update_loanedto_combo_ids(self):
+	self.loanedto_combo_ids = {}
+	self.loanedto_combo_ids[0] = 0
+	i = 1
+	persons = Select(self.db.Person.c, order_by='name')
+	for person in persons.execute().fetchall():
+		self.loanedto_combo_ids[i] = person.person_id
+		i += 1
+

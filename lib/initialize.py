@@ -47,7 +47,7 @@ def locations(self):
 	locations['exec'] = os.path.abspath(os.path.dirname(sys.argv[0])) # deprecated
 	locations['lib']  = os.path.dirname(__file__)
 	
-	if os.name == 'nt' or os.name == 'win32':
+	if os.name == 'nt' or os.name.startswith('win'): # win32, win64
 		import winshell
 		from win32com.shell import shellcon, shell
 		import shutil
@@ -144,7 +144,7 @@ def location_posters(locations, config):
 def gui(self):
 	self._ = None
 	self.debug.show("running on %s - %s" % (os.name, platform.system()))
-	if os.name == 'win32' or os.name == 'nt':
+	if os.name == 'nt' or os.name.startswith('win'):
 		self.windows = True
 	else:
 		self.windows = False
@@ -569,8 +569,10 @@ def dictionaries(self):
 	self.am_tags = {} # dictionary for tag CheckBoxes
 	update.update_volume_combo_ids(self)
 	update.update_collection_combo_ids(self)
+	update.update_loanedto_combo_ids(self)
 	fill_volumes_combo(self)
 	fill_collections_combo(self)
+	fill_loanedto_combo(self)
 	fill_preferences_tags_combo(self)
 	language_combos(self)
 	acodec_combos(self)
@@ -731,6 +733,18 @@ def fill_collections_combo(self, default=0):
 	if i is not None:
 		self.widgets['add']['collection'].set_active(int(i))
 	self.widgets['add']['collection'].set_wrap_width(2)
+
+def fill_loanedto_combo(self):
+	self.widgets['filter']['loanedto'].get_model().clear()
+	for i in self.loanedto_combo_ids:
+		per_id = self.loanedto_combo_ids[i]
+		if per_id>0:
+			name = self.db.Person.get_by(person_id=per_id).name
+		else:
+			name = ''
+		self.widgets['filter']['loanedto'].insert_text(int(i), str(name))
+	self.widgets['filter']['loanedto'].show_all()
+	self.widgets['filter']['loanedto'].set_active(0)
 
 def fill_preferences_tags_combo(self):
 	self.widgets['preferences']['tag_name'].get_model().clear()
