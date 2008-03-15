@@ -37,8 +37,8 @@ def display_poster_viewer(self):
         tmp_img = os.path.join(tmp_dest, "%s.jpg"%movie['image'])
         if os.path.isfile(tmp_img):
             image_path = tmp_img
-            self.viewer_frame.Show()
             image = wx.Image(image_path)
             self.viewer_frame.poster.SetBitmap(image.ConvertToBitmap())
             self.viewer_frame.Fit()
             self.viewer_frame.Center()
+            self.viewer_frame.Show()
