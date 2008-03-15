@@ -24,7 +24,7 @@ __revision__ = '$Id: $'
 # GNU General Public License, version 2 or later
 
 # ================================
-# Note: indentations with 4 spaces. This is how wxGlade likes to generates files...
+# Note: indentations with 4 spaces. This is how wxGlade likes to generate files...
 # ================================
 
 # set the PATH
