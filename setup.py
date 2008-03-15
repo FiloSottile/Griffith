@@ -34,7 +34,9 @@ if sys.platform == 'darwin':
 	 'lib/poster.py',
 	 'lib/statusbar.py',
 	 'lib/update.py',
-	 'lib/version.py'
+	 'lib/version.py',
+	 'MainFrame.py',
+	 'ViewerFrame.py'
 	]
 	OPTIONS = {'argv_emulation': True,
 	'includes': "cgi,PIL,tempfile,csv,threading,htmlentitydefs,sqlalchemy,sqlalchemy.*,sqlalchemy.mods.*,sqlalchemy.databases.*,sqlalchemy.engine.*,sqlalchemy.ext.*,sqlalchemy.orm.*,zipfile,webbrowser,shutil,reportlab,reportlab.pdfgen,reportlab.pdfgen.canvas,reportlab.platypus,reportlab.pdfbase.ttfonts,smtplib,platform,gzip,commands,encodings,encodings.*",
