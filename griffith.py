@@ -104,7 +104,7 @@ class MainFrame(wx.Frame):
         # begin wxGlade: MainFrame.__init__
         kwds["style"] = wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwds)
-        self.window_1 = wx.SplitterWindow(self, -1, style=wx.SP_3D|wx.SP_BORDER)
+        self.window_1 = wx.SplitterWindow(self, -1, style=wx.SP_3D|wx.SP_BORDER|wx.SP_LIVE_UPDATE)
         self.window_1_pane_2 = wx.Panel(self.window_1, -1)
         self.notebook_1 = wx.Notebook(self.window_1_pane_2, -1, style=0)
         self.window_1_pane_1 = wx.Panel(self.window_1, -1)
@@ -112,7 +112,7 @@ class MainFrame(wx.Frame):
         # Menu Bar
         self.main_frame_menubar = wx.MenuBar()
         wxglade_tmp_menu = wx.Menu()
-        self.new = wx.MenuItem(wxglade_tmp_menu, 1, _("New"), _("Start a blank database"), wx.ITEM_NORMAL)
+        self.new = wx.MenuItem(wxglade_tmp_menu, 1, _("&New"), _("Start a blank database"), wx.ITEM_NORMAL)
         wxglade_tmp_menu.AppendItem(self.new)
         self.save_as = wx.MenuItem(wxglade_tmp_menu, 2, _("Save as..."), _("Make a backup of the database"), wx.ITEM_NORMAL)
         wxglade_tmp_menu.AppendItem(self.save_as)
@@ -297,7 +297,10 @@ class MainFrame(wx.Frame):
     def __set_properties(self):
         # begin wxGlade: MainFrame.__set_properties
         self.SetTitle(_("Griffith"))
-        self.SetSize((684, 706))
+        _icon = wx.EmptyIcon()
+        _icon.CopyFromBitmap(wx.Bitmap("images/griffith.xpm", wx.BITMAP_TYPE_ANY))
+        self.SetIcon(_icon)
+        self.SetSize((795, 750))
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.main_frame_statusbar.SetStatusWidths([-1])
         # statusbar fields
