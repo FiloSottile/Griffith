@@ -24,7 +24,7 @@ __revision__ = '$Id$'
 from gettext import gettext as _
 import gutils
 import os
-import gtk
+import wx
 import string
 import shutil
 import quick_filter
