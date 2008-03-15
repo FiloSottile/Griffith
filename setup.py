@@ -31,6 +31,9 @@ if sys.platform == 'darwin':
 	 'lib/main_treeview.py',
 	 'lib/quick_filter.py',
 	 'lib/sql.py',
+	 'lib/poster.py',
+	 'lib/statusbar.py',
+	 'lib/update.py',
 	 'lib/version.py'
 	]
 	OPTIONS = {'argv_emulation': True,
