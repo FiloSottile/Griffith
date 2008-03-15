@@ -30,7 +30,6 @@ def change_filter(self):
     
     from sqlalchemy import select
     statement = select(self.db.Movie.c)
-    self.main_listcontrol.DeleteAllItems()
     
     if text:
         criteria = self.search_criteria[self.cb_criteria.GetSelection()]

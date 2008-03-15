@@ -136,6 +136,7 @@ def populate(self, movies=None, where=None):#{{{
                     movies.append_whereclause(self.db.Movie.c[i]==where[i])
         movies = movies.execute().fetchall()
 
+    self.main_listcontrol.DeleteAllItems()
 
     for movie in movies:
         index = self.main_listcontrol.InsertStringItem(sys.maxint, str(movie.number))
