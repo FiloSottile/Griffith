@@ -285,6 +285,7 @@ class MainFrame(wx.Frame):
         main_frame_statusbar_fields = [_("Ready")]
         for i in range(len(main_frame_statusbar_fields)):
             self.main_frame_statusbar.SetStatusText(main_frame_statusbar_fields[i], i)
+        self.main_frame_toolbar.SetToolBitmapSize((32, 32))
         self.main_frame_toolbar.Realize()
         self.tc_filter.SetMinSize((200, -1))
         self.number.SetFont(wx.Font(16, wx.DEFAULT, wx.NORMAL, wx.BOLD, 1, ""))

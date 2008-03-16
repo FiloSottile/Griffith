@@ -34,7 +34,7 @@ import wx
 class ViewerFrame(wx.Frame):
     def __init__(self, *args, **kwds):
         # begin wxGlade: ViewerFrame.__init__
-        kwds["style"] = wx.CAPTION|wx.CLOSE_BOX|wx.MINIMIZE_BOX|wx.MAXIMIZE_BOX|wx.STAY_ON_TOP|wx.SYSTEM_MENU|wx.RESIZE_BORDER|wx.FRAME_TOOL_WINDOW|wx.FRAME_FLOAT_ON_PARENT|wx.CLIP_CHILDREN
+        kwds["style"] = wx.CAPTION|wx.CLOSE_BOX|wx.MINIMIZE_BOX|wx.MAXIMIZE_BOX|wx.STAY_ON_TOP|wx.SYSTEM_MENU|wx.RESIZE_BORDER|wx.FRAME_TOOL_WINDOW|wx.CLIP_CHILDREN
         wx.Frame.__init__(self, *args, **kwds)
         self.poster = wx.StaticBitmap(self, -1, wx.NullBitmap)
 
