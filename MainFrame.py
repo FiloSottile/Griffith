@@ -31,7 +31,7 @@ import wx
 
 # end wxGlade
 
-import ViewerFrame
+import ViewerFrame, AddFrame
 import os
 import add, config, gconsole, gutils, gdebug
 import initialize, main_treeview, quick_filter, poster
@@ -278,7 +278,7 @@ class MainFrame(wx.Frame):
     def __set_properties(self):
         # begin wxGlade: MainFrame.__set_properties
         self.SetTitle(_("Griffith"))
-        self.SetSize((741, 704))
+        self.SetSize((600,400))
         self.SetBackgroundColour(wx.Colour(255, 255, 255))
         self.main_frame_statusbar.SetStatusWidths([-1])
         # statusbar fields
@@ -304,13 +304,19 @@ class MainFrame(wx.Frame):
         sizer_4 = wx.BoxSizer(wx.VERTICAL)
         sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_5 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_1.Add((0, 10), 0, 0, 0)
+        sizer_5.Add((10, 0), 0, 0, 0)
         sizer_5.Add(self.label_1, 0, 0, 0)
         sizer_5.Add(self.tc_filter, 0, 0, 0)
         sizer_5.Add(self.bt_clear_filter, 0, 0, 0)
         sizer_5.Add(self.cb_criteria, 0, 0, 0)
         sizer_1.Add(sizer_5, 0, wx.EXPAND, 0)
+        sizer_1.Add((0, 10), 0, 0, 0)
+        sizer_2.Add((10, 0), 0, 0, 0)
         sizer_2.Add(self.main_listcontrol, 1, wx.EXPAND, 0)
+        sizer_2.Add((10, 0), 0, 0, 0)
         self.window_1_pane_1.SetSizer(sizer_2)
+        sizer_3.Add((10, 0), 0, 0, 0)
         sizer_4.Add(self.number, 0, wx.ALL, 0)
         sizer_4.Add(self.o_title, 0, 0, 0)
         sizer_4.Add(self.title, 0, 0, 0)
@@ -323,6 +329,7 @@ class MainFrame(wx.Frame):
         self.window_1_pane_2.SetSizer(sizer_3)
         self.window_1.SplitVertically(self.window_1_pane_1, self.window_1_pane_2)
         sizer_1.Add(self.window_1, 1, wx.EXPAND, 0)
+        sizer_1.Add((0, 10), 0, 0, 0)
         self.SetSizer(sizer_1)
         self.Layout()
         self.Centre()
@@ -352,8 +359,8 @@ class MainFrame(wx.Frame):
         self.Close(True)
 
     def OnAdd(self, event): # wxGlade: MainFrame.<event_handler>
-        print "Event handler `OnAdd' not implemented"
-        event.Skip()
+        self.add_frame = AddFrame.AddFrame(self, -1, "")
+        self.add_frame.Show()
 
     def OnDelete(self, event): # wxGlade: MainFrame.<event_handler>
         from delete import delete_movie
@@ -514,7 +521,7 @@ class MainFrame(wx.Frame):
         print "not implemented"
 
     def OnPosterClick(self, event): # wxGlade: MainFrame.<event_handler>
-        self.viewer_frame = ViewerFrame.ViewerFrame(None, -1, "")
+        self.viewer_frame = ViewerFrame.ViewerFrame(self, -1, "")
         poster.display_poster_viewer(self)
 
     def OnPrint(self, event): # wxGlade: MainFrame.<event_handler>
