@@ -17,13 +17,13 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.8"
+plugin_version = "0.9"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode='iso-8859-1'
+		self.encode='utf-8'
 		self.movie_id = id
-		self.url = "http://www.ofdb.de/view.php?page=film&fid=%s" % str(self.movie_id)
+		self.url = "http://www.ofdb.de/%s" % str(self.movie_id)
 
 	def initialize(self):
 		# OFDb didn't provide the runtime, studio and classification but it provide a link to the german imdb entry
@@ -35,12 +35,12 @@ class Plugin(movie.Movie):
 			self.imdb_page = ''
 
 	def get_image(self):
-		self.image_url = "http://www.ofdb.de/images/film/" + gutils.trim( self.page, "<img src=\"images/film/", "\"" )
+		self.image_url = "http://img.ofdb.de/film/" + gutils.trim(self.page, 'img src="http://img.ofdb.de/film/', '"' )
 		
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, 'Originaltitel:', '</tr>')
+		self.o_title = gutils.clean(gutils.trim(self.page, 'Originaltitel:', '</tr>'))
 		if self.o_title == '':
-			self.o_title = gutils.trim(self.page,'size="3"><b>','<')
+			self.o_title = string.replace(self.o_title, '&nbsp;', '' )
 
 	def get_title(self):
 		self.title = gutils.trim(self.page,'size="3"><b>','<')
@@ -49,8 +49,9 @@ class Plugin(movie.Movie):
 		self.director = gutils.trim(self.page,"Regie: ","</a><br>")
 
 	def get_plot(self):
-		storyid = self.regextrim(self.page, '([?]|[&])sid=', '(">|[&])')
-		story_page = self.open_page(url="http://www.ofdb.de/view.php?page=inhalt&fid=%s&sid=%s" % (str(self.movie_id),storyid))
+		storyid = self.regextrim(self.page, '<a href="plot/', '(">|[&])')
+		if not storyid is None:
+			story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid))
 		self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
 	def get_year(self):
@@ -71,7 +72,9 @@ class Plugin(movie.Movie):
 
 	def get_cast(self):
 		self.cast = ''
-		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(self.movie_id) )
+		movie_id_elements = string.split(self.movie_id, ',')
+		movie_id_elements[0] = string.replace(movie_id_elements[0], "film/", "")
+		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(movie_id_elements[0]) )
 		self.cast = gutils.trim(cast_page, 'Darsteller</i>', '</table>')
 		self.cast = re.sub('(\n|\t|&nbsp;)', '', self.cast)
 		self.cast = string.replace(self.cast, '\t', '')
@@ -92,7 +95,7 @@ class Plugin(movie.Movie):
 		self.o_site = ""
 
 	def get_site(self):
-		self.site = "http://www.ofdb.de/view.php?page=film&fid=" + str(self.movie_id)
+		self.site = self.url
 
 	def get_trailer(self):
 		self.trailer = ""
@@ -121,9 +124,9 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.original_url_search    = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=Titel&SText="
-		self.translated_url_search    = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=Titel&SText="
-		self.encode='iso-8859-1'
+		self.original_url_search   = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=OTitel&SText="
+		self.translated_url_search = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText="
+		self.encode='utf-8'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -138,10 +141,15 @@ class SearchPlugin(movie.SearchMovie):
 
 		if (elements[0]<>''):
 			for element in elements:
-				elementid = gutils.digits_only( gutils.trim(element,'<a href="view.php?page=film&fid=','">') )
-				if elementid != 0:
+				elementid = gutils.trim(element,'<a href="','"')
+				if not elementid is None:
 					self.ids.append(elementid)
-					self.titles.append(gutils.trim(element,'">', '</a>'))
+					elementname = gutils.clean(element)
+					p1 = string.find(elementname, '>')
+					if p1 == -1:
+						self.titles.append(elementname)
+					else:
+						self.titles.append(elementname[p1+1:])
 
 #
 # Plugin Test
@@ -166,7 +174,7 @@ class PluginTest:
 	#        * or the expected value
 	#
 	test_configuration = {
-		'103013' : { 
+		'film/103013,Rocky%20Balboa' : { 
 			'title' 			: 'Rocky Balboa',
 			'o_title' 			: 'Rocky Balboa',
 			'director'			: 'Sylvester Stallone',
@@ -200,7 +208,7 @@ Gary Compton\n\
 Jody Giambelluca\n\
 Frank Stallone\n\
 Fran Pultro\n\
-Michael Buffer\n\
+Michael Buffer as Ring Announcer\n\
 Jack Lazzarado\n\
 Marc Ratner\n\
 Anthony Lato Jr.\n\
@@ -232,7 +240,7 @@ Ricky Cavazos',
 			'classification'	: False,
 			'studio'			: 'Metro-Goldwyn-Mayer (MGM)',
 			'o_site'			: False,
-			'site'				: 'http://www.ofdb.de/view.php?page=film&fid=103013',
+			'site'				: 'http://www.ofdb.de/film/103013,Rocky%20Balboa',
 			'trailer'			: False,
 			'year'				: 2006,
 			'notes'				: False,
@@ -240,7 +248,7 @@ Ricky Cavazos',
 			'image'				: True,
 			'rating'			: 8
 		},
-		'22489' : { 
+		'film/22489,Ein-Gl%C3%BCckliches-Jahr' : { 
 			'title' 			: 'Glückliches Jahr, Ein',
 			'o_title' 			: 'Bonne année, La',
 			'director'			: 'Claude Lelouch',
@@ -272,7 +280,7 @@ Elie Chouraqui',
 			'classification'	: False,
 			'studio'			: 'Les Films 13',
 			'o_site'			: False,
-			'site'				: 'http://www.ofdb.de/view.php?page=film&fid=22489',
+			'site'				: 'http://www.ofdb.de/film/22489,Ein-Gl%C3%BCckliches-Jahr',
 			'trailer'			: False,
 			'year'				: 1973,
 			'notes'				: False,
@@ -280,7 +288,7 @@ Elie Chouraqui',
 			'image'				: True,
 			'rating'			: 7
 		},
-		'54088' : { 
+		'film/54088,Arahan' : { 
 			'title' 			: 'Arahan',
 			'o_title' 			: 'Arahan jangpung daejakjeon',
 			'director'			: 'Ryoo Seung-wan',
@@ -308,7 +316,7 @@ Lee Choon-yeon',
 			'classification'	: '16',
 			'studio'			: 'Fun and Happiness',
 			'o_site'			: False,
-			'site'				: 'http://www.ofdb.de/view.php?page=film&fid=54088',
+			'site'				: 'http://www.ofdb.de/film/54088,Arahan',
 			'trailer'			: False,
 			'year'				: 2004,
 			'notes'				: False,
