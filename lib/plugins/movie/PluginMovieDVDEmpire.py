@@ -32,7 +32,7 @@ plugin_url = "www.dvdempire.com"
 plugin_language = _("English")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.0"
+plugin_version = "1.1"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -66,7 +66,7 @@ class Plugin(movie.Movie):
 		self.runtime = gutils.strip_tags(gutils.trim(self.page, '>Length:', '<br />'))
 
 	def get_genre(self):
-		self.genre = ""
+		self.genre = gutils.strip_tags(gutils.trim(self.page, '>Genre</b>:', '\n'))
 
 	def get_cast(self):
 		self.cast = gutils.trim(self.page, '>Actors:', '</td><td')
@@ -96,7 +96,13 @@ class Plugin(movie.Movie):
 		self.country = ""
 
 	def get_rating(self):
-		self.rating = "0"
+		self.rating = gutils.clean(gutils.trim(self.page, '>Overall Rating:', ' out of'))
+		try:
+			tmp_float = float(self.rating)
+			tmp_float = round(2 * tmp_float, 0)
+			self.rating = str(tmp_float)
+		except:
+			self.rating = '0'
 
 	def get_notes(self):
 		self.notes = ''
@@ -119,8 +125,8 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
-		self.original_url_search   = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=3&used=0&string="
-		self.translated_url_search = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=3&used=0&string="
+		self.original_url_search   = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=&search_refined=32&used=0&string="
+		self.translated_url_search = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=&search_refined=32&used=0&string="
 		self.encode = 'iso-8859-1'
 
 	def search(self,parent_window):
@@ -141,9 +147,9 @@ class SearchPlugin(movie.SearchMovie):
 			if tmp_pagecountint > tmp_pagecountintuse:
 				tmp_pagecountintuse = tmp_pagecountint
 		tmp_pagecountintcurrent = 1
-		while (tmp_pagecountintuse > tmp_pagecountintcurrent):
+		while tmp_pagecountintuse > tmp_pagecountintcurrent and tmp_pagecountintuse < 4:
 			tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
-			self.url = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=3&used=0&page=" + str(tmp_pagecountintcurrent) + "&string="
+			self.url = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=&search_refined=32&used=0&page=" + str(tmp_pagecountintcurrent) + "&string="
 			self.open_search(parent_window)
 			tmp_page2 = gutils.trim(self.page,'<select name="sort"', 'Click Here to make a Suggestion</a>')
 			tmp_page = tmp_page + tmp_page2
@@ -152,8 +158,8 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		split_pattern = re.compile('<a href=["\']/Exec/v4_item[.]asp[?]userid=[0-9]+[&]amp;item_id=')
-		check_pattern = re.compile('[0-9]+[&]amp;searchID=[0-9]+[\']>')
+		split_pattern = re.compile('<a[\t ]+href=["\']/Exec/v4_item[.]asp[?]userid=[-0-9]+[&]amp;item_id=')
+		check_pattern = re.compile('[0-9]+[&]amp;searchID=[0-9]+["\']>')
 		elements = split_pattern.split(self.page)
 		elements[0] = ''
 		for element in elements:
