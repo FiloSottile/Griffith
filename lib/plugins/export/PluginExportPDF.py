@@ -39,7 +39,7 @@ import string
 import sys
 import config
 from locale import getdefaultlocale
-from sqlalchemy import Select
+from sqlalchemy import Select, desc
 
 exec_location = os.path.abspath(os.path.dirname(sys.argv[0]))
 
@@ -47,7 +47,7 @@ plugin_name = "PDF"
 plugin_description = _("PDF export plugin")
 plugin_author = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.3"
+plugin_version = "0.4"
 
 class ExportPlugin:
     def __init__(self, database, locations, parent_window, debug, **kwargs):
@@ -120,25 +120,40 @@ class ExportPlugin:
                         else:
                             movies.order_by_clause.append(self.db.Movie.c[i])
                 movies = movies.execute().fetchall()
+                first_letter = '0'
                 for movie in movies:
                     number = movie.number
                     original_title = str(movie.o_title).encode(defaultEnc)
                     title = str(movie.title).encode(defaultEnc)
-                    if movie.year:
-                        year = ' - ' + str(movie.year)
-                    else:
-                        year = ""
                     if movie.director:
                         director = ' - ' + str(movie.director).encode(defaultEnc)
                     else:
                         director = ""
+                    # group by first letter
+                    if title[0] != first_letter:
+                        first_letter = title[0]
+                        paragraph_text = '<font name=' + self.fontName + ' size="15">' + saxutils.escape(first_letter) + '</fonts>'
+                        p = Paragraph(paragraph_text.decode(defaultEnc), self.styles['Heading2'])
+                        Story.append(p)
+                    # add movie title
                     paragraph_text = '<font name=' + self.fontName + ' size="7">' + \
-                        saxutils.escape(str(number) + ' | ' + original_title) + \
-                        '</font><font name=' + self.fontName + ' size="7">' + \
-                        saxutils.escape(' (' + title + ')' + year + director) + \
+                        '<b>'+ saxutils.escape(title) + '</b>' + \
+                        saxutils.escape(' (' + original_title + '), ' + director + ' | ' + str(number)) + \
                         '</font>'
                     p = Paragraph(paragraph_text.decode(defaultEnc), self.styles['Normal'])
                     Story.append(p)
+                    if not movie.genre is None:
+                        paragraph_text = '<font name=' + self.fontName + ' size="5">' + \
+                        '<b>' + _('Genre') + ': </b>' + saxutils.escape(str(movie.genre).encode(defaultEnc)) + \
+                        '</font>'
+                        p = Paragraph(paragraph_text.decode(defaultEnc), self.styles['Normal'])
+                        Story.append(p)
+                    if not movie.cast is None:
+                        paragraph_text = '<i><font name=' + self.fontName + ' size="5">' + \
+                        '<b>' + _('Cast') + ': </b>' + saxutils.escape('; '.join(str(movie.cast).encode(defaultEnc).split("\n")[0:2])) + \
+                            '</font></i>'
+                        p = Paragraph(paragraph_text.decode(defaultEnc), self.styles['Normal'])
+                        Story.append(p)
                 c.build(Story, onFirstPage=self.page_template, onLaterPages=self.page_template)
                 gutils.info(self, _('PDF has been created.'), self.parent)
             
