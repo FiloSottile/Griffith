@@ -33,7 +33,7 @@ plugin_url = "www.filmtipset.se"
 plugin_language = _("Swedish")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.0"
+plugin_version = "1.1"
 
 class Plugin(movie.Movie):
 
@@ -44,12 +44,12 @@ class Plugin(movie.Movie):
 
 	def get_image(self):
 		self.image_url = ''
-		tmp = gutils.trim(self.page, 'src="posters/', '"')
+		tmp = gutils.trim(self.page, 'src="http://images.filmtipset.se/posters/', '"')
 		if tmp != '':
-			self.image_url = 'http://www.filmtipset.se/posters/' + tmp
+			self.image_url = 'http://images.filmtipset.se/posters/' + tmp
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, 'Originaltitel:', '</span>')
+		self.o_title = gutils.trim(self.page, 'Originaltitel:', '</tr>')
 		if self.o_title == '':
 			self.o_title = gutils.trim(self.page, '<h1>', '</h1>')
 
@@ -57,22 +57,24 @@ class Plugin(movie.Movie):
 		self.title = gutils.trim(self.page, '<h1>', '</h1>')
 
 	def get_director(self):
-		self.director = gutils.trim(self.page, 'Regiss&ouml;r:', '</span>')
+		self.director = gutils.trim(self.page, 'Regiss&ouml;r:', '</tr>')
 
 	def get_plot(self):
-		self.plot = gutils.trim(self.page, 'Filminfo:', '</h2>')
+		self.plot = self.regextrim(self.page, '<h2>Om [^>]*[>]', '</tr>')
 
 	def get_year(self):
-		self.year = gutils.trim(self.page, 'Utgivnings&aring;r:', '</span>')
+		self.year = gutils.trim(self.page, 'Utgivnings&aring;r:', '</tr>')
 
 	def get_runtime(self):
 		self.runtime = string.strip(gutils.trim(self.page, 'L&auml;ngd:', ' min'))
 
 	def get_genre(self):
-		self.genre = string.strip(gutils.trim(self.page, 'Nyckelord:', '</span>'))
+		self.genre = string.strip(gutils.trim(self.page, 'Nyckelord:', '</tr>'))
+		if self.genre == '':
+			self.genre = string.strip(gutils.trim(self.page, 'Genre:', '</tr>'))
 
 	def get_cast(self):
-		self.cast = gutils.trim(self.page, 'Sk&aring;despelare:', '</span>')
+		self.cast = self.regextrim(self.page, 'Sk&aring;despelare [^:]*[:]', '</tr>')
 		self.cast = string.replace(self.cast, ', ', '\n')
 
 	def get_classification(self):
@@ -83,9 +85,9 @@ class Plugin(movie.Movie):
 
 	def get_o_site(self):
 		self.o_site = ''
-		tmp = gutils.trim(self.page, 'http://akas.imdb.com', '"')
+		tmp = gutils.trim(self.page, 'http://www.imdb.com', '"')
 		if tmp != '':
-			self.o_site = 'http://akas.imdb.com' + tmp
+			self.o_site = 'http://www.imdb.com' + tmp
 
 	def get_site(self):
 		self.site = self.url
@@ -105,6 +107,18 @@ class Plugin(movie.Movie):
 		if tmp != '':
 			self.notes = self.notes + 'Alt. titel:' + string.strip(gutils.strip_tags(tmp))
 
+	def regextrim(self,text,key1,key2):
+		obj = re.search(key1, text)
+		if obj is None:
+			return ''
+		else:
+			p1 = obj.end()
+		obj = re.search(key2, text[p1:])
+		if obj is None:
+			return ''
+		else:
+			p2 = p1 + obj.start()
+		return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -126,9 +140,12 @@ class SearchPlugin(movie.SearchMovie):
 		elements1[0] = None
 		for element in elements1:
 			if element <> None:
-				self.ids.append(gutils.trim(element, '/', '"'))
+				searchResult = re.search('["&?]', element)
+				if searchResult is None:
+					self.ids.append(gutils.before(element, '"'))
+				else:
+					self.ids.append(element[:searchResult.end() - 1])
 				self.titles.append(
 					gutils.strip_tags(gutils.trim(element, '>', '</a>')) + ' / ' +
 					string.replace(gutils.trim(element, 'title="', '"'), '&nbsp;', ' ')
 				)
-
