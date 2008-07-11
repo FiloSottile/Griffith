@@ -53,7 +53,7 @@ del missing
 
 # other imports
 import gtk, gtk.glade
-import add, config, gconsole, gutils, gdebug, initialize, main_treeview, quick_filter
+import add, config, gconsole, gutils, gdebug, initialize, main_treeview, quick_filter, update
 from gettext import gettext as _
 
 class Griffith:
@@ -573,6 +573,8 @@ class Griffith:
 		if tag and tag.add_to_db():
 			initialize.fill_preferences_tags_combo(self)
 			initialize.create_tag_vbox(self, widget=self.widgets['add']['tag_vbox'], tab=self.am_tags)
+			update.update_bytag_combo_ids(self)
+			initialize.fill_bytag_combo(self)
 
 	def on_tag_remove_clicked(self, widget):
 		active = self.widgets['preferences']['tag_name'].get_active()
@@ -582,6 +584,8 @@ class Griffith:
 			if tag and tag.remove_from_db():
 				initialize.fill_preferences_tags_combo(self)
 				initialize.create_tag_vbox(self, widget=self.widgets['add']['tag_vbox'], tab=self.am_tags)
+				update.update_bytag_combo_ids(self)
+				initialize.fill_bytag_combo(self)
 		else:
 			self.debug.show("You have to select tag first")
 
@@ -597,6 +601,8 @@ class Griffith:
 			if tag.update_in_db():
 				initialize.fill_preferences_tags_combo(self)
 				initialize.create_tag_vbox(self, widget=self.widgets['add']['tag_vbox'], tab=self.am_tags)
+				update.update_bytag_combo_ids(self)
+				initialize.fill_bytag_combo(self)
 
 	def on_tag_name_combo_changed(self, widget):
 		active = self.widgets['preferences']['tag_name'].get_active()
@@ -956,6 +962,9 @@ You can't undo this operation."""), \
 		quick_filter.change_filter(self)
 
 	def filter_loanedto(self, *args):
+		quick_filter.change_filter(self)
+
+	def filter_bytag(self, *args):
 		quick_filter.change_filter(self)
 
 	# windows/dialogs -----------------------------------------------------

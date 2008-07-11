@@ -53,3 +53,11 @@ def update_loanedto_combo_ids(self):
 		self.loanedto_combo_ids[i] = person.person_id
 		i += 1
 
+def update_bytag_combo_ids(self):
+	self.bytag_combo_ids = {}
+	self.bytag_combo_ids[0] = 0
+	i = 1
+	tags = Select(self.db.Tag.c, order_by='name')
+	for tag in tags.execute().fetchall():
+		self.bytag_combo_ids[i] = tag.tag_id
+		i += 1
