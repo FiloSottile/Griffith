@@ -66,7 +66,7 @@ class Plugin(movie.Movie):
 		self.runtime = gutils.strip_tags(gutils.trim(self.page, '>Length:', '<br />'))
 
 	def get_genre(self):
-		self.genre = gutils.strip_tags(gutils.trim(self.page, '>Genre</b>:', '\n'))
+		self.genre = gutils.strip_tags(gutils.trim(self.page, '>Genre</b>:', '</tr>'))
 
 	def get_cast(self):
 		self.cast = gutils.trim(self.page, '>Actors:', '</td><td')
@@ -107,17 +107,23 @@ class Plugin(movie.Movie):
 	def get_notes(self):
 		self.notes = ''
 		tmp_page = gutils.trim(self.page, 'Features:', '<b>')
+		tmp_page = tmp_page.replace('<br>', '\n')
+		tmp_page = tmp_page.replace('<br />', '\n')
 		tmp_page = gutils.strip_tags(tmp_page)
 		if tmp_page <> '':
-			self.notes = self.notes + '\nFeatures:\n' + tmp_page + '\n'
+			self.notes = self.notes + '\nFeatures:' + tmp_page + '\n'
 		tmp_page = gutils.trim(self.page, 'Video:', '<b>')
+		tmp_page = tmp_page.replace('<br>', '\n')
+		tmp_page = tmp_page.replace('<br />', '\n')
 		tmp_page = gutils.strip_tags(tmp_page)
 		if tmp_page <> '':
-			self.notes = self.notes + '\nVideo:\n' + tmp_page + '\n'
+			self.notes = self.notes + '\nVideo:' + tmp_page + '\n'
 		tmp_page = gutils.trim(self.page, 'Audio:', '<b>')
+		tmp_page = tmp_page.replace('<br>', '\n')
+		tmp_page = tmp_page.replace('<br />', '\n')
 		tmp_page = gutils.strip_tags(tmp_page)
 		if tmp_page <> '':
-			self.notes = self.notes + '\nAudio:\n' + tmp_page + '\n'
+			self.notes = self.notes + '\nAudio:' + tmp_page
 		tmp_page = gutils.trim(self.page, 'Subtitles:', '<b>')
 		tmp_page = gutils.strip_tags(tmp_page)
 		if tmp_page <> '':
