@@ -46,7 +46,7 @@ class Plugin(movie.Movie):
 		self.title = gutils.trim(self.page,'size="3"><b>','<')
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"Regie: ","</a><br>")
+		self.director = gutils.trim(self.page,"Regie:","</a><br>")
 
 	def get_plot(self):
 		storyid = self.regextrim(self.page, '<a href="plot/', '(">|[&])')
@@ -55,12 +55,12 @@ class Plugin(movie.Movie):
 		self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
 	def get_year(self):
-		self.year = gutils.trim(self.page,"Erscheinungsjahr: ","</a>")
+		self.year = gutils.trim(self.page,"Erscheinungsjahr:","</a>")
 		self.year = gutils.strip_tags(self.year)
 
 	def get_runtime(self):
 		# from imdb
-		self.runtime = gutils.trim(self.imdb_page, '<h5>L&auml;nge:</h5>', ' min')
+		self.runtime = gutils.trim(self.imdb_page, '<h5>L&auml;nge:</h5>', ' Min')
 
 	def get_genre(self):
 		self.genre = gutils.trim(self.page,"Genre(s):","</table>")
@@ -101,7 +101,7 @@ class Plugin(movie.Movie):
 		self.trailer = ""
 
 	def get_country(self):
-		self.country = gutils.trim(self.page,"Herstellungsland: ","</a>")
+		self.country = gutils.trim(self.page,"Herstellungsland:","</a>")
 
 	def get_rating(self):
 		self.rating = gutils.trim(self.page,"<br>Note: ","&nbsp;")
@@ -142,7 +142,7 @@ class SearchPlugin(movie.SearchMovie):
 		if (elements[0]<>''):
 			for element in elements:
 				elementid = gutils.trim(element,'<a href="','"')
-				if not elementid is None:
+				if not elementid is None and not elementid == '':
 					self.ids.append(elementid)
 					elementname = gutils.clean(element)
 					p1 = string.find(elementname, '>')
@@ -162,7 +162,7 @@ class SearchPluginTest(SearchPlugin):
 	test_configuration = {
 		'Rocky Balboa'			: 1,
 		'Arahan'				: 3,
-		'Ein glückliches Jahr'	: 1
+		'glückliches'			: 2
 	}
 
 class PluginTest:
@@ -286,7 +286,7 @@ Elie Chouraqui',
 			'notes'				: False,
 			'runtime'			: 90,
 			'image'				: True,
-			'rating'			: 7
+			'rating'			: 6
 		},
 		'film/54088,Arahan' : { 
 			'title' 			: 'Arahan',
@@ -294,7 +294,7 @@ Elie Chouraqui',
 			'director'			: 'Ryoo Seung-wan',
 			'plot' 				: True,
 			'cast'				: 'Ryoo Seung-beom\n\
-Yoon So-yi' + _(' as ') + 'Wi-jin\n\
+Yoon Soy' + _(' as ') + 'Wi-jin\n\
 Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
 Jung Doo-hong' + _(' as ') + 'Heuk-Woon\n\
 Yun Ju-sang\n\
