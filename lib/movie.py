@@ -290,6 +290,22 @@ class Retriever(threading.Thread):
 				downloaded_kbyte = int(count * blockSize/1024.0)
 				filesize_kbyte = int(totalSize/1024.0)
 
+#
+# use own derived URLopener class because we need to set a correct User-Agent
+# string for some web sites. The default is 'Python-urllib/<version>'
+# which not all sites accepting. (zelluloid.de for example)
+#
+_uaurlopener = None
+def urlretrieve(url, filename=None, reporthook=None, data=None):
+    global _uaurlopener
+    if not _uaurlopener:
+        _uaurlopener = UAFancyURLopener()
+    return _uaurlopener.retrieve(url, filename, reporthook, data)
+
+class UAFancyURLopener(FancyURLopener):
+	# use Firefox 3.0 User-Agent string from Windows XP
+	version = 'Mozilla/5.0 (Windows; U; Windows NT 6.0) Gecko/2008052906 Firefox/3.0'
+	
 class Progress:
 	def __init__(self, window, title, message):
 		self.status = False
