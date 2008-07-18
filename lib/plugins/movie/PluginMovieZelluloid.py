@@ -54,10 +54,10 @@ class Plugin(movie.Movie):
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page, 'Originaltitel: ', '<BR>')
 		if self.o_title == '':
-			self.o_title = gutils.trim(self.page, '<TITLE>', '|')
+			self.o_title = gutils.trim(self.page, '<title>', '|')
 
 	def get_title(self):
-		self.title = gutils.trim(self.page, '<TITLE>', '|')
+		self.title = gutils.trim(self.page, '<title>', '|')
 
 	def get_director(self):
 		self.director = gutils.trim(self.detail_page, 'Regie', '</A>')
@@ -157,9 +157,7 @@ class SearchPlugin(movie.SearchMovie):
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
-		tmp = gutils.before(gutils.trim(self.page, "Der Suchbegriff erzielte", "</TABLE>"), 'ALT="Person"')
-		if tmp == '':
-			tmp = gutils.trim(self.page, "Der Suchbegriff erzielte", "</TABLE>")
+		tmp = gutils.trim(self.page, "Der Suchbegriff erzielte", "</TABLE>")
 		return tmp
 
 	def get_searches(self):
@@ -170,7 +168,7 @@ class SearchPlugin(movie.SearchMovie):
 				id = gutils.trim(element, 'movie-', '-')
 				if id <> '':
 					self.ids.append(id)
-					self.titles.append(gutils.strip_tags(gutils.trim(element, '>', '</A>')))
+					self.titles.append(gutils.strip_tags(string.replace(gutils.trim(element, '>', '</A>'), '<BR>', ' - ')))
 
 #
 # Plugin Test
@@ -182,7 +180,7 @@ class SearchPluginTest(SearchPlugin):
 	#
 	test_configuration = {
 		'Rocky Balboa'		: 1,
-		'Die wilden Hühner'	: 2
+		'Die wilden Hühner'	: 3
 	}
 
 class PluginTest:
