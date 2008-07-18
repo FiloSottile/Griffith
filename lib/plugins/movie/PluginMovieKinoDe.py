@@ -309,7 +309,7 @@ class SearchPluginTest(SearchPlugin):
 	#
 	test_configuration = {
 		'Rocky Balboa'			: 6,
-		'Arahan'				: 5,
+		'Arahan'				: 6,
 		'Ein glückliches Jahr'	: 3
 	}
 
