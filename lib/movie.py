@@ -225,6 +225,7 @@ class SearchMovie:
 	translated_url_search = None
 	elements = None
 	title = None
+	remove_accents = True
 
 	def __init__(self):
 		pass

@@ -154,6 +154,7 @@ class SearchPlugin(movie.SearchMovie):
 		self.original_url_search   = "http://www.zelluloid.de/suche/index.php3?qstring="
 		self.translated_url_search = "http://www.zelluloid.de/suche/index.php3?qstring="
 		self.encode='iso-8859-1'
+		self.remove_accents = False
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
