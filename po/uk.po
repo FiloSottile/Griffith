@@ -1,16 +1,16 @@
-# Pushto translation for griffith
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# Ukrainian translation for griffith
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the griffith package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: griffith\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-21 21:28+0200\n"
-"PO-Revision-Date: 2008-01-26 21:56+0000\n"
-"Last-Translator: Baseer Ahmad Baheer <suraj.lmar@gmail.com>\n"
-"Language-Team: Pashto <ps@li.org>\n"
+"PO-Revision-Date: 2008-03-31 10:06+0000\n"
+"Last-Translator: vazaz <Unknown>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,16 +20,16 @@ msgstr ""
 #: ../griffith:212 ../griffith:842 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
 msgid "You have no movies in your database"
-msgstr "تاسوپخپل معلوماتي بانک کې کوم فلم نه لرئ"
+msgstr "Ви не маєте фільмів в вашій базі даних"
 
 #: ../griffith:393
 msgid "You have seen all films in your collection!"
-msgstr "تاسو پخپله ټولګه کې ټول فلمونه وکتل"
+msgstr "Ви переглянули всі фільми з вашої колекції!"
 
 #: ../griffith:521 ../griffith:526 ../lib/initialize.py:350
 #: ../lib/initialize.py:637
 msgid "subtitles"
-msgstr "فرعي سرلیکونه"
+msgstr "субтитри"
 
 #: ../griffith:809
 msgid ""
@@ -37,9 +37,9 @@ msgid ""
 "Your current movie collection will be replaced.\n"
 "You can't undo this operation."
 msgstr ""
-"آیا تاسو ډاډه یاست چې بیرته لمړني حالت ته واوړئ؟\n"
-" امکان لري ستاسو همدا فلم بدل شي\n"
-"تاسو نشئ کولای چې دا چارې بیرته راولئ"
+"Ви впевнені, що бажаєте відновити?\n"
+"Ваша теперішня колекція фільмів буде замінена.\n"
+"Ви не можете відмінити цю дію."
 
 #: ../griffith:819
 msgid ""
@@ -47,114 +47,119 @@ msgid ""
 "Your current movie collection will be mixed with a backup.\n"
 "You can't undo this operation."
 msgstr ""
-"آیا تاسو ډاډه یاست چې سره ګډ کړی؟\n"
-"کیدای شي ستاسو د فلم دا ټولګه له یوه ملاتړ سره ګډ شي\n"
-"تاسو نشئ کولای چې دا چارې بیرته راولئ"
+"Ви впевнені, що бажаєте об'єднати?\n"
+"Ваша теперішня колекція фільмів буде об'єднана з резервною базою.\n"
+"Ви не можете відмінити цю дію."
 
 #: ../griffith:917
 msgid " movie(s) in collection. "
-msgstr " په ټولګه کې فلمونه "
+msgstr " фільм(ів) в колекції. "
 
 #: ../griffith:918
 msgid " movie(s) loaned. "
-msgstr " فلمونه پور شوي "
+msgstr " фільм(ів) позичено. "
 
 #: ../griffith:919
 msgid "You haven't seen "
-msgstr "تاسو نه دي لیدلي "
+msgstr "Ви не бачили "
 
 #: ../griffith:919
 msgid " movie(s)"
-msgstr " فلمونه"
+msgstr " фільм(ів)"
 
 #: ../griffith:1121
 msgid ""
 "Are you sure you want to create a new database?\n"
 "You will lose ALL your current data!"
 msgstr ""
-"آیا تاسو ډاډمن یاست چې یو نوی معلوماتي بانک جوړ کړئ؟\n"
-"کیدای شي تاسو خپله اوسنۍ منځپانګه له لاسه ورکړئ"
+"Ви впевнені, що бажаєте створити нову базу даних?\n"
+"Ви втратите всі ваші дані!"
 
 #: ../griffith:1125
 msgid ""
 "Last chance!\n"
 "Do you confirm that you want\n"
 "to lose your current data?"
-msgstr "وروستی چانس(فرصت)"
+msgstr ""
+"Остання можливість!\n"
+"Ви підтверджуєте, те що бажаєте\n"
+"втратити ваші теперішні дані?"
 
 #: ../lib/about.py:41
 msgid "Main Authors"
-msgstr "اصلي جوړوونکی،پیل کوونکی، لیکونکی"
+msgstr "Основні Автори"
 
 #: ../lib/about.py:43
 msgid "Programmers"
-msgstr "پروګرام لیکونکي"
+msgstr "Програмісти"
 
 #: ../lib/about.py:46
 msgid "Contributors:"
-msgstr "مرسته کوونکيپر"
+msgstr "Розробники:"
 
 #: ../lib/about.py:50
 msgid "Logo, icon and general artwork "
-msgstr ""
+msgstr "Логотип, іконка і основні зображення "
 
 #: ../lib/about.py:76
 msgid "See TRANSLATORS file"
-msgstr ""
+msgstr "Дивитися файл ПЕРЕКЛАДАЧІ"
 
 #: ../lib/about.py:84
 msgid "This program is released under the GNU"
-msgstr "دا پروګرام د GNU پر بنسټ خپور شو"
+msgstr "Ця программа розроблена під ліцензією GNU"
 
 #: ../lib/add.py:45 ../glade/griffith.glade.h:23
 msgid "Add a new movie"
-msgstr "نوی فلم اضافه کول"
+msgstr "Додати новий фільм"
 
 #: ../lib/add.py:56
 msgid "Edit movie"
-msgstr "د فلم بیا سمول"
+msgstr "Редагувати фільм"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
 #: ../lib/main_treeview.py:497
 msgid " min"
-msgstr ""
+msgstr " хв"
 
 #: ../lib/add.py:379
 msgid "Movie information has been updated"
-msgstr ""
+msgstr "Інформація про фільм новлена"
 
 #: ../lib/add.py:384 ../lib/add.py:613
 msgid ""
 "You should fill the original title\n"
 "or the movie title."
-msgstr "ښایي تاسو اصلي او یا هم د فلم سرلیک ډک کړئ"
+msgstr ""
 
 #: ../lib/add.py:390 ../lib/add.py:396
 msgid "Movie with that title already exists, are you sure you want to add?"
-msgstr "په دې سرلیک فلم شته دی،ډاډه یاست تر څو دا فلم اضافه کړی؟"
+msgstr ""
+"Фільм з такою назвою вже існує в базі, ви впевнені що хочете додати цей "
+"фільм?"
 
 #: ../lib/add.py:575
 msgid "No results"
-msgstr "بې پایلې"
+msgstr "Немає  результату"
 
 #: ../lib/add.py:621
 msgid "Url: "
-msgstr "URL "
+msgstr "Посилання: "
 
 #: ../lib/add.py:622
 msgid "Language: "
-msgstr "ژبه: "
+msgstr "Мова: "
 
 #: ../lib/backup.py:32
 msgid "Save Griffith backup"
-msgstr ""
+msgstr "Зберегти резервну копію Griffith"
 
 #: ../lib/backup.py:41 ../lib/plugins/export/PluginExportCSV.py:64
 #: ../lib/plugins/export/PluginExportiPod.py:111
 #: ../lib/plugins/export/PluginExportPDF.py:85
 #: ../lib/plugins/export/PluginExportXML.py:65
 msgid "File exists. Do you want to overwrite it?"
-msgstr "فایل شته دی. غواړئ چې بدل یې کړئ؟"
+msgstr "Файл вже є в базі. Хочете переписати?"
 
 #: ../lib/backup.py:55
 msgid "Error creating backup"
@@ -166,88 +171,88 @@ msgstr ""
 
 #: ../lib/backup.py:105
 msgid "Backup has been created"
-msgstr "ملاتړ جوړ شو"
+msgstr "Резервну копію створено"
 
 #: ../lib/backup.py:109 ../lib/backup.py:183
 msgid "Restore Griffith backup"
-msgstr ""
+msgstr "Відновити Griffith з резервної копії"
 
 #: ../lib/backup.py:117 ../lib/backup.py:199
 msgid "Can't read backup file"
-msgstr "ملاتړ فایل نشي لوستلای"
+msgstr "Не можливо прочитати файл резервної копії"
 
 #: ../lib/backup.py:174
 msgid "Backup restored"
-msgstr "ملاتړ بیرته راوړل شو"
+msgstr "Резервну копію відновлено"
 
 #: ../lib/cover.py:42 ../lib/edit.py:46
 msgid "Select image"
-msgstr "انځور وټاکی"
+msgstr "Вибрати зображення"
 
 #: ../lib/cover.py:86 ../lib/cover.py:149
 msgid "Cover generated by Griffith v"
-msgstr ""
+msgstr "Обкладинка створена Griffith v"
 
 #: ../lib/cover.py:88 ../lib/cover.py:151
 #: ../lib/plugins/export/PluginExportHTML.py:743
 #: ../lib/plugins/export/PluginExportPDF.py:167
 msgid "Released Under the GNU/GPL License"
-msgstr ""
+msgstr "Створено під ліцензією GNU/GPL"
 
 #: ../lib/cover.py:176 ../lib/initialize.py:200 ../lib/initialize.py:622
 #: ../lib/plugins/export/PluginExportHTML.py:145
 #: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:97
 msgid "Original Title"
-msgstr "اصلي سرلیک"
+msgstr "Оригінальна назва"
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:630
 #: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:148
 msgid "Title"
-msgstr "سرلیک"
+msgstr "Назва"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:612
 #: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:48
 msgid "Director"
-msgstr "مشر،مدیر،رییس،اداره کوونکی،لارښود"
+msgstr "Режисер"
 
 #: ../lib/cover.py:181
 msgid "Running Time"
-msgstr "د چلیدو وخت"
+msgstr "Час відтворення"
 
 #: ../lib/cover.py:182 ../lib/initialize.py:611
 #: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:41
 msgid "Country"
-msgstr "هیواد"
+msgstr "Країна"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:613
 #: ../lib/plugins/export/PluginExportHTML.py:137
 #: ../lib/plugins/export/PluginExportPDF.py:147 ../glade/griffith.glade.h:62
 msgid "Genre"
-msgstr "ژانر،ښکلي هنرونه"
+msgstr "Жанр"
 
 #: ../lib/dbupgrade.py:86 ../lib/plugins/movie/PluginMovieE-Pipoca.py:34
 msgid "Brazilian Portuguese"
-msgstr "برازیلایی پرتګالي"
+msgstr "Бразильська португальська"
 
 #: ../lib/dbupgrade.py:87
 msgid "Bulgarian"
-msgstr "بلغاریایي"
+msgstr "Болгарська"
 
 #: ../lib/dbupgrade.py:88
 msgid "Catalan"
-msgstr ""
+msgstr "Каталонська"
 
 #: ../lib/dbupgrade.py:89 ../lib/plugins/movie/PluginMovieCSFD.py:30
 msgid "Czech"
-msgstr "چکی"
+msgstr "Чеська"
 
 #: ../lib/dbupgrade.py:90
 msgid "Danish"
-msgstr ""
+msgstr "Данська"
 
 #: ../lib/dbupgrade.py:91
 msgid "Dutch"
-msgstr ""
+msgstr "Голандська"
 
 #: ../lib/dbupgrade.py:92 ../lib/plugins/movie/PluginMovieAniDB.py:32
 #: ../lib/plugins/movie/PluginMovieDVDEmpire.py:32
@@ -255,16 +260,16 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieMediadis.py:16
 #: ../lib/plugins/movie/PluginMovieMoviefone.py:16
 msgid "English"
-msgstr "انګلیسي"
+msgstr "Англійська"
 
 #: ../lib/dbupgrade.py:93
 msgid "Estonian"
-msgstr ""
+msgstr "Естонська"
 
 #: ../lib/dbupgrade.py:94 ../lib/plugins/movie/PluginMovieAllocine.py:32
 #: ../lib/plugins/movie/PluginMovieCineMovies.py:31
 msgid "French"
-msgstr ""
+msgstr "Французька"
 
 #: ../lib/dbupgrade.py:95 ../lib/plugins/movie/PluginMovieDVDPalace.py:33
 #: ../lib/plugins/movie/PluginMovieFilmDb.py:32
@@ -274,45 +279,43 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieOFDb.py:17
 #: ../lib/plugins/movie/PluginMovieZelluloid.py:33
 msgid "German"
-msgstr ""
+msgstr "Німецька"
 
 #: ../lib/dbupgrade.py:96
 msgid "Greek"
-msgstr ""
+msgstr "Грецька"
 
 #: ../lib/dbupgrade.py:97
-#, fuzzy
 msgid "Hungarian"
-msgstr "بلغاریایي"
+msgstr "Угорська"
 
 #: ../lib/dbupgrade.py:98
 msgid "Indonesian"
-msgstr ""
+msgstr "Індонезійська"
 
 #: ../lib/dbupgrade.py:99 ../lib/plugins/movie/PluginMovieCinematografo.py:30
 msgid "Italian"
-msgstr ""
+msgstr "Італійська"
 
 #: ../lib/dbupgrade.py:100
 msgid "Japanese"
-msgstr ""
+msgstr "Японська"
 
 #: ../lib/dbupgrade.py:101
 msgid "Korean"
-msgstr ""
+msgstr "Корейська"
 
 #: ../lib/dbupgrade.py:102
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "Норвезька Бокмал"
 
 #: ../lib/dbupgrade.py:103
 msgid "Occitan"
-msgstr ""
+msgstr "Провансальська"
 
 #: ../lib/dbupgrade.py:104
-#, fuzzy
 msgid "Pashto"
-msgstr "غورځول،توږل، شمیرل"
+msgstr "Пашто"
 
 #: ../lib/dbupgrade.py:105 ../lib/plugins/movie/PluginMovieFDb.py:33
 #: ../lib/plugins/movie/PluginMovieFilmweb.py:31
@@ -321,130 +324,133 @@ msgstr "غورځول،توږل، شمیرل"
 #: ../lib/plugins/movie/PluginMovieTanukiAnime.py:31
 #: ../lib/plugins/movie/PluginMovieWP.py:32
 msgid "Polish"
-msgstr ""
+msgstr "Польська"
 
 #: ../lib/dbupgrade.py:106 ../lib/plugins/movie/PluginMovie7arte.py:32
 #: ../lib/plugins/movie/PluginMovieCineteka.py:32
 #: ../lib/plugins/movie/PluginMoviePTGate.py:32
 msgid "Portuguese"
-msgstr ""
+msgstr "Португальська"
 
 #: ../lib/dbupgrade.py:107
 msgid "Russian"
-msgstr ""
+msgstr "Російська"
 
 #: ../lib/dbupgrade.py:108
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "Китайська спрощена"
 
 #: ../lib/dbupgrade.py:109
 msgid "Slovak"
-msgstr ""
+msgstr "Словацька"
 
 #: ../lib/dbupgrade.py:110 ../lib/plugins/movie/PluginMovieCulturalia.py:32
 #: ../lib/plugins/movie/PluginMovieFilmAffinity.py:32
 #: ../lib/plugins/movie/PluginMovieIMDB-es.py:32
 msgid "Spanish"
-msgstr "هسپانوي"
+msgstr "Іспанська"
 
 #: ../lib/dbupgrade.py:111 ../lib/plugins/movie/PluginMovieFilmtipset.py:33
 msgid "Swedish"
-msgstr "سویډني"
+msgstr "Шведська"
 
 #: ../lib/dbupgrade.py:112
 msgid "Turkish"
-msgstr "ترکي"
+msgstr "Турецька"
 
 #: ../lib/dbupgrade.py:115
 msgid "Favourite"
-msgstr "غوره، د خوښې،په زړه پورې"
+msgstr "Улюблене"
 
 #: ../lib/dbupgrade.py:137
 msgid ""
 "Griffith will now convert your database to the new format. This can take "
 "several minutes if you have a large database."
 msgstr ""
+"Griffith зараз перетворить вашу базу даних в новий формат. Це може тривати "
+"декілька хвилин, якщо ви маєте велику базу даних."
 
 #: ../lib/dbupgrade.py:151
 msgid "Old DB conversion: please install pysqlite legacy (v1.0)"
-msgstr ""
+msgstr "Перетворення старої БД: будь-ласка встановіть pysqlite legacy (v1.0)"
 
 #: ../lib/dbupgrade.py:180
 msgid ""
 "Your database is most probably in SQLite2 format, please convert it to "
 "SQLite3"
 msgstr ""
+"Ваша база даних є можливо в форматі SQLite2, будь-ласка переформатуйте в "
+"SQLite3"
 
 #: ../lib/delete.py:37
 msgid "You can't delete movie while it is loaned."
-msgstr ""
+msgstr "Ви не можете знищити фільм, тому що він позичений."
 
 #: ../lib/delete.py:39
 msgid "Are you sure you want to delete this movie?"
-msgstr "آیا تاسو ډاډمن یاست چې دا فلم له منځه یوسئ؟"
+msgstr "Ви впевнені, що хочете видалити цей фільм?"
 
 #: ../lib/edit.py:58
 msgid "Image not valid."
-msgstr "انځور سم نه دی"
+msgstr "Невірне зображення"
 
 #: ../lib/edit.py:88 ../lib/edit.py:106
 msgid "Image has been updated"
-msgstr "انځور نوی شو"
+msgstr "Зображення оновлено"
 
 #: ../lib/edit.py:95
 msgid "Are you sure you want to delete this poster?"
-msgstr "غواړئ داخبرتیا له منځه یوسئ؟"
+msgstr "Ви впевнені, що бажаєте видалити цю афішу?"
 
 #: ../lib/edit.py:149 ../lib/edit.py:156
 msgid "No posters found for this movie."
-msgstr "د دې فلم لپاره کومې څرګندونې ونه موندل شوې"
+msgstr "Немає афіш для цього фільму.."
 
 #: ../lib/edit.py:201 ../lib/movie.py:147
 msgid "Fetching poster"
-msgstr "د راوړلو خبرتیا ،د خرڅولو خبرتیا"
+msgstr "Отримання афіші"
 
 #: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
-msgstr "یوه شیبه تم شئ"
+msgstr "Зачекайте хвилинку"
 
 #: ../lib/edit.py:213
 msgid "Sorry. A connection error has occurred."
-msgstr "وبخښئ. د اړیکو یوه تیروتنه پیښه شوه"
+msgstr "Вибачте. Виникла помилка з'єднання"
 
 #: ../lib/edit.py:226 ../lib/edit.py:259
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
-msgstr ""
-"وبخښئ. دا فلم لیست شو ولې په Amazon.com کې ورته کومه خبرتیا ونه موندل شوه"
+msgstr "Вибачте. Цей фільм є в переліку, проте немає афіші на Amazon.com."
 
 #: ../lib/edit.py:245
 msgid "Do you want to use this poster instead?"
-msgstr "آیا تاسو غواړئ دهغه په ځای دا خبرتیا وکاروئ"
+msgstr "Ви бажаєте використати цю афішу заново?"
 
 #: ../lib/gconsole.py:133
 msgid "No movie found"
-msgstr "کوم فلم ونه موندل شو"
+msgstr "Фільму не знайдено"
 
 #: ../lib/gemail.py:39
 msgid "Connection timed out"
-msgstr "د اړیکو وخت پای ته ورسید"
+msgstr "Час очікування з'єднання закінчився"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
 msgid "Error sending e-mail: %s"
-msgstr ""
+msgstr "Помилка відправлення пошти: %s"
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr ""
+msgstr "Помилковий логін"
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
-msgstr "بریښنالیک په بریالي توګه ولیږل شو"
+msgstr "Відправлення пошти завершено."
 
 #: ../lib/gemail.py:77
 msgid "Movie loan reminder"
-msgstr ""
+msgstr "Нагадування про позичені фільми"
 
 #: ../lib/gemail.py:77
 #, python-format
@@ -452,25 +458,24 @@ msgid ""
 "Hi, %s!\n"
 "\n"
 "Just to remind you "
-msgstr ""
+msgstr "Привіт, %s "
 
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
 msgstr ""
-"کیدای شي بریښنالیک نه وي لیږل شوی، مهرباني وکړئ او د بریښنا لیک لمړیتوبونه "
-"چک کړئ"
+"Пошта не може бути відправлена. Будь-ласка перевірте налаштування пошти."
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
-msgstr ""
+msgstr "Не задано адресу електронної пошти для цієї особи."
 
 #: ../lib/gutils.py:265
 msgid "Images"
-msgstr "انځورونه"
+msgstr "Зображення"
 
 #: ../lib/gutils.py:276 ../lib/plugins/imp/__init__.py:202
 msgid "All files"
-msgstr "ټول فایلونه"
+msgstr "Усі файли"
 
 #: ../lib/initialize.py:187
 msgid "N."
@@ -479,44 +484,44 @@ msgstr ""
 #: ../lib/initialize.py:194 ../lib/initialize.py:614
 #: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:69
 msgid "Image"
-msgstr "انځور"
+msgstr "Зображення"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:627
 #: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:127
 msgid "Seen it"
-msgstr ""
+msgstr "Дивився"
 
 #: ../lib/initialize.py:236 ../lib/initialize.py:634
 #: ../lib/plugins/export/PluginExportHTML.py:152 ../glade/griffith.glade.h:162
 msgid "Year"
-msgstr "کال"
+msgstr "Рік"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:626
 #: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:123
 msgid "Runtime"
-msgstr "د سرته رسیدو وخت"
+msgstr "Час відтворення"
 
 #: ../lib/initialize.py:254 ../lib/initialize.py:624
 #: ../lib/plugins/export/PluginExportHTML.py:147 ../glade/griffith.glade.h:113
 msgid "Rating"
-msgstr "پوړ، نرخ تړنه، ډله"
+msgstr "Рейтинг"
 
 #: ../lib/initialize.py:306
 msgid "Loan Date"
-msgstr "د پور نیټه"
+msgstr "Дата позички"
 
 #: ../lib/initialize.py:312
 msgid "Return Date"
-msgstr "د راګرځیدو نیټه"
+msgstr "Дата повернення"
 
 #: ../lib/initialize.py:317
 msgid "Loaned To"
-msgstr "پوری شوی دی"
+msgstr "Позичено"
 
 #: ../lib/initialize.py:336 ../lib/plugins/movie/PluginMovieIMDB-de.py:145
 #: ../lib/plugins/movie/PluginMovieIMDB.py:140
 msgid "Language"
-msgstr "ژبه"
+msgstr "Мова"
 
 #: ../lib/initialize.py:348 ../lib/initialize.py:637
 msgid "lector"
@@ -528,11 +533,11 @@ msgstr ""
 
 #: ../lib/initialize.py:351 ../lib/initialize.py:637
 msgid "commentary"
-msgstr "یو لړ تبصرې"
+msgstr ""
 
 #: ../lib/initialize.py:358 ../glade/griffith.glade.h:151
 msgid "Type"
-msgstr "نښه،ډول ،نمونه، ټايپ"
+msgstr ""
 
 #: ../lib/initialize.py:373
 msgid "Codec"
@@ -540,271 +545,273 @@ msgstr ""
 
 #: ../lib/initialize.py:388
 msgid "Channels"
-msgstr "لارې،کانال،د رادیويي ارتباط څپې"
+msgstr ""
 
 #: ../lib/initialize.py:403
 msgid "Subtitle format"
-msgstr "د فرعي سرلیک شکل"
+msgstr ""
 
 #: ../lib/initialize.py:519 ../glade/griffith.glade.h:91
 msgid "Name"
-msgstr "نوم"
+msgstr ""
 
 #: ../lib/initialize.py:525 ../glade/exporthtml.glade.h:16
 #: ../glade/griffith.glade.h:50 ../glade/import.glade.h:5
 msgid "E-mail"
-msgstr "بريښنلیک"
+msgstr ""
 
 #: ../lib/initialize.py:573
 msgid "Last added"
-msgstr "وروستی اضافه شوی"
+msgstr ""
 
 #: ../lib/initialize.py:606 ../lib/plugins/export/PluginExportHTML.py:133
 #: ../lib/plugins/export/PluginExportPDF.py:153 ../glade/griffith.glade.h:33
 msgid "Cast"
-msgstr "غورځول،توږل، شمیرل"
+msgstr "У ролях"
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:134
 #: ../glade/griffith.glade.h:35
 msgid "Classification"
-msgstr "طبقه بندی"
+msgstr "Класифікація"
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:161
 #: ../glade/griffith.glade.h:38
 msgid "Collection"
-msgstr "ټولګه"
+msgstr "Колекція"
 
 #: ../lib/initialize.py:609 ../lib/initialize.py:636
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
 #: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:39
 msgid "Color"
-msgstr "رنګ"
+msgstr "Колір"
 
 #: ../lib/initialize.py:610 ../glade/griffith.glade.h:40
 msgid "Condition"
-msgstr "شرط"
+msgstr "Стан"
 
 #: ../lib/initialize.py:615 ../glade/griffith.glade.h:73
 msgid "Layers"
-msgstr "پوړ"
+msgstr "Прошарки"
 
 #: ../lib/initialize.py:616 ../lib/plugins/export/PluginExportHTML.py:142
 msgid "Loaned"
-msgstr "پور شوی"
+msgstr "Позичений"
 
 #: ../lib/initialize.py:617 ../lib/plugins/export/PluginExportHTML.py:143
 #: ../glade/griffith.glade.h:49
 msgid "Discs"
-msgstr ""
+msgstr "Диски"
 
 #: ../lib/initialize.py:618 ../glade/griffith.glade.h:86
 msgid "Medium"
-msgstr "منځنی"
+msgstr "Середній"
 
 #: ../lib/initialize.py:619 ../lib/plugins/export/PluginExportHTML.py:153
 #: ../glade/griffith.glade.h:94
 msgid "Notes"
-msgstr "یادښتونه"
+msgstr "Примітки"
 
 #: ../lib/initialize.py:620 ../lib/sql.py:278
 #: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:95
 msgid "Number"
-msgstr "شمیره،عدد، ګڼه"
+msgstr "Число"
 
 #: ../lib/initialize.py:621 ../lib/plugins/export/PluginExportHTML.py:139
 #: ../glade/griffith.glade.h:96
 msgid "Official site"
-msgstr "رسمي ځای"
+msgstr "Офіційна інтернет сторінка"
 
 #: ../lib/initialize.py:623 ../lib/plugins/export/PluginExportHTML.py:146
 #: ../glade/griffith.glade.h:105
 msgid "Plot"
-msgstr "ټوټه"
+msgstr "Графік"
 
 #: ../lib/initialize.py:625 ../glade/griffith.glade.h:115
 msgid "Region"
-msgstr "سیمه"
+msgstr "Регіон"
 
 #: ../lib/initialize.py:628 ../lib/plugins/export/PluginExportHTML.py:140
 #: ../glade/griffith.glade.h:137
 msgid "Site"
-msgstr "ځای"
+msgstr "Інтернет сторінка"
 
 #: ../lib/initialize.py:629 ../lib/plugins/export/PluginExportHTML.py:149
 #: ../glade/griffith.glade.h:143
 msgid "Studio"
-msgstr "سټوډیو"
+msgstr "Студія"
 
 #: ../lib/initialize.py:631 ../lib/plugins/export/PluginExportHTML.py:141
 #: ../glade/griffith.glade.h:150
 msgid "Trailer"
-msgstr "څکند،غزند"
+msgstr "Анонс"
 
 #: ../lib/initialize.py:632 ../lib/plugins/export/PluginExportHTML.py:164
 #: ../glade/griffith.glade.h:157
 msgid "Video codec"
-msgstr ""
+msgstr "Відео кодек"
 
 #: ../lib/initialize.py:633 ../lib/plugins/export/PluginExportHTML.py:162
 #: ../glade/griffith.glade.h:160
 msgid "Volume"
-msgstr "د غږ ډکوالی یا جګوالی"
+msgstr "Гучність"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
 #: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
 #: ../lib/initialize.py:895
 msgid "N/A"
-msgstr ""
+msgstr "Н/Д"
 
 #: ../lib/initialize.py:635
 msgid "Damaged"
-msgstr "وران شوی"
+msgstr "Пошкоджено"
 
 #: ../lib/initialize.py:635
 msgid "Poor"
-msgstr "خراب،کم زوری"
+msgstr "Поганий"
 
 #: ../lib/initialize.py:635
 msgid "Fair"
-msgstr "وړ،پوره،ښکلی"
+msgstr "Непогано"
 
 #: ../lib/initialize.py:635
 msgid "Good"
-msgstr "ښه"
+msgstr "Добре"
 
 #: ../lib/initialize.py:635
 msgid "Excellent"
-msgstr "غوره،ډیر ښه، عالي"
+msgstr "Чудовий"
 
 #: ../lib/initialize.py:636
 msgid "Black and White"
-msgstr "تور او سپین"
+msgstr "Чорно-білий"
 
 #: ../lib/initialize.py:636
 msgid "Mixed"
-msgstr "ګډ شوی"
+msgstr "Змішаний"
 
 #: ../lib/initialize.py:638
 msgid "Single Side, Single Layer"
-msgstr "یوازې اړخ،یوازې پوړ"
+msgstr "Односторонній, Одношаровий"
 
 #: ../lib/initialize.py:638
 msgid "Single Side, Dual Layer"
-msgstr "یوازې اړخ،غبرګ پوړ"
+msgstr "Односторонній, Двошаровий"
 
 #: ../lib/initialize.py:638
 msgid "Dual Side, Single Layer"
-msgstr "غبرګ اړخ،یوازې پوړ"
+msgstr "Двосторонній, Одношаровий"
 
 #: ../lib/initialize.py:638
 msgid "Dual Side, Dual Layer"
-msgstr "غبرګ اړخ، غبرګ پوړ"
+msgstr "Двосторонній, Двошаровий"
 
 #: ../lib/initialize.py:640
 msgid "Region 0 (No Region Coding)"
-msgstr ""
+msgstr "Регіон 0 (код регіону)"
 
 #: ../lib/initialize.py:641
 msgid "Region 1 (United States of America, Canada)"
-msgstr "۱ سیمه(د امریکا متحده ایالات،کاناډا)"
+msgstr "Регіон 1 (США, Канада)"
 
 #: ../lib/initialize.py:642
 msgid ""
 "Region 2 (Europe,including France, Greece, Turkey, Egypt, Arabia, Japan and "
 "South Africa)"
 msgstr ""
-"۲ سیمه(اروپا، فرانسه،یونان،ترکیه،مصر،عربی ممالک،جاپان او جنوبي افریقا شامل "
-"هیوادونه)"
+"Регіон 2 (містить Францію, Грецію, Туреччину, Єгипет, Арабські країни, "
+"Японію, ПАР)"
 
 #: ../lib/initialize.py:643
 msgid "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
-msgstr "۳  سیمه(کوریا،ټایلنډ،ویتنام،بوزنیا او اندونیزیا)،"
+msgstr "Регіон 3 (Корея, Тайланд, В'єтнам, Борнео та Індонезія)"
 
 #: ../lib/initialize.py:644
 msgid ""
 "Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
 "America)"
-msgstr "۴ سیمه(استرالیا،نوی زیلاند،مکسیکو،کارابین،او جنوبی امریکا)"
+msgstr ""
+"Регіон 4 (Австралія і Нова Зеландія, Мексика, Карибські острови та Південна "
+"Америка)"
 
 #: ../lib/initialize.py:645
 msgid "Region 5 (India, Africa, Russia and former USSR countries)"
-msgstr "۵ سیمه(هند،افریقا،روسیه او د پخوانۍ روسیې هیوادونه)"
+msgstr "Регіон 5 (Індія, Африка, Росія і колишні республіки СРСР)"
 
 #: ../lib/initialize.py:646
 msgid "Region 6 (Popular Republic of China)"
-msgstr "۶ سیمه(جمهوریت خلق چین)"
+msgstr "Регіон 6 (Китай)"
 
 #: ../lib/initialize.py:647
 msgid "Region 7 (Reserved for Unspecified Special Use)"
-msgstr "۷ سیمه(د نا څرګنده ځانګړي کارونې لپاره ځانګړي شوي)"
+msgstr "Регіон 7 (Зарезервовано для спеціальної мети)"
 
 #: ../lib/initialize.py:648
 msgid "Region 8 (Airlines/Cruise Ships)"
-msgstr "۸ سیمه(هوايي کرښې/د بیړیو څارن ځای)"
+msgstr "Регіон 8 (Авіа і Морські подорожі)"
 
 #: ../lib/initialize.py:685
 msgid "Dictionary not available. Spellcheck will be disabled. \n"
-msgstr ""
+msgstr "Словник не доступний. Перевірка орфографії не можлива. \n"
 
 #: ../lib/loan.py:40
 msgid "No person is defined yet."
-msgstr "تر اوسه کوم کس نه دی معلوم شوی"
+msgstr "Осіб ще немає"
 
 #: ../lib/loan.py:67
 msgid "Do you want to loan whole collection?"
-msgstr "غواړئ چې ټوله ټولګه پور کړئ؟"
+msgstr "Ви дійсно хочете позичити всю колекцію?"
 
 #: ../lib/loan.py:79
 msgid "Movie loaned"
-msgstr "فلم پور شو"
+msgstr "Фільм позичено"
 
 #: ../lib/main_treeview.py:245
 msgid "This movie has been loaned to "
-msgstr "دا فلم .... ته پور شو "
+msgstr "Цей фільм позичено "
 
 #: ../lib/main_treeview.py:245
 msgid " on "
-msgstr " روښانه "
+msgstr " на "
 
 #: ../lib/main_treeview.py:256
 msgid "Movie not loaned"
-msgstr "فلم پور نه شو"
+msgstr "Фільм не позичено"
 
 #: ../lib/movie.py:121
 msgid "Fetching data"
-msgstr ""
+msgstr "Отримання даних"
 
 #: ../lib/movie.py:241
 msgid "Searching"
-msgstr "پلټل"
+msgstr "Пошук"
 
 #: ../lib/movie.py:280
 msgid "Connection error"
-msgstr "د اریکې تیروتنه"
+msgstr "Помилка з'єднання"
 
 #: ../lib/movie.py:320
 msgid "Cancel"
-msgstr "فسخ کول"
+msgstr "Скасувати"
 
 #: ../lib/people.py:59
 msgid "You should fill the person name"
-msgstr "ښایي تاسو د کس نوم ډک کړئ"
+msgstr "Ви повинні ввести ім'я особи"
 
 #: ../lib/people.py:88
 msgid "Record updated"
-msgstr "ټیکلی نوی شو"
+msgstr "Запис оновлено"
 
 #: ../lib/people.py:111
 msgid "This person has loaned films from you. Return them first."
-msgstr ""
+msgstr "Особа позичила у вас фільми. Повернути їх в першу чергу."
 
 #: ../lib/people.py:116
 msgid ""
 "This person has data in the loan history. This data will be erased if you "
 "continue."
 msgstr ""
-"دې کس په پخواني پور کې معلومات درلودل. که چیرې مخته لاړ شئ نو دا معلومات به "
-"پاک شي"
+"Ця особа має записи в історії позичок. Дані будуть видалені, якщо ви "
+"продовжите."
 
 #: ../lib/people.py:117
 #, python-format
@@ -817,16 +824,16 @@ msgstr ""
 msgid ""
 "This item is in use.\n"
 "Operation aborted!"
-msgstr ""
+msgstr "Цей пункт використовується."
 
 #: ../lib/sql.py:82
 msgid "This name is already in use!"
-msgstr "دا نوم کارول شوی"
+msgstr "Це ім'я вже використовується!"
 
 #: ../lib/sql.py:278
 #, python-format
 msgid "Column \"%s\" is not unique"
-msgstr ""
+msgstr "Колонка \"%s\" не унікальна"
 
 #: ../lib/sql.py:348
 msgid ""
@@ -1403,9 +1410,8 @@ msgid "By Tag"
 msgstr ""
 
 #: ../glade/griffith.glade.h:32
-#, fuzzy
 msgid "By Volume"
-msgstr "د غږ ډکوالی یا جګوالی"
+msgstr ""
 
 #: ../glade/griffith.glade.h:34
 msgid "Choose Image"
@@ -1554,7 +1560,7 @@ msgstr ""
 #: ../glade/griffith.glade.h:81
 #, fuzzy
 msgid "Loaned to"
-msgstr "پوری شوی دی"
+msgstr "Позичено"
 
 #: ../glade/griffith.glade.h:82
 msgid "Loans"
@@ -1891,11 +1897,11 @@ msgstr ""
 
 #: ../glade/importcsv.glade.h:10
 msgid "Encoding"
-msgstr ""
+msgstr "Кодування"
 
 #: ../glade/importcsv.glade.h:11 ../glade/import.glade.h:6
 msgid "Fields"
-msgstr ""
+msgstr "Поля"
 
 #: ../glade/importcsv.glade.h:12
 msgid "File-Options"
@@ -1903,23 +1909,25 @@ msgstr ""
 
 #: ../glade/importcsv.glade.h:13
 msgid "From Row"
-msgstr ""
+msgstr "З рядка"
 
 #: ../glade/importcsv.glade.h:14
 msgid "Griffith Fields"
-msgstr ""
+msgstr "Поля Griffith"
 
 #: ../glade/importcsv.glade.h:15
 msgid "If your file has no column headers then you should import from row 0."
 msgstr ""
+"Якщо в вашому файлі немає назв стовпців, тоді Ви повинні імпортувати їх з 0 "
+"рядка."
 
 #: ../glade/importcsv.glade.h:16
 msgid "Lineterminator"
-msgstr ""
+msgstr "Кінець лінії"
 
 #: ../glade/importcsv.glade.h:17
 msgid "Quotechar"
-msgstr ""
+msgstr "Символ Кавичок"
 
 #: ../glade/importcsv.glade.h:18
 msgid ""
@@ -2012,20 +2020,20 @@ msgstr ""
 
 #: ../glade/import.glade.h:1
 msgid "<b>Import only fields selected below</b>"
-msgstr ""
+msgstr "<b>Імпортувати тільки відмічені нижче поля</b>"
 
 #: ../glade/import.glade.h:2
 msgid "<b>Importing...</b>"
-msgstr ""
+msgstr "<b>Імпортується...</b>"
 
 #: ../glade/import.glade.h:7
 msgid "Import window"
-msgstr ""
+msgstr "Вікно імпорту"
 
 #: ../glade/import.glade.h:8
 msgid "Plugin"
-msgstr ""
+msgstr "Модуль"
 
 #: ../glade/import.glade.h:9
 msgid "Source"
-msgstr ""
+msgstr "Текст програми"
