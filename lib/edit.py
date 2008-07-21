@@ -166,8 +166,7 @@ def fetch_bigger_poster(self):
 	self.widgets['add']['b_get_from_web'].set_sensitive(False) # disable movie plugins (result window is shared)
 
 	for f in range(len(result.Item)):
-
-		if (len(result.Item[f].LargeImage.URL)):
+		if hasattr(result.Item[f], "LargeImage") and len(result.Item[f].LargeImage.URL):
 			title = result.Item[f].ItemAttributes.Title
 			myiter = self.treemodel_results.insert_before(None, None)
 			self.treemodel_results.set_value(myiter, 0, str(f))

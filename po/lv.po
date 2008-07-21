@@ -1,16 +1,16 @@
-# Pushto translation for griffith
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# Latvian translation for griffith
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the griffith package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: griffith\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-07-21 21:28+0200\n"
-"PO-Revision-Date: 2008-01-26 21:56+0000\n"
-"Last-Translator: Baseer Ahmad Baheer <suraj.lmar@gmail.com>\n"
-"Language-Team: Pashto <ps@li.org>\n"
+"PO-Revision-Date: 2008-06-02 12:46+0000\n"
+"Last-Translator: Aleksandrs Zdancuks <aleksandrs.zdancuks@gmail.com>\n"
+"Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,16 +20,17 @@ msgstr ""
 #: ../griffith:212 ../griffith:842 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
 msgid "You have no movies in your database"
-msgstr "تاسوپخپل معلوماتي بانک کې کوم فلم نه لرئ"
+msgstr "Jums nav neviena filma datubazē"
 
 #: ../griffith:393
 msgid "You have seen all films in your collection!"
-msgstr "تاسو پخپله ټولګه کې ټول فلمونه وکتل"
+msgstr ""
 
 #: ../griffith:521 ../griffith:526 ../lib/initialize.py:350
 #: ../lib/initialize.py:637
+#, fuzzy
 msgid "subtitles"
-msgstr "فرعي سرلیکونه"
+msgstr "subtitri"
 
 #: ../griffith:809
 msgid ""
@@ -37,9 +38,6 @@ msgid ""
 "Your current movie collection will be replaced.\n"
 "You can't undo this operation."
 msgstr ""
-"آیا تاسو ډاډه یاست چې بیرته لمړني حالت ته واوړئ؟\n"
-" امکان لري ستاسو همدا فلم بدل شي\n"
-"تاسو نشئ کولای چې دا چارې بیرته راولئ"
 
 #: ../griffith:819
 msgid ""
@@ -47,77 +45,74 @@ msgid ""
 "Your current movie collection will be mixed with a backup.\n"
 "You can't undo this operation."
 msgstr ""
-"آیا تاسو ډاډه یاست چې سره ګډ کړی؟\n"
-"کیدای شي ستاسو د فلم دا ټولګه له یوه ملاتړ سره ګډ شي\n"
-"تاسو نشئ کولای چې دا چارې بیرته راولئ"
 
 #: ../griffith:917
 msgid " movie(s) in collection. "
-msgstr " په ټولګه کې فلمونه "
+msgstr " filma(s) kolekcijā "
 
 #: ../griffith:918
 msgid " movie(s) loaned. "
-msgstr " فلمونه پور شوي "
+msgstr ""
 
 #: ../griffith:919
 msgid "You haven't seen "
-msgstr "تاسو نه دي لیدلي "
+msgstr ""
 
 #: ../griffith:919
 msgid " movie(s)"
-msgstr " فلمونه"
+msgstr " filma(s)"
 
 #: ../griffith:1121
 msgid ""
 "Are you sure you want to create a new database?\n"
 "You will lose ALL your current data!"
 msgstr ""
-"آیا تاسو ډاډمن یاست چې یو نوی معلوماتي بانک جوړ کړئ؟\n"
-"کیدای شي تاسو خپله اوسنۍ منځپانګه له لاسه ورکړئ"
 
 #: ../griffith:1125
 msgid ""
 "Last chance!\n"
 "Do you confirm that you want\n"
 "to lose your current data?"
-msgstr "وروستی چانس(فرصت)"
+msgstr ""
 
 #: ../lib/about.py:41
+#, fuzzy
 msgid "Main Authors"
-msgstr "اصلي جوړوونکی،پیل کوونکی، لیکونکی"
+msgstr "Galvenais autors"
 
 #: ../lib/about.py:43
 msgid "Programmers"
-msgstr "پروګرام لیکونکي"
+msgstr "Programmētēji"
 
 #: ../lib/about.py:46
 msgid "Contributors:"
-msgstr "مرسته کوونکيپر"
+msgstr "Atbalstītāji:"
 
 #: ../lib/about.py:50
 msgid "Logo, icon and general artwork "
 msgstr ""
 
 #: ../lib/about.py:76
+#, fuzzy
 msgid "See TRANSLATORS file"
-msgstr ""
+msgstr "Apskatities TRANSLATORU failu"
 
 #: ../lib/about.py:84
 msgid "This program is released under the GNU"
-msgstr "دا پروګرام د GNU پر بنسټ خپور شو"
+msgstr ""
 
 #: ../lib/add.py:45 ../glade/griffith.glade.h:23
 msgid "Add a new movie"
-msgstr "نوی فلم اضافه کول"
+msgstr "Pievienot jaunu filmu"
 
 #: ../lib/add.py:56
 msgid "Edit movie"
-msgstr "د فلم بیا سمول"
+msgstr "Reģiget filmu"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
 #: ../lib/main_treeview.py:497
 msgid " min"
-msgstr ""
+msgstr " min"
 
 #: ../lib/add.py:379
 msgid "Movie information has been updated"
@@ -127,23 +122,23 @@ msgstr ""
 msgid ""
 "You should fill the original title\n"
 "or the movie title."
-msgstr "ښایي تاسو اصلي او یا هم د فلم سرلیک ډک کړئ"
+msgstr ""
 
 #: ../lib/add.py:390 ../lib/add.py:396
 msgid "Movie with that title already exists, are you sure you want to add?"
-msgstr "په دې سرلیک فلم شته دی،ډاډه یاست تر څو دا فلم اضافه کړی؟"
+msgstr ""
 
 #: ../lib/add.py:575
 msgid "No results"
-msgstr "بې پایلې"
+msgstr "Nav rezultātu"
 
 #: ../lib/add.py:621
 msgid "Url: "
-msgstr "URL "
+msgstr ""
 
 #: ../lib/add.py:622
 msgid "Language: "
-msgstr "ژبه: "
+msgstr "Valoda: "
 
 #: ../lib/backup.py:32
 msgid "Save Griffith backup"
@@ -154,11 +149,12 @@ msgstr ""
 #: ../lib/plugins/export/PluginExportPDF.py:85
 #: ../lib/plugins/export/PluginExportXML.py:65
 msgid "File exists. Do you want to overwrite it?"
-msgstr "فایل شته دی. غواړئ چې بدل یې کړئ؟"
+msgstr "Datne eksistē. Vai vēlaties parrakstīt to?"
 
 #: ../lib/backup.py:55
+#, fuzzy
 msgid "Error creating backup"
-msgstr ""
+msgstr "Kļuda viedojot bekapu"
 
 #: ../lib/backup.py:62
 msgid "Backup function is available only for SQLite engine for now"
@@ -166,7 +162,7 @@ msgstr ""
 
 #: ../lib/backup.py:105
 msgid "Backup has been created"
-msgstr "ملاتړ جوړ شو"
+msgstr ""
 
 #: ../lib/backup.py:109 ../lib/backup.py:183
 msgid "Restore Griffith backup"
@@ -174,15 +170,15 @@ msgstr ""
 
 #: ../lib/backup.py:117 ../lib/backup.py:199
 msgid "Can't read backup file"
-msgstr "ملاتړ فایل نشي لوستلای"
+msgstr ""
 
 #: ../lib/backup.py:174
 msgid "Backup restored"
-msgstr "ملاتړ بیرته راوړل شو"
+msgstr ""
 
 #: ../lib/cover.py:42 ../lib/edit.py:46
 msgid "Select image"
-msgstr "انځور وټاکی"
+msgstr ""
 
 #: ../lib/cover.py:86 ../lib/cover.py:149
 msgid "Cover generated by Griffith v"
@@ -198,56 +194,56 @@ msgstr ""
 #: ../lib/plugins/export/PluginExportHTML.py:145
 #: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:97
 msgid "Original Title"
-msgstr "اصلي سرلیک"
+msgstr "Originalais nosaukums"
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:630
 #: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:148
 msgid "Title"
-msgstr "سرلیک"
+msgstr "Nosaukums"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:612
 #: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:48
 msgid "Director"
-msgstr "مشر،مدیر،رییس،اداره کوونکی،لارښود"
+msgstr "Direktors"
 
 #: ../lib/cover.py:181
 msgid "Running Time"
-msgstr "د چلیدو وخت"
+msgstr ""
 
 #: ../lib/cover.py:182 ../lib/initialize.py:611
 #: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:41
 msgid "Country"
-msgstr "هیواد"
+msgstr "Valsts"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:613
 #: ../lib/plugins/export/PluginExportHTML.py:137
 #: ../lib/plugins/export/PluginExportPDF.py:147 ../glade/griffith.glade.h:62
 msgid "Genre"
-msgstr "ژانر،ښکلي هنرونه"
+msgstr "Žanrs"
 
 #: ../lib/dbupgrade.py:86 ../lib/plugins/movie/PluginMovieE-Pipoca.py:34
 msgid "Brazilian Portuguese"
-msgstr "برازیلایی پرتګالي"
+msgstr ""
 
 #: ../lib/dbupgrade.py:87
 msgid "Bulgarian"
-msgstr "بلغاریایي"
+msgstr "Bulgāru"
 
 #: ../lib/dbupgrade.py:88
 msgid "Catalan"
-msgstr ""
+msgstr "Kataloniešu"
 
 #: ../lib/dbupgrade.py:89 ../lib/plugins/movie/PluginMovieCSFD.py:30
 msgid "Czech"
-msgstr "چکی"
+msgstr "Čehu"
 
 #: ../lib/dbupgrade.py:90
 msgid "Danish"
-msgstr ""
+msgstr "Dāņu"
 
 #: ../lib/dbupgrade.py:91
 msgid "Dutch"
-msgstr ""
+msgstr "Holandiešu"
 
 #: ../lib/dbupgrade.py:92 ../lib/plugins/movie/PluginMovieAniDB.py:32
 #: ../lib/plugins/movie/PluginMovieDVDEmpire.py:32
@@ -255,16 +251,16 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieMediadis.py:16
 #: ../lib/plugins/movie/PluginMovieMoviefone.py:16
 msgid "English"
-msgstr "انګلیسي"
+msgstr "Angļu"
 
 #: ../lib/dbupgrade.py:93
 msgid "Estonian"
-msgstr ""
+msgstr "Igauņu"
 
 #: ../lib/dbupgrade.py:94 ../lib/plugins/movie/PluginMovieAllocine.py:32
 #: ../lib/plugins/movie/PluginMovieCineMovies.py:31
 msgid "French"
-msgstr ""
+msgstr "Franču"
 
 #: ../lib/dbupgrade.py:95 ../lib/plugins/movie/PluginMovieDVDPalace.py:33
 #: ../lib/plugins/movie/PluginMovieFilmDb.py:32
@@ -274,45 +270,43 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieOFDb.py:17
 #: ../lib/plugins/movie/PluginMovieZelluloid.py:33
 msgid "German"
-msgstr ""
+msgstr "Vācu"
 
 #: ../lib/dbupgrade.py:96
 msgid "Greek"
-msgstr ""
+msgstr "Grieķu"
 
 #: ../lib/dbupgrade.py:97
-#, fuzzy
 msgid "Hungarian"
-msgstr "بلغاریایي"
+msgstr "Ungāru"
 
 #: ../lib/dbupgrade.py:98
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonēziešu"
 
 #: ../lib/dbupgrade.py:99 ../lib/plugins/movie/PluginMovieCinematografo.py:30
 msgid "Italian"
-msgstr ""
+msgstr "Itāļu"
 
 #: ../lib/dbupgrade.py:100
 msgid "Japanese"
-msgstr ""
+msgstr "Japāņu"
 
 #: ../lib/dbupgrade.py:101
 msgid "Korean"
-msgstr ""
+msgstr "Korejiešu"
 
 #: ../lib/dbupgrade.py:102
 msgid "Norwegian Bokmal"
-msgstr ""
+msgstr "Norvēģu (Bukmalu)"
 
 #: ../lib/dbupgrade.py:103
 msgid "Occitan"
 msgstr ""
 
 #: ../lib/dbupgrade.py:104
-#, fuzzy
 msgid "Pashto"
-msgstr "غورځول،توږل، شمیرل"
+msgstr ""
 
 #: ../lib/dbupgrade.py:105 ../lib/plugins/movie/PluginMovieFDb.py:33
 #: ../lib/plugins/movie/PluginMovieFilmweb.py:31
@@ -327,11 +321,11 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieCineteka.py:32
 #: ../lib/plugins/movie/PluginMoviePTGate.py:32
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugāļu"
 
 #: ../lib/dbupgrade.py:107
 msgid "Russian"
-msgstr ""
+msgstr "Krievu"
 
 #: ../lib/dbupgrade.py:108
 msgid "Simplified Chinese"
@@ -339,25 +333,25 @@ msgstr ""
 
 #: ../lib/dbupgrade.py:109
 msgid "Slovak"
-msgstr ""
+msgstr "Slovāku"
 
 #: ../lib/dbupgrade.py:110 ../lib/plugins/movie/PluginMovieCulturalia.py:32
 #: ../lib/plugins/movie/PluginMovieFilmAffinity.py:32
 #: ../lib/plugins/movie/PluginMovieIMDB-es.py:32
 msgid "Spanish"
-msgstr "هسپانوي"
+msgstr "Spāņu"
 
 #: ../lib/dbupgrade.py:111 ../lib/plugins/movie/PluginMovieFilmtipset.py:33
 msgid "Swedish"
-msgstr "سویډني"
+msgstr "Zviedru"
 
 #: ../lib/dbupgrade.py:112
 msgid "Turkish"
-msgstr "ترکي"
+msgstr "Turku"
 
 #: ../lib/dbupgrade.py:115
 msgid "Favourite"
-msgstr "غوره، د خوښې،په زړه پورې"
+msgstr ""
 
 #: ../lib/dbupgrade.py:137
 msgid ""
@@ -381,53 +375,52 @@ msgstr ""
 
 #: ../lib/delete.py:39
 msgid "Are you sure you want to delete this movie?"
-msgstr "آیا تاسو ډاډمن یاست چې دا فلم له منځه یوسئ؟"
+msgstr ""
 
 #: ../lib/edit.py:58
 msgid "Image not valid."
-msgstr "انځور سم نه دی"
+msgstr ""
 
 #: ../lib/edit.py:88 ../lib/edit.py:106
 msgid "Image has been updated"
-msgstr "انځور نوی شو"
+msgstr ""
 
 #: ../lib/edit.py:95
 msgid "Are you sure you want to delete this poster?"
-msgstr "غواړئ داخبرتیا له منځه یوسئ؟"
+msgstr ""
 
 #: ../lib/edit.py:149 ../lib/edit.py:156
 msgid "No posters found for this movie."
-msgstr "د دې فلم لپاره کومې څرګندونې ونه موندل شوې"
+msgstr ""
 
 #: ../lib/edit.py:201 ../lib/movie.py:147
 msgid "Fetching poster"
-msgstr "د راوړلو خبرتیا ،د خرڅولو خبرتیا"
+msgstr ""
 
 #: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
-msgstr "یوه شیبه تم شئ"
+msgstr "Mirkliti uzgaidiet"
 
 #: ../lib/edit.py:213
 msgid "Sorry. A connection error has occurred."
-msgstr "وبخښئ. د اړیکو یوه تیروتنه پیښه شوه"
+msgstr ""
 
 #: ../lib/edit.py:226 ../lib/edit.py:259
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
-"وبخښئ. دا فلم لیست شو ولې په Amazon.com کې ورته کومه خبرتیا ونه موندل شوه"
 
 #: ../lib/edit.py:245
 msgid "Do you want to use this poster instead?"
-msgstr "آیا تاسو غواړئ دهغه په ځای دا خبرتیا وکاروئ"
+msgstr ""
 
 #: ../lib/gconsole.py:133
 msgid "No movie found"
-msgstr "کوم فلم ونه موندل شو"
+msgstr ""
 
 #: ../lib/gemail.py:39
 msgid "Connection timed out"
-msgstr "د اړیکو وخت پای ته ورسید"
+msgstr ""
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
@@ -440,7 +433,7 @@ msgstr ""
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
-msgstr "بریښنالیک په بریالي توګه ولیږل شو"
+msgstr ""
 
 #: ../lib/gemail.py:77
 msgid "Movie loan reminder"
@@ -457,8 +450,6 @@ msgstr ""
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
 msgstr ""
-"کیدای شي بریښنالیک نه وي لیږل شوی، مهرباني وکړئ او د بریښنا لیک لمړیتوبونه "
-"چک کړئ"
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
@@ -466,11 +457,11 @@ msgstr ""
 
 #: ../lib/gutils.py:265
 msgid "Images"
-msgstr "انځورونه"
+msgstr "Attēli"
 
 #: ../lib/gutils.py:276 ../lib/plugins/imp/__init__.py:202
 msgid "All files"
-msgstr "ټول فایلونه"
+msgstr "Visi faili"
 
 #: ../lib/initialize.py:187
 msgid "N."
@@ -479,7 +470,7 @@ msgstr ""
 #: ../lib/initialize.py:194 ../lib/initialize.py:614
 #: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:69
 msgid "Image"
-msgstr "انځور"
+msgstr "Attēls"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:627
 #: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:127
@@ -489,34 +480,34 @@ msgstr ""
 #: ../lib/initialize.py:236 ../lib/initialize.py:634
 #: ../lib/plugins/export/PluginExportHTML.py:152 ../glade/griffith.glade.h:162
 msgid "Year"
-msgstr "کال"
+msgstr "Gads"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:626
 #: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:123
 msgid "Runtime"
-msgstr "د سرته رسیدو وخت"
+msgstr ""
 
 #: ../lib/initialize.py:254 ../lib/initialize.py:624
 #: ../lib/plugins/export/PluginExportHTML.py:147 ../glade/griffith.glade.h:113
 msgid "Rating"
-msgstr "پوړ، نرخ تړنه، ډله"
+msgstr "Novērtējums"
 
 #: ../lib/initialize.py:306
 msgid "Loan Date"
-msgstr "د پور نیټه"
+msgstr ""
 
 #: ../lib/initialize.py:312
 msgid "Return Date"
-msgstr "د راګرځیدو نیټه"
+msgstr ""
 
 #: ../lib/initialize.py:317
 msgid "Loaned To"
-msgstr "پوری شوی دی"
+msgstr ""
 
 #: ../lib/initialize.py:336 ../lib/plugins/movie/PluginMovieIMDB-de.py:145
 #: ../lib/plugins/movie/PluginMovieIMDB.py:140
 msgid "Language"
-msgstr "ژبه"
+msgstr "Valoda"
 
 #: ../lib/initialize.py:348 ../lib/initialize.py:637
 msgid "lector"
@@ -528,11 +519,11 @@ msgstr ""
 
 #: ../lib/initialize.py:351 ../lib/initialize.py:637
 msgid "commentary"
-msgstr "یو لړ تبصرې"
+msgstr ""
 
 #: ../lib/initialize.py:358 ../glade/griffith.glade.h:151
 msgid "Type"
-msgstr "نښه،ډول ،نمونه، ټايپ"
+msgstr "Tips"
 
 #: ../lib/initialize.py:373
 msgid "Codec"
@@ -540,57 +531,57 @@ msgstr ""
 
 #: ../lib/initialize.py:388
 msgid "Channels"
-msgstr "لارې،کانال،د رادیويي ارتباط څپې"
+msgstr "Kanāli"
 
 #: ../lib/initialize.py:403
 msgid "Subtitle format"
-msgstr "د فرعي سرلیک شکل"
+msgstr ""
 
 #: ../lib/initialize.py:519 ../glade/griffith.glade.h:91
 msgid "Name"
-msgstr "نوم"
+msgstr "Vārds"
 
 #: ../lib/initialize.py:525 ../glade/exporthtml.glade.h:16
 #: ../glade/griffith.glade.h:50 ../glade/import.glade.h:5
 msgid "E-mail"
-msgstr "بريښنلیک"
+msgstr "E-pasts"
 
 #: ../lib/initialize.py:573
 msgid "Last added"
-msgstr "وروستی اضافه شوی"
+msgstr ""
 
 #: ../lib/initialize.py:606 ../lib/plugins/export/PluginExportHTML.py:133
 #: ../lib/plugins/export/PluginExportPDF.py:153 ../glade/griffith.glade.h:33
 msgid "Cast"
-msgstr "غورځول،توږل، شمیرل"
+msgstr ""
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:134
 #: ../glade/griffith.glade.h:35
 msgid "Classification"
-msgstr "طبقه بندی"
+msgstr "Klasifikācija"
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:161
 #: ../glade/griffith.glade.h:38
 msgid "Collection"
-msgstr "ټولګه"
+msgstr "Kolekcija"
 
 #: ../lib/initialize.py:609 ../lib/initialize.py:636
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
 #: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:39
 msgid "Color"
-msgstr "رنګ"
+msgstr "Krāsa"
 
 #: ../lib/initialize.py:610 ../glade/griffith.glade.h:40
 msgid "Condition"
-msgstr "شرط"
+msgstr ""
 
 #: ../lib/initialize.py:615 ../glade/griffith.glade.h:73
 msgid "Layers"
-msgstr "پوړ"
+msgstr "Slāņi"
 
 #: ../lib/initialize.py:616 ../lib/plugins/export/PluginExportHTML.py:142
 msgid "Loaned"
-msgstr "پور شوی"
+msgstr ""
 
 #: ../lib/initialize.py:617 ../lib/plugins/export/PluginExportHTML.py:143
 #: ../glade/griffith.glade.h:49
@@ -599,46 +590,46 @@ msgstr ""
 
 #: ../lib/initialize.py:618 ../glade/griffith.glade.h:86
 msgid "Medium"
-msgstr "منځنی"
+msgstr ""
 
 #: ../lib/initialize.py:619 ../lib/plugins/export/PluginExportHTML.py:153
 #: ../glade/griffith.glade.h:94
 msgid "Notes"
-msgstr "یادښتونه"
+msgstr "Piezīmes"
 
 #: ../lib/initialize.py:620 ../lib/sql.py:278
 #: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:95
 msgid "Number"
-msgstr "شمیره،عدد، ګڼه"
+msgstr "Numurs"
 
 #: ../lib/initialize.py:621 ../lib/plugins/export/PluginExportHTML.py:139
 #: ../glade/griffith.glade.h:96
 msgid "Official site"
-msgstr "رسمي ځای"
+msgstr ""
 
 #: ../lib/initialize.py:623 ../lib/plugins/export/PluginExportHTML.py:146
 #: ../glade/griffith.glade.h:105
 msgid "Plot"
-msgstr "ټوټه"
+msgstr "Sižets"
 
 #: ../lib/initialize.py:625 ../glade/griffith.glade.h:115
 msgid "Region"
-msgstr "سیمه"
+msgstr "Reģions"
 
 #: ../lib/initialize.py:628 ../lib/plugins/export/PluginExportHTML.py:140
 #: ../glade/griffith.glade.h:137
 msgid "Site"
-msgstr "ځای"
+msgstr ""
 
 #: ../lib/initialize.py:629 ../lib/plugins/export/PluginExportHTML.py:149
 #: ../glade/griffith.glade.h:143
 msgid "Studio"
-msgstr "سټوډیو"
+msgstr "Studija"
 
 #: ../lib/initialize.py:631 ../lib/plugins/export/PluginExportHTML.py:141
 #: ../glade/griffith.glade.h:150
 msgid "Trailer"
-msgstr "څکند،غزند"
+msgstr ""
 
 #: ../lib/initialize.py:632 ../lib/plugins/export/PluginExportHTML.py:164
 #: ../glade/griffith.glade.h:157
@@ -648,57 +639,57 @@ msgstr ""
 #: ../lib/initialize.py:633 ../lib/plugins/export/PluginExportHTML.py:162
 #: ../glade/griffith.glade.h:160
 msgid "Volume"
-msgstr "د غږ ډکوالی یا جګوالی"
+msgstr "Skaļums"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
 #: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
 #: ../lib/initialize.py:895
 msgid "N/A"
-msgstr ""
+msgstr "Nav pieejams"
 
 #: ../lib/initialize.py:635
 msgid "Damaged"
-msgstr "وران شوی"
+msgstr "Bojats"
 
 #: ../lib/initialize.py:635
 msgid "Poor"
-msgstr "خراب،کم زوری"
+msgstr "Vāji"
 
 #: ../lib/initialize.py:635
 msgid "Fair"
-msgstr "وړ،پوره،ښکلی"
+msgstr "Pietiekami"
 
 #: ../lib/initialize.py:635
 msgid "Good"
-msgstr "ښه"
+msgstr "Labi"
 
 #: ../lib/initialize.py:635
 msgid "Excellent"
-msgstr "غوره،ډیر ښه، عالي"
+msgstr "Teicami"
 
 #: ../lib/initialize.py:636
 msgid "Black and White"
-msgstr "تور او سپین"
+msgstr "Melns un balts"
 
 #: ../lib/initialize.py:636
 msgid "Mixed"
-msgstr "ګډ شوی"
+msgstr "Miksēts"
 
 #: ../lib/initialize.py:638
 msgid "Single Side, Single Layer"
-msgstr "یوازې اړخ،یوازې پوړ"
+msgstr ""
 
 #: ../lib/initialize.py:638
 msgid "Single Side, Dual Layer"
-msgstr "یوازې اړخ،غبرګ پوړ"
+msgstr ""
 
 #: ../lib/initialize.py:638
 msgid "Dual Side, Single Layer"
-msgstr "غبرګ اړخ،یوازې پوړ"
+msgstr ""
 
 #: ../lib/initialize.py:638
 msgid "Dual Side, Dual Layer"
-msgstr "غبرګ اړخ، غبرګ پوړ"
+msgstr ""
 
 #: ../lib/initialize.py:640
 msgid "Region 0 (No Region Coding)"
@@ -706,41 +697,39 @@ msgstr ""
 
 #: ../lib/initialize.py:641
 msgid "Region 1 (United States of America, Canada)"
-msgstr "۱ سیمه(د امریکا متحده ایالات،کاناډا)"
+msgstr ""
 
 #: ../lib/initialize.py:642
 msgid ""
 "Region 2 (Europe,including France, Greece, Turkey, Egypt, Arabia, Japan and "
 "South Africa)"
 msgstr ""
-"۲ سیمه(اروپا، فرانسه،یونان،ترکیه،مصر،عربی ممالک،جاپان او جنوبي افریقا شامل "
-"هیوادونه)"
 
 #: ../lib/initialize.py:643
 msgid "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
-msgstr "۳  سیمه(کوریا،ټایلنډ،ویتنام،بوزنیا او اندونیزیا)،"
+msgstr ""
 
 #: ../lib/initialize.py:644
 msgid ""
 "Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
 "America)"
-msgstr "۴ سیمه(استرالیا،نوی زیلاند،مکسیکو،کارابین،او جنوبی امریکا)"
+msgstr ""
 
 #: ../lib/initialize.py:645
 msgid "Region 5 (India, Africa, Russia and former USSR countries)"
-msgstr "۵ سیمه(هند،افریقا،روسیه او د پخوانۍ روسیې هیوادونه)"
+msgstr ""
 
 #: ../lib/initialize.py:646
 msgid "Region 6 (Popular Republic of China)"
-msgstr "۶ سیمه(جمهوریت خلق چین)"
+msgstr ""
 
 #: ../lib/initialize.py:647
 msgid "Region 7 (Reserved for Unspecified Special Use)"
-msgstr "۷ سیمه(د نا څرګنده ځانګړي کارونې لپاره ځانګړي شوي)"
+msgstr ""
 
 #: ../lib/initialize.py:648
 msgid "Region 8 (Airlines/Cruise Ships)"
-msgstr "۸ سیمه(هوايي کرښې/د بیړیو څارن ځای)"
+msgstr ""
 
 #: ../lib/initialize.py:685
 msgid "Dictionary not available. Spellcheck will be disabled. \n"
@@ -748,27 +737,27 @@ msgstr ""
 
 #: ../lib/loan.py:40
 msgid "No person is defined yet."
-msgstr "تر اوسه کوم کس نه دی معلوم شوی"
+msgstr ""
 
 #: ../lib/loan.py:67
 msgid "Do you want to loan whole collection?"
-msgstr "غواړئ چې ټوله ټولګه پور کړئ؟"
+msgstr ""
 
 #: ../lib/loan.py:79
 msgid "Movie loaned"
-msgstr "فلم پور شو"
+msgstr ""
 
 #: ../lib/main_treeview.py:245
 msgid "This movie has been loaned to "
-msgstr "دا فلم .... ته پور شو "
+msgstr ""
 
 #: ../lib/main_treeview.py:245
 msgid " on "
-msgstr " روښانه "
+msgstr ""
 
 #: ../lib/main_treeview.py:256
 msgid "Movie not loaned"
-msgstr "فلم پور نه شو"
+msgstr ""
 
 #: ../lib/movie.py:121
 msgid "Fetching data"
@@ -776,23 +765,23 @@ msgstr ""
 
 #: ../lib/movie.py:241
 msgid "Searching"
-msgstr "پلټل"
+msgstr "Notiek meklēšana"
 
 #: ../lib/movie.py:280
 msgid "Connection error"
-msgstr "د اریکې تیروتنه"
+msgstr ""
 
 #: ../lib/movie.py:320
 msgid "Cancel"
-msgstr "فسخ کول"
+msgstr "Atcelt"
 
 #: ../lib/people.py:59
 msgid "You should fill the person name"
-msgstr "ښایي تاسو د کس نوم ډک کړئ"
+msgstr ""
 
 #: ../lib/people.py:88
 msgid "Record updated"
-msgstr "ټیکلی نوی شو"
+msgstr ""
 
 #: ../lib/people.py:111
 msgid "This person has loaned films from you. Return them first."
@@ -803,8 +792,6 @@ msgid ""
 "This person has data in the loan history. This data will be erased if you "
 "continue."
 msgstr ""
-"دې کس په پخواني پور کې معلومات درلودل. که چیرې مخته لاړ شئ نو دا معلومات به "
-"پاک شي"
 
 #: ../lib/people.py:117
 #, python-format
@@ -821,7 +808,7 @@ msgstr ""
 
 #: ../lib/sql.py:82
 msgid "This name is already in use!"
-msgstr "دا نوم کارول شوی"
+msgstr ""
 
 #: ../lib/sql.py:278
 #, python-format
@@ -1032,7 +1019,7 @@ msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:85
 msgid "Media"
-msgstr ""
+msgstr "Datu nesējs"
 
 #: ../lib/plugins/export/PluginExportHTML.py:504
 #: ../lib/plugins/export/PluginExportHTML.py:506
@@ -1081,11 +1068,11 @@ msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:809
 msgid "Yes"
-msgstr ""
+msgstr "Jā"
 
 #: ../lib/plugins/export/PluginExportHTML.py:811
 msgid "No"
-msgstr ""
+msgstr "Nē"
 
 #: ../lib/plugins/export/PluginExportHTML.py:884
 msgid "Document has been generated."
@@ -1124,7 +1111,7 @@ msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:106
 msgid "List of films"
-msgstr ""
+msgstr "Filmu saraksts"
 
 #: ../lib/plugins/export/PluginExportPDF.py:109
 #, python-format
@@ -1172,7 +1159,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:3
 msgid "<b>Header</b>"
-msgstr ""
+msgstr "<b>Augšraksts</b>"
 
 #: ../glade/exporthtml.glade.h:4
 msgid "<b>Limits</b>"
@@ -1188,7 +1175,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:7
 msgid "<b>Style</b>"
-msgstr ""
+msgstr "<b>Stils</b>"
 
 #: ../glade/exporthtml.glade.h:8
 msgid "<b>Template</b>"
@@ -1196,11 +1183,11 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:9 ../glade/import.glade.h:3
 msgid "Author"
-msgstr ""
+msgstr "Autors"
 
 #: ../glade/exporthtml.glade.h:10
 msgid "Black and white"
-msgstr ""
+msgstr "Melns un balts"
 
 #: ../glade/exporthtml.glade.h:11
 msgid "Choose style file"
@@ -1212,11 +1199,11 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:13
 msgid "Data"
-msgstr ""
+msgstr "Dati"
 
 #: ../glade/exporthtml.glade.h:14 ../glade/import.glade.h:4
 msgid "Description"
-msgstr ""
+msgstr "Apraksts"
 
 #: ../glade/exporthtml.glade.h:15
 msgid "Destination"
@@ -1224,7 +1211,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:17
 msgid "Export"
-msgstr ""
+msgstr "Eksportēt"
 
 #: ../glade/exporthtml.glade.h:18
 msgid "Export data"
@@ -1232,7 +1219,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:19
 msgid "Format"
-msgstr ""
+msgstr "Formāts"
 
 #: ../glade/exporthtml.glade.h:20
 msgid "Maximal height"
@@ -1252,7 +1239,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:24
 msgid "Template"
-msgstr ""
+msgstr "Veidne"
 
 #: ../glade/exporthtml.glade.h:25
 msgid "Use custom file"
@@ -1260,7 +1247,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:26 ../glade/import.glade.h:10
 msgid "Version"
-msgstr ""
+msgstr "Versija"
 
 #: ../glade/exporthtml.glade.h:27
 msgid "entries per page"
@@ -1268,7 +1255,7 @@ msgstr ""
 
 #: ../glade/exporthtml.glade.h:28
 msgid "files"
-msgstr ""
+msgstr "faili"
 
 #: ../glade/exporthtml.glade.h:29
 msgid "loaned only"
@@ -1304,11 +1291,11 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:5
 msgid "<b>Collection</b>"
-msgstr ""
+msgstr "<b>Kolekcija</b>"
 
 #: ../glade/griffith.glade.h:6
 msgid "<b>Defaults</b>"
-msgstr ""
+msgstr "<b> Noklusētie</b>"
 
 #: ../glade/griffith.glade.h:7
 msgid "<b>E-mail reminder</b>"
@@ -1316,7 +1303,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:8
 msgid "<b>Languages</b>"
-msgstr ""
+msgstr "<b>Valodas</b>"
 
 #: ../glade/griffith.glade.h:9
 msgid "<b>Loan History</b>"
@@ -1324,7 +1311,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:10
 msgid "<b>Media</b>"
-msgstr ""
+msgstr "<b>Datu nesējs</b>"
 
 #: ../glade/griffith.glade.h:11
 msgid "<b>Search for:</b>"
@@ -1332,7 +1319,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:12
 msgid "<b>Search results</b>"
-msgstr ""
+msgstr "<b>Meklēšanas rezultāti</b>"
 
 #: ../glade/griffith.glade.h:13
 msgid "<b>Select database to use</b>"
@@ -1348,7 +1335,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:17
 msgid "<b>Subtitles</b>"
-msgstr ""
+msgstr "<b>Titri</b>"
 
 #: ../glade/griffith.glade.h:18
 msgid "<b>Tags</b>"
@@ -1368,7 +1355,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:22
 msgid "Add"
-msgstr ""
+msgstr "Pievienot"
 
 #: ../glade/griffith.glade.h:24
 msgid "Add a new person"
@@ -1376,19 +1363,19 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:25
 msgid "Add movie"
-msgstr ""
+msgstr "Pievienot filmu"
 
 #: ../glade/griffith.glade.h:26
 msgid "Add movie and close"
-msgstr ""
+msgstr "Pievienot filmu un aizvert"
 
 #: ../glade/griffith.glade.h:27
 msgid "Add new movie"
-msgstr ""
+msgstr "Pievienot jaunu filmu"
 
 #: ../glade/griffith.glade.h:28
 msgid "All Movies"
-msgstr ""
+msgstr "Visas filmas"
 
 #: ../glade/griffith.glade.h:29
 msgid "Attempt to fetch a big poster from Amazon services Web site"
@@ -1399,17 +1386,17 @@ msgid "By Collection"
 msgstr ""
 
 #: ../glade/griffith.glade.h:31
+#, fuzzy
 msgid "By Tag"
-msgstr ""
+msgstr "Tagi"
 
 #: ../glade/griffith.glade.h:32
-#, fuzzy
 msgid "By Volume"
-msgstr "د غږ ډکوالی یا جګوالی"
+msgstr ""
 
 #: ../glade/griffith.glade.h:34
 msgid "Choose Image"
-msgstr ""
+msgstr "Izvēlēties attēlu"
 
 #: ../glade/griffith.glade.h:36
 msgid "Clears filter"
@@ -1417,7 +1404,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:37
 msgid "Clone"
-msgstr ""
+msgstr "Klonēt"
 
 #: ../glade/griffith.glade.h:42
 msgid "DVD layers"
@@ -1429,7 +1416,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:44
 msgid "Database"
-msgstr ""
+msgstr "Datu bāze"
 
 #: ../glade/griffith.glade.h:45
 msgid "Delete a person"
@@ -1437,11 +1424,11 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:46
 msgid "Details"
-msgstr ""
+msgstr "Detaļas"
 
 #: ../glade/griffith.glade.h:47
 msgid "Dictionaries"
-msgstr ""
+msgstr "Vārdnīcas"
 
 #: ../glade/griffith.glade.h:51
 msgid "E-mail reminder"
@@ -1449,7 +1436,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:52
 msgid "E_xport"
-msgstr ""
+msgstr "E_ksportēt"
 
 #: ../glade/griffith.glade.h:53
 msgid "Edit a person"
@@ -1497,19 +1484,20 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:65
 msgid "Griffith"
-msgstr ""
+msgstr "Grifits"
 
 #: ../glade/griffith.glade.h:66
 msgid "Homepage"
-msgstr ""
+msgstr "Mājas lapa"
 
 #: ../glade/griffith.glade.h:67
 msgid "Host"
-msgstr ""
+msgstr "Resursdators"
 
 #: ../glade/griffith.glade.h:68
+#, fuzzy
 msgid "I_mport"
-msgstr ""
+msgstr "I_mportēt"
 
 #: ../glade/griffith.glade.h:70
 msgid "Include Front Image"
@@ -1521,7 +1509,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:72
 msgid "Languages"
-msgstr ""
+msgstr "Valodas"
 
 #: ../glade/griffith.glade.h:74
 msgid "Limit search results to"
@@ -1552,9 +1540,8 @@ msgid "Loaned Movies"
 msgstr ""
 
 #: ../glade/griffith.glade.h:81
-#, fuzzy
 msgid "Loaned to"
-msgstr "پوری شوی دی"
+msgstr ""
 
 #: ../glade/griffith.glade.h:82
 msgid "Loans"
@@ -1575,8 +1562,9 @@ msgid ""
 msgstr ""
 
 #: ../glade/griffith.glade.h:89
+#, fuzzy
 msgid "Movie details"
-msgstr ""
+msgstr "Filma detaļas"
 
 #: ../glade/griffith.glade.h:90
 msgid "Movie information"
@@ -1596,7 +1584,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:99
 msgid "Other"
-msgstr ""
+msgstr "Cits"
 
 #: ../glade/griffith.glade.h:100
 msgid "PDF reader"
@@ -1604,15 +1592,15 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:101
 msgid "Password"
-msgstr ""
+msgstr "Parole"
 
 #: ../glade/griffith.glade.h:102
 msgid "People"
-msgstr ""
+msgstr "Cilvēki"
 
 #: ../glade/griffith.glade.h:103
 msgid "Phone"
-msgstr ""
+msgstr "Telefons"
 
 #: ../glade/griffith.glade.h:104
 msgid "Please wait a moment..."
@@ -1620,11 +1608,11 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:106
 msgid "Plugins"
-msgstr ""
+msgstr "Spraudņi"
 
 #: ../glade/griffith.glade.h:107
 msgid "Port"
-msgstr ""
+msgstr "Ports"
 
 #: ../glade/griffith.glade.h:108
 msgid "Poster image"
@@ -1636,7 +1624,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:110
 msgid "Preferences"
-msgstr ""
+msgstr "Iestatījumi"
 
 #: ../glade/griffith.glade.h:111
 msgid "Print Cover"
@@ -1652,7 +1640,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:116
 msgid "Remove"
-msgstr ""
+msgstr "Noņemt"
 
 #: ../glade/griffith.glade.h:117
 msgid "Remove selected movie"
@@ -1664,7 +1652,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:119
 msgid "Rename"
-msgstr ""
+msgstr "Pārdēvēt"
 
 #: ../glade/griffith.glade.h:120
 msgid "Report bug"
@@ -1676,11 +1664,11 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:124
 msgid "SMTP port"
-msgstr ""
+msgstr "SMTP ports"
 
 #: ../glade/griffith.glade.h:125
 msgid "SMTP server"
-msgstr ""
+msgstr "SMTP serveris"
 
 #: ../glade/griffith.glade.h:126
 msgid "Searching on the web"
@@ -1688,7 +1676,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:128
 msgid "Select A File"
-msgstr ""
+msgstr "Izvēlēties failu"
 
 #: ../glade/griffith.glade.h:129
 msgid "Select first movie"
@@ -1719,12 +1707,13 @@ msgid "Show other movies in this volume"
 msgstr ""
 
 #: ../glade/griffith.glade.h:136
+#, fuzzy
 msgid "Simple"
-msgstr ""
+msgstr "Vienkāršs"
 
 #: ../glade/griffith.glade.h:138
 msgid "Size"
-msgstr ""
+msgstr "Izmērs"
 
 #: ../glade/griffith.glade.h:139
 msgid "Spell check the following language"
@@ -1743,7 +1732,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:145
 msgid "Tags"
-msgstr ""
+msgstr "Tagi"
 
 #: ../glade/griffith.glade.h:146
 msgid "Technical information"
@@ -1755,7 +1744,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:149
 msgid "Toolbar"
-msgstr ""
+msgstr "Rīkjosla"
 
 #: ../glade/griffith.glade.h:152
 msgid ""
@@ -1777,7 +1766,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:156
 msgid "Username"
-msgstr ""
+msgstr "Lietotājvārds"
 
 #: ../glade/griffith.glade.h:158
 msgid "Visit movie web site"
@@ -1793,15 +1782,15 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:163
 msgid "_Edit"
-msgstr ""
+msgstr "_Rediģēt"
 
 #: ../glade/griffith.glade.h:164
 msgid "_File"
-msgstr ""
+msgstr "_Fails"
 
 #: ../glade/griffith.glade.h:165
 msgid "_Help"
-msgstr ""
+msgstr "_Palīdzība"
 
 #: ../glade/griffith.glade.h:166
 msgid "_Loans"
@@ -1813,7 +1802,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:168
 msgid "_View"
-msgstr ""
+msgstr "_Skats"
 
 #: ../glade/griffith.glade.h:169
 msgid "add entered name to collections list"
@@ -1841,7 +1830,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:175
 msgid "minutes"
-msgstr ""
+msgstr "minūtes"
 
 #: ../glade/griffith.glade.h:176
 msgid "movies"
@@ -1857,7 +1846,7 @@ msgstr ""
 
 #: ../glade/griffith.glade.h:179
 msgid "tags"
-msgstr ""
+msgstr "tagi"
 
 #: ../glade/griffith.glade.h:180
 msgid "volume details"
@@ -1887,15 +1876,15 @@ msgstr ""
 
 #: ../glade/importcsv.glade.h:9
 msgid "Delimiter"
-msgstr ""
+msgstr "Atdalītājs"
 
 #: ../glade/importcsv.glade.h:10
 msgid "Encoding"
-msgstr ""
+msgstr "Kodējums"
 
 #: ../glade/importcsv.glade.h:11 ../glade/import.glade.h:6
 msgid "Fields"
-msgstr ""
+msgstr "Lauki"
 
 #: ../glade/importcsv.glade.h:12
 msgid "File-Options"
@@ -2024,8 +2013,8 @@ msgstr ""
 
 #: ../glade/import.glade.h:8
 msgid "Plugin"
-msgstr ""
+msgstr "Spraudnis"
 
 #: ../glade/import.glade.h:9
 msgid "Source"
-msgstr ""
+msgstr "Avots"
