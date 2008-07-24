@@ -56,12 +56,9 @@ Source: dist\griffith.exe; DestDir: {app}; Flags: ignoreversion
 Source: dist\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
-[INI]
-Filename: {app}\griffith.url; Section: InternetShortcut; Key: URL; String: http://griffith.berlios.de/
-
 [Icons]
 Name: {group}\Griffith; Filename: {app}\griffith.exe
-Name: {group}\{cm:ProgramOnTheWeb,Griffith}; Filename: {app}\griffith.url
+Name: {group}\{cm:ProgramOnTheWeb,Griffith}; Filename: http://griffith.berlios.de
 Name: {group}\{cm:UninstallProgram,Griffith}; Filename: {uninstallexe}
 Name: {userdesktop}\Griffith; Filename: {app}\griffith.exe; Tasks: desktopicon
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Griffith; Filename: {app}\griffith.exe; Tasks: quicklaunchicon
@@ -70,5 +67,8 @@ Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Griffith; Filename:
 Filename: {app}\griffith.exe; Description: {cm:LaunchProgram,Griffith}; Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-Type: files; Name: {app}\griffith.url
+Type: files; Name: {app}\lib\*.pyo
+Type: files; Name: {app}\lib\plugins\export\*.pyo
+Type: files; Name: {app}\lib\plugins\movie\*.pyo
+Type: files; Name: {app}\lib\plugins\imp\*.pyo
 
