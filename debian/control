@@ -8,7 +8,7 @@ Standards-Version: 3.8.0
 XS-Python-Version: >=2.3
 Vcs-Svn: svn://svn.berlios.de/griffith/trunk/debian
 Vcs-Browser: http://svn.berlios.de/wsvn/griffith/debian/?sc=1
-Homepage: http://griffith.berlios.de/
+Homepage: http://www.griffith.cc/
 
 Package: griffith
 Architecture: all

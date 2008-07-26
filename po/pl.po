@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-21 21:28+0200\n"
+"POT-Creation-Date: 2008-07-26 21:54+0200\n"
 "PO-Revision-Date: 2008-01-26 21:55+0000\n"
 "Last-Translator: Piotr Ożarowski <ozarow+griffith@gmail.com>\n"
 "Language-Team: Polski\n"
@@ -116,7 +116,7 @@ msgid "Edit movie"
 msgstr "Edycja właściwości filmu"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
-#: ../lib/main_treeview.py:497
+#: ../lib/main_treeview.py:498
 msgid " min"
 msgstr " min."
 
@@ -406,24 +406,24 @@ msgstr "Czy na pewno chcesz usunąć ten plakat?"
 msgid "No posters found for this movie."
 msgstr "Nie znaleziono plakatów dla tego filmu."
 
-#: ../lib/edit.py:201 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
 msgstr "Pobieram plakat"
 
-#: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
 msgstr "Proszę czekać"
 
-#: ../lib/edit.py:213
+#: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
 msgstr "Wybacz, wystąpił błąd połączenia."
 
-#: ../lib/edit.py:226 ../lib/edit.py:259
+#: ../lib/edit.py:225 ../lib/edit.py:258
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr "Wybacz, serwis Amazon.com nie posiada plakatu z tym filmem"
 
-#: ../lib/edit.py:245
+#: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
 msgstr "Czy chcesz wykorzystać ten plakat?"
 
@@ -658,8 +658,8 @@ msgid "Volume"
 msgstr "Wolumin"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
-#: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
-#: ../lib/initialize.py:895
+#: ../lib/initialize.py:860 ../lib/initialize.py:861 ../lib/initialize.py:892
+#: ../lib/initialize.py:893
 msgid "N/A"
 msgstr "brak danych"
 

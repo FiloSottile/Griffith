@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-21 21:28+0200\n"
+"POT-Creation-Date: 2008-07-26 21:54+0200\n"
 "PO-Revision-Date: 2008-03-19 10:45+0000\n"
 "Last-Translator: jhj <jhpost@gmail.com>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -118,7 +118,7 @@ msgid "Edit movie"
 msgstr "Rediger film"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
-#: ../lib/main_treeview.py:497
+#: ../lib/main_treeview.py:498
 msgid " min"
 msgstr " min"
 
@@ -411,26 +411,26 @@ msgstr "Er du sikker på at du vil slette denne plakaten"
 msgid "No posters found for this movie."
 msgstr "Ingen plakater er funnet for denne filmen."
 
-#: ../lib/edit.py:201 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
 msgstr "Henter plakat"
 
-#: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
 msgstr "Vent et øyeblikk"
 
-#: ../lib/edit.py:213
+#: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
 msgstr "Beklager. En tilkoblingsfeil har opstått"
 
-#: ../lib/edit.py:226 ../lib/edit.py:259
+#: ../lib/edit.py:225 ../lib/edit.py:258
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 "Beklager. Denne filmen er i listen men har ingen plakat tilgjengelig på "
 "Amazon.com"
 
-#: ../lib/edit.py:245
+#: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
 msgstr "Vil du bruke denne plakaten i stedet?"
 
@@ -667,8 +667,8 @@ msgid "Volume"
 msgstr "Lydstyrke"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
-#: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
-#: ../lib/initialize.py:895
+#: ../lib/initialize.py:860 ../lib/initialize.py:861 ../lib/initialize.py:892
+#: ../lib/initialize.py:893
 msgid "N/A"
 msgstr "Ikke tilgjengelig"
 

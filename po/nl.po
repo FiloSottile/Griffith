@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-21 21:28+0200\n"
+"POT-Creation-Date: 2008-07-26 21:54+0200\n"
 "PO-Revision-Date: 2008-02-29 19:01+0000\n"
 "Last-Translator: Gijs Dekker <dekker.gijs@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -118,7 +118,7 @@ msgid "Edit movie"
 msgstr "Film bewerken"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
-#: ../lib/main_treeview.py:497
+#: ../lib/main_treeview.py:498
 msgid " min"
 msgstr " min"
 
@@ -409,24 +409,24 @@ msgstr "Weet u zeker dat u deze filmposter wilt verwijderen?"
 msgid "No posters found for this movie."
 msgstr "Voor deze film zijn geen posters gevonden."
 
-#: ../lib/edit.py:201 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
 msgstr "Poster aan het binnenhalen"
 
-#: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
 msgstr "Even geduld a.u.b."
 
-#: ../lib/edit.py:213
+#: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
 msgstr "Sorry. Er heeft zich een verbindingsprobleem voorgedaan."
 
-#: ../lib/edit.py:226 ../lib/edit.py:259
+#: ../lib/edit.py:225 ../lib/edit.py:258
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr "Sorry. Voor deze film is geen poster gevonden op Amazon.com."
 
-#: ../lib/edit.py:245
+#: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
 msgstr "Wilt u voortaan deze poster gebruiken?"
 
@@ -661,8 +661,8 @@ msgid "Volume"
 msgstr "Volume"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
-#: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
-#: ../lib/initialize.py:895
+#: ../lib/initialize.py:860 ../lib/initialize.py:861 ../lib/initialize.py:892
+#: ../lib/initialize.py:893
 msgid "N/A"
 msgstr "N/A"
 
