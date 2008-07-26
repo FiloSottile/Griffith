@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-21 21:28+0200\n"
+"POT-Creation-Date: 2008-07-26 21:54+0200\n"
 "PO-Revision-Date: 2008-03-31 10:06+0000\n"
 "Last-Translator: vazaz <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -118,7 +118,7 @@ msgid "Edit movie"
 msgstr "Редагувати фільм"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
-#: ../lib/main_treeview.py:497
+#: ../lib/main_treeview.py:498
 msgid " min"
 msgstr " хв"
 
@@ -406,24 +406,24 @@ msgstr "Ви впевнені, що бажаєте видалити цю афі�
 msgid "No posters found for this movie."
 msgstr "Немає афіш для цього фільму.."
 
-#: ../lib/edit.py:201 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
 msgstr "Отримання афіші"
 
-#: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
 msgstr "Зачекайте хвилинку"
 
-#: ../lib/edit.py:213
+#: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
 msgstr "Вибачте. Виникла помилка з'єднання"
 
-#: ../lib/edit.py:226 ../lib/edit.py:259
+#: ../lib/edit.py:225 ../lib/edit.py:258
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr "Вибачте. Цей фільм є в переліку, проте немає афіші на Amazon.com."
 
-#: ../lib/edit.py:245
+#: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
 msgstr "Ви бажаєте використати цю афішу заново?"
 
@@ -656,8 +656,8 @@ msgid "Volume"
 msgstr "Гучність"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
-#: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
-#: ../lib/initialize.py:895
+#: ../lib/initialize.py:860 ../lib/initialize.py:861 ../lib/initialize.py:892
+#: ../lib/initialize.py:893
 msgid "N/A"
 msgstr "Н/Д"
 

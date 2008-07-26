@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-21 21:28+0200\n"
+"POT-Creation-Date: 2008-07-26 21:54+0200\n"
 "PO-Revision-Date: 2008-03-30 18:27+0000\n"
 "Last-Translator: Kainourgiakis Giorgos <kaingeo@yahoo.gr>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -118,7 +118,7 @@ msgid "Edit movie"
 msgstr "Επεξεργασία ταινίας"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
-#: ../lib/main_treeview.py:497
+#: ../lib/main_treeview.py:498
 msgid " min"
 msgstr " λεπτά"
 
@@ -411,26 +411,26 @@ msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετ�
 msgid "No posters found for this movie."
 msgstr "Δεν βρέθηκαν αφίσες γι'αυτή την ταινία."
 
-#: ../lib/edit.py:201 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
 msgstr "Λήψη αφίσας"
 
-#: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 msgid "Wait a moment"
 msgstr "Παρακαλώ περιμένετε"
 
-#: ../lib/edit.py:213
+#: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
 msgstr "Λυπούμαστε. Προέκυψε σφάλμα στη σύνδεση."
 
-#: ../lib/edit.py:226 ../lib/edit.py:259
+#: ../lib/edit.py:225 ../lib/edit.py:258
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 "Λυπούμαστε. Αυτή η ταινία υπάρχει στη βάση αλλά δεν υπάρχει ανάλογη αφίσα "
 "στην τοποθεσία Amazon.com."
 
-#: ../lib/edit.py:245
+#: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
 msgstr "Θα θέλατε να χρησιμοποιήσετε αυτή την αφίσα;"
 
@@ -665,8 +665,8 @@ msgid "Volume"
 msgstr "Ένταση ήχου"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
-#: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
-#: ../lib/initialize.py:895
+#: ../lib/initialize.py:860 ../lib/initialize.py:861 ../lib/initialize.py:892
+#: ../lib/initialize.py:893
 msgid "N/A"
 msgstr "Ν/Α"
 

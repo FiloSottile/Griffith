@@ -4,6 +4,20 @@ Griffith ChangeLog
 ------------------
 (c) 2005-2008  Vasco Nunes, Piotr Ożarowski
 
+---- 0.9.7.1 ---
+
+2008-07-26  Piotr Ożarowski
+	* Links to Griffith's homepage and bug tracker updated
+	* Version changed to 0.9.7
+
+2008-07-24  Michael Jahn
+	* main treeview doesn't accept DB-NULL or empty strings for the int-fields rating, year and runtime
+
+2008-07-24  Michael Jahn
+	* Windows only: set_wrap_width doesn't work in filter toolbar without side effects if GTK 2.12.9 is used
+	* updated INSTALL file to new versions (GTK, Glade, PyGTK, py2exe, pywin32, Inno Setup)
+	* fixed URL creation in setup script; added removing of .pyo files if deinstalled
+
 ---- 0.9.7 ---
 
 2008-07-21  Piotr Ożarowski
@@ -52,11 +66,25 @@ Griffith ChangeLog
 2008-04-01  Michael Jahn
 	* fixed html export if sorted by collection, media, video codec or volume
 
+2008-03-22  Piotr Ożarowski
+	* Python>=2.4's xml module compatibility added
+
 2008-03-15  Michael Jahn
 	* quick filter for loaned-to
 
+2008-03-04  Vasco Nunes
+	* Serbian language file updated (thanks to Sasa Petrovic) 
+	* Portuguese language file updated
+
+2008-02-18  Piotr Ożarowski
+	* Filmweb movie plugin updated (thanks to Mariusz)
+	* Windows 64 bit is not detected correctly
+
 2008-02-12  Michael Jahn
 	* fixed selecting of quick filter volume and collection in main view
+
+2008-02-11  Vasco Nunes
+	* Added serbian language file (thanks to Sasa Petrovic) 
 
 2008-02-09  Michael Jahn
 	* sort collection list and volume list by name

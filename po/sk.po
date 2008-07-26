@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: griffith\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-21 21:28+0200\n"
+"POT-Creation-Date: 2008-07-26 21:54+0200\n"
 "PO-Revision-Date: 2008-02-16 16:26+0000\n"
 "Last-Translator: Maroš Brojo <majobrojo@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -115,7 +115,7 @@ msgid "Edit movie"
 msgstr "Upraviť film"
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
-#: ../lib/main_treeview.py:497
+#: ../lib/main_treeview.py:498
 msgid " min"
 msgstr " min"
 
@@ -417,28 +417,28 @@ msgstr "Určite chcete vymazať tento plagát?"
 msgid "No posters found for this movie."
 msgstr "Nebol nájdený plagát pre tento film."
 
-#: ../lib/edit.py:201 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
 msgstr ""
 
-#: ../lib/edit.py:201 ../lib/movie.py:121 ../lib/movie.py:147
+#: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:241
 #, fuzzy
 msgid "Wait a moment"
 msgstr "Chvíľku strpenia"
 
-#: ../lib/edit.py:213
+#: ../lib/edit.py:212
 #, fuzzy
 msgid "Sorry. A connection error has occurred."
 msgstr "Prepáčte, vyskytol sa problém pri pripojení."
 
-#: ../lib/edit.py:226 ../lib/edit.py:259
+#: ../lib/edit.py:225 ../lib/edit.py:258
 #, fuzzy
 msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
 "Prepáčte. Na stránke Amazon.com sa nenachádza plagát k požadovanému filmu."
 
-#: ../lib/edit.py:245
+#: ../lib/edit.py:244
 #, fuzzy
 msgid "Do you want to use this poster instead?"
 msgstr "Chcete ako náhradu použiť tento plagát?"
@@ -687,8 +687,8 @@ msgid "Volume"
 msgstr "Hlasitosť"
 
 #: ../lib/initialize.py:635 ../lib/initialize.py:636 ../lib/initialize.py:638
-#: ../lib/initialize.py:862 ../lib/initialize.py:863 ../lib/initialize.py:894
-#: ../lib/initialize.py:895
+#: ../lib/initialize.py:860 ../lib/initialize.py:861 ../lib/initialize.py:892
+#: ../lib/initialize.py:893
 msgid "N/A"
 msgstr "N/A"
 
