@@ -20,166 +20,166 @@ plugin_author_email = "Jessica.K.P@women-at-work.org"
 plugin_version = "0.9"
 
 class Plugin(movie.Movie):
-	def __init__(self, id):
-		self.encode='utf-8'
-		self.movie_id = id
-		self.url = "http://www.ofdb.de/%s" % str(self.movie_id)
+    def __init__(self, id):
+        self.encode='utf-8'
+        self.movie_id = id
+        self.url = "http://www.ofdb.de/%s" % str(self.movie_id)
 
-	def initialize(self):
-		# OFDb didn't provide the runtime, studio and classification but it provide a link to the german imdb entry
-		# lets use the imdb page, why not
-		imdb_nr = gutils.trim(self.page, 'http://german.imdb.com/Title?', '"')
-		if imdb_nr != '':
-			self.imdb_page = self.open_page(url='http://german.imdb.com/Title?' + imdb_nr)
-		else:
-			self.imdb_page = ''
+    def initialize(self):
+        # OFDb didn't provide the runtime, studio and classification but it provide a link to the german imdb entry
+        # lets use the imdb page, why not
+        imdb_nr = gutils.trim(self.page, 'http://german.imdb.com/Title?', '"')
+        if imdb_nr != '':
+            self.imdb_page = self.open_page(url='http://german.imdb.com/Title?' + imdb_nr)
+        else:
+            self.imdb_page = ''
 
-	def get_image(self):
-		self.image_url = "http://img.ofdb.de/film/" + gutils.trim(self.page, 'img src="http://img.ofdb.de/film/', '"' )
-		
-	def get_o_title(self):
-		self.o_title = gutils.clean(gutils.trim(self.page, 'Originaltitel:', '</tr>'))
-		if self.o_title == '':
-			self.o_title = string.replace(self.o_title, '&nbsp;', '' )
+    def get_image(self):
+        self.image_url = "http://img.ofdb.de/film/" + gutils.trim(self.page, 'img src="http://img.ofdb.de/film/', '"' )
+        
+    def get_o_title(self):
+        self.o_title = gutils.clean(gutils.trim(self.page, 'Originaltitel:', '</tr>'))
+        if self.o_title == '':
+            self.o_title = string.replace(self.o_title, '&nbsp;', '' )
 
-	def get_title(self):
-		self.title = gutils.trim(self.page,'size="3"><b>','<')
+    def get_title(self):
+        self.title = gutils.trim(self.page,'size="3"><b>','<')
 
-	def get_director(self):
-		self.director = gutils.trim(self.page,"Regie:","</a><br>")
+    def get_director(self):
+        self.director = gutils.trim(self.page,"Regie:","</a><br>")
 
-	def get_plot(self):
-		storyid = self.regextrim(self.page, '<a href="plot/', '(">|[&])')
-		if not storyid is None:
-			story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid))
-		self.plot = gutils.trim(story_page, "</b><br><br>","</")
+    def get_plot(self):
+        storyid = self.regextrim(self.page, '<a href="plot/', '(">|[&])')
+        if not storyid is None:
+            story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid))
+        self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
-	def get_year(self):
-		self.year = gutils.trim(self.page,"Erscheinungsjahr:","</a>")
-		self.year = gutils.strip_tags(self.year)
+    def get_year(self):
+        self.year = gutils.trim(self.page,"Erscheinungsjahr:","</a>")
+        self.year = gutils.strip_tags(self.year)
 
-	def get_runtime(self):
-		# from imdb
-		self.runtime = gutils.trim(self.imdb_page, '<h5>L&auml;nge:</h5>', ' Min')
+    def get_runtime(self):
+        # from imdb
+        self.runtime = gutils.trim(self.imdb_page, '<h5>L&auml;nge:</h5>', ' Min')
 
-	def get_genre(self):
-		self.genre = gutils.trim(self.page,"Genre(s):","</table>")
-		self.genre = string.replace(self.genre, "<br>", ", ")
-		self.genre = gutils.strip_tags(self.genre)
-		self.genre = string.replace(self.genre, "/", ", ")
-		self.genre = gutils.clean(self.genre)
-		self.genre = self.genre[0:-1]
+    def get_genre(self):
+        self.genre = gutils.trim(self.page,"Genre(s):","</table>")
+        self.genre = string.replace(self.genre, "<br>", ", ")
+        self.genre = gutils.strip_tags(self.genre)
+        self.genre = string.replace(self.genre, "/", ", ")
+        self.genre = gutils.clean(self.genre)
+        self.genre = self.genre[0:-1]
 
-	def get_cast(self):
-		self.cast = ''
-		movie_id_elements = string.split(self.movie_id, ',')
-		movie_id_elements[0] = string.replace(movie_id_elements[0], "film/", "")
-		cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(movie_id_elements[0]) )
-		self.cast = gutils.trim(cast_page, 'Darsteller</i>', '</table>')
-		self.cast = re.sub('(\n|\t|&nbsp;)', '', self.cast)
-		self.cast = string.replace(self.cast, '\t', '')
-		self.cast = string.replace(self.cast, 'class="Daten">', '>\n')
-		self.cast = string.strip(gutils.strip_tags(self.cast))
-		self.cast = string.replace(self.cast, '... ', _(' as '))
-		self.cast = gutils.clean(self.cast)
+    def get_cast(self):
+        self.cast = ''
+        movie_id_elements = string.split(self.movie_id, ',')
+        movie_id_elements[0] = string.replace(movie_id_elements[0], "film/", "")
+        cast_page = self.open_page(url="http://www.ofdb.de/view.php?page=film_detail&fid=%s" % str(movie_id_elements[0]) )
+        self.cast = gutils.trim(cast_page, 'Darsteller</i>', '</table>')
+        self.cast = re.sub('(\n|\t|&nbsp;)', '', self.cast)
+        self.cast = string.replace(self.cast, '\t', '')
+        self.cast = string.replace(self.cast, 'class="Daten">', '>\n')
+        self.cast = string.strip(gutils.strip_tags(self.cast))
+        self.cast = string.replace(self.cast, '... ', _(' as '))
+        self.cast = gutils.clean(self.cast)
 
-	def get_classification(self):
-		# from imdb
-		self.classification = gutils.trim(gutils.trim(self.imdb_page, 'Altersfreigabe:', '</div>'), 'Germany:', '&')
+    def get_classification(self):
+        # from imdb
+        self.classification = gutils.trim(gutils.trim(self.imdb_page, 'Altersfreigabe:', '</div>'), 'Germany:', '&')
 
-	def get_studio(self):
-		# from imdb
-		self.studio = gutils.trim(self.imdb_page, '<h5>Firma:</h5>', '</a>')
+    def get_studio(self):
+        # from imdb
+        self.studio = gutils.trim(self.imdb_page, '<h5>Firma:</h5>', '</a>')
 
-	def get_o_site(self):
-		self.o_site = ""
+    def get_o_site(self):
+        self.o_site = ""
 
-	def get_site(self):
-		self.site = self.url
+    def get_site(self):
+        self.site = self.url
 
-	def get_trailer(self):
-		self.trailer = ""
+    def get_trailer(self):
+        self.trailer = ""
 
-	def get_country(self):
-		self.country = gutils.trim(self.page,"Herstellungsland:","</a>")
+    def get_country(self):
+        self.country = gutils.trim(self.page,"Herstellungsland:","</a>")
 
-	def get_rating(self):
-		self.rating = gutils.trim(self.page,"<br>Note: ","&nbsp;")
-		if self.rating == '':
-			self.rating = "0"
-		self.rating = str(round(float(self.rating)))
+    def get_rating(self):
+        self.rating = gutils.trim(self.page,"<br>Note: ","&nbsp;")
+        if self.rating == '':
+            self.rating = "0"
+        self.rating = str(round(float(self.rating)))
 
-	def regextrim(self,text,key1,key2):
-		obj = re.search(key1, text)
-		if obj is None:
-			return ''
-		else:
-			p1 = obj.end()
-		obj = re.search(key2, text[p1:])
-		if obj is None:
-			return ''
-		else:
-			p2 = p1 + obj.start()
-		return text[p1:p2]
+    def regextrim(self,text,key1,key2):
+        obj = re.search(key1, text)
+        if obj is None:
+            return ''
+        else:
+            p1 = obj.end()
+        obj = re.search(key2, text[p1:])
+        if obj is None:
+            return ''
+        else:
+            p2 = p1 + obj.start()
+        return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
-	def __init__(self):
-		self.original_url_search   = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=OTitel&SText="
-		self.translated_url_search = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText="
-		self.encode='utf-8'
+    def __init__(self):
+        self.original_url_search   = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=OTitel&SText="
+        self.translated_url_search = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText="
+        self.encode='utf-8'
 
-	def search(self,parent_window):
-		self.open_search(parent_window)
-		self.page = gutils.trim(self.page,"</b><br><br>", "<br><br><br>");
-		self.page = string.replace( self.page, "'", '"' )
-		self.page = string.replace( self.page, '<font size="1">', '' )
-		self.page = string.replace( self.page, '</font>', '' )
-		return self.page
+    def search(self,parent_window):
+        self.open_search(parent_window)
+        self.page = gutils.trim(self.page,"</b><br><br>", "<br><br><br>");
+        self.page = string.replace( self.page, "'", '"' )
+        self.page = string.replace( self.page, '<font size="1">', '' )
+        self.page = string.replace( self.page, '</font>', '' )
+        return self.page
 
-	def get_searches(self):
-		elements = string.split(self.page,"<br>")
+    def get_searches(self):
+        elements = string.split(self.page,"<br>")
 
-		if (elements[0]<>''):
-			for element in elements:
-				elementid = gutils.trim(element,'<a href="','"')
-				if not elementid is None and not elementid == '':
-					self.ids.append(elementid)
-					elementname = gutils.clean(element)
-					p1 = string.find(elementname, '>')
-					if p1 == -1:
-						self.titles.append(elementname)
-					else:
-						self.titles.append(elementname[p1+1:])
+        if (elements[0]<>''):
+            for element in elements:
+                elementid = gutils.trim(element,'<a href="','"')
+                if not elementid is None and not elementid == '':
+                    self.ids.append(elementid)
+                    elementname = gutils.clean(element)
+                    p1 = string.find(elementname, '>')
+                    if p1 == -1:
+                        self.titles.append(elementname)
+                    else:
+                        self.titles.append(elementname[p1+1:])
 
 #
 # Plugin Test
 #
 class SearchPluginTest(SearchPlugin):
-	#
-	# Configuration for automated tests:
-	# dict { movie_id -> expected result count }
-	#
-	test_configuration = {
-		'Rocky Balboa'			: 1,
-		'Arahan'				: 3,
-		'glückliches'			: 2
-	}
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> expected result count }
+    #
+    test_configuration = {
+        'Rocky Balboa'            : 1,
+        'Arahan'                : 3,
+        'glückliches'            : 2
+    }
 
 class PluginTest:
-	#
-	# Configuration for automated tests:
-	# dict { movie_id -> dict { arribute -> value } }
-	#
-	# value: * True/False if attribute only should be tested for any value
-	#        * or the expected value
-	#
-	test_configuration = {
-		'film/103013,Rocky%20Balboa' : { 
-			'title' 			: 'Rocky Balboa',
-			'o_title' 			: 'Rocky Balboa',
-			'director'			: 'Sylvester Stallone',
-			'plot' 				: True,
-			'cast'				: 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        'film/103013,Rocky%20Balboa' : { 
+            'title'             : 'Rocky Balboa',
+            'o_title'             : 'Rocky Balboa',
+            'director'            : 'Sylvester Stallone',
+            'plot'                 : True,
+            'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
 Geraldine Hughes' + (' as ') + 'Marie\n\
@@ -235,25 +235,25 @@ Mike Tyson' + _(' as ') + 'Himself\n\
 Lou DiBella\n\
 Joe Cortez\n\
 Ricky Cavazos',
-			'country'			: 'USA',
-			'genre'				: 'Action, Drama, Sportfilm',
-			'classification'	: False,
-			'studio'			: 'Metro-Goldwyn-Mayer (MGM)',
-			'o_site'			: False,
-			'site'				: 'http://www.ofdb.de/film/103013,Rocky%20Balboa',
-			'trailer'			: False,
-			'year'				: 2006,
-			'notes'				: False,
-			'runtime'			: 102,
-			'image'				: True,
-			'rating'			: 8
-		},
-		'film/22489,Ein-Gl%C3%BCckliches-Jahr' : { 
-			'title' 			: 'Glückliches Jahr, Ein',
-			'o_title' 			: 'Bonne année, La',
-			'director'			: 'Claude Lelouch',
-			'plot' 				: False,
-			'cast'				: 'Lino Ventura\n\
+            'country'            : 'USA',
+            'genre'                : 'Action, Drama, Sportfilm',
+            'classification'    : False,
+            'studio'            : 'Metro-Goldwyn-Mayer (MGM)',
+            'o_site'            : False,
+            'site'                : 'http://www.ofdb.de/film/103013,Rocky%20Balboa',
+            'trailer'            : False,
+            'year'                : 2006,
+            'notes'                : False,
+            'runtime'            : 102,
+            'image'                : True,
+            'rating'            : 8
+        },
+        'film/22489,Ein-Gl%C3%BCckliches-Jahr' : { 
+            'title'             : 'Glückliches Jahr, Ein',
+            'o_title'             : 'Bonne année, La',
+            'director'            : 'Claude Lelouch',
+            'plot'                 : False,
+            'cast'                : 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard\n\
 André Falcon as Le bijoutier\n\
@@ -275,25 +275,25 @@ Georges Staquet\n\
 Jacques Villedieu\n\
 Harry Walter\n\
 Elie Chouraqui',
-			'country'			: 'Frankreich',
-			'genre'				: 'Komödie, Krimi',
-			'classification'	: False,
-			'studio'			: 'Les Films 13',
-			'o_site'			: False,
-			'site'				: 'http://www.ofdb.de/film/22489,Ein-Gl%C3%BCckliches-Jahr',
-			'trailer'			: False,
-			'year'				: 1973,
-			'notes'				: False,
-			'runtime'			: 90,
-			'image'				: True,
-			'rating'			: 6
-		},
-		'film/54088,Arahan' : { 
-			'title' 			: 'Arahan',
-			'o_title' 			: 'Arahan jangpung daejakjeon',
-			'director'			: 'Ryoo Seung-wan',
-			'plot' 				: True,
-			'cast'				: 'Ryoo Seung-beom\n\
+            'country'            : 'Frankreich',
+            'genre'                : 'Komödie, Krimi',
+            'classification'    : False,
+            'studio'            : 'Les Films 13',
+            'o_site'            : False,
+            'site'                : 'http://www.ofdb.de/film/22489,Ein-Gl%C3%BCckliches-Jahr',
+            'trailer'            : False,
+            'year'                : 1973,
+            'notes'                : False,
+            'runtime'            : 90,
+            'image'                : True,
+            'rating'            : 6
+        },
+        'film/54088,Arahan' : { 
+            'title'             : 'Arahan',
+            'o_title'             : 'Arahan jangpung daejakjeon',
+            'director'            : 'Ryoo Seung-wan',
+            'plot'                 : True,
+            'cast'                : 'Ryoo Seung-beom\n\
 Yoon Soy' + _(' as ') + 'Wi-jin\n\
 Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
 Jung Doo-hong' + _(' as ') + 'Heuk-Woon\n\
@@ -311,17 +311,17 @@ Bong Tae-gyu\n\
 Im Ha-ryong\n\
 Yoon Do-hyeon\n\
 Lee Choon-yeon',
-			'country'			: 'Südkorea',
-			'genre'				: 'Action, Fantasy, Komödie',
-			'classification'	: '16',
-			'studio'			: 'Fun and Happiness',
-			'o_site'			: False,
-			'site'				: 'http://www.ofdb.de/film/54088,Arahan',
-			'trailer'			: False,
-			'year'				: 2004,
-			'notes'				: False,
-			'runtime'			: 114,
-			'image'				: True,
-			'rating'			: 7
-		}
-	}
+            'country'            : 'Südkorea',
+            'genre'                : 'Action, Fantasy, Komödie',
+            'classification'    : '16',
+            'studio'            : 'Fun and Happiness',
+            'o_site'            : False,
+            'site'                : 'http://www.ofdb.de/film/54088,Arahan',
+            'trailer'            : False,
+            'year'                : 2004,
+            'notes'                : False,
+            'runtime'            : 114,
+            'image'                : True,
+            'rating'            : 7
+        }
+    }
