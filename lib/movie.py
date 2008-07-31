@@ -25,13 +25,15 @@ from gettext import gettext as _
 from urllib import *
 import sys
 import string
-import gutils
 import gtk
 import os
 import os.path
 import threading
 import time
 import tempfile
+import logging
+log = logging.getLogger("Griffith")
+import gutils
 
 class Movie:
     cast = None
@@ -160,7 +162,7 @@ class Movie:
                 try:
                     os.remove("%s.jpg" % tmp_dest )
                 except:
-                    print "Can't remove %s file" % tmp_dest # FIXME: use debug.show()
+                    log.info("Can't remove %s file" % tmp_dest)
         else:
             self.image = ""
 
