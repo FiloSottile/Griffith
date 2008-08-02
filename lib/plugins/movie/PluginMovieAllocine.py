@@ -21,7 +21,8 @@ __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-from gettext import gettext as _
+import gettext
+gettext.install('griffith', unicode=1)
 import gutils
 import movie
 import string

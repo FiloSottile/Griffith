@@ -42,7 +42,6 @@ __revision__ = '$Id$'
 
 import sys
 import initialize
-import gdebug
 import gutils
 try:
     import gtk
@@ -209,8 +208,6 @@ class PluginTester:
     # and executes the Plugin and SearchPlugin test methods
     #
     def do_test(self, domsgbox=True):
-        global debug
-        debug = self.debug = gdebug.GriffithDebug()
         self._tmp_home = None
         initialize.locations(self)
         search_successful = ''
