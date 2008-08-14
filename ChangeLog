@@ -4,6 +4,10 @@ Griffith ChangeLog
 ------------------
 (c) 2005-2008  Vasco Nunes, Piotr Ożarowski
 
+2008-08-14  Michael Jahn
+	* pdf export: group movies with numbers 0-9 (thanks to Luigi Pantano)
+	* pdf export: [#174463] Database Export as PDF doesn't work under Ubuntu
+
 2008-07-30  Michael Jahn
 	* [#253272] extra information columns not loaded on startup
 	* extended debug support on windows platforms
