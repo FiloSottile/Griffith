@@ -102,7 +102,7 @@ class Plugin(movie.Movie):
                 self.cast += elements2[1] + '--flip--' + elements2[0] + '\n'
             else:
                 self.cast += element + '\n'
-        self.cast = string.replace(self.cast, '--flip--', _(' as '))
+        self.cast = string.replace(self.cast, '--flip--', _(' as ').encode('utf8'))
 
     def get_classification(self):
         self.classification = gutils.trim(self.detail_page, 'FSK: ', '</TD>')
