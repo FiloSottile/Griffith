@@ -127,6 +127,7 @@ class SearchPlugin(movie.SearchMovie):
 		self.original_url_search   = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=OTitel&SText="
 		self.translated_url_search = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText="
 		self.encode='utf-8'
+		self.remove_accents = False
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -162,7 +163,7 @@ class SearchPluginTest(SearchPlugin):
 	test_configuration = {
 		'Rocky Balboa'			: 1,
 		'Arahan'				: 3,
-		'glückliches'			: 2
+		'glückliches'			: 4
 	}
 
 class PluginTest:
