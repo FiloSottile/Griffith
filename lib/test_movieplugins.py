@@ -43,6 +43,9 @@ __revision__ = '$Id$'
 import sys
 import initialize
 import gutils
+import config
+import os
+from time import sleep
 try:
     import gtk
     import gobject
@@ -58,6 +61,7 @@ sys.path.append('plugins/movie')
 #
 class PluginTester:
     test_plugins = [
+        'PluginMovieAmazon',
         'PluginMovieFilmeVonAZ',
         'PluginMovieKinoDe',
         'PluginMovieOFDb',
@@ -69,8 +73,13 @@ class PluginTester:
     # the count of results with the expected count
     #
     def test_search(self, plugin, title, cnt):
+        global myconfig
+        plugin.config = myconfig
         plugin.url = plugin.translated_url_search
-        plugin.title = gutils.remove_accents(title, 'utf-8')
+        if plugin.remove_accents:
+            plugin.title = gutils.remove_accents(title, 'utf-8')
+        else:
+            plugin.title = title
         plugin.search(None)
         plugin.get_searches()
         if not len(plugin.ids) - 1 == cnt:    # first entry is always '' (???)
@@ -96,6 +105,7 @@ class PluginTester:
                 searchPlugin = plugin.SearchPlugin()
                 if not self.test_search(searchPlugin, i, pluginTestConfig.test_configuration[i]):
                     result = False
+                sleep(1) # needed for amazon
         
         if domsgbox:
             if not result:
@@ -110,10 +120,12 @@ class PluginTester:
     # compares the results with the expected once
     #
     def test_one_movie(self, movieplugin, results_expected):
+        global myconfig
         result = True
         self.movie = movieplugin
         self.movie.parent_window = None
         self.movie.locations = self.locations
+        self.movie.config = myconfig
 
         fields_to_fetch = ['o_title', 'title', 'director', 'plot', 'cast', 'country', 'genre',
                 'classification', 'studio', 'o_site', 'site', 'trailer', 'year',
@@ -193,6 +205,7 @@ class PluginTester:
                 moviePlugin = plugin.Plugin(i)
                 if not self.test_one_movie(moviePlugin, pluginTestConfig.test_configuration[i]):
                     result = False
+                sleep(1) # needed for amazon
         
         if domsgbox:
             if not result:
@@ -208,8 +221,12 @@ class PluginTester:
     # and executes the Plugin and SearchPlugin test methods
     #
     def do_test(self, domsgbox=True):
+        global myconfig
         self._tmp_home = None
+        self._tmp_config = 'griffith.cfg'
         initialize.locations(self)
+        configFileName = os.path.join(self.locations['home'], self._tmp_config)
+        myconfig = self.config = config.Config(file=configFileName)
         search_successful = ''
         search_unsuccessful = ''
         get_successful = ''
