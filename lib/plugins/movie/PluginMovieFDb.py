@@ -82,8 +82,8 @@ class Plugin(movie.Movie):
             self.director = string.replace(self.director[2:], ', &nbsp;&nbsp;&nbsp;(więcej)', '')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page,'/opisy">','</a>')
-        self.plot = self.TRAILER_PATTERN.sub('', self.plot)
+        self.plot = gutils.trim(self.page,'Opis filmu</h3>','</div>')
+        self.plot = gutils.trim(self.plot,'<p>',"\n \n   ")
 
     def get_year(self):
         self.year = gutils.trim(self.page,'<small>(', ')</small>')
