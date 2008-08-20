@@ -109,7 +109,7 @@ class Plugin(movie.Movie):
         self.country = self.res[0][1]
 
     def get_rating(self):
-    	self.rating = gutils.trim(self.page,'</script></span> (',')')
+        self.rating = gutils.trim(self.page,'</script></span> (',')')
 
     def get_notes(self):
         self.notes = ''
