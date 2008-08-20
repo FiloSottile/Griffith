@@ -30,9 +30,9 @@ plugin_name         = 'Stopklatka'
 plugin_description  = 'Internetowy Serwis Filmowy'
 plugin_url          = 'www.stopklatka.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr Ożarowski'
-plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '1.9'
+plugin_author       = 'Piotr Ożarowski, Bartosz Kurczewski'
+plugin_author_email = '<bartosz.kurczewski@gmail.com>'
+plugin_version      = '1.10'
 
 class Plugin(movie.Movie):
     IMAGE_PATTERN = re.compile('(http://img.stopklatka.pl/film/.*?)"')
@@ -45,6 +45,9 @@ class Plugin(movie.Movie):
     def initialize(self):
         self.page = self.page.replace('\x9c','ś')
         self.page = self.page.replace('š','ą')
+        self.res = re.findall("""</td><td class="middle_cell"><span class="bold">(.*?)</span>, <span class="bold">(.*?)</span>, <span class="bold">(.*?)</span>, <span class="bold">(.*?) min</span>""", self.page)
+        if len(self.res) == 0:
+	    self.res = [( '','','','' )]
 
     def get_image(self):
         image = self.IMAGE_PATTERN.findall(self.page)
@@ -72,16 +75,13 @@ class Plugin(movie.Movie):
         self.plot = gutils.before(self.plot, '<b>Wi\xEAcej ')
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '>rok produkcji:<', '</span>')
-        self.year = gutils.after(self.year, '>')
+        self.year = self.res[0][2]
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page, 'trwania:<', ' min<')
-        self.runtime = gutils.after(self.runtime, '>')
+        self.runtime = self.res[0][3]
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, '>gatunek:<', '</span>')
-        self.genre = gutils.after(self.genre, '>')
+        self.genre = self.res[0][0]
 
     def get_cast(self):
         self.cast = gutils.trim(self.page, '>obsada:<', '</td></tr>')
@@ -106,11 +106,10 @@ class Plugin(movie.Movie):
         self.trailer = "http://www.stopklatka.pl/film/film.asp?fi=" + self.movie_id + "&sekcja=mmedia"
 
     def get_country(self):
-        self.country = gutils.trim(self.page, '>kraj:<', '</span>')
-        self.country = gutils.after(self.country, '>')
+        self.country = self.res[0][1]
 
     def get_rating(self):
-        self.rating = '0'
+    	self.rating = gutils.trim(self.page,'</script></span> (',')')
 
     def get_notes(self):
         self.notes = ''
@@ -129,9 +128,9 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
 
     def get_searches(self):
-        elements = re.findall("""/film/film.asp\?fi=(\d+)">.*?searchTitle\s*textB">(.*?)</span""", self.page)
+        elements = re.findall("""/film/film.asp\?fi=(\d+)">.*?searchTitle\s*textB">(.*?)</span>.*?"> (.*?)</span>""", self.page)
         self.number_results = len(elements)
 
         for element in elements:
             self.ids.append(element[0])
-            self.titles.append(element[1])
+            self.titles.append(element[1] + ' ' + element[2])
