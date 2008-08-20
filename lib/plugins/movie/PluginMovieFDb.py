@@ -32,9 +32,9 @@ plugin_name        = 'FDb'
 plugin_description    = 'Internetowa baza filmowa'
 plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
-plugin_author        = 'Piotr Ożarowski'
-plugin_author_email    = '<ozarow+griffith@gmail.com>'
-plugin_version        = '1.9'
+plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
+plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
+plugin_version        = '1.10'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN = re.compile('http://.*\.fdb\.pl/zwiastuny/odtwarzaj/[0-9]*')

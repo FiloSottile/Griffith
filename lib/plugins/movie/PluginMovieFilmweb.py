@@ -30,9 +30,9 @@ plugin_name        = 'Filmweb'
 plugin_description    = 'Web pełen filmów'
 plugin_url        = 'www.filmweb.pl'
 plugin_language        = _('Polish')
-plugin_author        = 'Piotr Ożarowski'
-plugin_author_email    = '<ozarow+griffith@gmail.com>'
-plugin_version        = '1.12'
+plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
+plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
+plugin_version        = '1.13'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN     = re.compile("""<a class=["']notSelected["'].*?href=["'](.*?)["']>zwiastuny</a>\s*\[\d+\]\s*&raquo;""")
@@ -174,7 +174,9 @@ class SearchPlugin(movie.SearchMovie):
                 for element in elements:
                     element = gutils.after(element, '<a class="searchResultTitle" href="')
                     self.ids.append(gutils.before(element, '">'))
-                    element = gutils.trim(element, '">', '</a>')
+                    element_title = gutils.trim(element, '">', '</a>')
+		    element_year = gutils.trim(element, '</a>', '<span')
+		    element = string.strip(element_title) + ' ' + string.strip(element_year)
                     element = gutils.convert_entities(element)
                     element = gutils.strip_tags(element)
                     self.titles.append(element)
