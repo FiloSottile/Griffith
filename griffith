@@ -454,15 +454,15 @@ class Griffith:
 					initialize.fill_collections_combo(self, default=col_id)
 
 	def show_volume(self, widget):
-		quick_filter.clear_filter(self)
 		vol_id = self.db.Movie.get_by(movie_id=self._movie_id).volume_id
 		pos = gutils.findKey(vol_id, self.volume_combo_ids)
+		quick_filter.clear_filter(self)
 		self.widgets['filter']['volume'].set_active(pos)
 
 	def show_collection(self, widget):
-		quick_filter.clear_filter(self)
 		col_id = self.db.Movie.get_by(movie_id=self._movie_id).collection_id
 		pos = gutils.findKey(col_id, self.collection_combo_ids)
+		quick_filter.clear_filter(self)
 		self.widgets['filter']['collection'].set_active(pos)
 	#}}}
 

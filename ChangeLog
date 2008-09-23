@@ -4,6 +4,10 @@ Griffith ChangeLog
 ------------------
 (c) 2005-2008  Vasco Nunes, Piotr Ożarowski
 
+
+2008-09-23  Michael Jahn
+	* [#273172] "Properties/Volume/show...in this volume" is broken
+
 2008-08-16  Michael Jahn
 	* fixed support for german umlauts in OFDb plugin
 	* added Amazon plugin (supports search by UPC/EAN)
