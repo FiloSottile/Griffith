@@ -34,7 +34,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.11"
+plugin_version = "1.12"
 
 class Plugin(movie.Movie):
     url_to_use = "http://www.kino.de/kinofilm/"
@@ -64,7 +64,7 @@ class Plugin(movie.Movie):
     def get_image(self):
         self.image_url = ''
         tmpdata = self.regextrim(self.tmp_page, '(PRINT[-]CONTENT[-]START|<td class="content">)', '(Dieser Film wurde |>FOTOSHOW<|>KRITIK<)')
-        tmpdatasplit = re.split('src="http://images.kino.de/flbilder', tmpdata)
+        tmpdatasplit = re.split('src="http://.+/flbilder', tmpdata)
         if len(tmpdatasplit) > 2:
             tmpdata = gutils.before(tmpdatasplit[2], '.jpg')
             if tmpdata <> '':
@@ -89,9 +89,9 @@ class Plugin(movie.Movie):
             self.title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
 
     def get_director(self):
-        self.director = gutils.trim(self.tmp_creditspage,"Regie","</a>")
-        self.director = gutils.after(self.director,"/star/")
-        self.director = gutils.after(self.director,">")
+        self.director = self.regextrim(self.tmp_creditspage, '>[ ]*Regie', '</a>')
+        self.director = gutils.after(self.director, '/star/')
+        self.director = gutils.after(self.director, '>')
 
     def get_plot(self):
         # little steps to perfect plot (I hope ... it's a terrible structured content ... )
@@ -159,9 +159,9 @@ class Plugin(movie.Movie):
         self.classification = self.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
 
     def get_studio(self):
-        self.studio = self.regextrim(self.tmp_page, 'Verleih:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
+        self.studio = self.regextrim(self.tmp_page, '>[ ]*Verleih:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
         if (self.studio == ""):
-            self.studio = self.regextrim(self.tmp_page, 'Anbieter:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
+            self.studio = self.regextrim(self.tmp_page, '>[ ]*Anbieter:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
 
     def get_o_site(self):
         self.o_site = ""
@@ -306,12 +306,12 @@ class SearchPlugin(movie.SearchMovie):
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
-    # dict { movie_id -> expected result count }
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'            : 6,
-        'Arahan'                : 6,
-        'Ein glückliches Jahr'    : 3
+        'Rocky Balboa'            : [ 6, 6 ],
+        'Arahan'                : [ 6, 6 ],
+        'Ein glückliches Jahr'    : [ 3, 3 ]
     }
 
 class PluginTest:

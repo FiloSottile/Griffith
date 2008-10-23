@@ -34,7 +34,7 @@ plugin_url          = 'www.zelluloid.de'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = '<mikej06@hotmail.com>'
-plugin_version      = '1.0'
+plugin_version      = '1.1'
 
 class Plugin(movie.Movie):
     index_url = 'http://www.zelluloid.de/filme/index.php3?id='
@@ -106,7 +106,7 @@ class Plugin(movie.Movie):
 
     def get_classification(self):
         self.classification = gutils.trim(self.detail_page, 'FSK: ', '</TD>')
-        self.classification = re.sub(',.*', '', self.classification)
+        self.classification = re.sub('[,<].*', '', self.classification)
 
     def get_studio(self):
         self.studio = gutils.strip_tags(gutils.trim(self.detail_page, 'alt="Produktion"', '&nbsp;'))
@@ -178,11 +178,11 @@ class SearchPlugin(movie.SearchMovie):
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
-    # dict { movie_id -> expected result count }
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'        : 1,
-        'Die wilden Hühner'    : 3
+        'Rocky Balboa'        : [ 1, 1 ],
+        'Die wilden Hühner'    : [ 3, 3 ]
     }
 
 class PluginTest:

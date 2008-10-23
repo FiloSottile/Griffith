@@ -159,12 +159,12 @@ class SearchPlugin(movie.SearchMovie):
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
-    # dict { movie_id -> expected result count }
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'          : 1,
-        'Arahan'                : 3,
-        'glückliches'          : 4
+        'Rocky Balboa'            : [ 1, 1 ],
+        'Arahan'                : [ 3, 2 ],
+        'glückliches'            : [ 4, 2 ]
     }
 
 class PluginTest:

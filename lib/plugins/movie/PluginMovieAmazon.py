@@ -367,12 +367,12 @@ class AmazonRetriever(threading.Thread):
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
-    # dict { movie_id -> expected result count }
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'            : 10,
-        'Arahan'                : 5,
-        'Ein glückliches Jahr'    : 1
+        'Rocky Balboa'            : [ 10, 10 ],
+        'Arahan'                : [ 6, 6 ],
+        'Ein glückliches Jahr'    : [ 1, 1 ]
     }
 
 class PluginTest:
@@ -437,7 +437,6 @@ Ahn Sung-kee',
             'country'            : 'Südkorea',
             'genre'                : 'Actionkomödie, Abenteuer- & Actionkomödie, Fantasykomödie, Action, Komödie, Mehr Fantasy, Korea, Action, Komödie, Fantasy, Unter 10 EUR',
             'classification'    : 'Freigegeben ab 16 Jahren',
-            'studio'            : 'Splendid Entertainment/WVG',
             'o_site'            : False,
             'site'                : 'http://www.amazon.de/dp/B000BSNOD6',
             'trailer'            : False,
