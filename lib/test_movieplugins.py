@@ -31,12 +31,12 @@ __revision__ = '$Id$'
 # dict in both cases.
 #
 # SearchPluginTest.test_configuration:
-# dict { movie_id -> expected result count }
+# dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
 #
 # PluginTest.test_configuration:
 # dict { movie_id -> dict { arribute -> value } }
 #
-# value: * True/False if attribute should only be tested for any value
+# value: * True/False if attribute should only be tested for any value or nothing
 #        * or the expected value
 #
 
@@ -64,6 +64,7 @@ class PluginTester:
 	test_plugins = [
 		'PluginMovieAmazon',
 		'PluginMovieFilmeVonAZ',
+		'PluginMovieIMDB-de',
 		'PluginMovieKinoDe',
 		'PluginMovieOFDb',
 		'PluginMovieZelluloid',
@@ -73,10 +74,12 @@ class PluginTester:
 	# simulates the search for a movie title and compares
 	# the count of results with the expected count
 	#
-	def test_search(self, plugin, title, cnt):
+	def test_search(self, plugin, title, cntOriginal, cntTranslated):
 		global debug, myconfig
+		result = True
 		plugin.debug = debug
 		plugin.config = myconfig
+		# plugin.translated_url_search
 		plugin.url = plugin.translated_url_search
 		if plugin.remove_accents:
 			plugin.title = gutils.remove_accents(title, 'utf-8')
@@ -84,10 +87,21 @@ class PluginTester:
 			plugin.title = title
 		plugin.search(None)
 		plugin.get_searches()
-		if not len(plugin.ids) - 1 == cnt:	# first entry is always '' (???)
-			print "Title: %s - expected: %d - found: %d" % (title, cnt, len(plugin.ids) - 1)
-			return False
-		return True
+		if not len(plugin.ids) - 1 == cntOriginal:	# first entry is always '' (???)
+			print "Title (Translated): %s - expected: %d - found: %d" % (title, cntOriginal, len(plugin.ids) - 1)
+			result = False
+		# plugin.original_url_search
+		plugin.url = plugin.original_url_search
+		if plugin.remove_accents:
+			plugin.title = gutils.remove_accents(title, 'utf-8')
+		else:
+			plugin.title = title
+		plugin.search(None)
+		plugin.get_searches()
+		if not len(plugin.ids) - 1 == cntTranslated:	# first entry is always '' (???)
+			print "Title (Original): %s - expected: %d - found: %d" % (title, cntTranslated, len(plugin.ids) - 1)
+			result = False
+		return result
 
 	#
 	# check every configured movie title
@@ -105,7 +119,7 @@ class PluginTester:
 		if not pluginTestConfig == None:
 			for i in pluginTestConfig.test_configuration:
 				searchPlugin = plugin.SearchPlugin()
-				if not self.test_search(searchPlugin, i, pluginTestConfig.test_configuration[i]):
+				if not self.test_search(searchPlugin, i, pluginTestConfig.test_configuration[i][0], pluginTestConfig.test_configuration[i][1]):
 					result = False
 				sleep(1) # needed for amazon
 		
@@ -281,4 +295,8 @@ class PluginTester:
 #
 # Start the tests
 #
+gtk.gdk.threads_init()
+gtk.gdk.threads_enter()
 PluginTester().do_test()
+#gtk.main()
+gtk.gdk.threads_leave()
