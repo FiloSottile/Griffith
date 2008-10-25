@@ -6,6 +6,9 @@ Griffith ChangeLog
 
 
 2008-10-23  Michael Jahn
+	* PDF export: disabled movie grouping if movie list is not sorted by title or original title
+
+2008-10-23  Michael Jahn
 	* updated IMDB-de, Kino.de, Zelluloid plugin
 	* added original url check within plugin test
 
