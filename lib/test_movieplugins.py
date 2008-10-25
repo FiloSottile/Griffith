@@ -125,7 +125,7 @@ class PluginTester:
             if not result:
                 gutils.error(self, 'SearchPluginTest %s: Test NOT successful !' % plugin_name)
             else:
-                gutils.info(self, 'SearchPluginTest %s: Test successful !' % plugin_name)
+                gutils.info('SearchPluginTest %s: Test successful !' % plugin_name)
         
         return result
 
@@ -225,7 +225,7 @@ class PluginTester:
             if not result:
                 gutils.error(self, 'PluginTest %s: Test NOT successful !' % plugin_name)
             else:
-                gutils.info(self, 'PluginTest %s: Test successful !' % plugin_name)
+                gutils.info('PluginTest %s: Test successful !' % plugin_name)
         
         return result
 
@@ -285,7 +285,7 @@ class PluginTester:
             else:
                 get_unsuccessful = get_unsuccessful + i + ', '
         if domsgbox:
-            gutils.info(self, 'SearchPluginTests\n  Success: %s\n  Failed: %s\n\nPluginTests\n  Success: %s\n  Failed: %s' % (search_successful, search_unsuccessful, get_successful, get_unsuccessful))
+            gutils.info('SearchPluginTests\n  Success: %s\n  Failed: %s\n\nPluginTests\n  Success: %s\n  Failed: %s' % (search_successful, search_unsuccessful, get_successful, get_unsuccessful))
 
 #
 # Start the tests
