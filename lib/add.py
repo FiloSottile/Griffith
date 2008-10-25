@@ -332,7 +332,10 @@ def validate_details(t_movies, allow_only=None):
 				t_movies.pop(i)
 
 def update_movie(self):
-	movie = self.db.Movie.get_by(movie_id=self._movie_id)
+	if self._am_movie_id is not None:
+		movie = self.db.Movie.get_by(movie_id=self._am_movie_id)
+	else:
+		movie = self.db.Movie.get_by(movie_id=self._movie_id)
 	if movie is None: # movie was deleted in the meantime
 		return add_movie_db(self, True)
 	old_image = movie.image
