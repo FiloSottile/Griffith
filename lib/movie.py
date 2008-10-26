@@ -69,6 +69,7 @@ class Movie:
     image_url = None
     encode = 'iso-8859-1'
     fields_to_fetch = []
+    progress = None
     
     # functions that plugin should implement: {{{
     def initialize(self):
@@ -114,6 +115,24 @@ class Movie:
     def __setitem__(self, key, value):
         setattr(self,key,value)
     
+    def get_movie(self, parent_window=None):
+        try:
+            #
+            # initialize the progress dialog once for the following loading process
+            #
+            if self.progress is None:
+                self.progress = Progress(parent_window)
+            self.progress.set_data(parent_window, _("Fetching data"), _("Wait a moment"), True)
+            #			
+            # get the page
+            #
+            self.open_page(parent_window)
+        except:
+            # close the dialog if an error occured
+            self.progress.hide()
+            # reraise the error
+            raise
+
     def open_page(self, parent_window=None, url=None):
         if url is None:
             url_to_fetch = self.url
@@ -121,16 +140,15 @@ class Movie:
             url_to_fetch = url
         if parent_window is not None:
             self.parent_window = parent_window
-        progress = Progress(self.parent_window,_("Fetching data"),_("Wait a moment"))
-        retriever = Retriever(url_to_fetch, self.parent_window,progress)
+        self.progress.set_data(parent_window, _("Fetching data"), _("Wait a moment"), False)
+        retriever = Retriever(url_to_fetch, self.parent_window, self.progress)
         retriever.start()
         while retriever.isAlive():
-            progress.pulse()
-            if progress.status:
+            self.progress.pulse()
+            if self.progress.status:
                 retriever.suspend()
             while gtk.events_pending():
                 gtk.main_iteration()
-        progress.close()
         try:
             ifile = file(retriever.html[0], "rb")
             data = ifile.read()
@@ -147,16 +165,15 @@ class Movie:
             self.image = tmp_dest.split('poster_', 1)[1]
             dest = "%s.jpg" % tmp_dest
             try:
-                progress = Progress(self.parent_window,_("Fetching poster"),_("Wait a moment"))
-                retriever = Retriever(self.image_url,self.parent_window,progress,dest)
+                self.progress.set_data(self.parent_window, _("Fetching poster"), _("Wait a moment"), False)
+                retriever = Retriever(self.image_url, self.parent_window, self.progress, dest)
                 retriever.start()
                 while retriever.isAlive():
-                    progress.pulse()
-                    if progress.status:
+                    self.progress.pulse()
+                    if self.progress.status:
                         retriever.suspend()
                     while gtk.events_pending():
                         gtk.main_iteration()
-                progress.close()
                 urlcleanup()
             except:
                 self.image = ""
@@ -168,54 +185,58 @@ class Movie:
             self.image = ""
 
     def parse_movie(self):
-        from copy import deepcopy
-        fields = deepcopy(self.fields_to_fetch)
+        try:
+            from copy import deepcopy
+            fields = deepcopy(self.fields_to_fetch)
 
-        self.initialize()
+            self.initialize()
 
-        if 'year' in fields:
-            self.get_year()
-            self.year = gutils.digits_only(self.year, 2100)
-            fields.pop(fields.index('year'))
-        if 'runtime' in fields:
-            self.get_runtime()
-            self.runtime = gutils.digits_only(self.runtime)
-            fields.pop(fields.index('runtime'))
-        if 'rating' in fields:
-            self.get_rating()
-            self.rating = gutils.digits_only(self.rating, 10)
-            fields.pop(fields.index('rating'))
-        if 'cast' in fields:
-            self.get_cast()
-            self.cast = gutils.clean(self.cast)
-            self.cast = gutils.gdecode(self.cast, self.encode)
-            fields.pop(fields.index('cast'))
-        if 'plot' in fields:
-            self.get_plot()
-            self.plot = gutils.clean(self.plot)
-            self.plot = gutils.gdecode(self.plot, self.encode)
-            fields.pop(fields.index('plot'))
-        if 'notes' in fields:
-            self.get_notes()
-            self.notes = gutils.clean(self.notes)
-            self.notes = gutils.gdecode(self.notes, self.encode)
-            fields.pop(fields.index('notes'))
-        if 'image' in fields:
-            self.get_image()
-            self.fetch_picture()
-            fields.pop(fields.index('image'))
+            if 'year' in fields:
+                self.get_year()
+                self.year = gutils.digits_only(self.year, 2100)
+                fields.pop(fields.index('year'))
+            if 'runtime' in fields:
+                self.get_runtime()
+                self.runtime = gutils.digits_only(self.runtime)
+                fields.pop(fields.index('runtime'))
+            if 'rating' in fields:
+                self.get_rating()
+                self.rating = gutils.digits_only(self.rating, 10)
+                fields.pop(fields.index('rating'))
+            if 'cast' in fields:
+                self.get_cast()
+                self.cast = gutils.clean(self.cast)
+                self.cast = gutils.gdecode(self.cast, self.encode)
+                fields.pop(fields.index('cast'))
+            if 'plot' in fields:
+                self.get_plot()
+                self.plot = gutils.clean(self.plot)
+                self.plot = gutils.gdecode(self.plot, self.encode)
+                fields.pop(fields.index('plot'))
+            if 'notes' in fields:
+                self.get_notes()
+                self.notes = gutils.clean(self.notes)
+                self.notes = gutils.gdecode(self.notes, self.encode)
+                fields.pop(fields.index('notes'))
+            if 'image' in fields:
+                self.get_image()
+                self.fetch_picture()
+                fields.pop(fields.index('image'))
 
-        for i in fields:
-            getattr(self, "get_%s" % i)()
-            self[i] = gutils.clean(self[i])
-            self[i] = gutils.gdecode(self[i], self.encode)
+            for i in fields:
+                getattr(self, "get_%s" % i)()
+                self[i] = gutils.clean(self[i])
+                self[i] = gutils.gdecode(self[i], self.encode)
         
-        if 'o_title' in self.fields_to_fetch and self.o_title is not None:
-            if self.o_title[:4] == 'The ':
-                self.o_title = self.o_title[4:] + ', The'
-        if 'title' in self.fields_to_fetch and self.title is not None:
-            if self.title[:4] == 'The ':
-                self.title = self.title[4:] + ', The'
+            if 'o_title' in self.fields_to_fetch and self.o_title is not None:
+                if self.o_title[:4] == 'The ':
+                    self.o_title = self.o_title[4:] + ', The'
+            if 'title' in self.fields_to_fetch and self.title is not None:
+                if self.title[:4] == 'The ':
+                    self.title = self.title[4:] + ', The'
+		finally:
+			# close the progress dialog which was opened in get_movie
+			self.progress.hide()
 
 class SearchMovie:
     page = None
@@ -229,9 +250,26 @@ class SearchMovie:
     elements = None
     title = None
     remove_accents = True
+    progress = None
 
     def __init__(self):
         pass
+
+    def search_movies(self,parent_window):
+        try:
+            #
+            # initialize the progress dialog once for the following search process
+            #
+            if self.progress is None:
+                self.progress = Progress(parent_window)
+            self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), True)
+            #			
+            # call the plugin specific search method
+            #
+            self.search(parent_window)
+        finally:
+            # dont forget to hide the progress dialog
+            self.progress.hide()
 
     def open_search(self,parent_window):
         self.titles = [""]
@@ -241,20 +279,19 @@ class SearchMovie:
             self.url = string.replace(self.url, ' ', '%20')
         else:
             self.url = string.replace(self.url+self.title,' ','%20')
-        progress = Progress(parent_window,_("Searching"),_("Wait a moment"))
         try:
             url = self.url.encode(self.encode)
         except UnicodeEncodeError:
             url = self.url.encode('utf-8')
-        retriever = Retriever(url, parent_window, progress)
+        self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), False)
+        retriever = Retriever(url, parent_window, self.progress)
         retriever.start()
         while retriever.isAlive():
-            progress.pulse()
-            if progress.status:
+            self.progress.pulse()
+            if self.progress.status:
                 retriever.suspend()
             while gtk.events_pending():
                 gtk.main_iteration()
-        progress.close()
         try:
             ifile = file(retriever.html[0], "rb")
             self.page = ifile.read()
@@ -311,9 +348,10 @@ class UAFancyURLopener(FancyURLopener):
     version = 'Mozilla/5.0 (Windows; U; Windows NT 6.0) Gecko/2008052906 Firefox/3.0'
     
 class Progress:
-    def __init__(self, window, title, message):
+    def __init__(self, window, title = '', message = ''):
         self.status = False
         self.dialog = gtk.Dialog(title, window, gtk.DIALOG_MODAL, ())
+        self.dialog.set_urgency_hint(False)
         self.label = gtk.Label()
         self.label.set_markup(message)
         self.dialog.vbox.pack_start(self.label)
@@ -332,4 +370,12 @@ class Progress:
         time.sleep(0.01)
     def close(self):
         self.dialog.destroy()
+    def hide(self):
+        self.dialog.hide()
+    def set_data(self, parent_window, title, message, showit):
+        #self.dialog.set_parent(parent_window)
+        self.dialog.set_title(title)
+        self.label.set_markup(message)
+        if showit == True:
+            self.dialog.show()
 # vim: fdm=marker

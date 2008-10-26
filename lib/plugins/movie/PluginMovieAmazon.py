@@ -53,7 +53,6 @@ class Plugin(movie.Movie):
         # dont use base functionality
         # use the Amazon Web API
         self.parent_window = parent_window
-        progress = movie.Progress(parent_window,_('Searching'),_('Wait a moment'))
         try:
             locale = self.config.get('amazon_locale', 0, section='add')
             if locale == '1':
@@ -68,20 +67,20 @@ class Plugin(movie.Movie):
                 locale = 'jp'
             else:
                 locale = None
-            retriever = AmazonRetriever(self.movie_id, locale, parent_window, progress, 'Get')
+            retriever = AmazonRetriever(self.movie_id, locale, parent_window, self.progress, 'Get')
             retriever.start()
             while retriever.isAlive():
-                progress.pulse()
+                self.progress.pulse()
                 while gtk.events_pending():
                     gtk.main_iteration()
             self.page = retriever.result.Item
         except:
+            self.page = ''
             try:
                 log.error("Error retrieving results from amazon.")
                 log.error(retriever.result.Request.Errors.Error.Message)
             except:
                 pass
-        progress.close()
         return self.page
 
     def get_image(self):
@@ -229,7 +228,6 @@ class SearchPlugin(movie.SearchMovie):
         # use the Amazon Web API
         self.titles = [""]
         self.ids = [""]
-        progress = movie.Progress(parent_window,_('Searching'),_('Wait a moment'))
         try:
             locale = self.config.get('amazon_locale', 0, section='add')
             if locale == '1':
@@ -244,10 +242,10 @@ class SearchPlugin(movie.SearchMovie):
                 locale = 'jp'
             else:
                 locale = None
-            retriever = AmazonRetriever(self.title.encode('iso8859-1'), locale, parent_window, progress)
+            retriever = AmazonRetriever(self.title.encode('iso8859-1'), locale, parent_window, self.progress)
             retriever.start()
             while retriever.isAlive():
-                progress.pulse()
+                self.progress.pulse()
                 while gtk.events_pending():
                     gtk.main_iteration()
             self.page = retriever.result
@@ -257,7 +255,6 @@ class SearchPlugin(movie.SearchMovie):
                 log.error(retriever.result.Request.Errors.Error.Message)
             except:
                 pass
-        progress.close()
         return self.page
 
     def get_searches(self):

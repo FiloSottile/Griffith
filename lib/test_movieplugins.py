@@ -83,7 +83,7 @@ class PluginTester:
             plugin.title = gutils.remove_accents(title, 'utf-8')
         else:
             plugin.title = title
-        plugin.search(None)
+        plugin.search_movies(None)
         plugin.get_searches()
         if not len(plugin.ids) - 1 == cntOriginal:	# first entry is always '' (???)
             print "Title (Translated): %s - expected: %d - found: %d" % (title, cntOriginal, len(plugin.ids) - 1)
@@ -94,7 +94,7 @@ class PluginTester:
             plugin.title = gutils.remove_accents(title, 'utf-8')
         else:
             plugin.title = title
-        plugin.search(None)
+        plugin.search_movies(None)
         plugin.get_searches()
         if not len(plugin.ids) - 1 == cntTranslated:	# first entry is always '' (???)
             print "Title (Original): %s - expected: %d - found: %d" % (title, cntTranslated, len(plugin.ids) - 1)
@@ -147,7 +147,7 @@ class PluginTester:
 
         self.movie.fields_to_fetch = fields_to_fetch
     
-        self.movie.open_page(None)
+        self.movie.get_movie(None)
         self.movie.parse_movie()
 
         results = {}
