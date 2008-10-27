@@ -85,7 +85,7 @@ class PluginTester:
             plugin.title = title
         plugin.search_movies(None)
         plugin.get_searches()
-        if not len(plugin.ids) - 1 == cntOriginal:	# first entry is always '' (???)
+        if not len(plugin.ids) - 1 == cntOriginal:    # first entry is always '' (???)
             print "Title (Translated): %s - expected: %d - found: %d" % (title, cntOriginal, len(plugin.ids) - 1)
             result = False
         # plugin.original_url_search
@@ -96,7 +96,7 @@ class PluginTester:
             plugin.title = title
         plugin.search_movies(None)
         plugin.get_searches()
-        if not len(plugin.ids) - 1 == cntTranslated:	# first entry is always '' (???)
+        if not len(plugin.ids) - 1 == cntTranslated:    # first entry is always '' (???)
             print "Title (Original): %s - expected: %d - found: %d" % (title, cntTranslated, len(plugin.ids) - 1)
             result = False
         return result

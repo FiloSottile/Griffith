@@ -47,7 +47,7 @@ class Plugin(movie.Movie):
         self.page = self.page.replace('š','ą')
         self.res = re.findall("""</td><td class="middle_cell"><span class="bold">(.*?)</span>, <span class="bold">(.*?)</span>, <span class="bold">(.*?)</span>, <span class="bold">(.*?) min</span>""", self.page)
         if len(self.res) == 0:
-	    self.res = [( '','','','' )]
+            self.res = [( '','','','' )]
 
     def get_image(self):
         image = self.IMAGE_PATTERN.findall(self.page)

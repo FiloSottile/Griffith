@@ -123,7 +123,7 @@ class Movie:
             if self.progress is None:
                 self.progress = Progress(parent_window)
             self.progress.set_data(parent_window, _("Fetching data"), _("Wait a moment"), True)
-            #			
+            #            
             # get the page
             #
             self.open_page(parent_window)
@@ -234,9 +234,9 @@ class Movie:
             if 'title' in self.fields_to_fetch and self.title is not None:
                 if self.title[:4] == 'The ':
                     self.title = self.title[4:] + ', The'
-		finally:
-			# close the progress dialog which was opened in get_movie
-			self.progress.hide()
+        finally:
+            # close the progress dialog which was opened in get_movie
+            self.progress.hide()
 
 class SearchMovie:
     page = None
@@ -263,7 +263,7 @@ class SearchMovie:
             if self.progress is None:
                 self.progress = Progress(parent_window)
             self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), True)
-            #			
+            #            
             # call the plugin specific search method
             #
             self.search(parent_window)

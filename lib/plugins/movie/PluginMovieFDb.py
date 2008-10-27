@@ -90,26 +90,26 @@ class Plugin(movie.Movie):
 
     def get_runtime(self):
         self.runtime = gutils.trim(self.page,'Czas trwania</h4>','</div>')
-	self.runtime = gutils.trim(self.runtime,'<li>',' minut')
+        self.runtime = gutils.trim(self.runtime,'<li>',' minut')
 
     def get_genre(self):
         self.genre = gutils.trim(self.page,'Gatunek</h4>','</div>')
-	self.genre = gutils.trim(self.genre,'<li>','</li>')
-	self.genre = string.replace(self.genre, ' / ', ' | ')
+        self.genre = gutils.trim(self.genre,'<li>','</li>')
+        self.genre = string.replace(self.genre, ' / ', ' | ')
 
     def get_cast(self):
         self.cast = gutils.trim(self.page,'Obsada</h3>','</div>')
-	self.cast = gutils.trim(self.cast,"<table>\n",'  </table>')
-	if self.cast != '':
-	    self.cast = gutils.strip_tags(self.cast)
-	    self.cast = self.cast.replace("      ","")
-	    self.cast = self.cast.replace("    ","")
-	    self.cast = self.cast.replace("\n...\n\n  ",_(' as '))
-	    self.cast = self.cast.replace("\n\n\n\n\n","")
+        self.cast = gutils.trim(self.cast,"<table>\n",'  </table>')
+        if self.cast != '':
+            self.cast = gutils.strip_tags(self.cast)
+            self.cast = self.cast.replace("      ","")
+            self.cast = self.cast.replace("    ","")
+            self.cast = self.cast.replace("\n...\n\n  ",_(' as '))
+            self.cast = self.cast.replace("\n\n\n\n\n","")
 
     def get_classification(self):
         self.classification = gutils.trim(self.page,"Od lat</h4>","</div>")
-	self.classification = gutils.trim(self.classification,'<li>','</li>')
+        self.classification = gutils.trim(self.classification,'<li>','</li>')
 
     def get_studio(self):
         self.studio = ''
@@ -127,7 +127,7 @@ class Plugin(movie.Movie):
 
     def get_country(self):
         self.country = gutils.trim(self.page,'Kraj produkcji</h4>','</div>')
-	self.country = gutils.trim(self.country,'<li>','</li>')
+        self.country = gutils.trim(self.country,'<li>','</li>')
 
     def get_rating(self):
         self.rating = gutils.trim(self.page, 'class="vote"','</strong>')
