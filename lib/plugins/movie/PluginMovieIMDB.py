@@ -53,12 +53,16 @@ class Plugin(movie.Movie):
 
     def get_o_title(self):
         self.o_title = gutils.trim(self.page, '<h1>', ' <span')
+        if self.o_title == '':
+            self.o_title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
     def get_title(self):    # same as get_o_title()
         self.title = gutils.trim(self.page, '<h1>', ' <span')
+        if self.title == '':
+            self.title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
     def get_director(self):
-        pattern = re.compile('<h5>Directors?:</h5>[\n\s\r]*(.*?)(?:<br/>)?(?:<a[^>]+>more</a>)?\n</div')
+        pattern = re.compile('<h5>Director[s]*?:</h5>[\n\s\r]*(.*?)(?:<br/>)?(?:<a[^>]+>more</a>)?[\n]*</div')
         result = pattern.search(self.page)
         if result:
             self.director = result.groups()[0]
@@ -92,6 +96,7 @@ class Plugin(movie.Movie):
         if self.cast == '':
             self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
         self.cast = string.replace(self.cast, ' ... ', _(' as '))
+        self.cast = string.replace(self.cast, '...', _(' as '))
         self.cast = string.replace(self.cast, '</tr><tr>', "\n")
         self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
         self.cast = string.replace(self.cast, '</tr><tr class="odd">', "\n")
@@ -117,12 +122,15 @@ class Plugin(movie.Movie):
         self.country = gutils.trim(self.page, '<h5>Country:</h5>', '</div>')
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, '<b>User Rating:</b> \n<b>', '/10')
-        if self.rating and self.rating.find('awaiting') == -1:
-            try:
-                self.rating = float(self.rating)
-            except Exception, e:
-                self.rating = 0
+        pattern = re.compile('>([0-9]([.][0-9])*)[/][0-9][0-9]<')
+        result = pattern.search(self.page)
+        if result:
+            self.rating = result.groups()[0]
+            if self.rating:
+                try:
+                    self.rating = float(self.rating)
+                except Exception, e:
+                    self.rating = 0
         else:
             self.rating = 0
 
@@ -130,13 +138,25 @@ class Plugin(movie.Movie):
         self.notes = ''
         language = gutils.trim(self.page, '<h5>Language:</h5>', '</div>')
         language = gutils.strip_tags(language)
+        language = re.sub('[\n]+', '', language)
+        language = re.sub('[ ]+', ' ', language)
+        language = language.rstrip()
         color = gutils.trim(self.page, '<h5>Color:</h5>', '</div>')
         color = gutils.strip_tags(color)
+        color = re.sub('[\n]+', '', color)
+        color = re.sub('[ ]+', ' ', color)
+        color = color.rstrip()
         sound = gutils.trim(self.page, '<h5>Sound Mix:</h5>', '</div>')
         sound = gutils.strip_tags(sound)
+        sound = re.sub('[\n]+', '', sound)
+        sound = re.sub('[ ]+', ' ', sound)
+        sound = sound.rstrip()
         tagline = gutils.trim(self.page, '<h5>Tagline:</h5>', '</div>')
         tagline = self.__before_more(tagline)
         tagline = gutils.strip_tags(tagline)
+        tagline = re.sub('[\n]+', '', tagline)
+        tagline = re.sub('[ ]+', ' ', tagline)
+        tagline = tagline.rstrip()
         if len(language)>0:
             self.notes = "%s: %s\n" %(_('Language'), language)
         if len(sound)>0:
@@ -153,25 +173,39 @@ class Plugin(movie.Movie):
         return data
 
 class SearchPlugin(movie.SearchMovie):
-    PATTERN = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["']>(.*?)</td>""")
+    PATTERN = re.compile(r"""<A HREF=['"]/title/tt([0-9]+)/["']>(.*?)</LI>""")
+    PATTERN2 = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["']>(.*?)</td>""")
+
     def __init__(self):
-        self.original_url_search    = 'http://imdb.com/find?more=tt;q='
-        self.translated_url_search    = 'http://imdb.com/find?more=tt;q='
+        self.original_url_search    = 'http://www.imdb.com/List?words='
+        self.translated_url_search	= 'http://www.imdb.com/find?more=tt;q='
         self.encode = 'utf-8'
 
     def search(self,parent_window):
         self.open_search(parent_window)
-        self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>');
+        tmp_page = gutils.trim(self.page, 'Here are the', '</TABLE>')
+        if tmp_page == '':
+            self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>')
+        else:
+            self.page = tmp_page
         self.page = self.page.decode('iso-8859-1')
         return self.page
 
     def get_searches(self):
-        elements = string.split(self.page, '<tr>')
-
-        if len(elements):
+        elements = re.split('<LI>', self.page)
+        if len(elements) < 2:
+            elements = string.split(self.page, '<tr>')
+            if len(elements):
+                for element in elements[1:]:
+                    match = self.PATTERN.findall(element)
+                    if len(match):
+                        tmp = gutils.clean(match[0][1])
+                        self.ids.append(match[0][0])
+                        self.titles.append(tmp)
+        else:
             for element in elements[1:]:
                 match = self.PATTERN.findall(element)
                 if len(match):
-                    tmp  = gutils.clean(match[0][1])
+                    tmp = gutils.clean(match[0][1])
                     self.ids.append(match[0][0])
                     self.titles.append(tmp)
