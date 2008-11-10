@@ -61,7 +61,7 @@ class Plugin(movie.Movie):
         self.director = gutils.trim(self.page, 'Regiss&ouml;r:', '</tr>')
 
     def get_plot(self):
-        self.plot = self.regextrim(self.page, '<h2>Om [^>]*[>]', '</tr>')
+        self.plot = gutils.regextrim(self.page, '<h2>Om [^>]*[>]', '</tr>')
 
     def get_year(self):
         self.year = gutils.trim(self.page, 'Utgivnings&aring;r:', '</tr>')
@@ -75,7 +75,7 @@ class Plugin(movie.Movie):
             self.genre = string.strip(gutils.trim(self.page, 'Genre:', '</tr>'))
 
     def get_cast(self):
-        self.cast = self.regextrim(self.page, 'Sk&aring;despelare [^:]*[:]', '</tr>')
+        self.cast = gutils.regextrim(self.page, 'Sk&aring;despelare [^:]*[:]', '</tr>')
         self.cast = string.replace(self.cast, ', ', '\n')
 
     def get_classification(self):
@@ -107,19 +107,6 @@ class Plugin(movie.Movie):
         tmp = gutils.trim(self.page, 'Alt. titel:', '</span>')
         if tmp != '':
             self.notes = self.notes + 'Alt. titel:' + string.strip(gutils.strip_tags(tmp))
-
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.start()
-        return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
 

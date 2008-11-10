@@ -66,7 +66,7 @@ class Plugin(movie.Movie):
 
     def get_title(self):
         self.title = gutils.trim(self.page, '<h1>', '<span')
-        elements = string.split(self.regextrim(self.page, '<h5>(Alternativ|Auch bekannt als):', '</div>'), '<i class="transl"')
+        elements = string.split(gutils.regextrim(self.page, '<h5>(Alternativ|Auch bekannt als):', '</div>'), '<i class="transl"')
         if len(elements) > 1:
             for element in elements:
                 tmp = gutils.before(gutils.trim(element, '>', '[de]'), '(')
@@ -99,7 +99,7 @@ class Plugin(movie.Movie):
         self.year = gutils.after(self.year, '">')
 
     def get_runtime(self):
-        self.runtime = self.regextrim(self.page, '<h5>L[^n]+nge:</h5>', ' [Mm]in')
+        self.runtime = gutils.regextrim(self.page, '<h5>L[^n]+nge:</h5>', ' [Mm]in')
 
     def get_genre(self):
         self.genre = gutils.trim(self.page, '<h5>Genre:</h5>', '</div>')
@@ -193,19 +193,6 @@ class Plugin(movie.Movie):
         if tmp>0:
             data = data[:tmp] + '>'
         return data
-
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.start()
-        return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
     PATTERN = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["']>(.*?)(</td>|</A>)""", re.IGNORECASE)

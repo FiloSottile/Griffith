@@ -65,7 +65,7 @@ class Plugin(movie.Movie):
             re.sub(
                 '[]', '-',
                 re.sub(
-                    '[\x93]', '"', self.regextrim(self.page, 'showcover.php[^>]*>', '</td>'))))
+                    '[\x93]', '"', gutils.regextrim(self.page, 'showcover.php[^>]*>', '</td>'))))
 
     def get_year(self):
         self.year = gutils.after(gutils.trim(gutils.trim(self.page, 'Originaltitel', '</TR>'), '(', ')'), ' ')
@@ -135,19 +135,6 @@ class Plugin(movie.Movie):
         )
         if (tmp_notes != ""):
             self.notes = self.notes + "Untertitel:" + tmp_notes + "\n\n"
-            
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.end()
-        return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -189,22 +176,10 @@ class SearchPlugin(movie.SearchMovie):
                         re.sub('[ \t\n][ \t\n]+', ' ',
                         string.replace(
                         string.replace(
-                            self.regextrim(element, '<div [^>]*>', '</div>'),
+                            gutils.regextrim(element, '<div [^>]*>', '</div>'),
                             '<br>', ' - '),
                             '&nbsp;', ''))
                         + ')'
                     )
                 )
-            
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.end()
-        return text[p1:p2]
+

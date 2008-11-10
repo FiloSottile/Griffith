@@ -50,7 +50,7 @@ class Plugin(movie.Movie):
     def get_o_title(self):
         self.o_title = string.capwords(
             gutils.clean(gutils.after(
-            self.regextrim(self.page, '"[ \t]+class="text_ergebniss_titel"', '[ \t]+[(]Originaltitel[)]'), '</a>')))
+            gutils.regextrim(self.page, '"[ \t]+class="text_ergebniss_titel"', '[ \t]+[(]Originaltitel[)]'), '</a>')))
         if self.o_title == '':
             self.o_title = gutils.after(gutils.trim(self.page, 'sucheNach=titel', '</a>'), '>')
 
@@ -61,7 +61,7 @@ class Plugin(movie.Movie):
         self.director = gutils.after(gutils.trim(self.page, '(Regie)', '</a>'), '>')
 
     def get_plot(self):
-        self.plot = gutils.after(self.regextrim(self.page, '[(]Darsteller[)]', '</[pP]>'), '<p>')
+        self.plot = gutils.after(gutils.regextrim(self.page, '[(]Darsteller[)]', '</[pP]>'), '<p>')
 
     def get_year(self):
         self.year = gutils.after(gutils.trim(self.page, 'sucheNach=produktionsjahr', '</a>'), '>')
@@ -81,7 +81,7 @@ class Plugin(movie.Movie):
                     self.delimiter = ", "
 
     def get_cast(self):
-        self.cast = self.regextrim(self.page, '[(]Darsteller[)]', '(<[pP]>|<br><span[^>]+>)')
+        self.cast = gutils.regextrim(self.page, '[(]Darsteller[)]', '(<[pP]>|<br><span[^>]+>)')
         self.cast = gutils.clean(self.cast)
         self.cast = self.cast.replace(' als ', _(' as '))
         self.cast = re.sub('( \t|\t|\r|\n)', '', self.cast)
@@ -89,7 +89,7 @@ class Plugin(movie.Movie):
         self.cast = self.cast.replace(',', '')
 
     def get_classification(self):
-        self.classification = self.regextrim(self.page, 'FSK:[ ]+', '[,;]')
+        self.classification = gutils.regextrim(self.page, 'FSK:[ ]+', '[,;]')
 
     def get_studio(self):
         self.studio = gutils.after(gutils.trim(self.page, 'sucheNach=produktionsfirma', '</a>'), '>')
@@ -108,19 +108,6 @@ class Plugin(movie.Movie):
 
     def get_rating(self):
         self.rating = 0
-        
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.start()
-        return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):

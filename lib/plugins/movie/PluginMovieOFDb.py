@@ -50,7 +50,7 @@ class Plugin(movie.Movie):
         self.director = gutils.trim(self.page,"Regie:","</a><br>")
 
     def get_plot(self):
-        storyid = self.regextrim(self.page, '<a href="plot/', '(">|[&])')
+        storyid = gutils.regextrim(self.page, '<a href="plot/', '(">|[&])')
         if not storyid is None:
             story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid))
         self.plot = gutils.trim(story_page, "</b><br><br>","</")
@@ -109,19 +109,6 @@ class Plugin(movie.Movie):
         if self.rating == '':
             self.rating = "0"
         self.rating = str(round(float(self.rating)))
-
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.start()
-        return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):

@@ -63,7 +63,7 @@ class Plugin(movie.Movie):
 
     def get_image(self):
         self.image_url = ''
-        tmpdata = self.regextrim(self.tmp_page, '(PRINT[-]CONTENT[-]START|<td class="content">)', '(Dieser Film wurde |>FOTOSHOW<|>KRITIK<)')
+        tmpdata = gutils.regextrim(self.tmp_page, '(PRINT[-]CONTENT[-]START|<td class="content">)', '(Dieser Film wurde |>FOTOSHOW<|>KRITIK<)')
         tmpdatasplit = re.split('src="http://.+/flbilder', tmpdata)
         if len(tmpdatasplit) > 2:
             tmpdata = gutils.before(tmpdatasplit[2], '.jpg')
@@ -78,25 +78,25 @@ class Plugin(movie.Movie):
         self.o_title = gutils.trim(self.tmp_page, 'span class="standardsmall">(', ')<')
         if self.o_title == '':
             if self.url_type == 'V':
-                self.o_title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/videofilm', '</a>'), '>')
+                self.o_title = gutils.after(gutils.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/videofilm', '</a>'), '>')
             else:
-                self.o_title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
+                self.o_title = gutils.after(gutils.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
 
     def get_title(self):
         if self.url_type == "V":
-            self.title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/videofilm', '</a>'), '>')
+            self.title = gutils.after(gutils.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/videofilm', '</a>'), '>')
         else:
-            self.title = gutils.after(self.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
+            self.title = gutils.after(gutils.regextrim(self.tmp_page, 'headline2"[^>]*>[ \t\r\n]*<a href="/kinofilm', '</a>'), '>')
 
     def get_director(self):
-        self.director = self.regextrim(self.tmp_creditspage, '>[ ]*Regie', '</a>')
+        self.director = gutils.regextrim(self.tmp_creditspage, '>[ ]*Regie', '</a>')
         self.director = gutils.after(self.director, '/star/')
         self.director = gutils.after(self.director, '>')
 
     def get_plot(self):
         # little steps to perfect plot (I hope ... it's a terrible structured content ... )
         self.plot = gutils.before(self.tmp_page, '<!-- PRINT-CONTENT-ENDE-->')
-        self.plot = self.regextrim(self.plot, 'Kurzinfo', '</td></tr>[ \t\r\n]*<tr><td></td></tr>')
+        self.plot = gutils.regextrim(self.plot, 'Kurzinfo', '</td></tr>[ \t\r\n]*<tr><td></td></tr>')
         if self.plot != '':
             lastpos = self.plot.rfind('</table>')
             if lastpos == -1:
@@ -118,7 +118,7 @@ class Plugin(movie.Movie):
 
     def get_year(self):
         self.year = ''
-        tmp = self.regextrim(self.tmp_page, 'span class="standardsmall"[^>]*><strong>', '</span>')
+        tmp = gutils.regextrim(self.tmp_page, 'span class="standardsmall"[^>]*><strong>', '</span>')
         if tmp <> None:
             srchresult = re.search('[0-9][0-9][0-9][0-9]</strong>', tmp)
             if srchresult <> None:
@@ -128,10 +128,10 @@ class Plugin(movie.Movie):
         self.runtime = ''
         srchresult = re.search('>[0-9]+[ \t]Min[.]<', self.tmp_page)
         if srchresult <> None:
-            self.runtime = self.regextrim(srchresult.string[srchresult.start():srchresult.end()], '>', '[^0-9]')
+            self.runtime = gutils.regextrim(srchresult.string[srchresult.start():srchresult.end()], '>', '[^0-9]')
 
     def get_genre(self):
-        self.genre = self.regextrim(self.tmp_page,'span class="standardsmall"[^>]*>[ \t\r\n]*<strong>((DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</strong>[ \t]-[ \t]<strong>)*', '</strong>[ \t]-[ \t]<strong>')
+        self.genre = gutils.regextrim(self.tmp_page,'span class="standardsmall"[^>]*>[ \t\r\n]*<strong>((DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</strong>[ \t]-[ \t]<strong>)*', '</strong>[ \t]-[ \t]<strong>')
 
     def get_cast(self):
         self.cast = gutils.trim(self.tmp_creditspage,'>Cast<', '</table><br')
@@ -159,12 +159,12 @@ class Plugin(movie.Movie):
             self.cast = string.replace(self.cast, '--flip--', _(' as ').encode('utf8'))
 
     def get_classification(self):
-        self.classification = self.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
+        self.classification = gutils.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
 
     def get_studio(self):
-        self.studio = self.regextrim(self.tmp_page, '>[ ]*Verleih:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
+        self.studio = gutils.regextrim(self.tmp_page, '>[ ]*Verleih:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
         if (self.studio == ""):
-            self.studio = self.regextrim(self.tmp_page, '>[ ]*Anbieter:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
+            self.studio = gutils.regextrim(self.tmp_page, '>[ ]*Anbieter:( |&nbsp;)+', '( - |&nbsp;-&nbsp;)*</strong>')
 
     def get_o_site(self):
         self.o_site = ""
@@ -176,9 +176,9 @@ class Plugin(movie.Movie):
         self.trailer = ""
 
     def get_country(self):
-        self.country = self.regextrim(self.tmp_page, 'span class="standardsmall"[^>]*><strong>((DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</strong>[ \t]-[ \t]<strong>)*', '</span>')
+        self.country = gutils.regextrim(self.tmp_page, 'span class="standardsmall"[^>]*><strong>((DVD|VHS|Laser Disc|Video CD|Blue-ray Disc)</strong>[ \t]-[ \t]<strong>)*', '</span>')
         if self.country <> None:
-            self.country = self.regextrim(self.country, '-[ \t]<strong>', '</strong>')
+            self.country = gutils.regextrim(self.country, '-[ \t]<strong>', '</strong>')
             self.country = re.sub('[0-9]+$', '', self.country)
         else:
             self.country = ''
@@ -200,19 +200,6 @@ class Plugin(movie.Movie):
         tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>EAN</b>", "</td></tr>")), "&nbsp;", "")
         if (tmp_notes != ""):
             self.notes = self.notes + "EAN:\n" + tmp_notes + "\n\n"
-            
-    def regextrim(self,text,key1,key2):
-        obj = re.search(key1, text)
-        if obj is None:
-            return ''
-        else:
-            p1 = obj.end()
-        obj = re.search(key2, text[p1:])
-        if obj is None:
-            return ''
-        else:
-            p2 = p1 + obj.start()
-        return text[p1:p2]
 
 #
 # kino.de use iso-8859-1
