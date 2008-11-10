@@ -51,12 +51,12 @@ class Plugin(movie.Movie):
 			self.image_url = gutils.trim(self.page[tmp:], 'src="', '"')
 
 	def get_o_title(self):
-		self.o_title = gutils.trim(self.page, '<h1>', ' <span')
+		self.o_title = self.regextrim(self.page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
 		if self.o_title == '':
 			self.o_title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
 	def get_title(self):	# same as get_o_title()
-		self.title = gutils.trim(self.page, '<h1>', ' <span')
+		self.title = self.regextrim(self.page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
 		if self.title == '':
 			self.title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
@@ -170,6 +170,19 @@ class Plugin(movie.Movie):
 		if tmp>0:
 			data = data[:tmp] + '>'
 		return data
+
+	def regextrim(self,text,key1,key2):
+		obj = re.search(key1, text)
+		if obj is None:
+			return ''
+		else:
+			p1 = obj.end()
+		obj = re.search(key2, text[p1:])
+		if obj is None:
+			return ''
+		else:
+			p2 = p1 + obj.start()
+		return text[p1:p2]
 
 class SearchPlugin(movie.SearchMovie):
 	PATTERN = re.compile(r"""<A HREF=['"]/title/tt([0-9]+)/["']>(.*?)</LI>""")

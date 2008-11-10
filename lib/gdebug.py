@@ -86,8 +86,9 @@ class DebugWindow:
 	def close(self):
 		self.dialog.destroy()
 	def add(self, txt):
-		buffer = self.textview.get_buffer()
-		buffer.insert(buffer.get_end_iter(), txt, -1)
+		if txt is not None:
+			buffer = self.textview.get_buffer()
+			buffer.insert(buffer.get_end_iter(), txt, -1)
 
 #
 # used on windows system
