@@ -66,7 +66,7 @@ class Plugin(movie.Movie):
 
     def get_title(self):
         self.title = gutils.trim(self.page, '<h1>', '<span')
-        elements = string.split(gutils.trim(self.page, '<h5>Alternativ:', '</div>'), '<i class="transl"')
+        elements = string.split(self.regextrim(self.page, '<h5>(Alternativ|Auch bekannt als):', '</div>'), '<i class="transl"')
         if len(elements) > 1:
             for element in elements:
                 tmp = gutils.before(gutils.trim(element, '>', '[de]'), '(')

@@ -140,20 +140,23 @@ class Plugin(movie.Movie):
                 self.cast = gutils.after(self.cast, '>mehr<')
             self.cast = gutils.after(self.cast, '>')
             self.cast = re.sub('<tr[ ]+class="(dbtrefferlight|dbtrefferdark)">', "\n", self.cast)
-            self.cast = self.cast.replace("&nbsp;", "--flip--")
+            self.cast = self.cast.replace('&nbsp;', '--flip--')
             self.cast = gutils.clean(self.cast)
+            self.cast = re.sub("[\t]+", '', self.cast)
+            self.cast = re.sub("[\n]+", "\n", self.cast)
+            self.cast = re.sub("--flip--[\n]+", '--flip--', self.cast)
             elements = self.cast.split("\n")
             self.cast = ''
             for element in elements:
-                elements2 = element.split("--flip--")
+                elements2 = element.split('--flip--')
                 if len(elements2) > 1:
                     if elements2[0] <> '':
-                        self.cast += elements2[1] + "--flip--" + elements2[0] + "\n"
+                        self.cast += elements2[1] + '--flip--' + elements2[0] + "\n"
                     else:
                         self.cast += elements2[1] + "\n"
                 else:
-                    self.cast = element
-            self.cast = string.replace(self.cast, "--flip--", _(" as ").encode('utf8'))
+                    self.cast += element + "\n"
+            self.cast = string.replace(self.cast, '--flip--', _(' as ').encode('utf8'))
 
     def get_classification(self):
         self.classification = self.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
@@ -221,8 +224,8 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
-        self.original_url_search    = "http://www.kino.de/megasuche.php4?typ=filme&wort="
-        self.translated_url_search    = "http://www.kino.de/megasuche.php4?typ=filme&wort="
+        self.original_url_search   = 'http://www.kino.de/search.php?mode=megaSearch&searchCategory=film&inputSearch='
+        self.translated_url_search = 'http://www.kino.de/search.php?mode=megaSearch&searchCategory=film&inputSearch='
 #        self.encode='utf-8'
         self.encode='iso-8859-1'
 
@@ -232,7 +235,7 @@ class SearchPlugin(movie.SearchMovie):
         #
         # try to get all result pages (not so nice, but it works)
         #
-        tmp_pagecount = gutils.trim(tmp_pagemovie, "&nbsp;von ", "</SPAN>")
+        tmp_pagecount = gutils.trim(tmp_pagemovie, '>von', '</a>')
         try:
             tmp_pagecountint = int(tmp_pagecount)
         except:
@@ -240,19 +243,19 @@ class SearchPlugin(movie.SearchMovie):
         tmp_pagecountintcurrent = 1
         while (tmp_pagecountint > tmp_pagecountintcurrent and tmp_pagecountintcurrent < 5):
             tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
-            self.url = "http://www.kino.de/megasuche.php4?typ=filme&page=" + str(tmp_pagecountintcurrent) + "&wort="
+            self.url = 'http://www.kino.de/search.php?mode=megaSearch&searchCategory=film&page=' + str(tmp_pagecountintcurrent) + "&inputSearch="
             self.open_search(parent_window)
             tmp_pagemovie = tmp_pagemovie + self.page
         #
         # Look for DVD and VHS
         #
-        self.url = "http://www.kino.de/megasuche.php4?typ=video&wort="
+        self.url = "http://www.kino.de/search.php?mode=megaSearch&searchCategory=video&inputSearch="
         self.open_search(parent_window)
         tmp_pagevideo = tmp_pagemovie + self.page
         #
         # try to get all result pages (not so nice, but it works)
         #
-        tmp_pagecount = gutils.trim(self.page, "&nbsp;von ", "</SPAN>")
+        tmp_pagecount = gutils.trim(self.page, '>von', '</a>')
         try:
             tmp_pagecountint = int(tmp_pagecount)
         except:
@@ -260,7 +263,7 @@ class SearchPlugin(movie.SearchMovie):
         tmp_pagecountintcurrent = 1
         while (tmp_pagecountint > tmp_pagecountintcurrent and tmp_pagecountintcurrent < 5):
             tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
-            self.url = "http://www.kino.de/megasuche.php4?typ=video&page=" + str(tmp_pagecountintcurrent) + "&wort="
+            self.url = "http://www.kino.de/search.php?mode=megaSearch&searchCategory=video&page=" + str(tmp_pagecountintcurrent) + "&inputSearch="
             self.open_search(parent_window)
             tmp_pagevideo = tmp_pagevideo + self.page
 

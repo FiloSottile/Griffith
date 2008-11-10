@@ -81,7 +81,7 @@ class Plugin(movie.Movie):
                     self.delimiter = ", "
 
     def get_cast(self):
-        self.cast = self.regextrim(self.page, '[(]Darsteller[)]', '<[pP]>')
+        self.cast = self.regextrim(self.page, '[(]Darsteller[)]', '(<[pP]>|<br><span[^>]+>)')
         self.cast = gutils.clean(self.cast)
         self.cast = self.cast.replace(' als ', _(' as '))
         self.cast = re.sub('( \t|\t|\r|\n)', '', self.cast)
