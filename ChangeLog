@@ -7,7 +7,8 @@ Griffith ChangeLog
 
 2008-11-11  Piotr Ożarowski
 	* Backport SQLAlchemy's pysqlite2 2.5.0 compatibility (taken from 0.4.8)
-	  + force gettext to use unicode
+	* Backport some unicode related changes from Griffith 0.10-beta1
+	* Few minor fixes
 
 2008-11-10  Michael Jahn
 	* updated plugins IMDB-de, Amazon, Kino.de, FilmeVonAZ

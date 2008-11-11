@@ -722,8 +722,8 @@ def fill_volumes_combo(self, default=0):
 			name = self.db.Volume.get_by(volume_id=vol_id).name
 		else:
 			name = ''
+		self.widgets['add']['volume'].insert_text(int(i), str(name))
 		# add some white spaces to prevent scrollbar hides parts of the names	
-		self.widgets['add']['volume'].insert_text(int(i), str(name) + '   ')
 		self.widgets['filter']['volume'].insert_text(int(i), str(name) + '   ')
 	self.initialized = _tmp
 	self.widgets['add']['volume'].show_all()
@@ -745,8 +745,8 @@ def fill_collections_combo(self, default=0):
 			name = self.db.Collection.get_by(collection_id=col_id).name
 		else:
 			name = ''
+		self.widgets['add']['collection'].insert_text(int(i), str(name))
 		# add some white spaces to prevent scrollbar hides parts of the names	
-		self.widgets['add']['collection'].insert_text(int(i), str(name) + '   ')
 		self.widgets['filter']['collection'].insert_text(int(i), str(name) + '   ')
 	self.initialized = _tmp
 	self.initialized = False

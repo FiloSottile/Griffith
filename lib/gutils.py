@@ -135,7 +135,7 @@ def on_combo_box_entry_changed(widget):
 		return 0
 
 def on_combo_box_entry_changed_name(widget):
-	return widget.get_active_text()
+	return widget.get_active_text().decode('utf-8')
 
 def convert_entities(text):
 	def conv(ents):
@@ -268,9 +268,9 @@ def file_chooser(title, action=None, buttons=None, name="", folder=os.path.expan
 		mfilter.add_mime_type("image/jpeg")
 		mfilter.add_mime_type("image/gif")
 		mfilter.add_pattern("*.[pP][nN][gG]")
-		mfilter.add_pattern("*.[jJ][pP][gG]")
+		mfilter.add_pattern("*.[jJ][pP][eE][gG]")
 		mfilter.add_pattern("*.[gG][iI][fF]")
-		mfilter.add_pattern("*.[tT][iI][fF]")
+		mfilter.add_pattern("*.[tT][iI][fF]{1,2}")
 		mfilter.add_pattern("*.[xX][pP][mM]")
 		dialog.add_filter(mfilter)
 	mfilter = gtk.FileFilter()

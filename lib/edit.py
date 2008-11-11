@@ -132,12 +132,12 @@ def fetch_bigger_poster(self):
 	amazon.setLicense("04GDDMMXX8X9CJ1B22G2")
 
 	locale = self.config.get('amazon_locale', 0, section='add')
-	keyword = self.widgets['movie']['o_title'].get_text()
+	keyword = self.widgets['movie']['o_title'].get_text().decode('utf-8')
 	if locale == '1':
 		locale = 'uk'
 	elif locale == '2':
 		locale = 'de'
-		keyword = self.widgets['movie']['title'].get_text()
+		keyword = self.widgets['movie']['title'].get_text().decode('utf-8')
 	elif locale == '3':
 		locale = 'ca'
 	elif locale == '4':
@@ -163,7 +163,7 @@ def fetch_bigger_poster(self):
 		return
 
 	for f in range(len(result.Item)):
-		if self.widgets['movie']['o_title'].get_text() == result.Item[f].ItemAttributes.Title:
+		if self.widgets['movie']['o_title'].get_text().decode('utf-8') == result.Item[f].ItemAttributes.Title:
 			get_poster(self, f, result, current_poster)
 			return
 
@@ -197,7 +197,7 @@ def get_poster(self, f, result, current_poster):
 		f = int(tmp_model.get_value(tmp_iter, 0))
 		self.widgets['results']['window'].hide()
 
-	file_to_copy = tempfile.mktemp(suffix=self.widgets['movie']['number'].get_text(), \
+	file_to_copy = tempfile.mktemp(suffix=self.widgets['movie']['number'].get_text().decode('utf-8'), \
 		dir=self.locations['temp'])
 	file_to_copy += ".jpg"
 	if len(result.Item[f].LargeImage.URL):
@@ -250,7 +250,7 @@ def get_poster(self, f, result, current_poster):
 				1, self.widgets['window'])
 		if response == -8:
 			self.debug.show("Using fetched poster, updating and removing old one from disk.")
-			update_image(self, self.widgets['movie']['number'].get_text(), file_to_copy)
+			update_image(self, self.widgets['movie']['number'].get_text().decode('utf-8'), file_to_copy)
 		else:
 			self.debug.show("Reverting to previous poster and deleting new one from disk.")
 			try:

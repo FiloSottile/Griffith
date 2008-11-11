@@ -45,16 +45,16 @@ def clear_person(self):
 	self.widgets['person']['phone'].set_text("")
 
 def add_person_db(self):
-	if (self.widgets['person']['name'].get_text()<>''):
+	if self.widgets['person']['name'].get_text().decode('utf-8'):
 		p = self.db.Person()
-		p.name = self.widgets['person']['name'].get_text()
-		p.email = self.widgets['person']['email'].get_text()
-		p.phone = self.widgets['person']['phone'].get_text()
+		p.name = self.widgets['person']['name'].get_text().decode('utf-8')
+		p.email = self.widgets['person']['email'].get_text().decode('utf-8')
+		p.phone = self.widgets['person']['phone'].get_text().decode('utf-8')
 		self.widgets['person']['window'].hide()
 		if p.add_to_db():
 			myiter = self.p_treemodel.insert_after(None, None)
-			self.p_treemodel.set_value(myiter,0,str(self.widgets['person']['name'].get_text()))
-			self.p_treemodel.set_value(myiter,1,str(self.widgets['person']['email'].get_text()))
+			self.p_treemodel.set_value(myiter,0,str(self.widgets['person']['name'].get_text().decode('utf-8')))
+			self.p_treemodel.set_value(myiter,1,str(self.widgets['person']['email'].get_text().decode('utf-8')))
 		self.widgets['people']['window'].present()
 	else:
 		gutils.error(self.widgets['results']['window'],_("You should fill the person name"))
@@ -63,7 +63,7 @@ def edit_person(self):
 	try:
 		treeselection = self.widgets['people']['treeview'].get_selection()
 		(tmp_model, tmp_iter) = treeselection.get_selected()
-		name = tmp_model.get_value(tmp_iter,0)
+		name = tmp_model.get_value(tmp_iter,0).decode('utf-8')
 	except:
 		return
 	p = self.db.Person.get_by(name=name)
@@ -79,12 +79,12 @@ def edit_person_cancel(self):
 	self.widgets['people']['window'].present()
 
 def update_person(self):
-	p = self.db.Person.get_by(person_id=self.widgets['person']['e_id'].get_text())
+	p = self.db.Person.get_by(person_id=self.widgets['person']['e_id'].get_text().decode('utf-8'))
 	if p is None:
 		return False
-	p.name = self.widgets['person']['e_name'].get_text()
-	p.email = self.widgets['person']['e_email'].get_text()
-	p.phone = self.widgets['person']['e_phone'].get_text()
+	p.name = self.widgets['person']['e_name'].get_text().decode('utf-8')
+	p.email = self.widgets['person']['e_email'].get_text().decode('utf-8')
+	p.phone = self.widgets['person']['e_phone'].get_text().decode('utf-8')
 	if p.update_in_db():
 		self.update_statusbar(_("Record updated"))
 		edit_person_cancel(self)
@@ -101,7 +101,7 @@ def delete_person(self):
 	try:
 		treeselection = self.widgets['people']['treeview'].get_selection()
 		(tmp_model, tmp_iter) = treeselection.get_selected()
-		person = tmp_model.get_value(tmp_iter,0)
+		person = tmp_model.get_value(tmp_iter,0).decode('utf-8')
 	except:
 		return
 	person = self.db.Person.get_by(name=person)

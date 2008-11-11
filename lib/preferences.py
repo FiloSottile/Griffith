@@ -323,12 +323,12 @@ def save_preferences(self):
 	else:
 		c.set('mail_use_tls', False, section='mail')
 
-	c.set('smtp_server', w['mail_smtp_server'].get_text(), section='mail')
-	c.set('mail_smtp_port', w['mail_smtp_port'].get_text(), section='mail')
+	c.set('smtp_server', w['mail_smtp_server'].get_text().decode('utf-8'), section='mail')
+	c.set('mail_smtp_port', w['mail_smtp_port'].get_text().decode('utf-8'), section='mail')
 
-	c.set('username', w['mail_username'].get_text(), section='mail')
-	c.set('password', w['mail_password'].get_text(), section='mail')
-	c.set('email', w['mail_email'].get_text(), section='mail')
+	c.set('username', w['mail_username'].get_text().decode('utf-8'), section='mail')
+	c.set('password', w['mail_password'].get_text().decode('utf-8'), section='mail')
+	c.set('email', w['mail_email'].get_text().decode('utf-8'), section='mail')
 
 	# default movie plugin
 	if w['default_plugin'].get_active():
@@ -365,9 +365,9 @@ def save_preferences(self):
 	if self.windows:
 		save_reader = ''
 	else:
-		save_reader = w['epdf_reader'].get_text()
+		save_reader = w['epdf_reader'].get_text().decode('utf-8')
 
-	c.set('lang', w['spell_lang'].get_text(), section='spell')
+	c.set('lang', w['spell_lang'].get_text().decode('utf-8'), section='spell')
 	c['pdf_reader'] = save_reader
 
 	c.set('amazon_locale', w['amazon_locale'].get_active(), section='add')

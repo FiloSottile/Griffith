@@ -27,7 +27,7 @@ import gutils
 
 def change_filter(self):
 	x = 0
-	text = gutils.gescape(self.widgets['filter']['text'].get_text())
+	text = gutils.gescape(self.widgets['filter']['text'].get_text().decode('utf-8'))
 	
 	from sqlalchemy import select
 	statement = select(self.db.Movie.c)
