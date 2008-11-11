@@ -19,7 +19,8 @@ __revision__ = '$Id: PluginMovieCSFD.py 12 2007-01-05 09:08:06Z blondak $'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-from gettext import gettext as _
+import gettext
+gettext.install('griffith', unicode=1)
 import gutils
 import movie,string
 import re

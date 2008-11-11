@@ -30,7 +30,8 @@ import string
 import platform
 import shutil
 from tempfile import mkdtemp
-from gettext import gettext as _
+import gettext
+gettext.install('griffith', unicode=1)
 
 plugin_name = "iPod"
 plugin_description = _("iPod Notes export plugin")

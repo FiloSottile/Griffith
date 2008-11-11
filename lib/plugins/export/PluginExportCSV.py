@@ -25,7 +25,9 @@ import csv
 import gtk
 import gutils
 import os
-from gettext import gettext as _
+import gettext
+gettext.install('griffith', unicode=1)
+import gutils
 
 plugin_name = "CSV"
 plugin_description = _("Full CSV list export plugin")

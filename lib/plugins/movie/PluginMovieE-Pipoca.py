@@ -25,7 +25,8 @@ __revision__ = '$Id$'
 # joe1310@terra.com.br - São Paulo/Brasil
 
 
-from gettext import gettext as _
+import gettext
+gettext.install('griffith', unicode=1)
 import gutils, movie, string
 
 plugin_name = "E-Pipoca"

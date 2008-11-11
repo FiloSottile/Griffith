@@ -21,9 +21,10 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-from gettext import gettext as _
+import gettext
+gettext.install('griffith', unicode=1)
 pname        = "Griffith"
-pversion     = "0.9.7.1"
+pversion     = "0.9.8"
 pauthor      = "Vasco Nunes, Piotr Ożarowski <griffith-private@lists.berlios.de>"
 pyear        = "2005-2008"
 pwebsite     = "http://www.griffith.cc/"
