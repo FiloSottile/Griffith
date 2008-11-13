@@ -5,6 +5,16 @@ Griffith ChangeLog
 (c) 2005-2008  Vasco Nunes, Piotr Ożarowski
 
 
+---- 0.9.8 ---
+
+2008-11-13  Piotr Ożarowski
+	* New translations:
+	  + Persian (thanks to Artin)
+	  + Finnish (thanks to Kari Argillander)
+	  + Low German (thanks to pheb62)
+	* Updated translations: bg, fi, pl, rs, fa
+	* Version changed to 0.9.8
+
 2008-11-11  Piotr Ożarowski
 	* Backport SQLAlchemy's pysqlite2 2.5.0 compatibility (taken from 0.4.8)
 	* Backport some unicode related changes from Griffith 0.10-beta1

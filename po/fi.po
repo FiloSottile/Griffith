@@ -1,15 +1,16 @@
-# SPANISH translation of Griffith.
-# Copyright (C) 2005 Vasco Nunes
-# This file is distributed under the same license as Griffith package.
-# Daniel Ucero <escaranbujo@gmail.comvasco>, 2006.
+# Finnish translation for griffith
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the griffith package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Griffith 0.9.7\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: griffith\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-01-26 22:18+0100\n"
-"PO-Revision-Date: 2008-07-23 17:55+0000\n"
-"Last-Translator: Paco Molinero <paco@byasl.com>\n"
-"Language-Team: Spanish <es@li.org>\n"
+"PO-Revision-Date: 2008-05-04 09:49+0000\n"
+"Last-Translator: Kari Argillander <Unknown>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,16 +20,16 @@ msgstr ""
 #: ../griffith:211 ../griffith:826 ../lib/delete.py:33 ../lib/edit.py:44
 #: ../lib/edit.py:128
 msgid "You have no movies in your database"
-msgstr "No hay películas en su base de datos"
+msgstr "Tietokannassasi ei ole elokuvia"
 
 #: ../griffith:385
 msgid "You have seen all films in your collection!"
-msgstr "Ya ha visto todas las películas de su colección"
+msgstr ""
 
 #: ../griffith:511 ../griffith:516 ../lib/initialize.py:338
 #: ../lib/initialize.py:621
 msgid "subtitles"
-msgstr "subtítulos"
+msgstr "tekstitys"
 
 #: ../griffith:793
 msgid ""
@@ -36,9 +37,9 @@ msgid ""
 "Your current movie collection will be replaced.\n"
 "You can't undo this operation."
 msgstr ""
-"¿Está seguro que quiere restaurar?\n"
-"Su colección actual de películas será reemplazada.\n"
-"No podrá deshacer esta acción."
+"Oletko varma että haluat palauttaa?\n"
+"Nykyinen elokuvakokoelmasi tullaan korvaamaan.\n"
+"Et voi perua tätä operaatiota."
 
 #: ../griffith:803
 msgid ""
@@ -46,33 +47,33 @@ msgid ""
 "Your current movie collection will be mixed with a backup.\n"
 "You can't undo this operation."
 msgstr ""
-"¿Está seguro que quiere mezclarlo?\n"
-"Su colección actual de películas ser combinará con una copia de seguridad.\n"
-"No podrá deshacer esta acción."
+"Oletko varma että haluat yhdistää?\n"
+"Nykyinen elokuvakokoelmasi tullaan yhdistämään varmuuskopion kanssa.\n"
+"Et voi perua tätä operaatiota."
 
 #: ../griffith:901
 msgid " movie(s) in collection. "
-msgstr " película(s) en colección "
+msgstr ""
 
 #: ../griffith:902
 msgid " movie(s) loaned. "
-msgstr " película(s) prestada(s) "
+msgstr ""
 
 #: ../griffith:903
 msgid "You haven't seen "
-msgstr "No has visto "
+msgstr "Et ole nähnyt "
 
 #: ../griffith:903
 msgid " movie(s)"
-msgstr " película(s)"
+msgstr ""
 
 #: ../griffith:1096
 msgid ""
 "Are you sure you want to create a new database?\n"
 "You will lose ALL your current data!"
 msgstr ""
-"¿Está seguro que quiere crear una nueva base de datos?\n"
-"¡Perderá TODOS tus datos actuales!"
+"Oletko varma että haluat luoda uuden tietokannan?\n"
+"Tulet menettämään KAIKKI nykyiset tietosi!"
 
 #: ../griffith:1100
 msgid ""
@@ -80,41 +81,41 @@ msgid ""
 "Do you confirm that you want\n"
 "to lose your current data?"
 msgstr ""
-"¡Última oportunidad!\n"
-"¿Confirma que quiere\n"
-"perder sus datos actuales?"
+"Viimeinen mahdollisuus!\n"
+"Varmistatko että haluat\n"
+"menettää nykyiset tietosi?"
 
 #: ../lib/about.py:41
 msgid "Main Authors"
-msgstr "Autores principales"
+msgstr ""
 
 #: ../lib/about.py:43
 msgid "Programmers"
-msgstr "Programadores"
+msgstr "Ohjelmoijat"
 
 #: ../lib/about.py:46
 msgid "Contributors:"
-msgstr "Colaboradores:"
+msgstr "Avustajat:"
 
 #: ../lib/about.py:50
 msgid "Logo, icon and general artwork "
-msgstr "Logo, icono e ilustración general "
+msgstr ""
 
 #: ../lib/about.py:70
 msgid "See TRANSLATORS file"
-msgstr "Vea el archivo TRANSLATORS"
+msgstr ""
 
 #: ../lib/about.py:78
 msgid "This program is released under the GNU"
-msgstr "Esta aplicación está licenciada bajo la GNU"
+msgstr ""
 
 #: ../lib/add.py:45 ../glade/griffith.glade.h:23
 msgid "Add a new movie"
-msgstr "Añadir una nueva película"
+msgstr ""
 
 #: ../lib/add.py:56
 msgid "Edit movie"
-msgstr "Editar película"
+msgstr ""
 
 #: ../lib/add.py:374 ../lib/add.py:442 ../lib/cover.py:181
 #: ../lib/main_treeview.py:469
@@ -123,137 +124,132 @@ msgstr " min"
 
 #: ../lib/add.py:379
 msgid "Movie information has been updated"
-msgstr "La información de la película ha sido actualizada"
+msgstr ""
 
 #: ../lib/add.py:384 ../lib/add.py:604
 msgid ""
 "You should fill the original title\n"
 "or the movie title."
 msgstr ""
-"Debe rellenar el título original\n"
-"o el título de la película."
 
 #: ../lib/add.py:390 ../lib/add.py:396
 msgid "Movie with that title already exists, are you sure you want to add?"
 msgstr ""
-"Ya existe una película con este título, ¿está seguro que quiere añadirla?"
 
 #: ../lib/add.py:575
 msgid "No results"
-msgstr "No hay resultados"
+msgstr "Ei tuloksia"
 
 #: ../lib/add.py:612
 msgid "Url: "
-msgstr "Url: "
+msgstr ""
 
 #: ../lib/add.py:613
 msgid "Language: "
-msgstr "Idioma: "
+msgstr "Kieli: "
 
 #: ../lib/backup.py:32
 msgid "Save Griffith backup"
-msgstr "Guardar una copia de Griffith"
+msgstr ""
 
 #: ../lib/backup.py:41 ../lib/plugins/export/PluginExportCSV.py:64
 #: ../lib/plugins/export/PluginExportiPod.py:111
 #: ../lib/plugins/export/PluginExportPDF.py:85
 #: ../lib/plugins/export/PluginExportXML.py:65
 msgid "File exists. Do you want to overwrite it?"
-msgstr "El archivo existe. ¿Quiere sobreescribirlo?"
+msgstr "Tiedosto on jo olemassa. Haluatko kirjoittaa tiedoston yli?"
 
 #: ../lib/backup.py:55
 msgid "Error creating backup"
-msgstr "Error creando copia de seguridad"
+msgstr ""
 
 #: ../lib/backup.py:62
 msgid "Backup function is available only for SQLite engine for now"
 msgstr ""
-"La función de hacer copias de seguridad sólo está disponible para SQLite "
-"actualmente"
 
 #: ../lib/backup.py:105
 msgid "Backup has been created"
-msgstr "La copia de seguridad ha sido creada"
+msgstr ""
 
 #: ../lib/backup.py:109 ../lib/backup.py:183
 msgid "Restore Griffith backup"
-msgstr "Restaurar la copia de seguridad"
+msgstr ""
 
 #: ../lib/backup.py:117 ../lib/backup.py:199
 msgid "Can't read backup file"
-msgstr "No se puede leer el archivo de copia de seguridad"
+msgstr ""
 
 #: ../lib/backup.py:174
 msgid "Backup restored"
-msgstr "Copia de seguridad restaurada"
+msgstr ""
 
 #: ../lib/cover.py:42 ../lib/edit.py:46
 msgid "Select image"
-msgstr "Seleccionar imágen"
+msgstr ""
 
 #: ../lib/cover.py:86 ../lib/cover.py:149
 msgid "Cover generated by Griffith v"
-msgstr "Carátula generada por Griffith v"
+msgstr ""
 
 #: ../lib/cover.py:88 ../lib/cover.py:151
 #: ../lib/plugins/export/PluginExportHTML.py:742
 #: ../lib/plugins/export/PluginExportPDF.py:152
 msgid "Released Under the GNU/GPL License"
-msgstr "Versión bajo la licencia GNU/GPL"
+msgstr ""
 
 #: ../lib/cover.py:176 ../lib/initialize.py:200 ../lib/initialize.py:606
 #: ../lib/plugins/export/PluginExportHTML.py:145
 #: ../lib/plugins/export/PluginExportHTML.py:330 ../glade/griffith.glade.h:95
 msgid "Original Title"
-msgstr "Título Original"
+msgstr ""
 
 #: ../lib/cover.py:177 ../lib/initialize.py:207 ../lib/initialize.py:614
 #: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:146
 msgid "Title"
-msgstr "Título"
+msgstr "Otsikko"
 
 #: ../lib/cover.py:179 ../lib/initialize.py:214 ../lib/initialize.py:596
 #: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:47
 msgid "Director"
-msgstr "Director"
+msgstr "ohjaaja"
 
 #: ../lib/cover.py:181
 msgid "Running Time"
-msgstr "Duración"
+msgstr ""
 
 #: ../lib/cover.py:182 ../lib/initialize.py:595
 #: ../lib/plugins/export/PluginExportHTML.py:135 ../glade/griffith.glade.h:40
 msgid "Country"
-msgstr "País"
+msgstr "Maa"
 
 #: ../lib/cover.py:183 ../lib/initialize.py:221 ../lib/initialize.py:597
 #: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:61
 msgid "Genre"
-msgstr "Género"
+msgstr ""
 
 #: ../lib/dbupgrade.py:86 ../lib/plugins/movie/PluginMovieE-Pipoca.py:34
 msgid "Brazilian Portuguese"
-msgstr "Portugués de Brasil"
+msgstr ""
 
 #: ../lib/dbupgrade.py:87
 msgid "Bulgarian"
-msgstr "Búlgaro"
+msgstr "Bulgaria"
 
 #: ../lib/dbupgrade.py:88
 msgid "Catalan"
-msgstr "Catalán"
+msgstr "Katalaani"
 
 #: ../lib/dbupgrade.py:89 ../lib/plugins/movie/PluginMovieCSFD.py:30
 msgid "Czech"
-msgstr "Checo"
+msgstr ""
 
 #: ../lib/dbupgrade.py:90
 msgid "Danish"
-msgstr "Danés"
+msgstr "Tanska"
 
 #: ../lib/dbupgrade.py:91
 msgid "Dutch"
-msgstr "Holandés"
+msgstr ""
 
 #: ../lib/dbupgrade.py:92 ../lib/plugins/movie/PluginMovieAniDB.py:32
 #: ../lib/plugins/movie/PluginMovieDVDEmpire.py:32
@@ -261,16 +257,16 @@ msgstr "Holandés"
 #: ../lib/plugins/movie/PluginMovieMediadis.py:16
 #: ../lib/plugins/movie/PluginMovieMoviefone.py:16
 msgid "English"
-msgstr "Inglés"
+msgstr ""
 
 #: ../lib/dbupgrade.py:93
 msgid "Estonian"
-msgstr "Estonio"
+msgstr ""
 
 #: ../lib/dbupgrade.py:94 ../lib/plugins/movie/PluginMovieAllocine.py:32
 #: ../lib/plugins/movie/PluginMovieCineMovies.py:31
 msgid "French"
-msgstr "Francés"
+msgstr ""
 
 #: ../lib/dbupgrade.py:95 ../lib/plugins/movie/PluginMovieDVDPalace.py:33
 #: ../lib/plugins/movie/PluginMovieFilmDb.py:32
@@ -280,43 +276,43 @@ msgstr "Francés"
 #: ../lib/plugins/movie/PluginMovieOFDb.py:17
 #: ../lib/plugins/movie/PluginMovieZelluloid.py:33
 msgid "German"
-msgstr "Alemán"
+msgstr ""
 
 #: ../lib/dbupgrade.py:96
 msgid "Greek"
-msgstr "Griego"
+msgstr ""
 
 #: ../lib/dbupgrade.py:97
 msgid "Hungarian"
-msgstr "Húngaro"
+msgstr ""
 
 #: ../lib/dbupgrade.py:98
 msgid "Indonesian"
-msgstr "Indonesio"
+msgstr ""
 
 #: ../lib/dbupgrade.py:99 ../lib/plugins/movie/PluginMovieCinematografo.py:30
 msgid "Italian"
-msgstr "Italiano"
+msgstr ""
 
 #: ../lib/dbupgrade.py:100
 msgid "Japanese"
-msgstr "Japonés"
+msgstr ""
 
 #: ../lib/dbupgrade.py:101
 msgid "Korean"
-msgstr "Coreano"
+msgstr ""
 
 #: ../lib/dbupgrade.py:102
 msgid "Norwegian Bokmal"
-msgstr "Noruego bokmal"
+msgstr ""
 
 #: ../lib/dbupgrade.py:103
 msgid "Occitan"
-msgstr "Occitano"
+msgstr ""
 
 #: ../lib/dbupgrade.py:104
 msgid "Pashto"
-msgstr "Pastún"
+msgstr ""
 
 #: ../lib/dbupgrade.py:105 ../lib/plugins/movie/PluginMovieFDb.py:33
 #: ../lib/plugins/movie/PluginMovieFilmweb.py:31
@@ -325,137 +321,130 @@ msgstr "Pastún"
 #: ../lib/plugins/movie/PluginMovieTanukiAnime.py:31
 #: ../lib/plugins/movie/PluginMovieWP.py:32
 msgid "Polish"
-msgstr "Polaco"
+msgstr ""
 
 #: ../lib/dbupgrade.py:106 ../lib/plugins/movie/PluginMovie7arte.py:32
 #: ../lib/plugins/movie/PluginMovieCineteka.py:32
 #: ../lib/plugins/movie/PluginMoviePTGate.py:32
 msgid "Portuguese"
-msgstr "Portugués"
+msgstr ""
 
 #: ../lib/dbupgrade.py:107
 msgid "Russian"
-msgstr "Ruso"
+msgstr ""
 
 #: ../lib/dbupgrade.py:108
 msgid "Simplified Chinese"
-msgstr "Chino simplificado"
+msgstr ""
 
 #: ../lib/dbupgrade.py:109
 msgid "Slovak"
-msgstr "Eslovaco"
+msgstr ""
 
 #: ../lib/dbupgrade.py:110 ../lib/plugins/movie/PluginMovieCulturalia.py:32
 #: ../lib/plugins/movie/PluginMovieFilmAffinity.py:32
 #: ../lib/plugins/movie/PluginMovieIMDB-es.py:32
 msgid "Spanish"
-msgstr "Español"
+msgstr ""
 
 #: ../lib/dbupgrade.py:111 ../lib/plugins/movie/PluginMovieFilmtipset.py:33
 msgid "Swedish"
-msgstr "Sueco"
+msgstr ""
 
 #: ../lib/dbupgrade.py:112
 msgid "Turkish"
-msgstr "Turco"
+msgstr ""
 
 #: ../lib/dbupgrade.py:115
 msgid "Favourite"
-msgstr "Favorita"
+msgstr ""
 
 #: ../lib/dbupgrade.py:137
 msgid ""
 "Griffith will now convert your database to the new format. This can take "
 "several minutes if you have a large database."
 msgstr ""
-"Griffith cambiará tu base de datos al formato nuevo ahora. Puede durar "
-"varios minutos si tienes un base de datos grande."
 
 #: ../lib/dbupgrade.py:151
 msgid "Old DB conversion: please install pysqlite legacy (v1.0)"
 msgstr ""
-"Conversión del Viejo Base de Datos; favor de instalar pysqlite legacy (v1.0)"
 
 #: ../lib/dbupgrade.py:180
 msgid ""
 "Your database is most probably in SQLite2 format, please convert it to "
 "SQLite3"
 msgstr ""
-"Es muy probable que tu base de datos esté en el formato de SQLite2, favor de "
-"convertirlo a SQLite3"
 
 #: ../lib/delete.py:37
 msgid "You can't delete movie while it is loaned."
-msgstr "No puedes borrar la película mientras está prestada"
+msgstr ""
 
 #: ../lib/delete.py:39
 msgid "Are you sure you want to delete this movie?"
-msgstr "¿Estás seguro que quieres eliminar esta película?"
+msgstr ""
 
 #: ../lib/edit.py:58
 msgid "Image not valid."
-msgstr "Imagen no válida."
+msgstr ""
 
 #: ../lib/edit.py:88 ../lib/edit.py:106
 msgid "Image has been updated"
-msgstr "La imagen ha sido actualizada"
+msgstr ""
 
 #: ../lib/edit.py:95
 msgid "Are you sure you want to delete this poster?"
-msgstr "¿Estás seguro que quieres eliminar este cartel?"
+msgstr ""
 
 #: ../lib/edit.py:148 ../lib/edit.py:155
 msgid "No posters found for this movie."
-msgstr "No se ha encontrado cartel para esta película"
+msgstr ""
 
 #: ../lib/edit.py:200 ../lib/movie.py:147
 msgid "Fetching poster"
-msgstr "Obteniendo cartel"
+msgstr ""
 
 #: ../lib/edit.py:200 ../lib/movie.py:121 ../lib/movie.py:147
 #: ../lib/movie.py:240
 msgid "Wait a moment"
-msgstr "Espere un momento"
+msgstr ""
 
 #: ../lib/edit.py:212
 msgid "Sorry. A connection error has occurred."
-msgstr "Lo siento. Ha ocurrido un error de conexión."
+msgstr ""
 
 #: ../lib/edit.py:225 ../lib/edit.py:258
 msgid ""
 "Sorry. This movie is listed but has no poster available at Amazon.com."
 msgstr ""
-"Lo siento. Esta película está en la lista pero no hay cartel disponible en "
-"Amazon.com."
 
 #: ../lib/edit.py:244
 msgid "Do you want to use this poster instead?"
-msgstr "¿Deseas utilizar este cartel en lugar de otro?"
+msgstr ""
 
 #: ../lib/gconsole.py:133
 msgid "No movie found"
-msgstr "Ninguna película encontrada"
+msgstr ""
 
 #: ../lib/gemail.py:39
 msgid "Connection timed out"
-msgstr "Expiró la conexión"
+msgstr "Yhteys aikakatkaistiin"
 
 #: ../lib/gemail.py:50 ../lib/gemail.py:60
 #, python-format
 msgid "Error sending e-mail: %s"
-msgstr "Error enviando e-mail: %s"
+msgstr ""
 
 #: ../lib/gemail.py:50
 msgid "login failure"
-msgstr "Fallo en autenticación"
+msgstr ""
 
 #: ../lib/gemail.py:57
 msgid "E-mail sent sucessfuly"
-msgstr "El e-mail se envió satisfactoriamente"
+msgstr ""
 
 #: ../lib/gemail.py:77
 msgid "Movie loan reminder"
-msgstr "Recordatorio del préstamo de la película"
+msgstr ""
 
 #: ../lib/gemail.py:77
 #, python-format
@@ -464,363 +453,352 @@ msgid ""
 "\n"
 "Just to remind you "
 msgstr ""
-"¡Hola, %s!\n"
-"\n"
-"Tan sólo recordarle que "
 
 #: ../lib/gemail.py:83
 msgid "Mail could not be sent. Please check e-mail preferences."
 msgstr ""
-"No se pudo enviar el correo electrónico. Por favor, compruebe las "
-"preferencias de correo electrónico."
 
 #: ../lib/gemail.py:85
 msgid "This person has no e-mail address defined."
-msgstr "Esta persona no tiene definida ninguna dirección de e-mail."
+msgstr ""
 
 #: ../lib/gutils.py:265
 msgid "Images"
-msgstr "Imágenes"
+msgstr "Kuvat"
 
 #: ../lib/gutils.py:276 ../lib/plugins/imp/__init__.py:202
 msgid "All files"
-msgstr "Todos los archivos"
+msgstr "Kaikki tiedostot"
 
 #: ../lib/initialize.py:187
 msgid "N."
-msgstr "N."
+msgstr ""
 
 #: ../lib/initialize.py:194 ../lib/initialize.py:598
 #: ../lib/plugins/export/PluginExportHTML.py:138 ../glade/griffith.glade.h:68
 msgid "Image"
-msgstr "Imagen"
+msgstr "Kuva"
 
 #: ../lib/initialize.py:228 ../lib/initialize.py:611
 #: ../lib/plugins/export/PluginExportHTML.py:150 ../glade/griffith.glade.h:125
 msgid "Seen it"
-msgstr "Vista"
+msgstr ""
 
 #: ../lib/initialize.py:236 ../lib/initialize.py:618
 #: ../lib/plugins/export/PluginExportHTML.py:152 ../glade/griffith.glade.h:160
 msgid "Year"
-msgstr "Año"
+msgstr "Vuosi"
 
 #: ../lib/initialize.py:245 ../lib/initialize.py:610
 #: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:121
 msgid "Runtime"
-msgstr "Duración"
+msgstr ""
 
 #: ../lib/initialize.py:294
 msgid "Loan Date"
-msgstr "Fecha de Préstamo"
+msgstr ""
 
 #: ../lib/initialize.py:300
 msgid "Return Date"
-msgstr "Fecha de Devolución"
+msgstr ""
 
 #: ../lib/initialize.py:305
 msgid "Loaned To"
-msgstr "Prestado a"
+msgstr ""
 
 #: ../lib/initialize.py:324 ../lib/plugins/movie/PluginMovieIMDB-de.py:145
 #: ../lib/plugins/movie/PluginMovieIMDB.py:140
 msgid "Language"
-msgstr "Idioma"
+msgstr ""
 
 #: ../lib/initialize.py:336 ../lib/initialize.py:621
 msgid "lector"
-msgstr "lector"
+msgstr ""
 
 #: ../lib/initialize.py:337 ../lib/initialize.py:621
 msgid "dubbing"
-msgstr "doblaje"
+msgstr ""
 
 #: ../lib/initialize.py:339 ../lib/initialize.py:621
 msgid "commentary"
-msgstr "comentario"
+msgstr ""
 
 #: ../lib/initialize.py:346 ../glade/griffith.glade.h:149
 msgid "Type"
-msgstr "~Tipo"
+msgstr ""
 
 #: ../lib/initialize.py:361
 msgid "Codec"
-msgstr "Códec"
+msgstr ""
 
 #: ../lib/initialize.py:376
 msgid "Channels"
-msgstr "Canales:"
+msgstr ""
 
 #: ../lib/initialize.py:391
 msgid "Subtitle format"
-msgstr "<b>Formato de Subtítulo</b>"
+msgstr ""
 
 #: ../lib/initialize.py:507 ../glade/griffith.glade.h:89
 msgid "Name"
-msgstr "Nombre"
+msgstr ""
 
 #: ../lib/initialize.py:513 ../glade/exporthtml.glade.h:16
 #: ../glade/griffith.glade.h:49 ../glade/import.glade.h:5
 msgid "E-mail"
-msgstr "E-mail"
+msgstr ""
 
 #: ../lib/initialize.py:561
 msgid "Last added"
-msgstr "La Ultima Añadida"
+msgstr ""
 
 #: ../lib/initialize.py:590 ../lib/plugins/export/PluginExportHTML.py:133
 #: ../glade/griffith.glade.h:32
 msgid "Cast"
-msgstr "Con"
+msgstr ""
 
 #: ../lib/initialize.py:591 ../lib/plugins/export/PluginExportHTML.py:134
 #: ../glade/griffith.glade.h:34
 msgid "Classification"
-msgstr "Clasificación"
+msgstr ""
 
 #: ../lib/initialize.py:592 ../lib/plugins/export/PluginExportHTML.py:161
 #: ../glade/griffith.glade.h:37
 msgid "Collection"
-msgstr "Colección"
+msgstr ""
 
 #: ../lib/initialize.py:593 ../lib/initialize.py:620
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:149
 #: ../lib/plugins/movie/PluginMovieIMDB.py:144 ../glade/griffith.glade.h:38
 msgid "Color"
-msgstr "Color"
+msgstr ""
 
 #: ../lib/initialize.py:594 ../glade/griffith.glade.h:39
 msgid "Condition"
-msgstr "Condición"
+msgstr ""
 
 #: ../lib/initialize.py:599 ../glade/griffith.glade.h:72
 msgid "Layers"
-msgstr "Capas"
+msgstr ""
 
 #: ../lib/initialize.py:600 ../lib/plugins/export/PluginExportHTML.py:142
 msgid "Loaned"
-msgstr "Prestado"
+msgstr ""
 
 #: ../lib/initialize.py:601 ../lib/plugins/export/PluginExportHTML.py:143
 #: ../glade/griffith.glade.h:48
 msgid "Discs"
-msgstr "Discos"
+msgstr ""
 
 #: ../lib/initialize.py:602 ../glade/griffith.glade.h:84
 msgid "Medium"
-msgstr "Medio"
+msgstr ""
 
 #: ../lib/initialize.py:603 ../lib/plugins/export/PluginExportHTML.py:153
 #: ../glade/griffith.glade.h:92
 msgid "Notes"
-msgstr "Notas"
+msgstr ""
 
 #: ../lib/initialize.py:604 ../lib/sql.py:278
 #: ../lib/plugins/export/PluginExportHTML.py:144 ../glade/griffith.glade.h:93
 msgid "Number"
-msgstr "Número"
+msgstr ""
 
 #: ../lib/initialize.py:605 ../lib/plugins/export/PluginExportHTML.py:139
 #: ../glade/griffith.glade.h:94
 msgid "Official site"
-msgstr "Sitio Oficial"
+msgstr ""
 
 #: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:146
 #: ../glade/griffith.glade.h:103
 msgid "Plot"
-msgstr "Resumen"
+msgstr ""
 
 #: ../lib/initialize.py:608 ../lib/plugins/export/PluginExportHTML.py:147
 #: ../glade/griffith.glade.h:111
 msgid "Rating"
-msgstr "Grado"
+msgstr ""
 
 #: ../lib/initialize.py:609 ../glade/griffith.glade.h:113
 msgid "Region"
-msgstr "Región"
+msgstr ""
 
 #: ../lib/initialize.py:612 ../lib/plugins/export/PluginExportHTML.py:140
 #: ../glade/griffith.glade.h:135
 msgid "Site"
-msgstr "Sitio"
+msgstr ""
 
 #: ../lib/initialize.py:613 ../lib/plugins/export/PluginExportHTML.py:149
 #: ../glade/griffith.glade.h:141
 msgid "Studio"
-msgstr "Estudio"
+msgstr ""
 
 #: ../lib/initialize.py:615 ../lib/plugins/export/PluginExportHTML.py:141
 #: ../glade/griffith.glade.h:148
 msgid "Trailer"
-msgstr "Trailer"
+msgstr ""
 
 #: ../lib/initialize.py:616 ../lib/plugins/export/PluginExportHTML.py:164
 #: ../glade/griffith.glade.h:155
 msgid "Video codec"
-msgstr "Códec de vídeo"
+msgstr ""
 
 #: ../lib/initialize.py:617 ../lib/plugins/export/PluginExportHTML.py:162
 #: ../glade/griffith.glade.h:158
 msgid "Volume"
-msgstr "Volumen"
+msgstr ""
 
 #: ../lib/initialize.py:619 ../lib/initialize.py:620 ../lib/initialize.py:622
 #: ../lib/initialize.py:816 ../lib/initialize.py:817 ../lib/initialize.py:848
 #: ../lib/initialize.py:849
 msgid "N/A"
-msgstr "N/A"
+msgstr ""
 
 #: ../lib/initialize.py:619
 msgid "Damaged"
-msgstr "Daño"
+msgstr ""
 
 #: ../lib/initialize.py:619
 msgid "Poor"
-msgstr "Malisimo"
+msgstr ""
 
 #: ../lib/initialize.py:619
 msgid "Fair"
-msgstr "Malo"
+msgstr ""
 
 #: ../lib/initialize.py:619
 msgid "Good"
-msgstr "Bueno"
+msgstr ""
 
 #: ../lib/initialize.py:619
 msgid "Excellent"
-msgstr "Excelente"
+msgstr ""
 
 #: ../lib/initialize.py:620
 msgid "Black and White"
-msgstr "Blanco y Negro"
+msgstr ""
 
 #: ../lib/initialize.py:620
 msgid "Mixed"
-msgstr "Mezclado"
+msgstr ""
 
 #: ../lib/initialize.py:622
 msgid "Single Side, Single Layer"
-msgstr "Una Cara, Una Capa"
+msgstr ""
 
 #: ../lib/initialize.py:622
 msgid "Single Side, Dual Layer"
-msgstr "Una Cara, Dos Capa"
+msgstr ""
 
 #: ../lib/initialize.py:622
 msgid "Dual Side, Single Layer"
-msgstr "Dos Cara, Una Capa"
+msgstr ""
 
 #: ../lib/initialize.py:622
 msgid "Dual Side, Dual Layer"
-msgstr "Dos Cara, Dos Capa"
+msgstr ""
 
 #: ../lib/initialize.py:624
 msgid "Region 0 (No Region Coding)"
-msgstr "Región 0 (Sin código de región)"
+msgstr ""
 
 #: ../lib/initialize.py:625
 msgid "Region 1 (United States of America, Canada)"
-msgstr "Región 1 (Estados Unidos de América, Canada)"
+msgstr ""
 
 #: ../lib/initialize.py:626
 msgid ""
 "Region 2 (Europe,including France, Greece, Turkey, Egypt, Arabia, Japan and "
 "South Africa)"
 msgstr ""
-"Región 2 (Europa,incluido Francia, Grecia, Turquia, Egipto, Arabia, Japón y "
-"Sur África)"
 
 #: ../lib/initialize.py:627
 msgid "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
-msgstr "Región 3 (Corea, Tailandia, Vietnam, Borneo y Indonesia)"
+msgstr ""
 
 #: ../lib/initialize.py:628
 msgid ""
 "Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
 "America)"
 msgstr ""
-"Región 4 (Australia y Nueva Zelanda, Mexico, El Caribe, y Sur América)"
 
 #: ../lib/initialize.py:629
 msgid "Region 5 (India, Africa, Russia and former USSR countries)"
-msgstr "Región 5 (India, África, Rusia y los países anteriores de URSS)"
+msgstr ""
 
 #: ../lib/initialize.py:630
 msgid "Region 6 (Popular Republic of China)"
-msgstr "Región 6 (República Popular de China)"
+msgstr ""
 
 #: ../lib/initialize.py:631
 msgid "Region 7 (Reserved for Unspecified Special Use)"
-msgstr "Región 7 (Reservada por Uso Especial No Especificado)"
+msgstr ""
 
 #: ../lib/initialize.py:632
 msgid "Region 8 (Airlines/Cruise Ships)"
-msgstr "Región 8 (Aerolineas/Cruceros en barco)"
+msgstr ""
 
 #: ../lib/initialize.py:669
 msgid "Dictionary not available. Spellcheck will be disabled. \n"
 msgstr ""
-"Diccionario no disponoble. Corrección ortográfica será inhabilitada. \n"
 
 #: ../lib/loan.py:40
 msgid "No person is defined yet."
-msgstr "No hay personas definidas todavia."
+msgstr ""
 
 #: ../lib/loan.py:67
 msgid "Do you want to loan whole collection?"
-msgstr "¿Quieres prestar la colección entera?"
+msgstr ""
 
 #: ../lib/loan.py:79
 msgid "Movie loaned"
-msgstr "Película prestada"
+msgstr ""
 
 #: ../lib/main_treeview.py:244
 msgid "This movie has been loaned to "
-msgstr "Has prestado esta película a "
+msgstr ""
 
 #: ../lib/main_treeview.py:244
 msgid " on "
-msgstr " en "
+msgstr ""
 
 #: ../lib/main_treeview.py:255
 msgid "Movie not loaned"
-msgstr "Película no prestada"
+msgstr ""
 
 #: ../lib/movie.py:121
 msgid "Fetching data"
-msgstr "Obtener datos"
+msgstr ""
 
 #: ../lib/movie.py:240
 msgid "Searching"
-msgstr "Buscando"
+msgstr ""
 
 #: ../lib/movie.py:279
 msgid "Connection error"
-msgstr "Error de conexión"
+msgstr ""
 
 #: ../lib/movie.py:303
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
 
 #: ../lib/people.py:59
 msgid "You should fill the person name"
-msgstr "Debes rellenar el nombre de la persona"
+msgstr ""
 
 #: ../lib/people.py:88
 msgid "Record updated"
-msgstr "Registro actualizado"
+msgstr ""
 
 #: ../lib/people.py:111
 msgid "This person has loaned films from you. Return them first."
-msgstr "Esta persona te ha prestado unas películas. Primero devuélveselas."
+msgstr ""
 
 #: ../lib/people.py:116
 msgid ""
 "This person has data in the loan history. This data will be erased if you "
 "continue."
 msgstr ""
-"Hay datos de esta persona en el historico de prestamos. Estos datos serán "
-"borrados si  continuas."
 
 #: ../lib/people.py:117
 #, python-format
@@ -828,63 +806,57 @@ msgid ""
 "%s\n"
 "Are you sure you want to delete this person?"
 msgstr ""
-"%s\n"
-"¿Estás seguro que quieres eliminar a esta persona?"
 
 #: ../lib/sql.py:61 ../lib/sql.py:123
 msgid ""
 "This item is in use.\n"
 "Operation aborted!"
 msgstr ""
-"Se está usando este objeto.\n"
-"¡Se abortó la operación!"
 
 #: ../lib/sql.py:82
 msgid "This name is already in use!"
-msgstr "Este nombre ya se usa:"
+msgstr ""
 
 #: ../lib/sql.py:278
 #, python-format
 msgid "Column \"%s\" is not unique"
-msgstr "Columna \"%s\" no es único"
+msgstr ""
 
 #: ../lib/sql.py:348
 msgid ""
 "Cannot connect to database.\n"
 "Falling back to SQLite."
 msgstr ""
-"No se pudo conectar con la base de datos.\n"
-"Volviendo a SQLite."
 
 #: ../lib/sql.py:348
 msgid "Please check debug output for more informations."
-msgstr "Para más información, compruebe la salida de depuración."
+msgstr ""
 
 #: ../lib/sql.py:356
 msgid "Database connection failed."
-msgstr "La conexión al base de datos falló."
+msgstr ""
 
 #: ../lib/version.py:30
 msgid "Griffith is a film collection manager."
-msgstr "Griffith es un catalogador de películas"
+msgstr ""
 
 #: ../lib/view.py:28
 msgid "Filter activated. Showing only not seen movies."
-msgstr "Filtro activado. Visualizando sólo las películas vistas."
+msgstr ""
 
 #: ../lib/view.py:32
 msgid "Filter activated. Showing only loaned movies."
-msgstr "Filtro activado. Visualizando sólo las películas prestadas."
+msgstr ""
 
 #: ../lib/view.py:42
 #, python-format
 msgid "Filter activated. Showing only movies from volume: %s"
-msgstr "Filtro activado. Visualizando sólo las películas del volumen: %s"
+msgstr ""
 
 #: ../lib/view.py:49
 #, python-format
 msgid "Filter activated. Showing only movies from collection: %s"
-msgstr "Filtro activado. Visualizando sólo las películas de la colección: %s"
+msgstr ""
 
 #: ../lib/widgets.py:312
 msgid ""
@@ -892,9 +864,6 @@ msgid ""
 "are xpdf, gpdf, evince or kpdf. Make sure you have this program installed "
 "and working first."
 msgstr ""
-"Define aquí el lector de PDF que quieres usar dentro de Griffith. Opciones "
-"comunes  son xpdf, gpdf, evince or kpdf. Asegurate que tienes alguno "
-"instalado y pruebalo primero."
 
 #: ../lib/widgets.py:313
 msgid ""
@@ -902,9 +871,6 @@ msgid ""
 "fields. Use you locale setting. For example, to use european portuguese "
 "spell checking enter 'pt'"
 msgstr ""
-"Aquí puedes definir el lenguaje que usarás para comprobar la ortografía de "
-"los campos. Utiliza tu configuración local. Por ejemplo, para usar portugués "
-"europeo introduce 'pt'"
 
 #: ../lib/widgets.py:314
 msgid ""
@@ -912,17 +878,12 @@ msgid ""
 "*nix systems, 'localhost' should work. Alternatively, you can use your "
 "Internet Service Provider's SMTP server address."
 msgstr ""
-"Usa esta entrada para definir el servidor SMTP que quieres usar para enviar "
-"mensajes. En sistemas Unix, 'localhost' deberia funcionar. Alternativamente, "
-"puedes usar tu dirección del servidor SMTP de tu proveedor de Internet."
 
 #: ../lib/widgets.py:315
 msgid ""
 "This is the from e-mail address that should be used to all outgoing e-mail. "
 "You want to include your own e-mail address here probably."
 msgstr ""
-"Esta es la dirección 'origen' que debes usar para todos los mensajes "
-"salientes. Puedes incluir tu propia dirección de e-mail aquí probablemente."
 
 #: ../lib/widgets.py:316
 msgid ""
@@ -930,18 +891,12 @@ msgid ""
 "gmail account service to send e-mails, try to enter '587' here. Default (and "
 "the most common one) is '25'"
 msgstr ""
-"Aquí puede definir el puerto smtp del servidor a utilizar. Si quiere usar su "
-"cuenta de gmail para enviar correos electrónicos, pruebe a introducir '587'. "
-"Por defecto (y la opción más común) es '25'."
 
 #: ../lib/widgets.py:317
 msgid ""
 "If you need TLS support, please check this checkbox. This is needed, for "
 "example, when using gmail service to send your reminder e-mails."
 msgstr ""
-"Si necesita soporte TLS, por favor, marque esta casilla. Ello es necesario, "
-"por ejemplo, para utilizar el servicio de gamail para enviarle recordatorios "
-"mediante correo electrónico."
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:93
 #: ../lib/plugins/movie/PluginMovieFDb.py:103
@@ -998,16 +953,16 @@ msgstr ""
 #: ../lib/plugins/movie/PluginMovieWP.py:98
 #: ../lib/plugins/movie/PluginMovieZelluloid.py:103
 msgid " as "
-msgstr " como "
+msgstr ""
 
 #: ../lib/plugins/movie/PluginMovieIMDB-de.py:147
 #: ../lib/plugins/movie/PluginMovieIMDB.py:142 ../glade/griffith.glade.h:4
 msgid "<b>Audio</b>"
-msgstr "<b>Audio</b>"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportCSV.py:31
 msgid "Full CSV list export plugin"
-msgstr "Plugin para exportar lista completa CSV"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportCSV.py:53
 #: ../lib/plugins/export/PluginExportCSV.py:56
@@ -1016,42 +971,42 @@ msgstr "Plugin para exportar lista completa CSV"
 #: ../lib/plugins/export/PluginExportXML.py:57
 #, python-format
 msgid "Export a %s document"
-msgstr "Exportar un documento %s"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportCSV.py:79
 #: ../lib/plugins/export/PluginExportXML.py:97
 #, python-format
 msgid "%s file has been created."
-msgstr "El archivo %s ha sido creado"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:36
 msgid "Plugin exports data using templates"
-msgstr "El Plugin exportó los datos usando plantillas"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:48
 msgid "Griffith's movies list"
-msgstr "Lista de películas de Griffith"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:160 ../glade/griffith.glade.h:83
 msgid "Media"
-msgstr "Medio"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:504
 #: ../lib/plugins/export/PluginExportHTML.py:506
 msgid "previous"
-msgstr "Anterior"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:517
 #: ../lib/plugins/export/PluginExportHTML.py:519
 msgid "next"
-msgstr "Siguiente"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:647
 #: ../lib/plugins/export/PluginExportHTML.py:689
 #: ../lib/plugins/export/PluginExportHTML.py:780
 #, python-format
 msgid "Can't create %s!"
-msgstr "No se puede crear %s!"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:678
 #, python-format
@@ -1059,674 +1014,668 @@ msgid ""
 "Directory %s already exists.\n"
 "Do you want to overwrite it?"
 msgstr ""
-"El directorio %s ya existe.\n"
-"¿Quieres sobreescribirlo?"
 
 #: ../lib/plugins/export/PluginExportHTML.py:682
 #, python-format
 msgid "Can't remove %s!"
-msgstr "No se puede borrar %s!"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:697
 #: ../lib/plugins/export/PluginExportHTML.py:710
 #, python-format
 msgid "Can't copy %s!"
-msgstr "No se puede copiar %s!"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:732
 #, python-format
 msgid "Can't open %s!"
-msgstr "No se puede abrir %s!"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:740
 #: ../lib/plugins/export/PluginExportPDF.py:150
 msgid "Document generated by Griffith v"
-msgstr "Documento generado por Griffith v"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:802
 msgid "Yes"
-msgstr "Si"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:804
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportHTML.py:869
 msgid "Document has been generated."
-msgstr "El documento ha sido generado"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportiPod.py:36
 msgid "iPod Notes export plugin"
-msgstr "Extensión para exportar a iPod Notes"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportiPod.py:85
 msgid "My Movies List"
-msgstr "Mi Lista de Películas"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportiPod.py:101
 msgid "List was successful exported to iPod."
-msgstr "La lista fue exportada bien al iPod."
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportiPod.py:103
 msgid "iPod is not connected."
-msgstr "iPod no está conectado."
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportiPod.py:118
 msgid ""
 "List was successful exported. Now you should move it to the 'Notes' folder "
 "on your iPod."
 msgstr ""
-"La lista fue exportada bien. Ahora debes moverla a la carpeta de 'Notes' en "
-"tu iPod."
 
 #: ../lib/plugins/export/PluginExportPDF.py:47
 msgid "PDF export plugin"
-msgstr "Plugin para exportar a PDF"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:75
 #: ../lib/plugins/export/PluginExportPDF.py:77
 msgid "Export a PDF"
-msgstr "Exportar a PDF"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:106
 msgid "List of films"
-msgstr "Lista de películas"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:109
 #, python-format
 msgid "Total Movies: %s"
-msgstr "Total películas: %s"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:143
 msgid "PDF has been created."
-msgstr "PDF ha sido creado."
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportPDF.py:148
 #, python-format
 msgid "Page %d"
-msgstr "Página %d"
+msgstr ""
 
 #: ../lib/plugins/export/PluginExportXML.py:32
 msgid "Full XML list export plugin"
-msgstr "Plugin para exportar lista en XML"
+msgstr ""
 
 #: ../lib/plugins/imp/CSV.py:43
 msgid "Full CSV list import plugin"
-msgstr "Extensión para para importar una lista de CSV completa"
+msgstr ""
 
 #: ../lib/plugins/imp/CSV.py:192
 msgid "Please assign at least one field first!"
-msgstr "¡Primero, asigna por lo mínimo un campo, por favor!"
+msgstr ""
 
 #: ../lib/plugins/imp/CSV.py:310
 #, python-format
 msgid "Can't open the file %s"
-msgstr "No se puede abrir el archivo %s!"
+msgstr ""
 
 #: ../lib/plugins/imp/__init__.py:227
 #, python-format
 msgid "%s file has been imported. %s movies added."
-msgstr "El archivo %s ha sido importado. %s películas fueron añadidas."
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:1
 msgid "<b>Example</b>"
-msgstr "<b>Ejemplo</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:2
 msgid "<b>Export</b>"
-msgstr "<b>Exportar</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:3
 msgid "<b>Header</b>"
-msgstr "<b>Cabecera</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:4
 msgid "<b>Limits</b>"
-msgstr "<b>Límites</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:5 ../glade/griffith.glade.h:15
 msgid "<b>Sort by</b>"
-msgstr "<b>Ordenar por</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:6
 msgid "<b>Split into</b>"
-msgstr "<b>Dividir en</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:7
 msgid "<b>Style</b>"
-msgstr "<b>Estilo</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:8
 msgid "<b>Template</b>"
-msgstr "<b>Plantilla</b>"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:9 ../glade/import.glade.h:3
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:10
 msgid "Black and white"
-msgstr "Blanco y Negro"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:11
 msgid "Choose style file"
-msgstr "Elige el archivo de estilo"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:12
 msgid "Convert images"
-msgstr "Convertir imágenes"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:13
 msgid "Data"
-msgstr "Dato"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:14 ../glade/import.glade.h:4
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:15
 msgid "Destination"
-msgstr "Destino"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:17
 msgid "Export"
-msgstr "Exportar"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:18
 msgid "Export data"
-msgstr "Exportar datos"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:19
 msgid "Format"
-msgstr "Formato"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:20
 msgid "Maximal height"
-msgstr "Altura máxima"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:21
 msgid "Maximal width"
-msgstr "Anchura máxima"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:22
 msgid "Posters"
-msgstr "Carteles"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:23 ../glade/griffith.glade.h:120
 msgid "Reverse"
-msgstr "Reverso"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:24
 msgid "Template"
-msgstr "Plantilla"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:25
 msgid "Use custom file"
-msgstr "Usar archivo propio"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:26 ../glade/import.glade.h:10
 msgid "Version"
-msgstr "Versión"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:27
 msgid "entries per page"
-msgstr "entradas por página"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:28
 msgid "files"
-msgstr "archivos"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:29
 msgid "loaned only"
-msgstr "sólo prestados"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:30
 msgid "none"
-msgstr "ninguno"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:31
 msgid "not loaned only"
-msgstr "no sólo los prestados"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:32
 msgid "seen only"
-msgstr "sólo los vistos"
+msgstr ""
 
 #: ../glade/exporthtml.glade.h:33
 msgid "unseen only"
-msgstr "sólo los no vistos"
+msgstr ""
 
 #: ../glade/griffith.glade.h:1
 msgid "0 means no limits"
-msgstr "0 significa que no hay límites"
+msgstr ""
 
 #: ../glade/griffith.glade.h:2
 msgid "<b>Audio channels</b>"
-msgstr "<b>Canales de Audio</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:3
 msgid "<b>Audio codecs</b>"
-msgstr "<b>Códeces de Audio</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:5
 msgid "<b>Collection</b>"
-msgstr "<b>Colección</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:6
 msgid "<b>Defaults</b>"
-msgstr "<b>Predefinidos</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:7
 msgid "<b>E-mail reminder</b>"
-msgstr "<b>Recordar por E-mail</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:8
 msgid "<b>Languages</b>"
-msgstr "<b>Idiomas</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:9
 msgid "<b>Loan History</b>"
-msgstr "<b>Historial de Préstamos</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:10
 msgid "<b>Media</b>"
-msgstr "<b>Medio</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:11
 msgid "<b>Search for:</b>"
-msgstr "<b>Busca</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:12
 msgid "<b>Search results</b>"
-msgstr "<b>Resultados de Búsqueda</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:13
 msgid "<b>Select database to use</b>"
-msgstr "<b>Escoge cual base de datos usar</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:14
 msgid "<b>Show only the following columns</b>"
-msgstr "<b>Mostrar sólo las siguientes columnas</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:16
 msgid "<b>Subtitle formats</b>"
-msgstr "<b>Formatos de Subtítulo</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:17
 msgid "<b>Subtitles</b>"
-msgstr "<b>Subtítulos</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:18
 msgid "<b>Tags</b>"
-msgstr "<b>Etiquetas</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:19
 msgid "<b>Use spell checking on the following fields:</b>"
-msgstr "<b>Usar el corrector ortográfico en los siguientes campos:</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:20
 msgid "<b>Video codecs</b>"
-msgstr "<b>Códeces de Video</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:21
 msgid "<b>Volume</b>"
-msgstr "<b>Volumen</b>"
+msgstr ""
 
 #: ../glade/griffith.glade.h:22
 msgid "Add"
-msgstr "Añadir"
+msgstr ""
 
 #: ../glade/griffith.glade.h:24
 msgid "Add a new person"
-msgstr "Añadir una nueva persona"
+msgstr ""
 
 #: ../glade/griffith.glade.h:25
 msgid "Add movie"
-msgstr "Añadir película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:26
 msgid "Add movie and close"
-msgstr "Añadir película y cerrar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:27
 msgid "Add new movie"
-msgstr "Añadir una nueva película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:28
 msgid "All Movies"
-msgstr "Todas las peliculas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:29
 msgid "Attempt to fetch a big poster from Amazon services Web site"
-msgstr "Intentar obtener un cartel grande de los servicios web de Amazon"
+msgstr ""
 
 #: ../glade/griffith.glade.h:30
 msgid "By Collection"
-msgstr "Por Colección"
+msgstr ""
 
 #: ../glade/griffith.glade.h:31
 msgid "By Volume"
-msgstr "Por volumen"
+msgstr ""
 
 #: ../glade/griffith.glade.h:33
 msgid "Choose Image"
-msgstr "Elegir imagen"
+msgstr ""
 
 #: ../glade/griffith.glade.h:35
 msgid "Clears filter"
-msgstr "Quita el filtro"
+msgstr ""
 
 #: ../glade/griffith.glade.h:36
 msgid "Clone"
-msgstr "Clonar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:41
 msgid "DVD layers"
-msgstr "Capas del DVD"
+msgstr ""
 
 #: ../glade/griffith.glade.h:42
 msgid "DVD region"
-msgstr "Región del DVD"
+msgstr ""
 
 #: ../glade/griffith.glade.h:43
 msgid "Database"
-msgstr "Base de datos"
+msgstr ""
 
 #: ../glade/griffith.glade.h:44
 msgid "Delete a person"
-msgstr "Borrar una persona"
+msgstr ""
 
 #: ../glade/griffith.glade.h:45
 msgid "Details"
-msgstr "Detalles"
+msgstr ""
 
 #: ../glade/griffith.glade.h:46
 msgid "Dictionaries"
-msgstr "Diccionarios"
+msgstr ""
 
 #: ../glade/griffith.glade.h:50
 msgid "E-mail reminder"
-msgstr "Recordar por e-mail"
+msgstr ""
 
 #: ../glade/griffith.glade.h:51
 msgid "E_xport"
-msgstr "E_xportar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:52
 msgid "Edit a person"
-msgstr "Editar una persona"
+msgstr ""
 
 #: ../glade/griffith.glade.h:53
 msgid "Edit movie details"
-msgstr "Editar las detalles de la película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:54
 msgid "Favorite Movie Plugin"
-msgstr "Plugin de películas favoritas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:55
 msgid "Fetch from Amazon"
-msgstr "Agarra de Amazon"
+msgstr ""
 
 #: ../glade/griffith.glade.h:56
 msgid "Fill empty fields only"
-msgstr "Llena los campos vacíos solamente"
+msgstr ""
 
 #: ../glade/griffith.glade.h:57
 msgid "Filter "
-msgstr "Filtro "
+msgstr ""
 
 #: ../glade/griffith.glade.h:58
 msgid "Font for reports"
-msgstr "Fuente del informe"
+msgstr ""
 
 #: ../glade/griffith.glade.h:59
 msgid "Forum"
-msgstr "Foro"
+msgstr ""
 
 #: ../glade/griffith.glade.h:60
 msgid "Found Results"
-msgstr "Resultados Encontrados"
+msgstr ""
 
 #: ../glade/griffith.glade.h:62
 msgid "Get from web"
-msgstr "Obtener desde la web"
+msgstr ""
 
 #: ../glade/griffith.glade.h:63
 msgid "Get movie data from:"
-msgstr "Obtener datos de la película desde:"
+msgstr ""
 
 #: ../glade/griffith.glade.h:64
 msgid "Griffith"
-msgstr "Griffith"
+msgstr ""
 
 #: ../glade/griffith.glade.h:65
 msgid "Homepage"
-msgstr "Página principal"
+msgstr ""
 
 #: ../glade/griffith.glade.h:66
 msgid "Host"
-msgstr "Servidor"
+msgstr ""
 
 #: ../glade/griffith.glade.h:67
 msgid "I_mport"
-msgstr "I_mportar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:69
 msgid "Include Front Image"
-msgstr "Incluir Imagen Frontal"
+msgstr ""
 
 #: ../glade/griffith.glade.h:70
 msgid "Include movie number"
-msgstr "Incluir número de película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:71
 msgid "Languages"
-msgstr "Idiomas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:73
 msgid "Limit search results to"
-msgstr "Limite los resultados de búsqueda a"
+msgstr ""
 
 #: ../glade/griffith.glade.h:74
 msgid "Load poster from disk"
-msgstr "Carga el póster del disco"
+msgstr ""
 
 #: ../glade/griffith.glade.h:75
 msgid "Loan"
-msgstr "Préstamo"
+msgstr ""
 
 #: ../glade/griffith.glade.h:76
 msgid "Loan Management"
-msgstr "Control de préstamos"
+msgstr ""
 
 #: ../glade/griffith.glade.h:77
 msgid "Loan movie"
-msgstr "Película prestada"
+msgstr ""
 
 #: ../glade/griffith.glade.h:78
 msgid "Loan to"
-msgstr "Prestada a"
+msgstr ""
 
 #: ../glade/griffith.glade.h:79
 msgid "Loaned Movies"
-msgstr "Películas prestadas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:80
 msgid "Loans"
-msgstr "Préstamos"
+msgstr ""
 
 #: ../glade/griffith.glade.h:81
 msgid "Main list"
-msgstr "Lista Principal"
+msgstr ""
 
 #: ../glade/griffith.glade.h:82
 msgid "Manage People"
-msgstr "Control de Presonas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:85
 msgid ""
 "Meter\n"
 "Stars"
 msgstr ""
-"Metro\n"
-"Estrellas"
 
 #: ../glade/griffith.glade.h:87
 msgid "Movie details"
-msgstr "Detalles de la película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:88
 msgid "Movie information"
-msgstr "Información de la película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:90
 msgid "Needs authentication"
-msgstr "Necisitas autentificación"
+msgstr ""
 
 #: ../glade/griffith.glade.h:91
 msgid "Not Seen Movies"
-msgstr "Películas no vistas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:96
 msgid "Original title"
-msgstr "Título Original"
+msgstr ""
 
 #: ../glade/griffith.glade.h:97
 msgid "Other"
-msgstr "Otro"
+msgstr ""
 
 #: ../glade/griffith.glade.h:98
 msgid "PDF reader"
-msgstr "Lector PDF"
+msgstr ""
 
 #: ../glade/griffith.glade.h:99
 msgid "Password"
-msgstr "Contraseña"
+msgstr ""
 
 #: ../glade/griffith.glade.h:100
 msgid "People"
-msgstr "Gente"
+msgstr ""
 
 #: ../glade/griffith.glade.h:101
 msgid "Phone"
-msgstr "Teléfono"
+msgstr ""
 
 #: ../glade/griffith.glade.h:102
 msgid "Please wait a moment..."
-msgstr "Por favor espera un momento..."
+msgstr ""
 
 #: ../glade/griffith.glade.h:104
 msgid "Plugins"
-msgstr "Plugins"
+msgstr ""
 
 #: ../glade/griffith.glade.h:105
 msgid "Port"
-msgstr "Puerto"
+msgstr ""
 
 #: ../glade/griffith.glade.h:106
 msgid "Poster image"
-msgstr "Visor de carteles"
+msgstr ""
 
 #: ../glade/griffith.glade.h:107
 msgid "Poster viewer"
-msgstr "Visor de carteles"
+msgstr ""
 
 #: ../glade/griffith.glade.h:108
 msgid "Preferences"
-msgstr "Preferencias"
+msgstr ""
 
 #: ../glade/griffith.glade.h:109
 msgid "Print Cover"
-msgstr "Imprimir caratula"
+msgstr ""
 
 #: ../glade/griffith.glade.h:110
 msgid "Print cover"
-msgstr "Imprimir caratula"
+msgstr ""
 
 #: ../glade/griffith.glade.h:112
 msgid "Rating image"
-msgstr "Puntuar imagen"
+msgstr ""
 
 #: ../glade/griffith.glade.h:114
 msgid "Remove"
-msgstr "Quitar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:115
 msgid "Remove selected movie"
-msgstr "Quita la película seccionada"
+msgstr ""
 
 #: ../glade/griffith.glade.h:116
 msgid "Removes poster"
-msgstr "Quita póster"
+msgstr ""
 
 #: ../glade/griffith.glade.h:117
 msgid "Rename"
-msgstr "Renombrar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:118
 msgid "Report bug"
-msgstr "Error en el informe"
+msgstr ""
 
 #: ../glade/griffith.glade.h:119
 msgid "Return"
-msgstr "Volver"
+msgstr ""
 
 #: ../glade/griffith.glade.h:122
 msgid "SMTP port"
-msgstr "Puerto SMTP"
+msgstr ""
 
 #: ../glade/griffith.glade.h:123
 msgid "SMTP server"
-msgstr "Servidor SMTP"
+msgstr ""
 
 #: ../glade/griffith.glade.h:124
 msgid "Searching on the web"
-msgstr "Buscando en la web"
+msgstr ""
 
 #: ../glade/griffith.glade.h:126
 msgid "Select A File"
-msgstr "Seleccionar un Archivo"
+msgstr ""
 
 #: ../glade/griffith.glade.h:127
 msgid "Select first movie"
-msgstr "Escoge la primera película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:128
 msgid "Select last movie"
-msgstr "Escoge la última película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:129
 msgid "Select next movie"
-msgstr "Escoge la siguiente película"
+msgstr ""
 
 #: ../glade/griffith.glade.h:130
 msgid "Select previous movie"
-msgstr "Escoge la película anterior"
+msgstr ""
 
 #: ../glade/griffith.glade.h:131
 msgid "Sender E-mail address"
-msgstr "Dirección de envio de E-mail"
+msgstr ""
 
 #: ../glade/griffith.glade.h:132
 msgid "Show other movies in this collection"
-msgstr "Muestra otras películas en esta colección"
+msgstr ""
 
 #: ../glade/griffith.glade.h:133
 msgid "Show other movies in this volume"
-msgstr "Muestra otras películas en esta volumen"
+msgstr ""
 
 #: ../glade/griffith.glade.h:134
 msgid "Simple"
-msgstr "Simple"
+msgstr ""
 
 #: ../glade/griffith.glade.h:136
 msgid "Size"
-msgstr "Tamaño"
+msgstr ""
 
 #: ../glade/griffith.glade.h:137
 msgid "Spell check the following language"
-msgstr "Comprobar ortografía del siguiente lenguaje"
+msgstr ""
 
 #: ../glade/griffith.glade.h:138
 msgid ""
@@ -1734,138 +1683,132 @@ msgid ""
 "Slim\n"
 "Double Slim"
 msgstr ""
-"Estandar\n"
-"Slim\n"
-"Double Slim"
 
 #: ../glade/griffith.glade.h:142
 msgid "Suggest an unseen movie"
-msgstr "Sugerir un película no vista"
+msgstr ""
 
 #: ../glade/griffith.glade.h:143
 msgid "Tags"
-msgstr "Etiquetas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:144
 msgid "Technical information"
-msgstr "Información técnica"
+msgstr ""
 
 #: ../glade/griffith.glade.h:145
 msgid "This movie is part of..."
-msgstr "Esta película es parte de..."
+msgstr ""
 
 #: ../glade/griffith.glade.h:147
 msgid "Toolbar"
-msgstr "Barra de Herramientas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:150
 msgid ""
 "Type in the original film tile, select source and choose <i>Get from "
 "web</i>. Griffith will try to fetch all the related information from the Web."
 msgstr ""
-"Escriba en la casilla título original, seleccione el origen y eliga "
-"<i>Obtener desde la Web</i>. Griffith intentará encontrar toda la "
-"información relacionada desde la Web."
 
 #: ../glade/griffith.glade.h:151
 msgid "Use Spellchecker"
-msgstr "Usar el corrector ortográfico"
+msgstr ""
 
 #: ../glade/griffith.glade.h:152
 msgid "Use TLS?"
-msgstr "¿Utilizar TLS?"
+msgstr ""
 
 #: ../glade/griffith.glade.h:153
 msgid "Use locale:"
-msgstr "Usa escenario"
+msgstr ""
 
 #: ../glade/griffith.glade.h:154
 msgid "Username"
-msgstr "Nombre de Usuario"
+msgstr ""
 
 #: ../glade/griffith.glade.h:156
 msgid "Visit movie web site"
-msgstr "Visitar el sitio oficial"
+msgstr ""
 
 #: ../glade/griffith.glade.h:157
 msgid "Visit the oficial web site"
-msgstr "Visitar el sitio oficial"
+msgstr ""
 
 #: ../glade/griffith.glade.h:159
 msgid "Watch the trailer"
-msgstr "Ver el trailer"
+msgstr ""
 
 #: ../glade/griffith.glade.h:161
 msgid "_Edit"
-msgstr "_Editar"
+msgstr ""
 
 #: ../glade/griffith.glade.h:162
 msgid "_File"
-msgstr "_Archivo"
+msgstr ""
 
 #: ../glade/griffith.glade.h:163
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr ""
 
 #: ../glade/griffith.glade.h:164
 msgid "_Loans"
-msgstr "_Préstamos"
+msgstr ""
 
 #: ../glade/griffith.glade.h:165
 msgid "_Tools"
-msgstr "_Herrameintas"
+msgstr "_Työkalut"
 
 #: ../glade/griffith.glade.h:166
 msgid "_View"
-msgstr "_Vista"
+msgstr "_Näytä"
 
 #: ../glade/griffith.glade.h:167
 msgid "add entered name to collections list"
-msgstr "añadir nombre completo a la lista de colecciones"
+msgstr ""
 
 #: ../glade/griffith.glade.h:168
 msgid "add entered name to volumes list"
-msgstr "añadir nombre completo a la lista de volúmenes"
+msgstr ""
 
 #: ../glade/griffith.glade.h:169
 msgid "classification"
-msgstr "clasificación"
+msgstr ""
 
 #: ../glade/griffith.glade.h:170
 msgid "click here if movie was returned"
-msgstr "click aquí si la película fue devuelta"
+msgstr ""
 
 #: ../glade/griffith.glade.h:171
 msgid "collection details"
-msgstr "Detalles de la colección"
+msgstr ""
 
 #: ../glade/griffith.glade.h:172
 msgid "loans movie or volume"
-msgstr "préstamos de películas o volúmenes"
+msgstr ""
 
 #: ../glade/griffith.glade.h:173
 msgid "minutes"
-msgstr "minutos"
+msgstr ""
 
 #: ../glade/griffith.glade.h:174
 msgid "movies"
-msgstr "películas"
+msgstr "elokuvat"
 
 #: ../glade/griffith.glade.h:175
 msgid "remove selected collection"
-msgstr "eliminar la colección seleccionada"
+msgstr ""
 
 #: ../glade/griffith.glade.h:176
 msgid "remove selected volume"
-msgstr "eliminar el volumen seleccionado"
+msgstr ""
 
 #: ../glade/griffith.glade.h:177
 msgid "tags"
-msgstr "etiquetas"
+msgstr ""
 
 #: ../glade/griffith.glade.h:178
 msgid "volume details"
-msgstr "Detalles de volúmen"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:1
 msgid ""
@@ -1876,61 +1819,54 @@ msgid ""
 "only one title.\n"
 "Your cast-list should be comma-seperated to break it apart in multiple lines."
 msgstr ""
-"<b>Unas Indirectas</b>\n"
-"En la siguiente paso puedes asignar tus campos de CSV con el de Griffith.\n"
-"Un campo de CSV se puede asignar a varios campos de Griffith, por ejemplo, "
-"si solo tienes un título.\n"
-"Tu lista de reparto debe ser separada por comas para dividirla en varias "
-"líneas."
 
 #: ../glade/importcsv.glade.h:6
 msgid "Assigned Fields (CSV > Griffith)"
-msgstr "Campos Asignados (CSV > Griffith)"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:7
 msgid "CSV Fields"
-msgstr "Campos de CSV"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:8
 msgid "CSV Import"
-msgstr "Importar de CSV"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:9
 msgid "Delimiter"
-msgstr "Delimitador"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:10
 msgid "Encoding"
-msgstr "Codificando"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:11 ../glade/import.glade.h:6
 msgid "Fields"
-msgstr "Campos"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:12
 msgid "File-Options"
-msgstr "Archivo-Opciones"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:13
 msgid "From Row"
-msgstr "A partir de la línea"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:14
 msgid "Griffith Fields"
-msgstr "Campos de Griffith"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:15
 msgid "If your file has no column headers then you should import from row 0."
 msgstr ""
-"Si tu archivo no tiene cabezazos de columna, hay que importar de la fila 0."
 
 #: ../glade/importcsv.glade.h:16
 msgid "Lineterminator"
-msgstr "Fin de Línea"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:17
 msgid "Quotechar"
-msgstr "NotarCaracter"
+msgstr ""
 
 #: ../glade/importcsv.glade.h:18
 msgid ""
@@ -2020,112 +1956,23 @@ msgid ""
 "utf_7 (all languages)\n"
 "utf_8 (all languages)"
 msgstr ""
-"ascii (Inglés)\n"
-"big5 (Chino Tradicional)\n"
-"big5hkscs (Chino Tradicional)\n"
-"cp037 (Inglés)\n"
-"cp424 (Hebreo)\n"
-"cp437 (Inglés)\n"
-"cp500 (Europa Occidental)\n"
-"cp737 (Griego)\n"
-"cp775 (Idiomas Bálticos)\n"
-"cp850 (Europa Occidental)\n"
-"cp852 (Europa Central y Oriente)\n"
-"cp855 (Búlgaro, Bielorruso, Macedonio, Ruso, Serbio)\n"
-"cp856 (Hebreo)\n"
-"cp857 (Turco)\n"
-"cp860 (Portugués)\n"
-"cp861 (Islandés)\n"
-"cp862 (Hebreo)\n"
-"cp863 (Canadiense)\n"
-"cp864 (Árabe)\n"
-"cp865 (Danés, Noruego)\n"
-"cp866 (Ruso)\n"
-"cp869 (Griego)\n"
-"cp874 (Tailandés)\n"
-"cp875 (Griego)\n"
-"cp932 (Japonés)\n"
-"cp949 (Corean)\n"
-"cp950 (Chino Tradicional)\n"
-"cp1006 (Urdu)\n"
-"cp1026 (Turco)\n"
-"cp1140 (Europa Occidental)\n"
-"cp1250 (Europa Central y Oriente)\n"
-"cp1251 (Búlgaro, Bielorruso, Macedonio, Ruso, Serbio)\n"
-"cp1252 (Europa Occidental)\n"
-"cp1253 (Griego)\n"
-"cp1254 (Turco)\n"
-"cp1255 (Hebreo)\n"
-"cp1256 (Árabe)\n"
-"cp1257 (Idiomas Bálticos)\n"
-"cp1258 (Vietnamita)\n"
-"euc_jp (Japonés)\n"
-"euc_jis_2004 (Japonés)\n"
-"euc_jisx0213 (Japonés)\n"
-"euc_kr (Corean)\n"
-"gb2312 (Chino Simplificado)\n"
-"gbk (Chino Unificado)\n"
-"gb18030 (Chino Unificado)\n"
-"hz (Chino Simplificado)\n"
-"iso2022_jp (Japonés)\n"
-"iso2022_jp_1 (Japonés)\n"
-"iso2022_jp_2 (Japonés, Corean, Chino Simplificado, Europa Occidental, "
-"Griego)\n"
-"iso2022_jp_2004 (Japonés)\n"
-"iso2022_jp_3 (Japonés)\n"
-"iso2022_jp_ext (Japonés)\n"
-"iso2022_kr (Corean)\n"
-"latin_1 (Europa Occidental)\n"
-"iso8859_2 (Europa Central y Oriente)\n"
-"iso8859_3 (Esperanto, Maltés)\n"
-"iso8859_4 (Idiomas Bálticos)\n"
-"iso8859_5 (Búlgaro, Bielorruso, Macedonio, Ruso, Serbio)\n"
-"iso8859_6 (Árabe)\n"
-"iso8859_7 (Griego)\n"
-"iso8859_8 (Hebreo)\n"
-"iso8859_9 (Turco)\n"
-"iso8859_10 (Idiomas Nórdicos)\n"
-"iso8859_13 (Idiomas Bálticos)\n"
-"iso8859_14 (Idiomas Celtas)\n"
-"iso8859_15 (Europa Occidental)\n"
-"johab (Corean)\n"
-"koi8_r (Ruso)\n"
-"koi8_u (Ucraniano)\n"
-"mac_cyrillic (Búlgaro, Bielorruso, Macedonio, Ruso, Serbio)\n"
-"mac_greek (Griego)\n"
-"mac_iceland (Islandés)\n"
-"mac_latin2 (Europa Central y Oriente)\n"
-"mac_roman (Europa Occidental)\n"
-"mac_turkish (Turco)\n"
-"ptcp154 (Kazaj)\n"
-"shift_jis (Japonés)\n"
-"shift_jis_2004 (Japonés)\n"
-"shift_jisx0213 (Japonés)\n"
-"utf_16 (Todos los idiomas)\n"
-"utf_16_be (Todos los idiomas (solo BMP))\n"
-"utf_16_le (Todos los idiomas (solo BMP))\n"
-"utf_7 (Todos los idiomas)\n"
-"utf_8 (Todos los idiomas)"
 
 #: ../glade/import.glade.h:1
 msgid "<b>Import only fields selected below</b>"
-msgstr "<p>Importa solo los campos elegidos debajo</b>"
+msgstr ""
 
 #: ../glade/import.glade.h:2
 msgid "<b>Importing...</b>"
-msgstr "<b>Importando</b>"
+msgstr ""
 
 #: ../glade/import.glade.h:7
 msgid "Import window"
-msgstr "Ventana de Importar"
+msgstr ""
 
 #: ../glade/import.glade.h:8
 msgid "Plugin"
-msgstr "Extensión"
+msgstr ""
 
 #: ../glade/import.glade.h:9
 msgid "Source"
-msgstr "Código fuente"
-
-#~ msgid "Brasilian Portuguese"
-#~ msgstr "Portugués de Brasil"
+msgstr ""
