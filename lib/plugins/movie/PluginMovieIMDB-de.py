@@ -108,8 +108,8 @@ class Plugin(movie.Movie):
 		self.cast = gutils.trim(self.cast_page, '<table class="cast">', '</table>')
 		if self.cast == '':
 			self.cast = gutils.trim(self.page, '<table class="cast">', '</table>')
-		self.cast = string.replace(self.cast, ' ... ', _(' as '))
-		self.cast = string.replace(self.cast, '...', _(' as '))
+		self.cast = string.replace(self.cast, ' ... ', _(' as ').encode('utf8'))
+		self.cast = string.replace(self.cast, '...', _(' as ').encode('utf8'))
 		self.cast = string.replace(self.cast, '</tr><tr>', "\n")
 		self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
 		self.cast = string.replace(self.cast, '</tr><tr class="odd">', "\n")
@@ -178,11 +178,11 @@ class Plugin(movie.Movie):
 		tagline = re.sub('[ ]+', ' ', tagline)
 		tagline = tagline.rstrip()
 		if len(language)>0:
-			self.notes = "%s: %s\n" %(_('Language'), language)
+			self.notes = "%s: %s\n" %(_('Language').encode('utf8'), language)
 		if len(sound)>0:
-			self.notes += "%s: %s\n" %(gutils.strip_tags(_('<b>Audio</b>')), sound)
+			self.notes += "%s: %s\n" %(gutils.strip_tags(_('<b>Audio</b>').encode('utf8')), sound)
 		if len(color)>0:
-			self.notes += "%s: %s\n" %(_('Color'), color)
+			self.notes += "%s: %s\n" %(_('Color').encode('utf8'), color)
 		if len(tagline)>0:
 			self.notes += "%s: %s\n" %('Tagline', tagline)
 	
@@ -211,7 +211,7 @@ class SearchPlugin(movie.SearchMovie):
 
 	def __init__(self):
 		self.original_url_search	= 'http://german.imdb.com/find?more=tt&q='
-		self.translated_url_search	= 'http://german.imdb.com/List?words='
+		self.translated_url_search	= 'http://german.imdb.com/find?more=tt&q='
 		self.encode = 'iso8859-1'
 		self.remove_accents = False
 

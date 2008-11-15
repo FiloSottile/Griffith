@@ -154,7 +154,7 @@ class Plugin(movie.Movie):
 						self.cast += elements2[1] + "\n"
 				else:
 					self.cast += element + "\n"
-			self.cast = string.replace(self.cast, '--flip--', _(' as '))
+			self.cast = string.replace(self.cast, '--flip--', _(' as ').encode('utf8'))
 
 	def get_classification(self):
 		self.classification = self.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
