@@ -21,7 +21,6 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gettext
 import config, edit, gutils, sql
 import gtk
 import os.path

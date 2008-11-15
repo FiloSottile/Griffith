@@ -21,7 +21,6 @@ __revision__ = '$Id: PluginMovie7arte.py 478 2006-12-05 21:14:51Z piotrek $'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gettext
 import gutils
 import movie
 import string

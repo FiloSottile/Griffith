@@ -24,8 +24,6 @@ __revision__ = '$Id$'
 # Updated on 04/29/2007 by Djohnson "Joe" Lima
 # joe1310@terra.com.br - São Paulo/Brasil
 
-
-import gettext
 import gutils, movie, string
 
 plugin_name = "E-Pipoca"

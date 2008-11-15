@@ -21,8 +21,6 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gettext
-
 def filter_not_seen(self):
 	self.populate_treeview()
 	self.update_statusbar(_("Filter activated. Showing only not seen movies."))

@@ -26,7 +26,6 @@ import xml.dom.ext
 import gtk
 import gutils
 import os
-import gettext
 
 plugin_name = "XML"
 plugin_description = _("Full XML list export plugin")

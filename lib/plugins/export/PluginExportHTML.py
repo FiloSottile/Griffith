@@ -30,7 +30,6 @@ import glob, shutil
 import version
 import math
 from xml.dom import minidom
-import gettext
 
 plugin_name         = 'HTML'
 plugin_description  = _('Plugin exports data using templates')

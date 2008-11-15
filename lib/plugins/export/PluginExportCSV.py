@@ -25,7 +25,6 @@ import csv
 import gtk
 import gutils
 import os
-import gettext
 import gutils
 
 plugin_name = "CSV"

@@ -10,7 +10,6 @@ __revision__ = '$Id$'
 #
 ###########################################################################
 
-import gettext
 from plugins.imp import ImportPlugin as IP
 import gtk
 import gtk.glade

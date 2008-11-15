@@ -30,7 +30,6 @@ import string
 import platform
 import shutil
 from tempfile import mkdtemp
-import gettext
 
 plugin_name = "iPod"
 plugin_description = _("iPod Notes export plugin")
