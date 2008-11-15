@@ -40,6 +40,7 @@ __revision__ = '$Id$'
 #        * or the expected value
 #
 
+import gettext
 import sys
 import initialize
 import gutils
@@ -239,6 +240,7 @@ class PluginTester:
         self._tmp_home = None
         self._tmp_config = 'griffith.cfg'
         initialize.locations(self)
+        gettext.install('griffith', self.locations['i18n'], unicode=1)
         configFileName = os.path.join(self.locations['home'], self._tmp_config)
         myconfig = self.config = config.Config(file=configFileName)
         search_successful = ''
