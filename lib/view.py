@@ -22,7 +22,6 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 
 def filter_not_seen(self):
 	self.populate_treeview()

@@ -26,7 +26,6 @@ __revision__ = '$Id$'
 
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils, movie, string
 
 plugin_name = "E-Pipoca"

@@ -22,7 +22,6 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 pname        = "Griffith"
 pversion     = "0.9.8"
 pauthor      = "Vasco Nunes, Piotr Ożarowski <griffith-private@lists.berlios.de>"

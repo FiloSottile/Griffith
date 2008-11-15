@@ -22,7 +22,6 @@ __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 import movie
 import string
@@ -55,18 +54,18 @@ class Plugin(movie.Movie):
 		self.title = gutils.trim(self.page,"<title>","</title>")
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"<h4>Réalisé par ","</a></h4>")
+		self.director = gutils.trim(self.page,"<h4>RÃ©alisÃ© par ","</a></h4>")
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page,"Synopsis</b></h3></td></tr></table>","</h4>")
 		self.plot = gutils.after(self.plot,"<h4>")
 
 	def get_year(self):
-		self.year = gutils.trim(self.page,"Année de production : ","</h4>")
+		self.year = gutils.trim(self.page,"AnnÃ©e de production : ","</h4>")
 
 	def get_runtime(self):
 		self.runtime = ""
-		self.runtime = gutils.trim(self.page,"<h4>Durée : ","min.</h4>&nbsp;")
+		self.runtime = gutils.trim(self.page,"<h4>DurÃ©e : ","min.</h4>&nbsp;")
 		if self.runtime:
 			self.runtime = str (int(gutils.before(self.runtime,"h"))*60 + int(gutils.after(self.runtime,"h")))
 

@@ -27,7 +27,6 @@ import gtk
 import gutils
 import os
 import gettext
-gettext.install('griffith', unicode=1)
 
 plugin_name = "XML"
 plugin_description = _("Full XML list export plugin")

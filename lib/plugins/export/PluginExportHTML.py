@@ -31,7 +31,6 @@ import version
 import math
 from xml.dom import minidom
 import gettext
-gettext.install('griffith', unicode=1)
 
 plugin_name         = 'HTML'
 plugin_description  = _('Plugin exports data using templates')

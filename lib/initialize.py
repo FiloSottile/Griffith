@@ -31,7 +31,6 @@ import gettext
 import platform
 import re
 import gettext
-gettext.install('griffith', unicode=1)
 from locale import getdefaultlocale
 
 try:
@@ -172,6 +171,7 @@ def i18n(self, location):
 	gettext.textdomain('griffith')
 	gtk.glade.bindtextdomain('griffith', location)
 	gtk.glade.textdomain('griffith')
+	gettext.install('griffith', location, unicode=1)
 
 def toolbar(self):
 	"""if toolbar is hide in config lets hide the widget"""

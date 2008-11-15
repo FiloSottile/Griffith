@@ -20,7 +20,6 @@ __revision__ = '$Id: PluginMovieCSFD.py 12 2007-01-05 09:08:06Z blondak $'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 import movie,string
 import re

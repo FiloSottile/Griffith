@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr O¿arowski
+# Copyright (c) 2005-2006 Piotr OÂ¿arowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 import movie,string
 
@@ -30,7 +29,7 @@ plugin_name         = 'Onet'
 plugin_description  = 'Onet Film'
 plugin_url          = 'film.onet.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr O¿arowski'
+plugin_author       = 'Piotr OÂ¿arowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
 plugin_version      = '1.7'
 

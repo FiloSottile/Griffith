@@ -22,7 +22,6 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 import movie
 import string
@@ -51,7 +50,7 @@ class Plugin(movie.Movie):
 		self.title = string.capwords(gutils.trim(self.page,"class=subtitle>","</b><br>") )
 
 	def get_director(self):
-		self.director = gutils.trim(self.page,"<b>realização</b><br>","<br><br><b>")
+		self.director = gutils.trim(self.page,"<b>realizaÃ§Ã£o</b><br>","<br><br><b>")
 
 	def get_plot(self):
 		self.plot = gutils.trim(self.page,"<b>sinopse</b><br>","<br><br>")
@@ -94,7 +93,7 @@ class Plugin(movie.Movie):
 		self.country = gutils.trim(self.page,"s</b><br>","<br><br><b>g")
 		
 	def get_notes(self):
-		self.notes = gutils.trim(self.page,"prémios e nomeações</b><br><b>", "<td width=6 background='Images/group_r.gif'")
+		self.notes = gutils.trim(self.page,"prÃ©mios e nomeaÃ§Ãµes</b><br><b>", "<td width=6 background='Images/group_r.gif'")
 		self.notes = gutils.strip_tags(self.notes)
 
 	def get_rating(self):

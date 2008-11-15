@@ -7,7 +7,6 @@
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 import movie,string
 

@@ -22,7 +22,6 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 from sqlalchemy import Select, desc
 import gutils
 import os

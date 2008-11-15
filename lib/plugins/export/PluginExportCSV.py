@@ -26,7 +26,6 @@ import gtk
 import gutils
 import os
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 
 plugin_name = "CSV"

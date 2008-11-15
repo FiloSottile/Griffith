@@ -22,7 +22,6 @@ __revision__ = '$Id: PluginMovie7arte.py 478 2006-12-05 21:14:51Z piotrek $'
 # GNU General Public License, version 2 or later
 
 import gettext
-gettext.install('griffith', unicode=1)
 import gutils
 import movie
 import string
@@ -57,7 +56,7 @@ class Plugin(movie.Movie):
 
 	def get_director(self):
 		"""Finds the film's director"""
-		self.director = gutils.strip_tags(gutils.trim(self.page, "<div><b>Realização:</b><br>", "</div>"))
+		self.director = gutils.strip_tags(gutils.trim(self.page, "<div><b>RealizaÃ§Ã£o:</b><br>", "</div>"))
 		self.director = string.replace(self.director,"<br>", ", ")
 		self.director = gutils.strip_tags(self.director)
 
@@ -71,11 +70,11 @@ class Plugin(movie.Movie):
 
 	def get_runtime(self):
 		"""Finds the film's running time"""
-		self.runtime = gutils.trim(self.page, "<td><b>Duração:</b> ", " min.</td>")
+		self.runtime = gutils.trim(self.page, "<td><b>DuraÃ§Ã£o:</b> ", " min.</td>")
 
 	def get_genre(self):
 		"""Finds the film's genre"""
-		self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>Género:</b><br>", "</div>"))
+		self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>GÃ©nero:</b><br>", "</div>"))
 		self.genre = string.replace(self.genre,"<br>", ", ")
 		self.genre = gutils.strip_tags(self.genre)
 
@@ -97,13 +96,13 @@ class Plugin(movie.Movie):
 		"""Find the film's oficial site"""
 		self.o_site = gutils.trim(self.page, \
 			"<a class=\"button\" href=\"", \
-			" title=\"Consultar título no Internet Movie Data Base\"")
+			" title=\"Consultar tÃ­tulo no Internet Movie Data Base\"")
 
 	def get_site(self):
 		"""Find the film's imdb details page"""
 		self.site = gutils.trim(self.page, \
 			"</td><td><a class=\"button\" href=\"", \
-			"""" title="Consultar tÃ­tulo""")
+			"""" title="Consultar tÃƒÂ­tulo""")
 
 	def get_trailer(self):
 		"""Find the film's trailer page or location"""
@@ -111,7 +110,7 @@ class Plugin(movie.Movie):
 
 	def get_country(self):
 		"""Find the film's country"""
-		self.country = gutils.trim(self.page, "<b>País:</b><br>", "</div>")
+		self.country = gutils.trim(self.page, "<b>PaÃ­s:</b><br>", "</div>")
 		self.country = string.replace(self.country,"<br>", ", ")
 		self.country = gutils.strip_tags(self.country)
 
