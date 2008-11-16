@@ -495,11 +495,16 @@ class GriffithSQL:
 			debug.show("DB version: %s" % e)
 			v = 0
 
-		if v is not None and v>1:
+		if v is not None and v > 1:
 			v = int(v.value)
 		if v < self.version:
 			from dbupgrade import upgrade_database
-			upgrade_database(self, v)
+            if not upgrade_database(self, v):
+				raise Exception("cannot upgrade database")
+		elif v > self.version:
+			debug.show("database version mismatch (detacted:%s; current:%s)" % (v, self.version))
+			gutils.warning(self, _('This database requires newer version of Griffith.'))
+			raise Exception("database version mismatch")
 
 # for debugging (run: ipython sql.py)
 if __name__ == '__main__':
