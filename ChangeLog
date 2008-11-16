@@ -7,6 +7,9 @@ Griffith ChangeLog
 
 ---- 0.9.8 ---
 
+2008-11-16  Piotr Ożarowski
+	* fail if database requires newer Griffith version
+
 2008-11-13  Piotr Ożarowski
 	* New translations:
 	  + Persian (thanks to Artin)

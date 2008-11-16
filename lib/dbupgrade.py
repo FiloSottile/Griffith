@@ -125,6 +125,7 @@ def upgrade_database(self, version):
 	#if version == 2:	# fix changes between v2 and v3
 	#	version+=1
 	#	self.Configuration.get_by(param='version').value = version
+	return True
 
 
 # ---------------------------------------------------
