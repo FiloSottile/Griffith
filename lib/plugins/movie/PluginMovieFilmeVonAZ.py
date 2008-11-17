@@ -21,7 +21,7 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-mport gutils
+import gutils
 import movie
 import string
 import re
