@@ -32,10 +32,10 @@ plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
 plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.10'
+plugin_version        = '1.11'
 
 class Plugin(movie.Movie):
-    TRAILER_PATTERN = re.compile('http://.*\.fdb\.pl/zwiastuny/odtwarzaj/[0-9]*')
+    TRAILER_PATTERN = re.compile('/film/.*/zwiastuny/odtwarzaj/[0-9]*')
 
     def __init__(self, movie_id):
         from md5 import md5
@@ -53,7 +53,7 @@ class Plugin(movie.Movie):
             self.image_url = ''
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<h2>', '</h2>')
+        self.o_title = gutils.trim(self.page, '<h2 class="title">', '</h2>')
         self.o_title = gutils.strip_tags(self.o_title)
         if self.o_title == '':
             self.o_title = self.get_title(True)
@@ -70,7 +70,7 @@ class Plugin(movie.Movie):
 
     def get_director(self):
         self.director = ''
-        elements = gutils.trim(self.page,'>Reżyseria</h4>','</div>')
+        elements = gutils.trim(self.page,'>Reżyseria: </h4>','</div>')
         elements = string.split(elements, '</li>')
         if elements[0] != '':
             for element in elements:
@@ -80,23 +80,23 @@ class Plugin(movie.Movie):
             self.director = string.replace(self.director[2:], ', &nbsp;&nbsp;&nbsp;(więcej)', '')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page,'Opis filmu</h3>','</div>')
-        self.plot = gutils.trim(self.plot,'<p>',"\n \n   ")
+        self.plot = gutils.trim(self.page,'Opis filmu','</div>')
+        self.plot = gutils.trim(self.plot,'<p>',"\n\n")
 
     def get_year(self):
         self.year = gutils.trim(self.page,'<small>(', ')</small>')
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page,'Czas trwania</h4>','</div>')
+        self.runtime = gutils.trim(self.page,'Czas trwania: </h4>','</div>')
         self.runtime = gutils.trim(self.runtime,'<li>',' minut')
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page,'Gatunek</h4>','</div>')
+        self.genre = gutils.trim(self.page,'Gatunek: </h4>','</div>')
         self.genre = gutils.trim(self.genre,'<li>','</li>')
         self.genre = string.replace(self.genre, ' / ', ' | ')
 
     def get_cast(self):
-        self.cast = gutils.trim(self.page,'Obsada</h3>','</div>')
+        self.cast = gutils.trim(self.page,'<h2 class="category-header">\n    Obsada','</div>')
         self.cast = gutils.trim(self.cast,"<table>\n",'  </table>')
         if self.cast != '':
             self.cast = gutils.strip_tags(self.cast)
@@ -106,7 +106,7 @@ class Plugin(movie.Movie):
             self.cast = self.cast.replace("\n\n\n\n\n","")
 
     def get_classification(self):
-        self.classification = gutils.trim(self.page,"Od lat</h4>","</div>")
+        self.classification = gutils.trim(self.page,"Od lat: </h4>","</div>")
         self.classification = gutils.trim(self.classification,'<li>','</li>')
 
     def get_studio(self):
@@ -121,14 +121,14 @@ class Plugin(movie.Movie):
     def get_trailer(self):
         trailer_url = self.TRAILER_PATTERN.findall(self.page)
         if trailer_url:
-            self.trailer = trailer_url[0]
+            self.trailer = 'http://fdb.pl' + trailer_url[0]
 
     def get_country(self):
-        self.country = gutils.trim(self.page,'Kraj produkcji</h4>','</div>')
+        self.country = gutils.trim(self.page,'Kraj produkcji: </h4>','</div>')
         self.country = gutils.trim(self.country,'<li>','</li>')
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, 'class="vote"','</strong>')
+        self.rating = gutils.trim(self.page, 'class="vote"','/10</strong>')
         self.rating = gutils.after(self.rating, '<strong>')
         if self.rating:
             self.rating = str(float(gutils.clean(self.rating)))
