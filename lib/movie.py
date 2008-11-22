@@ -150,12 +150,13 @@ class Movie:
         try:
             ifile = file(retriever.html[0], "rb")
             data = ifile.read()
+            data = data.decode(self.encode)
         except IOError:
             pass
         if url is None:
             self.page = data
-        return data
         urlcleanup()
+        return data
 
     def fetch_picture(self):
         if self.image_url:
@@ -204,17 +205,20 @@ class Movie:
             if 'cast' in fields:
                 self.get_cast()
                 self.cast = gutils.clean(self.cast)
-                self.cast = gutils.gdecode(self.cast, self.encode)
+                if not isinstance(self.cast, unicode):
+                    self.cast = gutils.gdecode(self.cast, self.encode)
                 fields.pop(fields.index('cast'))
             if 'plot' in fields:
                 self.get_plot()
                 self.plot = gutils.clean(self.plot)
-                self.plot = gutils.gdecode(self.plot, self.encode)
+                if not isinstance(self.plot, unicode):
+                    self.plot = gutils.gdecode(self.plot, self.encode)
                 fields.pop(fields.index('plot'))
             if 'notes' in fields:
                 self.get_notes()
                 self.notes = gutils.clean(self.notes)
-                self.notes = gutils.gdecode(self.notes, self.encode)
+                if not isinstance(self.notes, unicode):
+                    self.notes = gutils.gdecode(self.notes, self.encode)
                 fields.pop(fields.index('notes'))
             if 'image' in fields:
                 self.get_image()
@@ -224,14 +228,15 @@ class Movie:
             for i in fields:
                 getattr(self, "get_%s" % i)()
                 self[i] = gutils.clean(self[i])
-                self[i] = gutils.gdecode(self[i], self.encode)
+                if not isinstance(self[i], unicode):
+                    self[i] = gutils.gdecode(self[i], self.encode)
         
             if 'o_title' in self.fields_to_fetch and self.o_title is not None:
-                if self.o_title[:4] == 'The ':
-                    self.o_title = self.o_title[4:] + ', The'
+                if self.o_title[:4] == u'The ':
+                    self.o_title = self.o_title[4:] + u', The'
             if 'title' in self.fields_to_fetch and self.title is not None:
-                if self.title[:4] == 'The ':
-                    self.title = self.title[4:] + ', The'
+                if self.title[:4] == u'The ':
+                    self.title = self.title[4:] + u', The'
         finally:
             # close the progress dialog which was opened in get_movie
             self.progress.hide()
@@ -293,6 +298,7 @@ class SearchMovie:
         try:
             ifile = file(retriever.html[0], "rb")
             self.page = ifile.read()
+            self.page = self.page.decode(self.encode)
         except IOError:
             pass
         urlcleanup()
