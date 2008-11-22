@@ -441,7 +441,7 @@ def add_movie_db(self, close):
 	if details['year'] is None:
 		self.treemodel.set_value(myiter, 7, '')
 	else:
-		self.treemodel.set_value(myiter, 7, details['year'])
+		self.treemodel.set_value(myiter, 7, int(details['year']))
 	if details['runtime'] is None:
 		self.treemodel.set_value(myiter, 8, '')
 	else:
@@ -449,7 +449,7 @@ def add_movie_db(self, close):
 	if details['rating'] is None:
 		self.treemodel.set_value(myiter, 9, '')
 	else:
-		self.treemodel.set_value(myiter, 9, details['rating'])
+		self.treemodel.set_value(myiter, 9, int(details['rating']))
 	#update statusbar
 	self.total += 1
 	self.count_statusbar()
