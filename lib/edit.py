@@ -155,14 +155,15 @@ def fetch_bigger_poster(self):
 	from widgets import connect_poster_signals, reconnect_add_signals
 	connect_poster_signals(self, get_poster_select_dc, result, current_poster)
 
-	if not len(result.Item):
+	if not hasattr(result, 'Item') or not len(result.Item):
 		gutils.warning(self, _("No posters found for this movie."))
 		reconnect_add_signals(self)
 		return
 
-	for f in range(len(result.Item)):
-		if self.widgets['movie']['o_title'].get_text().decode('utf-8') == result.Item[f].ItemAttributes.Title:
-			get_poster(self, f, result, current_poster)
+	if len(result.Item) == 1:
+		o_title = self.widgets['movie']['o_title'].get_text().decode('utf-8')
+		if o_title == result.Item[0].ItemAttributes.Title or keyword == result.Item[0].ItemAttributes.Title:
+			get_poster(self, 0, result, current_poster)
 			return
 
 	self.treemodel_results.clear()
@@ -171,6 +172,16 @@ def fetch_bigger_poster(self):
 	for f in range(len(result.Item)):
 		if hasattr(result.Item[f], "LargeImage") and len(result.Item[f].LargeImage.URL):
 			title = result.Item[f].ItemAttributes.Title
+			if hasattr(result.Item[f].ItemAttributes, 'ProductGroup'):
+				title = title + u' - ' + result.Item[f].ItemAttributes.ProductGroup
+			elif hasattr(result.Item[f].ItemAttributes, 'Binding'):
+				title = title + u' - ' + result.Item[f].ItemAttributes.Binding
+			if hasattr(result.Item[f].ItemAttributes, 'ReleaseDate'):
+				title = title + u' - ' + result.Item[f].ItemAttributes.ReleaseDate[:4]
+			elif hasattr(result.Item[f].ItemAttributes, 'TheatricalReleaseDate'):
+				result.Item[f].ItemAttributes.TheatricalReleaseDate[:4]
+			if hasattr(result.Item[f].ItemAttributes, 'Studio'):
+				title = title + u' - ' + result.Item[f].ItemAttributes.Studio
 			myiter = self.treemodel_results.insert_before(None, None)
 			self.treemodel_results.set_value(myiter, 0, str(f))
 			self.treemodel_results.set_value(myiter, 1, title)

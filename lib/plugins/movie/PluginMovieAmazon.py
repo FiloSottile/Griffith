@@ -71,7 +71,7 @@ class Plugin(movie.Movie):
 				self.progress.pulse()
 				while gtk.events_pending():
 					gtk.main_iteration()
-			self.page = retriever.result.Item
+			self.page = retriever.result.Item[0]
 		except:
 			self.page = ''
 			try:
@@ -104,7 +104,10 @@ class Plugin(movie.Movie):
 
 	def get_director(self):
 		if hasattr(self.page.ItemAttributes, 'Director'):
-			self.director = self.page.ItemAttributes.Director
+			if isinstance(self.page.ItemAttributes.Director, list):
+				self.director = string.join(self.page.ItemAttributes.Director, ', ')
+			else:
+				self.director = self.page.ItemAttributes.Director
 		else:
 			self.director = ''
 
@@ -154,8 +157,10 @@ class Plugin(movie.Movie):
 	def get_cast(self):
 		self.cast = ''
 		if hasattr(self.page.ItemAttributes, 'Actor'):
-			for actor in self.page.ItemAttributes.Actor:
-				self.cast += actor + '\n'
+			if isinstance(self.page.ItemAttributes.Actor, list):
+				self.cast = string.join(self.page.ItemAttributes.Actor, '\n')
+			else:
+				self.cast = self.page.ItemAttributes.Actor
 
 	def get_classification(self):
 		if hasattr(self.page.ItemAttributes, 'AudienceRating'):
