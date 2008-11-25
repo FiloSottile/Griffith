@@ -72,7 +72,7 @@ class Plugin(movie.Movie):
                 self.progress.pulse()
                 while gtk.events_pending():
                     gtk.main_iteration()
-            self.page = retriever.result.Item
+            self.page = retriever.result.Item[0]
         except:
             self.page = ''
             try:
@@ -105,7 +105,10 @@ class Plugin(movie.Movie):
 
     def get_director(self):
         if hasattr(self.page.ItemAttributes, 'Director'):
-            self.director = self.page.ItemAttributes.Director
+            if isinstance(self.page.ItemAttributes.Director, list):
+                self.director = string.join(self.page.ItemAttributes.Director, ', ')
+            else:
+                self.director = self.page.ItemAttributes.Director,
         else:
             self.director = ''
 
@@ -155,8 +158,10 @@ class Plugin(movie.Movie):
     def get_cast(self):
         self.cast = ''
         if hasattr(self.page.ItemAttributes, 'Actor'):
-            for actor in self.page.ItemAttributes.Actor:
-                self.cast += actor + '\n'
+            if isinstance(self.page.ItemAttributes.Actor, list):
+                self.cast = string.join(self.page.ItemAttributes.Actor, '\n')
+            else:
+                self.cast = self.page.ItemAttributes.Actor
 
     def get_classification(self):
         if hasattr(self.page.ItemAttributes, 'AudienceRating'):
@@ -381,65 +386,65 @@ class PluginTest:
     #
     test_configuration = {
         'B000TIQMMI' : { 
-            'title'             : 'Rocky Balboa',
+            'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : '',
-            'plot'                 : True,
+            'plot'                : True,
             'cast'                : 'Sylvester Stallone\n\
 Antonio Traver\n\
 Burt Young',
-            'country'            : 'USA',
-            'genre'                : 'Mehr Drama, Drama',
-            'classification'    : 'Freigegeben ab 12 Jahren',
-            'studio'            : 'MGM Home Entertainment GmbH (dt.)',
-            'o_site'            : False,
+            'country'             : 'USA',
+            'genre'               : 'Mehr Drama, Drama',
+            'classification'      : 'Freigegeben ab 12 Jahren',
+            'studio'              : 'MGM Home Entertainment GmbH (dt.)',
+            'o_site'              : False,
             'site'                : 'http://www.amazon.de/dp/B000TIQMMI',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 2006,
-            'notes'                : 'EAN: 4045167004504',
-            'runtime'            : 97,
-            'image'                : True,
-            'rating'            : 9
+            'notes'               : 'EAN: 4045167004504',
+            'runtime'             : 97,
+            'image'               : True,
+            'rating'              : 9
         },
         'B0009NSASM' : { 
-            'title'             : 'Ein glückliches Jahr',
+            'title'               : 'Ein glückliches Jahr',
             'o_title'             : 'Ein glückliches Jahr',
             'director'            : 'Claude Lelouch',
-            'plot'                 : False,
+            'plot'                : False,
             'cast'                : 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard',
-            'country'            : 'Frankreich, Italien',
-            'genre'                : 'Krimi, Mehr Drama, Mehr Komödie, Drama, Komödie, Krimi',
-            'classification'    : 'Freigegeben ab 12 Jahren',
-            'studio'            : 'Warner Home Video - DVD',
-            'o_site'            : False,
+            'country'             : 'Frankreich, Italien',
+            'genre'               : 'Krimi, Mehr Drama, Mehr Komödie, Drama, Komödie, Krimi',
+            'classification'      : 'Freigegeben ab 12 Jahren',
+            'studio'              : 'Warner Home Video - DVD',
+            'o_site'              : False,
             'site'                : 'http://www.amazon.de/dp/B0009NSASM',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 1973,
-            'notes'                : 'EAN: 7321921998843',
-            'runtime'            : 110,
-            'image'                : True,
-            'rating'            : 10
+            'notes'               : 'EAN: 7321921998843',
+            'runtime'             : 110,
+            'image'               : True,
+            'rating'              : 10
         },
         'B000BSNOD6' : { 
-            'title'             : 'Arahan (Vanilla-DVD)',
+            'title'               : 'Arahan (Vanilla-DVD)',
             'o_title'             : 'Arahan (Vanilla-DVD)',
             'director'            : 'Ryoo Seung-wan',
-            'plot'                 : False,
+            'plot'                : False,
             'cast'                : 'Ryu Seung-beom\n\
 Yoon So-yi\n\
 Ahn Sung-kee',
-            'country'            : 'Südkorea',
-            'genre'                : 'Actionkomödie, Abenteuer- & Actionkomödie, Fantasykomödie, Action, Komödie, Mehr Fantasy, Korea, Action, Komödie, Fantasy, Unter 10 EUR',
-            'classification'    : 'Freigegeben ab 16 Jahren',
-            'o_site'            : False,
+            'country'             : 'Südkorea',
+            'genre'               : 'Actionkomödie, Abenteuer- & Actionkomödie, Fantasykomödie, Action, Komödie, Mehr Fantasy, Korea, Action, Komödie, Fantasy, Unter 10 EUR',
+            'classification'      : 'Freigegeben ab 16 Jahren',
+            'o_site'              : False,
             'site'                : 'http://www.amazon.de/dp/B000BSNOD6',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 2005,
-            'notes'                : 'EAN: 4013549871105',
-            'runtime'            : 108,
-            'image'                : True,
-            'rating'            : 8
+            'notes'               : 'EAN: 4013549871105',
+            'runtime'             : 108,
+            'image'               : True,
+            'rating'              : 8
         }
     }
