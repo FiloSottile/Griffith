@@ -7,6 +7,7 @@ Griffith ChangeLog
 
 2008-11-30  Piotr Ożarowski
 	* CSFD movie plugin updated (thanks to Otakar)
+	* Sync FDb, Filmweb and Stopklatka movie plugins with trunk
 
 2008-11-25  Michael Jahn
 	* fixed some amazon and unicode errors
