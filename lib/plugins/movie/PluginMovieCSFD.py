@@ -1,4 +1,4 @@
-# -*- coding: cp1250 -*-
+# -*- coding: utf-8 -*-
 __revision__ = '$Id: PluginMovieCSFD.py 12 2007-01-05 09:08:06Z blondak $'
 # Copyright (c) 2005 Blondak
 #
@@ -34,7 +34,7 @@ plugin_version = "0.8"
 class Plugin(movie.Movie):
     def __init__(self, id):
         self.movie_id = id
-        self.encode = "cp1250"
+        self.encode = "utf-8"
         self.url = "http://www.csfd.cz/"+str(id)
 
     def get_image(self):
@@ -54,7 +54,7 @@ class Plugin(movie.Movie):
             self.o_title = self.get_title(True)
 
     def get_title(self, ret=False):
-        data = re.search(r"<title>([^,]*), ",self.page)
+        data = re.search(r"<title>CSFD.cz - ([^,]*)\(\d{4}\)",self.page)
         if data:
             data = data.group(1)
         else:
@@ -65,7 +65,7 @@ class Plugin(movie.Movie):
             self.title = data
 
     def get_director(self):
-        self.director = re.search(r"Režie:(.*)<br><b>Hrají:",self.page)
+        self.director = re.search(r"Re¾ie:(.*)<br><b>Hrají:",self.page)
         if self.director:
             self.director = gutils.strip_tags(self.director.group(1))
         else:
@@ -79,7 +79,7 @@ class Plugin(movie.Movie):
             self.year = ""
 
     def get_runtime(self):
-        self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>Režie:",self.page)
+        self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>Re¾ie:",self.page)
         if self.runtime:
             self.runtime = gutils.strip_tags(self.runtime.group(1))
         else:
@@ -107,7 +107,7 @@ class Plugin(movie.Movie):
             self.cast = ""
 
     def get_plot(self):
-        self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah / Info:","</td>"),"(oficiální text distributora)",""))
+        self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah:","</td>"),"(oficiální text distributora)",""))
 
     def get_site(self):
         self.site = re.search(r"href=[\"'](http://.*imdb\.com/title/[^\"']*)",self.page)
@@ -149,7 +149,7 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
-        self.encode = "cp1250"
+        self.encode = "utf-8"
         self.original_url_search   = "http://www.csfd.cz/search_pg.php?search="
         self.translated_url_search = "http://www.csfd.cz/search_pg.php?search="
 
