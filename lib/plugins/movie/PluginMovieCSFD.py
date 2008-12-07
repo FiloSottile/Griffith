@@ -29,7 +29,7 @@ plugin_url = "www.csfd.cz"
 plugin_language = _("Czech")
 plugin_author = "Blondak"
 plugin_author_email = "<blondak@neser.cz>"
-plugin_version = "0.8"
+plugin_version = '0.9'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -65,21 +65,21 @@ class Plugin(movie.Movie):
             self.title = data
 
     def get_director(self):
-        self.director = re.search(r"Re¾ie:(.*)<br><b>Hrají:",self.page)
+        self.director = re.search(r"ie:(.*)<br><b>Hraj", self.page)
         if self.director:
             self.director = gutils.strip_tags(self.director.group(1))
         else:
             self.director = ""
 
     def get_year(self):
-        self.year = re.search(r"<title>.*\(([\d]+)\)",self.page)
+        self.year = re.search(r"<title>.*\(([\d]+)\)", self.page)
         if self.year:
             self.year = self.year.group(1)
         else:
             self.year = ""
 
     def get_runtime(self):
-        self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>Re¾ie:",self.page)
+        self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>Re", self.page)
         if self.runtime:
             self.runtime = gutils.strip_tags(self.runtime.group(1))
         else:
@@ -100,14 +100,19 @@ class Plugin(movie.Movie):
             self.country = ""
 
     def get_cast(self):
-        self.cast = re.search(r"Hrají: (.*)</div><br>",self.page)
+        self.cast = re.search(r"Hrají: (.*)</div><br>", self.page)
         if self.cast:
             self.cast = gutils.strip_tags(self.cast.group(1))
         else:
             self.cast = ""
 
     def get_plot(self):
-        self.plot = gutils.strip_tags(string.replace(gutils.trim(self.page,"Obsah:","</td>"),"(oficiální text distributora)",""))
+        text = re.search(r"\?text=([\d]*)", self.page)
+        if text:
+            page_content = self.open_page(url=self.url+"?text="+text.group(1))
+            self.plot = gutils.strip_tags(gutils.trim(page_content,"Obsah:","&nbsp;&nbsp;&nbsp;<b><i>("))
+        else:
+            self.plot = gutils.strip_tags(gutils.trim(self.page,"Obsah:","&nbsp;&nbsp;&nbsp;<b><i>("))
 
     def get_site(self):
         self.site = re.search(r"href=[\"'](http://.*imdb\.com/title/[^\"']*)",self.page)
