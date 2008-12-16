@@ -172,11 +172,11 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
     PATTERN = re.compile(r"""<A HREF=['"]/title/tt([0-9]+)/["']>(.*?)</LI>""")
-    PATTERN2 = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["']>(.*?)</td>""")
+    PATTERN2 = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["'](.*?)</tr>""")
 
     def __init__(self):
-        self.original_url_search    = 'http://www.imdb.com/List?words='
-        self.translated_url_search	= 'http://www.imdb.com/find?more=tt;q='
+        self.original_url_search   = 'http://www.imdb.com/List?words='
+        self.translated_url_search = 'http://www.imdb.com/find?more=tt;q='
         self.encode = 'utf-8'
 
     def search(self,parent_window):
@@ -187,6 +187,8 @@ class SearchPlugin(movie.SearchMovie):
         else:
             self.page = tmp_page
         self.page = self.page.decode('iso-8859-1')
+        # correction of all &#xxx entities
+        self.page = gutils.convert_entities(self.page)
         return self.page
 
     def get_searches(self):
@@ -195,9 +197,9 @@ class SearchPlugin(movie.SearchMovie):
             elements = string.split(self.page, '<tr>')
             if len(elements):
                 for element in elements[1:]:
-                    match = self.PATTERN.findall(element)
+                    match = self.PATTERN2.findall(element)
                     if len(match):
-                        tmp = gutils.clean(match[0][1])
+                        tmp = re.sub('^[0-9]+[.]', '', gutils.clean(gutils.after(match[0][1], '>')))
                         self.ids.append(match[0][0])
                         self.titles.append(tmp)
         else:
