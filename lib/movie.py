@@ -124,12 +124,14 @@ class Movie(object):
             #            
             # get the page
             #
-            self.open_page(parent_window)
+            if not self.open_page(parent_window):
+                return None
         except:
             # close the dialog if an error occured
             self.progress.hide()
             # reraise the error
             raise
+        return True
 
     def open_page(self, parent_window=None, url=None):
         if url is None:
