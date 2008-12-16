@@ -129,7 +129,8 @@ class SearchPlugin(movie.SearchMovie):
         self.encode='iso-8859-1'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         return gutils.trim(self.page, "<span class=font_normal>", "<table width=590")
 
     def get_searches(self):

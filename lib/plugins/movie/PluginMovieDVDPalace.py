@@ -142,7 +142,8 @@ class SearchPlugin(movie.SearchMovie):
         self.encode='iso-8859-1'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         tmp_pagemovie = self.page
         #
         # try to get all result pages (not so nice, but it works)
@@ -155,9 +156,9 @@ class SearchPlugin(movie.SearchMovie):
         tmp_pagecountintcurrent = 1
         while (tmp_pagecountint > tmp_pagecountintcurrent and tmp_pagecountintcurrent < 5):
             self.url = "http://www.dvd-palace.de/dvddatabase/dbsearch.php?action=1&start=" + str(tmp_pagecountintcurrent * 20) + "&suchbegriff="
-            self.open_search(parent_window)
-            tmp_pagemovie = tmp_pagemovie + self.page
-            tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
+            if self.open_search(parent_window):
+                tmp_pagemovie = tmp_pagemovie + self.page
+                tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
         self.page = tmp_pagemovie
         return self.page
 

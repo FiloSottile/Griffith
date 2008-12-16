@@ -116,7 +116,8 @@ class SearchPlugin(movie.SearchMovie):
         self.remove_accents = False
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.page = gutils.trim(self.page,"</b><br><br>", "<br><br><br>");
         self.page = string.replace( self.page, "'", '"' )
         self.page = string.replace( self.page, '<font size="1">', '' )

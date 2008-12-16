@@ -140,7 +140,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search    = 'http://fdb.pl/szukaj.php?t=f&s='
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         tmp = string.find(self.page,'<div>Wyniki wyszukiwania dla')
         if tmp == -1:        # already a movie page
             self.page = ''

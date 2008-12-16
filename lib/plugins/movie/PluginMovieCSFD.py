@@ -159,7 +159,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search = "http://www.csfd.cz/search_pg.php?search="
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         return self.page
 
     def get_searches(self):

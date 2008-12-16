@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Piotr O¿arowski
+# Copyright (c) 2005-2006 Piotr OÅ¼arowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ plugin_name         = 'Onet'
 plugin_description  = 'Onet Film'
 plugin_url          = 'film.onet.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr O¿arowski'
+plugin_author       = 'Piotr OÅ¼arowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
 plugin_version      = '1.7'
 
@@ -140,7 +140,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search    = 'http://film.onet.pl/filmoteka.html?O=1&S='
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.page = gutils.trim(self.page, '>Wynik wyszukiwania<', '<TABLE border=0 cellpadding=0');
         self.page = gutils.after(self.page, '</SPAN></DIV><BR>');
         return self.page
@@ -157,5 +158,3 @@ class SearchPlugin(movie.SearchMovie):
                 self.titles.append(element)
         else:
             self.number_results = 0
-
-# vim: fenc=iso-8859-2

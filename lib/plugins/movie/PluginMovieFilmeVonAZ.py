@@ -114,7 +114,8 @@ class SearchPlugin(movie.SearchMovie):
         self.encode='utf-8'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         # used for looking for subpages
         tmp_page = gutils.trim(self.page, "Treffer-Seite", "chste Seite")
         elements = string.split(tmp_page, '" class="text_navi">')
@@ -127,11 +128,12 @@ class SearchPlugin(movie.SearchMovie):
                 tmp_element = int(element)
             except:
                 tmp_element = 1
-            if (tmp_element <> 1):
+            if tmp_element != 1:
                 self.url = "http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&currentPage=" + str(tmp_element) + "&wert="
                 self.open_search(parent_window)
-                tmp_page2 = gutils.trim(self.page,"Alle Treffer aus der Kategorie", "Treffer-Seite")
-                tmp_page = tmp_page + tmp_page2
+                if self.open_search(parent_window):
+                    tmp_page2 = gutils.trim(self.page,"Alle Treffer aus der Kategorie", "Treffer-Seite")
+                    tmp_page = tmp_page + tmp_page2
         self.page = tmp_page
 
         return self.page

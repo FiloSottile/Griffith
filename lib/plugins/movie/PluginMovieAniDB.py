@@ -147,7 +147,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search    = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.page = decompress(self.page)
 
         tmp = string.find(self.page, '<h1>Anime List - Search for: ')

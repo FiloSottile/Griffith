@@ -109,7 +109,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search    = "http://www.allocine.fr/recherche/?motcle="
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.sub_search()
         return self.page
 

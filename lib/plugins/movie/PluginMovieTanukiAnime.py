@@ -133,7 +133,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search = 'http://anime.tanuki.pl/strony/anime/lista/title/1/?&title='
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         tmp = string.find(self.page, "<table class=\"animelist strippedlist\"")
         if tmp == -1:    # only one match!
             self.page = ''

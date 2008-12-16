@@ -131,7 +131,8 @@ class SearchPlugin(movie.SearchMovie):
 
     def search(self, parent_window):
         "Perform the web search"
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.sub_search()
         return self.page
 

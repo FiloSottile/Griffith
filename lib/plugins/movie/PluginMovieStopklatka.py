@@ -119,7 +119,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search    = "http://www.stopklatka.pl/szukaj/szukaj.asp?kategoria=film&szukaj="
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.page = gutils.trim(self.page, '>Wyniki poszukiwania frazy:', '</div>');
         self.page = self.page.replace('\x9c','ś')
         self.page = self.page.replace('š','ą')

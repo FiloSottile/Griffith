@@ -135,7 +135,8 @@ class SearchPlugin(movie.SearchMovie):
         self.encode = 'iso-8859-1'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         # short the content
         tmp_page = gutils.trim(self.page,'<select name="sort"', 'Click Here to make a Suggestion</a>')
         #
@@ -156,8 +157,9 @@ class SearchPlugin(movie.SearchMovie):
             tmp_pagecountintcurrent = tmp_pagecountintcurrent + 1
             self.url = "http://www.dvdempire.com/Exec/v1_search_all.asp?&site_media_id=0&pp=&search_refined=32&used=0&page=" + str(tmp_pagecountintcurrent) + "&string="
             self.open_search(parent_window)
-            tmp_page2 = gutils.trim(self.page,'<select name="sort"', 'Click Here to make a Suggestion</a>')
-            tmp_page = tmp_page + tmp_page2
+            if self.open_search(parent_window):
+                tmp_page2 = gutils.trim(self.page,'<select name="sort"', 'Click Here to make a Suggestion</a>')
+                tmp_page = tmp_page + tmp_page2
 
         self.page = tmp_page
         return self.page

@@ -156,7 +156,8 @@ class SearchPlugin(movie.SearchMovie):
         self.remove_accents = False
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         tmp = gutils.trim(self.page, "Der Suchbegriff erzielte", "</TABLE>")
         return tmp
 

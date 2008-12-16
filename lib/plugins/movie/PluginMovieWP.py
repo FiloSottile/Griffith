@@ -132,7 +132,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search    = 'http://film.wp.pl/szukaj,%s,type,f,szukaj.html'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         self.page = gutils.trim(self.page, '<div id="filmUS"', '<div id=');
         return self.page
 

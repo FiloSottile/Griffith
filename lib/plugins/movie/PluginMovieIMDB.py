@@ -24,19 +24,19 @@ __revision__ = '$Id$'
 import gutils, movie
 import string, re
 
-plugin_name        = 'IMDb'
-plugin_description    = 'Internet Movie Database'
-plugin_url        = 'www.imdb.com'
-plugin_language        = _('English')
-plugin_author        = 'Vasco Nunes, Piotr Ożarowski'
-plugin_author_email    = 'griffith-private@lists.berlios.de'
-plugin_version        = '1.5'
+plugin_name = 'IMDb'
+plugin_description = 'Internet Movie Database'
+plugin_url = 'www.imdb.com'
+plugin_language = _('English')
+plugin_author = 'Vasco Nunes, Piotr Ożarowski'
+plugin_author_email = 'griffith-private@lists.berlios.de'
+plugin_version = '1.6'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
         self.encode = 'utf-8'
         self.movie_id = id
-        self.url = "http://imdb.com/title/tt%s" % str(self.movie_id)
+        self.url = "http://imdb.com/title/tt%s" % self.movie_id
 
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
@@ -166,7 +166,7 @@ class Plugin(movie.Movie):
     
     def __before_more(self, data):
         tmp = string.find(data, '>more<')
-        if tmp>0:
+        if tmp > 0:
             data = data[:tmp] + '>'
         return data
 
@@ -180,9 +180,10 @@ class SearchPlugin(movie.SearchMovie):
         self.encode = 'utf-8'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         tmp_page = gutils.trim(self.page, 'Here are the', '</TABLE>')
-        if tmp_page == '':
+        if not tmp_page:
             self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>')
         else:
             self.page = tmp_page

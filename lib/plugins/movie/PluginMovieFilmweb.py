@@ -145,7 +145,8 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search = "http://www.filmweb.pl/szukaj?c=film&q="
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         pos = string.find(self.page, 'Znaleziono <b>')
         if pos == -1:    # movie page
             self.page = None

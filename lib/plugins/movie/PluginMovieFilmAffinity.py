@@ -127,7 +127,8 @@ class SearchPlugin(movie.SearchMovie):
         self.encode = 'iso-8859-15'
 
     def search(self,parent_window):
-        self.open_search(parent_window)
+        if not self.open_search(parent_window):
+            return None
         auxPage = self.page
         self.sub_search()
         if self.page <> '':
