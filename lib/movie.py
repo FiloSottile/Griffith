@@ -147,10 +147,12 @@ class Movie(object):
                 retriever.join()
             while gtk.events_pending():
                 gtk.main_iteration()
+        data = None
         try:
-            ifile = file(retriever.html[0], "rb")
-            data = ifile.read()
-            data = data.decode(self.encode)
+            if retriever.html:
+                ifile = file(retriever.html[0], "rb")
+                data = ifile.read()
+                data = data.decode(self.encode)
         except IOError:
             pass
         if url is None:
