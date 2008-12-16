@@ -34,7 +34,7 @@ import logging
 log = logging.getLogger("Griffith")
 import gutils
 
-class Movie:
+class Movie(object):
     cast = None
     classification = None
     country = None
@@ -185,8 +185,7 @@ class Movie:
 
     def parse_movie(self):
         try:
-            from copy import deepcopy
-            fields = deepcopy(self.fields_to_fetch)
+            fields = list(self.fields_to_fetch) # make a copy
 
             self.initialize()
 
@@ -241,11 +240,11 @@ class Movie:
             # close the progress dialog which was opened in get_movie
             self.progress.hide()
 
-class SearchMovie:
+class SearchMovie(object):
     page = None
     number_results = None
-    titles = [""]
-    ids = [""]
+    titles = []
+    ids = []
     url = None
     encode = 'utf-8'
     original_url_search = None
@@ -258,7 +257,7 @@ class SearchMovie:
     def __init__(self):
         pass
 
-    def search_movies(self,parent_window):
+    def search_movies(self, parent_window):
         try:
             #
             # initialize the progress dialog once for the following search process
@@ -281,7 +280,7 @@ class SearchMovie:
             self.url = self.url % self.title
             self.url = string.replace(self.url, ' ', '%20')
         else:
-            self.url = string.replace(self.url+self.title,' ','%20')
+            self.url = string.replace(self.url+self.title, ' ', '%20')
         try:
             url = self.url.encode(self.encode)
         except UnicodeEncodeError:
@@ -292,16 +291,20 @@ class SearchMovie:
         while retriever.isAlive():
             self.progress.pulse()
             if self.progress.status:
-                retriever.suspend()
+                retriever.join()
             while gtk.events_pending():
                 gtk.main_iteration()
         try:
-            ifile = file(retriever.html[0], "rb")
-            self.page = ifile.read()
-            self.page = self.page.decode(self.encode)
+            if retriever.html:
+                ifile = file(retriever.html[0], 'rb')
+                self.page = ifile.read()
+                self.page = self.page.decode(self.encode, 'replace')
+            else:
+                return False
         except IOError:
             pass
         urlcleanup()
+        return True
 
 class Retriever(threading.Thread):
     def __init__(self, URL, parent_window, progress, destination=None):
@@ -313,6 +316,7 @@ class Retriever(threading.Thread):
         self._stopevent = threading.Event()
         self._sleepperiod = 1.0
         threading.Thread.__init__(self, name="Retriever")
+
     def run(self):
         try:
             self.html = urlretrieve(self.URL, self.destination, self.hook)
@@ -323,7 +327,8 @@ class Retriever(threading.Thread):
             self.progress.dialog.hide()
             gutils.urllib_error(_("Connection error"), self.parent_window)
             self.suspend()
-    def hook(self,count, blockSize, totalSize):
+
+    def hook(self, count, blockSize, totalSize):
         if totalSize ==-1:
             pass
         else:
@@ -332,7 +337,7 @@ class Retriever(threading.Thread):
             except:
                 downloaded_percentage = 100
             if count != 0:
-                downloaded_kbyte = int(count * blockSize/1024.0)
+                downloaded_percentagenloaded_kbyte = int(count * blockSize/1024.0)
                 filesize_kbyte = int(totalSize/1024.0)
 
 #
@@ -366,20 +371,25 @@ class Progress:
         self.button.connect("clicked", self.callback)
         self.dialog.vbox.pack_start(self.button, False, False)
         self.dialog.show_all()
+
     def callback(self, widget):
         self.dialog.hide()
         self.status = True
+
     def pulse(self):
         self.progress.pulse()
         time.sleep(0.01)
+
     def close(self):
         self.dialog.destroy()
+
     def hide(self):
         self.dialog.hide()
+
     def set_data(self, parent_window, title, message, showit):
         #self.dialog.set_parent(parent_window)
         self.dialog.set_title(title)
         self.label.set_markup(message)
-        if showit == True:
+        if showit is True:
             self.dialog.show()
 # vim: fdm=marker
