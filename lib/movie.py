@@ -144,7 +144,7 @@ class Movie(object):
         while retriever.isAlive():
             self.progress.pulse()
             if self.progress.status:
-                retriever.suspend()
+                retriever.join()
             while gtk.events_pending():
                 gtk.main_iteration()
         try:
@@ -170,7 +170,7 @@ class Movie(object):
                 while retriever.isAlive():
                     self.progress.pulse()
                     if self.progress.status:
-                        retriever.suspend()
+                        retriever.join()
                     while gtk.events_pending():
                         gtk.main_iteration()
                 urlcleanup()
@@ -268,7 +268,7 @@ class SearchMovie(object):
             #            
             # call the plugin specific search method
             #
-            self.search(parent_window)
+            return self.search(parent_window)
         finally:
             # dont forget to hide the progress dialog
             self.progress.hide()
@@ -326,7 +326,7 @@ class Retriever(threading.Thread):
         except IOError:
             self.progress.dialog.hide()
             gutils.urllib_error(_("Connection error"), self.parent_window)
-            self.suspend()
+            self.join()
 
     def hook(self, count, blockSize, totalSize):
         if totalSize ==-1:
@@ -337,7 +337,7 @@ class Retriever(threading.Thread):
             except:
                 downloaded_percentage = 100
             if count != 0:
-                downloaded_percentagenloaded_kbyte = int(count * blockSize/1024.0)
+                downloaded_kbyte = int(count * blockSize/1024.0)
                 filesize_kbyte = int(totalSize/1024.0)
 
 #
