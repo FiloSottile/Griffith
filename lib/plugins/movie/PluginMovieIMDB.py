@@ -30,7 +30,7 @@ plugin_url = 'www.imdb.com'
 plugin_language = _('English')
 plugin_author = 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email = 'griffith-private@lists.berlios.de'
-plugin_version = '1.6'
+plugin_version = '1.7'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -67,7 +67,7 @@ class Plugin(movie.Movie):
             self.director = self.director.replace('<br/>', ', ')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, '<h5>Plot Outline:</h5>', '</div>')
+        self.plot = gutils.regextrim(self.page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
         self.plot = self.__before_more(self.plot)
         elements = string.split(self.plot_page, '<p class="plotpar">')
         if len(elements) > 1:
@@ -75,7 +75,7 @@ class Plugin(movie.Movie):
             elements[0] = ''
             for element in elements:
                 if element <> '':
-                    self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n'
+                    self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n\n'
 
     def get_year(self):
         self.year = gutils.trim(self.page, '<a href="/Sections/Years/', '</a>')
