@@ -32,7 +32,7 @@ plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
 plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.11'
+plugin_version        = '1.12'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN = re.compile('/film/.*/zwiastuny/odtwarzaj/[0-9]*')
@@ -49,7 +49,7 @@ class Plugin(movie.Movie):
     def get_image(self):
         self.image_url = gutils.trim(self.page, 'class="poster"', '/></a>')
         self.image_url = gutils.trim(self.image_url,'src="','"')
-        if self.image_url.endswith('no_picture.png'):
+        if self.image_url.endswith('http://fdb.pl/images/fdb2/add_poster.png?1214306282'):
             self.image_url = ''
 
     def get_o_title(self):
@@ -96,8 +96,11 @@ class Plugin(movie.Movie):
         self.genre = string.replace(self.genre, ' / ', ' | ')
 
     def get_cast(self):
-        self.cast = gutils.trim(self.page,'<h2 class="category-header">\n    Obsada','</div>')
-        self.cast = gutils.trim(self.cast,"<table>\n",'  </table>')
+        self.cast = gutils.trim(self.page,'<div class="cast">',"</div>")
+        tmpcast = gutils.trim(self.cast,"<table>\n",'</table>')
+        if tmpcast == '':
+            tmpcast = tmpcast = gutils.trim(self.cast,"<table>\n",'<div class="line">')
+        self.cast = tmpcast   
         if self.cast != '':
             self.cast = gutils.strip_tags(self.cast)
             self.cast = self.cast.replace("      ","")
@@ -136,17 +139,17 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.encode = 'utf-8'
-        self.original_url_search    = 'http://fdb.pl/szukaj.php?t=f&s='
-        self.translated_url_search    = 'http://fdb.pl/szukaj.php?t=f&s='
+        self.original_url_search    = 'http://fdb.pl/szukaj/movies?query='
+        self.translated_url_search    = 'http://fdb.pl/szukaj/movies?query='
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
             return None
-        tmp = string.find(self.page,'<div>Wyniki wyszukiwania dla')
+        tmp = string.find(self.page,'<h1>Wyniki wyszukiwania dla')
         if tmp == -1:        # already a movie page
             self.page = ''
         else:            # multiple matches
-            self.page = gutils.before(self.page[tmp:],'<div id="mapaSerwisu">');
+            self.page = gutils.before(self.page[tmp:],'>Mapa strony</h3>');
         return self.page
 
     def get_searches(self):
@@ -155,11 +158,11 @@ class SearchPlugin(movie.SearchMovie):
             self.ids.append(self.url)
             self.titles.append(self.title)
         else:            # multiple matches
-            elements = string.split(self.page,'<div class="searchItem">')
-            if len(elements)>0:
+            elements = string.split(self.page,'<div class="content">')
+            if len(elements)>1:
                 for element in elements:
                     tmpId = gutils.trim(element, '<a href="', '"')
-                    if tmpId.endswith('dodajNowy.php'):
+                    if tmpId.endswith('http://fdb.pl'):
                         continue
                     self.ids.append(tmpId)
                     element = gutils.strip_tags(
