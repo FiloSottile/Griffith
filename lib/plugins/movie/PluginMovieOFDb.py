@@ -16,7 +16,7 @@ plugin_url = "www.ofdb.de"
 plugin_language = _("German")
 plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.9"
+plugin_version = "0.10"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -31,7 +31,11 @@ class Plugin(movie.Movie):
         if imdb_nr != '':
             self.imdb_page = self.open_page(url='http://german.imdb.com/Title?' + imdb_nr)
         else:
-            self.imdb_page = ''
+            imdb_nr = gutils.trim(self.page, 'http://www.imdb.com/Title?', '"')
+            if imdb_nr != '':
+                self.imdb_page = self.open_page(url='http://www.imdb.com/Title?' + imdb_nr)
+            else:
+                self.imdb_page = ''
 
     def get_image(self):
         self.image_url = "http://img.ofdb.de/film/" + gutils.trim(self.page, 'img src="http://img.ofdb.de/film/', '"' )
@@ -59,7 +63,7 @@ class Plugin(movie.Movie):
 
     def get_runtime(self):
         # from imdb
-        self.runtime = gutils.trim(self.imdb_page, '<h5>L&auml;nge:</h5>', ' Min')
+        self.runtime = gutils.regextrim(self.imdb_page, '<h5>(L&auml;nge|Runtime):</h5>', ' (min|Min)')
 
     def get_genre(self):
         self.genre = gutils.trim(self.page,"Genre(s):","</table>")
@@ -84,11 +88,11 @@ class Plugin(movie.Movie):
 
     def get_classification(self):
         # from imdb
-        self.classification = gutils.trim(gutils.trim(self.imdb_page, 'Altersfreigabe:', '</div>'), 'Germany:', '&')
+        self.classification = gutils.regextrim(gutils.regextrim(self.imdb_page, '(Altersfreigabe|Certification):', '</div>'), 'Germany:', '(&|[|])')
 
     def get_studio(self):
         # from imdb
-        self.studio = gutils.trim(self.imdb_page, '<h5>Firma:</h5>', '</a>')
+        self.studio = gutils.regextrim(self.imdb_page, '<h5>(Firma|Company):</h5>', '</a>')
 
     def get_o_site(self):
         self.o_site = ""
@@ -148,9 +152,9 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'            : [ 1, 1 ],
-        'Arahan'                : [ 3, 2 ],
-        'glückliches'            : [ 4, 2 ]
+        'Rocky Balboa' : [ 1, 1 ],
+        'Arahan'       : [ 3, 2 ],
+        'glückliches'  : [ 4, 2 ]
     }
 
 class PluginTest:
