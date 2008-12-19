@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007 Michael Jahn
+# Copyright (c) 2007-2008 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ plugin_url          = 'german.imdb.com'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'mikej06@hotmail.com'
-plugin_version      = '1.3'
+plugin_version      = '1.4'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -41,6 +41,9 @@ class Plugin(movie.Movie):
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
         self.plot_page = self.open_page(url=self.url + '/plotsummary')
+        # looking for the original imdb page
+        self.imdb_page = self.open_page(url="http://www.imdb.com/title/tt%s" % str(self.movie_id))
+        self.imdb_plot_page = self.open_page(url="http://www.imdb.com/title/tt%s/plotsummary" % str(self.movie_id))
         # correction of all &#xxx entities
         self.page = self.page.decode(self.encode)
         self.page = gutils.convert_entities(self.page)
@@ -91,10 +94,21 @@ class Plugin(movie.Movie):
             for element in elements:
                 if element != '':
                     self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n'
+        if self.plot == '':
+            # nothing in german found, try original
+            self.plot = self.regextrim(self.imdb_page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
+            self.plot = self.__before_more(self.plot)
+            elements = string.split(self.imdb_plot_page, '<p class="plotpar">')
+            if len(elements) > 1:
+                self.plot = self.plot + '\n\n'
+                elements[0] = ''
+                for element in elements:
+                    if element <> '':
+                        self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n\n'
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '<a href="/Sections/Years/', '</a>')
-        self.year = gutils.after(self.year, '">')
+        self.year = gutils.trim(self.page, '<h1>', ' <span class')
+        self.year = gutils.trim(self.year, '(', ')')
 
     def get_runtime(self):
         self.runtime = gutils.regextrim(self.page, '<h5>L[^n]+nge:</h5>', ' [Mm]in')
@@ -117,7 +131,7 @@ class Plugin(movie.Movie):
         self.cast = re.sub('[ ]+', ' ', self.cast)
 
     def get_classification(self):
-        self.classification = gutils.trim(gutils.trim(self.page, 'Altersfreigabe:', '</div>'), 'Germany:', '&')
+        self.classification = gutils.trim(gutils.trim(self.page, 'Altersfreigabe:', '</div>'), 'Deutschland:', '|')
 
     def get_studio(self):
         self.studio = gutils.trim(self.page, '<h5>Firma:</h5>', '</div>')
@@ -142,7 +156,7 @@ class Plugin(movie.Movie):
         self.rating = gutils.trim(self.page, '<h5>Nutzer-Bewertung:</h5>', '/10')
         if self.rating:
             try:
-                self.rating = str(float(gutils.clean(self.rating)))
+                self.rating = str(float(gutils.digits_only(gutils.clean(self.rating))))
             except:
                 self.rating = ''
 
@@ -193,13 +207,13 @@ class Plugin(movie.Movie):
         return data
 
 class SearchPlugin(movie.SearchMovie):
-    PATTERN = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["']>(.*?)(</td>|</A>)""", re.IGNORECASE)
+    PATTERN = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["'](.*?)</tr>""", re.IGNORECASE)
     PATTERN_POWERSEARCH = re.compile(r"""Here are the [0-9]+ matching titles""")
 
     def __init__(self):
-        self.original_url_search    = 'http://german.imdb.com/find?more=tt&q='
-        self.translated_url_search    = 'http://german.imdb.com/List?words='
-        self.encode = 'iso8859-1'
+        self.original_url_search   = 'http://german.imdb.com/find?more=tt&q='
+        self.translated_url_search = 'http://german.imdb.com/find?more=tt&q='
+        self.encode = 'utf8'
         self.remove_accents = False
 
     def search(self,parent_window):
@@ -212,9 +226,9 @@ class SearchPlugin(movie.SearchMovie):
         else:
             self.page = tmp 
         # correction of all &#xxx entities
-        self.page = self.page.decode(self.encode)
+        self.page = self.page.decode('iso8859-1')
         self.page = gutils.convert_entities(self.page)
-        self.page = self.page.encode(self.encode)
+        #self.page = self.page.encode(self.encode)
         return self.page
 
     def get_searches(self):
@@ -226,7 +240,7 @@ class SearchPlugin(movie.SearchMovie):
             for element in elements[1:]:
                 match = self.PATTERN.findall(element)
                 for entry in match:
-                    tmp  = gutils.clean(entry[1])
+                    tmp  = re.sub('^[0-9]+[.]', '', gutils.clean(gutils.after(entry[1], '>')))
                     self.ids.append(entry[0])
                     self.titles.append(tmp)
 
@@ -239,8 +253,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'            : [ 3, 13 ],
-        'Ein glückliches Jahr'    : [ 1, 30 ]
+        'Rocky Balboa'          : [ 15, 15 ],
+        'Ein glückliches Jahr' : [  6,  6 ]
     }
 
 class PluginTest:
@@ -254,10 +268,10 @@ class PluginTest:
     test_configuration = {
         '0479143' : { 
             'title'             : 'Rocky Balboa',
-            'o_title'             : 'Rocky Balboa',
-            'director'            : 'Sylvester Stallone',
-            'plot'                 : True,
-            'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+            'o_title'           : 'Rocky Balboa',
+            'director'          : 'Sylvester Stallone',
+            'plot'              : True,
+            'cast'              : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie Panina\n\
 Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
 Geraldine Hughes' + _(' as ') + 'Marie\n\
@@ -265,87 +279,92 @@ Milo Ventimiglia' + _(' as ') + 'Robert Balboa Jr.\n\
 Tony Burton' + _(' as ') + 'Duke\n\
 A.J. Benza' + _(' as ') + 'L.C.\n\
 James Francis Kelly III' + _(' as ') + 'Steps\n\
-Talia Shire' + _(' as ') + 'Adrian (archive footage)\n\
-Lou DiBella' + _(' as ') + 'Himself\n\
-Mike Tyson' + _(' as ') + 'Himself\n\
+Talia Shire' + _(' as ') + 'Adrian (Archivmaterial)\n\
+Lou DiBella' + _(' as ') + 'als er selbst\n\
+Mike Tyson' + _(' as ') + 'als er selbst\n\
 Henry G. Sanders' + _(' as ') + 'Martin\n\
 Pedro Lovell' + _(' as ') + 'Spider Rico\n\
 Ana Gerena' + _(' as ') + 'Isabel\n\
 Angela Boyd' + _(' as ') + 'Angie\n\
 Louis Giansante' + _(' as ') + 'Bar Thug\n\
 Maureen Schilling' + _(' as ') + 'Lucky\'s Bartender\n\
-Lahmard J. Tate' + _(' as ') + 'X-Cell (as Lahmard Tate)\n\
-Woody Paige' + _(' as ') + 'ESPN Commentator (as Woodrow W. Paige)\n\
+Lahmard J. Tate' + _(' as ') + 'X-Cell (als Lahmard Tate)\n\
+Woody Paige' + _(' as ') + 'ESPN Commentator (als Woodrow W. Paige)\n\
 Skip Bayless' + _(' as ') + 'ESPN Commentator\n\
 Jay Crawford' + _(' as ') + 'ESPN Commentator\n\
 Brian Kenny' + _(' as ') + 'ESPN Host\n\
 Dana Jacobson' + _(' as ') + 'ESPN Host\n\
-Charles Johnson' + _(' as ') + 'ESPN Host (as Chuck Johnson)\n\
-James Binns' + _(' as ') + 'Commissioner (as James J. Binns)\n\
+Charles Johnson' + _(' as ') + 'ESPN Host (als Chuck Johnson)\n\
+James Binns' + _(' as ') + 'Commissioner (als James J. Binns)\n\
 Johnnie Hobbs Jr.' + _(' as ') + 'Commissioner\n\
 Barney Fitzpatrick' + _(' as ') + 'Commissioner\n\
 Jim Lampley' + _(' as ') + 'HBO Commentator\n\
 Larry Merchant' + _(' as ') + 'HBO Commentator\n\
 Max Kellerman' + _(' as ') + 'HBO Commentator\n\
-LeRoy Neiman' + _(' as ') + 'Himself\n\
+LeRoy Neiman' + _(' as ') + 'als er selbst\n\
 Bert Randolph Sugar' + _(' as ') + 'Ring Magazine Reporter\n\
-Bernard Fernández' + _(' as ') + 'Boxing Association of America Writer (as Bernard Fernandez)\n\
+Bernard Fernández' + _(' as ') + 'Boxing Association of America Writer (als Bernard Fernandez)\n\
 Gunnar Peterson' + _(' as ') + 'Weightlifting Trainer\n\
 Yahya' + _(' as ') + 'Dixon\'s Opponent\n\
 Marc Ratner' + _(' as ') + 'Weigh-In Official\n\
 Anthony Lato Jr.' + _(' as ') + 'Rocky\'s Inspector\n\
 Jack Lazzarado' + _(' as ') + 'Dixon\'s Inspector\n\
 Michael Buffer' + _(' as ') + 'Ring Announcer\n\
-Joe Cortez' + _(' as ') + 'Referee\n\
+Joe Cortez' + _(' as ') + 'Schiedsrichter\n\
 Carter Mitchell' + _(' as ') + 'Shamrock Foreman\n\
 Vinod Kumar' + _(' as ') + 'Ravi\n\
 Fran Pultro' + _(' as ') + 'Father at Restaurant\n\
-Frank Stallone' + _(' as ') + 'Dinner Patron (as Frank Stallone Jr.)\n\
+Frank Stallone' + _(' as ') + 'Dinner Patron (als Frank Stallone Jr.)\n\
 Jody Giambelluca' + _(' as ') + 'Dinner Patron\n\
 Tobias Segal' + _(' as ') + 'Robert\'s Friend\n\
 Tim Carr' + _(' as ') + 'Robert\'s Friend\n\
 Matt Frack' + _(' as ') + 'Robert\'s Friend #3\n\
 Paul Dion Monte' + _(' as ') + 'Robert\'s Friend\n\
-Kevin King Templeton' + _(' as ') + 'Robert\'s Friend (as Kevin King-Templeton)\n\
+Kevin King Templeton' + _(' as ') + 'Robert\'s Friend (als Kevin King-Templeton)\n\
 Robert Michael Kelly' + _(' as ') + 'Mr. Tomilson\n\
 Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
-Stu Nahan' + _(' as ') + 'Computer Fight Commentator (voice)\n\
-Gary Compton' + _(' as ') + 'Security Guard\n\
+Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
 übrige Besetzung in alphabetischer Reihenfolge:\n\
-Ricky Cavazos' + _(' as ') + 'Boxing Spectator (uncredited)\n\
-David Kneeream' + _(' as ') + 'Adrian\'s Patron (uncredited)\n\
-Dolph Lundgren' + _(' as ') + 'Captain Ivan Drago (archive footage) (uncredited)\n\
-Burgess Meredith' + _(' as ') + 'Mickey Goldmill (archive footage) (uncredited)\n\
-Keith Moyer' + _(' as ') + 'Bar Patron (uncredited)\n\
-Mr. T' + _(' as ') + 'Clubber Lang (archive footage) (uncredited)',
-            'country'            : 'USA',
-            'genre'                : 'Action | Sport',
+Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
+Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
+Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
+Mark J. Kilbane' + _(' as ') + 'Businessman (nicht im Abspann)\n\
+David Kneeream' + _(' as ') + 'Adrian\'s Patron (nicht im Abspann)\n\
+Dolph Lundgren' + _(' as ') + 'Captain Ivan Drago (Archivmaterial) (nicht im Abspann)\n\
+Burgess Meredith' + _(' as ') + 'Mickey Goldmill (Archivmaterial) (nicht im Abspann)\n\
+Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
+Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
+Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
+Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
+Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)',
+            'country'           : 'USA',
+            'genre'             : 'Action | Sport',
             'classification'    : False,
             'studio'            : 'Metro-Goldwyn-Mayer (MGM)',
             'o_site'            : False,
-            'site'                : 'http://german.imdb.com/title/tt0479143',
-            'trailer'            : 'http://german.imdb.com/title/tt0479143/trailers',
-            'year'                : 2006,
-            'notes'                : _('Language') + ': Englisch | Spanisch\n'\
+            'site'              : 'http://german.imdb.com/title/tt0479143',
+            'trailer'           : 'http://german.imdb.com/title/tt0479143/trailers',
+            'year'              : 2006,
+            'notes'             : _('Language') + ': Englisch | Spanisch\n'\
 + _('Audio') + ': DTS | Dolby Digital | SDDS\n'\
-+ _('Color') + ': Farbe\n\
-Tagline: It ain\'t over \'til it\'s over.',
-            'runtime'            : 102,
-            'image'                : True,
++ _('Color') + ': Farbe',
+            'runtime'           : 102,
+            'image'             : True,
             'rating'            : 7
         },
         '0069815' : { 
-            'title'             : 'Glückliches Jahr, Ein',
-            'o_title'             : 'Bonne année, La',
-            'director'            : 'Claude Lelouch',
-            'plot'                 : True,
-            'cast'                : 'Lino Ventura' + _(' as ') + 'Simon\n\
+            'title'             : 'Ein Glückliches Jahr',
+            'o_title'           : 'Bonne année, La',
+            'director'          : 'Claude Lelouch',
+            'plot'              : True,
+            'cast'              : 'Lino Ventura' + _(' as ') + 'Simon\n\
 Françoise Fabian' + _(' as ') + 'Françoise\n\
 Charles Gérard' + _(' as ') + 'Charlot\n\
 André Falcon' + _(' as ') + 'Le bijoutier\n\
-Mireille Mathieu' + _(' as ') + 'Herself / Elle-même\n\
+Mireille Mathieu' + _(' as ') + 'als sie selbst / Elle-même\n\
 Lilo' + _(' as ') + 'Madame Félix\n\
 Claude Mann' + _(' as ') + 'L\'intellectuel\n\
 Frédéric de Pasquale' + _(' as ') + 'L\'amant parisien\n\
@@ -356,30 +375,30 @@ Michel Bertay\n\
 Norman de la Chesnaye\n\
 Pierre Edeline\n\
 Pierre Pontiche\n\
-Michou' + _(' as ') + 'Himself\n\
+Michou' + _(' as ') + 'als er selbst\n\
 Bettina Rheims' + _(' as ') + 'La jeune vendeuse\n\
 Joseph Rythmann\n\
 Georges Staquet\n\
 Jacques Villedieu\n\
 Harry Walter\n\
 übrige Besetzung in alphabetischer Reihenfolge:\n\
-Anouk Aimée' + _(' as ') + 'Une femme (archive footage) (uncredited)\n\
-Elie Chouraqui' + _(' as ') + '(uncredited)\n\
-Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (uncredited)\n\
-Jean-Louis Trintignant' + _(' as ') + 'Un homme (archive footage) (uncredited)',
-            'country'            : 'France | Italy',
-            'genre'                : 'Komödie',
-            'classification'    : False,
-            'studio'            : 'Les Films 13',
-            'o_site'            : False,
-            'site'                : 'http://german.imdb.com/title/tt0069815',
+Anouk Aimée' + _(' as ') + 'Une femme (Archivmaterial) (nicht im Abspann)\n\
+Elie Chouraqui' + _(' as ') + '(nicht im Abspann)\n\
+Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (nicht im Abspann)\n\
+Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspann)',
+            'country'            : 'Frankreich | Italien',
+            'genre'              : 'Komödie',
+            'classification'     : False,
+            'studio'             : 'Les Films 13',
+            'o_site'             : False,
+            'site'               : 'http://german.imdb.com/title/tt0069815',
             'trailer'            : 'http://german.imdb.com/title/tt0069815/trailers',
-            'year'                : 1973,
-            'notes'                : _('Language') + ': Französisch\n'\
+            'year'               : 1973,
+            'notes'              : _('Language') + ': Französisch\n'\
 + _('Audio') + ': Mono\n'\
 + _('Color') + ': Farbe (Eastmancolor)',
             'runtime'            : 90,
-            'image'                : True,
-            'rating'            : 7
+            'image'              : True,
+            'rating'             : 7
         },
     }
