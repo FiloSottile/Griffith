@@ -28,9 +28,9 @@ plugin_name         = 'Onet'
 plugin_description  = 'Onet Film'
 plugin_url          = 'film.onet.pl'
 plugin_language     = _('Polish')
-plugin_author       = 'Piotr Ożarowski'
-plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '1.7'
+plugin_author       = 'Piotr Ożarowski, Bartosz Kurczewski'
+plugin_author_email = '<bartosz.kurczewski@gmail.com>'
+plugin_version      = '1.8'
 
 class Plugin(movie.Movie):
     def __init__(self, id):

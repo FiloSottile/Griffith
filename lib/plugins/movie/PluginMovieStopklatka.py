@@ -30,7 +30,7 @@ plugin_url          = 'www.stopklatka.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email = '<bartosz.kurczewski@gmail.com>'
-plugin_version      = '1.10'
+plugin_version      = '1.11'
 
 class Plugin(movie.Movie):
     IMAGE_PATTERN = re.compile('(http://img.stopklatka.pl/film/.*?)"')
@@ -38,18 +38,18 @@ class Plugin(movie.Movie):
     def __init__(self, id):
         self.movie_id = id
         self.url = "http://www.stopklatka.pl/film/film.asp?fi=%s" % str(self.movie_id)
-        self.encode = 'iso-8859-2' # with some cp-1250 data (sic!)
+        self.encode = 'utf-8' 
 
     def initialize(self):
         self.page = self.page.replace('\x9c','ś')
         self.page = self.page.replace('š','ą')
-        self.res = re.findall("""</td><td class="middle_cell"><span class="bold">(.*?)</span>, <span class="bold">(.*?)</span>, <span class="bold">(.*?)</span>, <span class="bold">(.*?) min</span>""", self.page)
+        self.res = re.findall("""<td class="middle_cell"><span class="bold">(.*?)</span>, (.*?), (.*?), (.*?) min</td>""", self.page)
         if len(self.res) == 0:
             self.res = [( '','','','' )]
 
     def get_image(self):
         image = self.IMAGE_PATTERN.findall(self.page)
-        if len(image):
+        if len(image) and image[0] != 'http://img.stopklatka.pl/film/0.jpg':
             self.image_url = image[0]
 
     def get_o_title(self):
@@ -65,12 +65,12 @@ class Plugin(movie.Movie):
             self.title = data
 
     def get_director(self):
-        self.director = gutils.trim(self.page, '>re\xbfyseria:<', '</td></tr>')
+        self.director = gutils.trim(self.page, '>reżyseria: <', '</span></a>')
         self.director = gutils.after(self.director, '>')
 
     def get_plot(self):
         self.plot = gutils.trim(self.page, '<p>', '</p>')
-        self.plot = gutils.before(self.plot, '<b>Wi\xEAcej ')
+        self.plot = gutils.before(self.plot, '<b>Więcej ')
 
     def get_year(self):
         self.year = self.res[0][2]
@@ -85,7 +85,7 @@ class Plugin(movie.Movie):
         self.cast = gutils.trim(self.page, '>obsada:<', '</td></tr>')
         self.cast = gutils.after(self.cast, '>')
         self.cast = string.replace(self.cast, ', ', "\n")
-        self.cast = gutils.before(self.cast, '<b>Wi\xEAcej ')
+        self.cast = gutils.before(self.cast, '<b>Więcej')
 
     def get_classification(self):
         self.classification = ''
@@ -114,7 +114,7 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
-        self.encode='iso-8859-2'
+        self.encode='utf-8'
         self.original_url_search    = "http://www.stopklatka.pl/szukaj/szukaj.asp?kategoria=film&szukaj="
         self.translated_url_search    = "http://www.stopklatka.pl/szukaj/szukaj.asp?kategoria=film&szukaj="
 
