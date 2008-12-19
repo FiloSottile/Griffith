@@ -72,15 +72,15 @@ class Plugin(movie.Movie):
             self.director = gutils.before(self.director, '</B>')
 
     def get_plot(self):
-        pos = string.find(self.page, '<TD class=tym>Tre\xb7\xe6</TD>')
+        pos = string.find(self.page, '<TD class=tym>')
         if pos > 0:
             self.plot = self.page[pos:]
-            self.plot = gutils.trim(self.plot, '<DIV class=a2>', '</DIV>')
+            self.plot = gutils.trim(self.plot, '<BR><DIV class=a2>', '</DIV>')
             return
-        pos = string.find(self.page, '>Recenzje</FONT>&nbsp;')
+        pos = string.find(self.page, '>Recenzje</font>&nbsp;')
         if pos > 0:
             self.plot = self.page[pos:]
-            self.plot = gutils.trim(self.plot, '<TD class=a1 colspan=3>', '<A class="ar" ')
+            self.plot = gutils.trim(self.plot, '<td class=a1 colspan=3>', '<a class="ar" ')
         else:
             self.plot = ''
 
