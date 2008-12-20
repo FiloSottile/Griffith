@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2007
+# Copyright (c) 2006-2008
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -44,6 +44,7 @@ import gettext
 import sys
 import initialize
 import gutils
+import gconsole
 import config
 import os
 from time import sleep
@@ -52,7 +53,11 @@ try:
     import gobject
 except:
     pass
-    
+
+import logging
+logging.basicConfig()
+log = logging.getLogger("Griffith")
+
 sys.path.append('plugins/movie')
 
 #
@@ -74,7 +79,7 @@ class PluginTester:
     # simulates the search for a movie title and compares
     # the count of results with the expected count
     #
-    def test_search(self, plugin, title, cntOriginal, cntTranslated):
+    def test_search(self, plugin, logFile, title, cntOriginal, cntTranslated):
         global myconfig
         result = True
         plugin.config = myconfig
@@ -88,6 +93,11 @@ class PluginTester:
         plugin.get_searches()
         if not len(plugin.ids) - 1 == cntOriginal:    # first entry is always '' (???)
             print "Title (Translated): %s - expected: %d - found: %d" % (title, cntOriginal, len(plugin.ids) - 1)
+            logFile.write("Title (Translated): %s - expected: %d - found: %d\n\n" % (title, cntOriginal, len(plugin.ids) - 1))
+            for titleFound in plugin.titles:
+                logFile.write(titleFound)
+                logFile.write('\n')
+            logFile.write('\n\n')
             result = False
         # plugin.original_url_search
         plugin.url = plugin.original_url_search
@@ -99,6 +109,11 @@ class PluginTester:
         plugin.get_searches()
         if not len(plugin.ids) - 1 == cntTranslated:    # first entry is always '' (???)
             print "Title (Original): %s - expected: %d - found: %d" % (title, cntTranslated, len(plugin.ids) - 1)
+            logFile.write("Title (Original): %s - expected: %d - found: %d\n\n" % (title, cntTranslated, len(plugin.ids) - 1))
+            for titleFound in plugin.titles:
+                logFile.write(titleFound)
+                logFile.write('\n')
+            logFile.write('\n\n')
             result = False
         return result
 
@@ -116,11 +131,15 @@ class PluginTester:
             pluginTestConfig = None
         
         if not pluginTestConfig == None:
-            for i in pluginTestConfig.test_configuration:
-                searchPlugin = plugin.SearchPlugin()
-                if not self.test_search(searchPlugin, i, pluginTestConfig.test_configuration[i][0], pluginTestConfig.test_configuration[i][1]):
-                    result = False
-                sleep(1) # needed for amazon
+            logFile = open(plugin_name + '-searchtest.txt', 'w+')
+            try:
+                for i in pluginTestConfig.test_configuration:
+                    searchPlugin = plugin.SearchPlugin()
+                    if not self.test_search(searchPlugin, logFile, i, pluginTestConfig.test_configuration[i][0], pluginTestConfig.test_configuration[i][1]):
+                        result = False
+                    sleep(1) # needed for amazon
+            finally:
+                logFile.close()
         
         if domsgbox:
             if not result:
@@ -134,7 +153,7 @@ class PluginTester:
     # simulates the resolving of movie data for configured movies and
     # compares the results with the expected once
     #
-    def test_one_movie(self, movieplugin, results_expected):
+    def test_one_movie(self, movieplugin, logFile, results_expected):
         global myconfig
         result = True
         self.movie = movieplugin
@@ -187,18 +206,22 @@ class PluginTester:
                 if i_val:
                     if not results.has_key(i) or len(results[i]) < 1:
                         print "Test error: %s: Value expected but nothing returned.\nKey: %s" % (movieplugin.movie_id, i)
+                        logFile.write("Test error: %s: Value expected but nothing returned.\nKey: %s\n\n" % (movieplugin.movie_id, i))
                         result = False
                 else:
                     if results.has_key(i) and len(results[i]) > 0:
                         print "Test error: %s: No value expected but something returned.\nKey: %s\nValue: %s" % (movieplugin.movie_id, i, results[i])
+                        logFile.write("Test error: %s: No value expected but something returned.\nKey: %s\nValue: %s\n\n" % (movieplugin.movie_id, i, results[i]))
                         result = False
             else:
                 if not results.has_key(i):
                     print "Test error: %s: Value expected but nothing returned.\nKey: %s" % (movieplugin.movie_id, i)
+                    logFile.write("Test error: %s: Value expected but nothing returned.\nKey: %s\n\n" % (movieplugin.movie_id, i))
                     result = False
                 else:
                     if not results[i] == i_val:
                         print "Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s" % (movieplugin.movie_id, i, i_val, results[i])
+                        logFile.write("Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s\n\n" % (movieplugin.movie_id, i, i_val, results[i]))
                         result = False
         return result
     
@@ -216,11 +239,15 @@ class PluginTester:
             pluginTestConfig = None
         
         if not pluginTestConfig == None:
-            for i in pluginTestConfig.test_configuration:
-                moviePlugin = plugin.Plugin(i)
-                if not self.test_one_movie(moviePlugin, pluginTestConfig.test_configuration[i]):
-                    result = False
-                sleep(1) # needed for amazon
+            logFile = open(plugin_name + '-loadtest.txt', 'w+')
+            try:
+                for i in pluginTestConfig.test_configuration:
+                    moviePlugin = plugin.Plugin(i)
+                    if not self.test_one_movie(moviePlugin, logFile, pluginTestConfig.test_configuration[i]):
+                        result = False
+                    sleep(1) # needed for amazon
+            finally:
+                logFile.close()
         
         if domsgbox:
             if not result:
@@ -238,11 +265,13 @@ class PluginTester:
     def do_test(self, domsgbox=True):
         global myconfig
         self._tmp_home = None
-        self._tmp_config = 'griffith.cfg'
-        initialize.locations(self)
+        home_dir, config_name = gconsole.check_args()
+        if not (config_name.find('/') >= 0 or config_name.find('\\') >= 0):
+            config_name = os.path.join(home_dir, config_name)
+        log.debug("config file used: %s", config_name)
+        myconfig = config.Config(file=config_name)
+        initialize.locations(self, home_dir)
         gettext.install('griffith', self.locations['i18n'], unicode=1)
-        configFileName = os.path.join(self.locations['home'], self._tmp_config)
-        myconfig = self.config = config.Config(file=configFileName)
         search_successful = ''
         search_unsuccessful = ''
         get_successful = ''
