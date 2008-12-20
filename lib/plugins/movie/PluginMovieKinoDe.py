@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2007
+# Copyright (c) 2006-2008
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.12"
+plugin_version = "1.13"
 
 class Plugin(movie.Movie):
 	url_to_use = "http://www.kino.de/kinofilm/"
@@ -51,13 +51,13 @@ class Plugin(movie.Movie):
 		self.url = self.url_to_use + str(self.movie_id)
 
 	def initialize(self):
-		self.tmp_page = gutils.before(self.page, 'kinode_navi1')
+		self.tmp_page = gutils.before(self.page, '<!-- PRINT-CONTENT-ENDE-->')
 		self.url = self.url_to_use + string.replace(str(self.movie_id), '/', '/credits/')
 		self.open_page(self.parent_window)
-		self.tmp_creditspage = gutils.before(self.page, 'kinode_navi1')
+		self.tmp_creditspage = gutils.before(self.page, '<!-- PRINT-CONTENT-ENDE-->')
 		self.url = self.url_to_use + string.replace(str(self.movie_id), "/", "/features/")
 		self.open_page(self.parent_window)
-		self.tmp_dvdfeaturespage = gutils.before(self.page, 'kinode_navi1')
+		self.tmp_dvdfeaturespage = gutils.before(self.page, '<!-- PRINT-CONTENT-ENDE-->')
 
 	def get_image(self):
 		self.image_url = ''
@@ -187,16 +187,16 @@ class Plugin(movie.Movie):
 	def get_notes(self):
 		self.notes = ""
 		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Sprache</b>", "</td></tr>")), "&nbsp;", "")
-		if (tmp_notes != ""):
+		if tmp_notes != "":
 			self.notes = self.notes + "Sprachen:\n" + tmp_notes + "\n\n"
 		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Untertitel</b>", "</td></tr>")), "&nbsp;", "")
-		if (tmp_notes != ""):
+		if tmp_notes != "":
 			self.notes = self.notes + "Untertitel:\n" + tmp_notes + "\n\n"
 		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Mehrkanalton</b>", "</td></tr>")), "&nbsp;", "")
-		if (tmp_notes != ""):
+		if tmp_notes != "":
 			self.notes = self.notes + "Mehrkanalton:\n" + tmp_notes + "\n\n"
 		tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>EAN</b>", "</td></tr>")), "&nbsp;", "")
-		if (tmp_notes != ""):
+		if tmp_notes != "":
 			self.notes = self.notes + "EAN:\n" + tmp_notes + "\n\n"
 			
 	def regextrim(self,text,key1,key2):
@@ -233,7 +233,7 @@ class SearchPlugin(movie.SearchMovie):
 		#
 		# try to get all result pages (not so nice, but it works)
 		#
-		tmp_pagecount = gutils.trim(tmp_pagemovie, '>von', '</a>')
+		tmp_pagecount = gutils.clean(gutils.trim(tmp_pagemovie, '>von', '</a>'))
 		try:
 			tmp_pagecountint = int(tmp_pagecount)
 		except:
@@ -253,7 +253,7 @@ class SearchPlugin(movie.SearchMovie):
 		#
 		# try to get all result pages (not so nice, but it works)
 		#
-		tmp_pagecount = gutils.trim(self.page, '>von', '</a>')
+		tmp_pagecount = gutils.clean(gutils.trim(self.page, '>von', '</a>'))
 		try:
 			tmp_pagecountint = int(tmp_pagecount)
 		except:
@@ -269,7 +269,7 @@ class SearchPlugin(movie.SearchMovie):
 		return self.page
 
 	def get_searches(self):
-		elements1 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(http://www.kino.de)*/kinofilm/', self.page)
+		elements1 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(?:http://www.kino.de)*/kinofilm/', self.page)
 		elements1[0] = None
 		for element in elements1:
 			if element <> None:
@@ -285,7 +285,7 @@ class SearchPlugin(movie.SearchMovie):
 					'( - (', '('), '))', ')')
 				)
 
-		elements2 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(http://www.kino.de)*/videofilm/', self.page)
+		elements2 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(?:http://www.video.de)*/videofilm/', self.page)
 		elements2[0] = None
 		for element in elements2:
 			if element <> None:
@@ -354,7 +354,7 @@ A.J. Benza' + _(' as ') + 'L.C.',
 			'title' 			: 'Ein glückliches Jahr',
 			'o_title' 			: 'La bonne année',
 			'director'			: 'Claude Lelouch',
-			'plot' 				: True,
+			'plot' 				: False,
 			'cast'				: 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard\n\
