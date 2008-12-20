@@ -96,7 +96,7 @@ class Plugin(movie.Movie):
                     self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n'
         if self.plot == '':
             # nothing in german found, try original
-            self.plot = self.regextrim(self.imdb_page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
+            self.plot = gutils.regextrim(self.imdb_page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
             self.plot = self.__before_more(self.plot)
             elements = string.split(self.imdb_plot_page, '<p class="plotpar">')
             if len(elements) > 1:

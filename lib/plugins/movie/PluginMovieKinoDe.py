@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2007
+# Copyright (c) 2006-2008
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ plugin_url = "www.kino.de"
 plugin_language = _("German")
 plugin_author = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.12"
+plugin_version = "1.13"
 
 class Plugin(movie.Movie):
     url_to_use = "http://www.kino.de/kinofilm/"
@@ -51,13 +51,13 @@ class Plugin(movie.Movie):
         self.url = self.url_to_use + str(self.movie_id)
 
     def initialize(self):
-        self.tmp_page = gutils.before(self.page, 'kinode_navi1')
+        self.tmp_page = gutils.before(self.page, '<!-- PRINT-CONTENT-ENDE-->')
         self.url = self.url_to_use + string.replace(str(self.movie_id), '/', '/credits/')
         self.open_page(self.parent_window)
-        self.tmp_creditspage = gutils.before(self.page, 'kinode_navi1')
+        self.tmp_creditspage = gutils.before(self.page, '<!-- PRINT-CONTENT-ENDE-->')
         self.url = self.url_to_use + string.replace(str(self.movie_id), "/", "/features/")
         self.open_page(self.parent_window)
-        self.tmp_dvdfeaturespage = gutils.before(self.page, 'kinode_navi1')
+        self.tmp_dvdfeaturespage = gutils.before(self.page, '<!-- PRINT-CONTENT-ENDE-->')
 
     def get_image(self):
         self.image_url = ''
@@ -154,7 +154,7 @@ class Plugin(movie.Movie):
                         self.cast += elements2[1] + "\n"
                 else:
                     self.cast += element + "\n"
-            self.cast = string.replace(self.cast, '--flip--', _(' as ').encode('utf8'))
+            self.cast = string.replace(self.cast, '--flip--', _(' as '))
 
     def get_classification(self):
         self.classification = gutils.regextrim(self.tmp_page,'FSK:( |&nbsp;)+', '</strong>')
@@ -187,32 +187,25 @@ class Plugin(movie.Movie):
     def get_notes(self):
         self.notes = ""
         tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Sprache</b>", "</td></tr>")), "&nbsp;", "")
-        if (tmp_notes != ""):
+        if tmp_notes != "":
             self.notes = self.notes + "Sprachen:\n" + tmp_notes + "\n\n"
         tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Untertitel</b>", "</td></tr>")), "&nbsp;", "")
-        if (tmp_notes != ""):
+        if tmp_notes != "":
             self.notes = self.notes + "Untertitel:\n" + tmp_notes + "\n\n"
         tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>Mehrkanalton</b>", "</td></tr>")), "&nbsp;", "")
-        if (tmp_notes != ""):
+        if tmp_notes != "":
             self.notes = self.notes + "Mehrkanalton:\n" + tmp_notes + "\n\n"
         tmp_notes = string.replace(gutils.strip_tags(gutils.trim(self.tmp_dvdfeaturespage, "<b>EAN</b>", "</td></tr>")), "&nbsp;", "")
-        if (tmp_notes != ""):
+        if tmp_notes != "":
             self.notes = self.notes + "EAN:\n" + tmp_notes + "\n\n"
-
-#
-# kino.de use iso-8859-1
-# it's not necessary to decode the page
-# in fact if utf-8 is used you can't search for movies with german umlaut
-# and if you use the decode call you get a terrible formatted result list
-#
 
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
         self.original_url_search   = 'http://www.kino.de/search.php?mode=megaSearch&searchCategory=film&inputSearch='
         self.translated_url_search = 'http://www.kino.de/search.php?mode=megaSearch&searchCategory=film&inputSearch='
-#        self.encode='utf-8'
         self.encode='iso-8859-1'
+        self.remove_accents = False
 
     def search(self,parent_window):
         self.open_search(parent_window)
@@ -220,7 +213,7 @@ class SearchPlugin(movie.SearchMovie):
         #
         # try to get all result pages (not so nice, but it works)
         #
-        tmp_pagecount = gutils.trim(tmp_pagemovie, '>von', '</a>')
+        tmp_pagecount = gutils.clean(gutils.trim(tmp_pagemovie, '>von', '</a>'))
         try:
             tmp_pagecountint = int(tmp_pagecount)
         except:
@@ -240,7 +233,7 @@ class SearchPlugin(movie.SearchMovie):
         #
         # try to get all result pages (not so nice, but it works)
         #
-        tmp_pagecount = gutils.trim(self.page, '>von', '</a>')
+        tmp_pagecount = gutils.clean(gutils.trim(self.page, '>von', '</a>'))
         try:
             tmp_pagecountint = int(tmp_pagecount)
         except:
@@ -256,7 +249,7 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
 
     def get_searches(self):
-        elements1 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(http://www.kino.de)*/kinofilm/', self.page)
+        elements1 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(?:http://www.kino.de)*/kinofilm/', self.page)
         elements1[0] = None
         for element in elements1:
             if element <> None:
@@ -272,7 +265,7 @@ class SearchPlugin(movie.SearchMovie):
                     '( - (', '('), '))', ')')
                 )
 
-        elements2 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(http://www.kino.de)*/videofilm/', self.page)
+        elements2 = re.split('headline3"[^>]*>[ \t\r\n]*<a href="(?:http://www.video.de)*/videofilm/', self.page)
         elements2[0] = None
         for element in elements2:
             if element <> None:
@@ -297,9 +290,9 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'            : [ 6, 6 ],
+        'Rocky Balboa'          : [ 6, 6 ],
         'Arahan'                : [ 6, 6 ],
-        'Ein glückliches Jahr'    : [ 3, 3 ]
+        'Ein glückliches Jahr' : [ 3, 3 ]
     }
 
 class PluginTest:
@@ -312,10 +305,10 @@ class PluginTest:
     #
     test_configuration = {
         'K_rocky-balboa/96132.html' : { 
-            'title'             : 'Rocky Balboa',
+            'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : 'Sylvester Stallone',
-            'plot'                 : True,
+            'plot'                : True,
             'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Antonio Traver' + _(' as ') + 'Mason "The Line" Dixon\n\
 Burt Young' + _(' as ') + 'Paulie\n\
@@ -324,59 +317,59 @@ Milo Ventimiglia' + _(' as ') + 'Rocky Jr.\n\
 James Francis Kelly III' + _(' as ') + 'Steps\n\
 Tony Burton' + _(' as ') + 'Duke\n\
 A.J. Benza' + _(' as ') + 'L.C.',
-            'country'            : 'USA',
-            'genre'                : 'Drama',
-            'classification'    : 'Freigegeben ab 12 Jahren',
-            'studio'            : 'Fox',
-            'o_site'            : False,
+            'country'             : 'USA',
+            'genre'               : 'Drama',
+            'classification'      : 'Freigegeben ab 12 Jahren',
+            'studio'              : 'Fox',
+            'o_site'              : False,
             'site'                : 'http://www.kino.de/kinofilm/rocky-balboa/96132.html',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 2006,
-            'notes'                : False,
-            'runtime'            : 102,
-            'image'                : True,
-            'rating'            : False
+            'notes'               : False,
+            'runtime'             : 102,
+            'image'               : True,
+            'rating'              : False
         },
         'K_ein-glueckliches-jahr/28675.html' : { 
-            'title'             : 'Ein glückliches Jahr',
+            'title'               : 'Ein glückliches Jahr',
             'o_title'             : 'La bonne année',
             'director'            : 'Claude Lelouch',
-            'plot'                 : True,
+            'plot'                : False,
             'cast'                : 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard\n\
 André Falcon',
-            'country'            : 'Frankreich/Italien',
-            'genre'                : 'Drama',
-            'classification'    : 'Freigegeben ab 12 Jahren',
-            'studio'            : 'Columbia TriStar',
-            'o_site'            : False,
+            'country'             : 'Frankreich/Italien',
+            'genre'               : 'Drama',
+            'classification'      : 'Freigegeben ab 12 Jahren',
+            'studio'              : 'Columbia TriStar',
+            'o_site'              : False,
             'site'                : 'http://www.kino.de/kinofilm/ein-glueckliches-jahr/28675.html',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 1973,
-            'notes'                : False,
-            'runtime'            : 115,
-            'image'                : False,
-            'rating'            : False
+            'notes'               : False,
+            'runtime'             : 115,
+            'image'               : False,
+            'rating'              : False
         },
         'V_ein-glueckliches-jahr-dvd/85546.html' : { 
-            'title'             : 'Ein glückliches Jahr',
+            'title'               : 'Ein glückliches Jahr',
             'o_title'             : 'La bonne année',
             'director'            : 'Claude Lelouch',
-            'plot'                 : True,
+            'plot'                : True,
             'cast'                : 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard\n\
 André Falcon',
-            'country'            : 'Frankreich/Italien',
-            'genre'                : 'Drama',
-            'classification'    : 'Freigegeben ab 12 Jahren',
-            'studio'            : 'Black Hill Pictures',
-            'o_site'            : False,
+            'country'             : 'Frankreich/Italien',
+            'genre'               : 'Drama',
+            'classification'      : 'Freigegeben ab 12 Jahren',
+            'studio'              : 'Black Hill Pictures',
+            'o_site'              : False,
             'site'                : 'http://www.kino.de/videofilm/ein-glueckliches-jahr-dvd/85546.html',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 1973,
-            'notes'                : 'Sprachen:\n\
+            'notes'               : 'Sprachen:\n\
 Deutsch DD 2.0, Französisch DD 2.0\n\
 \n\
 Mehrkanalton:\n\
@@ -384,29 +377,29 @@ Dolby Digital 2.0\n\
 \n\
 EAN:\n\
 7321921998843',
-            'runtime'            : 110,
-            'image'                : True,
-            'rating'            : False
+            'runtime'             : 110,
+            'image'               : True,
+            'rating'              : False
         },
         'V_arahan-vanilla-dvd/90405.html' : { 
-            'title'             : 'Arahan (Vanilla-DVD)',
+            'title'               : 'Arahan (Vanilla-DVD)',
             'o_title'             : 'Arahan jangpung dae jakjeon',
             'director'            : 'Ryoo Seung-wan',
-            'plot'                 : True,
+            'plot'                : True,
             'cast'                : 'Ryu Seung-beom' + _(' as ') + 'Sang-hwan\n\
 Yoon So-yi' + _(' as ') + 'Wi-jin\n\
 Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
 Jung Doo-hong' + _(' as ') + 'Heuk-woon\n\
 Yun Ju-sang' + _(' as ') + 'Mu-woon',
-            'country'            : 'Südkorea',
-            'genre'                : 'Action/Komödie',
-            'classification'    : 'Freigegeben ab 16 Jahren',
-            'studio'            : 'Splendid',
-            'o_site'            : False,
+            'country'             : 'Südkorea',
+            'genre'               : 'Action/Komödie',
+            'classification'      : 'Freigegeben ab 16 Jahren',
+            'studio'              : 'Splendid',
+            'o_site'              : False,
             'site'                : 'http://www.kino.de/videofilm/arahan-vanilla-dvd/90405.html',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 2004,
-            'notes'                : 'Sprachen:\n\
+            'notes'               : 'Sprachen:\n\
 Deutsch DD 5.1\n\
 \n\
 Mehrkanalton:\n\
@@ -414,8 +407,8 @@ Dolby Digital 5.1\n\
 \n\
 EAN:\n\
 4013549871105',
-            'runtime'            : 108,
-            'image'                : True,
-            'rating'            : False
+            'runtime'             : 108,
+            'image'               : True,
+            'rating'              : False
         }
     }

@@ -108,7 +108,7 @@ class Plugin(movie.Movie):
             if isinstance(self.page.ItemAttributes.Director, list):
                 self.director = string.join(self.page.ItemAttributes.Director, ', ')
             else:
-                self.director = self.page.ItemAttributes.Director,
+                self.director = self.page.ItemAttributes.Director
         else:
             self.director = ''
 
