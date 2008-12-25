@@ -127,13 +127,17 @@ class ExportPlugin:
                     number = movie.number
                     original_title = str(movie.o_title).encode(defaultEnc)
                     title = str(movie.title).encode(defaultEnc)
+                    grouping_title = movie.title
+                    if grouping_title is None:
+                        grouping_title = u'None'
                     if movie.director:
                         director = ' - ' + str(movie.director).encode(defaultEnc)
                     else:
                         director = ""
                     # group by first letter
-                    if do_grouping and title[0] != first_letter:
-                        if title[0] in '0123456789':
+                    # use movie.title/grouping_title for grouping because of encoding problems !!!
+                    if do_grouping and grouping_title[0] != first_letter:
+                        if grouping_title[0] in '0123456789':
                             # Group Numbers
                             if first_letter != '0-9':
                                 first_letter = '0-9'
@@ -141,7 +145,7 @@ class ExportPlugin:
                                 p = Paragraph(paragraph_text.decode(defaultEnc), self.styles['Heading2'])
                                 Story.append(p)
                         else:
-                            first_letter = title[0]
+                            first_letter = grouping_title[0]
                             paragraph_text = '<font name=' + self.fontName + ' size="15">' + saxutils.escape(first_letter) + '</fonts>'
                             p = Paragraph(paragraph_text.decode(defaultEnc), self.styles['Heading2'])
                             Story.append(p)
