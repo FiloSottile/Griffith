@@ -1,3 +1,10 @@
+Griffith 0.9.9
+==============
+* Updated movie plugins: CSFD, Cinematografo, FDb, Filmweb IMDB-de, IMDb, OFDb, Onet, Stopklatka
+* Few MySQL issues fixed
+* Amazon and unicode errors fixed
+
+
 Griffith 0.9.8
 ==============
 * New movie plugin: Amazon
