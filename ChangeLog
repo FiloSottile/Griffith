@@ -9,6 +9,7 @@ Griffith ChangeLog
 
 2008-12-26  Piotr Ożarowski
 	* Sync FDb, Onet and Stopklatka movie plugins with trunk
+	* Switch back the default search query in IMDb plugin ("words" search is now accesible under "title" field)
 	* NEWS updated
 	* Version changed to 0.9.9
 

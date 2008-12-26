@@ -188,8 +188,8 @@ class SearchPlugin(movie.SearchMovie):
 	PATTERN2 = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["'](.*?)</tr>""")
 
 	def __init__(self):
-		self.original_url_search	= 'http://www.imdb.com/List?words='
-		self.translated_url_search	= 'http://www.imdb.com/find?more=tt;q='
+		self.translated_url_search = 'http://www.imdb.com/List?words='
+		self.original_url_search = 'http://www.imdb.com/find?more=tt;q='
 		self.encode = 'utf-8'
 
 	def search(self,parent_window):
