@@ -1,3 +1,9 @@
+griffith (0.9.9-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Piotr Ożarowski <piotr@debian.org>  Sat, 27 Dec 2008 22:47:18 +0100
+
 griffith (0.9.8-1) unstable; urgency=low
 
   * New upstream release
