@@ -863,7 +863,7 @@ msgstr "Połączenie z bazą nie może być ustanowione."
 
 #: ../lib/sql.py:506
 msgid "This database requires newer version of Griffith."
-msgstr ""
+msgstr "Ta baza filmów wymaga nowszej wersji programu Griffith"
 
 #: ../lib/version.py:29
 msgid "Griffith is a film collection manager."
@@ -944,7 +944,7 @@ msgstr ""
 
 #: ../lib/plugins/movie/PluginMovieAmazon.py:38
 msgid "International"
-msgstr ""
+msgstr "międzynarodowy"
 
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:92
 #: ../lib/plugins/movie/PluginMovieCinematografo.py:201
