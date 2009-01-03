@@ -126,7 +126,7 @@ class Plugin(movie.Movie):
             self.rating = result.groups()[0]
             if self.rating:
                 try:
-                    self.rating = float(self.rating)
+                    self.rating = round(float(self.rating), 0)
                 except Exception, e:
                     self.rating = 0
         else:

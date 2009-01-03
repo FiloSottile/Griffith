@@ -156,9 +156,13 @@ class Plugin(movie.Movie):
         self.rating = gutils.trim(self.page, '<h5>Nutzer-Bewertung:</h5>', '/10')
         if self.rating:
             try:
-                self.rating = str(float(gutils.digits_only(gutils.clean(self.rating))))
+                tmp = re.findall('[0-9.,]+', gutils.clean(self.rating))
+                if tmp and len(tmp) > 0:
+                    self.rating = round(float(tmp[0].replace(',', '.')))
             except:
-                self.rating = ''
+                self.rating = 0
+        else:
+            self.rating = 0
 
     def get_notes(self):
         self.notes = ''
