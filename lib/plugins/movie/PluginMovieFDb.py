@@ -32,7 +32,7 @@ plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
 plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.12'
+plugin_version        = '1.13'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN = re.compile('/film/.*/zwiastuny/odtwarzaj/[0-9]*')
@@ -53,7 +53,7 @@ class Plugin(movie.Movie):
             self.image_url = ''
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<h2 class="title">', '</h2>')
+        self.o_title = gutils.trim(self.page, '<h2 class="after-title">', '</h2>')
         self.o_title = gutils.strip_tags(self.o_title)
         if self.o_title == '':
             self.o_title = self.get_title(True)
