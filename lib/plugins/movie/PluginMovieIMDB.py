@@ -24,13 +24,13 @@ __revision__ = '$Id$'
 import gutils, movie
 import string, re
 
-plugin_name = 'IMDb'
-plugin_description = 'Internet Movie Database'
-plugin_url = 'www.imdb.com'
-plugin_language = _('English')
-plugin_author = 'Vasco Nunes, Piotr Ożarowski'
+plugin_name         = 'IMDb'
+plugin_description  = 'Internet Movie Database'
+plugin_url          = 'www.imdb.com'
+plugin_language     = _('English')
+plugin_author       = 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email = 'griffith-private@lists.berlios.de'
-plugin_version = '1.7'
+plugin_version      = '1.8'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -163,7 +163,18 @@ class Plugin(movie.Movie):
             self.notes += "%s: %s\n" %(_('Color'), color)
         if len(tagline)>0:
             self.notes += "%s: %s\n" %('Tagline', tagline)
-    
+
+    def get_screenplay(self):
+        self.screenplay = ''
+        pattern = re.compile('<h5>Writer[s]*?(?:[ \t]+<a href="/wga">[(]WGA[)]</a>)*?:</h5>[\n\s\r]*(.*?)(?:<br/>)?(?:<a[^>]+>more</a>)?[\n]*</div')
+        result = pattern.search(self.page)
+        if result:
+            self.screenplay = result.groups()[0]
+            self.screenplay = self.screenplay.replace('<br/>', ', ')
+
+    def get_camerman(self):
+        self.camerman = ''
+
     def __before_more(self, data):
         tmp = string.find(data, '>more<')
         if tmp > 0:

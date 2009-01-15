@@ -53,6 +53,8 @@ class Movie(object):
     title = None
     trailer = None
     year = None
+    screenplay = None
+    cameraman = None
     
     movie_id = None
     debug = False
@@ -105,6 +107,10 @@ class Movie(object):
     def get_trailer(self):
         pass
     def get_year(self):
+        pass
+    def get_screenplay(self):
+        pass
+    def get_cameraman(self):
         pass
     #}}}
 
