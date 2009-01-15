@@ -228,7 +228,7 @@ def get_poster(self, f, result, current_poster):
 	file_to_copy = tempfile.mktemp(suffix=self.widgets['movie']['number'].get_text().decode('utf-8'), \
 		dir=self.locations['temp'])
 	file_to_copy += ".jpg"
-		canceled = False
+	canceled = False
 	if len(result.Item[f].LargeImage.URL):
 		try:
 			progress = movie.Progress(self.widgets['window'],_("Fetching poster"),_("Wait a moment"))
