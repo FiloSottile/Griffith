@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2008
+# Copyright (c) 2006-2009
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,13 +33,13 @@ from urlparse import urlsplit
 import logging
 log = logging.getLogger("Griffith")
 
-plugin_name = "Amazon"
-plugin_description = "Amazon"
-plugin_url = "www.amazon.com/.uk/.de/.ca/.fr/.jp"
-plugin_language = _("International")
-plugin_author = "Michael Jahn"
+plugin_name         = "Amazon"
+plugin_description  = "Amazon"
+plugin_url          = "www.amazon.com/.uk/.de/.ca/.fr/.jp"
+plugin_language     = _("International")
+plugin_author       = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.0"
+plugin_version      = "1.1"
 
 class Plugin(movie.Movie):
 
@@ -290,7 +290,7 @@ class SearchPlugin(movie.SearchMovie):
             theatricalReleaseDate = ' (' + item.ItemAttributes.TheatricalReleaseDate + ')'
         else:
             theatricalReleaseDate = ''
-        self.titles.append("%s%s%s" % (productGroup, title, theatricalReleaseDate))
+        self.titles.append("%s%s%s (ASIN: %s)" % (productGroup, title, theatricalReleaseDate, item.ASIN))
 
 class AmazonRetriever(threading.Thread):
 
@@ -321,9 +321,9 @@ class AmazonRetriever(threading.Thread):
                 tmp = amazon.searchByTitle(self.title, type='ItemAttributes', product_line='Video', locale=self.locale, page=1)
                 self.result.append(tmp)
                 if hasattr(tmp, 'TotalPages'):
-                    pages = int(tmp.TotalPages) - 1
+                    pages = int(tmp.TotalPages)
                     page = 2
-                    while page < pages and page < 11:
+                    while page <= pages and page < 11:
                         tmp = amazon.searchByTitle(self.title, type='ItemAttributes', product_line='Video', locale=self.locale, page=page)
                         self.result.append(tmp)
                         page = page + 1
