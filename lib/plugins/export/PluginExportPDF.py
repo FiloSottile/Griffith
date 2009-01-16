@@ -122,7 +122,7 @@ class ExportPlugin:
                         else:
                             movies.order_by_clause.append(self.db.Movie.c[i])
                 movies = movies.execute().fetchall()
-                first_letter = '0'
+                first_letter = ''
                 for movie in movies:
                     number = movie.number
                     original_title = str(movie.o_title).encode(defaultEnc)
