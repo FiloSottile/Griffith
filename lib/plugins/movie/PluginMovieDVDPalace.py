@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2007
+# Copyright (c) 2006-2009
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,13 +26,13 @@ import movie
 import string
 import re
 
-plugin_name = "DVD-Palace"
-plugin_description = "DVD-Onlinemagazin mit DVD-Datenbank"
-plugin_url = "www.dvd-palace.de"
-plugin_language = _("German")
-plugin_author = "Michael Jahn"
+plugin_name         = "DVD-Palace"
+plugin_description  = "DVD-Onlinemagazin mit DVD-Datenbank"
+plugin_url          = "www.dvd-palace.de"
+plugin_language     = _("German")
+plugin_author       = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version = "1.0"
+plugin_version      = "1.1"
 
 class Plugin(movie.Movie):
 
@@ -49,10 +49,10 @@ class Plugin(movie.Movie):
     def get_o_title(self):
         self.o_title = gutils.trim(self.page, 'Originaltitel', '</b>')
         if self.o_title == '':
-            self.o_title = gutils.trim(self.page, '<TITLE>', ' - DVD Details')
+            self.o_title = gutils.trim(self.page, '<TITLE>', ' - Details')
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '<TITLE>', ' - DVD Details')
+        self.title = gutils.trim(self.page, '<TITLE>', ' - Details')
 
     def get_director(self):
         self.director = gutils.trim(self.page, 'Regisseur(e)', '</TR>')
@@ -172,7 +172,7 @@ class SearchPlugin(movie.SearchMovie):
                     gutils.trim(element, '>', '</a>') +
                     gutils.strip_tags(
                         ' (' +
-                        re.sub('[ \t\n][ \t\n]+', ' ',
+                        re.sub('[ \t\n]+', ' ',
                         string.replace(
                         string.replace(
                             gutils.regextrim(element, '<div [^>]*>', '</div>'),
