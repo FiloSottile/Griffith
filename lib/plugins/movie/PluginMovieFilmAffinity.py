@@ -23,7 +23,7 @@ __revision__ = '$Id: PluginMovieFilmAffinity.py 389 2006-07-29 18:43:35Z piotrek
 
 import gutils
 import movie
-import string
+import string, re
 
 plugin_name		= 'FilmAffinity'
 plugin_description	= 'Base de Datos de Peliculas'
@@ -31,27 +31,29 @@ plugin_url		= 'www.filmaffinity.com'
 plugin_language		= _('Spanish')
 plugin_author		= 'Pedro D. Sánchez'
 plugin_author_email	= '<pedrodav@gmail.com>'
-plugin_version		= '0.2'
+plugin_version		= '0.3'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode='iso-8859-15'
+		self.encode   = 'iso-8859-15'
 		self.movie_id = id
-		self.url = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
+		self.url      = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
 
 	def get_image(self):
-		tmp = string.find(self.page, '<img src="http://www.filmaffinity.com/imgs/movies/')
+		tmp = string.find(self.page, 'www.filmaffinity.com/imgs/movies/')
 		if tmp == -1:
 			self.image_url = ''
 		else:
-			self.image_url = gutils.trim(self.page[tmp-1:], 'src="', '"')
+			self.image_url = 'http://' + gutils.before(self.page[tmp:], '"')
 
 	def get_o_title(self):
 		self.o_title = gutils.trim(self.page, '<b>TITULO ORIGINAL</b></td>', '</b></td>')
 		self.o_title = gutils.after(self.o_title, '<b>')
+		self.o_title = re.sub('[ ]+', ' ', self.o_title)
 
 	def get_title(self):
-		self.title = gutils.trim(self.page, '<img src="http://www.filmaffinity.com/images/movie.gif" border="0"> ', '</span>')
+		self.title = gutils.trim(self.page, 'www.filmaffinity.com/images/movie.gif" border="0"> ', '</span>')
+		self.title = re.sub('[ ]+', ' ', self.title)
 
 	def get_director(self):
 		self.director = gutils.trim(self.page,'<b>DIRECTOR</b></td>', '</td>')
@@ -71,7 +73,7 @@ class Plugin(movie.Movie):
 
 	def get_year(self):
 		self.year = gutils.trim(self.page, '<b>AÑO</b></td>', '</td>')
-		self.year = gutils.after(self.year, '<td >')
+		self.year = gutils.clean(self.year)
 
 	def get_runtime(self):
 		self.runtime = gutils.trim(self.page, '<b>DURACIÓN</b></td>', ' min.</td>')
@@ -89,9 +91,9 @@ class Plugin(movie.Movie):
 	def get_cast(self):
 		self.cast = ''
 		self.cast = gutils.trim(self.page, '<b>REPARTO</b></td>', '</td>')
-		self.cast = string.replace(self.cast, '</a>,', '\n')
+		self.cast = re.sub('</a>,[ ]*', '\n', self.cast)
 		self.cast = string.strip(gutils.strip_tags(self.cast))
-		self.cast = string.replace(self.cast, '  ', '')
+		self.cast = re.sub('[ ]+', ' ', self.cast)
 
 	def get_classification(self):
 		self.classification = ''
@@ -112,12 +114,16 @@ class Plugin(movie.Movie):
 
 	def get_country(self):
 		self.country = gutils.trim(self.page, '<b>PAÍS</b></td>', '</td>')
-		self.country = gutils.trim(self.country, 'alt="', '"')
+		tmp = gutils.trim(self.country, 'alt="', '"')
+		if tmp == '':
+			self.country = gutils.trim(self.country, 'title="', '"')
+		else:
+			self.country = tmp
 
 	def get_rating(self):
 		self.rating = gutils.trim(self.page, '<tr><td align="center" style="color:#990000; font-size:22px; font-weight: bold;">', '</td></tr>')
 		if self.rating:
-			self.rating = str(float(gutils.clean(string.replace(self.rating, ',', '.'))))
+			self.rating = str(round(float(gutils.clean(string.replace(self.rating, ',', '.')))))
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -151,6 +157,6 @@ class SearchPlugin(movie.SearchMovie):
 
 			if (elements[0]<>''):
 				for element in elements[:-1]:
-					self.ids.append(gutils.trim(element, '<b><a href="/es/film','.html'))
+					self.ids.append(gutils.trim(element, '<b><a href="/es/film', '.html'))
 					title = gutils.after(element, '<b><a href="/es/film')
 					self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.after(title, '>'))))
