@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2006 Vasco Nunes, Piotr Ozarowski
+# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,13 +25,13 @@ import gutils
 import movie
 import string
 
-plugin_name = "7arte"
-plugin_description = "O cinema em Portugal"
-plugin_url = "7arte.net"
-plugin_language = _("Portuguese")
-plugin_author = "Vasco Nunes"
+plugin_name         = "7arte"
+plugin_description  = "O cinema em Portugal"
+plugin_url          = "7arte.net"
+plugin_language     = _("Portuguese")
+plugin_author       = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.6"
+plugin_version      = "0.6"
 
 class Plugin(movie.Movie):
     """A movie plugin object"""
@@ -77,7 +77,7 @@ class Plugin(movie.Movie):
 
     def get_cast(self):
         self.cast = gutils.trim(self.page, "<B>Actores:</B>", "</FONT></TD>")
-        self.cast = string.replace(self.cast, "<B>»</B> ", "")
+        self.cast = string.replace(self.cast, u"<B>Â»</B> ", "")
 
     def get_classification(self):
         """Find the film's classification"""
@@ -122,9 +122,9 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
     """A movie search object"""
     def __init__(self):
-        self.original_url_search = "http://7arte.net/cgi-bin/arq_search_orig.pl?proc="
+        self.original_url_search   = "http://7arte.net/cgi-bin/arq_search_orig.pl?proc="
         self.translated_url_search = "http://7arte.net/cgi-bin/arq_search.pl?proc="
-        self.encode='iso-8859-1'
+        self.encode                = 'iso-8859-1'
 
     def search(self, parent_window):
         """Perform the web search"""
