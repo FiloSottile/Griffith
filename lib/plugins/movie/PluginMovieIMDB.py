@@ -172,8 +172,8 @@ class Plugin(movie.Movie):
             self.screenplay = result.groups()[0]
             self.screenplay = self.screenplay.replace('<br/>', ', ')
 
-    def get_camerman(self):
-        self.camerman = ''
+    def get_cameraman(self):
+        self.cameraman = ''
 
     def __before_more(self, data):
         tmp = string.find(data, '>more<')
