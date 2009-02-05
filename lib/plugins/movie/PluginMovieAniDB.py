@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2008 Piotr Ożarowski
+# Copyright (c) 2005-2009 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ plugin_url          = 'www.anidb.net'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.5'
+plugin_version      = '2.6'
 
 aid_pattern = re.compile('[?&;]aid=(\d+)')
 
@@ -60,31 +60,33 @@ class Plugin(movie.Movie):
             self.page = self.page[:pos]
 
     def get_image(self):
-        match = re.search('http://img\d*.anidb.net/pics/anime/\d*.jpg', self.page)
+        match = re.search('img\d*.anidb.net/pics/anime/\d*.jpg', self.page)
         if match is not None:
-            self.image_url = match.group()
+            self.image_url = 'http://' + match.group()
         else:
             self.image_url = ''
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<h1>Anime: ', '</h1>')
+        self.o_title = gutils.trim(self.page, '<span>Info: ', '</span>')
 
     def get_title(self):
         self.title = gutils.trim(self.page, '"field">Official Title', '</td>')
-        self.title = gutils.trim(self.title, '<span>', '</span>')
+        self.title = gutils.trim(self.title, '<label>', '</label>')
 
     def get_director(self):
         self.director = ''
 
     def get_plot(self):
         self.plot = gutils.trim(self.page, 'class="desc">', '</div>')
+        self.plot = self.plot.replace('<br/>', '\n')
 
     def get_year(self):
         self.year = gutils.trim(self.page, '"field">Year', '</td>')
         self.year = gutils.after(self.year, '"value">')[-4:]
 
     def get_runtime(self):
-        self.runtime = ''
+        self.runtime = gutils.trim(self.page, '<label>Complete Movie</label>', '</tr>')
+        self.runtime = gutils.trim(self.runtime, '<td class="duration">', 'm')
 
     def get_genre(self):
         self.genre = gutils.trim(self.page, '>Categories<', '</td>')
@@ -103,7 +105,10 @@ class Plugin(movie.Movie):
         self.classification = ''
 
     def get_studio(self):
-        self.studio = gutils.trim(self.page, '"field">Producers', '</td>')
+        self.studio = gutils.trim(self.page, '<tr class="producers">', '</tr>')
+        if self.studio == '':
+            self.studio = gutils.trim(self.page, '<tr class="g_odd producers">', '</tr>')
+        self.studio = gutils.trim(self.studio, '<td class="value">', '</td>')
         self.studio = gutils.strip_tags(self.studio)
         if len(self.studio) and self.studio[:2] == " (":
             self.studio = self.studio[2:]
@@ -125,43 +130,52 @@ class Plugin(movie.Movie):
         self.country = ''
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, '"field">Rating', '</td>')
+        self.rating = gutils.clean(gutils.after(gutils.trim(self.page, '<span class="rating', '</a>'), '>'))
+        if self.rating:
+            try:
+                self.rating = str(round(float(self.rating)))
+            except:
+                self.rating = ''
 
     def get_notes(self):
         self.notes = ''
-        # ...type
+        # ...type and episodes
         atype = gutils.trim(self.page, '"field">Type', '</td>')
         atype = gutils.clean(atype)
         if atype != '':
             self.notes += "Type: %s\n" % atype
-        # ...number of episodes
-        episodes = gutils.trim(self.page, '"field">Episodes', '</td>')
-        episodes = gutils.clean(episodes)
+        episodes = gutils.trim(self.page, '>Episode list<', '</table>')
         if episodes != '':
-            self.notes += "Episodes: %s\n" % episodes
+            parts = string.split(episodes, '<tr ')
+            for index in range(2, len(parts), 1):
+                part = parts[index]
+                nr = gutils.clean(gutils.trim(part, 'class="id eid">', '</td>'))
+                title = gutils.clean(gutils.after(gutils.trim(part, '<label', '</td>'), '>'))
+                duration = gutils.clean(gutils.trim(part, 'class="duration">', '</td>'))
+                airdate = gutils.clean(gutils.trim(part, 'class="date airdate">', '</td>'))
+                self.notes += '\n' + nr + ': ' + title + ' (' + duration + ', ' + airdate + ')'
 
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
-        self.encode = 'utf-8'
-        self.original_url_search    = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
-        self.translated_url_search    = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+        self.encode                = 'utf-8'
+        self.original_url_search   = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+        self.translated_url_search = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
             return None
-        self.page = decompress(self.page)
 
-        tmp = string.find(self.page, '<h1>Anime List - Search for: ')
+        tmp = string.find(self.page, '>Anime List - Search for: ')
         if tmp == -1:        # already a movie page
-            self.page = ''
+            self.page = 'movie'
         else:            # multiple matches
-            self.page = gutils.trim(self.page, 'class="anime_list"', '</table>');
+            self.page = gutils.trim(self.page, 'class="animelist"', '</table>');
             self.page = gutils.after(self.page, '</tr>');
 
         return self.page
 
     def get_searches(self):
-        if self.page == '':    # already a movie page
+        if self.page == 'movie':    # already a movie page
             self.number_results = 1
             self.ids.append(self.url)
             self.titles.append(self.title)
@@ -171,14 +185,16 @@ class SearchPlugin(movie.SearchMovie):
 
             if len(elements[0]):
                 for element in elements:
-                    element = gutils.trim(element, '<td', '</td>')
                     aid = aid_pattern.search(element)
                     if not aid:
                         continue
+                    title = gutils.clean(gutils.trim(element, '<td class="name">', '</a>'))
+                    type = gutils.clean(gutils.after(gutils.trim(element, '<td class="type', '</td>'), '>'))
                     self.ids.append(aid.groups()[0])
-                    element = gutils.after(element, '">')
-                    element = gutils.strip_tags(element)
-                    self.titles.append(element)
+                    if type:
+                        self.titles.append(title + ' (' + type + ')')
+                    else:
+                        self.titles.append(title)
             else:
                 self.number_results = 0
 
