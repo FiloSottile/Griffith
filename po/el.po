@@ -1,0 +1,2458 @@
+# Greek translation for griffith
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the griffith package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Griffith 0.10-beta1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-17 23:04+0100\n"
+"PO-Revision-Date: 2008-07-23 17:55+0000\n"
+"Last-Translator: Kainourgiakis Giorgos <kaingeo@yahoo.gr>\n"
+"Language-Team: Greek <el@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-11-11 14:21+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../griffith:221 ../griffith:1049 ../lib/delete.py:35 ../lib/edit.py:46
+#: ../lib/edit.py:137
+msgid "You have no movies in your database"
+msgstr "Η βάση δεδομένων είναι άδεια"
+
+#: ../griffith:399
+msgid "You have seen all films in your collection!"
+msgstr "Είδατε όλες τις ταινίες της συλλογή σας!"
+
+#: ../griffith:571 ../griffith:576 ../lib/initialize.py:329
+#: ../lib/initialize.py:615
+msgid "subtitles"
+msgstr "υπότιτλοι"
+
+#: ../griffith:618 ../griffith:678 ../griffith:737 ../griffith:795
+#: ../griffith:853 ../griffith:911 ../griffith:969 ../lib/db.py:66
+msgid ""
+"This item is in use.\n"
+"Operation aborted!"
+msgstr ""
+"Το αντικέιμενο αυτό χρησιμοποιείται.\n"
+"Ματαίωση λειτουργίας!"
+
+#: ../griffith:1019
+msgid ""
+"Are you sure you want to restore?\n"
+"Your current movie collection will be replaced.\n"
+"You can't undo this operation."
+msgstr ""
+"Είστε σίγουροι για την επαναφορά;\n"
+"Η τρέχουσα συλλογή ταινιών θα αντικατασταθεί.\n"
+"Δεν μπορείτε να αναιρέσετε αυτή την αλλαγή!"
+
+#: ../griffith:1027
+msgid ""
+"Are you sure you want to mix?\n"
+"Your current movie collection will be mixed with a backup.\n"
+"You can't undo this operation."
+msgstr ""
+"Είστε σίγουροι για το ανακάτεμα;\n"
+"Η τρέχουσα συλλογή ταινιών θα ανακατευτεί με ένα αντίγραφο.\n"
+"Δεν μπορείτε να αναιρέσετε αυτή την αλλαγή!"
+
+#: ../griffith:1336
+msgid ""
+"Are you sure you want to create a new database?\n"
+"You will lose ALL your current data!"
+msgstr ""
+"Είστε σίγουροι οτι θέλετε να δημιουργήσετε μια νέα βάση δεδομένων;\n"
+"Θα χάσετε ΟΛΑ τα υπάρχοντα δεδομένα!"
+
+#: ../griffith:1339
+msgid ""
+"Last chance!\n"
+"Do you confirm that you want\n"
+"to lose your current data?"
+msgstr ""
+"Τελευταία ευκαιρία!\n"
+"Είστε σίγουροi οτι θέλετε\n"
+"να χάσετε τα υπάρχοντα δεδομένα;"
+
+#: ../griffith:1472
+msgid ""
+"This is development version of Griffith.\n"
+"Upgrade path from dev. versions may not be provided.\n"
+"Please make sure you have a backup!\n"
+"\n"
+"Do you want to proceed?"
+msgstr ""
+
+#: ../lib/about.py:40
+msgid "Main Authors"
+msgstr "Βασικοί Συντάκτες"
+
+#: ../lib/about.py:42
+msgid "Programmers"
+msgstr "Προγραμματιστές"
+
+#: ../lib/about.py:45
+msgid "Contributors:"
+msgstr "Συνεργάτες:"
+
+#: ../lib/about.py:49
+msgid "Logo, icon and general artwork "
+msgstr "Λογότυπο, εικονίδιο και γενικά γραφικά "
+
+#: ../lib/about.py:75
+msgid "See TRANSLATORS file"
+msgstr ""
+
+#: ../lib/about.py:83
+msgid "This program is released under the GNU"
+msgstr "Το πρόγραμμα υπόκειται στην άδεια χρήσης GNU"
+
+#: ../lib/add.py:52 ../glade/griffith.glade.h:27
+msgid "Add a new movie"
+msgstr "Προσθήκη νέας ταινίας"
+
+#: ../lib/add.py:64
+msgid "Edit movie"
+msgstr "Επεξεργασία ταινίας"
+
+#: ../lib/add.py:133 ../lib/add.py:701 ../lib/cover.py:182
+#: ../lib/main_treeview.py:476
+msgid " min"
+msgstr " λεπτά"
+
+#: ../lib/add.py:142
+msgid "Movie information has been updated"
+msgstr "Οι πληροφορίες της ταινίας ενημερώθηκαν"
+
+#: ../lib/add.py:269
+msgid "No results"
+msgstr "Κανένα αποτέλεσμα"
+
+#: ../lib/add.py:309 ../lib/add.py:625
+msgid ""
+"You should fill the original title\n"
+"or the movie title."
+msgstr ""
+"Πρέπει να εισάγετε τον πρωτότυπο τίτλο\n"
+"ή τον τίτλο της ταινίας."
+
+#: ../lib/add.py:318
+msgid "Url: "
+msgstr "Url: "
+
+#: ../lib/add.py:319
+msgid "Language: "
+msgstr "Γλώσσα: "
+
+#: ../lib/add.py:632 ../lib/add.py:639
+msgid "Movie with that title already exists, are you sure you want to add?"
+msgstr ""
+"Ταινία με αυτόν τον τίτλο υπάρχει ήδη, είστε σίγουροι ότι θέλετε να την "
+"προσθέσετε;"
+
+#: ../lib/advfilter.py:64
+msgid "is equal to"
+msgstr ""
+
+#: ../lib/advfilter.py:65
+msgid "is not equal to"
+msgstr ""
+
+#: ../lib/advfilter.py:66
+msgid "starts with"
+msgstr ""
+
+#: ../lib/advfilter.py:67
+msgid "doesn't start with"
+msgstr ""
+
+#: ../lib/advfilter.py:68
+#, fuzzy
+msgid "contains"
+msgstr "Δανεισμοί"
+
+#: ../lib/advfilter.py:69
+msgid "doesn't contain"
+msgstr ""
+
+#: ../lib/advfilter.py:70
+msgid "like"
+msgstr ""
+
+#: ../lib/advfilter.py:71
+msgid "not like"
+msgstr ""
+
+#: ../lib/advfilter.py:72
+#, fuzzy
+msgid "ilike"
+msgstr "Τίτλος"
+
+#: ../lib/advfilter.py:73
+msgid "not ilike"
+msgstr ""
+
+#: ../lib/advfilter.py:134 ../lib/advfilter.py:142 ../lib/advfilter.py:161
+#, fuzzy
+msgid "ignore"
+msgstr "τίποτα"
+
+#: ../lib/advfilter.py:134
+msgid "with"
+msgstr ""
+
+#: ../lib/advfilter.py:134
+msgid "without"
+msgstr ""
+
+#: ../lib/advfilter.py:134
+msgid "require"
+msgstr ""
+
+#: ../lib/advfilter.py:142
+#, fuzzy
+msgid "in"
+msgstr " λεπτά"
+
+#: ../lib/advfilter.py:142
+#, fuzzy
+msgid "not in"
+msgstr " λεπτά"
+
+#: ../lib/advfilter.py:161
+#, fuzzy
+msgid "loaned to "
+msgstr "μόνο νοικιασμένες"
+
+#: ../lib/advfilter.py:161
+#, fuzzy
+msgid "loan history"
+msgstr "<b>Ιστορικό Δανεισμού</b>"
+
+#: ../lib/advfilter.py:360
+msgid "Name is empty"
+msgstr ""
+
+#: ../lib/advfilter.py:364
+msgid "Search conditions saved"
+msgstr ""
+
+#: ../lib/advfilter.py:366
+msgid "Cannot save search conditions"
+msgstr ""
+
+#: ../lib/backup.py:36
+msgid "Save Griffith backup"
+msgstr "Αποθήκευση αντιγράφου Griffith"
+
+#: ../lib/backup.py:45 ../lib/plugins/export/PluginExportCSV.py:58
+#: ../lib/plugins/export/PluginExportiPod.py:105
+#: ../lib/plugins/export/PluginExportPDF.py:82
+#: ../lib/plugins/export/PluginExportXML.py:59
+msgid "File exists. Do you want to overwrite it?"
+msgstr "Το αρχείο υπάρχει. Θέλετε να το αντικαταστήσετε;"
+
+#: ../lib/backup.py:59
+msgid "Error creating backup"
+msgstr "Σφάλμα δημιουργίας αντιγράφου"
+
+#: ../lib/backup.py:66
+msgid "Backup function is available only for SQLite engine for now"
+msgstr ""
+"Η λειτουργία δημιουργίας αντιγράφου είναι διαθέσιμη μόνο για τη μηχανή "
+"SQLite προς το παρόν"
+
+#: ../lib/backup.py:109
+msgid "Backup has been created"
+msgstr "Το αντίγραφο δημιουργήθηκε"
+
+#: ../lib/backup.py:113 ../lib/backup.py:183
+msgid "Restore Griffith backup"
+msgstr "Επαναφορά αντιγράφου Griffith"
+
+#: ../lib/backup.py:121 ../lib/backup.py:199
+msgid "Can't read backup file"
+msgstr "Δεν ήταν δυνατή η ανάγνωση του αντιγράφου"
+
+#: ../lib/backup.py:174
+msgid "Backup restored"
+msgstr "Το αντίγραφο επανακτήθηκε"
+
+#: ../lib/cover.py:43 ../lib/edit.py:48
+msgid "Select image"
+msgstr "Επιλογή εικόνας"
+
+#: ../lib/cover.py:87 ../lib/cover.py:150
+msgid "Cover generated by Griffith v"
+msgstr "Το εξώφυλλο δημιουργήθηκε από το Griffith v"
+
+#: ../lib/cover.py:89 ../lib/cover.py:152
+#: ../lib/plugins/export/PluginExportHTML.py:644
+#: ../lib/plugins/export/PluginExportPDF.py:175
+msgid "Released Under the GNU/GPL License"
+msgstr "Κυκλοφορία υπό την  άδεια χρήσης GNU/GPL"
+
+#: ../lib/cover.py:177 ../lib/initialize.py:179 ../lib/initialize.py:598
+#: ../lib/plugins/export/PluginExportHTML.py:146
+#: ../lib/plugins/export/PluginExportHTML.py:321 ../glade/griffith.glade.h:104
+msgid "Original Title"
+msgstr "Πρωτότυπος τίτλος"
+
+#: ../lib/cover.py:178 ../lib/initialize.py:186 ../lib/initialize.py:608
+#: ../lib/plugins/export/PluginExportHTML.py:152 ../glade/griffith.glade.h:156
+msgid "Title"
+msgstr "Τίτλος"
+
+#: ../lib/cover.py:180 ../lib/initialize.py:193 ../lib/initialize.py:588
+#: ../lib/plugins/export/PluginExportHTML.py:137 ../glade/griffith.glade.h:53
+msgid "Director"
+msgstr "Σκηνοθέτης"
+
+#: ../lib/cover.py:182
+msgid "Running Time"
+msgstr "Συνολικός Χρόνος"
+
+#: ../lib/cover.py:183 ../lib/initialize.py:587
+#: ../lib/plugins/export/PluginExportHTML.py:136 ../glade/griffith.glade.h:45
+msgid "Country"
+msgstr "Χώρα"
+
+#: ../lib/cover.py:184 ../lib/initialize.py:200 ../lib/initialize.py:589
+#: ../lib/plugins/export/PluginExportHTML.py:138
+#: ../lib/plugins/export/PluginExportPDF.py:155 ../glade/griffith.glade.h:68
+msgid "Genre"
+msgstr "Είδος"
+
+#: ../lib/db.py:52
+msgid "Name cannot be empty"
+msgstr ""
+
+#: ../lib/db.py:84
+msgid "This name is already in use!"
+msgstr "Αυτό το όνομα χρησιμοποιείται ήδη!"
+
+#: ../lib/db.py:118
+#, fuzzy
+msgid "E-mail address is not valid"
+msgstr "Μη έγκυρη εικόνα"
+
+#: ../lib/dbupgrade.py:80 ../lib/plugins/movie/PluginMovieE-Pipoca.py:33
+msgid "Brazilian Portuguese"
+msgstr "Πορτογαλικά Βραζιλίας"
+
+#: ../lib/dbupgrade.py:81
+msgid "Bulgarian"
+msgstr "Βουλγαρικά"
+
+#: ../lib/dbupgrade.py:82
+msgid "Catalan"
+msgstr "Καταλανικά"
+
+#: ../lib/dbupgrade.py:83 ../lib/plugins/movie/PluginMovieCSFD.py:29
+msgid "Czech"
+msgstr "Τσεχικά"
+
+#: ../lib/dbupgrade.py:84
+msgid "Danish"
+msgstr "Ισπανικά"
+
+#: ../lib/dbupgrade.py:85
+msgid "Dutch"
+msgstr "Ολλανδικά"
+
+#: ../lib/dbupgrade.py:86 ../lib/plugins/movie/PluginMovieAniDB.py:31
+#: ../lib/plugins/movie/PluginMovieDVDEmpire.py:31
+#: ../lib/plugins/movie/PluginMovieIMDB.py:30
+#: ../lib/plugins/movie/PluginMovieMediadis.py:15
+#: ../lib/plugins/movie/PluginMovieMoviefone.py:15
+msgid "English"
+msgstr "Αγγλικά"
+
+#: ../lib/dbupgrade.py:87
+msgid "Estonian"
+msgstr "Εσθονικά"
+
+#: ../lib/dbupgrade.py:88 ../lib/plugins/movie/PluginMovieAllocine.py:31
+#: ../lib/plugins/movie/PluginMovieCineMovies.py:30
+msgid "French"
+msgstr "Γαλλικά"
+
+#: ../lib/dbupgrade.py:89 ../lib/plugins/movie/PluginMovieDVDPalace.py:32
+#: ../lib/plugins/movie/PluginMovieFilmDb.py:31
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:32
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:30
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:32
+#: ../lib/plugins/movie/PluginMovieOFDb.py:16
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:32
+msgid "German"
+msgstr "Γερμανικά"
+
+#: ../lib/dbupgrade.py:90
+msgid "Greek"
+msgstr "Ελληνικά"
+
+#: ../lib/dbupgrade.py:91
+msgid "Hungarian"
+msgstr "Ουγγρικά"
+
+#: ../lib/dbupgrade.py:92
+msgid "Indonesian"
+msgstr "Ινδονησιακά"
+
+#: ../lib/dbupgrade.py:93 ../lib/plugins/movie/PluginMovieCinematografo.py:29
+msgid "Italian"
+msgstr "Ιταλικά"
+
+#: ../lib/dbupgrade.py:94
+msgid "Japanese"
+msgstr "Ιαπωνέζικα"
+
+#: ../lib/dbupgrade.py:95
+msgid "Korean"
+msgstr "Κορεατικά"
+
+#: ../lib/dbupgrade.py:96
+msgid "Norwegian Bokmal"
+msgstr "Νορβηγική Bokmal"
+
+#: ../lib/dbupgrade.py:97
+msgid "Occitan"
+msgstr "Οξιτανικά"
+
+#: ../lib/dbupgrade.py:98
+msgid "Pashto"
+msgstr "Παστού"
+
+#: ../lib/dbupgrade.py:99 ../lib/plugins/movie/PluginMovieFDb.py:32
+#: ../lib/plugins/movie/PluginMovieFilmweb.py:30
+#: ../lib/plugins/movie/PluginMovieOnet.py:30
+#: ../lib/plugins/movie/PluginMovieStopklatka.py:30
+#: ../lib/plugins/movie/PluginMovieTanukiAnime.py:30
+#: ../lib/plugins/movie/PluginMovieWP.py:31
+msgid "Polish"
+msgstr "Πολωνικά"
+
+#: ../lib/dbupgrade.py:100 ../lib/plugins/movie/PluginMovie7arte.py:31
+#: ../lib/plugins/movie/PluginMovieCineteka.py:31
+#: ../lib/plugins/movie/PluginMoviePTGate.py:31
+msgid "Portuguese"
+msgstr "Πορτογαλικά"
+
+#: ../lib/dbupgrade.py:101
+msgid "Russian"
+msgstr "Ρωσσικά"
+
+#: ../lib/dbupgrade.py:102
+msgid "Simplified Chinese"
+msgstr "Απλοποιημένα Κινέζικα"
+
+#: ../lib/dbupgrade.py:103
+msgid "Slovak"
+msgstr "Σλοβακικά"
+
+#: ../lib/dbupgrade.py:104 ../lib/plugins/movie/PluginMovieCulturalia.py:31
+#: ../lib/plugins/movie/PluginMovieFilmAffinity.py:31
+#: ../lib/plugins/movie/PluginMovieIMDB-es.py:31
+msgid "Spanish"
+msgstr "Ισπανικά"
+
+#: ../lib/dbupgrade.py:105 ../lib/plugins/movie/PluginMovieFilmtipset.py:32
+msgid "Swedish"
+msgstr "Σουηδικά"
+
+#: ../lib/dbupgrade.py:106
+msgid "Turkish"
+msgstr "Τουρικά"
+
+#: ../lib/dbupgrade.py:107
+msgid "Favourite"
+msgstr "Αγαπημένο"
+
+#: ../lib/dbupgrade.py:199
+msgid ""
+"Griffith will now convert your database to the new format. This can take "
+"several minutes if you have a large database."
+msgstr ""
+"Το Griffith θα μετατρέψει τώρα την βάση δεδομένων σας στη νέα μορφή. Αυτή η "
+"διαδικασία μπορεί να διαρκέσει αρκετά λεπτά εάν έχετε μία μεγάλη βάση "
+"δεδομένων."
+
+#: ../lib/dbupgrade.py:212
+msgid "Old DB conversion: please install pysqlite legacy (v1.0)"
+msgstr "Παλιά μετατροπή ΒΔ: παρακαλώ εγκαταστήστε τα pysqlite legacy (v1.0)"
+
+#: ../lib/dbupgrade.py:239
+msgid ""
+"Your database is most probably in SQLite2 format, please convert it to "
+"SQLite3"
+msgstr ""
+"Η βάση δεδομένων είναι πιθανότατα σε μορφή SQLite2, παρακαλώ μετατρέψτε την "
+"σε SQLite3"
+
+#: ../lib/delete.py:39
+msgid "You can't delete movie while it is loaned."
+msgstr "Δεν μπορείτε να διαγράψετε την ταινία ενώ είναι νοικιασμένη."
+
+#: ../lib/delete.py:42
+msgid "Are you sure you want to delete this movie?"
+msgstr "Είστε σίγουρος/η οτι θέλετε να διαγράψετε την ταινία;"
+
+#: ../lib/edit.py:60
+#, fuzzy
+msgid "Image is not valid."
+msgstr "Μη έγκυρη εικόνα"
+
+#: ../lib/edit.py:91 ../lib/edit.py:117
+msgid "Image has been updated"
+msgstr "Η εικόνα έχει ενημερωθεί"
+
+#: ../lib/edit.py:99
+msgid "Are you sure you want to delete this poster?"
+msgstr "Είστε σίγουροι ότι θέλετε να διαγράψετε αυτή την αφίσα;"
+
+#: ../lib/edit.py:163 ../lib/edit.py:170
+msgid "No posters found for this movie."
+msgstr "Δεν βρέθηκαν αφίσες γι'αυτή την ταινία."
+
+#: ../lib/edit.py:215 ../lib/movie.py:166
+msgid "Fetching poster"
+msgstr "Λήψη αφίσας"
+
+#: ../lib/edit.py:215 ../lib/movie.py:123 ../lib/movie.py:141
+#: ../lib/movie.py:166 ../lib/movie.py:263 ../lib/movie.py:284
+msgid "Wait a moment"
+msgstr "Παρακαλώ περιμένετε"
+
+#: ../lib/edit.py:227
+msgid "Sorry. A connection error has occurred."
+msgstr "Λυπούμαστε. Προέκυψε σφάλμα στη σύνδεση."
+
+#: ../lib/edit.py:239 ../lib/edit.py:270
+msgid "Sorry. This movie is listed but has no poster available at Amazon.com."
+msgstr ""
+"Λυπούμαστε. Αυτή η ταινία υπάρχει στη βάση αλλά δεν υπάρχει ανάλογη αφίσα "
+"στην τοποθεσία Amazon.com."
+
+#: ../lib/edit.py:257
+msgid "Do you want to use this poster instead?"
+msgstr "Θα θέλατε να χρησιμοποιήσετε αυτή την αφίσα;"
+
+#: ../lib/gconsole.py:151
+msgid "No movie found"
+msgstr "Δε βρέθηκε ταινία"
+
+#: ../lib/gemail.py:38
+msgid "Connection timed out"
+msgstr "Τέλος χρονικού ορίου σύνδεσης"
+
+#: ../lib/gemail.py:49 ../lib/gemail.py:59
+#, python-format
+msgid "Error sending e-mail: %s"
+msgstr "Λάθος κατα την αποστολή ηλεκτρονικού μηνύματος: %s"
+
+#: ../lib/gemail.py:49
+msgid "login failure"
+msgstr "αποτυχία εισόδου"
+
+#: ../lib/gemail.py:56
+msgid "E-mail sent sucessfuly"
+msgstr "Επιτυχής αποστολή ηλεκτρονικού μηνύματος"
+
+#: ../lib/gemail.py:76
+msgid "Movie loan reminder"
+msgstr "Υπενθύμιση ενοικίασης ταινίας"
+
+#: ../lib/gemail.py:76
+#, python-format
+msgid ""
+"Hi, %s!\n"
+"\n"
+"Just to remind you "
+msgstr ""
+"Γειά, %s!\n"
+"\n"
+"Σου υπενθυμίζω "
+
+#: ../lib/gemail.py:82
+msgid "Mail could not be sent. Please check e-mail preferences."
+msgstr "Το e-mail δεν εστάλει. Παρακαλώ ελέγξτε τις e-mail ρυθμίσεις."
+
+#: ../lib/gemail.py:84
+msgid "This person has no e-mail address defined."
+msgstr "Δε βρέθηκε ηλεκτρονική διεύθυνση καταχωρημένη για αυτό το άτομο."
+
+#: ../lib/gutils.py:284
+msgid "Images"
+msgstr "Εικόνες"
+
+#: ../lib/gutils.py:295 ../lib/plugins/imp/__init__.py:219
+msgid "All files"
+msgstr "Όλα τα αρχεία"
+
+#: ../lib/initialize.py:166
+msgid "N."
+msgstr "Ν."
+
+#: ../lib/initialize.py:173 ../lib/initialize.py:590
+#: ../lib/plugins/export/PluginExportHTML.py:139 ../glade/griffith.glade.h:75
+msgid "Image"
+msgstr "Εικόνα"
+
+#: ../lib/initialize.py:207 ../lib/initialize.py:605
+#: ../lib/plugins/export/PluginExportHTML.py:151 ../glade/griffith.glade.h:136
+msgid "Seen it"
+msgstr "Το έχετε δει"
+
+#: ../lib/initialize.py:215 ../lib/initialize.py:612
+#: ../lib/plugins/export/PluginExportHTML.py:153 ../glade/griffith.glade.h:170
+msgid "Year"
+msgstr "Χρονιά"
+
+#: ../lib/initialize.py:224 ../lib/initialize.py:603
+#: ../lib/plugins/export/PluginExportHTML.py:149 ../glade/griffith.glade.h:131
+msgid "Runtime"
+msgstr "Διάρκεια χρόνου"
+
+#: ../lib/initialize.py:233 ../lib/initialize.py:601
+#: ../lib/plugins/export/PluginExportHTML.py:148 ../glade/griffith.glade.h:120
+msgid "Rating"
+msgstr "Αξιολόγηση"
+
+#: ../lib/initialize.py:285
+msgid "Loan Date"
+msgstr "Ημερομηνία Ενοικίασης"
+
+#: ../lib/initialize.py:291
+msgid "Return Date"
+msgstr "Ημερομηνία Επιστροφής"
+
+#: ../lib/initialize.py:296
+msgid "Loaned To"
+msgstr "Ενοικίαση στον (στην)"
+
+#: ../lib/initialize.py:315 ../lib/plugins/movie/PluginMovieIMDB-de.py:181
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:330
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:377
+#: ../lib/plugins/movie/PluginMovieIMDB.py:159
+msgid "Language"
+msgstr "Γλώσσα"
+
+#: ../lib/initialize.py:327 ../lib/initialize.py:615
+msgid "lector"
+msgstr "λέκτορας"
+
+#: ../lib/initialize.py:328 ../lib/initialize.py:615
+msgid "dubbing"
+msgstr "υποτιτλισμός"
+
+#: ../lib/initialize.py:330 ../lib/initialize.py:615
+msgid "commentary"
+msgstr "σχόλια"
+
+#: ../lib/initialize.py:337 ../glade/griffith.glade.h:159
+msgid "Type"
+msgstr "Τύπος"
+
+#: ../lib/initialize.py:352
+msgid "Codec"
+msgstr "Αποκωδικοποιητής"
+
+#: ../lib/initialize.py:367
+msgid "Channels"
+msgstr "Κανάλια"
+
+#: ../lib/initialize.py:382
+msgid "Subtitle format"
+msgstr "Τύπος υπότιτλων"
+
+#: ../lib/initialize.py:498 ../glade/griffith.glade.h:96
+msgid "Name"
+msgstr "Όνομα"
+
+#: ../lib/initialize.py:504 ../glade/exporthtml.glade.h:15
+#: ../glade/griffith.glade.h:55 ../glade/import.glade.h:5
+msgid "E-mail"
+msgstr "Ηλ. Διεύθυνση"
+
+#: ../lib/initialize.py:552
+msgid "Last added"
+msgstr "Τελευταία Προσθήκη"
+
+#: ../lib/initialize.py:581 ../lib/plugins/export/PluginExportHTML.py:134
+#: ../lib/plugins/export/PluginExportPDF.py:161 ../glade/griffith.glade.h:37
+msgid "Cast"
+msgstr "Ηθοποιοί"
+
+#: ../lib/initialize.py:582 ../glade/griffith.glade.h:36
+#, fuzzy
+msgid "Cameraman"
+msgstr "Γερμανικά"
+
+#: ../lib/initialize.py:583 ../lib/plugins/export/PluginExportHTML.py:135
+#: ../glade/griffith.glade.h:39
+msgid "Classification"
+msgstr "Ταξινόμιση"
+
+#: ../lib/initialize.py:584 ../lib/plugins/export/PluginExportHTML.py:162
+#: ../glade/griffith.glade.h:42
+msgid "Collection"
+msgstr "Συλλογή"
+
+#: ../lib/initialize.py:585 ../lib/initialize.py:614
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:185
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:332
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:379
+#: ../lib/plugins/movie/PluginMovieIMDB.py:163 ../glade/griffith.glade.h:43
+msgid "Color"
+msgstr "Έγχρωμη"
+
+#: ../lib/initialize.py:586 ../glade/griffith.glade.h:44
+msgid "Condition"
+msgstr "Κατάσταση"
+
+#: ../lib/initialize.py:591 ../glade/griffith.glade.h:79
+msgid "Layers"
+msgstr "Επίπεδα"
+
+#: ../lib/initialize.py:592 ../lib/plugins/export/PluginExportHTML.py:143
+msgid "Loaned"
+msgstr "Δανεισμένη"
+
+#: ../lib/initialize.py:593 ../lib/plugins/export/PluginExportHTML.py:144
+#: ../glade/griffith.glade.h:54
+msgid "Discs"
+msgstr "Δίσκοι"
+
+#: ../lib/initialize.py:594 ../glade/griffith.glade.h:91
+msgid "Medium"
+msgstr "Μέσο"
+
+#: ../lib/initialize.py:595 ../lib/plugins/export/PluginExportHTML.py:154
+#: ../glade/griffith.glade.h:100
+msgid "Notes"
+msgstr "Σημειώσεις"
+
+#: ../lib/initialize.py:596 ../lib/plugins/export/PluginExportHTML.py:145
+#: ../glade/griffith.glade.h:101
+msgid "Number"
+msgstr "Αριθμός"
+
+#: ../lib/initialize.py:597 ../lib/plugins/export/PluginExportHTML.py:140
+#: ../glade/griffith.glade.h:102
+msgid "Official site"
+msgstr "Επίσημος δικτιακός χώρος"
+
+#: ../lib/initialize.py:599 ../lib/plugins/export/PluginExportHTML.py:147
+#: ../glade/griffith.glade.h:112
+msgid "Plot"
+msgstr "Πλοκή"
+
+#: ../lib/initialize.py:600 ../glade/griffith.glade.h:33
+msgid "Aspect ratio"
+msgstr ""
+
+#: ../lib/initialize.py:602 ../glade/griffith.glade.h:122
+msgid "Region"
+msgstr "Περιοχή"
+
+#: ../lib/initialize.py:604 ../glade/griffith.glade.h:134
+msgid "Screenplay"
+msgstr ""
+
+#: ../lib/initialize.py:606 ../lib/plugins/export/PluginExportHTML.py:141
+#: ../glade/griffith.glade.h:145
+msgid "Site"
+msgstr "Ιστοσελίδα"
+
+#: ../lib/initialize.py:607 ../lib/plugins/export/PluginExportHTML.py:150
+#: ../glade/griffith.glade.h:151
+msgid "Studio"
+msgstr "Θάλαμος"
+
+#: ../lib/initialize.py:609 ../lib/plugins/export/PluginExportHTML.py:142
+#: ../glade/griffith.glade.h:158
+msgid "Trailer"
+msgstr "Διαφημιστικό"
+
+#: ../lib/initialize.py:610 ../lib/plugins/export/PluginExportHTML.py:165
+#: ../glade/griffith.glade.h:165
+msgid "Video codec"
+msgstr "Αποκωδικοποιητής βίντεο"
+
+#: ../lib/initialize.py:611 ../lib/plugins/export/PluginExportHTML.py:163
+#: ../glade/griffith.glade.h:168
+msgid "Volume"
+msgstr "Ένταση ήχου"
+
+#: ../lib/initialize.py:613 ../lib/initialize.py:614 ../lib/initialize.py:616
+#: ../lib/initialize.py:851 ../lib/initialize.py:852 ../lib/initialize.py:884
+#: ../lib/initialize.py:885
+msgid "N/A"
+msgstr "Ν/Α"
+
+#: ../lib/initialize.py:613
+msgid "Damaged"
+msgstr "Κατεστραμένη"
+
+#: ../lib/initialize.py:613
+msgid "Poor"
+msgstr "Κακή"
+
+#: ../lib/initialize.py:613
+msgid "Fair"
+msgstr "Μέτρια"
+
+#: ../lib/initialize.py:613
+msgid "Good"
+msgstr "Καλή"
+
+#: ../lib/initialize.py:613
+msgid "Excellent"
+msgstr "Εξαιρετική"
+
+#: ../lib/initialize.py:614
+msgid "Black and White"
+msgstr "Ασπρόμαυρη"
+
+#: ../lib/initialize.py:614
+msgid "Mixed"
+msgstr "Ανάμεικτη"
+
+#: ../lib/initialize.py:616
+msgid "Single Side, Single Layer"
+msgstr "Μονής Πλευράς, Μονής Στρώσης"
+
+#: ../lib/initialize.py:616
+msgid "Single Side, Dual Layer"
+msgstr "Μονής Πλευράς, Διπλής Στρώσης"
+
+#: ../lib/initialize.py:616
+msgid "Dual Side, Single Layer"
+msgstr "Διπλής Πλευράς, Μονής Στρώσης"
+
+#: ../lib/initialize.py:616
+msgid "Dual Side, Dual Layer"
+msgstr "Διπλής Πλευράς, Διπλής Στρώσης"
+
+#: ../lib/initialize.py:618
+msgid "Region 0 (No Region Coding)"
+msgstr "Περιοχή 0 (Δεν υπάρχει Κωδικοποίηση Περιοχής)"
+
+#: ../lib/initialize.py:619
+msgid "Region 1 (United States of America, Canada)"
+msgstr "Περιοχή 1 (Ηνωμένες Πολιτείες, Καναδάς)"
+
+#: ../lib/initialize.py:620
+msgid ""
+"Region 2 (Europe,including France, Greece, Turkey, Egypt, Arabia, Japan and "
+"South Africa)"
+msgstr ""
+"Περιοχή 2 (Ευρώπη,συμπεριλαμβανομένης Γαλλίας, Ελλάδας, Τουρκίας, Αιγύπτου, "
+"Σ.Αραβία,Ιαπωνία και Νότια Αφρική)"
+
+#: ../lib/initialize.py:621
+msgid "Region 3 (Korea, Thailand, Vietnam, Borneo and Indonesia)"
+msgstr "Περιοχή 3 (Κορέα, Ταιλάνδη, Βιετνάμ,Βόρνεο και Ινδονησία)"
+
+#: ../lib/initialize.py:622
+msgid ""
+"Region 4 (Australia and New Zealand, Mexico, the Caribbean, and South "
+"America)"
+msgstr ""
+"Περιοχή 4 (Αυστραλία και Νέα Ζηλανδία, Μεξικό, Καραϊβική και Νότια Αμερική)"
+
+#: ../lib/initialize.py:623
+msgid "Region 5 (India, Africa, Russia and former USSR countries)"
+msgstr "Περιοχή 5 (Ινδία, Αφρική, Ρωσία και πρώην ΕΣΣΔ χώρες)"
+
+#: ../lib/initialize.py:624
+msgid "Region 6 (Popular Republic of China)"
+msgstr "Περιοχή 6 (Λαϊκή Δημοκρατίας της Κίνας)"
+
+#: ../lib/initialize.py:625
+msgid "Region 7 (Reserved for Unspecified Special Use)"
+msgstr "Περιοχή 7 (Δεσμευμένη για απροσδιόριστη χρήση)"
+
+#: ../lib/initialize.py:626
+msgid "Region 8 (Airlines/Cruise Ships)"
+msgstr "Περιοχή 8 (Αεροπορικές εταιρίες και κρουαζιερόπλοια)"
+
+#: ../lib/initialize.py:663
+msgid "Dictionary not available. Spellcheck will be disabled. \n"
+msgstr ""
+"Το λεξικό δεν είναι διαθέσιμο.Ο έλεγχος ορθογραφίας θα απενεργοποιηθεί. \n"
+
+#: ../lib/loan.py:43
+msgid "No person is defined yet."
+msgstr "Δεν ορίστηκε κάποιο πρόσωπο ακόμα"
+
+#: ../lib/loan.py:70
+msgid "Do you want to loan whole collection?"
+msgstr "Θέλετε να δανείσετε ολόκληρη συλλογή;"
+
+#: ../lib/loan.py:78
+msgid ""
+"Collection contains loaned movie.\n"
+"Loan aborted!"
+msgstr ""
+
+#: ../lib/loan.py:81
+msgid "Movie loaned"
+msgstr "Η ταινία δανείστηκε"
+
+#: ../lib/main_treeview.py:258
+msgid "This movie has been loaned to "
+msgstr "Αυτή η ταινία δανείστηκε στο-η/ν "
+
+#: ../lib/main_treeview.py:258
+msgid " on "
+msgstr " στο-η/ν "
+
+#: ../lib/main_treeview.py:269
+msgid "Movie not loaned"
+msgstr "Η ταινία δεν δανείστηκε"
+
+#: ../lib/movie.py:123 ../lib/movie.py:141
+msgid "Fetching data"
+msgstr "Λήψη δεδομένων"
+
+#: ../lib/movie.py:263 ../lib/movie.py:284
+msgid "Searching"
+msgstr "Αναζήτηση"
+
+#: ../lib/movie.py:318 ../lib/plugins/movie/PluginMovieAmazon.py:343
+#: ../lib/plugins/movie/PluginMovieAmazon.py:357
+msgid "Connection error"
+msgstr "Σφάλμα σύνδεσης"
+
+#: ../lib/movie.py:359
+msgid "Cancel"
+msgstr "Άκυρο"
+
+#: ../lib/people.py:71
+msgid "You should fill the person name"
+msgstr "Θα πρέπει να συμπληρώσετε το όνομα του προσώπου"
+
+#: ../lib/people.py:110
+msgid "Record updated"
+msgstr "Ανανέωση αρχέιου"
+
+#: ../lib/people.py:133
+msgid "This person has loaned films from you. Return them first."
+msgstr ""
+"Το πρόσωπο αυτό έχει δανειστεί ταινίες από εσάς. Θα πρέπει πρώτα να τις "
+"επιστρέψει."
+
+#: ../lib/people.py:138
+msgid ""
+"This person has data in the loan history. This data will be erased if you "
+"continue."
+msgstr ""
+"Το πρόσωπο αυτό έχει στοιχεία στο ιστορικό δανεισμού του. Τα στοιχεία αυτά "
+"θα διαγραφούν εάν συνεχίσετε."
+
+#: ../lib/people.py:139
+#, python-format
+msgid ""
+"%s\n"
+"Are you sure you want to delete this person?"
+msgstr ""
+"%s\n"
+"Είστε σίγουρος/η οτι επιθυμείτε να διαγράψετε αυτό το άτομο;"
+
+#: ../lib/sql.py:108
+msgid ""
+"Cannot connect to database.\n"
+"Falling back to SQLite."
+msgstr ""
+"Αδυναμία σύνδεσης στη βάση.\n"
+"Επιστροφή σε SQLite."
+
+#: ../lib/sql.py:108
+msgid "Please check debug output for more informations."
+msgstr ""
+"Παρακαλούμε ελέξτε την έξοδο απασφαλμάτωσης για περισσότερες πληροφορίες."
+
+#: ../lib/sql.py:122
+msgid "Database connection failed."
+msgstr "Η σύνδεση με τη Βάση Δεδομένων απέτυχε."
+
+#: ../lib/sql.py:152
+msgid "This database requires newer version of Griffith."
+msgstr ""
+
+#: ../lib/version.py:29
+msgid "Griffith is a film collection manager."
+msgstr "Το Griffith είναι ένα πρόγραμμα διαχείρησης συλλογής ταινιών."
+
+#: ../lib/view.py:28
+msgid "Filter activated. Showing only not seen movies."
+msgstr ""
+"Το φίλτρο ενεργοποιήθηκε. Παρουσιάζονται μόνο οι ταινίες που δεν έχουν "
+"προβληθεί."
+
+#: ../lib/view.py:32
+msgid "Filter activated. Showing only loaned movies."
+msgstr ""
+"Το φίλτρο ενεργοποιήθηκε. Παρουσιάζονται μόνο οι ταινίες που έχουν δανειστεί."
+
+#: ../lib/view.py:42
+#, python-format
+msgid "Filter activated. Showing only movies from volume: %s"
+msgstr ""
+"Το φίλτρο ενεργοποιήθηκε. Παρουσιάζονται μόνο οι ταινίες από τη σειρά: %s"
+
+#: ../lib/view.py:49
+#, python-format
+msgid "Filter activated. Showing only movies from collection: %s"
+msgstr ""
+"Το φίλτρο ενεργοποιήθηκε. Παρουσιάζονται μόνο οι ταινίες από τη συλλογή: %s"
+
+#: ../lib/widgets.py:348
+msgid ""
+"Define here the PDF reader you want to use within Griffith. Popular choices "
+"are xpdf, gpdf, evince or kpdf. Make sure you have this program installed "
+"and working first."
+msgstr ""
+"Καθορίστε εδώ το πρόγραμμα ανάγνωσης PDF που επιθυμείτε να χρησιμοποιήσετε "
+"στο Griffith. Ανάμεσα στις πιο δημοφιλείς επιλογές είναι τα xpdf, gpdf, "
+"evince ή kpdf. Σιγουρευτείτε οτι το πρόγραμμα είναι εγκατεστημένο και "
+"δουλεύει σωστά."
+
+#: ../lib/widgets.py:349
+msgid ""
+"Here you can define the desired language to use while spell checking some "
+"fields. Use you locale setting. For example, to use european portuguese "
+"spell checking enter 'pt'"
+msgstr ""
+"Εδω μπορείτε να καθορίσετε την χρήση της επιθυμητής γλώσσας ενω ελέγχεται η "
+"ορθρογραφία σε μερικά πεδία. Χρησιμοποιήστε τις ρυθμίσεις εντοπιότητας. Για "
+"παράδειγμα, για να χρησιμοποιήσετε τον έλεγχο ορθογραφίας στα πορτογαλλικά "
+"ευρώπης, εισάγετε 'pt'"
+
+#: ../lib/widgets.py:350
+msgid ""
+"Use this entry to define the SMTP server you want to use to send e-mails. On "
+"*nix systems, 'localhost' should work. Alternatively, you can use your "
+"Internet Service Provider's SMTP server address."
+msgstr ""
+"Χρησιμοποιείστε αυτή την εγγραφή για να καθορίσετε τον διακομιστή SMTP τον "
+"οποίο θα χρησιμοποιήσετε για την αποστολή της ηλεκτρονικής αλληλογραφίας. Σε "
+"συστήματα τύπου *nix, η χρήση του 'localhost' πρέπει να είναι επαρκής. "
+"Εναλλακτικά, μπορείτε να χρησιμοποιήσετε την διεύθυνση SMTP του Παρόχου "
+"Υπηρεσιών Διαδικτύου σας."
+
+#: ../lib/widgets.py:351
+msgid ""
+"This is the from e-mail address that should be used to all outgoing e-mail. "
+"You want to include your own e-mail address here probably."
+msgstr ""
+"Αυτή είναι η ηλεκτρονική διεύθυνση που πρέπει να χρησιμοποιείται για όλα τα "
+"εξερχόμενα ηλεκτρονικά μηνύματα. Πιθανώς να θέλετε να συμπεριλάβετε και την "
+"δική σας ηλεκτρονική διεύθυνση."
+
+#: ../lib/widgets.py:352
+msgid ""
+"Here you can define the smtp server port to use. If you want to use your "
+"gmail account service to send e-mails, try to enter '587' here. Default (and "
+"the most common one) is '25'"
+msgstr ""
+"Εδώ μπορείς να ορίσεις την smtp θύρα προς χρήση. Αν θέλεις να "
+"χρησιμοποιήσεις την υπηρεσία του gmal για αποστολή e-mails, προσπάθησε να "
+"βάλεις '587' εδώ. Η προεπιλογή (και πιο συνηθισμένη) είναι '25'"
+
+#: ../lib/widgets.py:353
+msgid ""
+"If you need TLS support, please check this checkbox. This is needed, for "
+"example, when using gmail service to send your reminder e-mails."
+msgstr ""
+"Αν χρειάζεσαι υποστήριξη TLS, τσέκαρε αυτό το κουτάκι. Αυτό χρειάζεται, για "
+"παράδειγμα, όταν χρησιμοποιείς το gmail για να στείλεις μηνύματα υπενθύμισης."
+
+#: ../lib/plugins/movie/PluginMovieAmazon.py:39
+msgid "International"
+msgstr ""
+
+#: ../lib/plugins/movie/PluginMovieCinematografo.py:92
+#: ../lib/plugins/movie/PluginMovieFDb.py:105
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:84
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:183
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:184
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:185
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:186
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:187
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:188
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:189
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:208
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:209
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:210
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:211
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:212
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:213
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:214
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:215
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:234
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:235
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:236
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:237
+#: ../lib/plugins/movie/PluginMovieFilmeVonAZ.py:238
+#: ../lib/plugins/movie/PluginMovieFilmweb.py:105
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:111
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:112
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:259
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:260
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:261
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:262
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:263
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:264
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:265
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:266
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:267
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:268
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:269
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:270
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:271
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:272
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:273
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:274
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:275
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:276
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:277
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:278
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:279
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:280
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:281
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:282
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:283
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:284
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:285
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:286
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:287
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:288
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:289
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:290
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:291
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:292
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:293
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:294
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:295
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:296
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:297
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:298
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:299
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:300
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:301
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:302
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:303
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:304
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:305
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:306
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:307
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:308
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:309
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:310
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:311
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:312
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:313
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:314
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:316
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:317
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:318
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:319
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:320
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:321
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:343
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:344
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:345
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:346
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:347
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:348
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:349
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:350
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:351
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:352
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:358
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:359
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:365
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:366
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:367
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:368
+#: ../lib/plugins/movie/PluginMovieIMDB-es.py:100
+#: ../lib/plugins/movie/PluginMovieIMDB.py:96
+#: ../lib/plugins/movie/PluginMovieIMDB.py:97
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:157
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:319
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:320
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:321
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:322
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:323
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:324
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:325
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:326
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:396
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:397
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:398
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:399
+#: ../lib/plugins/movie/PluginMovieKinoDe.py:400
+#: ../lib/plugins/movie/PluginMovieOFDb.py:82
+#: ../lib/plugins/movie/PluginMovieOFDb.py:169
+#: ../lib/plugins/movie/PluginMovieOFDb.py:170
+#: ../lib/plugins/movie/PluginMovieOFDb.py:171
+#: ../lib/plugins/movie/PluginMovieOFDb.py:221
+#: ../lib/plugins/movie/PluginMovieOFDb.py:284
+#: ../lib/plugins/movie/PluginMovieOFDb.py:285
+#: ../lib/plugins/movie/PluginMovieOFDb.py:286
+#: ../lib/plugins/movie/PluginMovieOnet.py:101
+#: ../lib/plugins/movie/PluginMovieWP.py:95
+#: ../lib/plugins/movie/PluginMovieWP.py:97
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:103
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:200
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:201
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:202
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:203
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:204
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:205
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:206
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:207
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:208
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:209
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:210
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:211
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:230
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:231
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:232
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:233
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:234
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:235
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:236
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:237
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:238
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:239
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:240
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:241
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:242
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:243
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:244
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:245
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:246
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:247
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:248
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:249
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:250
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:251
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:252
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:253
+#: ../lib/plugins/movie/PluginMovieZelluloid.py:254
+msgid " as "
+msgstr " ως "
+
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:183
+#: ../lib/plugins/movie/PluginMovieIMDB.py:161 ../glade/griffith.glade.h:4
+msgid "<b>Audio</b>"
+msgstr "<b>Ήχος</b>"
+
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:331
+#: ../lib/plugins/movie/PluginMovieIMDB-de.py:378
+#, fuzzy
+msgid "Audio"
+msgstr "Θάλαμος"
+
+#: ../lib/plugins/export/PluginExportCSV.py:33
+msgid "Full CSV list export plugin"
+msgstr "Πρόσθετο πλήρους εξωγής λίστας ως αρχείο CSV"
+
+#: ../lib/plugins/export/PluginExportCSV.py:47
+#: ../lib/plugins/export/PluginExportCSV.py:50
+#: ../lib/plugins/export/PluginExportiPod.py:100
+#: ../lib/plugins/export/PluginExportXML.py:48
+#: ../lib/plugins/export/PluginExportXML.py:51
+#, python-format
+msgid "Export a %s document"
+msgstr "Εξαγωγή του %s εγγράφου"
+
+#: ../lib/plugins/export/PluginExportCSV.py:73
+#: ../lib/plugins/export/PluginExportXML.py:95
+#, python-format
+msgid "%s file has been created."
+msgstr "Δημιουργήθηκε το %s αρχείο."
+
+#: ../lib/plugins/export/PluginExportHTML.py:40
+msgid "Plugin exports data using templates"
+msgstr "Πρόσθετο που εξάγει δεδομένα χρησιμοποιώντας πρότυπα"
+
+#: ../lib/plugins/export/PluginExportHTML.py:51
+msgid "Griffith's movies list"
+msgstr "Λίστα ταινιών του Griffith"
+
+#: ../lib/plugins/export/PluginExportHTML.py:161 ../glade/griffith.glade.h:90
+msgid "Media"
+msgstr "Μέσο"
+
+#: ../lib/plugins/export/PluginExportHTML.py:459
+#: ../lib/plugins/export/PluginExportHTML.py:461
+msgid "previous"
+msgstr "προηγούμενη"
+
+#: ../lib/plugins/export/PluginExportHTML.py:472
+#: ../lib/plugins/export/PluginExportHTML.py:474
+msgid "next"
+msgstr "επόμενο"
+
+#: ../lib/plugins/export/PluginExportHTML.py:550
+#: ../lib/plugins/export/PluginExportHTML.py:591
+#: ../lib/plugins/export/PluginExportHTML.py:688
+#, python-format
+msgid "Can't create %s!"
+msgstr "Δεν ήταν δυνατή η δημιουργία %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:580
+#, python-format
+msgid ""
+"Directory %s already exists.\n"
+"Do you want to overwrite it?"
+msgstr ""
+"Ο φάκελος %s υπάρχει ήδη.\n"
+"Θέλετε να το αντικαταστήσετε;"
+
+#: ../lib/plugins/export/PluginExportHTML.py:584
+#, python-format
+msgid "Can't remove %s!"
+msgstr "Δεν ήταν δυνατή η αφαίρεση του %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:599
+#: ../lib/plugins/export/PluginExportHTML.py:612
+#, python-format
+msgid "Can't copy %s!"
+msgstr "Δεν ήταν δυνατή η αντιγραφή του %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:634
+#, python-format
+msgid "Can't open %s!"
+msgstr "Δεν ήταν δυνατόν το άνοιγμα του %s!"
+
+#: ../lib/plugins/export/PluginExportHTML.py:642
+#: ../lib/plugins/export/PluginExportPDF.py:173
+msgid "Document generated by Griffith v"
+msgstr "Το έγγραφο αυτό δημιουργήθηκε από το Griffith v"
+
+#: ../lib/plugins/export/PluginExportHTML.py:710
+msgid "Yes"
+msgstr "Ναι"
+
+#: ../lib/plugins/export/PluginExportHTML.py:712
+msgid "No"
+msgstr "Όχι"
+
+#: ../lib/plugins/export/PluginExportHTML.py:785
+msgid "Document has been generated."
+msgstr "Το έγγραφο έχει δημιουργηθεί."
+
+#: ../lib/plugins/export/PluginExportiPod.py:63
+msgid "iPod Notes export plugin"
+msgstr "πρόσθετο εξαγωγής σημειώσεων iPod"
+
+#: ../lib/plugins/export/PluginExportiPod.py:79
+msgid "My Movies List"
+msgstr "Η συλλογή ταινιών μου"
+
+#: ../lib/plugins/export/PluginExportiPod.py:95
+msgid "List was successful exported to iPod."
+msgstr "Επιτυχής εξαγωγή της λίστας στο iPod."
+
+#: ../lib/plugins/export/PluginExportiPod.py:97
+msgid "iPod is not connected."
+msgstr "Το iPod δεν είναι συνδεδεμένο."
+
+#: ../lib/plugins/export/PluginExportiPod.py:112
+msgid ""
+"List was successful exported. Now you should move it to the 'Notes' folder "
+"on your iPod."
+msgstr ""
+"Επιτυχής εξαγωγή λίστας. Μεταφέρετε την λίστα στον φάκελο 'Σημειώσεις' του "
+"iPod σας."
+
+#: ../lib/plugins/export/PluginExportPDF.py:47
+msgid "PDF export plugin"
+msgstr "Πρόσθετο εξαγωγής PDF"
+
+#: ../lib/plugins/export/PluginExportPDF.py:72
+#: ../lib/plugins/export/PluginExportPDF.py:74
+msgid "Export a PDF"
+msgstr "Εξαγωγή σε PDF"
+
+#: ../lib/plugins/export/PluginExportPDF.py:116
+msgid "List of films"
+msgstr "Λίστα των ταινιών"
+
+#: ../lib/plugins/export/PluginExportPDF.py:119
+#, python-format
+msgid "Total Movies: %s"
+msgstr "Σύνολο ταινιών: %s"
+
+#: ../lib/plugins/export/PluginExportPDF.py:166
+msgid "PDF has been created."
+msgstr "Δημιουργήθηκε αρχείο PDF."
+
+#: ../lib/plugins/export/PluginExportPDF.py:171
+#, python-format
+msgid "Page %d"
+msgstr "Σελίδα %d"
+
+#: ../lib/plugins/export/PluginExportXML.py:34
+msgid "Full XML list export plugin"
+msgstr "Plugin πλήρης εξαγωγής λίστας XML"
+
+#: ../lib/plugins/imp/CSV.py:42
+msgid "Full CSV list import plugin"
+msgstr "Plugin πλήρης εισαγωγής CSV λίστας"
+
+#: ../lib/plugins/imp/CSV.py:191
+msgid "Please assign at least one field first!"
+msgstr "Παρακαλώ, ορίσατε πρώτα τουλάχιστον ενα πεδίο!"
+
+#: ../lib/plugins/imp/CSV.py:309
+#, python-format
+msgid "Can't open the file %s"
+msgstr "Δεν είναι δυνάτο το άνοιγμα του αρχείου %s"
+
+#: ../lib/plugins/imp/__init__.py:244
+#, python-format
+msgid "%s file has been imported. %s movies added."
+msgstr "Εσαγωγή του αρχείου %s. Προσθήκη %s ταινιών."
+
+#: ../glade/exporthtml.glade.h:1
+msgid "<b>Example</b>"
+msgstr "<b>Παράδειγμα</b>"
+
+#: ../glade/exporthtml.glade.h:2
+msgid "<b>Export</b>"
+msgstr "<b>Εξαγωγή</b>"
+
+#: ../glade/exporthtml.glade.h:3
+msgid "<b>Header</b>"
+msgstr "<b>Κεφαλίδα</b>"
+
+#: ../glade/exporthtml.glade.h:4 ../glade/griffith.glade.h:18
+msgid "<b>Sort by</b>"
+msgstr "<b>Ταξινόμηση κατά</b>"
+
+#: ../glade/exporthtml.glade.h:5
+msgid "<b>Split into</b>"
+msgstr "<b>Διαχωρισμός σε</b>"
+
+#: ../glade/exporthtml.glade.h:6
+msgid "<b>Style</b>"
+msgstr "<b>Στυλ</b>"
+
+#: ../glade/exporthtml.glade.h:7
+msgid "<b>Template</b>"
+msgstr "<b>Πρότυπο</b>"
+
+#: ../glade/exporthtml.glade.h:8 ../glade/import.glade.h:3
+msgid "Author"
+msgstr "Συντάκτης"
+
+#: ../glade/exporthtml.glade.h:9
+msgid "Black and white"
+msgstr "Ασπρόμαυρη"
+
+#: ../glade/exporthtml.glade.h:10
+msgid "Choose style file"
+msgstr "Επιλογή αρχείου μορφοποίησης"
+
+#: ../glade/exporthtml.glade.h:11
+msgid "Convert images"
+msgstr "Μετατροπή εικόνων"
+
+#: ../glade/exporthtml.glade.h:12
+msgid "Data"
+msgstr "Δεδομένα"
+
+#: ../glade/exporthtml.glade.h:13 ../glade/import.glade.h:4
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: ../glade/exporthtml.glade.h:14
+msgid "Destination"
+msgstr "Προορισμός"
+
+#: ../glade/exporthtml.glade.h:16
+msgid "Export"
+msgstr "Εξαγωγή"
+
+#: ../glade/exporthtml.glade.h:17
+msgid "Export data"
+msgstr "Εξαγωγή Δεδομένων"
+
+#: ../glade/exporthtml.glade.h:18
+msgid "Format"
+msgstr "Διαμόρφωση"
+
+#: ../glade/exporthtml.glade.h:19
+msgid "Maximal height"
+msgstr "Μέγιστο ύψος"
+
+#: ../glade/exporthtml.glade.h:20
+msgid "Maximal width"
+msgstr "Μέγιστο πλάτος"
+
+#: ../glade/exporthtml.glade.h:21
+msgid "Posters"
+msgstr "Αφίσες"
+
+#: ../glade/exporthtml.glade.h:22 ../glade/griffith.glade.h:130
+msgid "Reverse"
+msgstr "Αναστροφή"
+
+#: ../glade/exporthtml.glade.h:23
+msgid "Template"
+msgstr "Πρότυπο"
+
+#: ../glade/exporthtml.glade.h:24
+msgid "Use custom file"
+msgstr "Χρήση προσαρμοσμένου αρχείου"
+
+#: ../glade/exporthtml.glade.h:25 ../glade/import.glade.h:10
+msgid "Version"
+msgstr "Έκδοση"
+
+#: ../glade/exporthtml.glade.h:26
+msgid "entries per page"
+msgstr "εισαγωγές ανα σελίδα"
+
+#: ../glade/exporthtml.glade.h:27
+msgid "files"
+msgstr "αρχεία"
+
+#: ../glade/griffith.glade.h:1
+msgid "0 means no limits"
+msgstr "το 0 σημαίνει καθόλου όρια"
+
+#: ../glade/griffith.glade.h:2
+msgid "<b>Audio channels</b>"
+msgstr "<b>Κανάλια ήχου</b>"
+
+#: ../glade/griffith.glade.h:3
+msgid "<b>Audio codecs</b>"
+msgstr "<b>Αποκωδικοποιητές ήχου</b>"
+
+#: ../glade/griffith.glade.h:5
+msgid "<b>Collection</b>"
+msgstr "<b>Συλλογή</b>"
+
+#: ../glade/griffith.glade.h:6
+#, fuzzy
+msgid "<b>Collections</b>"
+msgstr "<b>Συλλογή</b>"
+
+#: ../glade/griffith.glade.h:7
+msgid "<b>Defaults</b>"
+msgstr "<b>Προεπιλεγμένα</b>"
+
+#: ../glade/griffith.glade.h:8
+msgid "<b>E-mail reminder</b>"
+msgstr "<b>Υπενθύμιση ηλεκτρονικού ταχυδρομείου</b>"
+
+#: ../glade/griffith.glade.h:9
+msgid "<b>Languages</b>"
+msgstr "<b>Γλώσσες</b>"
+
+#: ../glade/griffith.glade.h:10
+msgid "<b>Limits</b>"
+msgstr "<b>Όρια</b>"
+
+#: ../glade/griffith.glade.h:11
+msgid "<b>Loan History</b>"
+msgstr "<b>Ιστορικό Δανεισμού</b>"
+
+#: ../glade/griffith.glade.h:12
+#, fuzzy
+msgid "<b>Loans</b>"
+msgstr "<b>Γλώσσες</b>"
+
+#: ../glade/griffith.glade.h:13
+msgid "<b>Media</b>"
+msgstr "<b>Μέσα</b>"
+
+#: ../glade/griffith.glade.h:14
+msgid "<b>Search for:</b>"
+msgstr "<b>Αναζήτηση για:</b>"
+
+#: ../glade/griffith.glade.h:15
+msgid "<b>Search results</b>"
+msgstr "<b>Αναζήτηση αποτελεσμάτων</b>"
+
+#: ../glade/griffith.glade.h:16
+msgid "<b>Select database to use</b>"
+msgstr "<b>Επιλογή βάσης δεδομένων</b>"
+
+#: ../glade/griffith.glade.h:17
+msgid "<b>Show only the following columns</b>"
+msgstr "<b>Προβολή μόνο των ακόλουθων στηλών</b>"
+
+#: ../glade/griffith.glade.h:19
+msgid "<b>Subtitle formats</b>"
+msgstr "<b>Μορφή Υπότιτλων</b>"
+
+#: ../glade/griffith.glade.h:20
+msgid "<b>Subtitles</b>"
+msgstr "<b>Υπότιτλοι</b>"
+
+#: ../glade/griffith.glade.h:21
+msgid "<b>Tags</b>"
+msgstr "<b>Ετικέτες</b>"
+
+#: ../glade/griffith.glade.h:22
+msgid "<b>Use spell checking on the following fields:</b>"
+msgstr "<b>Χρήση Ορθογραφικού Ελέγχου στα ακόλουθα πεδία:</b>"
+
+#: ../glade/griffith.glade.h:23
+msgid "<b>Video codecs</b>"
+msgstr "<b>Αποκωδικοποιητές Βίντεο</b>"
+
+#: ../glade/griffith.glade.h:24
+msgid "<b>Volume</b>"
+msgstr "<b>Ήχος</b>"
+
+#: ../glade/griffith.glade.h:25
+#, fuzzy
+msgid "<b>Volumes</b>"
+msgstr "<b>Ήχος</b>"
+
+#: ../glade/griffith.glade.h:26
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: ../glade/griffith.glade.h:28
+msgid "Add a new person"
+msgstr "Εισάγετε νέο άτομο"
+
+#: ../glade/griffith.glade.h:29
+msgid "Add movie"
+msgstr "Προσθήκη ταινίας"
+
+#: ../glade/griffith.glade.h:30
+msgid "Add movie and close"
+msgstr "Προσθήκη ταινίας και κλείσιμο"
+
+#: ../glade/griffith.glade.h:31
+msgid "Add new movie"
+msgstr "Προσθήκη νέας ταινίας"
+
+#: ../glade/griffith.glade.h:32
+msgid "All Movies"
+msgstr "Όλες οι Ταινίες"
+
+#: ../glade/griffith.glade.h:34
+msgid "Attempt to fetch a big poster from Amazon services Web site"
+msgstr ""
+"Προσπάθησε να λάβεις μια μεγαλύτερη αφίσα από την ιστοσελίδα των υπηρεσιών "
+"Amazon"
+
+#: ../glade/griffith.glade.h:35
+msgid "By Collection"
+msgstr "Κατά Συλλογή"
+
+#: ../glade/griffith.glade.h:38
+msgid "Choose Image"
+msgstr "Επιλογή εικόνας"
+
+#: ../glade/griffith.glade.h:40
+msgid "Clears filter"
+msgstr "Εκκαθάριση φίλτρου"
+
+#: ../glade/griffith.glade.h:41
+msgid "Clone"
+msgstr "Αντίγραφο"
+
+#: ../glade/griffith.glade.h:46
+#, fuzzy
+msgid "Create backup"
+msgstr "Σφάλμα δημιουργίας αντιγράφου"
+
+#: ../glade/griffith.glade.h:47
+msgid "DVD layers"
+msgstr "Στρώματα DVD"
+
+#: ../glade/griffith.glade.h:48
+msgid "DVD region"
+msgstr "Περιοχή DVD"
+
+#: ../glade/griffith.glade.h:49
+msgid "Database"
+msgstr "Βάση Δεδομένων"
+
+#: ../glade/griffith.glade.h:50
+msgid "Delete a person"
+msgstr "Αφαίρεση ατόμου"
+
+#: ../glade/griffith.glade.h:51
+msgid "Details"
+msgstr "Λεπτομέρειες"
+
+#: ../glade/griffith.glade.h:52
+msgid "Dictionaries"
+msgstr "Λεξικά"
+
+#: ../glade/griffith.glade.h:56
+msgid "E-mail reminder"
+msgstr "Υπενθύμιση ηλεκτρονικού ταχυδρομείου"
+
+#: ../glade/griffith.glade.h:57
+msgid "E_xport"
+msgstr "Ε_ξαγωγή"
+
+#: ../glade/griffith.glade.h:58
+msgid "Edit a person"
+msgstr "Επεξεργασία ενός προσώπου"
+
+#: ../glade/griffith.glade.h:59
+msgid "Edit movie details"
+msgstr "Επεξεργασία λεπτομερειών ταινίας"
+
+#: ../glade/griffith.glade.h:60
+msgid "Favorite Movie Plugin"
+msgstr "Αγαπημένο πρόσθετο ταινίας"
+
+#: ../glade/griffith.glade.h:61
+msgid "Fetch from Amazon"
+msgstr "Λήψη από το Amazon"
+
+#: ../glade/griffith.glade.h:62
+msgid "Fill empty fields only"
+msgstr "Συμπληρώστε μόνο τα κενά πεδία"
+
+#: ../glade/griffith.glade.h:63
+msgid "Filter "
+msgstr "Φίλτρο "
+
+#: ../glade/griffith.glade.h:64
+#, fuzzy
+msgid "Filter movies"
+msgstr "Φίλτρο "
+
+#: ../glade/griffith.glade.h:65
+msgid "Font for reports"
+msgstr "Γραμματοσειρά για αναφορές"
+
+#: ../glade/griffith.glade.h:66
+msgid "Forum"
+msgstr "Φόρουμ"
+
+#: ../glade/griffith.glade.h:67
+msgid "Found Results"
+msgstr "Αποτελέσματα"
+
+#: ../glade/griffith.glade.h:69
+msgid "Get from web"
+msgstr "Βρείτε απο το διαδύκτιο"
+
+#: ../glade/griffith.glade.h:70
+msgid "Get movie data from:"
+msgstr "Βρείτε δεδομένα ταινίων απο:"
+
+#: ../glade/griffith.glade.h:71
+msgid "Griffith"
+msgstr "Griffith"
+
+#: ../glade/griffith.glade.h:72
+msgid "Homepage"
+msgstr "Αρχική σελίδα"
+
+#: ../glade/griffith.glade.h:73
+msgid "Host"
+msgstr "Κόμβος δικτύου"
+
+#: ../glade/griffith.glade.h:74
+msgid "I_mport"
+msgstr "_Εισαγωγή"
+
+#: ../glade/griffith.glade.h:76
+msgid "Include Front Image"
+msgstr "Να συμπεριληφθεί το Εξώφυλλο"
+
+#: ../glade/griffith.glade.h:77
+msgid "Include movie number"
+msgstr "Συμπερίληψη αριθμού ταινίας"
+
+#: ../glade/griffith.glade.h:78
+msgid "Languages"
+msgstr "Γλώσσες"
+
+#: ../glade/griffith.glade.h:80
+msgid "Limit search results to"
+msgstr "Περιορισμός αποτελεσμάτων αναζήτησης σε"
+
+#: ../glade/griffith.glade.h:81
+msgid "Load poster from disk"
+msgstr "Ανάκτηση αφίσας από το δίσκο"
+
+#: ../glade/griffith.glade.h:82
+msgid "Loan"
+msgstr "Δανεισμός"
+
+#: ../glade/griffith.glade.h:83
+msgid "Loan Management"
+msgstr "Διαχείρηση Δανείων"
+
+#: ../glade/griffith.glade.h:84
+msgid "Loan movie"
+msgstr "Δανεισμός ταινίας"
+
+#: ../glade/griffith.glade.h:85
+msgid "Loan to"
+msgstr "Δανεισμός σε"
+
+#: ../glade/griffith.glade.h:86
+msgid "Loaned Movies"
+msgstr "Δανεισμένες ταινίες"
+
+#: ../glade/griffith.glade.h:87
+msgid "Loans"
+msgstr "Δανεισμοί"
+
+#: ../glade/griffith.glade.h:88
+msgid "Main list"
+msgstr "Κεντρική Λίστα"
+
+#: ../glade/griffith.glade.h:89
+msgid "Manage People"
+msgstr "Διαχείριση Προσώπων"
+
+#: ../glade/griffith.glade.h:92
+msgid ""
+"Meter\n"
+"Stars"
+msgstr ""
+"Ο Μετρητής\n"
+"Ξεκινάει"
+
+#: ../glade/griffith.glade.h:94
+msgid "Movie details"
+msgstr "Λεπτομέριες ταινίας"
+
+#: ../glade/griffith.glade.h:95
+msgid "Movie information"
+msgstr "Πληροφορίες ταινίας"
+
+#: ../glade/griffith.glade.h:97
+msgid "Needs authentication"
+msgstr "Χρειάζεται πιστοποίηση"
+
+#: ../glade/griffith.glade.h:98
+#, fuzzy
+msgid "New database"
+msgstr "Βάση Δεδομένων"
+
+#: ../glade/griffith.glade.h:99
+msgid "Not Seen Movies"
+msgstr "Ταινίες που δεν έχουν προβληθεί"
+
+#: ../glade/griffith.glade.h:103
+msgid "Open search window"
+msgstr ""
+
+#: ../glade/griffith.glade.h:105
+msgid "Original title"
+msgstr "Πρωτότυπος τίτλος"
+
+#: ../glade/griffith.glade.h:106
+msgid "Other"
+msgstr "ΆΛΛες"
+
+#: ../glade/griffith.glade.h:107
+msgid "PDF reader"
+msgstr "Πρόγραμμα ανάγνωσης PDF"
+
+#: ../glade/griffith.glade.h:108
+msgid "Password"
+msgstr "Κωδικός πρόσβασης"
+
+#: ../glade/griffith.glade.h:109
+msgid "People"
+msgstr "Πρόσωπα"
+
+#: ../glade/griffith.glade.h:110
+msgid "Phone"
+msgstr "Τηλέφωνο:"
+
+#: ../glade/griffith.glade.h:111
+msgid "Please wait a moment..."
+msgstr "Παρακαλώ αναμείνατε..."
+
+#: ../glade/griffith.glade.h:113
+msgid "Plugins"
+msgstr "Πρόσθετες Λειτουργίες"
+
+#: ../glade/griffith.glade.h:114
+msgid "Port"
+msgstr "Θύρα"
+
+#: ../glade/griffith.glade.h:115
+msgid "Poster image"
+msgstr "Εικόνα αφίσας"
+
+#: ../glade/griffith.glade.h:116
+msgid "Poster viewer"
+msgstr "Προβολή αφίσας"
+
+#: ../glade/griffith.glade.h:117
+msgid "Preferences"
+msgstr "Προτιμήσεις..."
+
+#: ../glade/griffith.glade.h:118
+msgid "Print Cover"
+msgstr "Εκτύπωση Εξωφύλλου"
+
+#: ../glade/griffith.glade.h:119
+msgid "Print cover"
+msgstr "Εκτύπωση εξωφύλλου"
+
+#: ../glade/griffith.glade.h:121
+msgid "Rating image"
+msgstr "Βαθμολογική κατάταξη εικόνας"
+
+#: ../glade/griffith.glade.h:123
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+#: ../glade/griffith.glade.h:124
+msgid "Remove selected movie"
+msgstr "Απομάκρυνση επιλεγμένης ταινίας"
+
+#: ../glade/griffith.glade.h:125
+msgid "Removes poster"
+msgstr "Αφαίρεση αφίσας"
+
+#: ../glade/griffith.glade.h:126
+msgid "Rename"
+msgstr "Μετοναμασία"
+
+#: ../glade/griffith.glade.h:127
+msgid "Report bug"
+msgstr "Αναφορά σφάλματος"
+
+#: ../glade/griffith.glade.h:128
+#, fuzzy
+msgid "Restore from backup"
+msgstr "Επαναφορά αντιγράφου Griffith"
+
+#: ../glade/griffith.glade.h:129
+msgid "Return"
+msgstr "Επιστροφή"
+
+#: ../glade/griffith.glade.h:132
+msgid "SMTP port"
+msgstr ""
+
+#: ../glade/griffith.glade.h:133
+msgid "SMTP server"
+msgstr "Διακομιστής SMTP"
+
+#: ../glade/griffith.glade.h:135
+msgid "Searching on the web"
+msgstr "Αναζήτηση στο διαδύκτιο"
+
+#: ../glade/griffith.glade.h:137
+msgid "Select first movie"
+msgstr "Επιλογή πρώτης ταινίας"
+
+#: ../glade/griffith.glade.h:138
+msgid "Select last movie"
+msgstr "Επιλογή τελευταίας ταινίας"
+
+#: ../glade/griffith.glade.h:139
+msgid "Select next movie"
+msgstr "Επιλέξτε επόμενη ταινία"
+
+#: ../glade/griffith.glade.h:140
+msgid "Select previous movie"
+msgstr "Επιλέξτε προηγούμενη ταινία"
+
+#: ../glade/griffith.glade.h:141
+msgid "Sender E-mail address"
+msgstr "Αποστολέας ηλεκτρονικής διεύθυνσης"
+
+#: ../glade/griffith.glade.h:142
+msgid "Show other movies in this collection"
+msgstr "Προβολή άλλων ταινιών σε αυτή την συλλογή"
+
+#: ../glade/griffith.glade.h:143
+msgid "Show other movies in this volume"
+msgstr "Προβολή άλλων ταινιών σε αυτό το αρχείο"
+
+#: ../glade/griffith.glade.h:144
+msgid "Simple"
+msgstr "Απλό"
+
+#: ../glade/griffith.glade.h:146
+msgid "Size"
+msgstr "Μέγεθος"
+
+#: ../glade/griffith.glade.h:147
+msgid "Spell check the following language"
+msgstr "Έλεγχος ορθογραφίας της ακόλουθης γλώσσας"
+
+#: ../glade/griffith.glade.h:148
+msgid ""
+"Standard\n"
+"Slim\n"
+"Double Slim"
+msgstr ""
+"Κανονικό\n"
+"Λεπτό\n"
+"Διπλά λεπτό"
+
+#: ../glade/griffith.glade.h:152
+msgid "Suggest an unseen movie"
+msgstr "Πρόταση ταινίας που δεν έχω δει"
+
+#: ../glade/griffith.glade.h:153
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#: ../glade/griffith.glade.h:154
+msgid "Technical information"
+msgstr "Τεχνικές πληροφορίες"
+
+#: ../glade/griffith.glade.h:155
+msgid "This movie is part of..."
+msgstr "Αυτή η ταινία είναι μέρος της/του"
+
+#: ../glade/griffith.glade.h:157
+msgid "Toolbar"
+msgstr "Γραμμή εργαλείων"
+
+#: ../glade/griffith.glade.h:160
+msgid ""
+"Type in the original film tile, select source and choose <i>Get from web</"
+"i>. Griffith will try to fetch all the related information from the Web."
+msgstr ""
+"Πληκτρολογήστε τον πρωτότυπο τίτλο της ταινίας, επιλέξτε πηγή και πατήστε "
+"<i>Λήψη από διαδίκτυο</i>. Το Griffith θα προσπαθήσει να λάβει όλες τις "
+"σχετικές πληροφορίες από το Διαδίκτυο."
+
+#: ../glade/griffith.glade.h:161
+msgid "Use Spellchecker"
+msgstr "Χρήση Ορθογραφικού Ελέγχου"
+
+#: ../glade/griffith.glade.h:162
+msgid "Use TLS?"
+msgstr "Χρήση TLS;"
+
+#: ../glade/griffith.glade.h:163
+msgid "Use locale:"
+msgstr "Χρήση γλώσσας:"
+
+#: ../glade/griffith.glade.h:164
+msgid "Username"
+msgstr "Όνομα χρήστη"
+
+#: ../glade/griffith.glade.h:166
+msgid "Visit movie web site"
+msgstr "Επίσκεψη ιστοσελίδας της ταινίας"
+
+#: ../glade/griffith.glade.h:167
+msgid "Visit the oficial web site"
+msgstr "Επισκεφτε'ίτε τον επίσημο διαδυκτιακό τόπο"
+
+#: ../glade/griffith.glade.h:169
+msgid "Watch the trailer"
+msgstr "Δείτε το διαφημιστικό"
+
+#: ../glade/griffith.glade.h:171
+msgid "_Edit"
+msgstr "Επεξεργασία"
+
+#: ../glade/griffith.glade.h:172
+msgid "_File"
+msgstr "Αρχείο"
+
+#: ../glade/griffith.glade.h:173
+msgid "_Help"
+msgstr "Βοήθεια"
+
+#: ../glade/griffith.glade.h:174
+msgid "_Loans"
+msgstr "_Δανεισμοί"
+
+#: ../glade/griffith.glade.h:175
+msgid "_Tools"
+msgstr "Εργαλεία"
+
+#: ../glade/griffith.glade.h:176
+msgid "_View"
+msgstr "Προβολή"
+
+#: ../glade/griffith.glade.h:177
+msgid "add entered name to collections list"
+msgstr "προσθήκη εισαχθέντος ονόματος στη λίστα της συλλογής"
+
+#: ../glade/griffith.glade.h:178
+msgid "add entered name to volumes list"
+msgstr "προσθήκη εισααχθέντος ονόματος στη λίστα της σειράς"
+
+#: ../glade/griffith.glade.h:179
+msgid "classification"
+msgstr "Κατάταξη"
+
+#: ../glade/griffith.glade.h:180
+msgid "click here if movie was returned"
+msgstr "κάντε κλικ εδώ εάν η ταινία έχει επιστραφεί"
+
+#: ../glade/griffith.glade.h:181
+msgid "collection details"
+msgstr "Λεπτομέριες Συλλογής"
+
+#: ../glade/griffith.glade.h:182
+msgid "loaned only"
+msgstr "μόνο νοικιασμένες"
+
+#: ../glade/griffith.glade.h:183
+msgid "loans movie or volume"
+msgstr "δανεισμός ταινίας ή σειράς"
+
+#: ../glade/griffith.glade.h:184
+msgid "minutes"
+msgstr "λεπτά"
+
+#: ../glade/griffith.glade.h:185
+msgid "movies"
+msgstr "ταινίες"
+
+#: ../glade/griffith.glade.h:186
+msgid "none"
+msgstr "τίποτα"
+
+#: ../glade/griffith.glade.h:187
+msgid "not loaned only"
+msgstr "μόνο μη νοικιασμένες"
+
+#: ../glade/griffith.glade.h:188
+msgid "remove selected collection"
+msgstr "Απομάκρυνση επιλεγμένης συλλογής"
+
+#: ../glade/griffith.glade.h:189
+msgid "remove selected volume"
+msgstr "αφαίρεση επιλεγμένης σειράς"
+
+#: ../glade/griffith.glade.h:190
+msgid "seen only"
+msgstr "μόνο προβεβλημένες"
+
+#: ../glade/griffith.glade.h:191
+msgid "tags"
+msgstr "ετικέτες"
+
+#: ../glade/griffith.glade.h:192
+msgid "unseen only"
+msgstr "μόνο μη προβεβλημένες"
+
+#: ../glade/griffith.glade.h:193
+msgid "volume details"
+msgstr "λεπτομέρειες σειράς"
+
+#: ../glade/importcsv.glade.h:1
+msgid ""
+"<b>Some Hints</b>:\n"
+"\n"
+"On the next step you can assign your csv fields with the one in Griffith.\n"
+"One CSV-field can be assigned to multiple griffith-fields, i.e. if you have "
+"only one title.\n"
+"Your cast-list should be comma-seperated to break it apart in multiple lines."
+msgstr ""
+"<b>Μερικές Συμβουλές</b>:\n"
+"\n"
+"Στο επόμενο βήμα μπορείτε να αναθέσετε τα csv πεδία σας σε αυτά του "
+"Griffith.\n"
+"Ένα πεδίο CSV μπορεί να ανατεθεί σε πολλά πεδία griffith, π.χ. εάν έχετε "
+"μόνο έναν τίτλο.\n"
+"Η λίστα των ηθοποιών θα πρέπει να είναι χωρισμένη με κόμματα για να "
+"διασπαστεί σε πολλαπλές σειρές."
+
+#: ../glade/importcsv.glade.h:6
+msgid "Assigned Fields (CSV > Griffith)"
+msgstr "Ανατεθημένα Πεδία (CSV > Griffith)"
+
+#: ../glade/importcsv.glade.h:7
+msgid "CSV Fields"
+msgstr "Πεδία CSV"
+
+#: ../glade/importcsv.glade.h:8
+msgid "CSV Import"
+msgstr "Εισαγωγή CSV"
+
+#: ../glade/importcsv.glade.h:9
+msgid "Delimiter"
+msgstr "Οριοθέτης"
+
+#: ../glade/importcsv.glade.h:10
+msgid "Encoding"
+msgstr "Κωδικοποίηση"
+
+#: ../glade/importcsv.glade.h:11 ../glade/import.glade.h:6
+msgid "Fields"
+msgstr "Πεδία"
+
+#: ../glade/importcsv.glade.h:12
+msgid "File-Options"
+msgstr "Επιλογές αρχείων"
+
+#: ../glade/importcsv.glade.h:13
+msgid "From Row"
+msgstr "Από γραμμή"
+
+#: ../glade/importcsv.glade.h:14
+msgid "Griffith Fields"
+msgstr "Πεδία Griffith"
+
+#: ../glade/importcsv.glade.h:15
+msgid "If your file has no column headers then you should import from row 0."
+msgstr ""
+"Αν το αρχείο σας δεν έχει επικεφαλίδα στήλης, τότε πρέπει να εισάγετε απο "
+"την γραμμή 0."
+
+#: ../glade/importcsv.glade.h:16
+msgid "Lineterminator"
+msgstr "Τερματισμός σειράς"
+
+#: ../glade/importcsv.glade.h:17
+msgid "Quotechar"
+msgstr "Διάγραμμα Παράθεσης"
+
+#: ../glade/importcsv.glade.h:18
+msgid ""
+"ascii (English)\n"
+"big5 (Traditional Chinese)\n"
+"big5hkscs (Traditional Chinese)\n"
+"cp037 (English)\n"
+"cp424 (Hebrew)\n"
+"cp437 (English)\n"
+"cp500 (Western Europe)\n"
+"cp737 (Greek)\n"
+"cp775 (Baltic languages)\n"
+"cp850 (Western Europe)\n"
+"cp852 (Central and Eastern Europe)\n"
+"cp855 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"cp856 (Hebrew)\n"
+"cp857 (Turkish)\n"
+"cp860 (Portuguese)\n"
+"cp861 (Icelandic)\n"
+"cp862 (Hebrew)\n"
+"cp863 (Canadian)\n"
+"cp864 (Arabic)\n"
+"cp865 (Danish, Norwegian)\n"
+"cp866 (Russian)\n"
+"cp869 (Greek)\n"
+"cp874 (Thai)\n"
+"cp875 (Greek)\n"
+"cp932 (Japanese)\n"
+"cp949 (Korean)\n"
+"cp950 (Traditional Chinese)\n"
+"cp1006 (Urdu)\n"
+"cp1026 (Turkish)\n"
+"cp1140 (Western Europe)\n"
+"cp1250 (Central and Eastern Europe)\n"
+"cp1251 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"cp1252 (Western Europe)\n"
+"cp1253 (Greek)\n"
+"cp1254 (Turkish)\n"
+"cp1255 (Hebrew)\n"
+"cp1256 (Arabic)\n"
+"cp1257 (Baltic languages)\n"
+"cp1258 (Vietnamese)\n"
+"euc_jp (Japanese)\n"
+"euc_jis_2004 (Japanese)\n"
+"euc_jisx0213 (Japanese)\n"
+"euc_kr (Korean)\n"
+"gb2312 (Simplified Chinese)\n"
+"gbk (Unified Chinese)\n"
+"gb18030 (Unified Chinese)\n"
+"hz (Simplified Chinese)\n"
+"iso2022_jp (Japanese)\n"
+"iso2022_jp_1 (Japanese)\n"
+"iso2022_jp_2 (Japanese, Korean, Simplified Chinese, Western Europe, Greek)\n"
+"iso2022_jp_2004 (Japanese)\n"
+"iso2022_jp_3 (Japanese)\n"
+"iso2022_jp_ext (Japanese)\n"
+"iso2022_kr (Korean)\n"
+"latin_1 (West Europe)\n"
+"iso8859_2 (Central and Eastern Europe)\n"
+"iso8859_3 (Esperanto, Maltese)\n"
+"iso8859_4 (Baltic languagues)\n"
+"iso8859_5 (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"iso8859_6 (Arabic)\n"
+"iso8859_7 (Greek)\n"
+"iso8859_8 (Hebrew)\n"
+"iso8859_9 (Turkish)\n"
+"iso8859_10 (Nordic languages)\n"
+"iso8859_13 (Baltic languages)\n"
+"iso8859_14 (Celtic languages)\n"
+"iso8859_15 (Western Europe)\n"
+"johab (Korean)\n"
+"koi8_r (Russian)\n"
+"koi8_u (Ukrainian)\n"
+"mac_cyrillic (Bulgarian, Byelorussian, Macedonian, Russian, Serbian)\n"
+"mac_greek (Greek)\n"
+"mac_iceland (Icelandic)\n"
+"mac_latin2 (Central and Eastern Europe)\n"
+"mac_roman (Western Europe)\n"
+"mac_turkish (Turkish)\n"
+"ptcp154 (Kazakh)\n"
+"shift_jis (Japanese)\n"
+"shift_jis_2004 (Japanese)\n"
+"shift_jisx0213 (Japanese)\n"
+"utf_16 (all languages)\n"
+"utf_16_be (all languages (BMP only))\n"
+"utf_16_le (all languages (BMP only))\n"
+"utf_7 (all languages)\n"
+"utf_8 (all languages)"
+msgstr ""
+"ascii (Αγγλικά)\n"
+"big5 (Παραδοσιακά Κινέζικα)\n"
+"big5hkscs (Παραδοσιακά Κινέζικα)\n"
+"cp037 (Αγγλικά)\n"
+"cp424 (Εβραϊκά)\n"
+"cp437 (Αγγλικά)\n"
+"cp500 (Δυτικής Ευρώπης)\n"
+"cp737 (Ελληνικά)\n"
+"cp775 (Βαλτικής)\n"
+"cp850 (Δυτικής Ευρώπης)\n"
+"cp852 (Κεντρικης και Ανατολικής Ευρώπης)\n"
+"cp855 (Βουλγαρικά,Λευκορωσικά,Σκοπιανά,Ρωσικά, Σερβικά)\n"
+"cp856 (Εβραϊκά)\n"
+"cp857 (Τουρκικά)\n"
+"cp860 (Πορτογαλλικά)\n"
+"cp861 (Ισλανδικά)\n"
+"cp862 (Εβραϊκά)\n"
+"cp863 (Καναδικά)\n"
+"cp864 (Αραβικά)\n"
+"cp865 (Δανέζικα, Νορβηγικά)\n"
+"cp866 (Ρωσικά)\n"
+"cp869 (Ελληνικά)\n"
+"cp874 (Ταϊλανδέζικα)\n"
+"cp875 (Ελληνικά)\n"
+"cp932 (Ιαπωνία)\n"
+"cp949 (Κορεάτικα)\n"
+"cp950 (Παραδοσιακά Κινεζικά)\n"
+"cp1006 (Ουρντού)\n"
+"cp1026 (Τουρκικά)\n"
+"cp1140 (Δυτικής Ευρώπης)\n"
+"cp1250 (Κεντρικής και Ανατολικής Ευρώπης)\n"
+"cp1251 (Βουλγαρικά,Λευκορωσικά,Σκοπιανά,Ρωσικά, Σερβικά)\n"
+"cp1252 (Δυτικής Ευρώπης)\n"
+"cp1253 (Ελληνικά)\n"
+"cp1254 (Τουρκικά)\n"
+"cp1255 (Εβραϊκά)\n"
+"cp1256 (Αραβικά)\n"
+"cp1257 (Βαλτικής)\n"
+"cp1258 (Βιετναμέζικα)\n"
+"euc_jp (Ιαπωνικά)\n"
+"euc_jis_2004 (Ιαπωνικά)\n"
+"euc_jisx0213 (Ιαπωνικά)\n"
+"euc_kr (Κορεάτικα)\n"
+"gb2312 (Απλουστευμένα Κινέζικα)\n"
+"gbk (Ενιαία Κινέζικα)\n"
+"gb18030 (Ενιαία Κινέζικα)\n"
+"hz (Απλουστευμένα Κινέζικα)\n"
+"iso2022_jp (Ιαπωνικά)\n"
+"iso2022_jp_1 (Ιαπωνικά)\n"
+"iso2022_jp_2 (Ιαπωνικά, Κορεάτικα, Απλουστευμένα Κινέζικα, Δυτικής Ευρώπης, "
+"Ελληνικά)\n"
+"iso2022_jp_2004 (Ιαπωνικά)\n"
+"iso2022_jp_3 (Ιαπωνικά)\n"
+"iso2022_jp_ext (Ιαπωνικά)\n"
+"iso2022_kr (Κορεάτικα)\n"
+"latin_1 (Δυτικής Ευρώπη)\n"
+"iso8859_2 (Κεντρικής και Ανατολικής Ευρώπης)\n"
+"iso8859_3 (Εσπεράντο, Μαλτέζικα)\n"
+"iso8859_4 (Βαλτικής)\n"
+"iso8859_5 (Βουλγαρικά,Λευκορωσικά,Σκοπιανά,Ρωσικά, Σερβικά)\n"
+"iso8859_6 (Αραβικά)\n"
+"iso8859_7 (Ελληνικά)\n"
+"iso8859_8 (Εβραϊκά)\n"
+"iso8859_9 (Τουρκικά)\n"
+"iso8859_10 (Σκανδιναβικές γλώσσες)\n"
+"iso8859_13 (Βαλτικής)\n"
+"iso8859_14 (Κέλτικες γλώσσες)\n"
+"iso8859_15 (Δυτικής Ευρώπης)\n"
+"johab (Κορεάτικα)\n"
+"koi8_r (Ρωσικά)\n"
+"koi8_u (Ουκρανικά)\n"
+"mac_cyrillic (Βουλγαρικά,Λευκορωσικά,Σκοπιανά,Ρωσικά, Σερβικά)\n"
+"mac_greek (Ελληνικά)\n"
+"mac_iceland (Ισλανδικά)\n"
+"mac_latin2 (Κεντρικής και Ανατολικής Ευρώπης)\n"
+"mac_roman (Δυτικής Ευρώπης)\n"
+"mac_turkish (Τουρκικά)\n"
+"ptcp154 (Καζακική)\n"
+"shift_jis (Ιαπωνικά)\n"
+"shift_jis_2004 (Ιαπωνικά)\n"
+"shift_jisx0213 (Ιαπωνικά)\n"
+"utf_16 (όλες οι γλώσσες)\n"
+"utf_16_be (όλες οι γλώσσες (BMP μόνο))\n"
+"utf_16_le (όλες οι γλώσσες (BMP μόνο))\n"
+"utf_7 (όλες οι γλώσσες)\n"
+"utf_8 (όλες οι γλώσσες)"
+
+#: ../glade/import.glade.h:1
+msgid "<b>Import only fields selected below</b>"
+msgstr "<b>Εισάγετε μόνο τα πεδία που είναι κάτωθεν επιλεγμένα</b>"
+
+#: ../glade/import.glade.h:2
+msgid "<b>Importing...</b>"
+msgstr "<b>Εισαγωγή...</b>"
+
+#: ../glade/import.glade.h:7
+msgid "Import window"
+msgstr "Εισαγωγή παραθύρου"
+
+#: ../glade/import.glade.h:8
+msgid "Plugin"
+msgstr "Πρόσθετη λειτουργία"
+
+#: ../glade/import.glade.h:9
+msgid "Source"
+msgstr "Προέλευση"
+
+#, fuzzy
+#~ msgid "By Tag"
+#~ msgstr "Ετικέτες"
+
+#, fuzzy
+#~ msgid "Loaned to"
+#~ msgstr "Ενοικίαση στον (στην)"
+
+#~ msgid "Column \"%s\" is not unique"
+#~ msgstr "Η στήλη \"%s\" δεν είναι μοναδική"
+
+#, fuzzy
+#~ msgid "No movie selected"
+#~ msgstr "Απομάκρυνση επιλεγμένης ταινίας"
+
+#, fuzzy
+#~ msgid ""
+#~ "Plugin exports data using templates to a website grouped by collection"
+#~ msgstr "Πρόσθετο που εξάγει δεδομένα χρησιμοποιώντας πρότυπα"
+
+#~ msgid " movie(s) in collection. "
+#~ msgstr " ταινία(ες) στη συλλογή "
+
+#~ msgid " movie(s) loaned. "
+#~ msgstr " ταινία(ες) δανείστηκαν "
+
+#~ msgid "You haven't seen "
+#~ msgstr "Δεν έχετε δει "
+
+#~ msgid " movie(s)"
+#~ msgstr " ταινία(ες)"
+
+#~ msgid "Select A File"
+#~ msgstr "Επιλογή αρχείου"
+
+#~ msgid "Brasilian Portuguese"
+#~ msgstr "Πορτογαλικά Βραζιλίας"

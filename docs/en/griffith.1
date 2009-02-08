@@ -1,0 +1,80 @@
+'\" -*- coding: us-ascii -*-
+.if \n(.g .ds T< \\FC
+.if \n(.g .ds T> \\F[\n[.fam]]
+.de URL
+\\$2 \(la\\$1\(ra\\$3
+..
+.if \n(.g .mso www.tmac
+.TH griffith 1 "Dec 20, 2006" "" ""
+.SH NAME
+griffith \- film collection manager
+.SH SYNOPSIS
+'nh
+.fi
+.ad l
+\fBgriffith\fR \kx
+.if (\nx>(\n(.l/2)) .nr x (\n(.l/5)
+'in \n(.iu+\nxu
+'in \n(.iu-\nxu
+.ad b
+'hy
+.SH DESCRIPTION
+Griffith is a film collection manager.
+Adding items to the movie collection is as quick and easy as typing the film
+title and selecting a supported source. Griffith will then try to fetch all
+the related information from the Web.
+.SH OPTIONS
+.TP 
+\*(T<\fB\-h\fR\*(T> \*(T<\fB\-\-help\fR\*(T> 
+Show usage information.
+.TP 
+\*(T<\fB\-D\fR\*(T> \*(T<\fB\-\-debug\fR\*(T> 
+Run in debug mode.
+.TP 
+\*(T<\fB\-C\fR\*(T> \*(T<\fB\-\-clean\fR\*(T> 
+find and delete orphan files in posters directory.
+.TP 
+\*(T<\fB\-\-check\-dep\fR\*(T> 
+check dependencies - if all needed Python modules are installed, it prints nothting.
+.TP 
+\*(T<\fB\-\-sqlecho\fR\*(T> 
+Prints all SQL queries to standart output.
+.TP 
+\*(T<\fB\-\-home DIR\fR\*(T> 
+Set Griffith's home directory. Use this option if you want to change the default ~/.griffith
+.PP
+Printing movie list:
+.TP 
+\*(T<\fB\-c <expr>\fR\*(T> \*(T<\fB\-\-cast=<expr>\fR\*(T> 
+cast field must contain <expr>
+.TP 
+\*(T<\fB\-d <expr>\fR\*(T> \*(T<\fB\-\-director=<expr>\fR\*(T> 
+director field must contain <expr>
+.TP 
+\*(T<\fB\-o <expr>\fR\*(T> \*(T<\fB\-\-original_title=<expr>\fR\*(T> 
+original title field must contain <expr>
+.TP 
+\*(T<\fB\-t <expr>\fR\*(T> \*(T<\fB\-\-title=<expr>\fR\*(T> 
+title field must contain <expr>
+.TP 
+\*(T<\fB\-y <number>\fR\*(T> \*(T<\fB\-\-year=<number>\fR\*(T> 
+movie must be released in year <number>
+.TP 
+\*(T<\fB\-s <columns>\fR\*(T> \*(T<\fB\-\-sort=<columns>\fR\*(T> 
+set sort columns to <columns>. Example: \-\-sort=o_title,number,director
+.SH "SEE ALSO"
+Homepage: \(lahttp://www.griffith.cc/\(ra
+.SH BUGS
+If you want to help or report any bugs founded please visit
+.URL http://www.griffith.cc/ homepage
+or
+\(lahttps://bugs.launchpad.net/griffith\(ra
+.SH AUTHORS
+Griffith was written by Vasco Nunes and Piotr O\(oA\(14arowski.
+See the AUTHORS and THANKS files for a list of other
+contributors.
+.PP
+Copyright (C) 2005-2008 Vasco Nunes <\*(T<vasco.m.nunes@gmail.com\*(T>>,
+Piotr O\(oA\(14arowski <\*(T<ozarow+griffith@gmail.com\*(T>>,
+.PP
+This man page was written by Piotr Ozarowski

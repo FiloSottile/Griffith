@@ -1,0 +1,421 @@
+Griffith 0.10-beta1
+===================
+* Filter movies using complex search criteria functionality
+* Posters stored in database (+local cache)
+* New fields: aspect ratio, cameraman and screenplay
+* Lots of internal changes
+  + Unicode used internally (less problems with encodings, still needs some work)
+* Movie plugins updated
+* Export plugins are now exporting movies listed in main window only
+* Lots of bugs fixed, some speedups
+
+Note to package maintainers:
+Please note that Griffith requires Python >=2.5 and SQLAlchemy >= 0.5 now
+(see `./griffith --check-dep` or `./griffith --show-dep`)
+
+
+Griffith 0.9.8
+==============
+* New movie plugin: Amazon
+* Updated movie plugins: IMDb, IMDB-de, Kino.de, OFDb, FilmeVonAZ, Zelluloid
+* Translation changes:
+  + new: Persian, Finnish, Low German
+  + updated: bg, fi, pl, rs, fa
+* added compatibility with pysqlite2 2.5.0
+* bugs fixed: #179618, #258817, #273172, #253272 (see ChangeLog for more)
+
+
+Griffith 0.9.7.1
+================
+* Fixed crash when database (rating/year/runtime fields) contains empty data
+
+
+Griffith 0.9.7 ("Michael Jahn's release" :-)
+==============
+* Fixed fetching posters from Amazon
+* Updated movie plugins: DVDEmpire, Filmtipset, Filmweb, OFDb, Zelluloid
+* Update export plugins: HTML, PDF
+* Translation changes:
+  + new: Latvian, Ukrainian 
+  + updated: bg, ca, da, de, el, es, fr, it, nb, pt, pt_BR, ru, sv, tr
+* Few quick filter combos added (advanced search function not ready yet)
+* See ChangeLog for more changes
+
+
+Griffith 0.9.6
+==============
+* Distribute local copy of SQLAlchemy 0.3.11 (Griffith 0.10 which will work with SQLAlchemy 0.4.x is not ready yet)
+* Updated movie plugins: AniDb, FilmeVonAZ, Kino.de, OFDb, Stopklatka, Zelluloid
+* Translation changes:
+  + new: Estonian, Hungarian, Indonesian, Korean, Occitan (post 1500), Pashto, Slovak
+  + updated: almost all :-)
+* Quick filter for volumes
+* Added columns genre, seen, runtime and year to the mainlist
+* See ChangeLog for more changes
+
+
+Griffith 0.9.5
+==============
+* Backup function fixed
+* Updated movie plugins: 7arte, IMDB-de, KinoDE
+* Several changes on loan e-mail reminder system:
+  + Loan E-mail reminder timeout implemented
+  + Support for TLS smtp auth handshaking
+  + Added smtp server port usage
+  + Added gmail smtp server support
+* Translation changes:
+  + new: Catalan, Norwegian Bokmal
+  + updated: Brazilian Portuguese, Cech, Dutch, French, German, Italian, Polish, Portuguese, Russian
+* [Bug #11864] Fixed medium and video codec's default value in add window
+
+
+Griffith 0.9.4
+==============
+* Fixed volume/colection loaning problem
+* Support for different database names with sqlite
+* Updated movie plugins: FDb, OFDb, PTGate, Kino.de, DVD-Palace and IMDB-de
+* New movie plugins: FilmTipset
+* Translation files synchronized with Rosetta
+  + new: Japanese, Russian and Turkish
+  + updated: Czech, Spanish, Bulgarian, Greek
+* Few bugs fixed
+
+
+Griffith 0.9.3.1
+================
+* Problem with saving database preferences in config file fixed
+
+
+Griffith 0.9.3
+==============
+* New configuration file format (human readable) - please note that data from old config file is not used
+* Updated movie plugins: Filmweb, WP, FDb, IMDb, 7arte.net, Cineteka, Kino.de, DVD-Palace, E-Pipoca, Stopklatka
+* New movie plugins: FilmDb, Zelluloid, IMDb-de
+* New translations:
+  + Dutch (thanks to Marcel Dijkstra)
+  + Danish (thanks to Joe Dalton)
+  + Greek (thanka to Ioannis Koniaris)
+  + Simplified Chinese (thanks to kempson)
+* Updated translations: German, Spanish, French, Polish and Portuguese Brazilian (from Rosetta)
+* Added new alpha export plugin for iPods
+* Added Microsoft SQL support
+* Lots of bugs fixed
+
+
+Griffith 0.9.2
+==============
+* Updated movie plugins: IMDB, CSFD, KinoDE, FilmeVonAZ
+* New movie plugin: DVDEmpire
+* New seen/unseen icons
+
+
+Griffith 0.9.1
+==============
+Loan data is now imported correctly from old database.
+Broken databases will be fixed automatically, but return date will be set to 2007-01-01.
+If you don't like this behaviour, redo the upgrade process by changing
+"griffith.db" into "griffith.gri" in griffith.conf file. On Linux you can do
+that with this simple command: `sed -ie 's/griffith.db/griffith.gri/' ~/griffith.conf`
+
+
+Griffith 0.9
+============
+* Possible memory leak fixed (year data from some movie plugins wasn't parsed
+  correctly)
+* AnimeDB, Filmweb, PTGate and WP movie plugins updated
+* CSV import plugin updated
+* Fetch from Amazon function recognizes more posters now
+* First movie is selected by default now
+* Czech translation updated
+
+
+Griffith 0.9-rc3
+================
+* Old database is not modified during upgrade process (bug introduced in 0.9-rc2)
+* Catch some more bad cases while upgrading database
+* Fix upgrading volume / collection loan data
+* Updated translations: Italian
+
+
+Griffith 0.9-rc2
+================
+* Griffith works now a lot faster with large (>1000 movies) databases
+* Fix displaying volume/collection's loan status
+* Config files are now fully cross-platform
+* New features:
+  + limit search results to x movies
+  + sort by last added movies
+  + hide "Number" column
+  + change "seen it" status without opening edit window, new icons added
+* Filmweb movie plugin fixed
+* Updated translations: Czech, French, German, Portuguese, Portuguese Brazilian,
+  Swedish 
+
+Note to package maintainers:
+Please keep pysqlite1.0 as required dependency (see README file)
+This will make upgrade process from 0.6.2 a lot easier.
+
+
+Griffith 0.9~rc1 "Christmas Edition"
+====================================
+This release is marked as "Release Candidate" due to:
+ - database format change (if you have any problems send us the
+   ~/.griffith/griffith.gri file or `griffith --debug` output)
+ - translations are not finished (translators need more time)
+
+* SQLAlchemy transition, i.e.
+  + MySQL support added
+  + PostgreSQL support added
+  + SQLite3 transition on Linux (pysqlite2 is now required)
+* Import plugin system added, first import plugin (CSV)
+* All movie plugins updated
+* New data:
+  + video codec
+  + audio codec
+  + audio channels
+  + subtitle format
+  + "commentary" language type added
+* GUI changes:
+  + editing movie details moved to "Add" dialog
+  + languages data look changed
+  + draggable toolbar
+  + new "next" / "previous" buttons
+  + windows converted to dialogs
+* Selectable search data in movie plugins (search only for data you want to
+  download or not yet filled data)
+* Fetch details from different movie plugins
+* Smaller backup zip files generation
+* HTML export plugin changes:
+  + Fixed problem with posters conversion on Windows
+  + New green style in exported HTML tables
+* Configurable main list's default sorting criteria
+* Lots of bugs fixed (some new added ;-)
+
+
+Griffith 0.6.2
+==============
+This release updates some movie plugins. It's last release before
+SQLAlchemy transition. See SVN repository for list of new features already
+available.
+
+Updates:
+
+* Updated movie plugins: 7arte, AniDB, Cinematografo, Filmweb, IMDb.
+* New movie plugins: FilmeVonAZ, MovieKinoDe ((thanks to Michael Jahn), FDb.
+* Added italian translation (thanks to Diego Porcelli).
+* German translation updated (thanks to Malte Wiemann).
+* Some other tiny changes.
+
+
+Griffith 0.6.1
+==============
+This is mainly a bug fix release. Some changes:
+
+* Updated spanish, czech and polish language files.
+* Updated allocine and CSFD movie plugins.
+* Some makefile code cleanup.
+* First tag can now be renamed.
+* Quick filter rewrited with new fields as well.
+* Some language typos fixed.
+* Many windows related fixes.
+* Windows version is now up-to-date with posix one.
+* Initial latex export support
+
+
+Griffith 0.6
+============
+Latest Griffith has some new exciting features and dozens of bugs fixed as
+well. Also, this version has a reworked user interface and many code
+improvements.
+
+Some highlights:
+
+* Unlimited movie languages (lector, dubbing and subtitles).
+* Unlimited movie tags.
+* A reworked user interface
+* A new french movie plugin - Allocine (Thanks to Pierre-Luc Levy).
+* Added french translation (Thanks to Pierre-Luc Levy).
+* Added spanish translation (thanks to Daniel Ucero).
+* Movie numbers are now editable.
+* Custom fonts for PDF lists and movie covers.
+* Initial console support with multiple arguments for searching operations,
+  debug and maintenance.
+* Dozens of bugs fixed and lots of code optimization. See full changelog for
+  details.
+
+
+Griffith 0.5.1
+==============
+Changes/New features:
+
+* Added posters conversion to HTML export plugin
+* Added simple style to table template (HTML export plugin)
+* Added a win32 installer custom image.
+* Added portuguese, polish, german and czech translations to win32 installer.
+* Added Czech translation (Thanks to Blondak )
+* Added a new czech movie plugin (CSFD - esko-Slovensk Filmov Databze) - Thanks
+  to Blondak 
+* Polish translation updated
+
+Bugs fixed:
+
+* [Bug #5686] Colection/volume remembers selection after adding a movie
+* [Bug #5631] wrong language/locale with 0.5
+* [Bug #5684] About window doesn't work on windows
+* [Bug #5683] Two filters not working at all on windows
+* Removed cancel button from confirmation dialogs
+* Fixed layer dropdown list entries
+* 'Excellent' mispelled in condition dropdown list
+
+
+Griffith 0.5
+============
+Changes/New features
+
+* HTML export plugin updated to v3.3
+* Updated polish and portuguese translations
+* Memory management improvements when using large db collections
+* Media names are now stored in database. No frontend interface yet.
+* Added support to fetch bigger posters using Amazon Web Services
+* Added some HTML export plugin fixes for win32 compatibility
+* win32 build should use now the libwimp widget engine for better windows xp
+  default theme integration
+* Now Griffith's dir defaults to localized 'My Documents' dir on win32
+  environments
+* Added preferences defaults to media, layers, condition, color and region
+* Updated WP movie plugin (webpage was changed)
+* Removing poster images when deleting movie feature added
+* Added a 'by collection' quick filter
+* Poster viewer events changed to only show full poster when entering/leaving
+  zoom button
+* Moved all movie plugins logos to a new optional package
+* Added some tooltips to preferences widgets
+* Added some new tools to operate with posters
+* Added bulgarian translation (thanks to Luchezar P. Petkov)
+* Volumes / Collections feature added
+* Added new XML export plugin
+* Renamed Export With Templates plugin to HTML export plugin
+* DVDZone2 plugin renamed to Mediadis according to new company service and
+  website. Some enhancement to this plugin implemented.
+* Added Tanuki-Anime and Moviefone (America online) movie plugin
+* Added experimental support for Microsoft Windows 2000, Millenium and Windows 98
+  systems
+* Some fixes in Makefile (for MacOSX users)
+* Small main window changes
+* Gery movie plugin removed - webpage is not working
+* Merged two patches contributed by Arjen Schwarz, addressing one problem with
+  email notification that was using an incorrect date/time format and another
+  fixing some english spell errors found in language file.
+* Updated Anime Database and Filmweb movie plugins
+* Movie window reorganization
+
+Bugs fixed:
+
+* [Bug #1302] Searching movies with non-english characters gives null results
+* [Bug #1312] notes not empty after adding a movie
+* [Bug #1314] LANG environment variable no longer required
+* [Bug #1315] Added extra warning dialog when deleting directory
+* [Bug #1313] Film fields with & or < break the PDF export plugin
+* [Bug #5306] Last toolbar button not working as expected
+* [Bug #5344] fixed wrong encoding in IMDb movie plugin (thanks to dieterv)
+* [Bug #1324] Makefile fix.
+
+
+Griffith 0.4.2
+==============
+This is mainly a bug fixing release, addressing some issues found on the
+previous one. These are the main changes:
+
+* HTML export plugin now can use custom templates with XML config files. Styles
+  can have a thumbnail picture preview
+* Added manpages to griffith and to griffith-export-template
+* Added double click events and a popup menu in maintree view
+
+Bugs fixed:
+
+* [Bug #1260] data for the color, region, condition and layers not being stored
+  in database; Some spelling mistakes fixed on english language file. (thanks to
+  Arjen Schwarz)
+* [Bug #1261] number disk is 0.
+* [Bug #1295] The 'How To Irritate People' bug
+* Fixed encoding bug in built in debug method
+* Fixed a bug with malformed urls
+
+Read the included Changelog for the complete listing.
+
+
+Griffith 0.4.1
+==============
+A bug fix release, addressing some issues found on 0.4:
+
+* Fixed some encoding problems with portuguese movie plugins
+* Some minor UI changes
+* HTML export plugin update
+* [Bug #1258] wrong movie fetching
+* [Bug #1253] gtkspell module not found
+
+
+Griffith 0.4
+============
+* Loans history implemented
+* Better performance for large collections
+* New 'E-mail reminder' feature
+* HTML export plugin updated
+* New fields: seen movie, color, media condition, DVD region and DVD layers
+  information
+* Favorite movie plugin can be defined in the preferences
+* New movie plugins added: AniDB (english), OFDb (german) and ClubeMyDVD
+  (portuguese)
+* Added german translation; polish and portuguese translations updated.
+* Added picture preview and filter to file choose dialog
+* Added a 'Suggest a movie' feature.
+* Some minor UI changes.
+* Dozens of bugs fixed.
+
+Read the included Changelog for the complete listing.
+
+
+Griffith 0.3
+============
+* Three new movie plugins: CineMovie (french), Cinematografo (italian) and
+  E-pipoca (brasilian)
+* Added key events for trivial operations
+* Export plugin system implemented
+* Added HTML export plugin (contributed by Piotr Ozarowski)
+
+Bugs fixed:
+
+* [Bug #1192] New database not working under windows
+* [Bug #1196] Can't delete people on the friends list
+* [Bug #1195] Loans not working
+* [Bug #1194] Filter drop menu not working
+* [Bug #1193] Add new. Cancel not working 
+* [Bug #1190] Encoding problems with polish when exporting to PDF (and other
+  languages)
+* Problem with some characters not escaped as should be when inserting in db
+* Some minor PDF export plugin related fixes
+
+
+Griffith 0.2
+============
+* Multilanguage support (UNIX only)
+* Polish translation added (thanks to Piotr Ozarowski)
+* Portuguese translation added
+* True plugin system for web based data sources implemented
+* Five new polish plugins added (Filmeweb, Gery, Onet, Stopklatka and WP -
+  thanks to Piotr Ozarowski)
+* One new portuguese plugin added (PTGate)
+* Added flag for loaned films
+* Two new fields for data holding: notes and film rating
+* Film posters can now be replaced by custom ones
+* Initial gtkspell support (unix only)
+* Export database to CSV file
+* Exact search matches are now used without user intervention
+* Initial Microsoft Windows support
+* Initial Red Carpet package availability
+* Dozens of bugs fixed. See source package changelog for details.
+
+
+Griffith 0.1
+============
+Initial release

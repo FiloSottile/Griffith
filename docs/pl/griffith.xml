@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.4//EN"
+	"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
+	[
+	<!ENTITY program   "griffith">
+	<!ENTITY command   "<command>&program;</command>">
+	<!ENTITY homepage  "http://www.griffith.cc/">
+	]>
+<refentry>
+	<refentryinfo>
+		<!-- Informations about the author of the document -->		
+		<author>
+			<firstname>Piotr</firstname>
+			<surname>Ożarowski</surname>
+		</author>
+		<address>ozarow+griffith@gmail.com</address>
+		<copyright>
+			<year>2005-2008</year>
+			<holder>Piotr Ożarowski</holder>
+		</copyright>
+		<date>Dec 22, 2006</date>
+	</refentryinfo>
+	<refmeta>
+		<refentrytitle>&program;</refentrytitle>
+		<manvolnum>1</manvolnum>
+	</refmeta>
+	<refnamediv>
+		<refname>&program;</refname>
+		<refpurpose>zarządca kolekcji filmów</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv>
+		<cmdsynopsis>&command; [OPCJE]</cmdsynopsis>
+	</refsynopsisdiv>
+	<refsect1>
+		<title>OPIS</title>
+		<para>Griffith zarządza kolekcją filmów.
+			Dodawanie kolejnych pozycji jest tak łatwe i szybkie, jak wpisanie tytułu filmu i wybranie
+			odpowiedniego źródła. Griffith następnie sam pobierze z internetu potrzebne informacje.</para>
+	</refsect1>
+	<refsect1>
+		<title>OPCJE</title>
+		<variablelist>
+			<varlistentry>
+				<term>
+					<option>-h</option></term><term><option>--help</option>
+				</term>
+				<listitem>
+					<para>Pokazuje informacje o sposobie użycia.</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-D</option>
+					<option>--debug</option>
+				</term>
+				<listitem>
+					<para>Uruchamia program w trybie debugowania.</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-C</option>
+					<option>--clean</option>
+				</term>
+				<listitem>
+					<para>znajduje i usuwa niepotrzebne pliki w katalogu z plakatami.</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>--check-dep</option>
+				</term>
+				<listitem>
+					<para>sprawdza zależności - jeżeli wszystkie potrzebne moduły Pythona są
+						zainstalowane, polecenie nie wyświetla żadnych komunikatów.</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>--sqlecho</option>
+				</term>
+				<listitem>
+					<para>Wyświetla wszystkie zapytania SQL na standardowym wyjściu.</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>--home DIR</option>
+				</term>
+				<listitem>
+					<para>Ustawia katalog domowy Griffith'a. Użyj tej opcji, jeżeli chcesz zmienić
+						domyślny katalog ~/.griffith</para> 
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>Wyszukiwanie listy filmów:</para>
+		<variablelist>
+			<varlistentry>
+				<term>
+					<option>-c &lt;wyrażenie&gt;</option>
+					<option>--cast=&lt;wyrażenie&gt;</option>
+				</term>
+				<listitem>
+					<para>pole obsada musi zawierać &lt;wyrażenie&gt;</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-d &lt;wyrażenie&gt;</option>
+					<option>--director=&lt;wyrażenie&gt;</option>
+				</term>
+				<listitem>
+					<para>pole dyrektor musi zawierać &lt;wyrażenie&gt;</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-o &lt;wyrażenie&gt;</option>
+					<option>--original_title=&lt;wyrażenie&gt;</option>
+				</term>
+				<listitem>
+					<para>pole tytuł oryginalny musi zawierać &lt;wyrażenie&gt;</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-t &lt;wyrażenie&gt;</option>
+					<option>--title=&lt;wyrażenie&gt;</option>
+				</term>
+				<listitem>
+					<para>pole tytułu musi zawierać &lt;wyrażenie&gt;</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-y &lt;numer&gt;</option>
+					<option>--year=&lt;numer&gt;</option>
+				</term>
+				<listitem>
+					<para>film musi być wydany w roku &lt;numer&gt;</para> 
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>
+					<option>-s &lt;kolumny&gt;</option>
+					<option>--sort=&lt;kolumny&gt;</option>
+				</term>
+				<listitem>
+					<para>ustaw metodę sortowania na &lt;columns&gt;. Przykład użycia: --sort=o_title,number,director</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1>
+		<title>ZOBACZ TAKŻE</title>
+
+		<para>Strona domowa: <ulink url="&homepage;">&homepage;</ulink></para>
+	</refsect1>
+	<refsect1>
+		<title>BŁĘDY</title>
+		<para>Jeżeli szukasz pomocy lub chcesz zgłosić błąd, odwiedź
+			<ulink url="&homepage;">stronę domową</ulink> lub
+			<ulink url="https://bugs.launchpad.net/griffith">
+			https://bugs.launchpad.net/griffith
+			</ulink>
+		</para>
+	</refsect1>
+	<refsect1>
+		<title>AUTORZY</title>
+		<para>Griffith został napisany przez Vasco Nunesa i Piotra Ożarowskiego. Zobacz plik AUTHORS z listą współpracowników</para>
+		<para>
+			Copyright (C) 2005-2008 Vasco Nunes <email>vasco.m.nunes@gmail.com</email>,
+			Piotr Ożarowski <email>ozarow+griffith@gmail.com</email>,
+		</para>
+		<para>Ta strona podręcznika została napisana przez Piotra Ożarowskiego</para>
+	</refsect1>
+</refentry>
