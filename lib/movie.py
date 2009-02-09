@@ -55,6 +55,8 @@ class Movie(object):
     year = None
     screenplay = None
     cameraman = None
+    resolution = None
+    barcode = None
     
     movie_id = None
     debug = False
@@ -73,6 +75,10 @@ class Movie(object):
     
     # functions that plugin should implement: {{{
     def initialize(self):
+        pass
+    def get_barcode(self):
+        pass
+    def get_cameraman(self):
         pass
     def get_cast(self):
         pass
@@ -96,7 +102,11 @@ class Movie(object):
         pass
     def get_rating(self):
         pass
+    def get_resolution(self):
+        pass
     def get_runtime(self):
+        pass
+    def get_screenplay(self):
         pass
     def get_site(self):
         pass
@@ -107,10 +117,6 @@ class Movie(object):
     def get_trailer(self):
         pass
     def get_year(self):
-        pass
-    def get_screenplay(self):
-        pass
-    def get_cameraman(self):
         pass
     #}}}
 
