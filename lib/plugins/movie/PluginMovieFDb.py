@@ -32,7 +32,7 @@ plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
 plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.13'
+plugin_version        = '1.14'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN = re.compile('/film/.*/zwiastuny/odtwarzaj/[0-9]*')
@@ -47,7 +47,7 @@ class Plugin(movie.Movie):
             self.url = "http://fdb.pl/%s" % str(movie_id)
 
     def get_image(self):
-        self.image_url = gutils.trim(self.page, 'class="poster"', '/></a>')
+        self.image_url = gutils.trim(self.page, 'class="gfx-poster"', '/></a>')
         self.image_url = gutils.trim(self.image_url,'src="','"')
         if self.image_url.endswith('http://fdb.pl/images/fdb2/add_poster.png?1214306282'):
             self.image_url = ''
