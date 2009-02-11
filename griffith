@@ -377,6 +377,7 @@ class Griffith:
 			movie.refresh()
 			self.treemodel.set_value(m_iter,6,movie.seen)
 			self.treeview_clicked()
+			self.count_statusbar()
 
 	def sugest_movie(self, *args):
 		if not self.widgets['menu']['not_seen_movies'].get_active():
