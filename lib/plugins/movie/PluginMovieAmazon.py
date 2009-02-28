@@ -218,6 +218,9 @@ class Plugin(movie.Movie):
         if hasattr(self.page.ItemAttributes, 'EAN'):
             self.notes = 'EAN: ' + self.page.ItemAttributes.EAN
 
+    def get_barcode(self):
+        if hasattr(self.page.ItemAttributes, 'EAN'):
+            self.barcode = self.page.ItemAttributes.EAN
 
 class SearchPlugin(movie.SearchMovie):
 
