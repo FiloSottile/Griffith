@@ -29,13 +29,13 @@ plugin_url          = "www.cinematografo.it"
 plugin_language     = _("Italian")
 plugin_author       = "Vasco Nunes, Piotr Ożarowski"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version      = "1.2"
+plugin_version      = "1.3"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode='iso-8859-1'
+        self.encode   = 'iso-8859-1'
         self.movie_id = id
-        self.url = "http://www.cinematografo.it/bancadati/consultazione/schedafilm.jsp?completa=si&codice=%s" % str(self.movie_id)
+        self.url      = "http://www.cinematografo.it/bancadati/consultazione/schedafilm.jsp?completa=si&codice=%s" % str(self.movie_id)
 
     def get_image(self):
         # Find the film's poster image
@@ -129,8 +129,8 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
     # A movie search object
     def __init__(self):
-        self.encode='iso-8859-1'
-        self.original_url_search = "http://www.cinematografo.it/bancadati/consultazione/trovatitoli.jsp?tipo=CONTIENEPAROLE&word="
+        self.encode                = 'iso-8859-1'
+        self.original_url_search   = 'http://www.cinematografo.it/bancadati/consultazione/trovatitoli.jsp?startrighe=0&endrighe=100&tipo=CONTIENEPAROLE&word='
         self.translated_url_search = self.original_url_search
 
     def search(self, parent_window):
@@ -167,8 +167,9 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 12, 12 ],
-        'però'  : [  6,  6 ]
+        'Rocky'      : [ 12, 12 ],
+        'però'       : [  6,  6 ],
+        'il ritorno' : [ 95, 95 ]
     }
 
 class PluginTest:
