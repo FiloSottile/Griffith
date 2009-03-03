@@ -186,8 +186,15 @@ class SearchPlugin(movie.SearchMovie):
     PATTERN2 = re.compile(r"""<a href=['"]/title/tt([0-9]+)/["'](.*?)</tr>""")
 
     def __init__(self):
-        self.original_url_search   = 'http://www.imdb.com/List?words='
-        self.translated_url_search = 'http://www.imdb.com/find?more=tt;q='
+        # http://www.imdb.com/List?words=
+        # finds every title sorted alphabetically, first results are with a quote at
+        # the beginning (episodes from tv series), no popular results at first
+        # http://www.imdb.com/find?more=tt;q=
+        # finds a whole bunch of results. if you look for "Rocky" you will get 903 results.
+        # http://www.imdb.com/find?s=tt;q=
+        # seems to give the best results. 88 results for "Rocky", popular titles first.
+        self.original_url_search   = 'http://www.imdb.com/find?s=tt;q='
+        self.translated_url_search = 'http://www.imdb.com/find?s=tt;q='
         self.encode = 'utf-8'
 
     def search(self,parent_window):
@@ -195,6 +202,14 @@ class SearchPlugin(movie.SearchMovie):
             return None
         tmp_page = gutils.trim(self.page, 'Here are the', '</TABLE>')
         if not tmp_page:
+            has_results = re.match('[(]Displaying [1-9][0-7]* Results[)]', self.page)
+            if not has_results:
+                # nothing or one result found, try another url which looks deeper in the imdb database
+                # example: Adventures of Falcon -> one result, jumps directly to the movie page
+                # which isn't supported by this plugin
+                self.url = 'http://www.imdb.com/find?more=tt;q='
+                if not self.open_search(parent_window):
+                    return None
             self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>')
         else:
             self.page = tmp_page
