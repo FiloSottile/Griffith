@@ -43,9 +43,9 @@ plugin_version      = "1.1"
 class Plugin(movie.Movie):
 
 	def __init__(self, id):
-		self.encode='utf8'
+		self.encode   = 'utf8'
 		self.movie_id = id
-		self.url = 'http://www.amazon.de/dp/' + str(self.movie_id)
+		self.url      = 'http://www.amazon.de/dp/' + str(self.movie_id)
 
 	def open_page(self, parent_window=None, url=None):
 		# dont use base functionality
@@ -223,8 +223,8 @@ class SearchPlugin(movie.SearchMovie):
 	def __init__(self):
 		self.original_url_search   = 'http://www.amazon.de'
 		self.translated_url_search = 'http://www.amazon.de'
-		self.encode='utf8'
-		self.remove_accents = False
+		self.encode                = 'utf8'
+		self.remove_accents        = False
 
 	def search(self,parent_window):
 		# dont use base functionality
@@ -245,7 +245,7 @@ class SearchPlugin(movie.SearchMovie):
 				locale = 'jp'
 			else:
 				locale = None
-			retriever = AmazonRetriever(self.title.encode('iso8859-1'), locale, parent_window, self.progress, self.debug)
+			retriever = AmazonRetriever(self.title, locale, parent_window, self.progress, self.debug)
 			retriever.start()
 			while retriever.isAlive():
 				self.progress.pulse()
@@ -371,9 +371,9 @@ class SearchPluginTest(SearchPlugin):
 	# dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
 	#
 	test_configuration = {
-		'Rocky Balboa'			: [ 10, 10 ],
-		'Arahan'				: [ 6, 6 ],
-		'Ein glückliches Jahr'	: [ 2, 2 ]
+		'Rocky Balboa'         : [ 16, 16 ],
+		'Arahan'               : [  7,  7 ],
+		'Ein glückliches Jahr' : [  2,  2 ]
 	}
 
 class PluginTest:

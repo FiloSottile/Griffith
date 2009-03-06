@@ -225,7 +225,7 @@ def unmarshal(element):
 def buildURL(search_type, searchfield, searchvalue, product_line, type, page, license_key, locale, associate):
     _checkLocaleSupported(locale)
     if isinstance(searchvalue, unicode):
-        searchvalue = searchvalue.encode('iso8859-1')
+        searchvalue = searchvalue.encode('utf8')
     url = "http://" + _supportedLocales[locale][1]
     if search_type == 'ItemLookup':
         url += "&AssociateTag=%s" % associate
