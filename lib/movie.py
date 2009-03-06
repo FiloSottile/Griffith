@@ -169,7 +169,17 @@ class Movie(object):
                 # check for gzip compressed pages before decoding to unicode
                 if len(data) > 2 and data[0:2] == '\037\213':
                     data = gutils.decompress(data)
-                data = data.decode(self.encode)
+                try:
+                    # try to decode it strictly
+                    data = data.decode(self.encode)
+                except UnicodeDecodeError, exc:
+                    # something is wrong, perhaps a wrong character set
+                    # or some pages are not as strict as they should be
+                    # (like OFDb, mixes utf8 with iso8859-1)
+                    # I want to log the error here so that I can find it
+                    # but the program should not terminate
+                    log.error(exc)
+                    data = data.decode(self.encode, 'ignore')
         except IOError:
             pass
         if url is None:
