@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2008
+# Copyright (c) 2006-2009
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -310,7 +310,7 @@ class SearchPluginTest(SearchPlugin):
 	# dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
 	#
 	test_configuration = {
-		'Rocky Balboa'			: [ 6, 6 ],
+		'Rocky Balboa'			: [ 7, 7 ],
 		'Arahan'				: [ 6, 6 ],
 		'Ein glückliches Jahr'	: [ 3, 3 ]
 	}

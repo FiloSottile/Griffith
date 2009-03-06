@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007 Michael Jahn
+# Copyright (c) 2007-2009 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -253,7 +253,7 @@ Axel Häfner' + _(' as ') + 'Schrottplatzwärter\n\
 Simon Gosejohann' + _(' as ') + 'junger Mann\n\
 Piet Klocke' + _(' as ') + 'Junggeselle',
 			'country'			: 'Deutschland',
-			'genre'				: 'Kinder',
+			'genre'				: 'Kinderfilm',
 			'classification'	: 'ohne',
 			'studio'			: 'Bavaria Film, Constantin Film',
 			'o_site'			: False,

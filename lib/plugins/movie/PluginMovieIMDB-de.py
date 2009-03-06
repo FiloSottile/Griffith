@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007-2008 Michael Jahn
+# Copyright (c) 2007-2009 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,9 +34,9 @@ plugin_version      = '1.4'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode = 'iso8859-1'
+		self.encode   = 'iso8859-1'
 		self.movie_id = id
-		self.url = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
+		self.url      = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
 
 	def initialize(self):
 		self.cast_page = self.open_page(url=self.url + '/fullcredits')
@@ -228,10 +228,10 @@ class SearchPlugin(movie.SearchMovie):
 	PATTERN_POWERSEARCH = re.compile(r"""Here are the [0-9]+ matching titles""")
 
 	def __init__(self):
-		self.original_url_search	= 'http://german.imdb.com/find?more=tt&q='
-		self.translated_url_search	= 'http://german.imdb.com/find?more=tt&q='
-		self.encode = 'utf8'
-		self.remove_accents = False
+		self.original_url_search   = 'http://german.imdb.com/find?more=tt&q='
+		self.translated_url_search = 'http://german.imdb.com/find?more=tt&q='
+		self.encode                = 'utf8'
+		self.remove_accents        = False
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -269,8 +269,8 @@ class SearchPluginTest(SearchPlugin):
 	# dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
 	#
 	test_configuration = {
-		'Rocky Balboa'			: [ 15, 15 ],
-		'Ein glückliches Jahr'	: [  6,  6 ]
+		'Rocky Balboa'         : [ 17, 17 ],
+		'Ein glückliches Jahr' : [  6,  6 ]
 	}
 
 class PluginTest:
@@ -288,7 +288,7 @@ class PluginTest:
 			'director'			: 'Sylvester Stallone',
 			'plot' 				: True,
 			'cast'				: 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
-Burt Young' + _(' as ') + 'Paulie Panina\n\
+Burt Young' + _(' as ') + 'Paulie\n\
 Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
 Geraldine Hughes' + _(' as ') + 'Marie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Balboa Jr.\n\
@@ -342,8 +342,8 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
-Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
-übrige Besetzung in alphabetischer Reihenfolge:\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
+Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
@@ -355,7 +355,8 @@ Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
 Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
-Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)',
+Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
+Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)',
 			'country'			: 'USA',
 			'genre'				: 'Action | Sport',
 			'classification'	: False,
@@ -369,7 +370,7 @@ Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)',
 + _('Color') + ': Farbe',
 			'runtime'			: 102,
 			'image'				: True,
-			'rating'			: 7
+			'rating'			: 8
 		},
 		'0069815' : { 
 			'title' 			: 'Ein Glückliches Jahr',
@@ -396,10 +397,9 @@ Bettina Rheims' + _(' as ') + 'La jeune vendeuse\n\
 Joseph Rythmann\n\
 Georges Staquet\n\
 Jacques Villedieu\n\
-Harry Walter\n\
-übrige Besetzung in alphabetischer Reihenfolge:\n\
+Harry Walter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Anouk Aimée' + _(' as ') + 'Une femme (Archivmaterial) (nicht im Abspann)\n\
-Elie Chouraqui' + _(' as ') + '(nicht im Abspann)\n\
+Elie Chouraqui' + _(' as ') + ' (nicht im Abspann)\n\
 Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (nicht im Abspann)\n\
 Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspann)',
 			'country'			: 'Frankreich | Italien',
@@ -415,6 +415,6 @@ Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspa
 + _('Color') + ': Farbe (Eastmancolor)',
 			'runtime'			: 90,
 			'image'				: True,
-			'rating'			: 7
+			'rating'			: 8
 		},
 	}
