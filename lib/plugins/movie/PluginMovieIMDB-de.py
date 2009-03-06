@@ -30,13 +30,13 @@ plugin_url          = 'german.imdb.com'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'mikej06@hotmail.com'
-plugin_version      = '1.4'
+plugin_version      = '1.5'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode = 'iso8859-1'
+        self.encode   = 'iso8859-1'
         self.movie_id = id
-        self.url = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
+        self.url      = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
 
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
@@ -45,15 +45,11 @@ class Plugin(movie.Movie):
         self.imdb_page = self.open_page(url="http://www.imdb.com/title/tt%s" % str(self.movie_id))
         self.imdb_plot_page = self.open_page(url="http://www.imdb.com/title/tt%s/plotsummary" % str(self.movie_id))
         # correction of all &#xxx entities
-        self.page = self.page.decode(self.encode)
         self.page = gutils.convert_entities(self.page)
-        self.page = self.page.encode(self.encode)
-        self.cast_page = self.cast_page.decode(self.encode)
         self.cast_page = gutils.convert_entities(self.cast_page)
-        self.cast_page = self.cast_page.encode(self.encode)
-        self.plot_page = self.plot_page.decode(self.encode)
         self.plot_page = gutils.convert_entities(self.plot_page)
-        self.plot_page = self.plot_page.encode(self.encode)
+        self.imdb_page = gutils.convert_entities(self.imdb_page)
+        self.imdb_plot_page = gutils.convert_entities(self.imdb_plot_page)
 
     def get_image(self):
         tmp = string.find(self.page, 'a name="poster"')
@@ -217,8 +213,8 @@ class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.original_url_search   = 'http://german.imdb.com/find?more=tt&q='
         self.translated_url_search = 'http://german.imdb.com/find?more=tt&q='
-        self.encode = 'utf8'
-        self.remove_accents = False
+        self.encode                = 'utf8'
+        self.remove_accents        = False
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
@@ -257,7 +253,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'          : [ 15, 15 ],
+        'Rocky Balboa'         : [ 17, 17 ],
         'Ein glückliches Jahr' : [  6,  6 ]
     }
 
@@ -276,7 +272,7 @@ class PluginTest:
             'director'          : 'Sylvester Stallone',
             'plot'              : True,
             'cast'              : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
-Burt Young' + _(' as ') + 'Paulie Panina\n\
+Burt Young' + _(' as ') + 'Paulie\n\
 Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
 Geraldine Hughes' + _(' as ') + 'Marie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Balboa Jr.\n\
@@ -330,8 +326,8 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
-Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
-übrige Besetzung in alphabetischer Reihenfolge:\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
+Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
@@ -343,7 +339,8 @@ Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
 Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
-Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)',
+Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
+Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)',
             'country'           : 'USA',
             'genre'             : 'Action | Sport',
             'classification'    : False,
@@ -357,7 +354,7 @@ Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)',
 + _('Color') + ': Farbe',
             'runtime'           : 102,
             'image'             : True,
-            'rating'            : 7
+            'rating'            : 8
         },
         '0069815' : { 
             'title'             : 'Ein Glückliches Jahr',
@@ -384,10 +381,9 @@ Bettina Rheims' + _(' as ') + 'La jeune vendeuse\n\
 Joseph Rythmann\n\
 Georges Staquet\n\
 Jacques Villedieu\n\
-Harry Walter\n\
-übrige Besetzung in alphabetischer Reihenfolge:\n\
+Harry Walter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Anouk Aimée' + _(' as ') + 'Une femme (Archivmaterial) (nicht im Abspann)\n\
-Elie Chouraqui' + _(' as ') + '(nicht im Abspann)\n\
+Elie Chouraqui' + _(' as ') + ' (nicht im Abspann)\n\
 Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (nicht im Abspann)\n\
 Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspann)',
             'country'            : 'Frankreich | Italien',
@@ -403,6 +399,6 @@ Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspa
 + _('Color') + ': Farbe (Eastmancolor)',
             'runtime'            : 90,
             'image'              : True,
-            'rating'             : 7
+            'rating'             : 8
         },
     }

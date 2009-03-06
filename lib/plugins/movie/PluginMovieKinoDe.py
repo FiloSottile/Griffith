@@ -290,7 +290,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'          : [ 6, 6 ],
+        'Rocky Balboa'          : [ 7, 7 ],
         'Arahan'                : [ 6, 6 ],
         'Ein glückliches Jahr' : [ 3, 3 ]
     }

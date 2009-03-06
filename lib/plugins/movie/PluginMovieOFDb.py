@@ -10,19 +10,19 @@ __revision__ = '$Id$'
 import gutils
 import movie,string,re
 
-plugin_name = "OFDb"
-plugin_description = "Online-Filmdatenbank"
-plugin_url = "www.ofdb.de"
-plugin_language = _("German")
-plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
+plugin_name         = "OFDb"
+plugin_description  = "Online-Filmdatenbank"
+plugin_url          = "www.ofdb.de"
+plugin_language     = _("German")
+plugin_author       = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.10"
+plugin_version      = "0.10"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode='utf-8'
+        self.encode   = 'utf8'
         self.movie_id = id
-        self.url = "http://www.ofdb.de/%s" % str(self.movie_id)
+        self.url      = "http://www.ofdb.de/%s" % str(self.movie_id)
 
     def initialize(self):
         # OFDb didn't provide the runtime, studio and classification but it provide a link to the german imdb entry
@@ -116,8 +116,8 @@ class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.original_url_search   = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=OTitel&SText="
         self.translated_url_search = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText="
-        self.encode='utf-8'
-        self.remove_accents = False
+        self.encode                = 'utf8'
+        self.remove_accents        = False
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
@@ -174,12 +174,12 @@ class PluginTest:
             'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
-Geraldine Hughes' + (' as ') + 'Marie\n\
-James Francis Kelly III\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
 Tony Burton\n\
 A.J. Benza\n\
-Henry G. Sanders\n\
-Antonio Tarver' + (' as ') + 'Mason \'The Line\' Dixon\n\
+Henry G. Sanders' + _(' as ') + 'Martin\n\
+Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
 Pedro Lovell\n\
 Ana Gerena\n\
 Angela Boyd\n\
@@ -188,8 +188,8 @@ Maureen Schilling\n\
 Carter Mitchell\n\
 Vinod Kumar\n\
 Tobias Segal\n\
-Tim Carr\n\
-Paul Dion Monte\n\
+Tim Carr' + _(' as ') + 'Robert\'s Friend \n\
+Paul Dion Monte' + _(' as ') + 'Robert\'s Friend \n\
 Kevin King Templeton\n\
 Robert Michael Kelly\n\
 Don Sherman\n\
@@ -198,9 +198,9 @@ Rick Buchborn\n\
 Stu Nahan\n\
 Gary Compton\n\
 Jody Giambelluca\n\
-Frank Stallone\n\
+Frank Stallone als Frank Stallone Jr.' + _(' as ') + 'Dinner Patron \n\
 Fran Pultro\n\
-Michael Buffer as Ring Announcer\n\
+Michael Buffer' + _(' as ') + 'Ring Announcer\n\
 Jack Lazzarado\n\
 Marc Ratner\n\
 Anthony Lato Jr.\n\
@@ -248,7 +248,7 @@ Ricky Cavazos',
             'cast'                : 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard\n\
-André Falcon as Le bijoutier\n\
+André Falcon' + _(' as ') + 'Le bijoutier\n\
 Mireille Mathieu\n\
 Lilo\n\
 Claude Mann\n\
@@ -287,9 +287,9 @@ Elie Chouraqui',
             'plot'                 : True,
             'cast'                : 'Ryoo Seung-beom\n\
 Yoon Soy' + _(' as ') + 'Wi-jin\n\
-Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
-Jung Doo-hong' + _(' as ') + 'Heuk-Woon\n\
-Yun Ju-sang\n\
+Ahn Seong-gi' + _(' as ') + 'Ja-woon\n\
+Jeong Doo-hong' + _(' as ') + 'Heuk-Woon\n\
+Yoon Joo-sang\n\
 Kim Ji-yeong\n\
 Baek Chan-gi\n\
 Kim Jae-man\n\
@@ -299,10 +299,22 @@ Kim Su-hyeon\n\
 Geum Dong-hyeon\n\
 Lee Jae-goo\n\
 Ahn Kil-kang\n\
-Bong Tae-gyu\n\
-Im Ha-ryong\n\
+Bong Tae-gyu' + _(' as ') + 'Cameo\n\
+Im Ha-ryong' + _(' as ') + 'Cameo\n\
 Yoon Do-hyeon\n\
-Lee Choon-yeon',
+Lee Choon-yeon\n\
+Kim Yeong-in\n\
+Park Yoon-bae\n\
+Lee Won\n\
+Kim Kyeong-ae\n\
+Yoo Soon-cheol\n\
+Hwang Hyo-eun\n\
+Lee Jae-ho\n\
+Yang Ik-joon\n\
+Kwon Beom-taek\n\
+Min Hye-ryeong\n\
+Oh Soon-tae\n\
+Lee Oi-soo',
             'country'            : 'Südkorea',
             'genre'                : 'Action, Fantasy, Komödie',
             'classification'    : '16',

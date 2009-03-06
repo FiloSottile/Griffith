@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007 Michael Jahn
+# Copyright (c) 2007-2009 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -180,8 +180,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'        : [ 1, 1 ],
-        'Die wilden Hühner'    : [ 3, 3 ]
+        'Rocky Balboa'      : [ 1, 1 ],
+        'Die wilden Hühner' : [ 3, 3 ]
     }
 
 class PluginTest:
@@ -195,10 +195,10 @@ class PluginTest:
     test_configuration = {
         '2835' : { 
             'title'             : 'Rocky Balboa',
-            'o_title'             : 'Rocky Balboa',
-            'director'            : 'Sylvester Stallone',
-            'plot'                 : True,
-            'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+            'o_title'           : 'Rocky Balboa',
+            'director'          : 'Sylvester Stallone',
+            'plot'              : True,
+            'cast'              : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie\n\
 Antonio Tarver' + _(' as ') + 'Mason Dixon\n\
 Geraldine Hughes' + _(' as ') + 'Marie\n\
@@ -210,25 +210,25 @@ Talia Shire' + _(' as ') + 'Adrian\n\
 Lou DiBella' + _(' as ') + 'Lou DiBella\n\
 Mike Tyson' + _(' as ') + 'Mike Tyson\n\
 Henry G. Sanders' + _(' as ') + 'Martin',
-            'country'            : 'USA',
-            'genre'                : 'Drama, Sport',
+            'country'           : 'USA',
+            'genre'             : 'Drama, Sport',
             'classification'    : 'ab 12',
             'studio'            : 'Chartoff-Winkler Productions, Columbia Pictures Corporation, Metro-Goldwyn-Mayer, Revolution Studios, Rogue Marble',
             'o_site'            : False,
-            'site'                : 'http://www.zelluloid.de/filme/details.php3?id=2835',
-            'trailer'            : False,
-            'year'                : 2006,
-            'notes'                : False,
-            'runtime'            : 102,
-            'image'                : True,
+            'site'              : 'http://www.zelluloid.de/filme/details.php3?id=2835',
+            'trailer'           : False,
+            'year'              : 2006,
+            'notes'             : False,
+            'runtime'           : 102,
+            'image'             : True,
             'rating'            : 8.0
         },
         '6342' : { 
             'title'             : 'Die wilden Hühner',
-            'o_title'             : 'Die wilden Hühner',
-            'director'            : 'Vivian Naefe',
-            'plot'                 : True,
-            'cast'                : 'Michelle von Treuberg' + _(' as ') + 'Sprotte\n\
+            'o_title'           : 'Die wilden Hühner',
+            'director'          : 'Vivian Naefe',
+            'plot'              : True,
+            'cast'              : 'Michelle von Treuberg' + _(' as ') + 'Sprotte\n\
 Lucie Hollmann' + _(' as ') + 'Frieda\n\
 Paula Riemann' + _(' as ') + 'Melanie\n\
 Zsa Zsa Inci Bürkle' + _(' as ') + 'Trude\n\
@@ -253,17 +253,17 @@ Frank Wickermann' + _(' as ') + 'Melanies Vater\n\
 Axel Häfner' + _(' as ') + 'Schrottplatzwärter\n\
 Simon Gosejohann' + _(' as ') + 'junger Mann\n\
 Piet Klocke' + _(' as ') + 'Junggeselle',
-            'country'            : 'Deutschland',
-            'genre'                : 'Kinder',
+            'country'           : 'Deutschland',
+            'genre'             : 'Kinderfilm',
             'classification'    : 'ohne',
             'studio'            : 'Bavaria Film, Constantin Film',
             'o_site'            : False,
-            'site'                : 'http://www.zelluloid.de/filme/details.php3?id=6342',
-            'trailer'            : False,
-            'year'                : 2006,
-            'notes'                : False,
-            'runtime'            : 109,
-            'image'                : True,
+            'site'              : 'http://www.zelluloid.de/filme/details.php3?id=6342',
+            'trailer'           : False,
+            'year'              : 2006,
+            'notes'             : False,
+            'runtime'           : 109,
+            'image'             : True,
             'rating'            : 8.0
         }
     }
