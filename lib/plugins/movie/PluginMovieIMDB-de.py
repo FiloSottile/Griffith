@@ -30,7 +30,7 @@ plugin_url          = 'german.imdb.com'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'mikej06@hotmail.com'
-plugin_version      = '1.5'
+plugin_version      = '1.6'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -60,6 +60,17 @@ class Plugin(movie.Movie):
 
     def get_o_title(self):
         self.o_title = gutils.trim(self.page, '<h1>', '<span')
+        tmp = gutils.regextrim(self.page, '<h5>(Alternativ|Auch bekannt als):', '</div>')
+        if tmp:
+            elements = string.split(tmp, '<br>')
+            for element in elements:
+                tmp = gutils.before(element, '(Originaltitel)')
+                if tmp <> '':
+                    self.o_title = gutils.before(tmp, '- ')
+                    if not self.o_title:
+                        self.o_title = tmp
+                    self.o_title = string.replace(self.o_title, '"', '')
+                    break
 
     def get_title(self):
         self.title = gutils.trim(self.page, '<h1>', '<span')
