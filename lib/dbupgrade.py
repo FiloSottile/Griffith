@@ -48,6 +48,8 @@ def upgrade_database(self, version):
 		self.Medium.mapper.mapped_table.insert().execute(name='VHS')
 		self.Medium.mapper.mapped_table.insert().execute(name='BETACAM')
 		self.Medium.mapper.mapped_table.insert().execute(name='LaserDisc')
+		self.Medium.mapper.mapped_table.insert().execute(name='HD DVD')
+		self.Medium.mapper.mapped_table.insert().execute(name='Blu-ray')
 		self.ACodec.mapper.mapped_table.create()
 		self.ACodec.mapper.mapped_table.insert().execute(name='AC-3 Dolby audio')
 		self.ACodec.mapper.mapped_table.insert().execute(name='OGG')
