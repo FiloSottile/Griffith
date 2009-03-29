@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Vasco Nunes, Piotr Ożarowski
+# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,9 +34,9 @@ plugin_version      = '1.8'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode = 'utf-8'
+        self.encode   = 'iso8859-1'
         self.movie_id = id
-        self.url = "http://imdb.com/title/tt%s" % self.movie_id
+        self.url      = "http://imdb.com/title/tt%s" % self.movie_id
 
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
@@ -195,7 +195,7 @@ class SearchPlugin(movie.SearchMovie):
         # seems to give the best results. 88 results for "Rocky", popular titles first.
         self.original_url_search   = 'http://www.imdb.com/find?s=tt;q='
         self.translated_url_search = 'http://www.imdb.com/find?s=tt;q='
-        self.encode = 'utf-8'
+        self.encode                = 'iso8859-1'
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
