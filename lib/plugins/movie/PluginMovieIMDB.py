@@ -118,6 +118,7 @@ class Plugin(movie.Movie):
 
     def get_country(self):
         self.country = gutils.trim(self.page, '<h5>Country:</h5>', '</div>')
+        self.country = re.sub('[\n]+', '', self.country)
 
     def get_rating(self):
         pattern = re.compile('>([0-9]([.][0-9])*)[/][0-9][0-9]<')
