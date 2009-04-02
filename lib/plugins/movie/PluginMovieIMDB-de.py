@@ -64,8 +64,9 @@ class Plugin(movie.Movie):
         if tmp:
             elements = string.split(tmp, '<br>')
             for element in elements:
-                tmp = gutils.before(element, '(Originaltitel)')
-                if tmp <> '':
+                index = string.find(element,'(Originaltitel)')
+                if index > 0:
+                    tmp = element[:index]
                     self.o_title = gutils.before(tmp, '- ')
                     if not self.o_title:
                         self.o_title = tmp
