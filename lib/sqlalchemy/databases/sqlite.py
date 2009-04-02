@@ -84,32 +84,50 @@ class SLTime(DateTimeMixin, sqltypes.Time):
 
 
 class SLUnicodeMixin(object):
-   def bind_processor(self, dialect):
-       if self.convert_unicode or dialect.convert_unicode:
-           if self.assert_unicode is None:
+    def bind_processor(self, dialect):
+        if self.convert_unicode or dialect.convert_unicode:
+            if self.assert_unicode is None:
                assert_unicode = dialect.assert_unicode
-           else:
-               assert_unicode = self.assert_unicode
+            else:
+                assert_unicode = self.assert_unicode
+                 
+            if not assert_unicode:
+                return None 
                 
-           if not assert_unicode:
-               return None 
-                
-           def process(value):
-               if not isinstance(value, (unicode, NoneType)):
-                   if assert_unicode == 'warn':
-                       util.warn("Unicode type received non-unicode bind " 
+            def process(value):
+                if not isinstance(value, (unicode, NoneType)):
+                    if assert_unicode == 'warn':
+                        util.warn("Unicode type received non-unicode bind "
                                  "param value %r" % value)
-                       return value 
-                   else:
-                       raise exc.InvalidRequestError("Unicode type received non-unicode bind param value %r" % value)
-               else:
-                   return value
-           return process
-       else:
-           return None 
+                        return value 
+                    else:
+                        raise exc.InvalidRequestError("Unicode type received non-unicode bind param value %r" % value)
+                else:
+                    return value
+            return process
+        else:
+            return None
 
-   def result_processor(self, dialect):
-       return None 
+    def result_processor(self, dialect):
+       return None
+
+    # special fix for griffith 0.9.x and pysqlite 2.5.x because of the following error message
+    # You must not use 8-bit bytestrings unless you usea text_factory that can interpret 8-bit bytestrings
+    # (like text_factory = str). It is highly recommended that you instead just switch your application to Unicode strings
+    #
+    # backport of method bind_processor from sqlalchemy 0.4.x doesn't work
+    def convert_result_value(self, value, dialect):
+        if (self.convert_unicode or dialect.convert_unicode) and isinstance(value, unicode): 
+            return value.encode('utf8') 
+        else:
+            return value
+
+    def convert_bind_param(self, value, dialect):
+        if (self.convert_unicode or dialect.convert_unicode) and isinstance(value, basestring): 
+            # pass string values as unicode
+            return value.decode('utf8') 
+        else:
+            return value
     
 class SLText(SLUnicodeMixin, sqltypes.TEXT):
 #class SLText(sqltypes.TEXT):

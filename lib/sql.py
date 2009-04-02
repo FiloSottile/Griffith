@@ -340,12 +340,16 @@ class GriffithSQL:
 			config.set('type', 'sqlite', section='database')
 			url = "sqlite:///%s" % os.path.join(griffith_dir, config.get('name', 'griffith', section='database') + '.db')
 		try:
-			self.metadata = BoundMetaData(url)
+			if config.get('type', section='database') == 'sqlite':
+				# use explicit convert_unicode because of changes since pysqlite 2.5
+				self.metadata = BoundMetaData(url, convert_unicode = True)
+			else:
+				self.metadata = BoundMetaData(url)
 		except Exception, e:	# InvalidRequestError, ImportError
 			debug.show("BoundMetaData: %s" % e)
 			config.set('type', 'sqlite', section='database')
 			gutils.warning(self, "%s\n\n%s" % (_('Cannot connect to database.\nFalling back to SQLite.'), _('Please check debug output for more informations.')))
-			self.metadata = BoundMetaData("sqlite:///%s" % os.path.join(griffith_dir, config.get('name', 'griffith', section='database') + '.db'))
+			self.metadata = BoundMetaData("sqlite:///%s" % os.path.join(griffith_dir, config.get('name', 'griffith', section='database') + '.db'), convert_unicode = True)
 
 		# try to establish a db connection
 		try:
@@ -355,7 +359,7 @@ class GriffithSQL:
 			gutils.error(self, _('Database connection failed.'))
 			config.set('type', 'sqlite', section='database')
 			url = "sqlite:///%s" % os.path.join(griffith_dir, 'griffith.db')
-			self.metadata = BoundMetaData(url)
+			self.metadata = BoundMetaData(url, convert_unicode = True)
 			self.metadata.engine.connect()
 		#}}}
 
