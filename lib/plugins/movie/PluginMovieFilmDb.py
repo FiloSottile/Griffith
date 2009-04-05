@@ -69,8 +69,8 @@ class Plugin(movie.Movie):
 			self.plot = gutils.trim(self.page, 'noshade style=\'color:#FFCCCC;\'>', '"')
 		self.plot = self.plot.replace('\t', '')
 		self.plot = self.plot.replace('\n', '')
-		self.plot = self.plot.replace(u'\x93', '"')
-		self.plot = self.plot.replace(u'\x84', '"')
+		self.plot = self.plot.replace('\x93', '"')
+		self.plot = self.plot.replace('\x84', '"')
 
 	def get_year(self):
 		elements = string.split(self.page, 'landjahrsuche.php')

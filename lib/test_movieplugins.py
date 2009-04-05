@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2008
+# Copyright (c) 2006-2009
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -64,6 +64,8 @@ sys.path.append('plugins/movie')
 class PluginTester:
 	test_plugins = [
 		'PluginMovieAmazon',
+		'PluginMovieCinematografo',
+		'PluginMovieFilmDb',
 		'PluginMovieFilmeVonAZ',
 		'PluginMovieIMDB-de',
 		'PluginMovieKinoDe',
