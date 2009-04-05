@@ -338,7 +338,9 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
-Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
+übrige Besetzung in alphabetischer Reihenfolge:\n\
+Michael Ahl' + _(' as ') + 'Restaurant patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
@@ -346,6 +348,7 @@ Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
 Mark J. Kilbane' + _(' as ') + 'Businessman (nicht im Abspann)\n\
 David Kneeream' + _(' as ') + 'Adrian\'s Patron (nicht im Abspann)\n\
 Dolph Lundgren' + _(' as ') + 'Captain Ivan Drago (Archivmaterial) (nicht im Abspann)\n\
+Dean Mauro' + _(' as ') + 'Sports Journalist (nicht im Abspann) (unbestätigt)\n\
 Burgess Meredith' + _(' as ') + 'Mickey Goldmill (Archivmaterial) (nicht im Abspann)\n\
 Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
@@ -393,9 +396,10 @@ Bettina Rheims' + _(' as ') + 'La jeune vendeuse\n\
 Joseph Rythmann\n\
 Georges Staquet\n\
 Jacques Villedieu\n\
-Harry Walter übrige Besetzung in alphabetischer Reihenfolge:\n\
+Harry Walter\n\
+übrige Besetzung in alphabetischer Reihenfolge:\n\
 Anouk Aimée' + _(' as ') + 'Une femme (Archivmaterial) (nicht im Abspann)\n\
-Elie Chouraqui' + _(' as ') + ' (nicht im Abspann)\n\
+Elie Chouraqui' + _(' as ') + '(nicht im Abspann)\n\
 Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (nicht im Abspann)\n\
 Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspann)',
             'country'            : 'Frankreich | Italien',

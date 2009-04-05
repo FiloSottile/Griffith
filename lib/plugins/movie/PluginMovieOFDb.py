@@ -20,7 +20,7 @@ plugin_version      = "0.10"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode   = 'utf8'
+        self.encode   = 'utf-8'
         self.movie_id = id
         self.url      = "http://www.ofdb.de/%s" % str(self.movie_id)
 
@@ -116,7 +116,7 @@ class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.original_url_search   = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=OTitel&SText="
         self.translated_url_search = "http://www.ofdb.de/view.php?page=suchergebnis&Kat=DTitel&SText="
-        self.encode                = 'utf8'
+        self.encode                = 'utf-8'
         self.remove_accents        = False
 
     def search(self,parent_window):
@@ -245,7 +245,7 @@ Ricky Cavazos',
             'o_title'             : 'Bonne année, La',
             'director'            : 'Claude Lelouch',
             'plot'                 : False,
-            'cast'                : 'Lino Ventura\n\
+            'cast'                : 'Lino Ventura' + _(' as ') + 'Simon \n\
 Françoise Fabian\n\
 Charles Gérard\n\
 André Falcon' + _(' as ') + 'Le bijoutier\n\
@@ -289,7 +289,7 @@ Elie Chouraqui',
 Yoon Soy' + _(' as ') + 'Wi-jin\n\
 Ahn Seong-gi' + _(' as ') + 'Ja-woon\n\
 Jeong Doo-hong' + _(' as ') + 'Heuk-Woon\n\
-Yoon Joo-sang\n\
+Yoon Joo-sang' + _(' as ') + 'Mu-woon \n\
 Kim Ji-yeong\n\
 Baek Chan-gi\n\
 Kim Jae-man\n\

@@ -68,6 +68,8 @@ sys.path.append('plugins/movie')
 class PluginTester:
     test_plugins = [
         'PluginMovieAmazon',
+        'PluginMovieCinematografo',
+        'PluginMovieFilmDb',
         'PluginMovieFilmeVonAZ',
         'PluginMovieIMDB-de',
         'PluginMovieKinoDe',
@@ -163,7 +165,8 @@ class PluginTester:
 
         fields_to_fetch = ['o_title', 'title', 'director', 'plot', 'cast', 'country', 'genre',
                 'classification', 'studio', 'o_site', 'site', 'trailer', 'year',
-                'notes', 'runtime', 'image', 'rating']
+                'notes', 'runtime', 'image', 'rating', 'screenplay', 'cameraman',
+                'resolution', 'barcode']
 
         self.movie.fields_to_fetch = fields_to_fetch
     
