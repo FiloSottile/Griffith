@@ -387,7 +387,13 @@ def urlretrieve(url, filename=None, reporthook=None, data=None):
 class UAFancyURLopener(FancyURLopener):
     # use Firefox 3.0 User-Agent string from Windows XP
     version = 'Mozilla/5.0 (Windows; U; Windows NT 6.0) Gecko/2008052906 Firefox/3.0'
-    
+    def __init__(self, *args, **kwargs):
+        FancyURLopener.__init__(self, *args, **kwargs)
+        # additional HTTP headers to work around the html file compression which
+        # is used by UMTS connections. compression breaks the movie import plugins sometimes
+        self.addheaders.append(('Cache-Control', 'no-cache'))
+        self.addheaders.append(('Pragma', 'no-cache'))
+
 class Progress:
     def __init__(self, window, title = '', message = ''):
         self.status = False
