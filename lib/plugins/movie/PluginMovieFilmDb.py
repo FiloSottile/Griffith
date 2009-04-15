@@ -31,7 +31,7 @@ plugin_url          = 'www.filmdb.de'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = '<mikej06@hotmail.com>'
-plugin_version      = '1.0'
+plugin_version      = '1.1'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -40,10 +40,10 @@ class Plugin(movie.Movie):
         self.url      = "http://www.filmdb.de/filmanzeige.php?alle=1&filmid=" + self.movie_id
 
     def get_image(self):
-        tmp = gutils.trim(self.page, 'plakat.php?', '\'')
+        tmp = gutils.regextrim(self.page, 'plakat.php?', '["\']')
         if tmp:
             page_image = self.open_page(url='http://www.filmdb.de/plakat.php?' + tmp)
-            tmp = gutils.trim(self.page, 'http://bilder.filmdb.de', '"')
+            tmp = gutils.regextrim(self.page, 'bilder.filmdb.de', '["\']')
             if tmp:
                 self.image_url = 'http://bilder.filmdb.de' + tmp
 
@@ -195,8 +195,8 @@ class PluginTest:
             'cast'                : 'Dolph Lundgren\n\
 Sylvester Stallone\n\
 Carl Weathers\n\
-Burt Young\n\
 Mike Tyson\n\
+Burt Young\n\
 Talia Shire\n\
 Burgess Meredith\n\
 Tony Burton\n\
@@ -210,45 +210,45 @@ Don Sherman\n\
 Robert Michael Kelly\n\
 LeRoy Neiman\n\
 Stu Nahan\n\
+Tobias Segal\n\
 Skip Bayless\n\
 Gunnar Peterson\n\
-Tobias Segal\n\
 Marc Ratner\n\
 Henry G. Sanders\n\
+Rick Buchborn\n\
+Ricky Cavazos\n\
+Charles Johnson\n\
 Angela Boyd\n\
 Ana Gerena\n\
-Ricky Cavazos\n\
-Rick Buchborn\n\
 Fran Pultro\n\
-Joe Cortez\n\
-Charles Johnson\n\
-Jody Giambelluca\n\
-Yahya\n\
 Tim Carr\n\
-Jack Lazzarado\n\
+Joe Cortez\n\
+Jody Giambelluca\n\
 Carter Mitchell\n\
-Barney Fitzpatrick\n\
+A.J. Benza\n\
+Yahya\n\
 Maureen Schilling\n\
 James Binns\n\
+Jack Lazzarado\n\
+Barney Fitzpatrick\n\
 Antonio Tarver\n\
-A.J. Benza\n\
+Nick Baker\n\
+Jim Lampley\n\
 Matt Frack\n\
 Louis Giansante\n\
 Kevin King Templeton\n\
+Paul Dion Monte\n\
+Dana Jacobson\n\
+Brian Kenny\n\
 Woody Paige\n\
 Pedro Lovell\n\
-Nick Baker\n\
-Brian Kenny\n\
-Paul Dion Monte\n\
-Jim Lampley\n\
-Dana Jacobson\n\
+Larry Merchant\n\
 Bert Randolph Sugar\n\
 Bernard Fernández\n\
-Larry Merchant\n\
+Vinod Kumar\n\
 Anthony Lato Jr.\n\
 Max Kellerman\n\
 Lou DiBella\n\
-Vinod Kumar\n\
 Johnnie Hobbs Jr.\n\
 Jay Crawford\n\
 Gary Compton\n\

@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-__revision__ = '$Id: PluginMovie7arte.py 478 2006-12-05 21:14:51Z piotrek $'
+__revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Vasco Nunes, Piotr Ozarowski
+# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,22 +23,22 @@ __revision__ = '$Id: PluginMovie7arte.py 478 2006-12-05 21:14:51Z piotrek $'
 
 import gutils
 import movie
-import string
+import string, re
 
-plugin_name = "Cineteka"
-plugin_description = "O seu Clube de Video Online"
-plugin_url = "cineteka.com"
-plugin_language = _("Portuguese")
-plugin_author = "Vasco Nunes"
+plugin_name         = "Cineteka"
+plugin_description  = "O seu Clube de Video Online"
+plugin_url          = "cineteka.com"
+plugin_language     = _("Portuguese")
+plugin_author       = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version = "0.3"
+plugin_version      = "0.4"
 
 class Plugin(movie.Movie):
     """A movie plugin object"""
     def __init__(self, id):
-        self.encode='iso-8859-1'
+        self.encode   = 'iso-8859-1'
         self.movie_id = id
-        self.url = "http://www.cineteka.com/index.php?op=Movie&id=" + str(self.movie_id)
+        self.url      = "http://www.cineteka.com/index.php?op=Movie&id=" + str(self.movie_id)
 
     def get_image(self):
         """Finds the film's poster image"""
@@ -46,62 +46,66 @@ class Plugin(movie.Movie):
 
     def get_o_title(self):
         """Finds the film's original title"""
-        self.o_title = string.capwords(gutils.trim(self.page, """<nobr><span class="txt11">(""", ")"))
+        self.o_title = gutils.trim(self.page, u'<nobr><span class="txt11">(', u')')
 
     def get_title(self):
         """Finds the film's local title.
         Probably the original title translation"""
-        self.title = string.capwords(gutils.trim(self.page, """<td class="txt12"><b>""", "</b>"))
+        self.title = gutils.trim(self.page, u'<td class="movieT"><b>', u'</b>')
 
     def get_director(self):
         """Finds the film's director"""
-        self.director = gutils.strip_tags(gutils.trim(self.page, "<div><b>RealizaÁ„o:</b><br>", "</div>"))
-        self.director = string.replace(self.director,"<br>", ", ")
+        self.director = gutils.strip_tags(gutils.trim(self.page, u'<div><b>Realiza√ß√£o:</b><br>', u'</div>'))
+        self.director = string.replace(self.director, u'<br>', u', ')
         self.director = gutils.strip_tags(self.director)
 
     def get_plot(self):
         """Finds the film's plot"""
-        self.plot = gutils.trim(self.page, """<div class="txt-normal" style="margin-top: 10px;">""", "</td></tr></table>")
+        self.plot = gutils.trim(self.page, u'<div class="txt-normal" style="margin-top: 10px;">', u'</td></tr></table>')
+        self.plot = self.plot.replace(u'\x93', u'"')
+        self.plot = self.plot.replace(u'\x94', u'"')
+        self.plot = self.plot.replace(u'\x96', u'-')
 
     def get_year(self):
         """Finds the film's year"""
-        self.year = gutils.trim(self.page, "<b>Ano:</b> ", "</div>")
+        self.year = gutils.trim(self.page, u'<b>Ano:</b> ', u'</div>')
 
     def get_runtime(self):
         """Finds the film's running time"""
-        self.runtime = gutils.trim(self.page, "<td><b>DuraÁ„o:</b> ", " min.</td>")
+        self.runtime = gutils.trim(self.page, u'<td><b>Dura√ß√£o:</b> ', u' min.</td>')
 
     def get_genre(self):
         """Finds the film's genre"""
-        self.genre = gutils.strip_tags(gutils.trim(self.page, "<b>GÈnero:</b><br>", "</div>"))
-        self.genre = string.replace(self.genre,"<br>", ", ")
+        self.genre = gutils.trim(self.page, u'<b>G√©nero:</b><br>', u'</div>')
+        self.genre = string.replace(self.genre, u'<br>', u', ')
         self.genre = gutils.strip_tags(self.genre)
 
     def get_cast(self):
-        self.cast = gutils.strip_tags(gutils.trim(self.page, "<b>Elenco:</b> ", "</td>"))
-        self.cast = string.replace(self.cast, ", ", "")
-        self.cast = string.replace(self.cast, "\t", "")
-        self.cast = string.replace(self.cast, "\n ", "\n")
+        self.cast = gutils.trim(self.page, u'<b>Elenco:</b>', u'</td>')
+        self.cast = string.replace(self.cast, u'<br>', u'\n')
+        self.cast = string.replace(self.cast, u', ', u'')
+        self.cast = string.replace(self.cast, u'\t', u'')
+        self.cast = string.replace(self.cast, u'\n ', u'\n')
+        self.cast = gutils.clean(self.cast)
+        self.cast = re.sub('[ \t]*[\n]+[ \t]*' , '\n', self.cast)
 
     def get_classification(self):
         """Find the film's classification"""
-        self.classification = gutils.trim(self.page, "<b>Idade:</b> ", "</div>")
+        self.classification = gutils.trim(self.page, u'<b>Idade:</b> ', u'</div>')
 
     def get_studio(self):
         """Find the studio"""
-        self.studio = ""
+        self.studio = ''
 
     def get_o_site(self):
         """Find the film's oficial site"""
         self.o_site = gutils.trim(self.page, \
-            "<a class=\"button\" href=\"", \
-            " title=\"Consultar tÌtulo no Internet Movie Data Base\"")
+            u'<a class="button" href="', \
+            u'" title="Consultar t√≠tulo no Internet Movie Data Base"')
 
     def get_site(self):
         """Find the film's imdb details page"""
-        self.site = gutils.trim(self.page, \
-            "</td><td><a class=\"button\" href=\"", \
-            """" title="Consultar t√≠tulo""")
+        self.site = self.url
 
     def get_trailer(self):
         """Find the film's trailer page or location"""
@@ -109,44 +113,100 @@ class Plugin(movie.Movie):
 
     def get_country(self):
         """Find the film's country"""
-        self.country = gutils.trim(self.page, "<b>PaÌs:</b><br>", "</div>")
-        self.country = string.replace(self.country,"<br>", ", ")
+        self.country = gutils.trim(self.page, u'<b>Pa√≠s:</b><br>', u'</div>')
+        self.country = string.replace(self.country, u'<br>', u', ')
         self.country = gutils.strip_tags(self.country)
 
     def get_rating(self):
         """Find the film's rating. From 0 to 10.
         Convert if needed when assigning."""
-        self.rating = 0
+        self.rating = gutils.clean(gutils.trim(self.page, u'IMDB: ', u'</span>'))
+        try:
+            self.rating = round(float(self.rating), 0)
+        except Exception, e:
+            self.rating = 0
+
+    def get_screenplay(self):
+        self.screenplay = gutils.strip_tags(gutils.trim(self.page, u'<b>Argumento:</b><br>', u'</div>'))
+        self.screenplay = string.replace(self.screenplay, u'<br>', u', ')
+        self.screenplay = gutils.strip_tags(self.screenplay)
 
 class SearchPlugin(movie.SearchMovie):
     """A movie search object"""
     def __init__(self):
-        self.original_url_search = "http://www.cineteka.com/index.php?op=MovieSearch&s="
+        self.original_url_search   = "http://www.cineteka.com/index.php?op=MovieSearch&s="
         self.translated_url_search = self.original_url_search
-        self.encode='iso-8859-1'
+        self.encode                = 'iso-8859-1'
 
     def search(self, parent_window):
         """Perform the web search"""
         if not self.open_search(parent_window):
             return None
-        self.sub_search()
+        self.page = gutils.trim(self.page, 'tulo(s): ', '<div class="menuright">')
         return self.page
-
-    def sub_search(self):
-        """Isolating just a portion (with the data we want) of the results"""
-        self.page = gutils.trim(self.page, \
-            """o:</div>""", """<div style="margin-top: 10px; text-align: center;"></div>""")
 
     def get_searches(self):
         """Try to find both id and film title for each search result"""
-        elements = string.split(self.page, "</a>]</td>")
-        self.number_results = elements[-1]
+        elements = re.split('index[.]php[?]op=Movie&id=([0-9]+)">', self.page)
+        
+        for index in range(2, len(elements), 2):
+            id = elements[index - 1]
+            title = gutils.before(elements[index], '<')
+            self.ids.append(id)
+            self.titles.append(gutils.strip_tags(gutils.convert_entities(title)))
 
-        if (elements[0]<>''):
-            for element in elements:
-                self.ids.append(gutils.trim(element, "?op=Movie&id=", "\""))
-                self.titles.append(gutils.strip_tags(gutils.convert_entities \
-                    (gutils.trim(element, """<td class="txt12"><b>""", "</span></nobr></td>"))))
-        else:
-            self.number_results = 0
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+    #
+    test_configuration = {
+        'Rocky Balboa' : [ 1, 1 ],
+    }
 
+class PluginTest:
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        '002551' : { 
+            'title'               : 'Rocky Balboa',
+            'o_title'             : 'Rocky Balboa',
+            'director'            : 'Sylvester Stallone',
+            'plot'                : True,
+            'cast'                : 'Sylvester Stallone\n\
+Burt Young\n\
+Antonio Tarver\n\
+Geraldine Hughes\n\
+Milo Ventimiglia\n\
+Tony Burton\n\
+A.J. Benza\n\
+James Francis Kelly III\n\
+Talia Shire\n\
+Lou DiBella\n\
+Mike Tyson\n\
+Henry G. Sanders',
+            'country'             : 'EUA',
+            'genre'               : 'Ac√ß√£o, Desporto, Drama',
+            'classification'      : 'M/12',
+            'studio'              : False,
+            'o_site'              : 'http://www.imdb.com/title/tt0479143/',
+            'site'                : 'http://www.cineteka.com/index.php?op=Movie&id=002551',
+            'trailer'             : False,
+            'year'                : 2006,
+            'notes'               : False,
+            'runtime'             : 102,
+            'image'               : True,
+            'rating'              : 8,
+            'cameraman'           : False,
+            'screenplay'          : 'Sylvester Stallone',
+            'barcode'             : False
+        },
+    }

@@ -171,6 +171,8 @@ class Plugin(movie.Movie):
         result = pattern.search(self.page)
         if result:
             self.screenplay = result.groups()[0]
+            self.screenplay = self.screenplay.replace(' (written by)', '')
+            self.screenplay = self.screenplay.replace(' and<', '<')
             self.screenplay = self.screenplay.replace('<br/>', ', ')
 
     def get_cameraman(self):
@@ -237,3 +239,104 @@ class SearchPlugin(movie.SearchMovie):
                     tmp = gutils.clean(match[0][1])
                     self.ids.append(match[0][0])
                     self.titles.append(tmp)
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+    #
+    test_configuration = {
+        'Rocky Balboa'         : [ 16, 16 ],
+        'Ein glückliches Jahr' : [ 21, 21 ]
+    }
+
+class PluginTest:
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        '0138097' : { 
+            'title'             : 'Shakespeare in Love',
+            'o_title'           : 'Shakespeare in Love',
+            'director'          : 'John Madden',
+            'plot'              : True,
+            'cast'              : 'Geoffrey Rush' + _(' as ') + 'Philip Henslowe\n\
+Tom Wilkinson' + _(' as ') + 'Hugh Fennyman\n\
+Steven O\'Donnell' + _(' as ') + 'Lambert\n\
+Tim McMullan' + _(' as ') + 'Frees\n\
+Joseph Fiennes' + _(' as ') + 'Will Shakespeare\n\
+Steven Beard' + _(' as ') + 'Makepeace - the Preacher\n\
+Antony Sher' + _(' as ') + 'Dr. Moth\n\
+Patrick Barlow' + _(' as ') + 'Will Kempe\n\
+Martin Clunes' + _(' as ') + 'Richard Burbage\n\
+Sandra Reinton' + _(' as ') + 'Rosaline\n\
+Simon Callow' + _(' as ') + 'Tilney - Master of the Revels\n\
+Judi Dench' + _(' as ') + 'Queen Elizabeth\n\
+Bridget McConnell' + _(' as ') + 'Lady in Waiting\n\
+Georgie Glen' + _(' as ') + 'Lady in Waiting\n\
+Nicholas Boulton' + _(' as ') + 'Henry Condell\n\
+Gwyneth Paltrow' + _(' as ') + 'Viola De Lesseps\n\
+Imelda Staunton' + _(' as ') + 'Nurse\n\
+Colin Firth' + _(' as ') + 'Lord Wessex\n\
+Desmond McNamara' + _(' as ') + 'Crier\n\
+Barnaby Kay' + _(' as ') + 'Nol\n\
+Jim Carter' + _(' as ') + 'Ralph Bashford\n\
+Paul Bigley' + _(' as ') + 'Peter - the Stage Manager\n\
+Jason Round' + _(' as ') + 'Actor in Tavern\n\
+Rupert Farley' + _(' as ') + 'Barman\n\
+Adam Barker' + _(' as ') + 'First Auditionee\n\
+Joe Roberts' + _(' as ') + 'John Webster\n\
+Harry Gostelow' + _(' as ') + 'Second Auditionee\n\
+Alan Cody' + _(' as ') + 'Third Auditionee\n\
+Mark Williams' + _(' as ') + 'Wabash\n\
+David Curtiz' + _(' as ') + 'John Hemmings\n\
+Gregor Truter' + _(' as ') + 'James Hemmings\n\
+Simon Day' + _(' as ') + 'First Boatman\n\
+Jill Baker' + _(' as ') + 'Lady De Lesseps\n\
+Amber Glossop' + _(' as ') + 'Scullery Maid\n\
+Robin Davies' + _(' as ') + 'Master Plum\n\
+Hywel Simons' + _(' as ') + 'Servant\n\
+Nicholas Le Prevost' + _(' as ') + 'Sir Robert De Lesseps\n\
+Ben Affleck' + _(' as ') + 'Ned Alleyn\n\
+Timothy Kightley' + _(' as ') + 'Edward Pope\n\
+Mark Saban' + _(' as ') + 'Augustine Philips\n\
+Bob Barrett' + _(' as ') + 'George Bryan\n\
+Roger Morlidge' + _(' as ') + 'James Armitage\n\
+Daniel Brocklebank' + _(' as ') + 'Sam Gosse\n\
+Roger Frost' + _(' as ') + 'Second Boatman\n\
+Rebecca Charles' + _(' as ') + 'Chambermaid\n\
+Richard Gold' + _(' as ') + 'Lord in Waiting\n\
+Rachel Clarke' + _(' as ') + 'First Whore\n\
+Lucy Speed' + _(' as ') + 'Second Whore\n\
+Patricia Potter' + _(' as ') + 'Third Whore\n\
+John Ramm' + _(' as ') + 'Makepeace\'s Neighbor\n\
+Martin Neely' + _(' as ') + 'Paris / Lady Montague (as Martin Neeley)\n\
+The Choir of St. George\'s School in Windsor' + _(' as ') + 'Choir (as The Choir of St. George\'s School, Windsor) rest of cast listed alphabetically:\n\
+Jason Canning' + _(' as ') + 'Nobleman (uncredited)\n\
+Rupert Everett' + _(' as ') + 'Christopher Marlowe (uncredited)',
+            'country'           : 'USA | UK',
+            'genre'             : 'Comedy | Drama | Romance',
+            'classification'    : 'R',
+            'studio'            : 'Universal Pictures',
+            'o_site'            : False,
+            'site'              : 'http://www.imdb.com/title/tt0138097',
+            'trailer'           : 'http://www.imdb.com/title/tt0138097/trailers',
+            'year'              : 1998,
+            'notes'             : _('Language') + ': English\n'\
++ _('Audio') + ': Dolby Digital\n'\
++ _('Color') + ': Color\n\
+Tagline: ...A Comedy About the Greatest Love Story Almost Never Told...',
+            'runtime'           : 123,
+            'image'             : True,
+            'rating'            : 7,
+            'screenplay'        : 'Marc Norman, Tom Stoppard',
+            'cameraman'         : False,
+            'barcode'           : False
+        },
+    }

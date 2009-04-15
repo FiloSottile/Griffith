@@ -338,8 +338,7 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
-Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
-übrige Besetzung in alphabetischer Reihenfolge:\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Michael Ahl' + _(' as ') + 'Restaurant patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
@@ -372,8 +371,8 @@ Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)',
             'rating'            : 8
         },
         '0069815' : { 
-            'title'             : 'Ein Glückliches Jahr',
-            'o_title'           : 'Bonne année, La',
+            'title'             : 'Ein glückliches Jahr',
+            'o_title'           : 'La bonne année',
             'director'          : 'Claude Lelouch',
             'plot'              : True,
             'cast'              : 'Lino Ventura' + _(' as ') + 'Simon\n\
@@ -396,10 +395,9 @@ Bettina Rheims' + _(' as ') + 'La jeune vendeuse\n\
 Joseph Rythmann\n\
 Georges Staquet\n\
 Jacques Villedieu\n\
-Harry Walter\n\
-übrige Besetzung in alphabetischer Reihenfolge:\n\
+Harry Walter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Anouk Aimée' + _(' as ') + 'Une femme (Archivmaterial) (nicht im Abspann)\n\
-Elie Chouraqui' + _(' as ') + '(nicht im Abspann)\n\
+Elie Chouraqui' + _(' as ') + ' (nicht im Abspann)\n\
 Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (nicht im Abspann)\n\
 Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspann)',
             'country'            : 'Frankreich | Italien',
