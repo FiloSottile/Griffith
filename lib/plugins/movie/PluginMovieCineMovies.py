@@ -83,7 +83,7 @@ class Plugin(movie.Movie):
 		self.cast = self.cast.replace('</tr>', '\n')
 		self.cast = gutils.clean(self.cast)
 		self.cast = re.sub('\n[ \t]+', '\n', self.cast)
-		self.cast = re.sub('[.]+', _(' as '), self.cast)
+		self.cast = re.sub('[.][.]+', _(' as '), self.cast)
 		self.cast = re.sub(_(' as ') + '(\n|$)', '\n', self.cast)
 		self.cast = self.cast.encode(self.encode)
 
@@ -109,7 +109,7 @@ class Plugin(movie.Movie):
 		self.country = self.country.encode(self.encode)
 
 	def get_rating(self):
-		self.rating = gutils.clean(gutils.trim(self.page, '<DIV id=scoree>', '</DIV>')).encode(self.encode)
+		self.rating = gutils.clean(gutils.trim(self.page, '<div id=scoree>', '</div>')).encode(self.encode)
 
 
 class SearchPlugin(movie.SearchMovie):
@@ -138,3 +138,59 @@ class SearchPlugin(movie.SearchMovie):
 				self.titles.append(title + ' (' + year + ')')
 		else:
 			self.number_results = 0
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+	#
+	test_configuration = {
+		'Rocky Balboa' : [ 2, 2 ],
+	}
+
+class PluginTest:
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> dict { arribute -> value } }
+	#
+	# value: * True/False if attribute only should be tested for any value
+	#        * or the expected value
+	#
+	test_configuration = {
+		'6065' : { 
+			'title'               : 'Rocky Balboa',
+			'o_title'             : 'Rocky VI',
+			'director'            : 'Sylvester Stallone',
+			'plot'                : True,
+			'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+Burt Young' + _(' as ') + 'Paulie\n\
+Antonio Tarver' + _(' as ') + 'Mason "The Line"Dixon\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+Milo Ventimiglia' + _(' as ') + 'Rocky Jr.\n\
+Tony Burton' + _(' as ') + 'Duke\n\
+A.J. Benza' + _(' as ') + 'L.C.\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
+Talia Shire' + _(' as ') + 'Adrian\n\
+Lou DiBella' + _(' as ') + 'Lui-même\n\
+Mike Tyson' + _(' as ') + 'Lui-même\n\
+Henry G. Sanders' + _(' as ') + 'Martin\n\
+Pedro Lovell' + _(' as ') + 'Spider Rico\n\
+Angela Boyd' + _(' as ') + 'Angie\n\
+Lahmard J. Tate' + _(' as ') + 'X-Cell',
+			'country'             : 'USA',
+ 			'genre'               : 'Drame',
+			'classification'      : False,
+			'studio'              : 'Twentieth Century Fox France',
+			'o_site'              : 'http://www.sonypictures.com/movies/rocky/',
+			'site'                : 'http://www.cinemovies.fr/fiche_film.php?IDfilm=6065',
+			'trailer'             : False,
+			'year'                : 2007,
+			'notes'               : False,
+			'runtime'             : 105,
+			'image'               : True,
+			'rating'              : 6
+		},
+	}

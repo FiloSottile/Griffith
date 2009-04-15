@@ -63,10 +63,14 @@ sys.path.append('plugins/movie')
 #
 class PluginTester:
 	test_plugins = [
+		'PluginMovieAllMovie',
 		'PluginMovieAmazon',
 		'PluginMovieCinematografo',
+		'PluginMovieCineteka',
+		'PluginMovieDVDEmpire',
 		'PluginMovieFilmDb',
 		'PluginMovieFilmeVonAZ',
+		'PluginMovieIMDB',
 		'PluginMovieIMDB-de',
 		'PluginMovieKinoDe',
 		'PluginMovieOFDb',
