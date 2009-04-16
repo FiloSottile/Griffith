@@ -25,19 +25,19 @@ import gutils
 import movie
 import string
 
-plugin_name        = 'Culturalia'
-plugin_description    = 'Base de Datos de Peliculas'
-plugin_url        = 'www.culturalianet.com'
-plugin_language        = _('Spanish')
-plugin_author        = 'Pedro D. Sánchez'
-plugin_author_email    = '<pedrodav@gmail.com>'
-plugin_version        = '0.2'
+plugin_name         = 'Culturalia'
+plugin_description  = 'Base de Datos de Peliculas'
+plugin_url          = 'www.culturalianet.com'
+plugin_language     = _('Spanish')
+plugin_author       = 'Pedro D. Sánchez'
+plugin_author_email = '<pedrodav@gmail.com>'
+plugin_version      = '0.3'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
-        self.encode='iso-8859-15'
+        self.encode   = 'iso-8859-1'
         self.movie_id = id
-        self.url = "http://www.culturalianet.com/art/ver.php?art=%s" % str(self.movie_id)
+        self.url      = "http://www.culturalianet.com/art/ver.php?art=%s" % str(self.movie_id)
 
     def get_image(self):
         tmp = string.find(self.page, "<font class = 'titulo2'>")
@@ -64,12 +64,12 @@ class Plugin(movie.Movie):
         self.year = gutils.after(self.year, '. (')
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page, "<font class = 'titulo3'>Duración:</font> ", ' minutos')
+        self.runtime = gutils.trim(self.page, u"<font class = 'titulo3'>Duración:</font> ", u' minutos')
         if self.runtime == '':
             self.runtime = gutils.trim(self.page, "<font class = 'titulo3'>Duraci&oacute;n:</font> ", ' minutos')
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, "<font class = 'titulo3'>Género:</font><br>", '<br><br>')
+        self.genre = gutils.trim(self.page, u"<font class = 'titulo3'>Género:</font><br>", u'<br><br>')
 
     def get_cast(self):
         self.cast = ''
@@ -78,7 +78,7 @@ class Plugin(movie.Movie):
         self.cast = string.strip(gutils.strip_tags(self.cast))
 
     def get_classification(self):
-        self.classification = gutils.trim(self.page, "<font class = 'titulo3'>Calificación moral:</font> ", '<br>')
+        self.classification = gutils.trim(self.page, u"<font class = 'titulo3'>Calificación moral:</font> ", u'<br>')
         if self.classification == '':
             self.classification = gutils.trim(self.page, "<font class = 'titulo3'>Calificaci&oacute;n moral:</font> ", '<br>')
 
@@ -98,18 +98,24 @@ class Plugin(movie.Movie):
         self.country = gutils.trim(self.page, "<font class = 'titulo3'>Nacionalidad:</font><br>", '<br>')
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, "Puntuación: <font class = 'titulo3'>", '</font>')
+        self.rating = gutils.trim(self.page, u"Puntuación: <font class = 'titulo3'>", u'</font>')
         if self.rating == '':
             self.rating = gutils.trim(self.page, "Puntuaci&oacute;n: <font class = 'titulo3'>", '</font>')
         if self.rating:
             self.rating = str(float(gutils.clean(self.rating)))
 
+    def get_screenplay(self):
+        self.screenplay = gutils.trim(self.page,u'>Guión:', u'<br><br>')
+
+    def get_cameraman(self):
+        self.cameraman = gutils.trim(self.page,u'>Fotografía:', u'<br><br>')
+
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
-        self.original_url_search    = 'http://www.culturalianet.com/bus/resu.php?donde=1&texto='
-        self.translated_url_search    = 'http://www.culturalianet.com/bus/resu.php?donde=1&texto='
-        self.encode = 'iso-8859-15'
+        self.original_url_search   = 'http://www.culturalianet.com/bus/resu.php?donde=1&texto='
+        self.translated_url_search = 'http://www.culturalianet.com/bus/resu.php?donde=1&texto='
+        self.encode                = 'iso-8859-1'
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
@@ -129,3 +135,62 @@ class SearchPlugin(movie.SearchMovie):
             for element in elements:
                 self.ids.append(gutils.trim(element, 'ver.php?art=',"'"))
                 self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.trim(element, "target='_top'>", '</a>'))))
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+    #
+    test_configuration = {
+        'Rocky Balboa' : [ 11, 11 ],
+    }
+
+class PluginTest:
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        '27039' : { 
+            'title'               : 'Rocky Balboa',
+            'o_title'             : 'Rocky Balboa',
+            'director'            : 'Sylvester Stallone',
+            'plot'                : True,
+            'cast'                : 'Sylvester Stallone\n\
+Burt Young\n\
+Milo Ventimiglia\n\
+Geraldine Hughes\n\
+James Francis Kelly III\n\
+Tony Burton\n\
+A.J. Benza\n\
+Talia Shire\n\
+Henry G. Sanders\n\
+Antonio Tarver\n\
+Pedro Lovell\n\
+Ana Gerena\n\
+Angela Boyd\n\
+Louis Giansante\n\
+Maureen Schilling',
+            'country'             : 'USA',
+            'genre'               : 'Drama / Deportes',
+            'classification'      : False,
+            'studio'              : False,
+            'o_site'              : False,
+            'site'                : 'http://www.culturalianet.com/art/ver.php?art=27039',
+            'trailer'             : False,
+            'year'                : 2006,
+            'notes'               : False,
+            'runtime'             : 99,
+            'image'               : True,
+            'rating'              : False,
+            'cameraman'           : 'J. Clark Mathis',
+            'screenplay'          : 'Sylvester Stallone',
+            'barcode'             : False
+        },
+    }

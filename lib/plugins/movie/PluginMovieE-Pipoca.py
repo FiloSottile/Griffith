@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Vasco Nunes, Piotr Ożarowski
+# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,20 +27,23 @@ __revision__ = '$Id$'
 
 import gutils, movie, string
 
-plugin_name = "E-Pipoca"
-plugin_description = "E-Pipoca Brasil"
-plugin_url = "epipoca.uol.com.br"
-plugin_language = _("Brazilian Portuguese")
-plugin_author = "Vasco Nunes"
-plugin_author_email="<vasco.m.nunes@gmail.com>"
-plugin_version = "0.5"
+plugin_name         = "E-Pipoca"
+plugin_description  = "E-Pipoca Brasil"
+plugin_url          = "epipoca.uol.com.br"
+plugin_language     = _("Brazilian Portuguese")
+plugin_author       = "Vasco Nunes"
+plugin_author_email = "<vasco.m.nunes@gmail.com>"
+plugin_version      = "0.6"
 
 class Plugin(movie.Movie):
     "A movie plugin object"
     def __init__(self, id):
-        self.encode='iso-8859-1'
+        self.encode   = 'iso-8859-1'
         self.movie_id = id
-        self.url = "http://epipoca.uol.com.br/filmes_detalhes.php?idf=" + str(self.movie_id)
+        self.url      = "http://epipoca.uol.com.br/filmes_detalhes.php?idf=" + str(self.movie_id)
+
+    def initialize(self):
+        self.page_cast = self.open_page(url = 'http://epipoca.uol.com.br/filmes_ficha.php?idf=' + str(self.movie_id))
 
     def get_image(self):
         "Find the film's poster image"
@@ -81,9 +84,11 @@ class Plugin(movie.Movie):
     def get_cast(self):
         "Find the actors. Try to make it line separated."
         self.cast = ""
-        self.cast = gutils.trim(self.page, "<b>Elenco: </b>", "<b>mais...</b>")
-        self.cast = gutils.strip_tags(self.cast)
-        self.cast = self.cast[:-2]
+        tmp = gutils.trim(self.page_cast, '<b>Elenco / Cast</b>', '</table>')
+        elements = tmp.split('<tr>')
+        for index in range(1, len(elements), 1):
+            element = elements[index]
+            self.cast = self.cast + gutils.strip_tags(element.replace(' ... ', _(' as '))) + '\n'
 
     def get_classification(self):
         "Find the film's classification"
@@ -120,6 +125,12 @@ class Plugin(movie.Movie):
         else:
             self.rating = ""
 
+    def get_screenplay(self):
+        self.screenplay = gutils.trim(self.page_cast, '<b>Roteirista(s) / Writers</b>', '</table>').replace('</tr><tr>', ', ')
+
+    def get_cameraman(self):
+        self.cameraman = gutils.trim(self.page_cast, u'<b>Fotógrafo(s) / Cinematographers</b>', u'</table>').replace(u'</tr><tr>', u', ')
+
 class SearchPlugin(movie.SearchMovie):
     "A movie search object"
     def __init__(self):
@@ -152,3 +163,108 @@ class SearchPlugin(movie.SearchMovie):
                 self.titles.append(gutils.strip_tags(gutils.trim(element, "<font class=\"titulo\">", "<b>Adicionar aos meus filmes favoritos</b>") ))
         else:
             self.number_results = 0
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+    #
+    test_configuration = {
+        'Rocky Balboa' : [ 7, 7 ],
+    }
+
+class PluginTest:
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        '11521' : { 
+            'title'               : 'Rocky Balboa',
+            'o_title'             : 'Rocky Balboa',
+            'director'            : 'Sylvester Stallone',
+            'plot'                : True,
+            'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+Burt Young' + _(' as ') + 'Paulie\n\
+Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
+Tony Burton' + _(' as ') + 'Duke\n\
+A.J. Benza' + _(' as ') + 'L.C.\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
+Talia Shire' + _(' as ') + 'Adrian (imagens de arquivo)\n\
+Lou DiBella' + _(' as ') + 'Lou DiBella\n\
+Mike Tyson (1)' + _(' as ') + 'Mike Tyson\n\
+Henry G. Sanders' + _(' as ') + 'Martin\n\
+Pedro Lovell' + _(' as ') + 'Spider Rico\n\
+Ana Gerena' + _(' as ') + 'Isabel\n\
+Angela Boyd' + _(' as ') + 'Angie\n\
+Louis Giansante' + _(' as ') + 'Bandido do bar\n\
+Maureen Schilling' + _(' as ') + 'Bartender do Lucky\n\
+Lahmard Tate¹' + _(' as ') + 'X-Cell\n\
+Woodrow W. Paige¹' + _(' as ') + 'Comentarista da ESPN\n\
+Skip Bayless' + _(' as ') + 'Comentarista da ESPN\n\
+Jay Crawford' + _(' as ') + 'Comentarista da ESPN\n\
+Brian Kenny' + _(' as ') + 'Apresentador da ESPN\n\
+Dana Jacobson' + _(' as ') + 'Apresentador da ESPN\n\
+Chuck Johnson¹' + _(' as ') + 'Apresentador da ESPN\n\
+James Binns' + _(' as ') + 'Comissário\n\
+Johnnie Hobbs Jr.' + _(' as ') + 'Comissário\n\
+Barney Fitzpatrick' + _(' as ') + 'Comissário\n\
+Jim Lampley' + _(' as ') + 'Comentarista da HBO\n\
+Larry Merchant' + _(' as ') + 'Comentarista da HBO\n\
+Max Kellerman' + _(' as ') + 'Comentarista da HBO\n\
+LeRoy Neiman' + _(' as ') + 'LeRoy Neiman\n\
+Bert Randolph Sugar' + _(' as ') + 'Repórter da Ring Magazine\n\
+Bernard Fernández' + _(' as ') + 'Articulista da Boxing Association of America\n\
+Gunnar Peterson' + _(' as ') + 'Treinador de levantamento de peso\n\
+Yahya' + _(' as ') + 'Oponente de Dixon\n\
+Marc Ratner (1)' + _(' as ') + 'Oficial de luta\n\
+Anthony Lato Jr.' + _(' as ') + 'Inspetor de Rocky\n\
+Jack Lazzarado' + _(' as ') + 'Inspetor de Dixon\n\
+Michael Buffer' + _(' as ') + 'Anunciador de luta\n\
+Joe Cortez' + _(' as ') + 'Árbitro\n\
+Carter Mitchell' + _(' as ') + 'Shamrock Foreman\n\
+Vinod Kumar' + _(' as ') + 'Ravi\n\
+Fran Pultro' + _(' as ') + 'Pai no restaurante\n\
+Frank Stallone Jr.¹' + _(' as ') + 'Cliente do restaurante\n\
+Jody Giambelluca' + _(' as ') + 'Cliente do restaurante\n\
+Tobias Segal' + _(' as ') + 'Amigo de Robert\n\
+Tim Carr' + _(' as ') + 'Amigo de Robert\n\
+Matt Frack' + _(' as ') + 'Amigo de Robert\n\
+Paul Dion Monte' + _(' as ') + 'Amigo de Robert\n\
+Kevin King Templeton' + _(' as ') + 'Amigo de Robert\n\
+Robert Michael Kelly' + _(' as ') + 'Senhor Tomilson\n\
+Rick Buchborn' + _(' as ') + 'Fã de Rocky\n\
+Nick Baker' + _(' as ') + 'Bartender do pub irlandês\n\
+Don Sherman' + _(' as ') + 'Andy\n\
+Stu Nahan' + _(' as ') + 'Comentarista da luta pelo computador\n\
+Gary Compton' + _(' as ') + 'Segurança\n\
+Ricky Cavazos' + _(' as ') + 'Espectador da luta (não creditado)\n\
+Dolph Lundgren' + _(' as ') + 'Capitão Ivan Drago (imagens de arquivo) (não creditado)\n\
+Burgess Meredith' + _(' as ') + 'Mickey (imagens de arquivo) (não creditado)\n\
+Mr. T' + _(' as ') + 'Clubber Lang (imagens de arquivo) (não creditado)\n\
+Carl Weathers' + _(' as ') + 'Apollo Creed (imagens de arquivo) (não creditado)',
+            'country'             : 'EUA',
+            'genre'               : 'Ação',
+            'classification'      : False,
+            'studio'              : 'Fox Film',
+            'o_site'              : 'http://epipoca.uol.com.br/filmes_web.php?idf=11521',
+            'site'                : 'http://epipoca.uol.com.br/filmes_ficha.php?idf=11521',
+            'trailer'             : 'http://epipoca.uol.com.br/filmes_trailer.php?idf=11521',
+            'year'                : 2006,
+            'notes'               : False,
+            'runtime'             : 102,
+            'image'               : True,
+            'rating'              : 9,
+            'cameraman'           : 'J. Clark Mathis',
+            'screenplay'          : 'Sylvester Stallone ... Escrito por, Sylvester Stallone ... Personagens',
+            'barcode'             : False
+        },
+    }
