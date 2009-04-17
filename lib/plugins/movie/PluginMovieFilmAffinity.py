@@ -1,8 +1,8 @@
-# -*- coding: iso-8859-15 -*-
+# -*- coding: iso8859-1 -*-
 
 __revision__ = '$Id: PluginMovieFilmAffinity.py 389 2006-07-29 18:43:35Z piotrek $'
 
-# Copyright (c) 2006 Pedro D. Sánchez
+# Copyright (c) 2006-2009 Pedro D. Sánchez
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,17 +25,17 @@ import gutils
 import movie
 import string, re
 
-plugin_name		= 'FilmAffinity'
-plugin_description	= 'Base de Datos de Peliculas'
-plugin_url		= 'www.filmaffinity.com'
-plugin_language		= _('Spanish')
-plugin_author		= 'Pedro D. Sánchez'
-plugin_author_email	= '<pedrodav@gmail.com>'
-plugin_version		= '0.3'
+plugin_name         = 'FilmAffinity'
+plugin_description  = 'Base de Datos de Peliculas'
+plugin_url          = 'www.filmaffinity.com'
+plugin_language     = _('Spanish')
+plugin_author       = 'Pedro D. Sánchez'
+plugin_author_email = '<pedrodav@gmail.com>'
+plugin_version      = '0.3'
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
-		self.encode   = 'iso-8859-15'
+		self.encode   = 'iso-8859-1'
 		self.movie_id = id
 		self.url      = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
 
@@ -94,6 +94,7 @@ class Plugin(movie.Movie):
 		self.cast = re.sub('</a>,[ ]*', '\n', self.cast)
 		self.cast = string.strip(gutils.strip_tags(self.cast))
 		self.cast = re.sub('[ ]+', ' ', self.cast)
+		self.cast = re.sub('\n[ ]+', '\n', self.cast)
 
 	def get_classification(self):
 		self.classification = ''
@@ -128,9 +129,9 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 
 	def __init__(self):
-		self.original_url_search	= 'http://www.filmaffinity.com/es/search.php?stype=title&stext='
-		self.translated_url_search	= 'http://www.filmaffinity.com/es/search.php?stype=title&stext='
-		self.encode = 'iso-8859-15'
+		self.original_url_search   = 'http://www.filmaffinity.com/es/search.php?stype=title&stext='
+		self.translated_url_search = 'http://www.filmaffinity.com/es/search.php?stype=title&stext='
+		self.encode                = 'iso-8859-1'
 
 	def search(self,parent_window):
 		self.open_search(parent_window)
@@ -160,3 +161,54 @@ class SearchPlugin(movie.SearchMovie):
 					self.ids.append(gutils.trim(element, '<b><a href="/es/film', '.html'))
 					title = gutils.after(element, '<b><a href="/es/film')
 					self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.after(title, '>'))))
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+	#
+	test_configuration = {
+		'Rocky' : [ 9, 9 ],
+	}
+
+class PluginTest:
+	#
+	# Configuration for automated tests:
+	# dict { movie_id -> dict { arribute -> value } }
+	#
+	# value: * True/False if attribute only should be tested for any value
+	#        * or the expected value
+	#
+	test_configuration = {
+		'706925' : { 
+			'title'               : 'Rocky Balboa (Rocky VI)',
+			'o_title'             : 'Rocky Balboa (Rocky VI)',
+			'director'            : 'Sylvester Stallone',
+			'plot'                : True,
+			'cast'                : 'Sylvester Stallone\n\
+Burt Young\n\
+Tony Burton\n\
+Milo Ventimiglia\n\
+James Francis Kelly III\n\
+Talia Shire\n\
+Angela Boyd\n\
+Antonio Tarver\n\
+Geraldine Hughes\n\
+Mike Tyson',
+			'country'             : 'Estados Unidos',
+			'genre'               : u'Acción / Drama / Deporte (Boxeo)',
+			'classification'      : False,
+			'studio'              : 'MGM / UA / Columbia Pictures / Revolution Studios',
+			'o_site'              : 'http://www.rockythemovie.com',
+			'site'                : 'http://www.filmaffinity.com/es/film706925.html',
+			'trailer'             : False,
+			'year'                : 2006,
+			'notes'               : False,
+			'runtime'             : 102,
+			'image'               : True,
+			'rating'              : 6
+		},
+	}
