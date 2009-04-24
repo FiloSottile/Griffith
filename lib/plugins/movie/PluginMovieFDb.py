@@ -32,7 +32,7 @@ plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
 plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.14'
+plugin_version        = '1.15'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN = re.compile('/film/.*/zwiastuny/odtwarzaj/[0-9]*')
@@ -55,11 +55,12 @@ class Plugin(movie.Movie):
     def get_o_title(self):
         self.o_title = gutils.trim(self.page, '<h2 class="after-title">', '</h2>')
         self.o_title = gutils.strip_tags(self.o_title)
+        self.o_title = string.strip(self.o_title)
         if self.o_title == '':
             self.o_title = self.get_title(True)
 
     def get_title(self, extra=False):
-        data = gutils.trim(self.page,'<title>', '</title>')
+        data = gutils.trim(self.page,'<h1 id="movie-title">', '</h1>')
         tmp = string.find(data, '(')
         if tmp != -1:
             data = data[:tmp]
@@ -79,12 +80,24 @@ class Plugin(movie.Movie):
                     self.director += ', ' + element
             self.director = string.replace(self.director[2:], ', &nbsp;&nbsp;&nbsp;(więcej)', '')
 
+    def get_screenplay(self):
+        self.screenplay = ''
+        elements = gutils.trim(self.page,'>Scenariusz: </h4>','</div>')
+        elements = string.split(elements, '</li>')
+        if elements[0] != '':
+            for element in elements:
+                element = gutils.trim(element, '>', '</a')
+                if element != '':
+                    self.screenplay += ', ' + element
+            self.screenplay = string.replace(self.screenplay[2:], ', &nbsp;&nbsp;&nbsp;(więcej)', '')
+
+
     def get_plot(self):
         self.plot = gutils.trim(self.page,'Opis filmu','</div>')
         self.plot = gutils.trim(self.plot,'<p>',"\n\n")
 
     def get_year(self):
-        self.year = gutils.trim(self.page,'<small>(', ')</small>')
+        self.year = gutils.trim(self.page,'<small>  (', ')</small>')
 
     def get_runtime(self):
         self.runtime = gutils.trim(self.page,'Czas trwania: </h4>','</div>')
@@ -162,7 +175,7 @@ class SearchPlugin(movie.SearchMovie):
             if len(elements)>1:
                 for element in elements:
                     tmpId = gutils.trim(element, '<a href="', '"')
-                    if tmpId.endswith('http://fdb.pl'):
+                    if tmpId.startswith('/szukaj'):
                         continue
                     self.ids.append(tmpId)
                     element = gutils.strip_tags(
