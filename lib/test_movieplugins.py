@@ -82,6 +82,7 @@ class PluginTester:
         'PluginMovieIMDB',
         'PluginMovieIMDB-de',
         'PluginMovieKinoDe',
+        'PluginMovieMovieMeter',
         'PluginMovieOFDb',
         'PluginMovieZelluloid',
     ]
