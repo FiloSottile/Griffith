@@ -1,3 +1,17 @@
+Griffith 0.9.10
+===============
+* New movie plugins: AllMovie, MyMoviesIt (thanks to Giovanni Sposito)
+* Updated movie plugins: 7arte, Allocine, Amazon, AniDB, Cinematografo, CineMovies, Cineteka, Culturalia,
+  DVD Empire, DVD-Palace, E-Pipoca, FilmAffinity, FilmDb, Filmtipset, IMDB, IMDB-de, MovieFone, PTGate
+* added HD DVD and Blu-ray to the medium table for new databases
+* fixed Greek translation of the word "Danish" (thanks to Johnny)
+  (new installations of griffith with greek environment doesn't work)
+* Updated PDF export plugin
+* enhanced results for amazon poster search
+* bugs fixed: #224546, #269907, #290979, #313012, #317837, #337758, #341826, #348226 (see ChangeLog for more)
+* windows installer: movie import plugins deselectable from installation
+
+
 Griffith 0.9.9
 ==============
 * Updated movie plugins: CSFD, Cinematografo, FDb, Filmweb IMDB-de, IMDb, OFDb, Onet, Stopklatka

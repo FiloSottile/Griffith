@@ -3,7 +3,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Vasco Nunes
+# Copyright (c) 2005-2009 Vasco Nunes
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
@@ -54,7 +54,7 @@ opts = {
 
 setup(
     name = "Griffith",
-    version = "0.9.9",
+    version = "0.9.10",
 	description = 'Griffith - A film manager',
     author = 'Vasco Nunes/Piotr Ozarowski',
     author_email = 'griffith@griffith.cc',
