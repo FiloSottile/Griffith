@@ -1,0 +1,10 @@
+#!/bin/sh
+# TODO: remove this file after releasing Squeeze
+set -e
+if [ "$1" = upgrade ] && dpkg --compare-versions "$2" lt 0.9.10-1
+then
+	pycentral pkgremove griffith || true
+	rm -rf /usr/share/griffith/lib
+fi
+
+#DEBHELPER#

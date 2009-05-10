@@ -8,7 +8,7 @@ Copyright Holders: Vasco Nunes <vasco.m.nunes@gmail.com>,
 
 License:
 
- Copyright (c) 2005-2008 Vasco Nunes, Piotr Ożarowski
+ Copyright © 2005-2009 Vasco Nunes, Piotr Ożarowski
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -66,5 +66,5 @@ lib/sqlalchemy directory:
 
 ----------------------------------------------------------------
 
-The Debian packaging is (C) 2005-2008, Piotr Ożarowski <piotr@debian.org> and
+The Debian packaging is © 2005-2009, Piotr Ożarowski <piotr@debian.org> and
 is licensed under the GPL.
