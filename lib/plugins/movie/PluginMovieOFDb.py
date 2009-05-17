@@ -54,7 +54,7 @@ class Plugin(movie.Movie):
     def get_plot(self):
         storyid = gutils.regextrim(self.page, '<a href="plot/', '(">|[&])')
         if not storyid is None:
-            story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid))
+            story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid.encode('utf8')))
         self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
     def get_year(self):
