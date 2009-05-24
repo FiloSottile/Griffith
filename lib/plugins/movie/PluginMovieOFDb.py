@@ -10,13 +10,13 @@ __revision__ = '$Id$'
 import gutils
 import movie,string,re
 
-plugin_name = "OFDb"
-plugin_description = "Online-Filmdatenbank"
-plugin_url = "www.ofdb.de"
-plugin_language = _("German")
-plugin_author = "Christian Sagmueller, Jessica Katharina Parth"
+plugin_name         = "OFDb"
+plugin_description  = "Online-Filmdatenbank"
+plugin_url          = "www.ofdb.de"
+plugin_language     = _("German")
+plugin_author       = "Christian Sagmueller, Jessica Katharina Parth"
 plugin_author_email = "Jessica.K.P@women-at-work.org"
-plugin_version = "0.10"
+plugin_version      = "0.10"
 
 class Plugin(movie.Movie):
 	def __init__(self, id):
@@ -52,10 +52,12 @@ class Plugin(movie.Movie):
 		self.director = gutils.trim(self.page,"Regie:","</a><br>")
 
 	def get_plot(self):
+		self.plot = ''
 		storyid = self.regextrim(self.page, '<a href="plot/', '(">|[&])')
 		if not storyid is None:
 			story_page = self.open_page(url="http://www.ofdb.de/plot/%s" % (storyid))
-		self.plot = gutils.trim(story_page, "</b><br><br>","</")
+			if story_page:
+				self.plot = gutils.trim(story_page, "</b><br><br>","</")
 
 	def get_year(self):
 		self.year = gutils.trim(self.page,"Erscheinungsjahr:","</a>")
@@ -301,7 +303,7 @@ Elie Chouraqui',
 Yoon Soy' + _(' as ') + 'Wi-jin\n\
 Ahn Seong-gi' + _(' as ') + 'Ja-woon\n\
 Jeong Doo-hong' + _(' as ') + 'Heuk-Woon\n\
-Yoon Joo-sang' + _(' as ') + 'Mu-woon \n\
+Yoon Joo-sang' + _(' as ') + 'Moo-woon \n\
 Kim Ji-yeong\n\
 Baek Chan-gi\n\
 Kim Jae-man\n\
