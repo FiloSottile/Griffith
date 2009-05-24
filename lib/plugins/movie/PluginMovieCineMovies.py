@@ -86,7 +86,7 @@ class Plugin(movie.Movie):
         self.studio = string.strip(gutils.trim(self.page, 'Distributeur :', '</tr>'))
 
     def get_o_site(self):
-        self.o_site = gutils.after(gutils.after(gutils.trim(self.page, '>Site(s) Officiel(s):<', '</a'), '<a '), '>')
+        self.o_site = gutils.after(gutils.after(gutils.trim(self.page, '>Site(s) Officiel(s)<', '</a'), '<a '), '>')
 
     def get_site(self):
         self.site = self.url
