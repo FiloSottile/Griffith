@@ -95,7 +95,7 @@ class Plugin(movie.Movie):
 		self.studio = self.studio.encode(self.encode)
 
 	def get_o_site(self):
-		self.o_site = gutils.after(gutils.after(gutils.trim(self.page, '>Site(s) Officiel(s):<', '</a'), '<a '), '>')
+		self.o_site = gutils.after(gutils.after(gutils.trim(self.page, '>Site(s) Officiel(s)<', '</a'), '<a '), '>')
 		self.o_site = self.o_site.encode(self.encode)
 
 	def get_site(self):
