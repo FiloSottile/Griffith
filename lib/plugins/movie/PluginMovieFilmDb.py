@@ -122,7 +122,7 @@ class Plugin(movie.Movie):
 
     def get_country(self):
         elements = string.split(self.page, 'landjahrsuche.php')
-        if len (elements) > 0:
+        if len (elements) > 1:
             self.country = gutils.trim(elements[1], '>', '</a>') + '\n'
 
     def get_rating(self):
@@ -150,6 +150,7 @@ class SearchPlugin(movie.SearchMovie):
     def search(self,parent_window):
         if not self.open_search(parent_window):
             return None
+        self.page = gutils.convert_entities(self.page)
         return self.page
 
     def get_searches(self):
@@ -160,9 +161,15 @@ class SearchPlugin(movie.SearchMovie):
                 idmatch = re.search('([>]|["])', element)
                 if idmatch:
                     self.ids.append(element[:idmatch.end() - 1])
-                    self.titles.append(gutils.trim(element, '>', '<') + ' - ' +
-                            gutils.trim(gutils.after(element, '</a>'), '<td>', '</td>') + ' - ' +
-                            gutils.trim(gutils.after(element, '<td>'), '<td>', '</td>'))
+                    # I don't know what <wbr> means but it breaks the result list
+                    element = string.replace(element, '<wbr>', '')
+                    element = string.replace(element, '<wbr />', '')
+                    # line breaks sometimes within the title
+                    element = string.replace(element, '<wbr>', '')
+                    element = string.replace(element, '<wbr />', '')
+                    self.titles.append(string.replace(gutils.trim(element, '>', '<') + ' (' +
+                            gutils.trim(gutils.after(element, '<td>'), '<td>', '</td>') + ', ' +
+                            gutils.trim(gutils.after(element, '</a>'), '<td>', '</td>') + ')', '\n', ' - '))
 
 #
 # Plugin Test
@@ -187,7 +194,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        'Rocky Balboa' : { 
+        'Rocky%20Balboa' : { 
             'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : 'Sylvester Stallone',
@@ -200,65 +207,65 @@ Burt Young\n\
 Talia Shire\n\
 Burgess Meredith\n\
 Tony Burton\n\
-Mr. T\n\
 Milo Ventimiglia\n\
+Mr. T\n\
 Frank Stallone\n\
-Michael Buffer\n\
 Geraldine Hughes\n\
+Michael Buffer\n\
 Lahmard J. Tate\n\
 Don Sherman\n\
-Robert Michael Kelly\n\
 LeRoy Neiman\n\
+Robert Michael Kelly\n\
+Gunnar Peterson\n\
 Stu Nahan\n\
 Tobias Segal\n\
 Skip Bayless\n\
-Gunnar Peterson\n\
-Marc Ratner\n\
-Henry G. Sanders\n\
-Rick Buchborn\n\
 Ricky Cavazos\n\
+Marc Ratner\n\
+Rick Buchborn\n\
+Jim Lampley\n\
+Henry G. Sanders\n\
 Charles Johnson\n\
-Angela Boyd\n\
-Ana Gerena\n\
 Fran Pultro\n\
+Angela Boyd\n\
+Yahya\n\
 Tim Carr\n\
 Joe Cortez\n\
-Jody Giambelluca\n\
 Carter Mitchell\n\
-A.J. Benza\n\
-Yahya\n\
 Maureen Schilling\n\
-James Binns\n\
-Jack Lazzarado\n\
+Jody Giambelluca\n\
 Barney Fitzpatrick\n\
 Antonio Tarver\n\
+Ana Gerena\n\
+A.J. Benza\n\
+James Binns\n\
 Nick Baker\n\
-Jim Lampley\n\
+Jack Lazzarado\n\
 Matt Frack\n\
 Louis Giansante\n\
 Kevin King Templeton\n\
-Paul Dion Monte\n\
 Dana Jacobson\n\
-Brian Kenny\n\
-Woody Paige\n\
-Pedro Lovell\n\
 Larry Merchant\n\
-Bert Randolph Sugar\n\
-Bernard Fernández\n\
-Vinod Kumar\n\
+Woody Paige\n\
+Brian Kenny\n\
+Paul Dion Monte\n\
 Anthony Lato Jr.\n\
+Pedro Lovell\n\
 Max Kellerman\n\
+Bert Randolph Sugar\n\
+Vinod Kumar\n\
 Lou DiBella\n\
+Bernard Fernández\n\
 Johnnie Hobbs Jr.\n\
-Jay Crawford\n\
 Gary Compton\n\
+Jay Crawford\n\
 James Francis Kelly III',
             'country'             : 'USA',
             'genre'               : 'Drama',
             'classification'      : False,
             'studio'              : False,
             'o_site'              : False,
-            'site'                : 'http://www.filmdb.de/filmanzeige.php?filmid=Rocky Balboa',
+            'site'                : 'http://www.filmdb.de/filmanzeige.php?filmid=Rocky%20Balboa',
             'trailer'             : False,
             'year'                : 2006,
             'notes'               : False,
@@ -266,7 +273,7 @@ James Francis Kelly III',
             'image'               : True,
             'rating'              : False
         },
-        'Tatort -%3Cwbr %2F%3E M%26auml%3Brchenwald' : { 
+        'Tatort%20-<wbr%20%2F>%20M%26auml%3Brchenwald' : { 
             'title'               : 'Tatort - Märchenwald',
             'o_title'             : 'Tatort - Märchenwald',
             'director'            : 'Christiane Balthasar',
@@ -281,7 +288,7 @@ Michael Wittenborn',
             'classification'      : False,
             'studio'              : False,
             'o_site'              : False,
-            'site'                : 'http://www.filmdb.de/filmanzeige.php?filmid=Tatort -%3Cwbr %2F%3E M%26auml%3Brchenwald',
+            'site'                : 'http://www.filmdb.de/filmanzeige.php?filmid=Tatort%20-%20M%26auml%3Brchenwald',
             'trailer'             : False,
             'year'                : 2004,
             'notes'               : False,
