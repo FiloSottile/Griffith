@@ -23,7 +23,8 @@ __revision__ = '$Id$'
 
 import gutils, movie
 import string, re
-from xmlrpclib import ServerProxy, Error
+import urllib, httplib
+from xmlrpclib import ServerProxy, Transport
 
 plugin_name         = 'MovieMeter'
 plugin_description  = 'de filmsite voor liefhebbers'
@@ -32,10 +33,47 @@ plugin_language     = _('Dutch')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'griffith-private@lists.berlios.de'
 plugin_version      = '1.0'
+# API key created for Griffith
 moviemeter_api_key  = 'qs1bqrpqf89e9uht5b0q01y0xstcp3w0'
 
+#
+# XMLRPC through proxy if necessary
+#
+class ProxiedTransport(Transport):
+    proxy_is_used = False
+
+    def make_connection(self, host):
+        self.realhost = host
+        proxies = urllib.getproxies()
+        proxyurl = None
+        if 'http' in proxies:
+            proxyurl = proxies['http']
+        elif 'all' in proxies:
+            proxyurl = proxies['all']
+        if proxyurl:
+            urltype, proxyhost = urllib.splittype(proxyurl)
+            host, selector = urllib.splithost(proxyhost)
+            h = httplib.HTTP(host)
+            self.proxy_is_used = True
+            return h
+        else:
+            self.proxy_is_used = False
+            return Transport.make_connection(self, host)
+
+    def send_request(self, connection, handler, request_body):
+        if self.proxy_is_used:
+            connection.putrequest("POST", 'http://%s%s' % (self.realhost, handler))
+        else:
+            Transport.send_request(self, connection, handler, request_body)
+
+    def send_host(self, connection, host):
+        if self.proxy_is_used:
+            connection.putheader('Host', self.realhost)
+        else:
+            Transport.send_host(self, connection, host)
+
 class Plugin(movie.Movie):
-    server = ServerProxy('http://www.moviemeter.nl/ws')
+    server = ServerProxy('http://www.moviemeter.nl/ws', transport=ProxiedTransport())
 
     def __init__(self, id):
         self.encode   = 'iso8859-1'
@@ -127,7 +165,7 @@ class Plugin(movie.Movie):
                 self.notes = self.notes + element['title'] + '\n'
 
 class SearchPlugin(movie.SearchMovie):
-    server = ServerProxy('http://www.moviemeter.nl/ws')
+    server = ServerProxy('http://www.moviemeter.nl/ws', transport=ProxiedTransport())
 
     def __init__(self):
         self.original_url_search   = 'http://www.moviemeter.nl/film/search/'
