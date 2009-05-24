@@ -66,6 +66,7 @@ class PluginTester:
 		'PluginMovieAllMovie',
 		'PluginMovieAmazon',
 		'PluginMovieCinematografo',
+		'PluginMovieCineMovies',
 		'PluginMovieCineteka',
 		'PluginMovieCulturalia',
 		'PluginMovieDVDEmpire',
@@ -106,22 +107,23 @@ class PluginTester:
 				logFile.write('\n')
 			logFile.write('\n\n')
 			result = False
-		# plugin.original_url_search
-		plugin.url = plugin.original_url_search
-		if plugin.remove_accents:
-			plugin.title = gutils.remove_accents(title, 'utf-8')
-		else:
-			plugin.title = title
-		plugin.search_movies(None)
-		plugin.get_searches()
-		if not len(plugin.ids) - 1 == cntTranslated:	# first entry is always '' (???)
-			print "Title (Original): %s - expected: %d - found: %d" % (title, cntTranslated, len(plugin.ids) - 1)
-			logFile.write("Title (Original): %s - expected: %d - found: %d\n\n" % (title, cntTranslated, len(plugin.ids) - 1))
-			for titleFound in plugin.titles:
-				logFile.write(titleFound)
-				logFile.write('\n')
-			logFile.write('\n\n')
-			result = False
+		# plugin.original_url_search if it is different to plugin.translated_url_search
+		if plugin.original_url_search <> plugin.translated_url_search:
+			plugin.url = plugin.original_url_search
+			if plugin.remove_accents:
+				plugin.title = gutils.remove_accents(title, 'utf-8')
+			else:
+				plugin.title = title
+			plugin.search_movies(None)
+			plugin.get_searches()
+			if not len(plugin.ids) - 1 == cntTranslated:	# first entry is always '' (???)
+				print "Title (Original): %s - expected: %d - found: %d" % (title, cntTranslated, len(plugin.ids) - 1)
+				logFile.write("Title (Original): %s - expected: %d - found: %d\n\n" % (title, cntTranslated, len(plugin.ids) - 1))
+				for titleFound in plugin.titles:
+					logFile.write(titleFound)
+					logFile.write('\n')
+				logFile.write('\n\n')
+				result = False
 		return result
 
 	#
