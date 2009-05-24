@@ -31,13 +31,17 @@ plugin_url          = 'www.filmaffinity.com'
 plugin_language     = _('Spanish')
 plugin_author       = 'Pedro D. Sánchez'
 plugin_author_email = '<pedrodav@gmail.com>'
-plugin_version      = '0.3'
+plugin_version      = '0.4'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
         self.encode   = 'iso-8859-1'
         self.movie_id = id
         self.url      = "http://www.filmaffinity.com/es/film%s.html" % str(self.movie_id)
+
+    def initialize(self):
+        self.page = self.page.replace(u'\x91', '\'')
+        self.page = self.page.replace(u'\x92', '\'')
 
     def get_image(self):
         tmp = string.find(self.page, 'www.filmaffinity.com/imgs/movies/')
@@ -59,15 +63,11 @@ class Plugin(movie.Movie):
         self.director = gutils.trim(self.page,'<b>DIRECTOR</b></td>', '</td>')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, u'<b>GÉNERO Y CRÍTICA</b>', '<br />')
+        self.plot = gutils.trim(self.page, u'<b>GÉNERO Y CRÍTICA</b>', '</tr>')
         if self.plot == '':
-            self.plot = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '<br />')
+            self.plot = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '</tr>')
         self.plot = gutils.after(self.plot, '<td valign="top">')
-        self.plot = gutils.after(self.plot, '/')
-        self.plot = string.replace(self.plot, ' SINOPSIS: ', '')
-        self.plot = string.replace(self.plot, ' SINOPSIS:', '')
-        self.plot = string.replace(self.plot, 'SINOPSIS: ', '')
-        self.plot = string.replace(self.plot, 'SINOPSIS:', '')
+        self.plot = gutils.after(self.plot, 'SINOPSIS:')
         self.plot = string.replace(self.plot, ' (FILMAFFINITY)', '')
         self.plot = string.replace(self.plot, '(FILMAFFINITY)', '')
 
@@ -82,11 +82,14 @@ class Plugin(movie.Movie):
         self.runtime = gutils.after(self.runtime[-10:], '<td>')
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, u'<b>GÉNERO Y CRÍTICA</b>', '<br />')
-        if self.genre == '':
-            self.genre = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '<br />')
-        self.genre = gutils.trim(self.genre, '<td valign="top">', '/')
-        self.genre = string.replace(self.genre, '.', " /")
+        self.genre = ''
+        tmp = gutils.trim(self.page, u'<b>GÉNERO Y CRÍTICA</b>', ' / SINOPSIS')
+        if tmp == '':
+            tmp = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', ' / SINOPSIS')
+        tmp = gutils.after(tmp, '<td valign="top">')
+        if tmp:
+            tmp = tmp.split(' / ')
+            self.genre = tmp[len(tmp) - 1]
 
     def get_cast(self):
         self.cast = ''
@@ -194,7 +197,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '706925' : { 
+        '706925' : {
             'title'               : 'Rocky Balboa (Rocky VI)',
             'o_title'             : 'Rocky Balboa (Rocky VI)',
             'director'            : 'Sylvester Stallone',
@@ -210,7 +213,7 @@ Antonio Tarver\n\
 Geraldine Hughes\n\
 Mike Tyson',
             'country'             : 'Estados Unidos',
-            'genre'               : u'Acción / Drama / Deporte (Boxeo)',
+            'genre'               : u'Acción. Drama. Deporte (Boxeo)',
             'classification'      : False,
             'studio'              : 'MGM / UA / Columbia Pictures / Revolution Studios',
             'o_site'              : 'http://www.rockythemovie.com',
@@ -223,6 +226,86 @@ Mike Tyson',
             'rating'              : 6,
             'cameraman'           : 'J. Clark Mathis',
             'screenplay'          : 'Sylvester Stallone (Personajes: Sylvester Stallone)',
+            'barcode'             : False
+        },
+        '373499' : { 
+            'title'               : 'Camino',
+            'o_title'             : 'Camino',
+            'director'            : 'Javier Fesser',
+            'plot'                : True,
+            'cast'                : u'Nerea Camacho\n\
+Carmen Elías\n\
+Mariano Venancio\n\
+Manuela Vellés\n\
+Ana Gracia\n\
+Lola Casamayor\n\
+Lucas Manzano\n\
+Pepe Ocio\n\
+Claudia Otero\n\
+Jordi Dauder\n\
+Emilio Gavira\n\
+Miriam Raya',
+            'country'             : u'España',
+            'genre'               : u'Drama. Enfermedad. Religión. Basado en hechos reales',
+            'classification'      : False,
+            'studio'              : u'Películas Pendelton / Mediapro',
+            'o_site'              : 'http://www.caminolapelicula.com/',
+            'site'                : 'http://www.filmaffinity.com/es/film373499.html',
+            'trailer'             : False,
+            'year'                : 2008,
+            'notes'               : False,
+            'runtime'             : 143,
+            'image'               : True,
+            'rating'              : 7,
+            'cameraman'           : u'Alex Catalán',
+            'screenplay'          : 'Javier Fesser',
+            'barcode'             : False
+        },
+        '580875' : { 
+            'title'               : 'El gato negro (Masters of Horror Series)',
+            'o_title'             : 'Black Cat (Masters of Horror Series), The',
+            'director'            : 'Stuart Gordon',
+            'plot'                : True,
+            'cast'                : 'Jeffrey Combs\n\
+Patrick Gallagher\n\
+Eric Keenleyside\n\
+Christopher Heyerdahl',
+            'country'             : 'Estados Unidos',
+            'genre'               : 'Terror',
+            'classification'      : False,
+            'studio'              : 'Emitida por la cadena Showtime',
+            'o_site'              : False,
+            'site'                : 'http://www.filmaffinity.com/es/film580875.html',
+            'trailer'             : False,
+            'year'                : 2007,
+            'notes'               : False,
+            'runtime'             : 59,
+            'image'               : True,
+            'rating'              : 6,
+            'cameraman'           : 'David Pelletier',
+            'screenplay'          : 'Dennis Paoli, Stuart Gordon (Historia corta: Edgar Allan Poe)',
+            'barcode'             : False
+        },
+        '826399' : { 
+            'title'               : 'Surcadores del cielo (The Sky Crawlers)',
+            'o_title'             : 'Sukai kurora (The Sky Crawlers)',
+            'director'            : 'Mamoru Oshii',
+            'plot'                : True,
+            'cast'                : 'Animation',
+            'country'             : u'Japón',
+            'genre'               : u'Animación. Aventuras',
+            'classification'      : False,
+            'studio'              : 'Production I.G. / Nippon Television Network Corporation (NTV)',
+            'o_site'              : 'http://sky.crawlers.jp/',
+            'site'                : 'http://www.filmaffinity.com/es/film826399.html',
+            'trailer'             : False,
+            'year'                : 2008,
+            'notes'               : False,
+            'runtime'             : 0,
+            'image'               : True,
+            'rating'              : 6,
+            'cameraman'           : 'Animation',
+            'screenplay'          : 'Chihiro Itou (Novela: Hiroshi Mori)',
             'barcode'             : False
         },
     }
