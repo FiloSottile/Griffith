@@ -30,7 +30,7 @@ plugin_url          = 'www.imdb.com'
 plugin_language     = _('English')
 plugin_author       = 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email = 'griffith-private@lists.berlios.de'
-plugin_version      = '1.8'
+plugin_version      = '1.9'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -60,11 +60,13 @@ class Plugin(movie.Movie):
             self.title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
     def get_director(self):
-        pattern = re.compile('<h5>Director[s]*?:</h5>[\n\s\r]*(.*?)(?:<br/>)?(?:<a[^>]+>more</a>)?[\n]*</div')
-        result = pattern.search(self.page)
-        if result:
-            self.director = result.groups()[0]
-            self.director = self.director.replace('<br/>', ', ')
+        self.director = ''
+        parts = re.split('<a href=', gutils.trim(self.cast_page, '>Directed by<', '</table>'))
+        if len(parts) > 1:
+            for part in parts[1:]:
+                director = gutils.trim(part, '>', '<')
+                self.director = self.director + director + ', '
+            self.director = self.director[0:len(self.director) - 2]
 
     def get_plot(self):
         self.plot = gutils.regextrim(self.page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
@@ -96,8 +98,8 @@ class Plugin(movie.Movie):
         self.cast = string.replace(self.cast, ' ... ', _(' as '))
         self.cast = string.replace(self.cast, '...', _(' as '))
         self.cast = string.replace(self.cast, '</tr><tr>', "\n")
-        self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
-        self.cast = string.replace(self.cast, '</tr><tr class="odd">', "\n")
+        self.cast = re.sub('</tr>[ \t]*<tr[ \t]*class="even">', "\n", self.cast)
+        self.cast = re.sub('</tr>[ \t]*<tr[ \t]*class="odd">', "\n", self.cast)
         self.cast = self.__before_more(self.cast)
 
     def get_classification(self):
@@ -167,13 +169,17 @@ class Plugin(movie.Movie):
 
     def get_screenplay(self):
         self.screenplay = ''
-        pattern = re.compile('<h5>Writer[s]*?(?:[ \t]+<a href="/wga">[(]WGA[)]</a>)*?:</h5>[\n\s\r]*(.*?)(?:<br/>)?(?:<a[^>]+>more</a>)?[\n]*</div')
-        result = pattern.search(self.page)
-        if result:
-            self.screenplay = result.groups()[0]
-            self.screenplay = self.screenplay.replace(' (written by)', '')
-            self.screenplay = self.screenplay.replace(' and<', '<')
-            self.screenplay = self.screenplay.replace('<br/>', ', ')
+        parts = re.split('<a href=', gutils.trim(self.cast_page, '>Writing credits<', '</table>'))
+        if len(parts) > 1:
+            for part in parts[1:]:
+                screenplay = gutils.trim(part, '>', '<')
+                if screenplay == 'WGA':
+                    continue
+                screenplay = screenplay.replace(' (written by)', '')
+                screenplay = screenplay.replace(' and<', '<')
+                self.screenplay = self.screenplay + screenplay + ', '
+            if len(self.screenplay) > 2:
+                self.screenplay = self.screenplay[0:len(self.screenplay) - 2]
 
     def get_cameraman(self):
         self.cameraman = ''
@@ -205,7 +211,7 @@ class SearchPlugin(movie.SearchMovie):
             return None
         tmp_page = gutils.trim(self.page, 'Here are the', '</TABLE>')
         if not tmp_page:
-            has_results = re.match('[(]Displaying [1-9][0-7]* Results[)]', self.page)
+            has_results = re.match('[(]Displaying [1-9][0-7]* Result[s]*[)]', self.page)
             if not has_results:
                 # nothing or one result found, try another url which looks deeper in the imdb database
                 # example: Adventures of Falcon -> one result, jumps directly to the movie page
@@ -213,7 +219,7 @@ class SearchPlugin(movie.SearchMovie):
                 self.url = 'http://www.imdb.com/find?more=tt;q='
                 if not self.open_search(parent_window):
                     return None
-            self.page = gutils.trim(self.page, '(Displaying', '<b>Suggestions For Improving Your Results</b>')
+            self.page = gutils.trim(self.page, '(Displaying', '>Suggestions For Improving Your Results<')
         else:
             self.page = tmp_page
         self.page = self.page.decode('iso-8859-1')
@@ -248,8 +254,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 16, 16 ],
-        'Ein glückliches Jahr' : [ 21, 21 ]
+        'Rocky Balboa'         : [ 15, 15 ],
+        'Ein glückliches Jahr' : [ 22, 22 ]
     }
 
 class PluginTest:
