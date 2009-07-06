@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-__revision__ = '$Id: _movie.py 1251 2009-07-06 18:29:12Z piotrek $'
+__revision__ = '$Id$'
 
 # Copyright © 2009 Piotr Ożarowski
 #
@@ -20,11 +20,15 @@ __revision__ = '$Id: _movie.py 1251 2009-07-06 18:29:12Z piotrek $'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
+import logging
+
 from sqlalchemy import and_, or_
 from sqlalchemy.orm import object_session
 
 import tables
 from _objects import Loan
+
+log = logging.getLogger('Griffith')
 
 res_aliases = {(2560, 1600): ('QSXGA',),
                 (2048, 1536): ('QXGA',),
