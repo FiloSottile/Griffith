@@ -78,7 +78,7 @@ class Plugin(movie.Movie):
 		self.genre = self.genre.encode(self.encode)
 
 	def get_cast(self):
-		self.cast = gutils.trim(self.page_cast, 'diens</b> :', '</table>')
+		self.cast = gutils.trim(self.page_cast, 'diens</h2> :', '</table>')
 		self.cast = self.cast.replace('\n', '')
 		self.cast = self.cast.replace('</tr>', '\n')
 		self.cast = gutils.clean(self.cast)

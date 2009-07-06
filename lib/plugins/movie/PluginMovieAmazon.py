@@ -393,7 +393,7 @@ class PluginTest:
 			'cast'				: 'Sylvester Stallone\n\
 Antonio Traver\n\
 Burt Young',
-			'country'			: False,
+			'country'			: 'USA',
 			'genre'				: 'Drama, Drama',
 			'classification'	: 'Freigegeben ab 12 Jahren',
 			'studio'			: 'MGM Home Entertainment GmbH (dt.)',
@@ -414,7 +414,7 @@ Burt Young',
 			'cast'				: 'Lino Ventura\n\
 Françoise Fabian\n\
 Charles Gérard',
-			'country'			: 'Frankreich',
+			'country'			: 'Frankreich, Italien',
 			'genre'				: 'Krimikomödie, Drama, General AAS, Drama, Komödie, Krimi',
 			'classification'	: 'Freigegeben ab 12 Jahren',
 			'studio'			: 'Warner Home Video - DVD',
