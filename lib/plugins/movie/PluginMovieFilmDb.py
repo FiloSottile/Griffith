@@ -201,64 +201,64 @@ class PluginTest:
             'plot'                : True,
             'cast'                : 'Dolph Lundgren\n\
 Sylvester Stallone\n\
-Carl Weathers\n\
 Mike Tyson\n\
+Carl Weathers\n\
 Burt Young\n\
 Talia Shire\n\
 Burgess Meredith\n\
-Tony Burton\n\
 Milo Ventimiglia\n\
 Mr. T\n\
-Frank Stallone\n\
+Tony Burton\n\
 Geraldine Hughes\n\
+Frank Stallone\n\
 Michael Buffer\n\
 Lahmard J. Tate\n\
 Don Sherman\n\
-LeRoy Neiman\n\
-Robert Michael Kelly\n\
 Gunnar Peterson\n\
-Stu Nahan\n\
+LeRoy Neiman\n\
 Tobias Segal\n\
+Stu Nahan\n\
 Skip Bayless\n\
+Robert Michael Kelly\n\
 Ricky Cavazos\n\
-Marc Ratner\n\
 Rick Buchborn\n\
-Jim Lampley\n\
-Henry G. Sanders\n\
-Charles Johnson\n\
-Fran Pultro\n\
-Angela Boyd\n\
+Jody Giambelluca\n\
 Yahya\n\
+Charles Johnson\n\
+Barney Fitzpatrick\n\
+Henry G. Sanders\n\
+Fran Pultro\n\
+Dana Jacobson\n\
 Tim Carr\n\
 Joe Cortez\n\
-Carter Mitchell\n\
-Maureen Schilling\n\
-Jody Giambelluca\n\
-Barney Fitzpatrick\n\
-Antonio Tarver\n\
-Ana Gerena\n\
-A.J. Benza\n\
-James Binns\n\
-Nick Baker\n\
-Jack Lazzarado\n\
-Matt Frack\n\
-Louis Giansante\n\
-Kevin King Templeton\n\
-Dana Jacobson\n\
-Larry Merchant\n\
-Woody Paige\n\
-Brian Kenny\n\
-Paul Dion Monte\n\
-Anthony Lato Jr.\n\
-Pedro Lovell\n\
+Jim Lampley\n\
 Max Kellerman\n\
+Ana Gerena\n\
+Marc Ratner\n\
+Jack Lazzarado\n\
+Carter Mitchell\n\
+Angela Boyd\n\
+Maureen Schilling\n\
+James Binns\n\
+Antonio Tarver\n\
+A.J. Benza\n\
+Nick Baker\n\
+Louis Giansante\n\
+Matt Frack\n\
+Larry Merchant\n\
+Paul Dion Monte\n\
+Bernard Fernández\n\
+Anthony Lato Jr.\n\
+Kevin King Templeton\n\
+Brian Kenny\n\
+Woody Paige\n\
+Lou DiBella\n\
+Pedro Lovell\n\
 Bert Randolph Sugar\n\
 Vinod Kumar\n\
-Lou DiBella\n\
-Bernard Fernández\n\
-Johnnie Hobbs Jr.\n\
-Gary Compton\n\
 Jay Crawford\n\
+Gary Compton\n\
+Johnnie Hobbs Jr.\n\
 James Francis Kelly III',
             'country'             : 'USA',
             'genre'               : 'Drama',

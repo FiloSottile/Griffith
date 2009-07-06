@@ -304,7 +304,7 @@ Ahn Kil-kang\n\
 Bong Tae-gyu' + _(' as ') + 'Cameo\n\
 Im Ha-ryong' + _(' as ') + 'Cameo\n\
 Yoon Do-hyeon\n\
-Lee Choon-yeon\n\
+Lee Choon-yeon' + _(' as ') + 'Cameo\n\
 Kim Yeong-in\n\
 Park Yoon-bae\n\
 Lee Won\n\

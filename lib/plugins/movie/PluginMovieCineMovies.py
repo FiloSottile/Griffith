@@ -71,7 +71,7 @@ class Plugin(movie.Movie):
         self.genre = gutils.trim(self.page, 'Genre :', '</tr>')
 
     def get_cast(self):
-        self.cast = gutils.trim(self.page_cast, 'diens</b> :', '</table>')
+        self.cast = gutils.trim(self.page_cast, 'diens</h2> :', '</table>')
         self.cast = self.cast.replace('\n', '')
         self.cast = self.cast.replace('</tr>', '\n')
         self.cast = gutils.clean(self.cast)
@@ -101,7 +101,7 @@ class Plugin(movie.Movie):
         self.rating = gutils.clean(gutils.trim(self.page, '<div id=scoree>', '</div>'))
 
     def get_screenplay(self):
-        self.screenplay = gutils.clean(gutils.trim(self.page_cast, 'nario de</b> :', '</a>'))
+        self.screenplay = gutils.clean(gutils.trim(self.page_cast, 'nario de</h2> :', '</a>'))
 
 
 class SearchPlugin(movie.SearchMovie):

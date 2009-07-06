@@ -34,7 +34,7 @@ plugin_author       = 'Michael Jahn'
 plugin_author_email = 'griffith-private@lists.berlios.de'
 plugin_version      = '1.0'
 # API key created for Griffith
-moviemeter_api_key  = 'qs1bqrpqf89e9uht5b0q01y0xstcp3w0'
+moviemeter_api_key  = '6h70thfmkwhq55hst69gnr65ckbaqu6h'
 
 #
 # XMLRPC through proxy if necessary

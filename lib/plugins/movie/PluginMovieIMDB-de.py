@@ -133,8 +133,8 @@ class Plugin(movie.Movie):
         self.cast = string.replace(self.cast, ' ... ', _(' as ').encode('utf8'))
         self.cast = string.replace(self.cast, '...', _(' as ').encode('utf8'))
         self.cast = string.replace(self.cast, '</tr><tr>', "\n")
-        self.cast = string.replace(self.cast, '</tr><tr class="even">', "\n")
-        self.cast = string.replace(self.cast, '</tr><tr class="odd">', "\n")
+        self.cast = re.sub('</tr>[ \t]*<tr[ \t]*class="even">', "\n", self.cast)
+        self.cast = re.sub('</tr>[ \t]*<tr[ \t]*class="odd">', "\n", self.cast)
         self.cast = self.__before_more(self.cast)
         self.cast = re.sub('[ ]+', ' ', self.cast)
 
@@ -265,7 +265,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 17, 17 ],
+        'Rocky Balboa'         : [ 16, 16 ],
         'Ein glückliches Jahr' : [  6,  6 ]
     }
 
@@ -354,6 +354,7 @@ Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
 Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
 Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
+Keyon Smith' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)',
             'country'           : 'USA',
             'genre'             : 'Action | Sport',
@@ -368,7 +369,7 @@ Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)',
 + _('Color') + ': Farbe',
             'runtime'           : 102,
             'image'             : True,
-            'rating'            : 8
+            'rating'            : 7
         },
         '0069815' : { 
             'title'             : 'Ein glückliches Jahr',

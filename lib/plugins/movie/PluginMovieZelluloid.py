@@ -59,7 +59,7 @@ class Plugin(movie.Movie):
         self.title = gutils.trim(self.page, '<title>', '|')
 
     def get_director(self):
-        self.director = gutils.trim(self.detail_page, 'Regie', '</A>')
+        self.director = gutils.trim(self.detail_page, 'Regie', '</a>')
 
     def get_plot(self):
         self.plot = gutils.trim(self.page, '<DIV CLASS=bigtext>', '</DIV>')
@@ -88,8 +88,9 @@ class Plugin(movie.Movie):
                 delimiter = ', '
 
     def get_cast(self):
-        self.cast = gutils.trim(self.detail_page, 'alt="Besetzung"', '<TD COLSPAN=')
-        self.cast = self.cast.replace('<A HREF=', '--flip--' + '<A HREF=')
+        self.cast = gutils.trim(self.detail_page, 'alt="Besetzung"', '<img')
+        self.cast = self.cast.replace('<a href=', '--flip--' + '<a href=')
+        self.cast = self.cast.replace('</td></tr>', '\n')
         self.cast = gutils.strip_tags(self.cast)
         self.cast = gutils.after(self.cast, '>')
         elements = self.cast.split('\n')
@@ -107,11 +108,12 @@ class Plugin(movie.Movie):
         self.classification = re.sub('[,<].*', '', self.classification)
 
     def get_studio(self):
-        self.studio = gutils.strip_tags(gutils.trim(self.detail_page, 'alt="Produktion"', '&nbsp;'))
+        self.studio = gutils.trim(self.detail_page, 'alt="Produktion"', '<img')
         if self.studio == '':
             self.studio = gutils.trim(self.detail_page, 'alt="Produktion"', '</TABLE>')
         self.studio = gutils.after(self.studio, '>')
-        self.studio = self.studio.replace('\n', ', ')
+        self.studio = self.studio.replace('<tr>', ', ')
+        self.studio = gutils.strip_tags(self.studio)
         self.studio = re.sub('((^, )|(, $))', '', self.studio)
         
     def get_o_site(self):
@@ -146,6 +148,9 @@ class Plugin(movie.Movie):
 
     def get_notes(self):
         self.notes = ""
+
+    def get_screenplay(self):
+        self.screenplay = gutils.after(gutils.trim(self.detail_page, '>Drehbuch<', '</a>'), '>')
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -221,7 +226,8 @@ Henry G. Sanders' + _(' as ') + 'Martin',
             'notes'             : False,
             'runtime'           : 102,
             'image'             : True,
-            'rating'            : 8.0
+            'rating'            : 8.0,
+            'screenplay'        : 'Sylvester Stallone'
         },
         '6342' : { 
             'title'             : 'Die wilden Hühner',
@@ -264,6 +270,7 @@ Piet Klocke' + _(' as ') + 'Junggeselle',
             'notes'             : False,
             'runtime'           : 109,
             'image'             : True,
-            'rating'            : 8.0
+            'rating'            : 8.0,
+            'screenplay'        : 'Güzin Kar, Uschi Reich'
         }
     }

@@ -43,9 +43,9 @@ class Plugin(movie.Movie):
         self.page_cast = self.open_page(self.parent_window, url = "http://www.allocine.fr/film/casting_gen_cfilm=%s.html" % str(self.movie_id))
 
     def get_image(self):
-        urls = re.split('<img[ \t]+src=[\'"]', self.page)
-        for index in range(1, len(urls), 1):
-            url = gutils.before(urls[index], '"')
+        urls = re.split('<img[ \t]+src=[\'"]', gutils.trim(self.page, '</h1>', '</h2>'))
+        for url in urls[1:]:
+            url = gutils.before(url, '"')
             if string.find(url, '.jpg') >= 0:
                 self.image_url = url
                 break
@@ -54,10 +54,10 @@ class Plugin(movie.Movie):
         self.o_title = ""
         self.o_title = gutils.trim(self.page,"Titre original : <i>","</i>")
         if (self.o_title==''):
-            self.o_title = string.replace(gutils.trim(self.page, '<title>', '</title>'), ' - Allocine.fr', '')
+            self.o_title = string.replace(gutils.trim(self.page, '<title>', '</title>'), u' - AlloCiné', '')
 
     def get_title(self):
-        self.title = string.replace(gutils.trim(self.page, '<title>', '</title>'), ' - Allocine.fr', '')
+        self.title = string.replace(gutils.trim(self.page, '<title>', '</title>'), u' - AlloCiné', '')
 
     def get_director(self):
         self.director = gutils.trim(self.page, u'Réalisé par ', '</a></h3>')
@@ -82,9 +82,9 @@ class Plugin(movie.Movie):
         self.cast = ""
         casts = gutils.trim(self.page_cast, 'Acteurs', '</table>')
         parts = string.split(casts, '<td ')
-        for index in range(1, len(parts) - 1, 2):
-            character = gutils.after(parts[index], '>')
-            actor = gutils.after(parts[index + 1], '>')
+        for index in range(1, len(parts) - 1, 3):
+            character = gutils.after(parts[index + 1], '>')
+            actor = gutils.after(parts[index + 2], '>')
             self.cast = self.cast + gutils.clean(actor) + _(' as ') + gutils.clean(character) + '\n'
 
     def get_classification(self):
@@ -139,4 +139,61 @@ class SearchPlugin(movie.SearchMovie):
             for index in range(1, len(elements), 1):
                 element = elements[index]
                 self.ids.append(gutils.before(element, '.'))
-                self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.trim(element, '>', '</a>'))))
+                title = gutils.strip_tags(gutils.convert_entities(gutils.trim(element, '>', '</a>')))
+                year = gutils.clean(gutils.trim(element, '</h4>', '</h4>'))
+                if year:
+                    self.titles.append(title + ' (' + year + ')')
+                else:
+                    self.titles.append(title)
+
+#
+# Plugin Test
+#
+class SearchPluginTest(SearchPlugin):
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+    #
+    test_configuration = {
+        'Le Prix à payer' : [ 4, 4 ],
+    }
+
+class PluginTest:
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        '110585' : { 
+            'title'               : u'Le Prix à payer',
+            'o_title'             : u'Le Prix à payer',
+            'director'            : u'Alexandra Leclère',
+            'plot'                : True,
+            'cast'                : u'Christian Clavier' + _(' as ') + 'Jean-Pierre Ménard\n\
+Nathalie Baye' + _(' as ') + 'Odile Ménard\n\
+Gérard Lanvin' + _(' as ') + 'Richard\n\
+Géraldine Pailhas' + _(' as ') + 'Caroline\n\
+Patrick Chesnais' + _(' as ') + 'Grégoire l\'amant\n\
+Anaïs Demoustier' + _(' as ') + 'Justine\n\
+Maud Buquet' + _(' as ') + 'la prostituée\n\
+Francis Leplay' + _(' as ') + 'l\'agent immobilier',
+            'country'             : u'français',
+            'genre'               : u'Comédie',
+            'classification'      : False,
+            'studio'              : False,
+            'o_site'              : False,
+            'site'                : 'http://www.allocine.fr/film/fichefilm_gen_cfilm=110585.html',
+            'trailer'             : 'http://www.allocine.fr/film/video_gen_cfilm=110585.html',
+            'year'                : 2007,
+            'notes'               : False,
+            'runtime'             : 95,
+            'image'               : True,
+            'rating'              : 5,
+            'cameraman'           : u'Jean-François Robin',
+            'screenplay'          : u'Alexandra Leclère',
+            'barcode'             : False
+        },
+    }
