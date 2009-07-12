@@ -24,6 +24,7 @@ import logging
 
 from sqlalchemy import and_, or_
 from sqlalchemy.orm import object_session
+from sqlalchemy.sql import select, update
 
 import tables
 from _objects import Loan
@@ -111,7 +112,7 @@ class Movie(object):
         if self.volume_id is not None:
             where.append(tables.loans.c.volume_id==self.volume_id)
         return object_session(self).query(Loan).filter(and_(tables.loans.c.return_date!=None, or_(*where))).all()
-    loan_history = property(_get_loan_history)
+    loan_history = property(_get_loan_history, doc='list of already returned loans')
 
     def _get_loan_details(self):
         where = [tables.loans.c.movie_id==self.movie_id]
@@ -120,5 +121,49 @@ class Movie(object):
         if self.volume_id is not None:
             where.append(tables.loans.c.volume_id==self.volume_id)
         return object_session(self).query(Loan).filter(and_(tables.loans.c.return_date==None, or_(*where))).first()
-    loan_details = property(_get_loan_details)
+    loan_details = property(_get_loan_details, doc='current loan details or None')
+
+    def loan_to(self, person, whole_collection=False):
+        """
+        Loans movie, all other movies from the same volume and optionally
+        movie's collection.
+        
+        :param person: Person instance or person_id.
+        :param whole_collection=False: if True, will loan all movies from the same
+            collection.
+        """
+
+        if self.loaned:
+            log.warn('movie already loaned: %s', self.loan_details)
+            return False
+
+        session = object_session(self)
+
+        if hasattr(person, 'person_id'):
+            person = person.person_id
+        elif not isinstance(person, int):
+            raise ValueError("expecting int or Person instance, got %s instead" % type(person))
+
+        loan = Loan()
+        loan.person_id = person
+        loan.movie = self
+
+        if whole_collection:
+            if self.collection:
+                # next line will update the status of all other movies in collection
+                # or raise and OtherMovieAlreadyLoanedError
+                self.collection.loaned = True
+                loan.collection_id = self.collection_id
+            else:
+                log.debug('this movie doesn\'t have collection assigned, whole_collection param ignored')
+
+        if self.volume:
+            # next line will update the status of all other movies in volume
+            self.volume.loaned = True
+            loan.volume_id = self.volume_id
+
+        self.loaned = True
+        session.add(loan)
+
+        return True
 
