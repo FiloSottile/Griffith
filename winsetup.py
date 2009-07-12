@@ -53,7 +53,7 @@ opts = {
 
 setup(
     name = "Griffith",
-    version = "0.10-beta3",
+    version = "0.10-rc1",
     description = 'Griffith - A film manager',
     author = 'Vasco Nunes/Piotr Ozarowski',
     author_email = 'griffith-private@lists.berlios.de',
@@ -112,5 +112,6 @@ setup(
         ("lib/plugins/movie", glob.glob("lib\\plugins\\movie\\*.*")),
         ("lib/plugins/imp", glob.glob("lib\\plugins\\imp\\*.*")),
         ("images", glob.glob("images\\*.png")),
+        ("lib/db", glob.glob("lib\\db\\*.py")),
         ("lib", glob.glob("lib\\*.*"))],
 )

@@ -30,8 +30,8 @@ plugin_description  = 'Anime DataBase'
 plugin_url          = 'www.anidb.net'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ożarowski'
-plugin_author_email = '<ozarow+griffith@gmail.com>'
-plugin_version      = '2.6'
+plugin_author_email = 'piotr@griffith.cc'
+plugin_version      = '2.7'
 
 aid_pattern = re.compile('[?&;]aid=(\d+)')
 
@@ -67,14 +67,15 @@ class Plugin(movie.Movie):
             self.image_url = ''
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<span>Info: ', '</span>')
+        self.o_title = gutils.trim(self.page, '<span class="i_icon i_audio_ja" title=" language: japanese"><span>ja</span></span>', '</td>')
+        self.o_title = gutils.trim(self.o_title, '<label>', '</label>')
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '"field">Official Title', '</td>')
-        self.title = gutils.trim(self.title, '<label>', '</label>')
+        self.title = gutils.trim(self.page, '<h1 class="anime">Anime: ', '</h1>')
 
     def get_director(self):
-        self.director = ''
+        self.director = gutils.trim(self.page, '<a title="Direction (&#x76E3;&#x7763;)" href=', 'a>')
+        self.director = gutils.trim(self.director, '>', '</')
 
     def get_plot(self):
         self.plot = gutils.trim(self.page, 'class="desc">', '</div>')
@@ -99,7 +100,21 @@ class Plugin(movie.Movie):
         self.genre = string.replace(self.genre, '\n', '')
 
     def get_cast(self):
-        self.cast = ''
+        self.cast = 'Characters:\n---------------'
+        castv = gutils.trim(self.page, '<table id="characterlist" class="characterlist">', '</table>')
+        if castv != '':
+            castparts = string.split(castv, '<tr ')
+            for index in range(2, len(castparts), 1):
+                castpart = castparts[index]
+                castcharacter = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="name">', '</td>'))
+                castentity = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="entity">', '</td>'))
+                castactor = gutils.clean(gutils.trim(castpart, '<td class="name"><a href="animedb.pl?show=creator&amp;creatorid=', 'd>'))
+                castactor = gutils.clean(gutils.trim(castactor, '">', '</t'))
+                if castv == ' ':
+                    castactor = 'unknown'
+                castrelation = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="relation">', '</td>'))
+                castappearance = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="eprange">', '</td>'))
+                self.cast += '\n\n' + '[' + castcharacter + '] voiced by ' + castactor + '\n' + castentity + '; ' + castrelation + '; appears in episodes: ' + castappearance
 
     def get_classification(self):
         self.classification = ''
@@ -117,8 +132,8 @@ class Plugin(movie.Movie):
         self.studio = string.replace(self.studio, '\n', '')
 
     def get_o_site(self):
-        self.o_site = gutils.trim(self.page, '"field">URL', '</td>')
-        self.o_site = gutils.trim(self.o_site, 'href="', '"')
+        self.o_site = gutils.trim(self.page, '<th class="field">Resources</th>', '</tr>') #class varies, tag used
+        self.o_site = gutils.trim(self.o_site, '<a href="', '" rel="anidb::extern">Official page</a>')
 
     def get_site(self):
         self.site = self.url
@@ -157,13 +172,13 @@ class Plugin(movie.Movie):
 
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
-        self.encode                = 'utf-8'
-        self.original_url_search   = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+        self.encode = 'utf-8'
+        self.original_url_search = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
         self.translated_url_search = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
 
     def search(self,parent_window):
-        if not self.open_search(parent_window):
-            return None
+        self.open_search(parent_window)
+        self.page = decompress(self.page)
 
         tmp = string.find(self.page, '>Anime List - Search for: ')
         if tmp == -1:        # already a movie page
