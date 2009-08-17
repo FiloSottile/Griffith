@@ -165,7 +165,10 @@ class Movie(object):
         try:
             if retriever.html:
                 ifile = file(retriever.html[0], "rb")
-                data = ifile.read()
+                try:
+                    data = ifile.read()
+                finally:
+                    ifile.close()
                 # check for gzip compressed pages before decoding to unicode
                 if len(data) > 2 and data[0:2] == '\037\213':
                     data = gutils.decompress(data)
@@ -326,7 +329,10 @@ class SearchMovie(object):
         try:
             if retriever.html:
                 ifile = file(retriever.html[0], 'rb')
-                self.page = ifile.read()
+                try:
+                    self.page = ifile.read()
+                finally:
+                    ifile.close()
                 # check for gzip compressed pages before decoding to unicode
                 if len(self.page) > 2 and self.page[0:2] == '\037\213':
                     self.page = gutils.decompress(self.page)
