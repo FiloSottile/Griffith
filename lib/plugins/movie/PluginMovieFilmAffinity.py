@@ -44,7 +44,7 @@ class Plugin(movie.Movie):
         self.page = self.page.replace(u'\x92', '\'')
 
     def get_image(self):
-        tmp = string.find(self.page, 'www.filmaffinity.com/imgs/movies/')
+        tmp = string.find(self.page, 'pics.filmaffinity.com/')
         if tmp == -1:
             self.image_url = ''
         else:
