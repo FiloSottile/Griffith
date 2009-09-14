@@ -23,7 +23,7 @@ __revision__ = '$Id$'
 
 import logging
 
-from sqlalchemy.sql import update
+from sqlalchemy.sql import delete
 
 from db.tables import movies as movies_table
 from gutils import question
@@ -33,25 +33,26 @@ from sql import update_whereclause
 log = logging.getLogger('Griffith')
 
 class GriffithExtension(Base):
-    name = 'Mark as seen'
-    description = _('Marks all currently filtered movies as seen')
+    name = 'Remover'
+    description = _('Removes all currently filtered movies')
     author = 'Piotr Ożarowski'
     email = 'piotr@griffith.cc'
     version = 0.1
     api = 1
-    enabled = False # disabled by default
+    enabled = True # TODO: disable it by default
 
-    toolbar_icon = 'seen.png'
+    toolbar_icon = 'gtk-delete'
 
     def toolbar_icon_clicked(self, widget, movie):
-        if question(_('Are you sure you want to update %d movies?') % self.app.total):
+        if question(_('Are you sure you want to remove %d movies?') % self.app.total):
             session = self.db.Session()
 
-            update_query = update(movies_table, values={'seen': True})
+            query = delete(movies_table)
             # FIXME: self.app._search_conditions contains advfilter conditions only (no other filters)
-            update_query = update_whereclause(update_query, self.app._search_conditions)
+            query = update_whereclause(query, self.app._search_conditions)
+            query = query.where(movies_table.c.loaned==False) # don't delete loaned movies
 
-            session.execute(update_query)
+            session.execute(query)
             session.commit()
 
-            self.app.populate_treeview() # update seen widget in the list
+            self.app.populate_treeview()
