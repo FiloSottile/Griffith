@@ -265,7 +265,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 16, 16 ],
+        'Rocky Balboa'         : [ 18, 18 ],
         'Ein glückliches Jahr' : [  6,  6 ]
     }
 
@@ -341,23 +341,28 @@ Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
 Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Michael Ahl' + _(' as ') + 'Restaurant patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
+Tim Brooks' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
+David Gere' + _(' as ') + 'Patron at Adrian\'s (nicht im Abspann)\n\
 Mark J. Kilbane' + _(' as ') + 'Businessman (nicht im Abspann)\n\
+Zach Klinefelter' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 David Kneeream' + _(' as ') + 'Adrian\'s Patron (nicht im Abspann)\n\
 Dolph Lundgren' + _(' as ') + 'Captain Ivan Drago (Archivmaterial) (nicht im Abspann)\n\
 Dean Mauro' + _(' as ') + 'Sports Journalist (nicht im Abspann) (unbestätigt)\n\
 Burgess Meredith' + _(' as ') + 'Mickey Goldmill (Archivmaterial) (nicht im Abspann)\n\
+Dan Montero' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
 Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
 Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
-Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)',
+Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)\n\
+Kim Villanova' + _(' as ') + 'Business woman (nicht im Abspann)',
             'country'           : 'USA',
-            'genre'             : 'Action | Sport',
+            'genre'             : 'Action | Drama | Sport',
             'classification'    : False,
             'studio'            : 'Metro-Goldwyn-Mayer (MGM)',
             'o_site'            : False,
@@ -414,6 +419,6 @@ Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspa
 + _('Color') + ': Farbe (Eastmancolor)',
             'runtime'            : 90,
             'image'              : True,
-            'rating'             : 8
+            'rating'             : 7
         },
     }

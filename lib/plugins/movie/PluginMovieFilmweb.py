@@ -24,13 +24,13 @@ __revision__ = '$Id$'
 import gutils, movie
 import re,string
 
-plugin_name        = 'Filmweb'
-plugin_description    = 'Web pełen filmów'
-plugin_url        = 'www.filmweb.pl'
-plugin_language        = _('Polish')
-plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
-plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.13'
+plugin_name         = 'Filmweb'
+plugin_description  = 'Web pełen filmów'
+plugin_url          = 'www.filmweb.pl'
+plugin_language     = _('Polish')
+plugin_author       = 'Piotr Ożarowski, Bartosz Kurczewski'
+plugin_author_email = '<bartosz.kurczewski@gmail.com>'
+plugin_version      = '1.13'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN     = re.compile("""<a class=["']notSelected["'].*?href=["'](.*?)["']>zwiastuny</a>\s*\[\d+\]\s*&raquo;""")
@@ -71,7 +71,7 @@ class Plugin(movie.Movie):
             self.director = string.replace(self.director, ",",", ")
             self.director = string.replace(self.director, "  "," ")
             self.director = string.replace(self.director, " ,  ",", ")
-            self.director = string.replace(self.director, ",  (wi\xeacej&#160;...)",'')
+            self.director = string.replace(self.director, u",  (wi\xeacej&#160;...)",'')
 
     def get_plot(self):
         self.plot = gutils.trim(self.page,'<h2 id="o-filmie-header" class="replace">','</div>')
@@ -82,7 +82,7 @@ class Plugin(movie.Movie):
         if url != '':
             plot_page = self.open_page(url=url)
             self.plot = gutils.trim(plot_page, '<div class="filmContent">', '</ul>')
-            self.plot = gutils.after(self.plot, 'zgłoś poprawkę')
+            self.plot = gutils.after(self.plot, u'zgłoś poprawkę')
 
     def get_year(self):
         self.year = gutils.trim(self.page, '<span class="year">', '</a>')
@@ -96,7 +96,7 @@ class Plugin(movie.Movie):
         self.genre = string.replace(self.genre, "\n",'')
 
     def get_cast(self):
-        self.cast = gutils.trim(self.page, '<td class="film-actor">',"zobacz więcej")
+        self.cast = gutils.trim(self.page, '<td class="film-actor">',u"zobacz więcej")
         self.cast = string.replace(self.cast, chr(13),"")
         self.cast = string.replace(self.cast, chr(10),"")
 #        self.cast = string.replace(self.cast, "\n","")

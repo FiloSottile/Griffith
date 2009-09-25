@@ -205,60 +205,60 @@ Mike Tyson\n\
 Carl Weathers\n\
 Burt Young\n\
 Talia Shire\n\
-Burgess Meredith\n\
 Milo Ventimiglia\n\
-Mr. T\n\
+Burgess Meredith\n\
 Tony Burton\n\
+Mr. T\n\
 Geraldine Hughes\n\
 Frank Stallone\n\
-Michael Buffer\n\
 Lahmard J. Tate\n\
+Michael Buffer\n\
 Don Sherman\n\
+Tobias Segal\n\
 Gunnar Peterson\n\
 LeRoy Neiman\n\
-Tobias Segal\n\
-Stu Nahan\n\
-Skip Bayless\n\
-Robert Michael Kelly\n\
+Jody Giambelluca\n\
 Ricky Cavazos\n\
 Rick Buchborn\n\
-Jody Giambelluca\n\
-Yahya\n\
-Charles Johnson\n\
+Stu Nahan\n\
 Barney Fitzpatrick\n\
 Henry G. Sanders\n\
 Fran Pultro\n\
-Dana Jacobson\n\
-Tim Carr\n\
 Joe Cortez\n\
-Jim Lampley\n\
-Max Kellerman\n\
-Ana Gerena\n\
-Marc Ratner\n\
-Jack Lazzarado\n\
-Carter Mitchell\n\
+Yahya\n\
+Skip Bayless\n\
+Robert Michael Kelly\n\
 Angela Boyd\n\
-Maureen Schilling\n\
-James Binns\n\
-Antonio Tarver\n\
+Tim Carr\n\
+Jim Lampley\n\
+Charles Johnson\n\
+Carter Mitchell\n\
 A.J. Benza\n\
-Nick Baker\n\
-Louis Giansante\n\
 Matt Frack\n\
+Max Kellerman\n\
+Jack Lazzarado\n\
+Marc Ratner\n\
 Larry Merchant\n\
-Paul Dion Monte\n\
+Dana Jacobson\n\
+Antonio Tarver\n\
+Ana Gerena\n\
+Maureen Schilling\n\
 Bernard Fernández\n\
-Anthony Lato Jr.\n\
-Kevin King Templeton\n\
+Louis Giansante\n\
+Nick Baker\n\
+James Binns\n\
 Brian Kenny\n\
+Anthony Lato Jr.\n\
 Woody Paige\n\
+Paul Dion Monte\n\
+Gary Compton\n\
 Lou DiBella\n\
+Kevin King Templeton\n\
+Jay Crawford\n\
 Pedro Lovell\n\
+Johnnie Hobbs Jr.\n\
 Bert Randolph Sugar\n\
 Vinod Kumar\n\
-Jay Crawford\n\
-Gary Compton\n\
-Johnnie Hobbs Jr.\n\
 James Francis Kelly III',
             'country'             : 'USA',
             'genre'               : 'Drama',
@@ -278,8 +278,8 @@ James Francis Kelly III',
             'o_title'             : 'Tatort - Märchenwald',
             'director'            : 'Christiane Balthasar',
             'plot'                : True,
-            'cast'                : 'Maria Furtwängler\n\
-Hannes Jaenicke\n\
+            'cast'                : 'Hannes Jaenicke\n\
+Maria Furtwängler\n\
 Charly Hübner\n\
 Ingo Naujoks\n\
 Michael Wittenborn',
@@ -303,8 +303,8 @@ Michael Wittenborn',
             'plot'                : True,
             'cast'                : 'So-yi Yoon\n\
 Doo-hong Jung\n\
-Ryu Seung-beom\n\
 Ahn Sung-ki\n\
+Ryu Seung-beom\n\
 Yun Ju-Sang',
             'country'             : 'RK',
             'genre'               : 'Actionkomödie',

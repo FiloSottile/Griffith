@@ -92,25 +92,25 @@ class Plugin(movie.Movie):
             self.image_url = self.page.SmallImage.URL
 
     def get_o_title(self):
-        if hasattr(self.page.ItemAttributes, 'Title'):
-            self.o_title = self.page.ItemAttributes.Title
-        else:
-            self.director = ''
+        self.o_title = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'Title'):
+                self.o_title = self.page.ItemAttributes.Title
 
     def get_title(self):
-        if hasattr(self.page.ItemAttributes, 'Title'):
-            self.title = self.page.ItemAttributes.Title
-        else:
-            self.director = ''
+        self.title = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'Title'):
+                self.title = self.page.ItemAttributes.Title
 
     def get_director(self):
-        if hasattr(self.page.ItemAttributes, 'Director'):
-            if isinstance(self.page.ItemAttributes.Director, list):
-                self.director = string.join(self.page.ItemAttributes.Director, ', ')
-            else:
-                self.director = self.page.ItemAttributes.Director
-        else:
-            self.director = ''
+        self.director = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'Director'):
+                if isinstance(self.page.ItemAttributes.Director, list):
+                    self.director = string.join(self.page.ItemAttributes.Director, ', ')
+                else:
+                    self.director = self.page.ItemAttributes.Director
 
     def get_plot(self):
         self.plot = ''
@@ -127,18 +127,18 @@ class Plugin(movie.Movie):
                         self.plot = self.page.EditorialReviews.EditorialReview.Content
 
     def get_year(self):
-        if hasattr(self.page.ItemAttributes, 'TheatricalReleaseDate'):
-            self.year = self.page.ItemAttributes.TheatricalReleaseDate[:4]
-        elif hasattr(self.page.ItemAttributes, 'ReleaseDate'):
-            self.year = self.page.ItemAttributes.ReleaseDate[:4]
-        else:
-            self.year = ''
+        self.year = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'TheatricalReleaseDate'):
+                self.year = self.page.ItemAttributes.TheatricalReleaseDate[:4]
+            elif hasattr(self.page.ItemAttributes, 'ReleaseDate'):
+                self.year = self.page.ItemAttributes.ReleaseDate[:4]
 
     def get_runtime(self):
-        if hasattr(self.page.ItemAttributes, 'RunningTime'):
-            self.runtime = self.page.ItemAttributes.RunningTime
-        else:
-            self.runtime = ''
+        self.runtime = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'RunningTime'):
+                self.runtime = self.page.ItemAttributes.RunningTime
 
     def get_genre(self):
         # BrowseNodeId 547664 (Genres)
@@ -157,23 +157,24 @@ class Plugin(movie.Movie):
 
     def get_cast(self):
         self.cast = ''
-        if hasattr(self.page.ItemAttributes, 'Actor'):
-            if isinstance(self.page.ItemAttributes.Actor, list):
-                self.cast = string.join(self.page.ItemAttributes.Actor, '\n')
-            else:
-                self.cast = self.page.ItemAttributes.Actor
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'Actor'):
+                if isinstance(self.page.ItemAttributes.Actor, list):
+                    self.cast = string.join(self.page.ItemAttributes.Actor, '\n')
+                else:
+                    self.cast = self.page.ItemAttributes.Actor
 
     def get_classification(self):
-        if hasattr(self.page.ItemAttributes, 'AudienceRating'):
-            self.classification = self.page.ItemAttributes.AudienceRating
-        else:
-            self.classification = ''
+        self.classification = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'AudienceRating'):
+                self.classification = self.page.ItemAttributes.AudienceRating
 
     def get_studio(self):
-        if hasattr(self.page.ItemAttributes, 'Studio'):
-            self.studio = self.page.ItemAttributes.Studio
-        else:
-            self.studio = ''
+        self.studio = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'Studio'):
+                self.studio = self.page.ItemAttributes.Studio
 
     def get_o_site(self):
         self.o_site = ''
@@ -215,12 +216,15 @@ class Plugin(movie.Movie):
 
     def get_notes(self):
         self.notes = ''
-        if hasattr(self.page.ItemAttributes, 'EAN'):
-            self.notes = 'EAN: ' + self.page.ItemAttributes.EAN
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'EAN'):
+                self.notes = 'EAN: ' + self.page.ItemAttributes.EAN
 
     def get_barcode(self):
-        if hasattr(self.page.ItemAttributes, 'EAN'):
-            self.barcode = self.page.ItemAttributes.EAN
+        self.barcode = ''
+        if hasattr(self.page, 'ItemAttributes'):
+            if hasattr(self.page.ItemAttributes, 'EAN'):
+                self.barcode = self.page.ItemAttributes.EAN
 
 class SearchPlugin(movie.SearchMovie):
 

@@ -169,7 +169,7 @@ class SearchPluginTest(SearchPlugin):
     test_configuration = {
         'Rocky'      : [ 12, 12 ],
         'però'       : [  6,  6 ],
-        'il ritorno' : [ 95, 95 ]
+        'il ritorno' : [ 96, 96 ]
     }
 
 class PluginTest:

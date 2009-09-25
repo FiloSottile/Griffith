@@ -59,6 +59,7 @@ logging.basicConfig()
 log = logging.getLogger("Griffith")
 
 sys.path.append('plugins/movie')
+sys.path.append('plugins/extensions')
 
 #
 # test class for movie plugin classes Plugin and SearchPlugin
