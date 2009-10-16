@@ -23,9 +23,11 @@ __revision__ = '$Id$'
 
 import logging
 
-from sqlalchemy.sql import delete
+from sqlalchemy.sql import delete, select
 
 from db.tables import movies as movies_table
+from db.tables import movie_tag as movie_tag_table
+from db.tables import movie_lang as movie_lang_table
 from gutils import question
 from plugins.extensions import GriffithExtensionBase as Base
 from sql import update_whereclause
@@ -37,7 +39,7 @@ class GriffithExtension(Base):
     description = _('Removes all currently filtered movies')
     author = 'Piotr Ożarowski'
     email = 'piotr@griffith.cc'
-    version = 0.1
+    version = 0.2
     api = 1
     enabled = True # TODO: disable it by default
 
@@ -47,6 +49,23 @@ class GriffithExtension(Base):
         if question(_('Are you sure you want to remove %d movies?') % self.app.total):
             session = self.db.Session()
 
+            # first: remove all dependend data (associated tags, languages, ...)
+            query = select([movies_table.c.movie_id])
+            # FIXME: self.app._search_conditions contains advfilter conditions only (no other filters)
+            query = update_whereclause(query, self.app._search_conditions)
+            query = query.where(movies_table.c.loaned==False) # don't delete loaned movies
+            for movie_entry in session.execute(query):
+                # tags
+                query_movie_tags = delete(movie_tag_table)
+                query_movie_tags = query_movie_tags.where(movie_tag_table.c.movie_id==movie_entry.movie_id)
+                session.execute(query_movie_tags)
+                # languages
+                query_movie_lang = delete(movie_lang_table)
+                query_movie_lang = query_movie_lang.where(movie_lang_table.c.movie_id==movie_entry.movie_id)
+                session.execute(query_movie_lang)
+                # TODO: removing posters if no longer used by another movie?
+
+            # second: remove the movie entries
             query = delete(movies_table)
             # FIXME: self.app._search_conditions contains advfilter conditions only (no other filters)
             query = update_whereclause(query, self.app._search_conditions)
