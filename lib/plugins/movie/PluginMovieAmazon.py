@@ -39,7 +39,7 @@ plugin_url          = "www.amazon.com/.uk/.de/.ca/.fr/.jp"
 plugin_language     = _("International")
 plugin_author       = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version      = "1.1"
+plugin_version      = "1.2"
 
 class Plugin(movie.Movie):
 
@@ -53,7 +53,14 @@ class Plugin(movie.Movie):
         # use the Amazon Web API
         self.parent_window = parent_window
         try:
-            locale = self.config.get('amazon_locale', 0, section='add')
+            accesskey = self.config.get('amazon_accesskey', None, section='extensions')
+            secretkey = self.config.get('amazon_secretkey', None, section='extensions')
+            if not accesskey or not secretkey:
+                gutils.error(self.app, _('Please configure you Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
+                return False
+            amazon.setLicense(accesskey, secretkey)
+
+            locale = self.config.get('amazon_locale', 0, section='extensions')
             if locale == '1':
                 locale = 'uk'
             elif locale == '2':
@@ -76,7 +83,7 @@ class Plugin(movie.Movie):
         except:
             self.page = ''
             try:
-                log.error("Error retrieving results from amazon.")
+                log.exception('Error retrieving results from amazon.')
                 log.error(retriever.result.Request.Errors.Error.Message)
             except:
                 pass
@@ -240,7 +247,14 @@ class SearchPlugin(movie.SearchMovie):
         self.titles = [""]
         self.ids = [""]
         try:
-            locale = self.config.get('amazon_locale', 0, section='add')
+            accesskey = self.config.get('amazon_accesskey', None, section='extensions')
+            secretkey = self.config.get('amazon_secretkey', None, section='extensions')
+            if not accesskey or not secretkey:
+                gutils.error(self.app, _('Please configure you Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
+                return False
+            amazon.setLicense(accesskey, secretkey)
+
+            locale = self.config.get('amazon_locale', 0, section='extensions')
             if locale == '1':
                 locale = 'uk'
             elif locale == '2':
@@ -262,7 +276,7 @@ class SearchPlugin(movie.SearchMovie):
             self.page = retriever.result
         except:
             try:
-                log.error("Error retrieving results from amazon.")
+                log.exception('Error retrieving results from amazon.')
                 log.error(retriever.result.Request.Errors.Error.Message)
             except:
                 pass
@@ -323,7 +337,6 @@ class AmazonRetriever(threading.Thread):
     def run_search(self):
         self.result = []
         try:
-            amazon.setLicense('04GDDMMXX8X9CJ1B22G2')
             try:
                 tmp = amazon.searchByTitle(self.title, type='ItemAttributes', product_line='Video', locale=self.locale, page=1)
                 self.result.append(tmp)
@@ -334,8 +347,8 @@ class AmazonRetriever(threading.Thread):
                         tmp = amazon.searchByTitle(self.title, type='ItemAttributes', product_line='Video', locale=self.locale, page=page)
                         self.result.append(tmp)
                         page = page + 1
-            except amazon.AmazonError, e:
-                log.error(e.Message)
+            except amazon.AmazonError:
+                log.exception('Error retrieving results from amazon.')
             # if all digits then try to find an EAN / UPC
             if self.title.isdigit():
                 if len(self.title) == 13:
@@ -343,31 +356,33 @@ class AmazonRetriever(threading.Thread):
                         tmp = amazon.searchByEAN(self.title, type='ItemAttributes', product_line='Video', locale=self.locale)
                         self.result.append(tmp)
                     except amazon.AmazonError, e:
-                        log.error(e.Message)
+                        log.exception('Error retrieving results from amazon.')
                 elif len(self.title) == 12:
                     try:
                         tmp = amazon.searchByUPC(self.title, type='ItemAttributes', product_line='Video', locale=self.locale)
                         self.result.append(tmp)
                     except amazon.AmazonError, e:
-                        log.error(e.Message)
+                        log.exception('Error retrieving results from amazon.')
         except IOError:
-            self.progress.dialog.hide()
-            gutils.urllib_error(_('Connection error'), self.parent_window)
-            self.suspend()
+            log.exception('Error retrieving results from amazon.')
+            #self.progress.dialog.hide()
+            #gutils.urllib_error(_('Connection error'), self.parent_window)
+            #self.suspend()
 
     def run_get(self):
         self.result = None
         try:
-            amazon.setLicense('04GDDMMXX8X9CJ1B22G2')
             # get by ASIN
             try:
                 self.result = amazon.searchByASIN(self.title, type='Large', locale=self.locale)
             except amazon.AmazonError, e:
-                log.error(e.Message)
+                log.exception('Error retrieving results from amazon.')
         except IOError:
-            self.progress.dialog.hide()
-            gutils.urllib_error(_('Connection error'), self.parent_window)
-            self.suspend()
+            log.exception('Error retrieving results from amazon.')
+            #self.progress.dialog.hide()
+            #gutils.urllib_error(_('Connection error'), self.parent_window)
+            #self.suspend()
+
 
 #
 # Plugin Test
