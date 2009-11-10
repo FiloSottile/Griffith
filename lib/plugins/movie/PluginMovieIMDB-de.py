@@ -341,8 +341,10 @@ Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
 Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Michael Ahl' + _(' as ') + 'Restaurant patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
+Lacy Bevis' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Tim Brooks' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
+Rennie Cowan' + _(' as ') + 'Boxing spectator (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
 David Gere' + _(' as ') + 'Patron at Adrian\'s (nicht im Abspann)\n\
@@ -360,9 +362,9 @@ Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
 Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)\n\
-Kim Villanova' + _(' as ') + 'Business woman (nicht im Abspann)',
+Kimberly Villanova' + _(' as ') + 'Business woman (nicht im Abspann)',
             'country'           : 'USA',
-            'genre'             : 'Action | Drama | Sport',
+            'genre'             : 'Drama | Sport',
             'classification'    : False,
             'studio'            : 'Metro-Goldwyn-Mayer (MGM)',
             'o_site'            : False,
@@ -419,6 +421,6 @@ Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspa
 + _('Color') + ': Farbe (Eastmancolor)',
             'runtime'            : 90,
             'image'              : True,
-            'rating'             : 7
+            'rating'             : 8
         },
     }

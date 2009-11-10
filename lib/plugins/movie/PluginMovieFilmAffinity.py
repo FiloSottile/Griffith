@@ -51,7 +51,7 @@ class Plugin(movie.Movie):
             self.image_url = 'http://' + gutils.before(self.page[tmp:], '"')
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<b>TITULO ORIGINAL</b></td>', '</b></td>')
+        self.o_title = gutils.trim(self.page, u'<b>TÍTULO ORIGINAL</b></td>', '</b></td>')
         self.o_title = gutils.after(self.o_title, '<b>')
         self.o_title = re.sub('[ ]+', ' ', self.o_title)
 
@@ -185,7 +185,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 9, 9 ],
+        'Rocky' : [ 10, 10 ],
     }
 
 class PluginTest:

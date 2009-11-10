@@ -248,8 +248,8 @@ Ricky Cavazos',
             'director'            : 'Claude Lelouch',
             'plot'                 : False,
             'cast'                : 'Lino Ventura' + _(' as ') + 'Simon \n\
-Françoise Fabian\n\
-Charles Gérard\n\
+Françoise Fabian' + _(' as ') + 'Françoise\n\
+Charles Gérard' + _(' as ') + 'Charlot\n\
 André Falcon' + _(' as ') + 'Le bijoutier\n\
 Mireille Mathieu\n\
 Lilo\n\

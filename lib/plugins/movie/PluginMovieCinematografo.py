@@ -169,7 +169,7 @@ class SearchPluginTest(SearchPlugin):
     test_configuration = {
         'Rocky'      : [ 12, 12 ],
         'però'       : [  6,  6 ],
-        'il ritorno' : [ 96, 96 ]
+        'il ritorno' : [ 97, 97 ]
     }
 
 class PluginTest:
@@ -187,68 +187,66 @@ class PluginTest:
             'director'          : 'Sylvester Stallone',
             'plot'              : True,
             'cast'              : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
-Burt Young' + _(' as ') + 'Paulie\n\
-Milo Ventimiglia' + _(' as ') + 'Rocky Balboa Jr.\n\
-Geraldine Hughes' + _(' as ') + 'Marie\n\
+Burt Young' + _(' as ') + 'Pauliev\n\
 Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
-James Francis Kelly III' + _(' as ') + 'Steps\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
 Tony Burton' + _(' as ') + 'Duke\n\
+A.J. Benza' + _(' as ') + 'L.C.\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
+Talia Shire' + _(' as ') + 'Adrian (imagens de arquivo)\n\
+Lou DiBella' + _(' as ') + 'Lou DiBella\n\
+Mike Tyson (1)' + _(' as ') + 'Mike Tyson\n\
 Henry G. Sanders' + _(' as ') + 'Martin\n\
-Tim Carr' + _(' as ') + 'Buddy\n\
-James Binns' + _(' as ') + 'Procuratore\n\
-Rick Collum' + _(' as ') + 'Impiegato nell\'ufficio\n\
-Michael Ahl' + _(' as ') + 'Proprietario del ristorante\n\
-Nancy de Zutter' + _(' as ') + 'Proprietaria del ristorante\n\
-Peter Defeo' + _(' as ') + 'Venditore\n\
-Angela Boyd' + _(' as ') + 'Ragazza ubriaca al banco del bar\n\
-Ron Borges' + _(' as ') + 'Reporter\n\
-A.J. Benza' + _(' as ') + 'L.C. Luco\n\
-Frank Bednarz' + _(' as ') + 'Tifoso al bordo del ring\n\
-Marvin Beck' + _(' as ') + 'Uomo d\'affari nel pub irlandese\n\
-Frank Hansen' + _(' as ') + 'Proprietario del bar\n\
-Tony Devon' + _(' as ') + 'Vicino di casa\n\
-Michael Buffer' + _(' as ') + 'Se stesso',
-            'country'           : 'USA',
-            'genre'             : 'drammatico, sportivo',
-            'classification'    : False,
-            'studio'            : '20th Century Fox Italia, Dvd E Blu-ray: 20th Century Fox Home Entertainment',
-            'o_site'            : False,
-            'site'              : 'http://www.cinematografo.it/bancadati/consultazione/schedafilm.jsp?completa=si&codice=47931',
-            'trailer'           : False,
-            'year'              : 2006,
-            'notes'             : False,
-            'runtime'           : 102,
-            'image'             : True,
-            'rating'            : False
-        },
-        '3996' : { 
-            'title'             : 'Amor non ho, però... però...',
-            'o_title'           : 'Amor non ho, però... però...',
-            'director'          : 'Giorgio Bianchi',
-            'plot'              : True,
-            'cast'              : 'Renato Rascel' + _(' as ') + 'Teodoro\n\
-Gina Lollobrigida' + _(' as ') + 'Gina\n\
-Luigi Pavese' + _(' as ') + 'Antonio Scutipizzo\n\
-Aroldo Tieri' + _(' as ') + 'Giuliano\n\
-Carlo Ninchi' + _(' as ') + 'Maurizio\n\
-Kiki Urbani' + _(' as ') + 'Kiki, la ballerina\n\
-Adriana Danieli' + _(' as ') + 'Olga\n\
-Strelsa Brown' + _(' as ') + 'Mabel\n\
-Virgilio Riento' + _(' as ') + 'Il contadino\n\
-Gabriele Tinti' + _(' as ') + '(Gastone Tinti) Un componente dell\'orchestra\n\
-Guglielmo Barnabò' + _(' as ') + '\n\
-Giuseppe De Martino' + _(' as ') + '\n\
-Raimondo Vianello' + _(' as ') + '(Riccardo Vianello) \n\
-Maria Carla Vittone' + _(' as ') + '\n\
-Marco Tulli' + _(' as ') + '\n\
-Giuseppe Ricagno' + _(' as ') + '\n\
-Luciano Rebeggiani' + _(' as ') + '\n\
-Kurt Lary' + _(' as ') + '\n\
-Giovanni Lesa' + _(' as ') + '\n\
-Riccardo Ferri' + _(' as ') + '\n\
-Pia De Doses' + _(' as ') + '\n\
-Guido Barbarisi' + _(' as ') + '\n\
-Galeazzo Benti as',
+Pedro Lovell' + _(' as ') + 'Spider Rico\n\
+Ana Gerena' + _(' as ') + 'Isabel\n\
+Angela Boyd' + _(' as ') + 'Angie\n\
+Louis Giansante' + _(' as ') + 'Bandido do bar\n\
+Maureen Schilling' + _(' as ') + 'Bartender do Lucky\n\
+Lahmard Tate¹' + _(' as ') + 'X-Cell\n\
+Woodrow W. Paige¹' + _(' as ') + 'Comentarista da ESPN\n\
+Skip Bayless' + _(' as ') + 'Comentarista da ESPN\n\
+Jay Crawford' + _(' as ') + 'Comentarista da ESPN\n\
+Brian Kenny' + _(' as ') + 'Apresentador da ESPN\n\
+Dana Jacobson' + _(' as ') + 'Apresentador da ESPN\n\
+Chuck Johnson¹' + _(' as ') + 'Apresentador da ESPN\n\
+James Binns' + _(' as ') + 'Comissário\n\
+Johnnie Hobbs Jr.' + _(' as ') + 'Comissário\n\
+Barney Fitzpatrick' + _(' as ') + 'Comissário\n\
+Jim Lampley' + _(' as ') + 'Comentarista da HBO\n\
+Larry Merchant' + _(' as ') + 'Comentarista da HBO\n\
+Max Kellerman' + _(' as ') + 'Comentarista da HBO\n\
+LeRoy Neiman' + _(' as ') + 'LeRoy Neiman\n\
+Bert Randolph Sugar' + _(' as ') + 'Repórter da Ring Magazine\n\
+Bernard Fernández' + _(' as ') + 'Articulista da Boxing Association of America\n\
+Gunnar Peterson' + _(' as ') + 'Treinador de levantamento de peso\n\
+Yahya' + _(' as ') + 'Oponente de Dixon\n\
+Marc Ratner (1)' + _(' as ') + 'Oficial de luta\n\
+Anthony Lato Jr.' + _(' as ') + 'Inspetor de Rocky\n\
+Jack Lazzarado' + _(' as ') + 'Inspetor de Dixon\n\
+Michael Buffer' + _(' as ') + 'Anunciador de luta\n\
+Joe Cortez' + _(' as ') + 'Árbitro\n\
+Carter Mitchell' + _(' as ') + 'Shamrock Foreman\n\
+Vinod Kumar (1)' + _(' as ') + 'Ravi\n\
+Fran Pultro' + _(' as ') + 'Pai no restaurante\n\
+Frank Stallone Jr.¹' + _(' as ') + 'Cliente do restaurante\n\
+Jody Giambelluca' + _(' as ') + 'Cliente do restaurante\n\
+Tobias Segal' + _(' as ') + 'Amigo de Robert\n\
+Tim Carr' + _(' as ') + 'Amigo de Robert\n\
+Matt Frack' + _(' as ') + 'Amigo de Robert\n\
+Paul Dion Monte' + _(' as ') + 'Amigo de Robert\n\
+Kevin King Templeton' + _(' as ') + 'Amigo de Robert\n\
+Robert Michael Kelly' + _(' as ') + 'Senhor Tomilson\n\
+Rick Buchborn' + _(' as ') + 'Fã de Rocky\n\
+Nick Baker' + _(' as ') + 'Bartender do pub irlandês\n\
+Don Sherman' + _(' as ') + 'Andy\n\
+Stu Nahan' + _(' as ') + 'Comentarista da luta pelo computador\n\
+Gary Compton' + _(' as ') + 'Segurança\n\
+Ricky Cavazos' + _(' as ') + 'Espectador da luta (não creditado)\n\
+Dolph Lundgren' + _(' as ') + 'Capitão Ivan Drago (imagens de arquivo) (não creditado)\n\
+Burgess Meredith' + _(' as ') + 'Mickey (imagens de arquivo) (não creditado)\n\
+Mr. T' + _(' as ') + 'Clubber Lang (imagens de arquivo) (não creditado)\n\
+Carl Weathers' + _(' as ') + 'Apollo Creed (imagens de arquivo) (não creditado)',
             'country'           : 'ITALIA',
             'genre'             : 'commedia',
             'classification'    : False,
