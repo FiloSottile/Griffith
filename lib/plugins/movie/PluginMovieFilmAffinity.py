@@ -44,11 +44,11 @@ class Plugin(movie.Movie):
         self.page = self.page.replace(u'\x92', '\'')
 
     def get_image(self):
-        tmp = string.find(self.page, 'pics.filmaffinity.com/')
-        if tmp == -1:
+        tmp = re.search('pics[0-9]*.filmaffinity.com/', self.page)
+        if not tmp:
             self.image_url = ''
         else:
-            self.image_url = 'http://' + gutils.before(self.page[tmp:], '"')
+            self.image_url = 'http://' + gutils.before(self.page[tmp.start():], '"')
 
     def get_o_title(self):
         self.o_title = gutils.trim(self.page, u'<b>TÍTULO ORIGINAL</b></td>', '</b></td>')

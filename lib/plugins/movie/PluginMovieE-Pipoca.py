@@ -231,7 +231,7 @@ Jack Lazzarado' + _(' as ') + 'Inspetor de Dixon\n\
 Michael Buffer' + _(' as ') + 'Anunciador de luta\n\
 Joe Cortez' + _(' as ') + 'Árbitro\n\
 Carter Mitchell' + _(' as ') + 'Shamrock Foreman\n\
-Vinod Kumar' + _(' as ') + 'Ravi\n\
+Vinod Kumar (1)' + _(' as ') + 'Ravi\n\
 Fran Pultro' + _(' as ') + 'Pai no restaurante\n\
 Frank Stallone Jr.¹' + _(' as ') + 'Cliente do restaurante\n\
 Jody Giambelluca' + _(' as ') + 'Cliente do restaurante\n\

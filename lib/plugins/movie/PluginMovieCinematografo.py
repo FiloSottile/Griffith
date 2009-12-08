@@ -181,72 +181,34 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '47931' : { 
-            'title'             : 'Rocky Balboa',
-            'o_title'           : 'Rocky Balboa',
-            'director'          : 'Sylvester Stallone',
+        '3996' : { 
+            'title'             : 'Amor non ho, però... però...',
+            'o_title'           : 'Amor non ho, però... però...',
+            'director'          : 'Giorgio Bianchi',
             'plot'              : True,
-            'cast'              : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
-Burt Young' + _(' as ') + 'Pauliev\n\
-Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
-Geraldine Hughes' + _(' as ') + 'Marie\n\
-Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
-Tony Burton' + _(' as ') + 'Duke\n\
-A.J. Benza' + _(' as ') + 'L.C.\n\
-James Francis Kelly III' + _(' as ') + 'Steps\n\
-Talia Shire' + _(' as ') + 'Adrian (imagens de arquivo)\n\
-Lou DiBella' + _(' as ') + 'Lou DiBella\n\
-Mike Tyson (1)' + _(' as ') + 'Mike Tyson\n\
-Henry G. Sanders' + _(' as ') + 'Martin\n\
-Pedro Lovell' + _(' as ') + 'Spider Rico\n\
-Ana Gerena' + _(' as ') + 'Isabel\n\
-Angela Boyd' + _(' as ') + 'Angie\n\
-Louis Giansante' + _(' as ') + 'Bandido do bar\n\
-Maureen Schilling' + _(' as ') + 'Bartender do Lucky\n\
-Lahmard Tate¹' + _(' as ') + 'X-Cell\n\
-Woodrow W. Paige¹' + _(' as ') + 'Comentarista da ESPN\n\
-Skip Bayless' + _(' as ') + 'Comentarista da ESPN\n\
-Jay Crawford' + _(' as ') + 'Comentarista da ESPN\n\
-Brian Kenny' + _(' as ') + 'Apresentador da ESPN\n\
-Dana Jacobson' + _(' as ') + 'Apresentador da ESPN\n\
-Chuck Johnson¹' + _(' as ') + 'Apresentador da ESPN\n\
-James Binns' + _(' as ') + 'Comissário\n\
-Johnnie Hobbs Jr.' + _(' as ') + 'Comissário\n\
-Barney Fitzpatrick' + _(' as ') + 'Comissário\n\
-Jim Lampley' + _(' as ') + 'Comentarista da HBO\n\
-Larry Merchant' + _(' as ') + 'Comentarista da HBO\n\
-Max Kellerman' + _(' as ') + 'Comentarista da HBO\n\
-LeRoy Neiman' + _(' as ') + 'LeRoy Neiman\n\
-Bert Randolph Sugar' + _(' as ') + 'Repórter da Ring Magazine\n\
-Bernard Fernández' + _(' as ') + 'Articulista da Boxing Association of America\n\
-Gunnar Peterson' + _(' as ') + 'Treinador de levantamento de peso\n\
-Yahya' + _(' as ') + 'Oponente de Dixon\n\
-Marc Ratner (1)' + _(' as ') + 'Oficial de luta\n\
-Anthony Lato Jr.' + _(' as ') + 'Inspetor de Rocky\n\
-Jack Lazzarado' + _(' as ') + 'Inspetor de Dixon\n\
-Michael Buffer' + _(' as ') + 'Anunciador de luta\n\
-Joe Cortez' + _(' as ') + 'Árbitro\n\
-Carter Mitchell' + _(' as ') + 'Shamrock Foreman\n\
-Vinod Kumar (1)' + _(' as ') + 'Ravi\n\
-Fran Pultro' + _(' as ') + 'Pai no restaurante\n\
-Frank Stallone Jr.¹' + _(' as ') + 'Cliente do restaurante\n\
-Jody Giambelluca' + _(' as ') + 'Cliente do restaurante\n\
-Tobias Segal' + _(' as ') + 'Amigo de Robert\n\
-Tim Carr' + _(' as ') + 'Amigo de Robert\n\
-Matt Frack' + _(' as ') + 'Amigo de Robert\n\
-Paul Dion Monte' + _(' as ') + 'Amigo de Robert\n\
-Kevin King Templeton' + _(' as ') + 'Amigo de Robert\n\
-Robert Michael Kelly' + _(' as ') + 'Senhor Tomilson\n\
-Rick Buchborn' + _(' as ') + 'Fã de Rocky\n\
-Nick Baker' + _(' as ') + 'Bartender do pub irlandês\n\
-Don Sherman' + _(' as ') + 'Andy\n\
-Stu Nahan' + _(' as ') + 'Comentarista da luta pelo computador\n\
-Gary Compton' + _(' as ') + 'Segurança\n\
-Ricky Cavazos' + _(' as ') + 'Espectador da luta (não creditado)\n\
-Dolph Lundgren' + _(' as ') + 'Capitão Ivan Drago (imagens de arquivo) (não creditado)\n\
-Burgess Meredith' + _(' as ') + 'Mickey (imagens de arquivo) (não creditado)\n\
-Mr. T' + _(' as ') + 'Clubber Lang (imagens de arquivo) (não creditado)\n\
-Carl Weathers' + _(' as ') + 'Apollo Creed (imagens de arquivo) (não creditado)',
+            'cast'              : 'Renato Rascel' + _(' as ') + 'Teodoro\n\
+Gina Lollobrigida' + _(' as ') + 'Gina\n\
+Luigi Pavese' + _(' as ') + 'Antonio Scutipizzo\n\
+Aroldo Tieri' + _(' as ') + 'Giuliano\n\
+Carlo Ninchi' + _(' as ') + 'Maurizio\n\
+Kiki Urbani' + _(' as ') + 'Kiki, la ballerina\n\
+Adriana Danieli' + _(' as ') + 'Olga\n\
+Strelsa Brown' + _(' as ') + 'Mabel\n\
+Virgilio Riento' + _(' as ') + 'Il contadino\n\
+Gabriele Tinti' + _(' as ') + '(Gastone Tinti) Un componente dell\'orchestra\n\
+Guglielmo Barnabò' + _(' as ') + '\n\
+Giuseppe De Martino' + _(' as ') + '\n\
+Raimondo Vianello' + _(' as ') + '(Riccardo Vianello) \n\
+Maria Carla Vittone' + _(' as ') + '\n\
+Marco Tulli' + _(' as ') + '\n\
+Giuseppe Ricagno' + _(' as ') + '\n\
+Luciano Rebeggiani' + _(' as ') + '\n\
+Kurt Lary' + _(' as ') + '\n\
+Giovanni Lesa' + _(' as ') + '\n\
+Riccardo Ferri' + _(' as ') + '\n\
+Pia De Doses' + _(' as ') + '\n\
+Guido Barbarisi' + _(' as ') + '\n\
+Galeazzo Benti as',
             'country'           : 'ITALIA',
             'genre'             : 'commedia',
             'classification'    : False,

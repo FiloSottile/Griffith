@@ -275,7 +275,7 @@ class PluginTest:
             'cast'              : 'Geoffrey Rush' + _(' as ') + 'Philip Henslowe\n\
 Tom Wilkinson' + _(' as ') + 'Hugh Fennyman\n\
 Steven O\'Donnell' + _(' as ') + 'Lambert\n\
-Tim McMullan' + _(' as ') + 'Frees\n\
+Tim McMullan' + _(' as ') + 'Frees (as Tim McMullen)\n\
 Joseph Fiennes' + _(' as ') + 'Will Shakespeare\n\
 Steven Beard' + _(' as ') + 'Makepeace - the Preacher\n\
 Antony Sher' + _(' as ') + 'Dr. Moth\n\
@@ -284,7 +284,7 @@ Martin Clunes' + _(' as ') + 'Richard Burbage\n\
 Sandra Reinton' + _(' as ') + 'Rosaline\n\
 Simon Callow' + _(' as ') + 'Tilney - Master of the Revels\n\
 Judi Dench' + _(' as ') + 'Queen Elizabeth\n\
-Bridget McConnell' + _(' as ') + 'Lady in Waiting\n\
+Bridget McConnell' + _(' as ') + 'Lady in Waiting (as Bridget McConnel)\n\
 Georgie Glen' + _(' as ') + 'Lady in Waiting\n\
 Nicholas Boulton' + _(' as ') + 'Henry Condell\n\
 Gwyneth Paltrow' + _(' as ') + 'Viola De Lesseps\n\

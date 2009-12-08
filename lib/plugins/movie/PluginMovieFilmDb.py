@@ -200,65 +200,65 @@ class PluginTest:
             'director'            : 'Sylvester Stallone',
             'plot'                : True,
             'cast'                : 'Dolph Lundgren\n\
-Sylvester Stallone\n\
 Mike Tyson\n\
+Sylvester Stallone\n\
 Carl Weathers\n\
 Burt Young\n\
-Talia Shire\n\
 Milo Ventimiglia\n\
+Talia Shire\n\
 Burgess Meredith\n\
 Tony Burton\n\
 Mr. T\n\
-Geraldine Hughes\n\
 Frank Stallone\n\
+Geraldine Hughes\n\
 Lahmard J. Tate\n\
 Michael Buffer\n\
 Don Sherman\n\
 Tobias Segal\n\
 Gunnar Peterson\n\
 LeRoy Neiman\n\
+Yahya\n\
+Henry G. Sanders\n\
+Stu Nahan\n\
 Jody Giambelluca\n\
 Ricky Cavazos\n\
 Rick Buchborn\n\
-Stu Nahan\n\
-Barney Fitzpatrick\n\
-Henry G. Sanders\n\
-Fran Pultro\n\
 Joe Cortez\n\
-Yahya\n\
 Skip Bayless\n\
-Robert Michael Kelly\n\
+Barney Fitzpatrick\n\
+Fran Pultro\n\
 Angela Boyd\n\
+Robert Michael Kelly\n\
+Ana Gerena\n\
 Tim Carr\n\
 Jim Lampley\n\
 Charles Johnson\n\
 Carter Mitchell\n\
-A.J. Benza\n\
-Matt Frack\n\
-Max Kellerman\n\
-Jack Lazzarado\n\
-Marc Ratner\n\
-Larry Merchant\n\
 Dana Jacobson\n\
+Matt Frack\n\
+A.J. Benza\n\
 Antonio Tarver\n\
-Ana Gerena\n\
+Max Kellerman\n\
+Marc Ratner\n\
+Jack Lazzarado\n\
 Maureen Schilling\n\
+Larry Merchant\n\
 Bernard Fernández\n\
 Louis Giansante\n\
 Nick Baker\n\
 James Binns\n\
 Brian Kenny\n\
 Anthony Lato Jr.\n\
-Woody Paige\n\
 Paul Dion Monte\n\
+Woody Paige\n\
+Kevin King Templeton\n\
 Gary Compton\n\
 Lou DiBella\n\
-Kevin King Templeton\n\
 Jay Crawford\n\
 Pedro Lovell\n\
 Johnnie Hobbs Jr.\n\
-Bert Randolph Sugar\n\
 Vinod Kumar\n\
+Bert Randolph Sugar\n\
 James Francis Kelly III',
             'country'             : 'USA',
             'genre'               : 'Drama',
@@ -302,8 +302,8 @@ Michael Wittenborn',
             'director'            : 'Ryoo Seung-Wan',
             'plot'                : True,
             'cast'                : 'So-yi Yoon\n\
-Doo-hong Jung\n\
 Ahn Sung-ki\n\
+Doo-hong Jung\n\
 Ryu Seung-beom\n\
 Yun Ju-Sang',
             'country'             : 'RK',

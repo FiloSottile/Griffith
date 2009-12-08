@@ -123,6 +123,7 @@ class Plugin(movie.Movie):
         tmp_page = gutils.trim(self.page, 'Audio:', '<b>')
         tmp_page = tmp_page.replace('<br>', '\n')
         tmp_page = tmp_page.replace('<br />', '\n')
+        tmp_page = tmp_page.replace('(more info)', '\n')
         tmp_page = gutils.strip_tags(tmp_page)
         if tmp_page <> '':
             tmp_page = re.sub('[\r\n]+', '\n', tmp_page)
@@ -243,7 +244,7 @@ Audio Commentary with Sylvester Stallone\n\
 Video:\n\
 Widescreen 1.85:1 Color (Anamorphic) \n\
 \n\
-Audio:\n\
+Audio: \n\
 ENGLISH: Dolby Digital 5.1 [CC]\n\
 FRENCH: Dolby Digital 5.1\n\
 \n\

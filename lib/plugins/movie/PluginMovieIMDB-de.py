@@ -421,6 +421,6 @@ Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspa
 + _('Color') + ': Farbe (Eastmancolor)',
             'runtime'            : 90,
             'image'              : True,
-            'rating'             : 8
+            'rating'             : 7
         },
     }
