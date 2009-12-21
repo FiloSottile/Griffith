@@ -35,7 +35,7 @@ class Plugin(movie.Movie):
     def __init__(self, id):
         self.encode   = 'iso-8859-1'
         self.movie_id = id
-        self.url      = "http://www.cinematografo.it/bancadati/consultazione/schedafilm.jsp?completa=si&codice=%s" % str(self.movie_id)
+        self.url      = "http://www.cinematografo.it/bancadati/consultazione/schedafilm_2009.jsp?completa=si&codice=%s" % str(self.movie_id)
 
     def get_image(self):
         # Find the film's poster image
@@ -214,7 +214,7 @@ Galeazzo Benti as',
             'classification'    : False,
             'studio'            : 'Minervafilm - Mfd Home Video',
             'o_site'            : False,
-            'site'              : 'http://www.cinematografo.it/bancadati/consultazione/schedafilm.jsp?completa=si&codice=3996',
+            'site'              : 'http://www.cinematografo.it/bancadati/consultazione/schedafilm_2009.jsp?completa=si&codice=3996',
             'trailer'           : False,
             'year'              : 1951,
             'notes'             : False,
