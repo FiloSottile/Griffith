@@ -60,6 +60,7 @@ for res, aliases in res_aliases.iteritems():
         res_alias_res[alias.upper()] = res
 del aliases, alias, res
 
+
 class Movie(object):
 
     def _set_resolution(self, res_string):
@@ -93,8 +94,8 @@ class Movie(object):
         return "<Movie:%s (number=%s)>" % (self.movie_id, self.number)
 
     def __contains__(self, name):
-        if name in ('volume','collection','medium','vcodec','loans','tags',\
-                    'languages','lectors','dubbings','subtitles','resolution'):
+        if name in ('volume', 'collection', 'medium', 'vcodec', 'loans', 'tags',\
+                    'languages', 'lectors', 'dubbings', 'subtitles', 'resolution'):
             return True
         else:
             return name in tables.movies.columns
@@ -103,31 +104,32 @@ class Movie(object):
         if hasattr(self, name):
             return getattr(self, name)
         else:
-            raise AttributeError, name
+            raise AttributeError(name)
 
     def _get_loan_history(self):
-        where = [tables.loans.c.movie_id==self.movie_id]
+        where = [tables.loans.c.movie_id == self.movie_id]
         if self.collection_id is not None:
-            where.append(tables.loans.c.collection_id==self.collection_id)
+            where.append(tables.loans.c.collection_id == self.collection_id)
         if self.volume_id is not None:
-            where.append(tables.loans.c.volume_id==self.volume_id)
-        return object_session(self).query(Loan).filter(and_(tables.loans.c.return_date!=None, or_(*where))).all()
+            where.append(tables.loans.c.volume_id == self.volume_id)
+        return object_session(self).query(Loan).filter(\
+                and_(tables.loans.c.return_date != None, or_(*where))).all()
     loan_history = property(_get_loan_history, doc='list of already returned loans')
 
     def _get_loan_details(self):
-        where = [tables.loans.c.movie_id==self.movie_id]
+        where = [tables.loans.c.movie_id == self.movie_id]
         if self.collection_id is not None:
-            where.append(tables.loans.c.collection_id==self.collection_id)
+            where.append(tables.loans.c.collection_id == self.collection_id)
         if self.volume_id is not None:
-            where.append(tables.loans.c.volume_id==self.volume_id)
-        return object_session(self).query(Loan).filter(and_(tables.loans.c.return_date==None, or_(*where))).first()
+            where.append(tables.loans.c.volume_id == self.volume_id)
+        return object_session(self).query(Loan).filter(and_(tables.loans.c.return_date == None, or_(*where))).first()
     loan_details = property(_get_loan_details, doc='current loan details or None')
 
     def loan_to(self, person, whole_collection=False):
         """
         Loans movie, all other movies from the same volume and optionally
         movie's collection.
-        
+
         :param person: Person instance or person_id.
         :param whole_collection=False: if True, will loan all movies from the same
             collection.
@@ -166,4 +168,3 @@ class Movie(object):
         session.add(loan)
 
         return True
-
