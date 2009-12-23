@@ -74,7 +74,7 @@ class Plugin(movie.Movie):
 
     def get_plot(self):
         # Find the film's plot
-        self.plot = gutils.regextrim(self.page, '"fontYellowB">Trama</font>', "(\n|Critica<)")
+        self.plot = gutils.regextrim(self.page, '"fontYellowB">Trama</font>', "(\n|Critica<|Note<)")
 
     def get_year(self):
         # Find the film's year
@@ -88,7 +88,7 @@ class Plugin(movie.Movie):
 
     def get_genre(self):
         # Find the film's genre
-        self.genre = gutils.trim(self.page, ">Genere</font>", "</tr>").lower()
+        self.genre = string.capwords(gutils.trim(self.page, ">Genere</font>", "</tr>"))
 
     def get_cast(self):
         # Find the actors. Try to make it comma separated.
@@ -129,12 +129,21 @@ class Plugin(movie.Movie):
 
     def get_country(self):
         # Find the film's country
-        self.country = gutils.trim(self.page, ">Origine</font>", "</tr>")
+        self.country = string.replace(string.capwords(gutils.clean(gutils.trim(self.page, ">Origine</font>", "</tr>"))), 'Usa', 'USA')
 
     def get_rating(self):
         # Find the film's rating. From 0 to 10.
         # Convert if needed when assigning.
         self.rating = 0
+
+    def get_notes(self):
+        self.notes = ''
+        critica = gutils.clean(string.replace(gutils.regextrim(self.page, 'Critica</font>', "(</td>|\n|Note<)"), '<br>', '\n'))
+        if critica:
+            self.notes = 'Critica:\n\n' + critica + '\n\n'
+        note = gutils.clean(string.replace(gutils.regextrim(self.page, 'Note</font>', "(</td>|\n|Critica<)"), '<br>', '\n'))
+        if note:
+            self.notes = 'Note:\n\n' + string.capwords(note)
 
     def get_screenplay(self):
         # Find the screenplay
@@ -243,15 +252,15 @@ Riccardo Ferri' + _(' as ') + '\n\
 Pia De Doses' + _(' as ') + '\n\
 Guido Barbarisi' + _(' as ') + '\n\
 Galeazzo Benti as',
-            'country'           : 'ITALIA',
-            'genre'             : 'commedia',
+            'country'           : 'Italia',
+            'genre'             : 'Commedia',
             'classification'    : False,
             'studio'            : 'Minervafilm - Mfd Home Video',
             'o_site'            : False,
             'site'              : 'http://www.cinematografo.it/bancadati/consultazione/schedafilm_2009.jsp?completa=si&codice=3996',
             'trailer'           : False,
             'year'              : 1951,
-            'notes'             : False,
+            'notes'             : True,
             'runtime'           : 90,
             'image'             : False,
             'rating'            : False,
