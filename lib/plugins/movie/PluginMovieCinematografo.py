@@ -21,7 +21,10 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gutils, movie, string, re
+import string
+import re
+import gutils
+import movie
 
 plugin_name         = "Cinematografo"
 plugin_description  = "Rivista del Cinematografo dal 1928"
@@ -29,9 +32,11 @@ plugin_url          = "www.cinematografo.it"
 plugin_language     = _("Italian")
 plugin_author       = "Vasco Nunes, Piotr Ożarowski"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version      = "1.3"
+plugin_version      = "1.4"
+
 
 class Plugin(movie.Movie):
+
     def __init__(self, id):
         self.encode   = 'iso-8859-1'
         self.movie_id = id
@@ -43,7 +48,7 @@ class Plugin(movie.Movie):
         if tmp_poster != "":
             self.image_url = "http://www.cinematografo.it/bancadati/images_locandine/%s/%s.jpg" % (self.movie_id, tmp_poster)
         else:
-            self.image_url=""
+            self.image_url = ""
 
     def get_o_title(self):
         # Find the film's original title
@@ -69,7 +74,7 @@ class Plugin(movie.Movie):
 
     def get_plot(self):
         # Find the film's plot
-        self.plot = gutils.trim(self.page, "\"fontYellowB\">Trama</font>", "\n")
+        self.plot = gutils.regextrim(self.page, '"fontYellowB">Trama</font>', "(\n|Critica<)")
 
     def get_year(self):
         # Find the film's year
@@ -89,7 +94,7 @@ class Plugin(movie.Movie):
         # Find the actors. Try to make it comma separated.
         self.cast = gutils.regextrim(self.page, ">Attori</font>", '(<font class="fontViolaB">|\n)')
         self.cast = string.replace(self.cast, "target='_self'>", "\n>")
-        self.cast = string.replace(self.cast, "<a>",_(" as ").encode('utf8'))
+        self.cast = string.replace(self.cast, "<a>", _(" as ").encode('utf8'))
         self.cast = string.replace(self.cast, "</tr><tr>", '\n')
         self.cast = string.replace(self.cast, "...vedi il resto del cast", '')
         self.cast = gutils.clean(self.cast)
@@ -115,7 +120,12 @@ class Plugin(movie.Movie):
 
     def get_trailer(self):
         # Find the film's trailer page or location
-        self.trailer = ""
+        self.trailer = ''
+        pos_end = string.find(self.page, '>guarda il trailer<')
+        if pos_end > -1:
+            pos_beg = string.rfind(self.page[:pos_end], '<a href')
+            if pos_beg > -1:
+                self.trailer = gutils.trim(self.page[pos_beg:pos_end], '"', '"')
 
     def get_country(self):
         # Find the film's country
@@ -126,7 +136,29 @@ class Plugin(movie.Movie):
         # Convert if needed when assigning.
         self.rating = 0
 
+    def get_screenplay(self):
+        # Find the screenplay
+        self.screenplay = gutils.trim(self.page, 'Sceneggiatura</font></td></tr><tr>', '<td colspan="2"')
+        self.screenplay = string.replace(self.screenplay, '<tr>', ', ')
+        # beautification
+        self.screenplay = gutils.clean(self.screenplay)
+        self.screenplay = string.replace(self.screenplay, ' ,', ',')
+        self.screenplay = re.sub('[ ]+', ' ', self.screenplay)
+        self.screenplay = re.sub('[,][ ]*$', '', self.screenplay)
+
+    def get_cameraman(self):
+        # Find the cameraman
+        self.cameraman = gutils.trim(self.page, 'Fotografia</font></td></tr><tr>', '<td colspan="2"')
+        self.cameraman = string.replace(self.cameraman, '<tr>', ', ')
+        # beautification
+        self.cameraman = gutils.clean(self.cameraman)
+        self.cameraman = string.replace(self.cameraman, ' ,', ',')
+        self.cameraman = re.sub('[ ]+', ' ', self.cameraman)
+        self.cameraman = re.sub('[,][ ]*$', '', self.cameraman)
+
+
 class SearchPlugin(movie.SearchMovie):
+
     # A movie search object
     def __init__(self):
         self.encode                = 'iso-8859-1'
@@ -161,16 +193,18 @@ class SearchPlugin(movie.SearchMovie):
 #
 # Plugin Test
 #
+
+
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky'      : [ 12, 12 ],
-        'però'       : [  6,  6 ],
-        'il ritorno' : [ 97, 97 ]
-    }
+        'Rocky'      : [12, 12],
+        'però'       : [6, 6],
+        'il ritorno' : [97, 97]}
+
 
 class PluginTest:
     #
@@ -181,7 +215,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '3996' : { 
+        '3996' : {
             'title'             : 'Amor non ho, però... però...',
             'o_title'           : 'Amor non ho, però... però...',
             'director'          : 'Giorgio Bianchi',
@@ -220,6 +254,6 @@ Galeazzo Benti as',
             'notes'             : False,
             'runtime'           : 90,
             'image'             : False,
-            'rating'            : False
-        },
-    }
+            'rating'            : False,
+            'screenplay'        : 'Giuseppe Marotta, Mario Brancacci, Vittorio Veltroni, Augusto Borselli, Franco Riganti',
+            'cameraman'         : 'Mario Bava'}, }
