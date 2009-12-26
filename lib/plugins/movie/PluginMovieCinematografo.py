@@ -53,17 +53,19 @@ class Plugin(movie.Movie):
     def get_o_title(self):
         # Find the film's original title
         self.o_title = gutils.trim(self.page, ">Titolo Originale</font>", "</tr>")
-        self.o_title = string.capwords(self.o_title)
+        self.o_title = self.capwords(self.o_title)
         # if nothing found, use the title
         if self.o_title == '':
             self.o_title = gutils.trim(self.page, "<!--TITOLO-->", "<!--FINE TITOLO-->")
             self.o_title = gutils.trim(self.o_title, "<b>", "</b>")
+        self.o_title = self.capwords(self.o_title)
 
     def get_title(self):
         # Find the film's local title.
         # Probably the original title translation
         self.title = gutils.trim(self.page, "<!--TITOLO-->", "<!--FINE TITOLO-->")
         self.title = gutils.trim(self.title, "<b>", "</b>")
+        self.title = self.capwords(self.title)
 
     def get_director(self):
         # Find the film's director
@@ -88,7 +90,7 @@ class Plugin(movie.Movie):
 
     def get_genre(self):
         # Find the film's genre
-        self.genre = string.capwords(gutils.trim(self.page, ">Genere</font>", "</tr>"))
+        self.genre = self.capwords(gutils.trim(self.page, ">Genere</font>", "</tr>"))
 
     def get_cast(self):
         # Find the actors. Try to make it comma separated.
@@ -108,7 +110,7 @@ class Plugin(movie.Movie):
 
     def get_studio(self):
         # Find the studio
-        self.studio = string.capwords(gutils.clean(gutils.trim(self.page, ">Distribuzione</font>", "</tr>")))
+        self.studio = self.capwords(gutils.clean(gutils.trim(self.page, ">Distribuzione</font>", "</tr>")))
 
     def get_o_site(self):
         # Find the film's oficial site
@@ -129,7 +131,7 @@ class Plugin(movie.Movie):
 
     def get_country(self):
         # Find the film's country
-        self.country = string.replace(string.capwords(gutils.clean(gutils.trim(self.page, ">Origine</font>", "</tr>"))), 'Usa', 'USA')
+        self.country = string.replace(self.capwords(gutils.clean(gutils.trim(self.page, ">Origine</font>", "</tr>"))), 'Usa', 'USA')
 
     def get_rating(self):
         # Find the film's rating. From 0 to 10.
@@ -141,9 +143,11 @@ class Plugin(movie.Movie):
         critica = gutils.clean(string.replace(gutils.regextrim(self.page, 'Critica</font>', "(</td>|\n|Note<)"), '<br>', '\n'))
         if critica:
             self.notes = 'Critica:\n\n' + critica + '\n\n'
-        note = gutils.clean(string.replace(gutils.regextrim(self.page, 'Note</font>', "(</td>|\n|Critica<)"), '<br>', '\n'))
+        note = gutils.clean(string.replace(gutils.regextrim(self.page, 'Note</font>', "(</td>|\n|Critica<)"), '<br>', '--BR--'))
         if note:
-            self.notes = 'Note:\n\n' + string.capwords(note)
+            # string.capwords removes line breaks, preventing them with placeholder --BR--
+            note = self.capwords(note)
+            self.notes = self.notes + 'Note:\n\n' + string.replace(note, '--br--', '\n')
 
     def get_screenplay(self):
         # Find the screenplay
@@ -165,6 +169,11 @@ class Plugin(movie.Movie):
         self.cameraman = re.sub('[ ]+', ' ', self.cameraman)
         self.cameraman = re.sub('[,][ ]*$', '', self.cameraman)
 
+    def capwords(self, name):
+        tmp = gutils.clean(name)
+        if tmp == string.upper(tmp):
+            return string.capwords(name)
+        return name
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -184,6 +193,12 @@ class SearchPlugin(movie.SearchMovie):
         # Isolating just a portion (with the data we want) of the results
         self.page = gutils.trim(self.page, '<td valign="top" width="73%" bgcolor="#4d4d4d">', '</td>')
 
+    def capwords(self, name):
+        tmp = gutils.clean(name)
+        if tmp == string.upper(tmp):
+            return string.capwords(name)
+        return name
+
     def get_searches(self):
         # Try to find both id and film title for each search result
         elements = string.split(self.page, "<li>")
@@ -194,7 +209,7 @@ class SearchPlugin(movie.SearchMovie):
                 id = gutils.trim(element, "?codice=", "\">")
                 if id <> '':
                     self.ids.append(id)
-                    self.titles.append(gutils.convert_entities(gutils.trim(element, "<b>", "</b>")))
+                    self.titles.append(self.capwords(gutils.convert_entities(gutils.trim(element, "<b>", "</b>"))))
         else:
             self.number_results = 0
 
