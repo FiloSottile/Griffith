@@ -41,6 +41,7 @@ plugin_author       = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
 plugin_version      = "1.2"
 
+
 class Plugin(movie.Movie):
 
     def __init__(self, id):
@@ -61,15 +62,15 @@ class Plugin(movie.Movie):
             amazon.setLicense(accesskey, secretkey)
 
             locale = self.config.get('amazon_locale', 0, section='extensions')
-            if locale == '1':
+            if locale == '1' or locale == 'UK':
                 locale = 'uk'
-            elif locale == '2':
+            elif locale == '2' or locale == 'DE':
                 locale = 'de'
-            elif locale == '3':
+            elif locale == '3' or locale == 'CA':
                 locale = 'ca'
-            elif locale == '4':
+            elif locale == '4' or locale == 'FR':
                 locale = 'fr'
-            elif locale == '5':
+            elif locale == '5' or locale == 'JP':
                 locale = 'jp'
             else:
                 locale = None
@@ -233,6 +234,7 @@ class Plugin(movie.Movie):
             if hasattr(self.page.ItemAttributes, 'EAN'):
                 self.barcode = self.page.ItemAttributes.EAN
 
+
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
@@ -241,7 +243,7 @@ class SearchPlugin(movie.SearchMovie):
         self.encode                = 'utf8'
         self.remove_accents        = False
 
-    def search(self,parent_window):
+    def search(self, parent_window):
         # dont use base functionality
         # use the Amazon Web API
         self.titles = [""]
@@ -255,15 +257,15 @@ class SearchPlugin(movie.SearchMovie):
             amazon.setLicense(accesskey, secretkey)
 
             locale = self.config.get('amazon_locale', 0, section='extensions')
-            if locale == '1':
+            if locale == '1' or locale == 'UK':
                 locale = 'uk'
-            elif locale == '2':
+            elif locale == '2' or locale == 'DE':
                 locale = 'de'
-            elif locale == '3':
+            elif locale == '3' or locale == 'CA':
                 locale = 'ca'
-            elif locale == '4':
+            elif locale == '4' or locale == 'FR':
                 locale = 'fr'
-            elif locale == '5':
+            elif locale == '5' or locale == 'JP':
                 locale = 'jp'
             else:
                 locale = None
@@ -312,6 +314,7 @@ class SearchPlugin(movie.SearchMovie):
         else:
             theatricalReleaseDate = ''
         self.titles.append("%s%s%s (ASIN: %s)" % (productGroup, title, theatricalReleaseDate, item.ASIN))
+
 
 class AmazonRetriever(threading.Thread):
 
@@ -387,16 +390,19 @@ class AmazonRetriever(threading.Thread):
 #
 # Plugin Test
 #
+# Amazon test data for DE locale only
+#
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 16, 16 ],
+        'Rocky Balboa'         : [ 17, 17 ],
         'Arahan'               : [  7,  7 ],
-        'Ein glückliches Jahr' : [  2,  2 ]
+        'Ein glückliches Jahr' : [  3,  3 ]
     }
+
 
 class PluginTest:
     #
@@ -460,7 +466,7 @@ Charles Gérard',
 Yoon So-yi\n\
 Ahn Sung-kee',
             'country'             : 'Südkorea',
-            'genre'               : 'Actionkomödie, Abenteuer- & Actionkomödie, Fantasykomödie, General AAS, Action, Komödie, Action, Fantasy, Komödie, Korea, Unter 10 EUR',
+            'genre'               : 'Actionkomödie, Abenteuer- & Actionkomödie, Fantasykomödie, General AAS, Action, Komödie, Action, Fantasy, Komödie, Korea',
             'classification'      : 'Freigegeben ab 16 Jahren',
             'o_site'              : False,
             'site'                : 'http://www.amazon.de/dp/B000BSNOD6',
