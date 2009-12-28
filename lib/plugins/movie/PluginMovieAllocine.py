@@ -23,7 +23,8 @@ __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 
 import gutils
 import movie
-import string, re
+import string
+import re
 
 plugin_name         = "Allocine"
 plugin_description  = "Internet Movie Database"
@@ -33,7 +34,10 @@ plugin_author       = "Pierre-Luc Levy"
 plugin_author_email = ""
 plugin_version      = "0.7"
 
+
 class Plugin(movie.Movie):
+    replace_tabs = re.compile('[\t\r\n]', re.M)
+
     def __init__(self, id):
         self.movie_id = id
         self.url      = "http://www.allocine.fr/film/fichefilm_gen_cfilm=%s.html" % str(self.movie_id)
@@ -52,9 +56,8 @@ class Plugin(movie.Movie):
                 break
 
     def get_o_title(self):
-        self.o_title = ""
-        self.o_title = gutils.trim(self.page,"Titre original : <i>","</i>")
-        if (self.o_title==''):
+        self.o_title = gutils.trim(self.page, "Titre original : <i>", "</i>")
+        if (self.o_title == ''):
             self.o_title = re.sub('[(][0-9]+[)]', '', string.replace(gutils.trim(self.page, '<title>', '</title>'), u' - AlloCiné', ''))
 
     def get_title(self):
@@ -72,11 +75,11 @@ class Plugin(movie.Movie):
     def get_runtime(self):
         self.runtime = gutils.clean(gutils.trim(self.page, u'Durée :', 'min'))
         if self.runtime:
-            self.runtime = str (int(gutils.before(self.runtime,"h"))*60 + int(gutils.after(self.runtime,"h")))
+            self.runtime = str(int(gutils.before(self.runtime, "h")) * 60 + int(gutils.after(self.runtime, "h")))
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, 'Genre : ', '</a')
-        self.genre = gutils.strip_tags(self.genre)
+        self.genre = gutils.regextrim(self.page, 'Genre : ', '</a>[^,]')
+        self.genre = string.replace(self.replace_tabs.sub('', gutils.clean(self.genre)), ',', ', ')
 
     def get_cast(self):
         self.cast = ""
@@ -84,9 +87,14 @@ class Plugin(movie.Movie):
         parts = string.split(casts, 'href="/personne/fichepersonne_gen_cpersonne=')
         for index in range(1, len(parts), 1):
             character = gutils.clean(gutils.trim(parts[index], 'Rôle :', '<'))
+            if not character:
+                character = gutils.clean(gutils.trim(parts[index - 1], '<td>', '</td>'))
             actor = gutils.clean(gutils.trim(parts[index], '>', '<'))
             if actor:
-                self.cast = self.cast + actor + _(' as ') + character + '\n'
+                if character:
+                    self.cast = self.cast + actor + _(' as ') + character + '\n'
+                else:
+                    self.cast = self.cast + actor + '\n'
 
     def get_classification(self):
         self.classification = ""
@@ -111,7 +119,7 @@ class Plugin(movie.Movie):
         self.rating = gutils.trim(self.rating, 'class="stareval n', ' ')
         if self.rating:
             try:
-                self.rating = str(round(float(int(self.rating)*.225)))
+                self.rating = str(round(float(int(self.rating) * .225)))
             except:
                 self.rating = 0
 
@@ -121,6 +129,7 @@ class Plugin(movie.Movie):
     def get_cameraman(self):
         self.cameraman = gutils.clean(gutils.trim(self.page_cast, 'Directeur de la photographie', '</tr>'))
 
+
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
@@ -128,7 +137,7 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search = "http://www.allocine.fr/recherche/?q="
         self.encode                = 'utf-8'
 
-    def search(self,parent_window):
+    def search(self, parent_window):
         if not self.open_search(parent_window):
             return None
         self.sub_search()
@@ -139,7 +148,7 @@ class SearchPlugin(movie.SearchMovie):
 
     def get_searches(self):
         elements = string.split(self.page, '<a href=\'/film/fichefilm_gen_cfilm=')
-        if (elements[0]<>''):
+        if (elements[0] <> ''):
             for index in range(1, len(elements), 1):
                 element = elements[index]
                 title = gutils.clean(gutils.convert_entities(gutils.trim(element, '>', '</a>')))
@@ -151,9 +160,12 @@ class SearchPlugin(movie.SearchMovie):
                     else:
                         self.titles.append(title)
 
+
 #
 # Plugin Test
 #
+
+
 class SearchPluginTest(SearchPlugin):
     #
     # Configuration for automated tests:
@@ -162,6 +174,7 @@ class SearchPluginTest(SearchPlugin):
     test_configuration = {
         'Le Prix à payer' : [ 4, 4 ],
     }
+
 
 class PluginTest:
     #
@@ -199,6 +212,41 @@ Francis Leplay' + _(' as ') + 'l\'agent immobilier',
             'rating'              : 5,
             'cameraman'           : u'Jean-François Robin',
             'screenplay'          : u'Alexandra Leclère',
+            'barcode'             : False
+        },
+        '309' : { 
+            'title'               : u'Terminator',
+            'o_title'             : u'Terminator',
+            'director'            : u'James Cameron',
+            'plot'                : True,
+            'cast'                : u'Arnold Schwarzenegger' + _(' as ') + 'le Terminator\n\
+Michael Biehn' + _(' as ') + 'Kyle Reese\n\
+Linda Hamilton' + _(' as ') + 'Sarah Connor\n\
+Lance Henriksen' + _(' as ') + 'l\'inspecteur Vukovich\n\
+Paul Winfield' + _(' as ') + 'le lieutenant Ed Traxler\n\
+Bess Motta' + _(' as ') + 'Ginger Ventura\n\
+Rick Rossovich' + _(' as ') + 'Matt Buchanan\n\
+Earl Boen' + _(' as ') + 'le Dr Peter Silberman\n\
+Dick Miller' + _(' as ') + 'le marchand d\'armes\n\
+Shawn Schepps' + _(' as ') + 'Nancy\n\
+Bill Paxton' + _(' as ') + 'le chef des punks\n\
+Brian Thompson' + _(' as ') + 'un punk\n\
+Marianne Muellerleile' + _(' as ') + 'la \'mauvaise\' Sarah Connor\n\
+Franco Columbu' + _(' as ') + 'le Terminator infiltrant le bunker dans le futur',
+            'country'             : u'américain',
+            'genre'               : u'Science fiction, Thriller',
+            'classification'      : False,
+            'studio'              : False,
+            'o_site'              : False,
+            'site'                : 'http://www.allocine.fr/film/fichefilm_gen_cfilm=309.html',
+            'trailer'             : 'http://www.allocine.fr/film/video_gen_cfilm=309.html',
+            'year'                : 1984,
+            'notes'               : False,
+            'runtime'             : 108,
+            'image'               : True,
+            'rating'              : 8,
+            'cameraman'           : u'Adam Greenberg',
+            'screenplay'          : u'James Cameron',
             'barcode'             : False
         },
     }
