@@ -40,7 +40,7 @@ class Plugin(movie.Movie):
         self.url      = "http://www.filmdb.de/filmanzeige.php?alle=1&filmid=" + self.movie_id
 
     def get_image(self):
-        tmp = gutils.regextrim(self.page, 'plakat.php?', '["\']')
+        tmp = gutils.regextrim(self.page, 'plakat.php[?]', '["\']')
         if tmp:
             page_image = self.open_page(url='http://www.filmdb.de/plakat.php?' + tmp)
             tmp = gutils.regextrim(self.page, 'bilder.filmdb.de', '["\']')
