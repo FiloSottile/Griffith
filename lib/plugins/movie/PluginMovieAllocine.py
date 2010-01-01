@@ -25,6 +25,8 @@ import gutils
 import movie
 import string
 import re
+import logging
+log = logging.getLogger("Griffith")
 
 plugin_name         = "Allocine"
 plugin_description  = "Internet Movie Database"
@@ -133,18 +135,41 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
-        self.original_url_search   = "http://www.allocine.fr/recherche/?q="
-        self.translated_url_search = "http://www.allocine.fr/recherche/?q="
+        self.original_url_search   = "http://www.allocine.fr/recherche/1/?q="
+        self.translated_url_search = "http://www.allocine.fr/recherche/1/?q="
         self.encode                = 'utf-8'
+        self.remove_accents        = True
 
     def search(self, parent_window):
         if not self.open_search(parent_window):
             return None
+        # try to find next pages if more than 20 results
+        match = re.search('<span class="navcurrpage">1</span> / ([0-9])+</li>', self.page)
         self.sub_search()
+        if match:
+            saved_url = self.url
+            saved_title = self.title
+            self.title = ''
+            try:
+                maxpages = int(match.group(1))
+                if maxpages > 1:
+                    currpage = 2
+                    while currpage <= maxpages and currpage < 5:
+                        oldpage = self.page
+                        self.url = string.replace(saved_url, '/?q=', '/?p=%s&q=' % currpage)
+                        if not self.open_search(parent_window):
+                            return None
+                        self.sub_search()
+                        self.page = oldpage + self.page
+                        currpage = currpage + 1
+            except:
+                log.exception('')
+            self.url = saved_url
+            self.title = saved_title
         return self.page
 
     def sub_search(self):
-        self.page = gutils.trim(self.page, 'résultats trouvés', '<div class="spacer"')
+        self.page = gutils.regextrim(self.page, u'résultat[s]* trouvé[s]*', '<form method=')
 
     def get_searches(self):
         elements = string.split(self.page, '<a href=\'/film/fichefilm_gen_cfilm=')
