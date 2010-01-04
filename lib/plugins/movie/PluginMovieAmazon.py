@@ -57,7 +57,7 @@ class Plugin(movie.Movie):
             accesskey = self.config.get('amazon_accesskey', None, section='extensions')
             secretkey = self.config.get('amazon_secretkey', None, section='extensions')
             if not accesskey or not secretkey:
-                gutils.error(self.app, _('Please configure you Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
+                gutils.error(self.app, _('Please configure your Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
                 return False
             amazon.setLicense(accesskey, secretkey)
 
