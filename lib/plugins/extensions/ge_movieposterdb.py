@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright © 20010 Michael Jahn
+# Copyright © 2010 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published byp
