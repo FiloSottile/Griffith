@@ -22,13 +22,14 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import os
-from urllib import urlcleanup, FancyURLopener, urlretrieve
+import logging
+from urllib import quote, urlcleanup
 import gtk
 import gutils
-from plugins.extensions import GriffithExtensionBase as Base
 from edit import update_image_from_memory
 from movie import Progress, Retriever
-import logging
+from plugins.extensions import GriffithExtensionBase as Base
+
 log = logging.getLogger('Griffith')
 
 
@@ -41,7 +42,6 @@ class GriffithExtension(Base):
     api = 1
     enabled = True
 
-    preferences = {}
     toolbar_icon = 'gtk-network'
 
     baseurltitle = 'http://www.movieposterdb.com/embed.inc.php?movie_title=%s'
@@ -77,20 +77,20 @@ class GriffithExtension(Base):
             self.encode = 'iso8859-1'
             if o_title:
                 if movie.year:
-                    url = self.baseurltitleyear % (o_title, movie.year)
+                    url = self.baseurltitleyear % (quote(o_title), movie.year)
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
                 if not result or not largeurl:
-                    url = self.baseurltitle % o_title
+                    url = self.baseurltitle % quote(o_title)
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
-            if not result or not largeurl and title and not title == o_title:
+            if not result or not largeurl and title and title != o_title:
                 if movie.year:
-                    url = self.baseurltitleyear % (title, movie.year)
+                    url = self.baseurltitleyear % (quote(title), movie.year)
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
                 if not result or not largeurl:
-                    url = self.baseurltitle % title
+                    url = self.baseurltitle % quote(title)
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
         except:
@@ -142,7 +142,6 @@ class GriffithExtension(Base):
 
     def _search(self, url, parent_window):
         result = False
-        url = url.replace(' ', '%20')
         try:
             if self.encode:
                 url = url.encode(self.encode)
