@@ -54,6 +54,20 @@ class GriffithExtension(Base):
         log.info('fetching poster from MoviePosterDB.com...')
         self.movie = movie
 
+        # correction of the movie name for the search
+        o_title = None
+        title = None
+        if movie.o_title is not None:
+            if len(movie.o_title) > 5 and movie.o_title[-5:] == u', The':
+                o_title = u'The ' + movie.o_title[:-5]
+            else:
+                o_title = movie.o_title
+        if movie.title is not None:
+            if len(movie.title) > 5 and movie.title[-5:] == u', The':
+                title = u'The ' + movie.title[:-5]
+            else:
+                title = movie.title
+
         # try to get an url to the large version of a poster for the movie
         # (requests are in the order:
         #  original title + year, original title only, title + year, title only)
@@ -61,22 +75,22 @@ class GriffithExtension(Base):
             largeurl = None
             result = False
             self.encode = 'iso8859-1'
-            if movie.o_title:
+            if o_title:
                 if movie.year:
-                    url = self.baseurltitleyear % (movie.o_title, movie.year)
+                    url = self.baseurltitleyear % (o_title, movie.year)
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
                 if not result or not largeurl:
-                    url = self.baseurltitle % movie.o_title
+                    url = self.baseurltitle % o_title
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
-            if not result or not largeurl and movie.title and not movie.title == movie.o_title:
+            if not result or not largeurl and title and not title == o_title:
                 if movie.year:
-                    url = self.baseurltitleyear % (movie.title, movie.year)
+                    url = self.baseurltitleyear % (title, movie.year)
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
                 if not result or not largeurl:
-                    url = self.baseurltitle % movie.title
+                    url = self.baseurltitle % title
                     result = self.search(url, self.widgets['window'])
                     largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
         except:
