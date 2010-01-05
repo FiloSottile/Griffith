@@ -57,13 +57,13 @@ class GriffithExtension(Base):
         # correction of the movie name for the search
         o_title = None
         title = None
-        if movie.o_title is not None:
-            if len(movie.o_title) > 5 and movie.o_title[-5:] == u', The':
+        if movie.o_title:
+            if movie.o_title[-5:] == ', The':
                 o_title = u'The ' + movie.o_title[:-5]
             else:
                 o_title = movie.o_title
-        if movie.title is not None:
-            if len(movie.title) > 5 and movie.title[-5:] == u', The':
+        if movie.title:
+            if movie.title[-5:] == ', The':
                 title = u'The ' + movie.title[:-5]
             else:
                 title = movie.title
