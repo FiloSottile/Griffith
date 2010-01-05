@@ -39,7 +39,7 @@ class GriffithExtension(Base):
     email = 'mike@griffith.cc'
     version = 1
     api = 1
-    enabled = False # disabled by default
+    enabled = True
 
     preferences = {}
     toolbar_icon = 'gtk-network'
