@@ -48,7 +48,6 @@ class GriffithExtension(Base):
     baseurltitleyear = 'http://www.movieposterdb.com/embed.inc.php?movie_title=%s[%s]'
 
     progress = None
-    encode = 'iso8859-1'
 
     def toolbar_icon_clicked(self, widget, movie):
         log.info('fetching poster from MoviePosterDB.com...')
@@ -58,13 +57,13 @@ class GriffithExtension(Base):
         o_title = None
         title = None
         if movie.o_title:
-            if movie.o_title[-5:] == ', The':
-                o_title = u'The ' + movie.o_title[:-5]
+            if movie.o_title.endswith(', The'):
+                o_title = u"The %s" % movie.o_title[:-5]
             else:
                 o_title = movie.o_title
         if movie.title:
-            if movie.title[-5:] == ', The':
-                title = u'The ' + movie.title[:-5]
+            if movie.title.endswith(', The'):
+                title = u"The %s" % movie.title[:-5]
             else:
                 title = movie.title
 
@@ -73,107 +72,92 @@ class GriffithExtension(Base):
         #  original title + year, original title only, title + year, title only)
         try:
             largeurl = None
-            result = False
-            self.encode = 'iso8859-1'
+            data = False
             if o_title:
                 if movie.year:
                     url = self.baseurltitleyear % (quote(o_title), movie.year)
-                    result = self.search(url, self.widgets['window'])
-                    largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
-                if not result or not largeurl:
+                    data = self._get(url, self.widgets['window'])
+                    if data:
+                        largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
+                if not data or not largeurl:
                     url = self.baseurltitle % quote(o_title)
-                    result = self.search(url, self.widgets['window'])
-                    largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
-            if not result or not largeurl and title and title != o_title:
+                    data = self._get(url, self.widgets['window'])
+                    if data:
+                        largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
+            if not data or not largeurl and title and title != o_title:
                 if movie.year:
                     url = self.baseurltitleyear % (quote(title), movie.year)
-                    result = self.search(url, self.widgets['window'])
-                    largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
-                if not result or not largeurl:
+                    data = self._get(url, self.widgets['window'])
+                    if data:
+                        largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
+                if not data or not largeurl:
                     url = self.baseurltitle % quote(title)
-                    result = self.search(url, self.widgets['window'])
-                    largeurl = gutils.trim(self.data, 'src=\\"', '\\"').replace('/t_', '/l_')
+                    data = self._get(url, self.widgets['window'])
+                    if data:
+                        largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
         except:
             log.exception('')
             gutils.warning(_('No posters found for this movie.'))
             return
 
-        if not result or not largeurl:
+        if not data or not largeurl:
             gutils.warning(_('No posters found for this movie.'))
             return
 
         # got the url for a large poster, fetch the data, show preview and update the
         # movie entry if the user want it
-        self.encode = None
-        if not self.search(largeurl, self.widgets['window']):
+        data = self._get(largeurl, self.widgets['window'], decode=False)
+        if not data:
             gutils.warning(_('No posters found for this movie.'))
             return
 
-        if self.show_preview():
-            update_image_from_memory(self.app, movie.number, self.data)
+        if self._show_preview(data):
+            update_image_from_memory(self.app, movie.number, data)
 
-    def show_preview(self):
+    def _show_preview(self, data):
         loader = gtk.gdk.PixbufLoader()
-        loader.write(self.data, len(self.data))
+        loader.write(data, len(data))
         loader.close()
         handler = self.widgets['big_poster'].set_from_pixbuf(loader.get_pixbuf())
         self.widgets['poster_window'].show()
-        self.widgets['poster_window'].move(0, 0)
         result = gutils.question(_("Do you want to use this poster instead?"), self.widgets['window'])
         self.widgets['poster_window'].hide()
         return result
 
-    def search(self, url, parent_window):
-        try:
-            #
-            # initialize the progress dialog once for the following search process
-            #
-            if self.progress is None:
-                self.progress = Progress(parent_window)
-            self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), True)
-            #
-            # call the plugin specific search method
-            #
-            return self._search(url, parent_window)
-        finally:
-            # dont forget to hide the progress dialog
-            if self.progress:
-                self.progress.hide()
+    def _get(self, url, parent_window, decode=True):
+        # initialize the progress dialog once for the following search process
+        if not self.progress:
+            self.progress = Progress(parent_window)
 
-    def _search(self, url, parent_window):
-        result = False
+        data = None
+        url = url.encode('utf-8', 'replace')
+        log.debug('Using url <%s>', url)
+        self.progress.set_data(parent_window, _('Searching'), _('Wait a moment'), True)
         try:
-            if self.encode:
-                url = url.encode(self.encode)
-            else:
-                url = url.encode('iso8859-1')
-        except UnicodeEncodeError:
-            url = url.encode('utf-8')
-        log.debug('Using url <%s>' % url)
-        self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), False)
-        retriever = Retriever(url, parent_window, self.progress)
-        retriever.start()
-        while retriever.isAlive():
-            self.progress.pulse()
-            if self.progress.status:
-                retriever.join()
-            while gtk.events_pending():
-                gtk.main_iteration()
-        try:
-            if retriever.html:
-                ifile = file(retriever.html[0], 'rb')
-                try:
-                    self.data = ifile.read()
-                finally:
-                    ifile.close()
-                # check for gzip compressed pages before decoding to unicode
-                if len(self.data) > 2 and self.data[0:2] == '\037\213':
-                    self.data = gutils.decompress(self.data)
-                if self.encode:
-                    self.data = self.data.decode(self.encode, 'replace')
-                result = True
-                os.remove(retriever.html[0])
-        except IOError:
-            log.exception('')
+            retriever = Retriever(url, parent_window, self.progress)
+            retriever.start()
+            while retriever.isAlive():
+                self.progress.pulse()
+                if self.progress.status:
+                    retriever.join()
+                while gtk.events_pending():
+                    gtk.main_iteration()
+            try:
+                if retriever.html:
+                    ifile = file(retriever.html[0], 'rb')
+                    try:
+                        data = ifile.read()
+                    finally:
+                        ifile.close()
+                    # check for gzip compressed pages before decoding to unicode
+                    if len(data) > 2 and data[0:2] == '\037\213':
+                        data = gutils.decompress(data)
+                    if decode:
+                        data = data.decode('utf-8', 'replace')
+                    os.remove(retriever.html[0])
+            except IOError:
+                log.exception('')
+        finally:
+            self.progress.hide()
         urlcleanup()
-        return result
+        return data
