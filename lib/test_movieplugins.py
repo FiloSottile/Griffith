@@ -158,7 +158,7 @@ class PluginTester:
         
         if domsgbox:
             if not result:
-                gutils.error(self, 'SearchPluginTest %s: Test NOT successful !' % plugin_name)
+                gutils.error('SearchPluginTest %s: Test NOT successful !' % plugin_name)
             else:
                 gutils.info('SearchPluginTest %s: Test successful !' % plugin_name)
         
@@ -267,7 +267,7 @@ class PluginTester:
         
         if domsgbox:
             if not result:
-                gutils.error(self, 'PluginTest %s: Test NOT successful !' % plugin_name)
+                gutils.error('PluginTest %s: Test NOT successful !' % plugin_name)
             else:
                 gutils.info('PluginTest %s: Test successful !' % plugin_name)
         
