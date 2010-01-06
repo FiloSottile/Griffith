@@ -30,11 +30,12 @@ plugin_url          = 'www.filmweb.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email = '<bartosz.kurczewski@gmail.com>'
-plugin_version      = '1.13'
+plugin_version      = '1.14'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN     = re.compile("""<a class=["']notSelected["'].*?href=["'](.*?)["']>zwiastuny</a>\s*\[\d+\]\s*&raquo;""")
     DIRECTOR_PATTERN    = re.compile('yseria\s+(.*)\s+scenariusz', re.MULTILINE)
+    SCREENPLAY_PATTERN  = re.compile('scenariusz\s+(.*)\s+zdj.cia', re.MULTILINE)
     O_TITLE_AKA_PATTERN = re.compile('\(AKA\s+(.*?)\)')
 
     def __init__(self, id):
@@ -71,7 +72,18 @@ class Plugin(movie.Movie):
             self.director = string.replace(self.director, ",",", ")
             self.director = string.replace(self.director, "  "," ")
             self.director = string.replace(self.director, " ,  ",", ")
-            self.director = string.replace(self.director, u",  (wi\xeacej&#160;...)",'')
+            self.director = string.replace(self.director, "(więcej...)", '')
+
+    def get_screenplay(self):
+	screenplay = self.SCREENPLAY_PATTERN.findall(self.page)
+	if len(screenplay)>0:
+            self.screenplay = screenplay[0]
+	    self.screenplay = string.replace(self.screenplay, "\t", '')
+	    self.screenplay = re.sub('\s+', ' ', self.screenplay)
+	    self.screenplay = string.replace(self.screenplay, ",",", ")
+	    self.screenplay = string.replace(self.screenplay, "  "," ")
+	    self.screenplay = string.replace(self.screenplay, " ,  ",", ")
+	    self.screenplay = string.replace(self.screenplay, "(więcej...)", '')
 
     def get_plot(self):
         self.plot = gutils.trim(self.page,'<h2 id="o-filmie-header" class="replace">','</div>')
@@ -81,7 +93,7 @@ class Plugin(movie.Movie):
         self.plot = gutils.strip_tags(self.plot)
         if url != '':
             plot_page = self.open_page(url=url)
-            self.plot = gutils.trim(plot_page, '<div class="filmContent">', '</ul>')
+	    self.plot = gutils.trim(plot_page, '<div class="filmContent" style="position: relative;">', '</p></li>')
             self.plot = gutils.after(self.plot, u'zgłoś poprawkę')
 
     def get_year(self):
@@ -99,7 +111,6 @@ class Plugin(movie.Movie):
         self.cast = gutils.trim(self.page, '<td class="film-actor">',u"zobacz więcej")
         self.cast = string.replace(self.cast, chr(13),"")
         self.cast = string.replace(self.cast, chr(10),"")
-#        self.cast = string.replace(self.cast, "\n","")
         self.cast = string.replace(self.cast, "\t",'')
         self.cast = string.replace(self.cast, "  ",'')
         self.cast = string.replace(self.cast, '<td class="film-protagonist">', _(" as "))
