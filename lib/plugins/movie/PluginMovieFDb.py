@@ -32,7 +32,7 @@ plugin_url        = 'fdb.pl'
 plugin_language        = _('Polish')
 plugin_author        = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email    = '<bartosz.kurczewski@gmail.com>'
-plugin_version        = '1.15'
+plugin_version        = '1.16'
 
 class Plugin(movie.Movie):
     TRAILER_PATTERN = re.compile('/film/.*/zwiastuny/odtwarzaj/[0-9]*')
@@ -183,6 +183,7 @@ class SearchPlugin(movie.SearchMovie):
                     element = element.replace("\n", '')
                     element = element.replace('   ', '')
                     element = element.replace('aka ', ' aka ')
+		    element = element.replace('{{rate}}', ' ')
                     element = element.replace(' - Oryginalny', '')
                     self.titles.append(element)
             else:
