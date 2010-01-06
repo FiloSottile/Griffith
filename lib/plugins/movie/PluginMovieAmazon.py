@@ -24,7 +24,6 @@ __revision__ = '$Id$'
 import gutils
 import movie
 import string
-import re
 import amazon
 import threading
 import gtk
@@ -57,7 +56,7 @@ class Plugin(movie.Movie):
             accesskey = self.config.get('amazon_accesskey', None, section='extensions')
             secretkey = self.config.get('amazon_secretkey', None, section='extensions')
             if not accesskey or not secretkey:
-                gutils.error(self.app, _('Please configure your Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
+                gutils.error(None, _('Please configure your Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
                 return False
             amazon.setLicense(accesskey, secretkey)
 
@@ -252,7 +251,7 @@ class SearchPlugin(movie.SearchMovie):
             accesskey = self.config.get('amazon_accesskey', None, section='extensions')
             secretkey = self.config.get('amazon_secretkey', None, section='extensions')
             if not accesskey or not secretkey:
-                gutils.error(self.app, _('Please configure your Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
+                gutils.error(None, _('Please configure your Amazon Access Key ID and Secret Key correctly in the preferences dialog.'))
                 return False
             amazon.setLicense(accesskey, secretkey)
 
