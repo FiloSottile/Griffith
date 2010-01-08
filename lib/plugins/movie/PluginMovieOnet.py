@@ -30,7 +30,7 @@ plugin_url          = 'film.onet.pl'
 plugin_language     = _('Polish')
 plugin_author       = 'Piotr Ożarowski, Bartosz Kurczewski'
 plugin_author_email = '<bartosz.kurczewski@gmail.com>'
-plugin_version      = '1.8'
+plugin_version      = '1.9'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -63,26 +63,13 @@ class Plugin(movie.Movie):
             self.title = data
 
     def get_director(self):
-        self.director = gutils.trim(self.page, '<BR>Re\xbfyseria:&nbsp;&nbsp;', '<BR>')
-        if string.find(self.director, '-->') <> -1:
-            self.director = gutils.after(self.director, '-->')
-            self.director = gutils.before(self.director,"<!--")
-        else:
-            self.director = gutils.after(self.director, '<B>')
-            self.director = gutils.before(self.director, '</B>')
+        self.director = gutils.trim(self.page, u'<BR>Reżyseria:&nbsp;&nbsp;', '<BR>')
+
+    def get_screenplay(self):
+	self.screenplay = gutils.trim(self.page, u'<BR>Scenariusz:&nbsp;&nbsp;', 'więcej')
 
     def get_plot(self):
-        pos = string.find(self.page, '<TD class=tym>')
-        if pos > 0:
-            self.plot = self.page[pos:]
-            self.plot = gutils.trim(self.plot, '<BR><DIV class=a2>', '</DIV>')
-            return
-        pos = string.find(self.page, '>Recenzje</font>&nbsp;')
-        if pos > 0:
-            self.plot = self.page[pos:]
-            self.plot = gutils.trim(self.plot, '<td class=a1 colspan=3>', '<a class="ar" ')
-        else:
-            self.plot = ''
+	self.plot = gutils.trim(self.page, u'class=tym>Treść', '</div><BR><TABLE')
 
     def get_year(self):
         self.year = gutils.trim(self.page, 'class=a2 valign=top width="100%">',')<BR>')
@@ -124,7 +111,7 @@ class Plugin(movie.Movie):
         self.country = gutils.before(self.country,",")
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, '>Ocena filmu</TD>', 'g\xb3os\xf3w)')
+        self.rating = gutils.trim(self.page, '>Ocena filmu</TD>', 'głosów)')
         self.rating = gutils.after(self.rating, '<BR><B>')
         self.rating = gutils.before(self.rating, '/5</B>')
         if self.rating != '':
