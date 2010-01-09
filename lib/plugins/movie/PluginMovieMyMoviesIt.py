@@ -31,9 +31,9 @@ plugin_name = "MyMoviesIt"
 plugin_description = "mymovies.it"
 plugin_url = "www.mymovies.it"
 plugin_language = _("Italian")
-plugin_author = "Giovanni Sposito"
-plugin_author_email = "<giovanni.sposito@gmail.com>"
-plugin_version = "0.1"
+plugin_author = "Giovanni Sposito, Filippo Valsorda"
+plugin_author_email = "<giovanni.sposito@gmail.com>, <filosottile.wiki@gmail.com>"
+plugin_version = "0.2"
 
 class Plugin(movie.Movie):
 
@@ -43,7 +43,7 @@ class Plugin(movie.Movie):
         self.url = "http://www.mymovies.it/dizionario/recensione.asp?id=%s" % self.movie_id
 
     def get_image(self):
-        tmp_image = string.find(self.page, '<img style="border:solid 1px #737373; padding:3px" src="')
+        tmp_image = string.find(self.page, '<img style="float:left; border:solid 1px gray; padding:3px; margin:5px;" src="')
         if tmp_image == -1:
             self.image_url = ''
         else:
@@ -52,15 +52,15 @@ class Plugin(movie.Movie):
     def get_o_title(self):
         tmp = gutils.trim(self.page, 'Titolo originale <em>', '</em>')
         if not tmp:
-            self.o_title = gutils.trim(self.page, '<meta name="titolo_tag" content="', 'titolo_tag_fine')
+            self.o_title = gutils.trim(self.page, '<h1 style="margin-bottom:3px;">', '</h1>')
         else:
             self.o_title = tmp
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '<meta name="titolo_tag" content="', 'titolo_tag_fine')
+        self.title = gutils.trim(self.page, '<h1 style="margin-bottom:3px;">', '</h1>')
 
     def get_director(self):
-        pos_iniziale = string.find(self.page, '<div style="margin:0px" class="linkblu">')
+        pos_iniziale = string.find(self.page, '<div style="text-align:left" class="linkblu">')
         self.director = gutils.trim(self.page[pos_iniziale:],'Un film di <a','</a>')
         self.director = gutils.after(self.director,'>')
         if not self.director:
@@ -69,20 +69,23 @@ class Plugin(movie.Movie):
             self.director = gutils.trim(self.page[pos_iniziale:],'Un film di ','<')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page,'<p style="text-align:justify;">','</p>')
+        pos_iniziale = string.find(self.page, '<div id="recensione">')
+        self.plot = gutils.trim(self.page[pos_iniziale:],'<p>','</p>')
+        if '</a>' in self.plot:
+            self.plot = gutils.after(self.plot, '</a>')
 
     def get_year(self):
-        self.year = gutils.trim(self.page,'" href="http://www.mymovies.it/film/?anno=', '"')
+        self.year = gutils.regextrim(self.page,'<strong> <a title="Film [0-9]+" href="http://www.mymovies.it/film/[0-9]+/">', '</a></strong>')
 
     def get_runtime(self):
         self.runtime = gutils.trim(self.page, 'durata ', ' min.')
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, 'document.write(\'"http://ad.it.doubleclick.net/adj/MyMdizionario.it/scheda;genere=', ';')
+        self.genre = gutils.regextrim(self.page,'<a title="Film [a-zA-Z]+" href="http://www.mymovies.it/film/[a-zA-Z]+/">', '</a>')
 
-    def get_cast(self):
+    def get_cast(self): # TODO
         tmp = string.find(self.page, 'Con <a')
-        self.cast = gutils.trim(self.page[tmp-6:],'Con ','</a>.')
+        self.cast = gutils.trim(self.page[tmp:],'Con ','</a>.')
         self.cast = string.replace(self.cast, ',', '\n')
 
     def get_classification(self):
@@ -101,27 +104,16 @@ class Plugin(movie.Movie):
         self.site = self.url
 
     def get_trailer(self):
-        tmp = gutils.trim(self.page, '<a title="Trailer', '">Trailer</a></span>')
-        if tmp:
-            self.trailer = re.sub('.*href="', '' ,tmp)
-        else:
-            self.trailer = ''
+        self.trailer = "http://www.mymovies.it/trailer/?id=%s" % self.movie_id
 
     def get_country(self):
         pos = string.find(self.page, ' min.')
         self.country = gutils.trim(self.page[pos+2:], '- ', '  <')
 
     def get_rating(self):
-        #posizione della parte intera della votazione TODO: translate it :-)
-        rat = gutils.trim(self.page, '<i>mymonetro</i> ', ',')
+        rat = gutils.trim(self.page, '<div style="text-align:center; font-size:23px; font-weight:bold; letter-spacing:1px; margin:0px 11px 7px 11px">', '<span style="font-size:11px">/5</span></div>')
         if rat != '':
-            self.rating = int(rat)
-            #posizione di un'eventuale parte decimale # TODO: see above
-            pos_rating = string.find(self.page, '<i>mymonetro</i> ')
-            pos_rating_dec = gutils.trim(self.page[pos_rating+18:], ',', ' stelle')
-            if pos_rating_dec != '':
-                if int(pos_rating_dec) > 51:
-                    self.rating = self.rating + 1
+            self.rating = int(round(float(rat.replace(',', '.'))*2, 0))
         else:
             self.rating = 0
 
