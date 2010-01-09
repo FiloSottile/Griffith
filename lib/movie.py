@@ -21,18 +21,19 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-from urllib import *
-import sys
-import string
-import gtk
+import logging
 import os
-import os.path
+import string
+import sys
+import tempfile
 import threading
 import time
-import tempfile
-import logging
-log = logging.getLogger("Griffith")
+from urllib import *
+import gtk
 import gutils
+
+log = logging.getLogger("Griffith")
+
 
 class Movie(object):
     cast = None
@@ -57,7 +58,7 @@ class Movie(object):
     cameraman = None
     resolution = None
     barcode = None
-    
+
     movie_id = None
     debug = False
     locations = None
@@ -72,59 +73,81 @@ class Movie(object):
     encode = 'iso-8859-1'
     fields_to_fetch = []
     progress = None
-    
+
     # functions that plugin should implement: {{{
     def initialize(self):
         pass
+
     def get_barcode(self):
         pass
+
     def get_cameraman(self):
         pass
+
     def get_cast(self):
         pass
+
     def get_classification(self):
         pass
+
     def get_country(self):
         pass
+
     def get_director(self):
         pass
+
     def get_genre(self):
         pass
+
     def get_image(self):
         pass
+
     def get_notes(self):
         pass
+
     def get_o_site(self):
         pass
+
     def get_o_title(self):
         pass
+
     def get_plot(self):
         pass
+
     def get_rating(self):
         pass
+
     def get_resolution(self):
         pass
+
     def get_runtime(self):
         pass
+
     def get_screenplay(self):
         pass
+
     def get_site(self):
         pass
+
     def get_studio(self):
         pass
+
     def get_title(self):
         pass
+
     def get_trailer(self):
         pass
+
     def get_year(self):
         pass
     #}}}
 
     def __getitem__(self, key):
-        return getattr(self,key)
+        return getattr(self, key)
+
     def __setitem__(self, key, value):
-        setattr(self,key,value)
-    
+        setattr(self, key, value)
+
     def get_movie(self, parent_window=None):
         try:
             #
@@ -133,7 +156,7 @@ class Movie(object):
             if self.progress is None:
                 self.progress = Progress(parent_window)
             self.progress.set_data(parent_window, _("Fetching data"), _("Wait a moment"), True)
-            #            
+            #
             # get the page
             #
             if not self.open_page(parent_window):
@@ -209,7 +232,7 @@ class Movie(object):
             except:
                 self.image = ""
                 try:
-                    os.remove("%s.jpg" % tmp_dest )
+                    os.remove("%s.jpg" % tmp_dest)
                 except:
                     log.info("Can't remove %s file" % tmp_dest)
         else:
@@ -261,7 +284,7 @@ class Movie(object):
                 self[i] = gutils.clean(self[i])
                 if not isinstance(self[i], unicode):
                     self[i] = gutils.gdecode(self[i], self.encode)
-        
+
             if 'o_title' in self.fields_to_fetch and self.o_title is not None:
                 if self.o_title[:4] == u'The ':
                     self.o_title = self.o_title[4:] + u', The'
@@ -271,6 +294,7 @@ class Movie(object):
         finally:
             # close the progress dialog which was opened in get_movie
             self.progress.hide()
+
 
 class SearchMovie(object):
     page = None
@@ -297,7 +321,7 @@ class SearchMovie(object):
             if self.progress is None:
                 self.progress = Progress(parent_window)
             self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), True)
-            #            
+            #
             # call the plugin specific search method
             #
             return self.search(parent_window)
@@ -305,14 +329,14 @@ class SearchMovie(object):
             # dont forget to hide the progress dialog
             self.progress.hide()
 
-    def open_search(self,parent_window):
+    def open_search(self, parent_window):
         self.titles = [""]
         self.ids = [""]
         if self.url.find('%s') > 0:
             self.url = self.url % self.title
             self.url = string.replace(self.url, ' ', '%20')
         else:
-            self.url = string.replace(self.url+self.title, ' ', '%20')
+            self.url = string.replace(self.url + self.title, ' ', '%20')
         try:
             url = self.url.encode(self.encode)
         except UnicodeEncodeError:
@@ -344,7 +368,9 @@ class SearchMovie(object):
         urlcleanup()
         return True
 
+
 class Retriever(threading.Thread):
+
     def __init__(self, URL, parent_window, progress, destination=None):
         self.URL = URL
         self.html = None
@@ -367,16 +393,16 @@ class Retriever(threading.Thread):
             self.join()
 
     def hook(self, count, blockSize, totalSize):
-        if totalSize ==-1:
+        if totalSize == -1:
             pass
         else:
             try:
-                downloaded_percentage = min((count*blockSize*100)/totalSize, 100)
+                downloaded_percentage = min((count * blockSize * 100) / totalSize, 100)
             except:
                 downloaded_percentage = 100
             if count != 0:
-                downloaded_kbyte = int(count * blockSize/1024.0)
-                filesize_kbyte = int(totalSize/1024.0)
+                downloaded_kbyte = int(count * blockSize / 1024.0)
+                filesize_kbyte = int(totalSize / 1024.0)
 
 #
 # use own derived URLopener class because we need to set a correct User-Agent
@@ -384,15 +410,19 @@ class Retriever(threading.Thread):
 # which not all sites accepting. (zelluloid.de for example)
 #
 _uaurlopener = None
+
+
 def urlretrieve(url, filename=None, reporthook=None, data=None):
     global _uaurlopener
     if not _uaurlopener:
         _uaurlopener = UAFancyURLopener()
     return _uaurlopener.retrieve(url, filename, reporthook, data)
 
+
 class UAFancyURLopener(FancyURLopener):
     # use Firefox 3.0 User-Agent string from Windows XP
     version = 'Mozilla/5.0 (Windows; U; Windows NT 6.0) Gecko/2008052906 Firefox/3.0'
+
     def __init__(self, *args, **kwargs):
         FancyURLopener.__init__(self, *args, **kwargs)
         # additional HTTP headers to work around the html file compression which
@@ -400,8 +430,10 @@ class UAFancyURLopener(FancyURLopener):
         self.addheaders.append(('Cache-Control', 'no-cache'))
         self.addheaders.append(('Pragma', 'no-cache'))
 
+
 class Progress:
-    def __init__(self, window, title = '', message = ''):
+
+    def __init__(self, window, title='', message=''):
         self.status = False
         self.dialog = gtk.Dialog(title, window, gtk.DIALOG_MODAL, ())
         self.dialog.set_urgency_hint(False)
