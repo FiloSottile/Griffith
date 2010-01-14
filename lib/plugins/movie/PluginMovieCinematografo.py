@@ -209,7 +209,14 @@ class SearchPlugin(movie.SearchMovie):
                 id = gutils.trim(element, "?codice=", "\">")
                 if id <> '':
                     self.ids.append(id)
-                    self.titles.append(self.capwords(gutils.convert_entities(gutils.trim(element, "<b>", "</b>"))))
+                    title = self.capwords(gutils.convert_entities(gutils.trim(element, "<b>", "</b>")))
+                    year = re.search('([[][0-9]{4}[]])', element)
+                    if year:
+                        year = year.group(0)
+                    if year:
+                        self.titles.append(title + ' ' + year)
+                    else:
+                        self.titles.append(title)
         else:
             self.number_results = 0
 
