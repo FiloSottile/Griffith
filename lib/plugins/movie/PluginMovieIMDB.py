@@ -80,7 +80,7 @@ class Plugin(movie.Movie):
                     self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n\n'
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '<a href="/Sections/Years/', '</a>')
+        self.year = gutils.trim(self.page, '<a href="/year/', '</a>')
         self.year = gutils.after(self.year, '">')
 
     def get_runtime(self):
@@ -254,8 +254,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 17, 17 ],
-        'Ein glückliches Jahr' : [ 24, 24 ]
+        'Rocky Balboa'         : [ 18, 18 ],
+        'Ein glückliches Jahr' : [ 25, 25 ]
     }
 
 class PluginTest:
@@ -267,7 +267,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '0138097' : { 
+        '0138097' : {
             'title'             : 'Shakespeare in Love',
             'o_title'           : 'Shakespeare in Love',
             'director'          : 'John Madden',
@@ -325,7 +325,8 @@ John Ramm' + _(' as ') + 'Makepeace\'s Neighbor\n\
 Martin Neely' + _(' as ') + 'Paris / Lady Montague (as Martin Neeley)\n\
 The Choir of St. George\'s School in Windsor' + _(' as ') + 'Choir (as The Choir of St. George\'s School, Windsor) rest of cast listed alphabetically:\n\
 Jason Canning' + _(' as ') + 'Nobleman (uncredited)\n\
-Rupert Everett' + _(' as ') + 'Christopher Marlowe (uncredited)',
+Rupert Everett' + _(' as ') + 'Christopher Marlowe (uncredited)\n\
+John Inman' + _(' as ') + 'Character player (uncredited)',
             'country'           : 'USA | UK',
             'genre'             : 'Comedy | Drama | Romance',
             'classification'    : 'R',
