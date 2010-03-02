@@ -61,6 +61,7 @@ class Plugin(movie.Movie):
         self.plot = gutils.trim(self.page, '<div id="film-top-middle">', '</div>')
         if self.plot:
             self.plot = string.replace(self.plot, '’', "'")
+            self.plot = string.replace(self.plot, 'â€™', "'")
             self.plot = gutils.convert_entities(self.plot)
 
     def get_year(self):
