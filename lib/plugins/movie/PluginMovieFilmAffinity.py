@@ -63,11 +63,7 @@ class Plugin(movie.Movie):
         self.director = gutils.trim(self.page,'<b>DIRECTOR</b></td>', '</td>')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, u'<b>GÉNERO Y CRÍTICA</b>', '</tr>')
-        if self.plot == '':
-            self.plot = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', '</tr>')
-        self.plot = gutils.after(self.plot, '<td valign="top">')
-        self.plot = gutils.after(self.plot, 'SINOPSIS:')
+        self.plot = gutils.trim(self.page, u'<b>SINOPSIS</b>', '</tr>')
         self.plot = string.replace(self.plot, ' (FILMAFFINITY)', '')
         self.plot = string.replace(self.plot, '(FILMAFFINITY)', '')
 
@@ -83,13 +79,13 @@ class Plugin(movie.Movie):
 
     def get_genre(self):
         self.genre = ''
-        tmp = gutils.trim(self.page, u'<b>GÉNERO Y CRÍTICA</b>', ' / SINOPSIS')
+        tmp = gutils.trim(self.page, u'<b>GÉNERO</b>', '<b>SINOPSIS</b>')
         if tmp == '':
-            tmp = gutils.trim(self.page, '<b>G&Eacute;NERO Y CR&Iacute;TICA</b>', ' / SINOPSIS')
+            tmp = gutils.trim(self.page, '<b>G&Eacute;NERO</b>', '<b>SINOPSIS</b>')
         tmp = gutils.after(tmp, '<td valign="top">')
         if tmp:
-            tmp = tmp.split(' / ')
-            self.genre = tmp[len(tmp) - 1]
+            self.genre = gutils.clean(string.replace(tmp, ' | ', '. '))
+            self.genre = re.sub('[.][ \t]+', '. ', self.genre)
 
     def get_cast(self):
         self.cast = ''
@@ -185,7 +181,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 10, 10 ],
+        'Rocky' : [ 11, 11 ],
     }
 
 class PluginTest:
@@ -213,7 +209,7 @@ Antonio Tarver\n\
 Geraldine Hughes\n\
 Mike Tyson',
             'country'             : 'Estados Unidos',
-            'genre'               : u'Acción. Drama. Deporte (Boxeo)',
+            'genre'               : u'Acción. Drama. Deporte. Boxeo',
             'classification'      : False,
             'studio'              : 'MGM / UA / Columbia Pictures / Revolution Studios',
             'o_site'              : 'http://www.rockythemovie.com',
@@ -228,7 +224,7 @@ Mike Tyson',
             'screenplay'          : 'Sylvester Stallone (Personajes: Sylvester Stallone)',
             'barcode'             : False
         },
-        '373499' : { 
+        '373499' : {
             'title'               : 'Camino',
             'o_title'             : 'Camino',
             'director'            : 'Javier Fesser',
@@ -261,7 +257,7 @@ Miriam Raya',
             'screenplay'          : 'Javier Fesser',
             'barcode'             : False
         },
-        '580875' : { 
+        '580875' : {
             'title'               : 'El gato negro (Masters of Horror Series)',
             'o_title'             : 'Black Cat (Masters of Horror Series), The',
             'director'            : 'Stuart Gordon',
@@ -286,7 +282,7 @@ Christopher Heyerdahl',
             'screenplay'          : 'Dennis Paoli, Stuart Gordon (Historia corta: Edgar Allan Poe)',
             'barcode'             : False
         },
-        '826399' : { 
+        '826399' : {
             'title'               : 'Surcadores del cielo (The Sky Crawlers)',
             'o_title'             : 'Sukai kurora (The Sky Crawlers)',
             'director'            : 'Mamoru Oshii',
