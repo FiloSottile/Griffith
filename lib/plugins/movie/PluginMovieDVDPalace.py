@@ -32,7 +32,7 @@ plugin_url          = "www.dvd-palace.de"
 plugin_language     = _("German")
 plugin_author       = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version      = "1.1"
+plugin_version      = "1.2"
 
 class Plugin(movie.Movie):
 
@@ -59,11 +59,9 @@ class Plugin(movie.Movie):
 
     def get_plot(self):
         self.plot = re.sub(
-            '[0-9 ]+Views', '',
-            re.sub(
-                '[]', '-',
+                u'[]', '-',
                 re.sub(
-                    '[\x93]', '"', gutils.regextrim(self.page, 'showcover.php[^>]*>', '</td>'))))
+                    u'[\x93]', '"', gutils.regextrim(self.page, '[0-9 ]+Views', '</td>')))
 
     def get_year(self):
         self.year = gutils.after(gutils.trim(gutils.trim(self.page, 'Originaltitel', '</TR>'), '(', ')'), ' ')
@@ -163,15 +161,20 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
 
     def get_searches(self):
-        elements1 = re.split('&nbsp;<a title="[^"]+" href="/dvd-datenbank/', self.page)
-        elements1[0] = None
-        for element in elements1:
+        elements = re.split('&nbsp;<a title="[^"]+" href="(/dvd-datenbank/|/datenbank/blu-ray/)', self.page)
+        elements[0] = None
+        for index in range(1, len(elements), 2):
+            element = elements[index + 1]
+            if elements[index] == '/datenbank/blu-ray/':
+                medium = 'Blu-Ray'
+            else:
+                medium = 'DVD'
             if element <> None:
                 self.ids.append(gutils.before(element,'"'))
                 self.titles.append(
                     gutils.trim(element, '>', '</a>') +
-                    gutils.strip_tags(
-                        ' (' +
+                    gutils.clean(
+                        '(' + medium + ' - ' +
                         re.sub('[ \t\n]+', ' ',
                         string.replace(
                         string.replace(
