@@ -39,7 +39,7 @@ class Plugin(movie.Movie):
 
     def get_image(self):
         self.image_url = "http://img.ofdb.de/film/" + gutils.trim(self.page, 'img src="http://img.ofdb.de/film/', '"' )
-        
+
     def get_o_title(self):
         self.o_title = gutils.clean(gutils.trim(self.page, 'Originaltitel:', '</tr>'))
         if self.o_title == '':
@@ -168,11 +168,11 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        'film/103013,Rocky%20Balboa' : { 
-            'title'             : 'Rocky Balboa',
+        'film/103013,Rocky%20Balboa' : {
+            'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : 'Sylvester Stallone',
-            'plot'                 : True,
+            'plot'                : True,
             'cast'                : 'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
@@ -229,24 +229,24 @@ Mike Tyson' + _(' as ') + 'Himself\n\
 Lou DiBella\n\
 Joe Cortez\n\
 Ricky Cavazos',
-            'country'            : 'USA',
-            'genre'                : 'Action, Drama, Sportfilm',
-            'classification'    : False,
-            'studio'            : 'Metro-Goldwyn-Mayer (MGM)',
-            'o_site'            : False,
+            'country'             : 'USA',
+            'genre'               : 'Action, Drama, Sportfilm',
+            'classification'      : False,
+            'studio'              : 'Metro-Goldwyn-Mayer (MGM)',
+            'o_site'              : False,
             'site'                : 'http://www.ofdb.de/film/103013,Rocky%20Balboa',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 2006,
-            'notes'                : False,
-            'runtime'            : 102,
-            'image'                : True,
-            'rating'            : 8
+            'notes'               : False,
+            'runtime'             : 102,
+            'image'               : True,
+            'rating'              : 8
         },
-        'film/22489,Ein-Gl%C3%BCckliches-Jahr' : { 
-            'title'             : 'Glückliches Jahr, Ein',
+        'film/22489,Ein-Gl%C3%BCckliches-Jahr' : {
+            'title'               : 'Glückliches Jahr, Ein',
             'o_title'             : 'Bonne année, La',
             'director'            : 'Claude Lelouch',
-            'plot'                 : False,
+            'plot'                : False,
             'cast'                : 'Lino Ventura' + _(' as ') + 'Simon \n\
 Françoise Fabian' + _(' as ') + 'Françoise\n\
 Charles Gérard' + _(' as ') + 'Charlot\n\
@@ -256,7 +256,7 @@ Lilo\n\
 Claude Mann\n\
 Frédéric de Pasquale\n\
 Gérard Sire\n\
-Silvano Tranquilli\n\
+Silvano Tranquilli' + _(' as ') + 'L\'amant italien \n\
 André Barello\n\
 Michel Bertay\n\
 Norman de la Chesnaye\n\
@@ -269,20 +269,20 @@ Georges Staquet\n\
 Jacques Villedieu\n\
 Harry Walter\n\
 Elie Chouraqui',
-            'country'            : 'Frankreich',
-            'genre'                : 'Komödie, Krimi',
-            'classification'    : False,
-            'studio'            : 'Les Films 13',
-            'o_site'            : False,
+            'country'             : 'Frankreich',
+            'genre'               : 'Komödie, Krimi',
+            'classification'      : '12 (f)',
+            'studio'              : 'Les Films 13',
+            'o_site'              : False,
             'site'                : 'http://www.ofdb.de/film/22489,Ein-Gl%C3%BCckliches-Jahr',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 1973,
-            'notes'                : False,
-            'runtime'            : 90,
-            'image'                : True,
-            'rating'            : 6
+            'notes'               : False,
+            'runtime'             : 90,
+            'image'               : True,
+            'rating'              : 6
         },
-        'film/54088,Arahan' : { 
+        'film/54088,Arahan' : {
             'title'             : 'Arahan',
             'o_title'             : 'Arahan jangpung daejakjeon',
             'director'            : 'Ryoo Seung-wan',

@@ -185,9 +185,10 @@ class Plugin(movie.Movie):
         self.cameraman = ''
 
     def __before_more(self, data):
-        tmp = string.find(data, '>more<')
-        if tmp > 0:
-            data = data[:tmp] + '>'
+        for element in ['>See more<', '>more<', '>Full summary<', '>Full synopsis<']:
+            tmp = string.find(data, element)
+            if tmp>0:
+                data = data[:tmp] + '>'
         return data
 
 class SearchPlugin(movie.SearchMovie):
@@ -254,8 +255,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 18, 18 ],
-        'Ein glückliches Jahr' : [ 25, 25 ]
+        'Rocky Balboa'         : [ 20, 20 ],
+        'Ein glückliches Jahr' : [ 41, 41 ]
     }
 
 class PluginTest:

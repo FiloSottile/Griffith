@@ -26,21 +26,22 @@ import string, re
 
 plugin_name         = 'IMDb-de'
 plugin_description  = 'Internet Movie Database German'
-plugin_url          = 'german.imdb.com'
+plugin_url          = 'www.imdb.de'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'mikej06@hotmail.com'
-plugin_version      = '1.6'
+plugin_version      = '1.7'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
         self.encode   = 'iso8859-1'
         self.movie_id = id
-        self.url      = "http://german.imdb.com/title/tt%s" % str(self.movie_id)
+        self.url      = "http://www.imdb.de/title/tt%s" % str(self.movie_id)
 
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
         self.plot_page = self.open_page(url=self.url + '/plotsummary')
+        self.comp_page = self.open_page(url=self.url + '/companycredits')
         # looking for the original imdb page
         self.imdb_page = self.open_page(url="http://www.imdb.com/title/tt%s" % str(self.movie_id))
         self.imdb_plot_page = self.open_page(url="http://www.imdb.com/title/tt%s/plotsummary" % str(self.movie_id))
@@ -48,6 +49,7 @@ class Plugin(movie.Movie):
         self.page = gutils.convert_entities(self.page)
         self.cast_page = gutils.convert_entities(self.cast_page)
         self.plot_page = gutils.convert_entities(self.plot_page)
+        self.comp_page = gutils.convert_entities(self.comp_page)
         self.imdb_page = gutils.convert_entities(self.imdb_page)
         self.imdb_plot_page = gutils.convert_entities(self.imdb_plot_page)
 
@@ -142,17 +144,20 @@ class Plugin(movie.Movie):
         self.classification = gutils.trim(gutils.trim(self.page, 'Altersfreigabe:', '</div>'), 'Deutschland:', '|')
 
     def get_studio(self):
-        self.studio = gutils.trim(self.page, '<h5>Firma:</h5>', '</div>')
-        self.studio = self.__before_more(self.studio)
+        self.studio = gutils.trim(self.comp_page, '<h2>Produktionsfirmen</h2>', '</ul>')
+        self.studio = string.replace(self.studio, '</li><li>', ', ')
+        if not self.studio:
+            self.studio = gutils.trim(self.page, '<h5>Firma:</h5>', '</div>')
+            self.studio = self.__before_more(self.studio)
 
     def get_o_site(self):
         self.o_site = ''
 
     def get_site(self):
-        self.site = "http://german.imdb.com/title/tt%s" % self.movie_id
+        self.site = "http://www.imdb.de/title/tt%s" % self.movie_id
 
     def get_trailer(self):
-        self.trailer = "http://german.imdb.com/title/tt%s/trailers" % self.movie_id
+        self.trailer = "http://www.imdb.de/title/tt%s/trailers" % self.movie_id
 
     def get_country(self):
         self.country = gutils.trim(self.page, '<h5>Land:</h5>', '</div>')
@@ -211,11 +216,32 @@ class Plugin(movie.Movie):
             self.notes += "%s: %s\n" %(_('Color').encode('utf8'), color)
         if len(tagline)>0:
             self.notes += "%s: %s\n" %('Tagline', tagline)
-    
+
+    def get_screenplay(self):
+        self.screenplay = ''
+        parts = re.split('<a href=', gutils.trim(self.cast_page, '>Buch<', '</table>'))
+        if len(parts) > 1:
+            for part in parts[1:]:
+                screenplay = gutils.trim(part, '>', '<')
+                if screenplay == 'WGA':
+                    continue
+                screenplay = screenplay.replace(' (geschrieben von)', '')
+                screenplay = screenplay.replace(' (original scenario)', '')
+                screenplay = screenplay.replace(' und<', '<')
+                self.screenplay = self.screenplay + screenplay + ', '
+            if len(self.screenplay) > 2:
+                self.screenplay = self.screenplay[0:len(self.screenplay) - 2]
+
+    def get_cameraman(self):
+        self.cameraman = '<' + gutils.trim(self.cast_page, '>Kamera<', '</table>')
+        self.cameraman = string.replace(self.cameraman, '(Kamera)', '')
+        self.cameraman = string.replace(self.cameraman, '(nicht im Abspann)', '')
+
     def __before_more(self, data):
-        tmp = string.find(data, '>mehr<')
-        if tmp>0:
-            data = data[:tmp] + '>'
+        for element in ['>Mehr ansehen<', '>mehr<', '>Full summary<', '>Full synopsis<']:
+            tmp = string.find(data, element)
+            if tmp>0:
+                data = data[:tmp] + '>'
         return data
 
 class SearchPlugin(movie.SearchMovie):
@@ -223,8 +249,8 @@ class SearchPlugin(movie.SearchMovie):
     PATTERN_POWERSEARCH = re.compile(r"""Here are the [0-9]+ matching titles""")
 
     def __init__(self):
-        self.original_url_search   = 'http://german.imdb.com/find?more=tt&q='
-        self.translated_url_search = 'http://german.imdb.com/find?more=tt&q='
+        self.original_url_search   = 'http://www.imdb.de/find?more=tt&q='
+        self.translated_url_search = 'http://www.imdb.de/find?more=tt&q='
         self.encode                = 'utf8'
         self.remove_accents        = False
 
@@ -236,7 +262,7 @@ class SearchPlugin(movie.SearchMovie):
             if self.PATTERN_POWERSEARCH.search(self.page) is None:
                 self.page = ''
         else:
-            self.page = tmp 
+            self.page = tmp
         # correction of all &#xxx entities
         self.page = self.page.decode('iso8859-1')
         self.page = gutils.convert_entities(self.page)
@@ -265,7 +291,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 18, 18 ],
+        'Rocky Balboa'         : [ 20, 20 ],
         'Ein glückliches Jahr' : [  6,  6 ]
     }
 
@@ -278,7 +304,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '0479143' : { 
+        '0479143' : {
             'title'             : 'Rocky Balboa',
             'o_title'           : 'Rocky Balboa',
             'director'          : 'Sylvester Stallone',
@@ -339,15 +365,20 @@ Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
 Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
-Michael Ahl' + _(' as ') + 'Restaurant patron (nicht im Abspann)\n\
+Vale Anoai' + _(' as ') + 'Shopper in Italian Market\n\
+Michael Ahl' + _(' as ') + 'Restaurant Patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
 Lacy Bevis' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Tim Brooks' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
+D.T. Carney' + _(' as ') + 'High Roller (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
-Rennie Cowan' + _(' as ') + 'Boxing spectator (nicht im Abspann)\n\
-Deon Derrico' + _(' as ') + 'High roller at limo (nicht im Abspann)\n\
+Rennie Cowan' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
+Peter Defeo' + _(' as ') + 'Vendor (nicht im Abspann)\n\
+Deon Derrico' + _(' as ') + 'High Roller at Limo (nicht im Abspann)\n\
+Jacob \'Stitch\' Duran' + _(' as ') + 'Dixon\'s Trainer (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
 David Gere' + _(' as ') + 'Patron at Adrian\'s (nicht im Abspann)\n\
+Noah Jacobs' + _(' as ') + 'Boxing Fan (nicht im Abspann)\n\
 Mark J. Kilbane' + _(' as ') + 'Businessman (nicht im Abspann)\n\
 Zach Klinefelter' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 David Kneeream' + _(' as ') + 'Adrian\'s Patron (nicht im Abspann)\n\
@@ -362,23 +393,25 @@ Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
 Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)\n\
-Kimberly Villanova' + _(' as ') + 'Business woman (nicht im Abspann)',
+Kimberly Villanova' + _(' as ') + 'Businesswoman (nicht im Abspann)',
             'country'           : 'USA',
             'genre'             : 'Drama | Sport',
             'classification'    : False,
-            'studio'            : 'Metro-Goldwyn-Mayer (MGM)',
+            'studio'            : 'Metro-Goldwyn-Mayer (MGM) (presents) (copyright owner), Columbia Pictures (presents) (copyright owner), Revolution Studios (presents) (copyright owner), Chartoff-Winkler Productions, Rogue Marble',
             'o_site'            : False,
-            'site'              : 'http://german.imdb.com/title/tt0479143',
-            'trailer'           : 'http://german.imdb.com/title/tt0479143/trailers',
+            'site'              : 'http://www.imdb.de/title/tt0479143',
+            'trailer'           : 'http://www.imdb.de/title/tt0479143/trailers',
             'year'              : 2006,
             'notes'             : _('Language') + ': Englisch | Spanisch\n'\
 + _('Audio') + ': DTS | Dolby Digital | SDDS\n'\
 + _('Color') + ': Farbe',
             'runtime'           : 102,
             'image'             : True,
-            'rating'            : 7
+            'rating'            : 7,
+            'screenplay'        : 'Sylvester Stallone, Sylvester Stallone',
+            'cameraman'         : 'Clark Mathis'
         },
-        '0069815' : { 
+        '0069815' : {
             'title'             : 'Ein glückliches Jahr',
             'o_title'           : 'La bonne année',
             'director'          : 'Claude Lelouch',
@@ -410,17 +443,19 @@ Rémy Julienne' + _(' as ') + 'Chauffeur de taxi (nicht im Abspann)\n\
 Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspann)',
             'country'            : 'Frankreich | Italien',
             'genre'              : 'Komödie',
-            'classification'     : False,
-            'studio'             : 'Les Films 13',
+            'classification'     : '12 (f)',
+            'studio'             : 'Les Films 13, Rizzoli Film',
             'o_site'             : False,
-            'site'               : 'http://german.imdb.com/title/tt0069815',
-            'trailer'            : 'http://german.imdb.com/title/tt0069815/trailers',
+            'site'               : 'http://www.imdb.de/title/tt0069815',
+            'trailer'            : 'http://www.imdb.de/title/tt0069815/trailers',
             'year'               : 1973,
             'notes'              : _('Language') + ': Französisch\n'\
 + _('Audio') + ': Mono\n'\
 + _('Color') + ': Farbe (Eastmancolor)',
             'runtime'            : 90,
             'image'              : True,
-            'rating'             : 7
+            'rating'             : 7,
+            'screenplay'         : 'Claude Lelouch, Pierre Uytterhoeven, Claude Lelouch',
+            'cameraman'          : 'Claude Lelouch'
         },
     }

@@ -36,7 +36,7 @@ plugin_version      = '1.1'
 
 class Plugin(movie.Movie):
     index_url = 'http://www.zelluloid.de/filme/index.php3?id='
-    
+
     def __init__(self, id):
         self.encode='iso-8859-1'
         self.movie_id = id
@@ -63,7 +63,9 @@ class Plugin(movie.Movie):
 
     def get_plot(self):
         self.plot = gutils.trim(self.page, '<DIV CLASS=bigtext>', '</DIV>')
-        
+        if not self.plot:
+            self.plot = gutils.trim(self.page, '<div class="bigtext">', '</div>')
+
     def get_year(self):
         self.year = ''
         elements = string.split(self.detail_page, '/directory/az.php3?j')
@@ -115,7 +117,7 @@ class Plugin(movie.Movie):
         self.studio = self.studio.replace('<tr>', ', ')
         self.studio = gutils.strip_tags(self.studio)
         self.studio = re.sub('((^, )|(, $))', '', self.studio)
-        
+
     def get_o_site(self):
         self.o_site = ""
 
@@ -198,7 +200,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '2835' : { 
+        '2835' : {
             'title'             : 'Rocky Balboa',
             'o_title'           : 'Rocky Balboa',
             'director'          : 'Sylvester Stallone',
@@ -229,7 +231,7 @@ Henry G. Sanders' + _(' as ') + 'Martin',
             'rating'            : 8.0,
             'screenplay'        : 'Sylvester Stallone'
         },
-        '6342' : { 
+        '6342' : {
             'title'             : 'Die wilden Hühner',
             'o_title'           : 'Die wilden Hühner',
             'director'          : 'Vivian Naefe',

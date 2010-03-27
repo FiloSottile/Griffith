@@ -83,6 +83,7 @@ class PluginTester:
         'PluginMovieFilmtipset',
         'PluginMovieIMDB',
         'PluginMovieIMDB-de',
+        'PluginMovieIMDB-es',
         'PluginMovieKinoDe',
         'PluginMovieMovieMeter',
         'PluginMovieOFDb',
@@ -138,14 +139,14 @@ class PluginTester:
     #
     def do_test_searchplugin(self, plugin_name, domsgbox=True):
         result = True
-        
+
         plugin = __import__(plugin_name)
         try:
             pluginTestConfig = plugin.SearchPluginTest()
         except:
             print "Warning: SearchPlugin test could not be executed for %s because of missing configuration class SearchPluginTest." % plugin_name
             pluginTestConfig = None
-        
+
         if not pluginTestConfig == None:
             logFile = open(plugin_name + '-searchtest.txt', 'w+')
             try:
@@ -156,13 +157,13 @@ class PluginTester:
                     sleep(1) # needed for amazon
             finally:
                 logFile.close()
-        
+
         if domsgbox:
             if not result:
                 gutils.error('SearchPluginTest %s: Test NOT successful !' % plugin_name)
             else:
                 gutils.info('SearchPluginTest %s: Test successful !' % plugin_name)
-        
+
         return result
 
     #
@@ -183,7 +184,7 @@ class PluginTester:
                 'resolution', 'barcode']
 
         self.movie.fields_to_fetch = fields_to_fetch
-    
+
         self.movie.get_movie(None)
         self.movie.parse_movie()
 
@@ -215,7 +216,7 @@ class PluginTester:
         # other fields
         for i in fields_to_fetch:
             results[i] = gutils.convert_entities(self.movie[i])
-            
+
         # check the fields
         for i in results_expected:
             i_val = results_expected[i]
@@ -241,20 +242,20 @@ class PluginTester:
                         logFile.write("Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s\n\n" % (movieplugin.movie_id, i, i_val, results[i]))
                         result = False
         return result
-    
+
     #
     # check every configured movie
     #
     def do_test_plugin(self, plugin_name, domsgbox=True):
         result = True
-        
+
         plugin = __import__(plugin_name)
         try:
             pluginTestConfig = plugin.PluginTest()
         except:
             print "Warning: Plugin test could not be executed for %s because of missing configuration class PluginTest." % plugin_name
             pluginTestConfig = None
-        
+
         if not pluginTestConfig == None:
             logFile = open(plugin_name + '-loadtest.txt', 'w+')
             try:
@@ -265,13 +266,13 @@ class PluginTester:
                     sleep(1) # needed for amazon
             finally:
                 logFile.close()
-        
+
         if domsgbox:
             if not result:
                 gutils.error('PluginTest %s: Test NOT successful !' % plugin_name)
             else:
                 gutils.info('PluginTest %s: Test successful !' % plugin_name)
-        
+
         return result
 
     #

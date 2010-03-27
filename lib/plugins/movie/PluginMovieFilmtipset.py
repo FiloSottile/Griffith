@@ -154,7 +154,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 15, 15 ],
+        'Rocky' : [ 16, 16 ],
     }
 
 class PluginTest:
@@ -166,7 +166,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        'rocky-balboa.html' : { 
+        'rocky-balboa.html' : {
             'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : 'Sylvester Stallone',

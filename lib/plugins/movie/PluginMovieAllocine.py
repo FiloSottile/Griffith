@@ -210,7 +210,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '110585' : { 
+        '110585' : {
             'title'               : u'Le Prix à payer',
             'o_title'             : u'Le Prix à payer',
             'director'            : u'Alexandra Leclère',
@@ -239,7 +239,7 @@ Francis Leplay' + _(' as ') + 'l\'agent immobilier',
             'screenplay'          : u'Alexandra Leclère',
             'barcode'             : False
         },
-        '309' : { 
+        '309' : {
             'title'               : u'Terminator',
             'o_title'             : u'Terminator',
             'director'            : u'James Cameron',
@@ -259,7 +259,7 @@ Brian Thompson' + _(' as ') + 'un punk\n\
 Marianne Muellerleile' + _(' as ') + 'la \'mauvaise\' Sarah Connor\n\
 Franco Columbu' + _(' as ') + 'le Terminator infiltrant le bunker dans le futur',
             'country'             : u'américain',
-            'genre'               : u'Science fiction, Thriller',
+            'genre'               : u'Science fiction',
             'classification'      : False,
             'studio'              : False,
             'o_site'              : False,

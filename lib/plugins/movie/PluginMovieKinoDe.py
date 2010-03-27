@@ -364,7 +364,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        'K_rocky-balboa/96132.html' : { 
+        'K_rocky-balboa/96132.html' : {
             'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : 'Sylvester Stallone',
@@ -392,7 +392,7 @@ A.J. Benza' + _(' as ') + 'L.C.',
             'cameraman'           : 'J. Clark Mathis',
             'screenplay'          : 'Sylvester Stallone'
         },
-        'K_ein-glueckliches-jahr/28675.html' : { 
+        'K_ein-glueckliches-jahr/28675.html' : {
             'title'               : 'Ein glückliches Jahr',
             'o_title'             : 'La bonne année',
             'director'            : 'Claude Lelouch',
@@ -416,7 +416,7 @@ André Falcon',
             'cameraman'           : 'Jean Collomb',
             'screenplay'          : 'Claude Lelouch'
         },
-        'V_ein-glueckliches-jahr-dvd/85546.html' : { 
+        'V_ein-glueckliches-jahr-dvd/85546.html' : {
             'title'               : 'Ein glückliches Jahr',
             'o_title'             : 'La bonne année',
             'director'            : 'Claude Lelouch',
@@ -427,7 +427,7 @@ Charles Gérard\n\
 André Falcon',
             'country'             : 'Frankreich/Italien',
             'genre'               : 'Drama',
-            'classification'      : 'ab 12 Jahren',
+            'classification'      : 'ab 12',
             'studio'              : 'Warner Home Video',
             'o_site'              : False,
             'site'                : 'http://www.video.de/videofilm/ein-glueckliches-jahr-dvd/85546.html',
@@ -447,7 +447,7 @@ Bildformat:\n\
             'cameraman'           : 'Jean Collomb',
             'screenplay'          : 'Claude Lelouch'
         },
-        'V_arahan-vanilla-dvd/90405.html' : { 
+        'V_arahan-vanilla-dvd/90405.html' : {
             'title'               : 'Arahan',
             'o_title'             : 'Arahan jangpung dae jakjeon',
             'director'            : 'Ryoo Seung-wan',
@@ -459,7 +459,7 @@ Jung Doo-hong' + _(' as ') + 'Heuk-woon\n\
 Yun Ju-sang' + _(' as ') + 'Mu-woon',
             'country'             : 'Südkorea',
             'genre'               : 'Action/ Komödie',
-            'classification'      : 'ab 16 Jahren',
+            'classification'      : 'ab 16',
             'studio'              : 'WVG Medien',
             'o_site'              : False,
             'site'                : 'http://www.video.de/videofilm/arahan-vanilla-dvd/90405.html',

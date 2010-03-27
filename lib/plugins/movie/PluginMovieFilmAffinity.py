@@ -209,7 +209,7 @@ Antonio Tarver\n\
 Geraldine Hughes\n\
 Mike Tyson',
             'country'             : 'Estados Unidos',
-            'genre'               : u'Acción. Drama. Deporte. Boxeo',
+            'genre'               : u'Acción. Drama. Deporte. Boxeo. Secuela',
             'classification'      : False,
             'studio'              : 'MGM / UA / Columbia Pictures / Revolution Studios',
             'o_site'              : 'http://www.rockythemovie.com',

@@ -397,7 +397,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 17, 17 ],
+        'Rocky Balboa'         : [ 19, 19 ],
         'Arahan'               : [  7,  7 ],
         'Ein glückliches Jahr' : [  3,  3 ]
     }
@@ -412,7 +412,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        'B000TIQMMI' : { 
+        'B000TIQMMI' : {
             'title'               : 'Rocky Balboa',
             'o_title'             : 'Rocky Balboa',
             'director'            : '',
@@ -434,7 +434,7 @@ Burt Young',
             'rating'              : 9,
             'barcode'             : '4045167004504'
         },
-        'B0009NSASM' : { 
+        'B0009NSASM' : {
             'title'               : 'Ein glückliches Jahr',
             'o_title'             : 'Ein glückliches Jahr',
             'director'            : 'Claude Lelouch',
@@ -456,7 +456,7 @@ Charles Gérard',
             'rating'              : 10,
             'barcode'             : '7321921998843'
         },
-        'B000BSNOD6' : { 
+        'B000BSNOD6' : {
             'title'               : 'Arahan (Vanilla-DVD)',
             'o_title'             : 'Arahan (Vanilla-DVD)',
             'director'            : 'Ryoo Seung-wan',

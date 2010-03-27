@@ -234,7 +234,7 @@ class SearchPluginTest(SearchPlugin):
     test_configuration = {
         'Rocky'      : [12, 12],
         'però'       : [6, 6],
-        'il ritorno' : [97, 97]}
+        'il ritorno' : [98, 98]}
 
 
 class PluginTest:
@@ -251,7 +251,7 @@ class PluginTest:
             'o_title'           : 'Amor non ho, però... però...',
             'director'          : 'Giorgio Bianchi',
             'plot'              : True,
-            'cast'              : 'Renato Rascel' + _(' as ') + 'Teodoro\n\
+            'cast'              : u'Renato Rascel' + _(' as ') + 'Teodoro\n\
 Gina Lollobrigida' + _(' as ') + 'Gina\n\
 Luigi Pavese' + _(' as ') + 'Antonio Scutipizzo\n\
 Aroldo Tieri' + _(' as ') + 'Giuliano\n\
@@ -261,18 +261,18 @@ Adriana Danieli' + _(' as ') + 'Olga\n\
 Strelsa Brown' + _(' as ') + 'Mabel\n\
 Virgilio Riento' + _(' as ') + 'Il contadino\n\
 Gabriele Tinti' + _(' as ') + '(Gastone Tinti) Un componente dell\'orchestra\n\
-Guglielmo Barnabò' + _(' as ') + '\n\
+Guido Barbarisi' + _(' as ') + '\n\
 Giuseppe De Martino' + _(' as ') + '\n\
-Raimondo Vianello' + _(' as ') + '(Riccardo Vianello) \n\
 Maria Carla Vittone' + _(' as ') + '\n\
+Raimondo Vianello' + _(' as ') + '(Riccardo Vianello) \n\
 Marco Tulli' + _(' as ') + '\n\
 Giuseppe Ricagno' + _(' as ') + '\n\
 Luciano Rebeggiani' + _(' as ') + '\n\
-Kurt Lary' + _(' as ') + '\n\
 Giovanni Lesa' + _(' as ') + '\n\
+Kurt Lary' + _(' as ') + '\n\
 Riccardo Ferri' + _(' as ') + '\n\
 Pia De Doses' + _(' as ') + '\n\
-Guido Barbarisi' + _(' as ') + '\n\
+Guglielmo Barnabò' + _(' as ') + '\n\
 Galeazzo Benti as',
             'country'           : 'Italia',
             'genre'             : 'Commedia',
