@@ -71,6 +71,7 @@ class PluginTester:
         'PluginMovieAllocine',
         'PluginMovieAllMovie',
         'PluginMovieAmazon',
+        'PluginMovieAniDB',
         'PluginMovieCinematografo',
         'PluginMovieCineMovies',
         'PluginMovieCineteka',

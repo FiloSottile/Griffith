@@ -31,7 +31,7 @@ plugin_url          = 'www.anidb.net'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = 'piotr@griffith.cc'
-plugin_version      = '2.7'
+plugin_version      = '2.8'
 
 aid_pattern = re.compile('[?&;]aid=(\d+)')
 
@@ -74,11 +74,11 @@ class Plugin(movie.Movie):
         self.title = gutils.trim(self.page, '<h1 class="anime">Anime: ', '</h1>')
 
     def get_director(self):
-        self.director = gutils.trim(self.page, '<a title="Direction (&#x76E3;&#x7763;)" href=', 'a>')
-        self.director = gutils.trim(self.director, '>', '</')
+        self.director = gutils.trim(self.page, '>Direction (&#x76E3;&#x7763;', '</tr>')
+        self.director = gutils.after(gutils.trim(self.director, '<a ', '</a>'), '>')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, 'class="desc">', '</div>')
+        self.plot = gutils.regextrim(self.page, 'class="(g_bubble )*desc">', '</div>')
         self.plot = self.plot.replace('<br/>', '\n')
 
     def get_year(self):
@@ -170,6 +170,10 @@ class Plugin(movie.Movie):
                 airdate = gutils.clean(gutils.trim(part, 'class="date airdate">', '</td>'))
                 self.notes += '\n' + nr + ': ' + title + ' (' + duration + ', ' + airdate + ')'
 
+    def get_screenplay(self):
+        self.screenplay = gutils.trim(self.page, 'Script/Screenplay (&#x811A;&#x672C;', '</tr>')
+        self.screenplay = gutils.after(gutils.trim(self.screenplay, '<a ', '</a>'), '>')
+
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.encode = 'utf-8'
@@ -213,3 +217,83 @@ class SearchPlugin(movie.SearchMovie):
             else:
                 self.number_results = 0
 
+#
+# Plugin Test
+#
+
+
+class SearchPluginTest(SearchPlugin):
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
+    #
+    test_configuration = {
+        'Hellsing' : [ 8, 8 ]
+    }
+
+
+class PluginTest:
+    #
+    # Configuration for automated tests:
+    # dict { movie_id -> dict { arribute -> value } }
+    #
+    # value: * True/False if attribute only should be tested for any value
+    #        * or the expected value
+    #
+    test_configuration = {
+        '32' : {
+            'title'               : 'Hellsing',
+            'o_title'             : u'ヘルシング',
+            'director'            : 'Urata Yasunori',
+            'plot'                : True,
+            'cast'                : u'Characters:\n\
+---------------\n\
+\n\
+[Alucard] voiced by Nakata Jouji\n\
+male; main character in; appears in episodes: -\n\
+\n\
+[Incognito] voiced by Yamazaki Takumi\n\
+-; main character in; appears in episodes: 8-13\n\
+\n\
+[Seras Victoria] voiced by Orikasa Fumiko\n\
+female; main character in; appears in episodes: -\n\
+\n\
+[Sir Integral Fairbrook Wingates Hellsing] voiced by Sakakibara Yoshiko\n\
+22, female; main character in; appears in episodes: -\n\
+\n\
+[Alexander Anderson] voiced by Nozawa Nachi\n\
+male; secondary cast in; appears in episodes: -\n\
+\n\
+[Enrico Maxwell] voiced by Tanaka Hideyuki\n\
+male; secondary cast in; appears in episodes: -\n\
+\n\
+[Helena] voiced by Hiramatsu Akiko\n\
+female; secondary cast in; appears in episodes: 8, 11\n\
+\n\
+[Walter C. Dornez] voiced by Kiyokawa Motomu\n\
+male; secondary cast in; appears in episodes: -\n\
+\n\
+[Hellsing Organization] voiced by \n\
+Organisation; appears in; appears in episodes: -\n\
+\n\
+[Iscariot Organization] voiced by \n\
+Organisation; appears in; appears in episodes: -\n\
+\n\
+[Police Officer inside Heli (ヘリ機内警察官)] voiced by Andy Holyfield\n\
+-; appears in; appears in episodes: 8',
+            'country'             : False,
+            'genre'               : 'Action, Contemporary Fantasy, Cops, Fantasy, Gunfights, Horror, Law and Order, Seinen, Special Squads, Vampires, Violence',
+            'classification'      : False,
+            'studio'              : False,
+            'o_site'              : 'http://www.gonzo.co.jp/works/0102.html',
+            'site'                : 'http://anidb.net/perl-bin/animedb.pl?show=anime&aid=32',
+            'trailer'             : False,
+            'year'                : 2002,
+            'notes'               : True,
+            'runtime'             : 0,
+            'image'               : True,
+            'rating'              : 8,
+            'cameraman'           : False,
+            'screenplay'          : 'Konaka Chiaki'
+        },
+    }
