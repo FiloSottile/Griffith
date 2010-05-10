@@ -157,7 +157,7 @@ class Plugin(movie.Movie):
         self.site = "http://www.imdb.de/title/tt%s" % self.movie_id
 
     def get_trailer(self):
-        self.trailer = "http://www.imdb.de/title/tt%s/trailers" % self.movie_id
+        self.trailer = "http://www.imdb.com/title/tt%s/trailers" % self.movie_id
 
     def get_country(self):
         self.country = gutils.trim(self.page, '<h5>Land:</h5>', '</div>')
