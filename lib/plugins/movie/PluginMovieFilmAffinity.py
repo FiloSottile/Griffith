@@ -54,10 +54,12 @@ class Plugin(movie.Movie):
         self.o_title = gutils.trim(self.page, u'<b>TÍTULO ORIGINAL</b></td>', '</b></td>')
         self.o_title = gutils.after(self.o_title, '<b>')
         self.o_title = re.sub('[ ]+', ' ', self.o_title)
+        self.o_title = re.sub('([(]Serie de TV[)]|[(]TV[)]|[(]TV Series[)])', '', self.o_title)
 
     def get_title(self):
         self.title = gutils.trim(self.page, 'www.filmaffinity.com/images/movie.gif" border="0"> ', '</span>')
         self.title = re.sub('[ ]+', ' ', self.title)
+        self.title = re.sub('([(]Serie de TV[)]|[(]TV[)]|[(]TV Series[)])', '', self.title)
 
     def get_director(self):
         self.director = gutils.trim(self.page,'<b>DIRECTOR</b></td>', '</td>')
@@ -267,7 +269,7 @@ Patrick Gallagher\n\
 Eric Keenleyside\n\
 Christopher Heyerdahl',
             'country'             : 'Estados Unidos',
-            'genre'               : 'Terror',
+            'genre'               : u'Terror. Biográfico. Siglo XIX. Serie [Masters of Horror]',
             'classification'      : False,
             'studio'              : 'Emitida por la cadena Showtime',
             'o_site'              : False,

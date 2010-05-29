@@ -257,7 +257,22 @@ Shawn Schepps' + _(' as ') + 'Nancy\n\
 Bill Paxton' + _(' as ') + 'le chef des punks\n\
 Brian Thompson' + _(' as ') + 'un punk\n\
 Marianne Muellerleile' + _(' as ') + 'la \'mauvaise\' Sarah Connor\n\
-Franco Columbu' + _(' as ') + 'le Terminator infiltrant le bunker dans le futur',
+Franco Columbu' + _(' as ') + 'le Terminator infiltrant le bunker dans le futur\n\
+Ken Fritz' + _(' as ') + 'Policeman\n\
+Stan Yale' + _(' as ') + 'Derelict in Alley\n\
+Brad Rearden' + _(' as ') + 'Punk\n\
+Joe Farago' + _(' as ') + 'TV Anchorman\n\
+Anthony Trujillo' + _(' as ') + 'Mexican Boy (close-ups)\n\
+Harriet Medin' + _(' as ') + 'Customer\n\
+Hugh Farrington' + _(' as ') + 'Customer\n\
+Philip Gordon' + _(' as ') + 'Mexican Boy (long shots)\n\
+Patrick Pinney' + _(' as ') + 'Bar Customer\n\
+Wayne Stone' + _(' as ') + 'Tanker Driver\n\
+Norman Friedman' + _(' as ') + 'Cleaning Man at Flophouse\n\
+Hettie Lynne Hurtes' + _(' as ') + 'TV Anchorwoman\n\
+Al Kahn' + _(' as ') + 'Customer\n\
+Bill W. Richmond' + _(' as ') + 'Bartender\n\
+Bruce M. Kerner' + _(' as ') + 'Desk Sergeant',
             'country'             : u'américain',
             'genre'               : u'Science fiction',
             'classification'      : False,

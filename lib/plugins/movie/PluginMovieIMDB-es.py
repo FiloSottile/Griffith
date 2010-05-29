@@ -320,10 +320,12 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (voz)\n\
-Gary Compton' + _(' as ') + u'Oficial de Seguridad listado alfabético del resto del reparto:\n\
+Gary Compton' + _(' as ') + 'Oficial de Seguridad\n\
+Tony Devon' + _(' as ') + u'Neighbor listado alfabético del resto del reparto:\n\
 Vale Anoai' + _(' as ') + 'Shopper in Italian Market\n\
 Michael Ahl' + _(' as ') + 'Restaurant Patron (sin acreditar)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (sin acreditar)\n\
+Ben Bachelder' + _(' as ') + 'The Arm (sin acreditar)\n\
 Lacy Bevis' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 Tim Brooks' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 D.T. Carney' + _(' as ') + 'High Roller (sin acreditar)\n\

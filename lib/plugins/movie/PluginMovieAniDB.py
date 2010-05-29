@@ -282,7 +282,7 @@ Organisation; appears in; appears in episodes: -\n\
 [Police Officer inside Heli (ヘリ機内警察官)] voiced by Andy Holyfield\n\
 -; appears in; appears in episodes: 8',
             'country'             : False,
-            'genre'               : 'Action, Contemporary Fantasy, Cops, Fantasy, Gunfights, Horror, Law and Order, Seinen, Special Squads, Vampires, Violence',
+            'genre'               : 'Action, Contemporary Fantasy, Cops, Fantasy, Gunfights, Horror, Law and Order, Manga, Seinen, Special Squads, Vampires, Violence',
             'classification'      : False,
             'studio'              : False,
             'o_site'              : 'http://www.gonzo.co.jp/works/0102.html',

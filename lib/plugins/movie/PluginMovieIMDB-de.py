@@ -364,10 +364,12 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
-Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
+Tony Devon' + _(' as ') + 'Neighbor übrige Besetzung in alphabetischer Reihenfolge:\n\
 Vale Anoai' + _(' as ') + 'Shopper in Italian Market\n\
 Michael Ahl' + _(' as ') + 'Restaurant Patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
+Ben Bachelder' + _(' as ') + 'The Arm (nicht im Abspann)\n\
 Lacy Bevis' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Tim Brooks' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 D.T. Carney' + _(' as ') + 'High Roller (nicht im Abspann)\n\
@@ -400,7 +402,7 @@ Kimberly Villanova' + _(' as ') + 'Businesswoman (nicht im Abspann)',
             'studio'            : 'Metro-Goldwyn-Mayer (MGM) (presents) (copyright owner), Columbia Pictures (presents) (copyright owner), Revolution Studios (presents) (copyright owner), Chartoff-Winkler Productions, Rogue Marble',
             'o_site'            : False,
             'site'              : 'http://www.imdb.de/title/tt0479143',
-            'trailer'           : 'http://www.imdb.de/title/tt0479143/trailers',
+            'trailer'           : 'http://www.imdb.com/title/tt0479143/trailers',
             'year'              : 2006,
             'notes'             : _('Language') + ': Englisch | Spanisch\n'\
 + _('Audio') + ': DTS | Dolby Digital | SDDS\n'\
@@ -447,7 +449,7 @@ Jean-Louis Trintignant' + _(' as ') + 'Un homme (Archivmaterial) (nicht im Abspa
             'studio'             : 'Les Films 13, Rizzoli Film',
             'o_site'             : False,
             'site'               : 'http://www.imdb.de/title/tt0069815',
-            'trailer'            : 'http://www.imdb.de/title/tt0069815/trailers',
+            'trailer'            : 'http://www.imdb.com/title/tt0069815/trailers',
             'year'               : 1973,
             'notes'              : _('Language') + ': Französisch\n'\
 + _('Audio') + ': Mono\n'\

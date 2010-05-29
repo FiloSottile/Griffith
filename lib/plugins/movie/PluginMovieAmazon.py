@@ -284,19 +284,20 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
 
     def get_searches(self):
-        for result in self.page:
-            if hasattr(result, 'Item'):
-                if hasattr(result.Item, 'ASIN'):
-                    self.add_item(result.Item)
-                else:
-                    for item in result.Item:
-                        self.add_item(item)
-            elif hasattr(result, 'Items'):
-                if hasattr(result.Item, 'ASIN'):
-                    self.add_item(result.Items)
-                else:
-                    for item in result.Items:
-                        self.add_item(item)
+        if self.page:
+            for result in self.page:
+                if hasattr(result, 'Item'):
+                    if hasattr(result.Item, 'ASIN'):
+                        self.add_item(result.Item)
+                    else:
+                        for item in result.Item:
+                            self.add_item(item)
+                elif hasattr(result, 'Items'):
+                    if hasattr(result.Item, 'ASIN'):
+                        self.add_item(result.Items)
+                    else:
+                        for item in result.Items:
+                            self.add_item(item)
 
     def add_item(self, item):
         self.ids.append(item.ASIN)
