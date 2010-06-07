@@ -75,6 +75,7 @@ class PluginTester:
         'PluginMovieCinematografo',
         'PluginMovieCineMovies',
         'PluginMovieCineteka',
+        'PluginMovieClubedevideo',
         'PluginMovieCulturalia',
         'PluginMovieDVDEmpire',
         'PluginMovieE-Pipoca',
@@ -220,28 +221,36 @@ class PluginTester:
 
         # check the fields
         for i in results_expected:
-            i_val = results_expected[i]
-            if isinstance(i_val, bool):
-                if i_val:
-                    if not results.has_key(i) or len(results[i]) < 1:
+            try:
+                i_val = results_expected[i]
+                if isinstance(i_val, bool):
+                    if i_val:
+                        if not results.has_key(i) or len(results[i]) < 1:
+                            print "Test error: %s: Value expected but nothing returned.\nKey: %s" % (movieplugin.movie_id, i)
+                            logFile.write("Test error: %s: Value expected but nothing returned.\nKey: %s\n\n" % (movieplugin.movie_id, i))
+                            result = False
+                    else:
+                        if results.has_key(i):
+                            if isinstance(results[i], int) and results[i] == 0:
+                                continue
+                            if not isinstance(results[i], int) and len(results[i]) < 1:
+                                continue
+                            print "Test error: %s: No value expected but something returned.\nKey: %s\nValue: %s" % (movieplugin.movie_id, i, results[i])
+                            logFile.write("Test error: %s: No value expected but something returned.\nKey: %s\nValue: %s\n\n" % (movieplugin.movie_id, i, results[i]))
+                            result = False
+                else:
+                    if not results.has_key(i):
                         print "Test error: %s: Value expected but nothing returned.\nKey: %s" % (movieplugin.movie_id, i)
                         logFile.write("Test error: %s: Value expected but nothing returned.\nKey: %s\n\n" % (movieplugin.movie_id, i))
                         result = False
-                else:
-                    if results.has_key(i) and len(results[i]) > 0:
-                        print "Test error: %s: No value expected but something returned.\nKey: %s\nValue: %s" % (movieplugin.movie_id, i, results[i])
-                        logFile.write("Test error: %s: No value expected but something returned.\nKey: %s\nValue: %s\n\n" % (movieplugin.movie_id, i, results[i]))
-                        result = False
-            else:
-                if not results.has_key(i):
-                    print "Test error: %s: Value expected but nothing returned.\nKey: %s" % (movieplugin.movie_id, i)
-                    logFile.write("Test error: %s: Value expected but nothing returned.\nKey: %s\n\n" % (movieplugin.movie_id, i))
-                    result = False
-                else:
-                    if not results[i] == i_val:
-                        print "Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s" % (movieplugin.movie_id, i, i_val, results[i])
-                        logFile.write("Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s\n\n" % (movieplugin.movie_id, i, i_val, results[i]))
-                        result = False
+                    else:
+                        if not results[i] == i_val:
+                            print "Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s" % (movieplugin.movie_id, i, i_val, results[i])
+                            logFile.write("Test error: %s: Wrong value returned.\nKey: %s\nValue expected: %s\nValue returned: %s\n\n" % (movieplugin.movie_id, i, i_val, results[i]))
+                            result = False
+            except:
+                log.exception(i + ' - ' + str(i_val) + ' - ' + str(results[i]) + ' - ' + str(movieplugin))
+                result = False
         return result
 
     #
