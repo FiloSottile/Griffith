@@ -65,7 +65,7 @@ class Plugin(movie.Movie):
         tmpdata = gutils.regextrim(self.page, '<div class="cover-area">', '</div>')
         if tmpdata:
             # video page
-            tmpdata = re.search('(http[:][/][/][^/]+[/]flbilder[/][^"]+)', tmpdata)
+            tmpdata = re.search('(http[:][/][/][^/]+[/]flbilder[/][^"\']+)', tmpdata)
             if tmpdata:
                 self.image_url = tmpdata.group(1)
         else:
