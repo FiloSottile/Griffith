@@ -83,6 +83,7 @@ class PluginTester:
         'PluginMovieFilmDb',
         'PluginMovieFilmeVonAZ',
         'PluginMovieFilmtipset',
+        'PluginMovieHKMDB',
         'PluginMovieIMDB',
         'PluginMovieIMDB-de',
         'PluginMovieIMDB-es',
