@@ -272,7 +272,10 @@ Norman Friedman' + _(' as ') + 'Cleaning Man at Flophouse\n\
 Hettie Lynne Hurtes' + _(' as ') + 'TV Anchorwoman\n\
 Al Kahn' + _(' as ') + 'Customer\n\
 Bill W. Richmond' + _(' as ') + 'Bartender\n\
-Bruce M. Kerner' + _(' as ') + 'Desk Sergeant',
+Bruce M. Kerner' + _(' as ') + 'Desk Sergeant\n\
+David Pierce' + _(' as ') + 'Tanker Partner\n\
+Barbara Powers' + _(' as ') + 'Ticket Taker at Club Technoir\n\
+Ed Dogans' + _(' as ') + 'Acteur',
             'country'             : u'américain',
             'genre'               : u'Science fiction',
             'classification'      : False,

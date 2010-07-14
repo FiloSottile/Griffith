@@ -398,7 +398,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 19, 19 ],
+        'Rocky Balboa'         : [ 20, 20 ],
         'Arahan'               : [  7,  7 ],
         'Ein glückliches Jahr' : [  3,  3 ]
     }
@@ -422,7 +422,7 @@ class PluginTest:
 Antonio Traver\n\
 Burt Young',
             'country'             : 'USA',
-            'genre'               : 'Drama, Drama',
+            'genre'               : 'Sport, Drama, Drama, Reise & Freizeit',
             'classification'      : 'Freigegeben ab 12 Jahren',
             'studio'              : 'MGM Home Entertainment GmbH (dt.)',
             'o_site'              : False,
@@ -432,7 +432,7 @@ Burt Young',
             'notes'               : 'EAN: 4045167004504',
             'runtime'             : 97,
             'image'               : True,
-            'rating'              : 9,
+            'rating'              : 8,
             'barcode'             : '4045167004504'
         },
         'B0009NSASM' : {
@@ -444,7 +444,7 @@ Burt Young',
 Françoise Fabian\n\
 Charles Gérard',
             'country'             : 'Frankreich, Italien',
-            'genre'               : 'Krimikomödie, Drama, General AAS, Drama, Komödie, Krimi',
+            'genre'               : 'Krimikomödie, Thriller, General AAS, Drama, Komödie, Krimi',
             'classification'      : 'Freigegeben ab 12 Jahren',
             'studio'              : 'Warner Home Video - DVD',
             'o_site'              : False,
