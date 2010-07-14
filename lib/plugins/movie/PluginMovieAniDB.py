@@ -133,7 +133,7 @@ class Plugin(movie.Movie):
 
     def get_o_site(self):
         self.o_site = gutils.trim(self.page, '<th class="field">Resources</th>', '</tr>') #class varies, tag used
-        self.o_site = gutils.trim(self.o_site, '<a href="', '" rel="anidb::extern">Official page</a>')
+        self.o_site = gutils.regextrim(self.o_site, '<a class="official[^"]*" href="', '" rel="anidb::extern">Official page')
 
     def get_site(self):
         self.site = self.url
