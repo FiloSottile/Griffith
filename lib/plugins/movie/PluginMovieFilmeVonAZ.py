@@ -194,35 +194,37 @@ class PluginTest:
     test_configuration = {
         '528267' : { 
             'title'             : 'Rocky Balboa',
-            'o_title'             : 'Rocky Balboa',
-            'director'            : 'Sylvester Stallone',
-            'plot'                 : True,
-            'cast'                : 'A.J. Benza' + _(' as ') + 'L.C.\n\
+            'o_title'           : 'Rocky Balboa',
+            'director'          : 'Sylvester Stallone',
+            'plot'              : True,
+            'cast'              : 'A.J. Benza' + _(' as ') + 'L.C.\n\
 Milo Ventimiglia' + _(' as ') + 'Rocky jr.\n\
 Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
 Geraldine Hughes' + _(' as ') + 'Marie\n\
 Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
 Burt Young' + _(' as ') + 'Paulie\n\
 Tony Burton' + _(' as ') + 'Duke',
-            'country'            : 'USA',
-            'genre'                : 'Boxerfilm',
+            'country'           : 'USA',
+            'genre'             : 'Boxerfilm',
             'classification'    : 'ab 12',
-            'studio'            : 'Columbia Pic./ MGM/ Rogue Marble/ Revolution Studios/ Chartoff-Winkler Prod.',
+            'studio'            : 'Columbia Pic., MGM, Rogue Marble, Revolution Studios, Chartoff-Winkler Prod.',
             'o_site'            : False,
-            'site'                : 'http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&wert=528267',
-            'trailer'            : False,
-            'year'                : 2006,
-            'notes'                : False,
-            'runtime'            : 102,
-            'image'                : False,
-            'rating'            : False
+            'site'              : 'http://www.zweitausendeins.de/filmlexikon/?sucheNach=titel&wert=528267',
+            'trailer'           : False,
+            'year'              : 2006,
+            'notes'             : False,
+            'runtime'           : 102,
+            'image'             : True,
+            'rating'            : False,
+            'screenplay'        : 'Sylvester Stallone',
+            'cameraman'         : 'J. Clark Mathis',
         },
         '26956' : { 
             'title'             : 'Bürgschaft für ein Jahr',
-            'o_title'             : 'Bürgschaft für ein Jahr',
-            'director'            : 'Herrmann Zschoche',
-            'plot'                 : True,
-            'cast'                : 'Heide Kipp' + _(' as ') + 'Frau Braun\n\
+            'o_title'           : 'Bürgschaft für ein Jahr',
+            'director'          : 'Herrmann Zschoche',
+            'plot'              : True,
+            'cast'              : 'Heide Kipp' + _(' as ') + 'Frau Braun\n\
 Jan Spitzer' + _(' as ') + 'Werner Horn\n\
 Monika Lennartz' + _(' as ') + 'Irmgard Behrend\n\
 Katrin Saß' + _(' as ') + 'Nina\n\
@@ -230,40 +232,44 @@ Ursula Werner' + _(' as ') + 'Frau Müller\n\
 Christian Steyer' + _(' as ') + 'Heiner Menk\n\
 Jaecki Schwarz' + _(' as ') + 'Peter Müller\n\
 Barbara Dittus' + _(' as ') + 'Heimleiterin',
-            'country'            : 'DDR',
-            'genre'                : 'Arbeiterfilm, Frauenfilm, Literaturverfilmung',
+            'country'           : 'DDR',
+            'genre'             : 'Arbeiterfilm, Frauenfilm, Literaturverfilmung',
             'classification'    : 'ab 6',
             'studio'            : 'DEFA, Gruppe "Berlin"',
             'o_site'            : False,
-            'site'                : 'http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&wert=26956',
-            'trailer'            : False,
-            'year'                : 1981,
-            'notes'                : False,
-            'runtime'            : 93,
-            'image'                : False,
-            'rating'            : False
+            'site'              : 'http://www.zweitausendeins.de/filmlexikon/?sucheNach=titel&wert=26956',
+            'trailer'           : False,
+            'year'              : 1981,
+            'notes'             : False,
+            'runtime'           : 93,
+            'image'             : True,
+            'rating'            : False,
+            'screenplay'        : 'Gabriele Kotte',
+            'cameraman'         : 'Günter Jaeuthe',
         },
         '524017' : { 
             'title'             : 'Arahan',
-            'o_title'             : 'Arahan Jangpung Daejakjeon',
-            'director'            : 'Ryoo Seung-wan',
-            'plot'                 : True,
-            'cast'                : 'Yoon So-yi' + _(' as ') + 'Wi-jin\n\
+            'o_title'           : 'Arahan Jangpung Daejakjeon',
+            'director'          : 'Ryoo Seung-wan',
+            'plot'              : True,
+            'cast'              : 'Ryu Seung-beom' + _(' as ') + 'Sang-hwan\n\
+Yoon So-yi' + _(' as ') + 'Wi-jin\n\
 Yun Ju-sang' + _(' as ') + 'Mu-woon\n\
 Ahn Sung-kee' + _(' as ') + 'Ja-woon\n\
-Jung Doo-hong' + _(' as ') + 'Heukwoon\n\
-Ryu Seung-beom' + _(' as ') + 'Sang-hwan',
-            'country'            : 'Südkorea',
-            'genre'                : False,
+Jung Doo-hong' + _(' as ') + 'Heukwoon',
+            'country'           : 'Südkorea',
+            'genre'             : False,
             'classification'    : 'ab 16',
-            'studio'            : 'Fun and Happiness/ Good Movie',
+            'studio'            : 'Fun and Happiness, Good Movie',
             'o_site'            : False,
-            'site'                : 'http://www.filmevona-z.de/filmsuche.cfm?sucheNach=Titel&wert=524017',
-            'trailer'            : False,
-            'year'                : 2004,
-            'notes'                : False,
-            'runtime'            : 108,
-            'image'                : False,
-            'rating'            : False
+            'site'              : 'http://www.zweitausendeins.de/filmlexikon/?sucheNach=titel&wert=524017',
+            'trailer'           : False,
+            'year'              : 2004,
+            'notes'             : False,
+            'runtime'           : 108,
+            'image'             : False,
+            'rating'            : False,
+            'screenplay'        : 'Ryoo Seung-wan',
+            'cameraman'         : 'Lee Jun-gyu',
         }
     }
