@@ -262,7 +262,7 @@ Axel Häfner' + _(' as ') + 'Schrottplatzwärter\n\
 Simon Gosejohann' + _(' as ') + 'junger Mann\n\
 Piet Klocke' + _(' as ') + 'Junggeselle',
             'country'           : 'Deutschland',
-            'genre'             : 'Kinderfilm',
+            'genre'             : 'Kinder',
             'classification'    : 'ohne',
             'studio'            : 'Bavaria Film, Constantin Film',
             'o_site'            : False,

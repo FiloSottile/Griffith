@@ -411,7 +411,7 @@ André Falcon',
             'year'                : 1973,
             'notes'               : False,
             'runtime'             : 115,
-            'image'               : False,
+            'image'               : True,
             'rating'              : False,
             'cameraman'           : 'Jean Collomb',
             'screenplay'          : 'Claude Lelouch'

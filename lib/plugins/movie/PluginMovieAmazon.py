@@ -398,7 +398,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 20, 20 ],
+        'Rocky Balboa'         : [ 21, 21 ],
         'Arahan'               : [  7,  7 ],
         'Ein glückliches Jahr' : [  3,  3 ]
     }
@@ -444,7 +444,7 @@ Burt Young',
 Françoise Fabian\n\
 Charles Gérard',
             'country'             : 'Frankreich, Italien',
-            'genre'               : 'Krimikomödie, Thriller, General AAS, Drama, Komödie, Krimi',
+            'genre'               : 'Krimi, Thriller, Krimikomödie, General AAS, Drama, Komödie, Krimi',
             'classification'      : 'Freigegeben ab 12 Jahren',
             'studio'              : 'Warner Home Video - DVD',
             'o_site'              : False,

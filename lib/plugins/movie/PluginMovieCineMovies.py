@@ -184,7 +184,7 @@ Lahmard J. Tate' + _(' as ') + 'X-Cell',
             'notes'               : False,
             'runtime'             : 105,
             'image'               : True,
-            'rating'              : 6,
+            'rating'              : 7,
             'cameraman'           : False,
             'screenplay'          : 'Sylvester Stallone',
             'barcode'             : False
