@@ -58,7 +58,7 @@ class Plugin(movie.Movie):
                 break
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, "Titre original : <i>", "</i>")
+        self.o_title = gutils.after(gutils.trim(self.page, 'Titre original : <span', '</span>'), '>')
         if (self.o_title == ''):
             self.o_title = re.sub('[(][0-9]+[)]', '', string.replace(gutils.trim(self.page, '<title>', '</title>'), u' - AlloCiné', ''))
 
