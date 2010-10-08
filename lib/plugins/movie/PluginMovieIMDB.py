@@ -30,7 +30,7 @@ plugin_url          = 'www.imdb.com'
 plugin_language     = _('English')
 plugin_author       = 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email = 'griffith-private@lists.berlios.de'
-plugin_version      = '1.9'
+plugin_version      = '1.11'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -41,13 +41,12 @@ class Plugin(movie.Movie):
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
         self.plot_page = self.open_page(url=self.url + '/plotsummary')
+        self.comp_page = self.open_page(url=self.url + '/companycredits')
+        self.tagl_page = self.open_page(url=self.url + '/taglines')
 
     def get_image(self):
-        tmp = string.find(self.page, 'a name="poster"')
-        if tmp == -1:        # poster not available
-            self.image_url = ''
-        else:
-            self.image_url = gutils.trim(self.page[tmp:], 'src="', '"')
+        tmp = gutils.trim(self.page, 'id="img_primary"', '</a>')
+        self.image_url = gutils.trim(tmp, 'src="', '"')
 
     def get_o_title(self):
         self.o_title = gutils.regextrim(self.page, 'class="title-extra">', '<')
@@ -86,10 +85,10 @@ class Plugin(movie.Movie):
         self.year = gutils.after(self.year, '">')
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page, '<h5>Runtime:</h5>', ' min')
+        self.runtime = gutils.regextrim(self.page, 'Runtime:<[^>]+>', ' min')
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, '<h5>Genre:</h5>', '</div>')
+        self.genre = gutils.regextrim(self.page, 'Genre[s]*:<[^>]+>', '</div>')
         self.genre = self.__before_more(self.genre)
 
     def get_cast(self):
@@ -105,11 +104,19 @@ class Plugin(movie.Movie):
         self.cast = self.__before_more(self.cast)
 
     def get_classification(self):
-        self.classification = gutils.trim(self.page, '<h5><a href="/mpaa">MPAA</a>:</h5>', '</div>')
+        self.classification = gutils.trim(self.page, '(<a href="/mpaa">MPAA</a>)', '</div>')
         self.classification = gutils.trim(self.classification, 'Rated ', ' ')
 
     def get_studio(self):
-        self.studio = gutils.trim(self.page, '<h5>Company:</h5>', '</a>')
+        self.studio = ''
+        tmp = gutils.regextrim(self.comp_page, 'Production Companies<[^>]+', '</ul>')
+        tmp = string.split(tmp, 'href="')
+        for entry in tmp:
+            entry = gutils.trim(entry, '>', '<')
+            if entry:
+                self.studio = self.studio + entry + ', '
+        if self.studio:
+            self.studio = self.studio[:-2]
 
     def get_o_site(self):
         self.o_site = ''
@@ -121,11 +128,11 @@ class Plugin(movie.Movie):
         self.trailer = "http://www.imdb.com/title/tt%s/trailers" % self.movie_id
 
     def get_country(self):
-        self.country = gutils.trim(self.page, '<h5>Country:</h5>', '</div>')
+        self.country = '<' + gutils.trim(self.page, 'Country:<', '</div>')
         self.country = re.sub('[\n]+', '', self.country)
 
     def get_rating(self):
-        pattern = re.compile('>([0-9]([.][0-9])*)[/][0-9][0-9]<')
+        pattern = re.compile('>([0-9]([.][0-9])*)<[^>]+>[/][0-9][0-9]<')
         result = pattern.search(self.page)
         if result:
             self.rating = result.groups()[0]
@@ -139,27 +146,32 @@ class Plugin(movie.Movie):
 
     def get_notes(self):
         self.notes = ''
-        language = gutils.trim(self.page, '<h5>Language:</h5>', '</div>')
+        language = gutils.regextrim(self.page, 'Language:<[^>]+>', '</div>')
         language = gutils.strip_tags(language)
         language = re.sub('[\n]+', '', language)
         language = re.sub('[ ]+', ' ', language)
-        language = language.rstrip()
-        color = gutils.trim(self.page, '<h5>Color:</h5>', '</div>')
+        language = language.strip()
+        color = gutils.regextrim(self.page, 'Color:<[^>]+>', '</div>')
         color = gutils.strip_tags(color)
         color = re.sub('[\n]+', '', color)
         color = re.sub('[ ]+', ' ', color)
-        color = color.rstrip()
-        sound = gutils.trim(self.page, '<h5>Sound Mix:</h5>', '</div>')
+        color = color.strip()
+        sound = gutils.regextrim(self.page, 'Sound Mix:<[^>]+>', '</div>')
         sound = gutils.strip_tags(sound)
         sound = re.sub('[\n]+', '', sound)
         sound = re.sub('[ ]+', ' ', sound)
-        sound = sound.rstrip()
-        tagline = gutils.trim(self.page, '<h5>Tagline:</h5>', '</div>')
-        tagline = self.__before_more(tagline)
-        tagline = gutils.strip_tags(tagline)
-        tagline = re.sub('[\n]+', '', tagline)
-        tagline = re.sub('[ ]+', ' ', tagline)
-        tagline = tagline.rstrip()
+        sound = sound.strip()
+        tagline = gutils.regextrim(self.tagl_page, 'Taglines for', 'Related Links')
+        index = string.rfind(tagline, '</div>')
+        if index > -1:
+            taglines = string.split(tagline[index:], '<hr')
+            tagline = ''
+            for entry in taglines:
+                entry = gutils.clean(gutils.after(entry, '>'))
+                if entry:
+                    tagline = tagline + entry + '\n'
+        else:
+            tagline = ''
         if len(language)>0:
             self.notes = "%s: %s\n" %(_('Language'), language)
         if len(sound)>0:
@@ -258,7 +270,7 @@ class SearchPluginTest(SearchPlugin):
     #
     test_configuration = {
         'Rocky Balboa'         : [ 21, 21 ],
-        'Ein glückliches Jahr' : [ 43, 43 ]
+        'Ein glückliches Jahr' : [ 45, 45 ]
     }
 
 class PluginTest:
@@ -333,7 +345,7 @@ John Inman' + _(' as ') + 'Character player (uncredited)',
             'country'           : 'USA | UK',
             'genre'             : 'Comedy | Drama | Romance',
             'classification'    : 'R',
-            'studio'            : 'Universal Pictures',
+            'studio'            : 'Universal Pictures, Miramax Films, Bedford Falls Productions',
             'o_site'            : False,
             'site'              : 'http://www.imdb.com/title/tt0138097',
             'trailer'           : 'http://www.imdb.com/title/tt0138097/trailers',
@@ -341,7 +353,8 @@ John Inman' + _(' as ') + 'Character player (uncredited)',
             'notes'             : _('Language') + ': English\n'\
 + _('Audio') + ': Dolby Digital\n'\
 + _('Color') + ': Color\n\
-Tagline: ...A Comedy About the Greatest Love Story Almost Never Told...',
+Tagline: ...A Comedy About the Greatest Love Story Almost Never Told...\n\
+Love is the only inspiration',
             'runtime'           : 123,
             'image'             : True,
             'rating'            : 7,
