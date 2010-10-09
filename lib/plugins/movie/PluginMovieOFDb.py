@@ -29,11 +29,11 @@ class Plugin(movie.Movie):
         # lets use the imdb page, why not
         imdb_nr = gutils.trim(self.page, 'http://german.imdb.com/Title?', '"')
         if imdb_nr != '':
-            self.imdb_page = self.open_page(url='http://german.imdb.com/Title?' + imdb_nr)
+            self.imdb_page = self.open_page(url='http://www.imdb.de/Title?' + imdb_nr)
         else:
             imdb_nr = gutils.trim(self.page, 'http://www.imdb.com/Title?', '"')
             if imdb_nr != '':
-                self.imdb_page = self.open_page(url='http://www.imdb.com/Title?' + imdb_nr)
+                self.imdb_page = self.open_page(url='http://www.imdb.de/Title?' + imdb_nr)
             else:
                 self.imdb_page = ''
 
@@ -65,7 +65,7 @@ class Plugin(movie.Movie):
 
     def get_runtime(self):
         # from imdb
-        self.runtime = gutils.regextrim(self.imdb_page, '<h5>(L&auml;nge|Runtime):</h5>', ' (min|Min)')
+        self.runtime = gutils.regextrim(self.imdb_page, '<h5>(L&auml;nge|L&#xE4;nge|Runtime):</h5>', ' (min|Min)')
 
     def get_genre(self):
         self.genre = gutils.trim(self.page,"Genre(s):","</table>")
@@ -90,7 +90,7 @@ class Plugin(movie.Movie):
 
     def get_classification(self):
         # from imdb
-        self.classification = gutils.regextrim(gutils.regextrim(self.imdb_page, '(Altersfreigabe|Certification):', '</div>'), 'Germany:', '(&|[|])')
+        self.classification = gutils.regextrim(gutils.regextrim(self.imdb_page, '(Altersfreigabe|Certification):', '</div>'), '(Deutschland|Germany):', '(&|[|])')
 
     def get_studio(self):
         # from imdb
@@ -283,10 +283,10 @@ Elie Chouraqui',
             'rating'              : 6
         },
         'film/54088,Arahan' : {
-            'title'             : 'Arahan',
+            'title'               : 'Arahan',
             'o_title'             : 'Arahan jangpung daejakjeon',
             'director'            : 'Ryoo Seung-wan',
-            'plot'                 : True,
+            'plot'                : True,
             'cast'                : 'Ryoo Seung-beom\n\
 Yoon Soy' + _(' as ') + 'Wi-jin\n\
 Ahn Seong-gi' + _(' as ') + 'Ja-woon\n\
@@ -317,17 +317,17 @@ Kwon Beom-taek\n\
 Min Hye-ryeong\n\
 Oh Soon-tae\n\
 Lee Oi-soo',
-            'country'            : 'Südkorea',
-            'genre'                : 'Action, Fantasy, Komödie',
-            'classification'    : '16',
-            'studio'            : 'Fun and Happiness',
-            'o_site'            : False,
+            'country'             : 'Südkorea',
+            'genre'               : 'Action, Fantasy, Komödie',
+            'classification'      : '16',
+            'studio'              : 'Fun and Happiness',
+            'o_site'              : False,
             'site'                : 'http://www.ofdb.de/film/54088,Arahan',
-            'trailer'            : False,
+            'trailer'             : False,
             'year'                : 2004,
-            'notes'                : False,
-            'runtime'            : 114,
-            'image'                : True,
-            'rating'            : 7
+            'notes'               : False,
+            'runtime'             : 114,
+            'image'               : True,
+            'rating'              : 7
         }
     }

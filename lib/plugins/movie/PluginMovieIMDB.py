@@ -197,6 +197,14 @@ class Plugin(movie.Movie):
 
     def get_cameraman(self):
         self.cameraman = ''
+        tmp = gutils.regextrim(self.cast_page, 'Cinematography by<[^>]+', '</table>')
+        tmp = string.split(tmp, 'href="')
+        for entry in tmp:
+            entry = gutils.trim(entry, '>', '<')
+            if entry:
+                self.cameraman = self.cameraman + entry + ', '
+        if self.cameraman:
+            self.cameraman = self.cameraman[:-2]
 
     def __before_more(self, data):
         for element in ['>See more<', '>more<', '>Full summary<', '>Full synopsis<']:
@@ -359,7 +367,7 @@ Love is the only inspiration',
             'image'             : True,
             'rating'            : 7,
             'screenplay'        : 'Marc Norman, Tom Stoppard',
-            'cameraman'         : False,
+            'cameraman'         : 'Richard Greatrex',
             'barcode'           : False
         },
     }
