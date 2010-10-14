@@ -29,7 +29,7 @@ import gutils, movie, string
 
 plugin_name         = "E-Pipoca"
 plugin_description  = "E-Pipoca Brasil"
-plugin_url          = "epipoca.uol.com.br"
+plugin_url          = "www.epipoca.com.br"
 plugin_language     = _("Brazilian Portuguese")
 plugin_author       = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
@@ -40,16 +40,16 @@ class Plugin(movie.Movie):
     def __init__(self, id):
         self.encode   = 'iso-8859-1'
         self.movie_id = id
-        self.url      = "http://epipoca.uol.com.br/filmes_detalhes.php?idf=" + str(self.movie_id)
+        self.url      = "http://www.epipoca.com.br/filmes_detalhes.php?idf=" + str(self.movie_id)
 
     def initialize(self):
-        self.page_cast = self.open_page(url = 'http://epipoca.uol.com.br/filmes_ficha.php?idf=' + str(self.movie_id))
+        self.page_cast = self.open_page(url = 'http://www.epipoca.com.br/filmes_ficha.php?idf=' + str(self.movie_id))
 
     def get_image(self):
         "Find the film's poster image"
         tmp_pic = gutils.trim(self.page, "images/filmes/poster/poster_", "\"")
         self.image_url = \
-            "http://epipoca.uol.com.br/images/filmes/poster/poster_" + tmp_pic
+            "http://www.epipoca.com.br/images/filmes/poster/poster_" + tmp_pic
 
     def get_o_title(self):
         "Find the film's original title"
@@ -100,15 +100,15 @@ class Plugin(movie.Movie):
 
     def get_o_site(self):
         "Find the film's oficial site"
-        self.o_site = "http://epipoca.uol.com.br/filmes_web.php?idf=" + str(self.movie_id)
+        self.o_site = "http://www.epipoca.com.br/filmes_web.php?idf=" + str(self.movie_id)
 
     def get_site(self):
         "Find the film's imdb details page"
-        self.site = "http://epipoca.uol.com.br/filmes_ficha.php?idf=" + str(self.movie_id)
+        self.site = "http://www.epipoca.com.br/filmes_ficha.php?idf=" + str(self.movie_id)
 
     def get_trailer(self):
         "Find the film's trailer page or location"
-        self.trailer = "http://epipoca.uol.com.br/filmes_trailer.php?idf=" + str(self.movie_id)
+        self.trailer = "http://www.epipoca.com.br/filmes_trailer.php?idf=" + str(self.movie_id)
             
     def get_country(self):
         "Find the film's country"
@@ -135,9 +135,9 @@ class SearchPlugin(movie.SearchMovie):
     "A movie search object"
     def __init__(self):
         self.original_url_search = \
-            "http://epipoca.uol.com.br/busca.php?opc=todos&busca="
+            "http://www.epipoca.com.br/busca.php?opc=todos&busca="
         self.translated_url_search = \
-            "http://epipoca.uol.com.br/busca.php?opc=todos&busca="
+            "http://www.epipoca.com.br/busca.php?opc=todos&busca="
         self.encode='iso-8859-1'
 
     def search(self, parent_window):
@@ -255,9 +255,9 @@ Carl Weathers' + _(' as ') + 'Apollo Creed (imagens de arquivo) (não creditado)
             'genre'               : 'Ação',
             'classification'      : False,
             'studio'              : 'Fox Film',
-            'o_site'              : 'http://epipoca.uol.com.br/filmes_web.php?idf=11521',
-            'site'                : 'http://epipoca.uol.com.br/filmes_ficha.php?idf=11521',
-            'trailer'             : 'http://epipoca.uol.com.br/filmes_trailer.php?idf=11521',
+            'o_site'              : 'http://www.epipoca.com.br/filmes_web.php?idf=11521',
+            'site'                : 'http://www.epipoca.com.br/filmes_ficha.php?idf=11521',
+            'trailer'             : 'http://www.epipoca.com.br/filmes_trailer.php?idf=11521',
             'year'                : 2006,
             'notes'               : False,
             'runtime'             : 102,
