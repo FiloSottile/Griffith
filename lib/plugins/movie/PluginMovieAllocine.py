@@ -169,7 +169,7 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
 
     def sub_search(self):
-        self.page = gutils.regextrim(self.page, u'résultat[s]* trouvé[s]*', '<form method=')
+        self.page = gutils.regextrim(self.page, u'résultat[s]* trouvé[s]*', '<form ')
 
     def get_searches(self):
         elements = string.split(self.page, '<a href=\'/film/fichefilm_gen_cfilm=')
