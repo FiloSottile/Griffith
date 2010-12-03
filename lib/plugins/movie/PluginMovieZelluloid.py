@@ -32,7 +32,7 @@ plugin_url          = 'www.zelluloid.de'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = '<mikej06@hotmail.com>'
-plugin_version      = '1.1'
+plugin_version      = '1.2'
 
 class Plugin(movie.Movie):
     index_url = 'http://www.zelluloid.de/filme/index.php3?id='
@@ -176,7 +176,7 @@ class SearchPlugin(movie.SearchMovie):
                 id = gutils.trim(element, 'movie-', '-')
                 if id <> '':
                     self.ids.append(id)
-                    self.titles.append(gutils.strip_tags(string.replace(gutils.trim(element, '>', '</A>'), '<BR>', ' - ')))
+                    self.titles.append(gutils.strip_tags(string.replace(gutils.regextrim(element, '>', '</[Aa]>'), '<br />', ' - ')))
 
 #
 # Plugin Test
