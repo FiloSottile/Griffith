@@ -95,7 +95,7 @@ class Plugin(movie.Movie):
         self.director = re.sub(',$', '', self.director)
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, '<h5>Kurzbeschreibung:</h5>', '</div>')
+        self.plot = gutils.trim(self.page, '<h5>Handlung:</h5>', '</div>')
         self.plot = self.__before_more(self.plot)
         germanplot = gutils.clean(gutils.trim(self.plot_page, '<div id="swiki.2.1">', '</div>').replace('<br/>', '\n'))
         if germanplot:
