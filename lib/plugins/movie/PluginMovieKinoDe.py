@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2009
+# Copyright (c) 2006-2011
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ plugin_url          = "www.kino.de"
 plugin_language     = _("German")
 plugin_author       = "Michael Jahn"
 plugin_author_email = "<mikej06@hotmail.com>"
-plugin_version      = "1.14"
+plugin_version      = "1.15"
 
 class Plugin(movie.Movie):
     url_to_use_base = 'http://www.kino.de/'
@@ -152,7 +152,7 @@ class Plugin(movie.Movie):
 
     def get_cast(self):
         self.cast = ''
-        tmp = gutils.trim(self.page, '<th>Darsteller:', '</table>')
+        tmp = gutils.regextrim(self.page, '<th>Darsteller:', '(<th>[^&]|</table>)')
         if tmp:
             tmpparts = string.split(tmp, '<a href="/star/')
             for tmppart in tmpparts[1:]:
@@ -255,7 +255,7 @@ class Plugin(movie.Movie):
             self.screenplay= gutils.trim(self.creditspage, 'Drehbuch&nbsp;', '</tr>')
 
     def get_cameraman(self):
-        self.cameraman = gutils.regextrim(self.page, '<th>Kamera:', '<th>')
+        self.cameraman = gutils.regextrim(self.page, '<th>Kamera:', '(<th>|</table>)')
         if not self.cameraman:
             self.cameraman= gutils.trim(self.creditspage, 'Kamera&nbsp;', '</tr>')
 
@@ -350,7 +350,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 8, 8 ],
+        'Rocky Balboa'         : [ 9, 9 ],
         'Arahan'               : [ 6, 6 ],
         'Ein glückliches Jahr' : [ 4, 4 ]
     }
