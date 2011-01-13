@@ -30,7 +30,7 @@ plugin_url          = 'www.imdb.de'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = 'mikej06@hotmail.com'
-plugin_version      = '1.7'
+plugin_version      = '1.8'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -97,13 +97,9 @@ class Plugin(movie.Movie):
     def get_plot(self):
         self.plot = gutils.trim(self.page, '<h5>Kurzbeschreibung:</h5>', '</div>')
         self.plot = self.__before_more(self.plot)
-        elements = string.split(self.plot_page, '<p class="plotpar">')
-        if len(elements) > 1:
-            self.plot = self.plot + '\n\n'
-            elements[0] = ''
-            for element in elements:
-                if element != '':
-                    self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n'
+        germanplot = gutils.clean(gutils.trim(self.plot_page, '<div id="swiki.2.1">', '</div>').replace('<br/>', '\n'))
+        if germanplot:
+            self.plot = germanplot
         if self.plot == '':
             # nothing in german found, try original
             self.plot = gutils.regextrim(self.imdb_page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
@@ -233,9 +229,13 @@ class Plugin(movie.Movie):
                 self.screenplay = self.screenplay[0:len(self.screenplay) - 2]
 
     def get_cameraman(self):
-        self.cameraman = '<' + gutils.trim(self.cast_page, '>Kamera<', '</table>')
+        self.cameraman = gutils.trim(self.cast_page, '>Kamera</a>', '</table>')
         self.cameraman = string.replace(self.cameraman, '(Kamera)', '')
         self.cameraman = string.replace(self.cameraman, '(nicht im Abspann)', '')
+        self.cameraman = string.replace(self.cameraman, '</a>', ', ')
+        self.cameraman = gutils.clean(self.cameraman)
+        self.cameraman = re.sub(',[ \t]*$', '', self.cameraman)
+        self.cameraman = re.sub('[ ]+', ' ', self.cameraman)
 
     def __before_more(self, data):
         for element in ['>Mehr ansehen<', '>mehr<', '>Full summary<', '>Full synopsis<']:
