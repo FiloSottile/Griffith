@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ożarowski
+# Copyright (c) 2005-2011 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -71,13 +71,13 @@ class Plugin(movie.Movie):
         self.genre = gutils.trim(self.page, 'Genre :', '</tr>')
 
     def get_cast(self):
-        self.cast = gutils.trim(self.page_cast, 'diens</h2> :', '</table>')
+        self.cast = gutils.trim(self.page_cast, 'diens</h2> :', '<div id="cast_film">')
         self.cast = self.cast.replace('\n', '')
         self.cast = self.cast.replace('</tr>', '\n')
+        self.cast = re.sub('</a></h5>', _(' as '), self.cast)
         self.cast = gutils.clean(self.cast)
-        self.cast = re.sub('\n[ \t]+', '\n', self.cast)
-        self.cast = re.sub('[.][.]+', _(' as '), self.cast)
         self.cast = re.sub(_(' as ') + '(\n|$)', '\n', self.cast)
+        self.cast = re.sub('[ \t]*\n[ \t]+', '\n', self.cast)
 
     def get_classification(self):
         self.classification = ''
@@ -101,7 +101,7 @@ class Plugin(movie.Movie):
         self.rating = gutils.clean(gutils.trim(self.page, '<div id=scoree>', '</div>'))
 
     def get_screenplay(self):
-        self.screenplay = gutils.clean(gutils.trim(self.page_cast, 'nario de</h2> :', '</a>'))
+        self.screenplay = gutils.clean(gutils.trim(self.page_cast, 'nario de</h2> :', '</h5>'))
 
 
 class SearchPlugin(movie.SearchMovie):
