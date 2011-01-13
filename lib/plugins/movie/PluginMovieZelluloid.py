@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007-2009 Michael Jahn
+# Copyright (c) 2007-2011 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ plugin_url          = 'www.zelluloid.de'
 plugin_language     = _('German')
 plugin_author       = 'Michael Jahn'
 plugin_author_email = '<mikej06@hotmail.com>'
-plugin_version      = '1.2'
+plugin_version      = '1.3'
 
 class Plugin(movie.Movie):
     index_url = 'http://www.zelluloid.de/filme/index.php3?id='
@@ -152,7 +152,7 @@ class Plugin(movie.Movie):
         self.notes = ""
 
     def get_screenplay(self):
-        self.screenplay = gutils.after(gutils.trim(self.detail_page, '>Drehbuch<', '</a>'), '>')
+        self.screenplay = string.replace(gutils.after(gutils.regextrim(self.detail_page, '>Drehbuch<', '(<td align="right">[^&]|</table>)'), '>'), '&nbsp;', ", ")
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -262,7 +262,7 @@ Axel Häfner' + _(' as ') + 'Schrottplatzwärter\n\
 Simon Gosejohann' + _(' as ') + 'junger Mann\n\
 Piet Klocke' + _(' as ') + 'Junggeselle',
             'country'           : 'Deutschland',
-            'genre'             : 'Kinder',
+            'genre'             : 'Familie',
             'classification'    : 'ohne',
             'studio'            : 'Bavaria Film, Constantin Film',
             'o_site'            : False,
