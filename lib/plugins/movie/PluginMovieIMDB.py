@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ożarowski
+# Copyright (c) 2005-2011 Vasco Nunes, Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -277,7 +277,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 21, 21 ],
+        'Rocky Balboa'         : [ 23, 23 ],
         'Ein glückliches Jahr' : [ 45, 45 ]
     }
 

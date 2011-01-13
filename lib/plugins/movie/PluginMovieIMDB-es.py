@@ -2,7 +2,7 @@
 
 __revision__ = '$Id: PluginMovieIMDB-es.py 389 2006-07-29 18:43:35Z piotrek $'
 
-# Copyright (c) 2006 Pedro D. Sánchez
+# Copyright (c) 2006-2011 Pedro D. Sánchez
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -248,7 +248,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 21, 21 ]
+        'Rocky Balboa'         : [ 23, 23 ]
     }
 
 class PluginTest:
@@ -320,9 +320,9 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (voz)\n\
-Gary Compton' + _(' as ') + 'Oficial de Seguridad\n\
-Tony Devon' + _(' as ') + u'Neighbor listado alfabético del resto del reparto:\n\
+Gary Compton' + _(' as ') + u'Oficial de Seguridad listado alfabético del resto del reparto:\n\
 Vale Anoai' + _(' as ') + 'Shopper in Italian Market\n\
+Sikander Malik' + _(' as ') + 'Boxer\n\
 Michael Ahl' + _(' as ') + 'Restaurant Patron (sin acreditar)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (sin acreditar)\n\
 Ben Bachelder' + _(' as ') + 'The Arm (sin acreditar)\n\
@@ -331,9 +331,9 @@ Tim Brooks' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 D.T. Carney' + _(' as ') + 'High Roller (sin acreditar)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 Rennie Cowan' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
-Peter Defeo' + _(' as ') + 'Vendor (sin acreditar)\n\
 Deon Derrico' + _(' as ') + 'High Roller at Limo (sin acreditar)\n\
 Jacob \'Stitch\' Duran' + _(' as ') + 'Dixon\'s Trainer (sin acreditar)\n\
+Simon P Edwards' + _(' as ') + 'Crowd Member (sin acreditar)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (sin acreditar)\n\
 David Gere' + _(' as ') + 'Patron at Adrian\'s (sin acreditar)\n\
 Noah Jacobs' + _(' as ') + 'Boxing Fan (sin acreditar)\n\
@@ -348,9 +348,9 @@ Keith Moyer' + _(' as ') + 'Administrador del Bar (sin acreditar)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (tomas de archivo) (sin acreditar)\n\
 Jacqueline Olivia' + _(' as ') + 'Chica (sin acreditar)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (sin acreditar)\n\
-Jackie Sereni' + _(' as ') + 'Girl on Steps (sin acreditar)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 Frank Traynor' + _(' as ') + 'Abogado (sin acreditar)\n\
+Ryan Tygh' + _(' as ') + 'Ring Photographer (sin acreditar)\n\
 Kimberly Villanova' + _(' as ') + 'Businesswoman (sin acreditar)',
             'country'           : 'Estados Unidos',
             'genre'             : 'Drama | Deporte',

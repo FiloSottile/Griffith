@@ -228,7 +228,7 @@ LeRoy Neiman\n\
 Mike Tyson' + _(' as ') + 'Himself\n\
 Lou DiBella\n\
 Joe Cortez\n\
-Ricky Cavazos',
+Ricky Cavazos' + _(' as ') + 'Boxing Spectator (uncredited)',
             'country'             : 'USA',
             'genre'               : 'Action, Drama, Sportfilm',
             'classification'      : False,

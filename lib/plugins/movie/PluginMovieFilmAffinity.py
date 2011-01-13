@@ -2,7 +2,7 @@
 
 __revision__ = '$Id: PluginMovieFilmAffinity.py 389 2006-07-29 18:43:35Z piotrek $'
 
-# Copyright (c) 2006-2009 Pedro D. Sánchez
+# Copyright (c) 2006-2011 Pedro D. Sánchez
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -183,7 +183,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 11, 11 ],
+        'Rocky' : [ 13, 13 ],
     }
 
 class PluginTest:

@@ -2,7 +2,7 @@
 
 __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 
-# Copyright (c) 2005-2009 Vasco Nunes, Piotr Ozarowski
+# Copyright (c) 2005-2011 Vasco Nunes, Piotr Ozarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -271,11 +271,16 @@ Wayne Stone' + _(' as ') + 'Tanker Driver\n\
 Norman Friedman' + _(' as ') + 'Cleaning Man at Flophouse\n\
 Hettie Lynne Hurtes' + _(' as ') + 'TV Anchorwoman\n\
 Al Kahn' + _(' as ') + 'Customer\n\
-Bill W. Richmond' + _(' as ') + 'Bartender\n\
+Bill W. Richmond' + _(' as ') + 'Barman\n\
 Bruce M. Kerner' + _(' as ') + 'Desk Sergeant\n\
 David Pierce' + _(' as ') + 'Tanker Partner\n\
 Barbara Powers' + _(' as ') + 'Ticket Taker at Club Technoir\n\
-Ed Dogans' + _(' as ') + 'Acteur',
+Ed Dogans' + _(' as ') + 'Acteur\n\
+Tony Mirelez' + _(' as ') + 'Acteur\n\
+Webster Williams' + _(' as ') + 'Acteur\n\
+John E. Bristol' + _(' as ') + 'Acteur\n\
+Gregory Robbins' + _(' as ') + 'Acteur\n\
+Chino \'Fats\' Williams' + _(' as ') + 'Acteur',
             'country'             : u'américain',
             'genre'               : u'Science fiction',
             'classification'      : False,

@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007-2009
+# Copyright (c) 2007-2011
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import movie
 import string
 import re
 
-plugin_name        = "Filmtipset.se"
+plugin_name         = "Filmtipset.se"
 plugin_description  = "Filmtipset.se"
 plugin_url          = "www.filmtipset.se"
 plugin_language     = _("Swedish")
@@ -154,7 +154,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 16, 16 ],
+        'Rocky' : [ 17, 17 ],
     }
 
 class PluginTest:

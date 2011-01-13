@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007-2009 Michael Jahn
+# Copyright (c) 2007-2011 Michael Jahn
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -291,7 +291,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 21, 21 ],
+        'Rocky Balboa'         : [ 23, 23 ],
         'Ein glückliches Jahr' : [  6,  6 ]
     }
 
@@ -364,9 +364,9 @@ Rick Buchborn' + _(' as ') + 'Rocky Fan\n\
 Nick Baker' + _(' as ') + 'Irish Pub Bartender\n\
 Don Sherman' + _(' as ') + 'Andy\n\
 Stu Nahan' + _(' as ') + 'Computer Fight Commentator (Sprechrolle)\n\
-Gary Compton' + _(' as ') + 'Sicherheitsbediensteter\n\
-Tony Devon' + _(' as ') + 'Neighbor übrige Besetzung in alphabetischer Reihenfolge:\n\
+Gary Compton' + _(' as ') + 'Sicherheitsbediensteter übrige Besetzung in alphabetischer Reihenfolge:\n\
 Vale Anoai' + _(' as ') + 'Shopper in Italian Market\n\
+Sikander Malik' + _(' as ') + 'Boxer\n\
 Michael Ahl' + _(' as ') + 'Restaurant Patron (nicht im Abspann)\n\
 Andrew Aninsman' + _(' as ') + 'Promoter (nicht im Abspann)\n\
 Ben Bachelder' + _(' as ') + 'The Arm (nicht im Abspann)\n\
@@ -375,9 +375,9 @@ Tim Brooks' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 D.T. Carney' + _(' as ') + 'High Roller (nicht im Abspann)\n\
 Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Rennie Cowan' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
-Peter Defeo' + _(' as ') + 'Vendor (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High Roller at Limo (nicht im Abspann)\n\
 Jacob \'Stitch\' Duran' + _(' as ') + 'Dixon\'s Trainer (nicht im Abspann)\n\
+Simon P Edwards' + _(' as ') + 'Crowd Member (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
 David Gere' + _(' as ') + 'Patron at Adrian\'s (nicht im Abspann)\n\
 Noah Jacobs' + _(' as ') + 'Boxing Fan (nicht im Abspann)\n\
@@ -392,9 +392,9 @@ Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
 Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
-Jackie Sereni' + _(' as ') + 'Girl on Steps (nicht im Abspann)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)\n\
+Ryan Tygh' + _(' as ') + 'Ring Photographer (nicht im Abspann)\n\
 Kimberly Villanova' + _(' as ') + 'Businesswoman (nicht im Abspann)',
             'country'           : 'USA',
             'genre'             : 'Drama | Sport',
