@@ -31,7 +31,7 @@ plugin_url          = 'www.filmaffinity.com'
 plugin_language     = _('Spanish')
 plugin_author       = 'Pedro D. Sánchez'
 plugin_author_email = '<pedrodav@gmail.com>'
-plugin_version      = '0.4'
+plugin_version      = '0.5'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -144,21 +144,34 @@ class SearchPlugin(movie.SearchMovie):
         self.translated_url_search = 'http://www.filmaffinity.com/es/search.php?stype=title&stext='
         self.encode                = 'iso-8859-1'
 
-    def search(self,parent_window):
+    def search(self, parent_window):
         if not self.open_search(parent_window):
             return None
         auxPage = self.page
-        self.sub_search()
+        self.sub_search(parent_window)
         if self.page <> '':
             return self.page
         auxPage = gutils.trim(auxPage, u'<b>TU CRÍTICA</b></div>', '</a>')
         self.page = gutils.trim(auxPage, 'movie_id=', '">')
         return self.page
 
-    def sub_search(self):
-        self.page = gutils.trim(self.page, u'Resultados por título</span>', '<br>')
-        #self.page = gutils.after(self.page, '</td></tr><tr><td><b>')
-        #self.page = self.page.decode('iso-8859-15')
+    def sub_search(self, parent_window):
+        moviepage = gutils.trim(self.page, u'Resultados por título</span>', '<br>')
+        nextpage = self.get_nextpage_url()
+        while nextpage:
+            self.url = nextpage
+            self.open_search(parent_window)
+            moviepage = moviepage + gutils.trim(self.page, u'Resultados por título</span>', '<br>')
+            nextpage = self.get_nextpage_url()
+        self.page = moviepage
+
+    def get_nextpage_url(self):
+        match = re.search('(siguientes >>|siguientes &gt;&gt;)', self.page)
+        if match:
+            start = string.rfind(self.page, '<a href="', 0, match.start())
+            if start >= 0:
+                return 'http://www.filmaffinity.com/es/' + gutils.before(self.page[start + 9:match.start()], '"')
+        return None
 
     def get_searches(self):
         if len(self.page) < 20:    # immidietly redirection to movie page
@@ -184,6 +197,7 @@ class SearchPluginTest(SearchPlugin):
     #
     test_configuration = {
         'Rocky' : [ 13, 13 ],
+        'Darkness' : [47, 47 ]
     }
 
 class PluginTest:
