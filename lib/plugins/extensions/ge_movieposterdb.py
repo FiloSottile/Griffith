@@ -118,8 +118,9 @@ class GriffithExtension(Base):
         loader = gtk.gdk.PixbufLoader()
         loader.write(data, len(data))
         loader.close()
-        handler = self.widgets['big_poster'].set_from_pixbuf(loader.get_pixbuf())
+        # show before set_from_pixbuf because it doesn't resize otherwise
         self.widgets['poster_window'].show()
+        handler = self.widgets['big_poster'].set_from_pixbuf(loader.get_pixbuf())
         result = gutils.question(_("Do you want to use this poster instead?"), self.widgets['window'])
         self.widgets['poster_window'].hide()
         return result
