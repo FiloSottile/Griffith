@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 __revision__ = '$Id$'
 
-# Copyright © 2009 Piotr Ożarowski
+# Copyright © 2009-2011 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ log = logging.getLogger('Griffith')
 res_aliases = {(2560, 1600): ('QSXGA',),
                 (2048, 1536): ('QXGA',),
                 (1920, 1200): ('WUXGA',),
-                (1920, 1080): ('HD 1080', '1080p', '1080'),
+                (1920, 1080): ('1080p', 'HD 1080', '1080'),
                 (1920, 540): ('1080i',),
                 (1680, 1050): ('WSXGA+',),
                 (1600, 1200): ('UXGA',),
@@ -42,7 +42,7 @@ res_aliases = {(2560, 1600): ('QSXGA',),
                 #(1440, 960): ('',),
                 #(1280, 960): ('',),
                 #(1280, 854): ('',),
-                (1280, 720): ('HD 720', '720p', '720'),
+                (1280, 720): ('720p', 'HD 720', '720'),
                 (1280, 360): ('720i',),
                 (1280, 1024): ('SXGA',),
                 #(1152, 768): ('',),
