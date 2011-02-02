@@ -30,7 +30,7 @@ plugin_url          = 'www.imdb.com'
 plugin_language     = _('English')
 plugin_author       = 'Vasco Nunes, Piotr Ożarowski'
 plugin_author_email = 'griffith-private@lists.berlios.de'
-plugin_version      = '1.11'
+plugin_version      = '1.12'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -53,12 +53,12 @@ class Plugin(movie.Movie):
         if not self.o_title:
             self.o_title = gutils.regextrim(self.page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
         if not self.o_title:
-            self.o_title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
+            self.o_title = re.sub(' [(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
     def get_title(self):    # same as get_o_title()
         self.title = gutils.regextrim(self.page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
         if not self.title:
-            self.title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
+            self.title = re.sub(' [(].*', '', gutils.trim(self.page, '<title>', '</title>'))
 
     def get_director(self):
         self.director = ''
