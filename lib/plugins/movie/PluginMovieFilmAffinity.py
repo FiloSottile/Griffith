@@ -31,7 +31,7 @@ plugin_url          = 'www.filmaffinity.com'
 plugin_language     = _('Spanish')
 plugin_author       = 'Pedro D. Sánchez'
 plugin_author_email = '<pedrodav@gmail.com>'
-plugin_version      = '0.5'
+plugin_version      = '0.6'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -182,10 +182,12 @@ class SearchPlugin(movie.SearchMovie):
             elements = string.split(self.page, '</a></b>')
 
             if (elements[0]<>''):
-                for element in elements[:-1]:
+                for index in range(0, len(elements) - 1, 1):
+                    element = elements[index]
+                    nextelement = elements[index + 1]
                     self.ids.append(gutils.trim(element, '<b><a href="/es/film', '.html'))
                     title = gutils.after(element, '<b><a href="/es/film')
-                    self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.after(title, '>'))))
+                    self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.after(title, '>'))) + ' ' + string.strip(gutils.before(nextelement, '<')))
 
 #
 # Plugin Test
