@@ -111,7 +111,7 @@ class Plugin(movie.Movie):
         self.country = gutils.trim(self.page[pos+2:], '- ', '  <')
 
     def get_rating(self):
-        rat = gutils.trim(self.page, '<div style="text-align:center; font-size:23px; font-weight:bold; letter-spacing:1px; margin:0px 11px 7px 11px">', '<span style="font-size:11px">/5</span></div>')
+        rat = gutils.trim(self.page, '<div style="text-align:center; font-size:23px; font-weight:bold; letter-spacing:1px; margin:0px 11px 7px 11px"><span class="rating">', '</span><span style="font-size:11px">/5</span></div>')
         if rat != '':
             self.rating = int(round(float(rat.replace(',', '.'))*2, 0))
         else:

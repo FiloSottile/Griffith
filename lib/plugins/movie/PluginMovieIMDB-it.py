@@ -82,8 +82,8 @@ class Plugin(movie.Movie):
                     self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n\n'
 
     def get_year(self):
-        self.year = gutils.trim(self.o_page, '<a href="/Sections/Years/', '</a>')
-        self.year = gutils.after(self.year, '">')
+        self.year = gutils.trim(self.page, '<title>', '</title>')
+        self.year = gutils.trim(self.year, '(', ')')
 
     def get_runtime(self):
         self.runtime = gutils.trim(self.page, '<h5>Durata:</h5>', ' min')

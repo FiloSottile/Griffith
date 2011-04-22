@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-__revision__ = '$Id: PluginMovieCSFD.py 12 2007-01-05 09:08:06Z blondak $'
-# Copyright (c) 2005 Blondak
+__revision__ = '$Id: PluginMovieCSFD.py 12 2011-05-22 08:37:14Z KamilHanus $'
+# Copyright (c) 2011 Kamil Hanus
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@ __revision__ = '$Id: PluginMovieCSFD.py 12 2007-01-05 09:08:06Z blondak $'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
+from gettext import gettext as _
 import gutils
 import movie,string
 import re
@@ -27,36 +28,31 @@ plugin_name = "CSFD"
 plugin_description = "Cesko-Slovenska Filmova Databaze"
 plugin_url = "www.csfd.cz"
 plugin_language = _("Czech")
-plugin_author = "Blondak"
-plugin_author_email = "<blondak@neser.cz>"
-plugin_version = '0.9'
+plugin_author = "Kamil Hanus"
+plugin_author_email = "<kamilhanus@gmail.com>"
+plugin_version = '1.1'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
         self.movie_id = id
         self.encode = "utf-8"
-        self.url = "http://www.csfd.cz/"+str(id)
+        self.url = "http://www.csfd.cz"+str(id)
 
     def get_image(self):
-        self.image_url = re.search(r"background=\"http://img.csfd.cz/posters/([^\"]*)\"",self.page)
+        self.image_url = re.search(r"content=\"http://img.csfd.cz/posters/([^\"]*)\"",self.page)
         if self.image_url:
             self.image_url = "http://img.csfd.cz/posters/" + gutils.strip_tags(self.image_url.group(1))
         else:
             self.image_url = ""
 
-    def get_o_title(self):
-        self.o_title = re.findall(r"/images/flag_[\d]+\.gif'[^>]*></td><td>([^<]*)",self.page)
-        if len(self.o_title)>0:
-            self.o_title = self.o_title[len(self.o_title)-1]
-        else:
-            self.o_title = ""
-        if self.o_title == "":
-            self.o_title = self.get_title(True)
 
     def get_title(self, ret=False):
-        data = re.search(r"<title>CSFD.cz - ([^,]*)\(\d{4}\)",self.page)
+        data = re.search(r'<title>*>([^>]*)',self.page)
         if data:
-            data = data.group(1)
+            if len(data.group(1).split("/")) == 2:
+		data = data.group(1).split(" | ")[0][:-7]
+	    else:
+		data = data.group(1).split(" / ")[0]
         else:
             data = ""
         if ret is True:
@@ -64,55 +60,103 @@ class Plugin(movie.Movie):
         else:
             self.title = data
 
-    def get_director(self):
-        self.director = re.search(r"ie:(.*)<br><b>Hraj", self.page)
-        if self.director:
-            self.director = gutils.strip_tags(self.director.group(1))
+
+    def get_o_title(self):
+        self.o_title = re.findall(r'/images/flags/flag_[\d]+.gif"[^<]*>([^/]*)',self.page)
+        if len(self.o_title)>0:
+            self.o_title = self.o_title[0]
+	    self.o_title = self.o_title[11:-1]
         else:
-            self.director = ""
+            self.o_title = ""
+        if self.o_title == "":
+            self.o_title = self.get_title(True)
+
+
+
+    def get_director(self):
+	a=re.sub("\t", "", self.page)
+	a=re.sub("\n", "", a)
+	try:
+	    b = re.search(r'data-truncate="60">(.*)</span></div><div>',a).group()
+	    b = re.search(r"<a(.*)</span", b).group()[:-6]
+	    b = b.split(",")
+
+	    self.director=""
+	    for i in b:
+	        self.director=self.director + ", "+i[:-4].split(">")[-1]
+	    if self.director[0] == ",":
+	        self.director=self.director[2:]
+	except:
+	    self.director=""
+	if self.director=="":
+	    try:
+		b = re.search(r'data-truncate="60">(.*)</a></span></div>',a).group()
+
+		b = re.search(r"<a(.*)</span", b).group()[:-6]
+		b = b.split(",")
+
+		self.director=""
+	        for i in b:
+	            self.director=self.director + ", "+i[:-4].split(">")[-1]
+	        if self.director[0] == ",":
+	            self.director=self.director[2:]
+	    except:
+		self.director=""
+
 
     def get_year(self):
-        self.year = re.search(r"<title>.*\(([\d]+)\)", self.page)
+        self.year = re.search(r'<p class="origin"[^<]*>([^>]*)', self.page)
         if self.year:
-            self.year = self.year.group(1)
+            self.year = self.year.group()[18:-7].split(", ")[-2]
         else:
             self.year = ""
 
     def get_runtime(self):
-        self.runtime = re.search(r"([\d]+) min</b><BR><BR><b>Re", self.page)
+        self.runtime = re.search(r'<p class="origin"[^<]*>([^>]*)', self.page)
         if self.runtime:
-            self.runtime = gutils.strip_tags(self.runtime.group(1))
+	    self.runtime = self.runtime.group()[18:-7].split(", ")[-1]
+
         else:
             self.runtime = ""
 
     def get_genre(self):
-        self.genre = re.search(r"/images/flag_[\d]+.gif.*</table>[\s]*<br>[\s]*<b>([^&:]*)&nbsp;<br>",self.page)
-        if self.genre:
-            self.genre = gutils.strip_tags(self.genre.group(1))
-        else:
+	try:
+            self.genre = re.search(r'<p class="genre"[^<]*>([^>]*)',self.page).group()[17:-3]
+        except:
             self.genre = ""
 
     def get_country(self):
-        self.country = re.search(r"/images/flag_[\d]+.gif.*</table>[\s]*<br>[\s]*<b>[^&:]*&nbsp;<br>(.*), [\d]{4}, ",self.page)
+        self.country = re.search(r'<p class="origin"[^<]*>([^>]*)', self.page)
         if self.country:
-            self.country = gutils.strip_tags(self.country.group(1))
+            self.country = self.country.group()[18:-7].split(", ")[0]
         else:
             self.country = ""
 
     def get_cast(self):
-        self.cast = re.search(r"Hrají: (.*)</div><br>", self.page)
-        if self.cast:
-            self.cast = gutils.strip_tags(self.cast.group(1))
-        else:
-            self.cast = ""
+	a=re.sub("\t", "", self.page)
+	a=re.sub("\n", "", a)
+	try:
+	    b = re.search(r'data-truncate="280">(.*)</span></div></div>',a).group()
+	    b = re.search(r"<a(.*)</span", b).group()[:-6]
+	    b = b.split(",")
+	
+	    self.cast=""
+	    for i in b:
+	        self.cast=self.cast + ", "+i[:-4].split(">")[-1]
+	    if self.cast[0] == ",":
+	        self.cast=self.cast[2:]
+	except:
+	    self.cast=""
 
     def get_plot(self):
-        text = re.search(r"\?text=([\d]*)", self.page)
-        if text:
-            page_content = self.open_page(url=self.url+"?text="+text.group(1))
-            self.plot = gutils.strip_tags(gutils.trim(page_content,"Obsah:","&nbsp;&nbsp;&nbsp;<b><i>("))
-        else:
-            self.plot = gutils.strip_tags(gutils.trim(self.page,"Obsah:","&nbsp;&nbsp;&nbsp;<b><i>("))
+
+	a= re.sub("\t", "", self.page)
+	a= re.sub("\n", "", a)
+	a= re.sub("<BR>", "", a)
+	try:
+            self.plot = re.search(r'ka"([^<]*)',a).group(0)[6:]
+	except:
+	    self.plot = ""
 
     def get_site(self):
         self.site = re.search(r"href=[\"'](http://.*imdb\.com/title/[^\"']*)",self.page)
@@ -123,24 +167,27 @@ class Plugin(movie.Movie):
 
     def get_trailer(self):
         self.trailer = re.search(r"<a href=\"([^\"]*)\"[^>]*>trailer<br><img src=\"http://img.csfd.cz/images/new/film/ikona_trailer",self.page)
-        if self.trailer:
-            self.trailer = "http://www.csfd.cz/"+gutils.strip_tags(self.trailer.group(1))
+        try:
+            self.trailer = self.url+"videa"
 
-        else:
+        except:
             self.trailer = ""
 
     def get_rating(self):
-        self.rating = re.search(r"[\s]*([\d]+)%[\s]*</td>",self.page)
+	a= re.sub("\t", "", self.page)
+	a= re.sub("\n", "", a)
+        self.rating = re.search(r"[\s]*([\d]+)%[\s]*</h2>",a).group()[:-6]
+	
         if self.rating:
-            self.rating = str(float(self.rating.group(1))/10)
+            self.rating = str(float(self.rating)/10)
         else:
             self.rating = ""
 
     def get_o_site(self):
-        self.o_site = re.search(r"href=\"([^\"]*)\"[^>]*>www<br><img src=\"http://img.csfd.cz/images/new/film/ikona_www",self.page)
-        if self.o_site:
-            self.o_site = gutils.strip_tags(self.o_site.group(1))
-        else:
+	try:
+            self.o_site = "http://"+re.findall(r'<li><a\ href="http://([^>]*)',self.page)[1][:-36]
+
+        except:
             self.o_site = ""
 
     def get_notes(self):
@@ -155,8 +202,8 @@ class Plugin(movie.Movie):
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
         self.encode = "utf-8"
-        self.original_url_search   = "http://www.csfd.cz/search_pg.php?search="
-        self.translated_url_search = "http://www.csfd.cz/search_pg.php?search="
+        self.original_url_search   = "http://www.csfd.cz/hledat/?q="
+        self.translated_url_search = "http://www.csfd.cz/hledat/?q="
 
     def search(self,parent_window):
         if not self.open_search(parent_window):
@@ -175,4 +222,3 @@ class SearchPlugin(movie.SearchMovie):
                     self.ids.append(item[0])
 #                    self.titles.append(gutils.convert_entities(item[1])+' '+item[2])
                     self.titles.append(item[1]+' '+item[2])
-
