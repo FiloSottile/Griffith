@@ -49,7 +49,7 @@ class Plugin(movie.Movie):
         self.o_title = gutils.trim(self.page, 'Titre original :', '</tr>')
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '<h1 class="h1artist">', '</h1>')
+        self.title = gutils.regextrim(self.page, '<h1 class="h1artist"[^>]*>', '</h1>')
 
     def get_director(self):
         self.director = string.strip(gutils.trim(self.page, 'par :</b></td>', '</a>'))
@@ -98,7 +98,7 @@ class Plugin(movie.Movie):
         self.country = gutils.trim(self.page, 'Pays :', '</tr>')
 
     def get_rating(self):
-        self.rating = gutils.clean(gutils.trim(self.page, '<div id=scoree>', '</div>'))
+        self.rating = gutils.clean(gutils.regextrim(gutils.regextrim(self.page, '<div id=scoree[^>]*>', '</div>'), '<div class=[^>]*>', '$'))
 
     def get_screenplay(self):
         self.screenplay = gutils.clean(gutils.trim(self.page_cast, 'nario de</h2> :', '</h5>'))

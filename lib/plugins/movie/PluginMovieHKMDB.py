@@ -47,7 +47,7 @@ class Plugin(movie.Movie):
         self.o_title = gutils.trim(self.page, '<font size="+2">', '</font>')
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '<font size="+2">', '</font>')
+        self.title = re.sub('[(][0-9]+[)]', '', gutils.trim(self.page, '<font size="+1">', '</font>'))
 
     def get_director(self):
         self.director = ''
@@ -64,7 +64,7 @@ class Plugin(movie.Movie):
         self.plot = ''
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '<font size="+1">', '</font>')
+        self.year = gutils.trim(gutils.trim(self.page, '<font size="+1">', '</font>'), '(', ')')
 
     def get_runtime(self):
         self.runtime = 0
@@ -179,7 +179,7 @@ class PluginTest:
     test_configuration = {
         '8997' : {
             'title'             : 'Mar\'s Villa, The',
-            'o_title'           : 'Mar\'s Villa, The',
+            'o_title'           : u'蟡',
             'director'          : 'Ting Chung (1)',
             'plot'              : False,
             'cast'              : 'John Liu Chung-Liang' + _(' as ') + 'Ma Tien Lang\n\
@@ -200,7 +200,8 @@ Lui Wan-Biu' + _(' as ') + 'extra\n\
 Hung Ji-Yue\n\
 Ho Szu-Yuan\n\
 Mark Lung Goon-Mo\n\
-Chan Jan (1)' + _(' as ') + 'extra',
+Chan Jan (1)' + _(' as ') + 'extra\n\
+Fan Fung-San' + _(' as ') + 'extra',
             'country'           : 'Taiwan',
             'genre'             : 'Martial Arts',
             'classification'    : False,
