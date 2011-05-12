@@ -53,7 +53,11 @@ res_aliases = {(2560, 1600): ('QSXGA',),
                 (720, 480): ('NTSC',),
                 (640, 480): ('VGA',),
                 (320, 240): ('QVGA',),
-                (320, 200): ('CGA',)}
+                (320, 200): ('CGA',),
+                # some kine of "virtual" resolutions
+                (1, 1): ('4:3 Fullscreen',),
+                (1, 2): ('Widescreen',),
+                (1, 3): ('Anamorphic Widescreen',)}
 res_alias_res = {}
 for res, aliases in res_aliases.iteritems():
     for alias in aliases:
