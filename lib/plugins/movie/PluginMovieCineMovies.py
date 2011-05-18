@@ -30,7 +30,7 @@ plugin_url          = "www.cinemovies.fr"
 plugin_language     = _("French")
 plugin_author       = "Vasco Nunes"
 plugin_author_email = "<vasco.m.nunes@gmail.com>"
-plugin_version      = "0.3"
+plugin_version      = "0.4"
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -42,20 +42,20 @@ class Plugin(movie.Movie):
         self.page_cast = self.open_page(self.parent_window, url = 'http://www.cinemovies.fr/fiche_cast.php?IDfilm='+ str(self.movie_id))
 
     def get_image(self):
-        self.image_url = 'http://www.cinemovies.fr/images/data/affiches/Paff'
-        self.image_url = self.image_url + string.strip(gutils.trim(self.page, 'data/affiches/Paff', '.jpg')) + '.jpg'
+        self.image_url = gutils.trim(self.page, '<link rel="image_src" href="', '">')
 
     def get_o_title(self):
         self.o_title = gutils.trim(self.page, 'Titre original :', '</tr>')
 
     def get_title(self):
-        self.title = gutils.regextrim(self.page, '<h1 class="h1artist"[^>]*>', '</h1>')
+        self.title = gutils.trim(self.page, '<h1 class="h1artist" property="v:name">', '</h1>')
 
     def get_director(self):
-        self.director = string.strip(gutils.trim(self.page, 'par :</b></td>', '</a>'))
+        self.director = gutils.clean(gutils.trim(self.page_cast, u'Réalisé par</h2> :', '<div id="cast_film">'))
+        self.director = re.sub('[\n|\t]+', ', ', self.director)
 
     def get_plot(self):
-        self.plot = gutils.trim(gutils.after(self.page, '>L\'histoire<'), '<div id="story_fiche">', '</div>')
+        self.plot = gutils.trim(gutils.after(self.page, '>L\'histoire<'), '<div id="story_fiche" property="v:summary">', '</div>')
 
     def get_year(self):
         self.year = gutils.trim(self.page, 'Date(s) de Sortie(s)', '</a>')
@@ -65,21 +65,27 @@ class Plugin(movie.Movie):
     def get_runtime(self):
         self.runtime = gutils.clean(gutils.trim(self.page, u'>Durée :', '</tr>'))
         if self.runtime:
-            self.runtime = str (int(gutils.before(self.runtime,"h"))*60 + int(gutils.after(self.runtime,"h")))
+           if self.runtime.find('h') > 0:
+              self.runtime = str (int(gutils.before(self.runtime,'h'))*60 + int(gutils.after(self.runtime,'h')))
+           else:
+              self.runtime = gutils.before(self.runtime,' mn')
 
     def get_genre(self):
         self.genre = gutils.trim(self.page, 'Genre :', '</tr>')
+        self.genre = re.sub('[,][^,]*$', '', self.genre)
+        self.genre = self.genre.replace(',', ', ')
 
     def get_cast(self):
-        self.cast = gutils.trim(self.page_cast, 'diens</h2> :', '<div id="cast_film">')
+        self.cast = gutils.trim(self.page_cast, u'Comédiens</h2> :', '<div id="cast_film">')
         self.cast = self.cast.replace('\n', '')
         self.cast = self.cast.replace('</tr>', '\n')
         self.cast = re.sub('</a></h5>', _(' as '), self.cast)
         self.cast = gutils.clean(self.cast)
-        self.cast = re.sub(_(' as ') + '(\n|$)', '\n', self.cast)
+        self.cast = re.sub(_(' as ') + '[ \t]*(\n|$)', '\n', self.cast)
         self.cast = re.sub('[ \t]*\n[ \t]+', '\n', self.cast)
 
     def get_classification(self):
+        # not available on this site
         self.classification = ''
 
     def get_studio(self):
@@ -92,16 +98,18 @@ class Plugin(movie.Movie):
         self.site = self.url
 
     def get_trailer(self):
-        self.trailer = ''
+        self.trailer = 'http://www.cinemovies.fr/fiche_multimedia.php?IDfilm=' + str(self.movie_id)
 
     def get_country(self):
         self.country = gutils.trim(self.page, 'Pays :', '</tr>')
 
     def get_rating(self):
-        self.rating = gutils.clean(gutils.regextrim(gutils.regextrim(self.page, '<div id=scoree[^>]*>', '</div>'), '<div class=[^>]*>', '$'))
+        # site's rating, not users'
+        self.rating = gutils.trim(self.page, '<div class=number3>', '</div>')
 
     def get_screenplay(self):
-        self.screenplay = gutils.clean(gutils.trim(self.page_cast, 'nario de</h2> :', '</h5>'))
+        self.screenplay = gutils.clean(gutils.trim(self.page_cast, u'Scénario de</h2> :', '<div id="cast_film">'))
+        self.screenplay = re.sub('[\n|\t]+', ', ', self.screenplay)
 
 
 class SearchPlugin(movie.SearchMovie):
@@ -179,7 +187,7 @@ Lahmard J. Tate' + _(' as ') + 'X-Cell',
             'studio'              : 'Twentieth Century Fox France',
             'o_site'              : 'http://www.sonypictures.com/movies/rocky/',
             'site'                : 'http://www.cinemovies.fr/fiche_film.php?IDfilm=6065',
-            'trailer'             : False,
+            'trailer'             : 'http://www.cinemovies.fr/fiche_multimedia.php?IDfilm=6065',
             'year'                : 2007,
             'notes'               : False,
             'runtime'             : 105,
@@ -187,6 +195,58 @@ Lahmard J. Tate' + _(' as ') + 'X-Cell',
             'rating'              : 7,
             'cameraman'           : False,
             'screenplay'          : 'Sylvester Stallone',
+            'barcode'             : False
+        },
+        '18158' : { 
+            'title'               : 'Miss Mars',
+            'o_title'             : 'Miss March',
+            'director'            : 'Zach Cregger, Trevor Moore',
+            'plot'                : True,
+            'cast'                : 'Zach Cregger' + _(' as ') + 'Eugene Bell\n\
+Trevor Moore' + _(' as ') + 'Tucker Cleigh\n\
+Raquel Alessi' + _(' as ') + 'Cindi Whitehall\n\
+Molly Stanton' + _(' as ') + 'Candace\n\
+Craig Robinson' + _(' as ') + 'Horsedick.MPEG\n\
+Hugh M. Hefner' + _(' as ') + u'Lui même\n\
+Carla Jimenez' + _(' as ') + u'Juanita / Infirmière\n\
+Cedric Yarbrough' + _(' as ') + 'Docteur\n\
+Geoff Meed' + _(' as ') + 'Rick / Pompier\n\
+Slade Pearce' + _(' as ') + 'Eugene jeune\n\
+Remy Thorne' + _(' as ') + 'Tucker jeune\n\
+Tanjareen Martin' + _(' as ') + 'Crystal\n\
+Eve Mauro' + _(' as ') + 'Vonka\n\
+Alexis Raben' + _(' as ') + 'Katja\n\
+Windell Middlebrooks' + _(' as ') + 'Videur\n\
+Lindsay Schoneweis' + _(' as ') + 'Sheila\n\
+David Wells' + _(' as ') + 'Principal\n\
+Britten Kelley' + _(' as ') + 'Chevonne\n\
+Barry Sigismondi' + _(' as ') + 'Mr. Whitehall\n\
+Alex Donnelley' + _(' as ') + 'Mrs. Whitehall\n\
+Josh Fadem' + _(' as ') + 'Flava Flav Kid\n\
+Paul Rogan' + _(' as ') + 'Mr. Biederman\n\
+Kate Luyben' + _(' as ') + 'Mrs. Biederman\n\
+Seth Morris' + _(' as ') + 'Boss\n\
+Michael Busch' + _(' as ') + u'Employé\n\
+Ryan Kitley' + _(' as ') + 'Serveur\n\
+Anthony Jeselnik' + _(' as ') + 'Directeur\n\
+Niki J. Crawford' + _(' as ') + 'Janine\n\
+Bonita Friedericy' + _(' as ') + u'Serveuse du dîner\n\
+Carrie Keagan' + _(' as ') + u'Elle même\n\
+Shark Firestone' + _(' as ') + u'Lui même',
+            'country'             : 'USA',
+            'genre'               : u'Comédie',
+            'classification'      : False,
+            'studio'              : 'Twentieth Century Fox France',
+            'o_site'              : 'http://www.missmars-lefilm.com',
+            'site'                : 'http://www.cinemovies.fr/fiche_film.php?IDfilm=18158',
+            'trailer'             : 'http://www.cinemovies.fr/fiche_multimedia.php?IDfilm=18158',
+            'year'                : 2009,
+            'notes'               : False,
+            'runtime'             : 90,
+            'image'               : True,
+            'rating'              : 2,
+            'cameraman'           : False,
+            'screenplay'          : 'Zach Cregger, Trevor Moore',
             'barcode'             : False
         },
     }
