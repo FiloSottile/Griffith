@@ -58,7 +58,7 @@ class Plugin(movie.Movie):
         self.plot = gutils.trim(self.page, '>synopsis', '</p>')
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '<dt>released</dt>', '</div>')
+        self.year = gutils.after(gutils.trim(self.page, '<dt>release date</dt>', '</div>'), ',')
 
     def get_runtime(self):
         self.runtime = ''

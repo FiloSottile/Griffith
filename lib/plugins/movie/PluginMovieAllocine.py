@@ -72,7 +72,7 @@ class Plugin(movie.Movie):
         self.plot = gutils.trim(self.page, 'Synopsis : ', '</div>')
 
     def get_year(self):
-        self.year = gutils.clean(gutils.trim(self.page, u'Année de production : ', '</a>'))
+        self.year = gutils.clean(gutils.trim(self.page, u'Année de production :', '</a>'))
 
     def get_runtime(self):
         self.runtime = gutils.clean(gutils.trim(self.page, u'Durée :', 'min'))
@@ -80,7 +80,7 @@ class Plugin(movie.Movie):
             self.runtime = str(int(gutils.before(self.runtime, "h")) * 60 + int(gutils.after(self.runtime, "h")))
 
     def get_genre(self):
-        self.genre = gutils.regextrim(self.page, 'Genre : ', '</a>[^,]')
+        self.genre = gutils.regextrim(self.page, 'Genre :', '</a>[^,]')
         self.genre = string.replace(self.replace_tabs.sub('', gutils.clean(self.genre)), ',', ', ')
 
     def get_cast(self):
@@ -275,12 +275,12 @@ Bill W. Richmond' + _(' as ') + 'Barman\n\
 Bruce M. Kerner' + _(' as ') + 'Desk Sergeant\n\
 David Pierce' + _(' as ') + 'Tanker Partner\n\
 Barbara Powers' + _(' as ') + 'Ticket Taker at Club Technoir\n\
-Ed Dogans' + _(' as ') + 'Acteur\n\
-Tony Mirelez' + _(' as ') + 'Acteur\n\
-Webster Williams' + _(' as ') + 'Acteur\n\
-John E. Bristol' + _(' as ') + 'Acteur\n\
-Gregory Robbins' + _(' as ') + 'Acteur\n\
-Chino \'Fats\' Williams' + _(' as ') + 'Acteur',
+Ed Dogans' + _(' as ') + 'Cop in Alley\n\
+Tony Mirelez' + _(' as ') + 'Gas Station Attendant\n\
+Webster Williams' + _(' as ') + 'Reporter\n\
+John E. Bristol' + _(' as ') + 'Biker at Phone Booth\n\
+Gregory Robbins' + _(' as ') + 'Tiki Motel Customer\n\
+Chino \'Fats\' Williams' + _(' as ') + 'Truck Driver',
             'country'             : u'américain',
             'genre'               : u'Science fiction',
             'classification'      : False,
