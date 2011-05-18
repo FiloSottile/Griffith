@@ -248,7 +248,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 23, 23 ]
+        'Rocky Balboa'         : [ 24, 24 ]
     }
 
 class PluginTest:
@@ -333,7 +333,7 @@ Ricky Cavazos' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 Rennie Cowan' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 Deon Derrico' + _(' as ') + 'High Roller at Limo (sin acreditar)\n\
 Jacob \'Stitch\' Duran' + _(' as ') + 'Dixon\'s Trainer (sin acreditar)\n\
-Simon P Edwards' + _(' as ') + 'Crowd Member (sin acreditar)\n\
+Simon P. Edwards' + _(' as ') + 'Crowd Member (sin acreditar)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (sin acreditar)\n\
 David Gere' + _(' as ') + 'Patron at Adrian\'s (sin acreditar)\n\
 Noah Jacobs' + _(' as ') + 'Boxing Fan (sin acreditar)\n\
@@ -346,6 +346,7 @@ Burgess Meredith' + _(' as ') + 'Mickey Goldmill (tomas de archivo) (sin acredit
 Dan Montero' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\
 Keith Moyer' + _(' as ') + 'Administrador del Bar (sin acreditar)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (tomas de archivo) (sin acreditar)\n\
+Carol Anne Mueller' + _(' as ') + 'Restaurant Patron (sin acreditar)\n\
 Jacqueline Olivia' + _(' as ') + 'Chica (sin acreditar)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (sin acreditar)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (sin acreditar)\n\

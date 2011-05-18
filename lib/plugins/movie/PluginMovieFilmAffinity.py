@@ -198,8 +198,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 13, 13 ],
-        'Darkness' : [47, 47 ]
+        'Rocky' : [ 14, 14 ],
+        'Darkness' : [51, 51 ]
     }
 
 class PluginTest:
@@ -285,7 +285,7 @@ Patrick Gallagher\n\
 Eric Keenleyside\n\
 Christopher Heyerdahl',
             'country'             : 'Estados Unidos',
-            'genre'               : u'Terror. Biográfico. Siglo XIX. Serie [Masters of Horror]',
+            'genre'               : u'Terror. Biográfico. Drama psicológico. Siglo XIX. Serie [Masters of Horror]',
             'classification'      : False,
             'studio'              : 'Emitida por la cadena Showtime',
             'o_site'              : False,

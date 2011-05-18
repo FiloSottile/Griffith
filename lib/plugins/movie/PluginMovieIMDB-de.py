@@ -293,7 +293,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 23, 23 ],
+        'Rocky Balboa'         : [ 24, 24 ],
         'Ein glückliches Jahr' : [  6,  6 ]
     }
 
@@ -379,7 +379,7 @@ Ricky Cavazos' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Rennie Cowan' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Deon Derrico' + _(' as ') + 'High Roller at Limo (nicht im Abspann)\n\
 Jacob \'Stitch\' Duran' + _(' as ') + 'Dixon\'s Trainer (nicht im Abspann)\n\
-Simon P Edwards' + _(' as ') + 'Crowd Member (nicht im Abspann)\n\
+Simon P. Edwards' + _(' as ') + 'Crowd Member (nicht im Abspann)\n\
 Ruben Fischman' + _(' as ') + 'High-Roller in Las Vegas (nicht im Abspann)\n\
 David Gere' + _(' as ') + 'Patron at Adrian\'s (nicht im Abspann)\n\
 Noah Jacobs' + _(' as ') + 'Boxing Fan (nicht im Abspann)\n\
@@ -392,6 +392,7 @@ Burgess Meredith' + _(' as ') + 'Mickey Goldmill (Archivmaterial) (nicht im Absp
 Dan Montero' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\
 Keith Moyer' + _(' as ') + 'Bargast (nicht im Abspann)\n\
 Mr. T' + _(' as ') + 'Clubber Lang (Archivmaterial) (nicht im Abspann)\n\
+Carol Anne Mueller' + _(' as ') + 'Restaurant Patron (nicht im Abspann)\n\
 Jacqueline Olivia' + _(' as ') + 'Mädchen (nicht im Abspann)\n\
 Brian H. Scott' + _(' as ') + 'Ringside Cop #1 (nicht im Abspann)\n\
 Keyon Smith' + _(' as ') + 'Boxing Spectator (nicht im Abspann)\n\

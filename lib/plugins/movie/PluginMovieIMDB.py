@@ -277,7 +277,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 23, 23 ],
+        'Rocky Balboa'         : [ 24, 24 ],
         'Ein glückliches Jahr' : [ 45, 45 ]
     }
 
@@ -348,6 +348,7 @@ John Ramm' + _(' as ') + 'Makepeace\'s Neighbor\n\
 Martin Neely' + _(' as ') + 'Paris / Lady Montague (as Martin Neeley)\n\
 The Choir of St. George\'s School in Windsor' + _(' as ') + 'Choir (as The Choir of St. George\'s School, Windsor) rest of cast listed alphabetically:\n\
 Jason Canning' + _(' as ') + 'Nobleman (uncredited)\n\
+Kelley Costigan' + _(' as ') + 'Theatregoer (uncredited)\n\
 Rupert Everett' + _(' as ') + 'Christopher Marlowe (uncredited)\n\
 John Inman' + _(' as ') + 'Character player (uncredited)',
             'country'           : 'USA | UK',

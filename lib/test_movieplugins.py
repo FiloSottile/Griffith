@@ -69,7 +69,7 @@ sys.path.append('plugins/extensions')
 class PluginTester:
     test_plugins = [
         'PluginMovieAllocine',
-        'PluginMovieAllMovie',
+        'PluginMovieAllRovi',
         'PluginMovieAmazon',
         'PluginMovieAniDB',
         'PluginMovieCinematografo',
@@ -81,7 +81,7 @@ class PluginTester:
         'PluginMovieE-Pipoca',
         'PluginMovieFilmAffinity',
         'PluginMovieFilmDb',
-        'PluginMovieFilmeVonAZ',
+        #'PluginMovieFilmeVonAZ',
         'PluginMovieFilmtipset',
         'PluginMovieHKMDB',
         'PluginMovieIMDB',
@@ -333,6 +333,7 @@ class PluginTester:
                 dialog.destroy()
                 if not response == gtk.RESPONSE_YES:
                     continue
+            print "Starting test of plugin: %s" % i
             plugin = __import__(i)
             # search test
             if self.do_test_searchplugin(i, False):
