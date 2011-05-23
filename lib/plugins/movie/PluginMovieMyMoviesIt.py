@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2007
+# Copyright (c) 2007-2011
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ plugin_url = "www.mymovies.it"
 plugin_language = _("Italian")
 plugin_author = "Giovanni Sposito, Filippo Valsorda"
 plugin_author_email = "<giovanni.sposito@gmail.com>, <filosottile.wiki@gmail.com>"
-plugin_version = "0.2"
+plugin_version = "0.3"
 
 class Plugin(movie.Movie):
 
@@ -41,6 +41,9 @@ class Plugin(movie.Movie):
         self.encode = 'iso-8859-1'
         self.movie_id = id
         self.url = "http://www.mymovies.it/dizionario/recensione.asp?id=%s" % self.movie_id
+
+    def initialize(self):
+        self.castpage = self.open_page(self.parent_window, url='http://www.mymovies.it/cast/?id=' + self.movie_id)
 
     def get_image(self):
         tmp_image = string.find(self.page, '<img style="float:left; border:solid 1px gray; padding:3px; margin:5px;" src="')
@@ -60,13 +63,7 @@ class Plugin(movie.Movie):
         self.title = gutils.trim(self.page, '<h1 style="margin-bottom:3px;">', '</h1>')
 
     def get_director(self):
-        pos_iniziale = string.find(self.page, '<div style="text-align:left" class="linkblu">')
-        self.director = gutils.trim(self.page[pos_iniziale:],'Un film di <a','</a>')
-        self.director = gutils.after(self.director,'>')
-        if not self.director:
-            self.director = gutils.trim(self.page[pos_iniziale:], 'Un film di ', 'Con')
-        if len(self.director) > 25:
-            self.director = gutils.trim(self.page[pos_iniziale:],'Un film di ','<')
+        self.director = self._find_actor('>Regista', ', ')
 
     def get_plot(self):
         pos_iniziale = string.find(self.page, '<div id="recensione">')
@@ -83,10 +80,18 @@ class Plugin(movie.Movie):
     def get_genre(self):
         self.genre = gutils.regextrim(self.page,'<a title="Film [a-zA-Z]+" href="http://www.mymovies.it/film/[a-zA-Z]+/">', '</a>')
 
-    def get_cast(self): # TODO
-        tmp = string.find(self.page, 'Con <a')
-        self.cast = gutils.trim(self.page[tmp:],'Con ','</a>.')
-        self.cast = string.replace(self.cast, ',', '\n')
+    def get_cast(self):
+        self.cast = ''
+        elements = string.split(gutils.before(self.castpage, 'Filmmakers</div>'), '<div class="linkblu"')
+        i = 3
+        while i < len(elements):
+            actorandrole = gutils.after(gutils.trim(elements[i], '<div', '</div>'), '>')
+            actorandrole = string.replace(actorandrole, '</a>', _(' as '))
+            actorandrole = gutils.clean(actorandrole)
+            actorandrole = re.sub('(\n|\r)', '', actorandrole)
+            actorandrole = re.sub('[ \t]+', ' ', actorandrole)
+            self.cast = self.cast + actorandrole + '\n'
+            i += 1
 
     def get_classification(self):
         self.classification = ''
@@ -124,6 +129,26 @@ class Plugin(movie.Movie):
         #    self.notes = self.notes + 'Alt. titel:' + string.strip(gutils.strip_tags(tmp))
         self.notes = ''
 
+    def get_screenplay(self):
+        self.screenplay = self._find_actor('>Sceneggiatura', ', ')
+
+    def get_cameraman(self):
+        self.cameraman = self._find_actor('>Fotografia', ', ')
+        
+    def _find_actor(self, type, delimiter):
+        elements = string.split(self.castpage, '<div class="linkblu"')
+        result = ''
+        i = 1
+        while i < len(elements):
+            actorandrole = gutils.after(gutils.trim(elements[i], '<div', '</div>'), '>')
+            if string.find(actorandrole, type) > 0:
+                result = result + gutils.before(actorandrole, '</a>') + delimiter
+            i += 1
+        if result:
+            result = result[:-len(delimiter)]
+        return result
+
+
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
@@ -158,6 +183,7 @@ class SearchPlugin(movie.SearchMovie):
         else:
             self.number_results = 0
 
+
 #
 # Plugin Test
 #
@@ -167,8 +193,9 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> expected result count }
     #
     test_configuration = {
-        'Rocky Balboa'            : 1
+        'Rocky' : [ 11, 11 ]
     }
+
 
 class PluginTest:
     #
@@ -180,10 +207,38 @@ class PluginTest:
     #
     test_configuration = {
         '44566' : {
-            'title'             : 'Rocky Balboa',
-            'o_title'             : 'Rocky Balboa',
-            'director'            : 'Sylvester Stallone',
-            'genre'                : 'Sportivo',
-            'year'                : 2006
+            'title'          : 'Rocky Balboa',
+            'o_title'        : 'Rocky Balboa',
+            'director'       : 'Sylvester Stallone',
+            'plot'           : True,
+            'cast'           :'Sylvester Stallone' + _(' as ') + 'Rocky Balboa\n\
+Burt Young' + _(' as ') + 'Paulie\n\
+Antonio Tarver' + _(' as ') + 'Mason Dixon\n\
+Milo Ventimiglia' + _(' as ') + 'Rocky Balboa jr\n\
+Geraldine Hughes' + _(' as ') + 'Marie\n\
+Mike Tyson' + _(' as ') + 'Se stesso\n\
+Tony Burton' + _(' as ') + 'Duke\n\
+A.J. Benza' + _(' as ') + 'L.C.\n\
+James Francis Kelly III' + _(' as ') + 'Steps\n\
+Talia Shire' + _(' as ') + 'Adriana Balboa (materiale d\'archivio)\n\
+Lou DiBella' + _(' as ') + 'Se stesso\n\
+Henry G. Sanders' + _(' as ') + 'Martin\n\
+Pedro Lovell' + _(' as ') + 'Spider Rico\n\
+Ana Gerena' + _(' as ') + 'Isabel\n\
+Angela Boyd' + _(' as ') + 'Angie',
+            'country'        : 'USA',
+            'genre'          : 'Sportivo',
+            'classification' : False,
+            'studio'         : False,
+            'o_site'         : False,
+            'site'           : 'http://www.mymovies.it/dizionario/recensione.asp?id=44566',
+            'trailer'        : 'http://www.mymovies.it/trailer/?id=44566',
+            'year'           : 2006,
+            'notes'          : False,
+            'runtime'        : 102,
+            'image'          : True,
+            'rating'         : 6,
+            'cameraman'      : 'J. Clark Mathis',
+            'screenplay'     : 'Sylvester Stallone'
         }
     }
