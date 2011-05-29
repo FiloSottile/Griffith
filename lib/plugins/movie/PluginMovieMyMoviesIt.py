@@ -68,8 +68,10 @@ class Plugin(movie.Movie):
     def get_plot(self):
         pos_iniziale = string.find(self.page, '<div id="recensione">')
         self.plot = gutils.trim(self.page[pos_iniziale:],'<p>','</p>')
-        if '</a>' in self.plot:
-            self.plot = gutils.after(self.plot, '</a>')
+        self.plot = self.plot.replace(u'\x91', u"'")
+        self.plot = self.plot.replace(u'\x93', u'"')
+        self.plot = self.plot.replace(u'\x94', u'"')
+        self.plot = self.plot.replace(u'\x96', u'-')
 
     def get_year(self):
         self.year = gutils.regextrim(self.page,'<strong> <a title="Film [0-9]+" href="http://www.mymovies.it/film/[0-9]+/">', '</a></strong>')
@@ -146,6 +148,7 @@ class Plugin(movie.Movie):
             i += 1
         if result:
             result = result[:-len(delimiter)]
+            result = re.sub('[\n\r\t ]+', ' ', result)
         return result
 
 
