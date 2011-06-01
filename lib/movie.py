@@ -31,6 +31,7 @@ import time
 from urllib import *
 import gtk
 import gutils
+import urllib2
 
 log = logging.getLogger("Griffith")
 
@@ -150,6 +151,8 @@ class Movie(object):
 
     def get_movie(self, parent_window=None):
         try:
+            # check for internet connection
+            urllib2.urlopen("http://www.griffith.cc")
             #
             # initialize the progress dialog once for the following loading process
             #
@@ -161,13 +164,12 @@ class Movie(object):
             #
             if not self.open_page(parent_window):
                 return None
-        except:
-            # close the dialog if an error occured
-            self.progress.hide()
-            # reraise the error
-            raise
-        return True
+            return True
 
+        except:
+            gutils.error(_("Connection failed."))
+            return False
+        
     def open_page(self, parent_window=None, url=None):
         if url is None:
             url_to_fetch = self.url
