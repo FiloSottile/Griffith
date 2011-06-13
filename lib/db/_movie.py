@@ -27,7 +27,7 @@ from sqlalchemy.orm import object_session
 from sqlalchemy.sql import select, update
 
 import tables
-from _objects import Loan
+from _objects import Loan, DBTable
 
 log = logging.getLogger('Griffith')
 
@@ -65,7 +65,7 @@ for res, aliases in res_aliases.iteritems():
 del aliases, alias, res
 
 
-class Movie(object):
+class Movie(DBTable):
 
     def _set_resolution(self, res_string):
         if not res_string: # clear resulution field
