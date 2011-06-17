@@ -64,7 +64,7 @@ sys.path.append('plugins/extensions')
 #
 # test class for movie plugin classes Plugin and SearchPlugin
 # it simulates the resolving of movie data for configured movies and
-# compares the results with the expected once
+# compares the results with the expected one
 #
 class PluginTester:
     test_plugins = [
@@ -76,6 +76,7 @@ class PluginTester:
         'PluginMovieCineMovies',
         'PluginMovieCineteka',
         'PluginMovieClubedevideo',
+        'PluginMovieCSFD',
         'PluginMovieCulturalia',
         'PluginMovieDVDEmpire',
         'PluginMovieE-Pipoca',
