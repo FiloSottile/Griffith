@@ -3,6 +3,7 @@
 __revision__ = '$Id$'
 
 # Copyright (c) 2010-2015 Enrico Carlesso
+# Copyright (c) 2011 Filippo Valsorda
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,16 +29,16 @@ plugin_name         = 'IMDb-IT'
 plugin_description  = 'Internet Movie Database in Italiano'
 plugin_url          = 'italian.imdb.com'
 plugin_language     = _('Italian')
-plugin_author       = 'Enrico Carlesso'
-plugin_author_email = 'enrico@ecarlesso.org'
-plugin_version      = '0.1'
+plugin_author       = 'Enrico Carlesso, Filippo Valsorda'
+plugin_author_email = 'enrico@ecarlesso.org, filosottile.wiki -at- gmail com'
+plugin_version      = '0.2'
 
 class Plugin(movie.Movie):
     def __init__(self, id):
         self.encode   = 'iso8859-1'
         self.movie_id = id
-        self.url      = "http://italian.imdb.com/title/tt%s" % self.movie_id
-        self.o_url      = "http://imdb.com/title/tt%s" % self.movie_id
+        self.url      = "http://www.imdb.it/title/tt%s" % self.movie_id
+        self.o_url      = "http://www.imdb.com/title/tt%s" % self.movie_id
 
     def initialize(self):
         self.cast_page = self.open_page(url=self.url + '/fullcredits')
@@ -52,11 +53,13 @@ class Plugin(movie.Movie):
             self.image_url = gutils.trim(self.page[tmp:], 'src="', '"')
 
     def get_o_title(self):
-        self.o_title = gutils.regextrim(self.o_page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
+        self.o_title = gutils.trim(self.o_page, '<span class="title-extra">', '<i>(original title)</i>')
+        if self.o_title == '':
+            self.o_title = gutils.regextrim(self.o_page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
         if self.o_title == '':
             self.o_title = re.sub('[(].*', '', gutils.trim(self.o_page, '<title>', '</title>'))
 
-    def get_title(self):    # same as get_o_title()
+    def get_title(self):
         self.title = gutils.regextrim(self.page, '<h1>', '([ ]|[&][#][0-9]+[;])<span')
         if self.title == '':
             self.title = re.sub('[(].*', '', gutils.trim(self.page, '<title>', '</title>'))
@@ -71,15 +74,8 @@ class Plugin(movie.Movie):
             self.director = self.director[0:len(self.director) - 2]
 
     def get_plot(self):
-        self.plot = gutils.regextrim(self.page, '<h5>Plot:</h5>', '(</div>|<a href.*)')
-        self.plot = self.__before_more(self.plot)
-        elements = string.split(self.plot_page, '<p class="plotpar">')
-        if len(elements) > 1:
-            self.plot = self.plot + '\n\n'
-            elements[0] = ''
-            for element in elements:
-                if element <> '':
-                    self.plot = self.plot + gutils.strip_tags(gutils.before(element, '</a>')) + '\n\n'
+        self.plot = gutils.trim(self.plot_page, '<div id="swiki.2.1">', '</div>')
+        self.plot = gutils.convert_entities(self.plot)
 
     def get_year(self):
         self.year = gutils.trim(self.page, '<title>', '</title>')
@@ -102,17 +98,16 @@ class Plugin(movie.Movie):
         self.cast = string.replace(self.cast, '</tr><tr>', "\n")
         self.cast = re.sub('</tr>[ \t]*<tr[ \t]*class="even">', "\n", self.cast)
         self.cast = re.sub('</tr>[ \t]*<tr[ \t]*class="odd">', "\n", self.cast)
-        self.cast = self.__before_more(self.cast)
+        self.cast = gutils.convert_entities(self.cast)
 
     def get_classification(self):
-        self.classification = gutils.trim(self.page, '<h5><a href="/mpaa">MPAA</a>:</h5>', '</div>')
-        self.classification = gutils.trim(self.classification, 'Rated ', ' ')
+        self.classification = gutils.trim(self.page, '<h5>Divieti:</h5>', '</div>')
 
     def get_studio(self):
         self.studio = gutils.trim(self.page, '<h5>Compagnia:</h5>', '</a>')
 
     def get_o_site(self):
-        self.o_site = ''
+        self.o_site = "http://italian.imdb.com/title/tt%s/officialsites" % self.movie_id
 
     def get_site(self):
         self.site = "http://italian.imdb.com/title/tt%s" % self.movie_id
@@ -121,21 +116,16 @@ class Plugin(movie.Movie):
         self.trailer = "http://italian.imdb.com/title/tt%s/trailers" % self.movie_id
 
     def get_country(self):
-        self.country = gutils.trim(self.page, '<h5>Nazionalità:</h5>', '</div>')
-        self.country = re.sub('[\n]+', '', self.country)
+        self.country = gutils.trim(self.page, '<h5>Nazionalit&#xE0;:</h5>', '</div>')
 
     def get_rating(self):
-        pattern = re.compile('>([0-9]([.][0-9])*)[/][0-9][0-9]<')
-        result = pattern.search(self.o_page)
-        if result:
-            self.rating = result.groups()[0]
-            if self.rating:
-                try:
-                    self.rating = round(float(self.rating), 0)
-                except Exception, e:
-                    self.rating = 0
-        else:
-            self.rating = 0
+        self.rating = gutils.trim(self.page, '<div class="starbar-meta">', '/10</b>')
+        self.rating = gutils.clean(self.rating).replace(',', '.')
+        if self.rating:
+            try:
+                self.rating = round(float(self.rating), 0)
+            except Exception, e:
+                self.rating = 0
 
     def get_notes(self):
         self.notes = ''
@@ -154,20 +144,18 @@ class Plugin(movie.Movie):
         sound = re.sub('[\n]+', '', sound)
         sound = re.sub('[ ]+', ' ', sound)
         sound = sound.rstrip()
-        tagline = gutils.trim(self.page, '<h5>Trama:</h5>', '</div>')
-        tagline = self.__before_more(tagline)
-        tagline = gutils.strip_tags(tagline)
-        tagline = re.sub('[\n]+', '', tagline)
-        tagline = re.sub('[ ]+', ' ', tagline)
-        tagline = tagline.rstrip()
+        date = gutils.trim(self.page, '<h5>Data di uscita:</h5>', '<a class="tn15more inline"')
+        date = re.sub('[\n]+', '', date)
+        date = re.sub('[ ]+', ' ', date)
+        date = gutils.clean(date)
         if len(language)>0:
             self.notes = "%s: %s\n" %(_('Language'), language)
         if len(sound)>0:
             self.notes += "%s: %s\n" %(gutils.strip_tags(_('<b>Audio</b>')), sound)
         if len(color)>0:
             self.notes += "%s: %s\n" %(_('Color'), color)
-        if len(tagline)>0 and tagline != "Aggiungi o traduci un riassunto della trama":
-            self.notes += "%s: %s\n" %('Tagline', tagline)
+        if len(date)>0:
+            self.notes += "%s: %s\n" %(_('Data di uscita'), date)
 
     def get_screenplay(self):
         self.screenplay = ''
