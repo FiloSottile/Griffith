@@ -102,10 +102,9 @@ class Plugin(movie.Movie):
         self.studio = ''
 
     def get_o_site(self):
-        self.o_site = ''
-        #tmp = gutils.trim(self.page, 'http://www.imdb.com', '"')
-        #if tmp != '':
-        #    self.o_site = 'http://www.imdb.com' + tmp
+        self.o_site = gutils.rtrim(self.page, '<a href="', '">Sito italiano</a>')
+        if not self.o_site:
+            self.o_site = gutils.rtrim(self.page, '<a href="', '">Sito ufficiale</a>')
 
     def get_site(self):
         self.site = self.url
@@ -114,21 +113,19 @@ class Plugin(movie.Movie):
         self.trailer = "http://www.mymovies.it/trailer/?id=%s" % self.movie_id
 
     def get_country(self):
-        pos = string.find(self.page, ' min.')
-        self.country = gutils.trim(self.page[pos+2:], '- ', '  <')
+        obj = re.search('<strong> <a title="Film [0-9]+" href="http://www.mymovies.it/film/[0-9]+/">', self.page)
+        if obj:
+            pos = self.page[:obj.start()].rfind('- ')
+            self.country = self.page[pos+2:obj.start()]
 
     def get_rating(self):
-        rat = gutils.trim(self.page, '<div style="text-align:center; font-size:23px; font-weight:bold; letter-spacing:1px; margin:0px 11px 7px 11px"><span class="rating">', '</span><span style="font-size:11px">/5</span></div>')
+        rat = gutils.trim(self.page, '<span itemprop="average">', '</span>')
         if rat != '':
             self.rating = int(round(float(rat.replace(',', '.'))*2, 0))
         else:
             self.rating = 0
 
     def get_notes(self):
-        #self.notes = ''
-        #tmp = gutils.trim(self.page, 'Alt. titel:', '</span>')
-        #if tmp:
-        #    self.notes = self.notes + 'Alt. titel:' + string.strip(gutils.strip_tags(tmp))
         self.notes = ''
 
     def get_screenplay(self):
