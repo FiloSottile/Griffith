@@ -132,7 +132,7 @@ class Plugin(movie.Movie):
         self.country = re.sub('[\n]+', '', self.country)
 
     def get_rating(self):
-        pattern = re.compile('>([0-9]([.][0-9])*)<[^>]+>[/][0-9][0-9]<')
+        pattern = re.compile('>([0-9]([.][0-9])*)<[/][^/]+>[/][0-9][0-9]<')
         result = pattern.search(self.page)
         if result:
             self.rating = result.groups()[0]
