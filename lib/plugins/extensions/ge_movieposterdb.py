@@ -42,7 +42,7 @@ class GriffithExtension(Base):
     api = 1
     enabled = True
 
-    toolbar_icon = 'gtk-network'
+    toolbar_icon = 'ge_movieposterdb.png'
 
     baseurltitle = 'http://www.movieposterdb.com/embed.inc.php?movie_title=%s'
     baseurltitleyear = 'http://www.movieposterdb.com/embed.inc.php?movie_title=%s[%s]'
@@ -75,23 +75,23 @@ class GriffithExtension(Base):
             data = False
             if o_title:
                 if movie.year:
-                    url = self.baseurltitleyear % (quote(o_title), movie.year)
+                    url = self.baseurltitleyear % (o_title, movie.year)
                     data = self._get(url, self.widgets['window'])
                     if data:
                         largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
                 if not data or not largeurl:
-                    url = self.baseurltitle % quote(o_title)
+                    url = self.baseurltitle % o_title
                     data = self._get(url, self.widgets['window'])
                     if data:
                         largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
             if not data or not largeurl and title and title != o_title:
                 if movie.year:
-                    url = self.baseurltitleyear % (quote(title), movie.year)
+                    url = self.baseurltitleyear % (title, movie.year)
                     data = self._get(url, self.widgets['window'])
                     if data:
                         largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')
                 if not data or not largeurl:
-                    url = self.baseurltitle % quote(title)
+                    url = self.baseurltitle % title
                     data = self._get(url, self.widgets['window'])
                     if data:
                         largeurl = gutils.trim(data, 'src=\\"', '\\"').replace('/t_', '/l_')

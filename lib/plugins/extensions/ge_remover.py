@@ -43,7 +43,7 @@ class GriffithExtension(Base):
     api = 1
     enabled = True # TODO: disable it by default
 
-    toolbar_icon = 'gtk-delete'
+    toolbar_icon = 'ge_remover.png'
 
     def toolbar_icon_clicked(self, widget, movie):
         if question(_('Are you sure you want to remove %d movies?') % self.app.total):
