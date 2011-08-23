@@ -31,6 +31,7 @@ from db.tables import movie_lang as movie_lang_table
 from gutils import question
 from plugins.extensions import GriffithExtensionBase as Base
 from sql import update_whereclause
+from quick_filter import change_filter_update_whereclause
 
 log = logging.getLogger('Griffith')
 
@@ -51,7 +52,9 @@ class GriffithExtension(Base):
 
             # first: remove all dependend data (associated tags, languages, ...)
             query = select([movies_table.c.movie_id])
-            # FIXME: self.app._search_conditions contains advfilter conditions only (no other filters)
+            # add conditions from simple filter
+            change_filter_update_whereclause(self.app, query)
+            # add conditions from adv filter
             query = update_whereclause(query, self.app._search_conditions)
             query = query.where(movies_table.c.loaned==False) # don't delete loaned movies
             log.debug(query)
@@ -71,13 +74,14 @@ class GriffithExtension(Base):
                 # TODO: removing posters if no longer used by another movie?
 
             # second: remove the movie entries
-            query = delete(movies_table)
-            # use the collected movie ids because other conditions are not true anymore
-            # (f.e. tags are already deleted)
-            query = query.where(movies_table.c.movie_id.in_(movie_ids))
+            if len(movie_ids):
+                query = delete(movies_table)
+                # use the collected movie ids because other conditions are not true anymore
+                # (f.e. tags are already deleted)
+                query = query.where(movies_table.c.movie_id.in_(movie_ids))
 
-            log.debug(query)
-            session.execute(query)
+                log.debug(query)
+                session.execute(query)
             session.commit()
 
             self.app.populate_treeview()
