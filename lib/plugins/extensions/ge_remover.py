@@ -54,23 +54,29 @@ class GriffithExtension(Base):
             # FIXME: self.app._search_conditions contains advfilter conditions only (no other filters)
             query = update_whereclause(query, self.app._search_conditions)
             query = query.where(movies_table.c.loaned==False) # don't delete loaned movies
+            log.debug(query)
+            movie_ids = []
             for movie_entry in session.execute(query):
+                movie_ids.append(movie_entry.movie_id)
                 # tags
                 query_movie_tags = delete(movie_tag_table)
                 query_movie_tags = query_movie_tags.where(movie_tag_table.c.movie_id==movie_entry.movie_id)
+                log.debug(query_movie_tags)
                 session.execute(query_movie_tags)
                 # languages
                 query_movie_lang = delete(movie_lang_table)
                 query_movie_lang = query_movie_lang.where(movie_lang_table.c.movie_id==movie_entry.movie_id)
+                log.debug(query_movie_lang)
                 session.execute(query_movie_lang)
                 # TODO: removing posters if no longer used by another movie?
 
             # second: remove the movie entries
             query = delete(movies_table)
-            # FIXME: self.app._search_conditions contains advfilter conditions only (no other filters)
-            query = update_whereclause(query, self.app._search_conditions)
-            query = query.where(movies_table.c.loaned==False) # don't delete loaned movies
+            # use the collected movie ids because other conditions are not true anymore
+            # (f.e. tags are already deleted)
+            query = query.where(movies_table.c.movie_id.in_(movie_ids))
 
+            log.debug(query)
             session.execute(query)
             session.commit()
 
