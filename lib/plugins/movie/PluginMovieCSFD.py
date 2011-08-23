@@ -145,14 +145,14 @@ class Plugin(movie.Movie):
             self.trailer = ""
 
     def get_rating(self):
+        self.rating = ""
         a = re.sub("\t", "", self.page)
         a = re.sub("\n", "", a)
-        self.rating = re.search(r"[\s]*([\d]+)%[\s]*</h2>", a).group()[:-6]
-
-        if self.rating:
-            self.rating = str(float(self.rating) / 10)
-        else:
-            self.rating = ""
+        search = re.search(r"[\s]*([\d]+)%[\s]*</h2>", a)
+        if search:
+            self.rating = search.group()[:-6]
+            if self.rating:
+                self.rating = str(float(self.rating) / 10)
 
     def get_o_site(self):
         try:
