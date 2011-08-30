@@ -166,17 +166,23 @@ class SearchPlugin(movie.SearchMovie):
         if not self.open_search(parent_window):
             return None
         tmp = gutils.trim(self.page, "Der Suchbegriff erzielte", "</TABLE>")
+        if not tmp:
+            return self.page
         return tmp
 
     def get_searches(self):
-        elements = string.split(self.page, "hit.php3?hit=")
-        elements[0] = ''
-        for element in elements:
-            if element <> '':
-                id = gutils.trim(element, 'movie-', '-')
-                if id <> '':
-                    self.ids.append(id)
-                    self.titles.append(gutils.strip_tags(string.replace(gutils.regextrim(element, '>', '</[Aa]>'), '<br />', ' - ')))
+        if string.find(self.page, '<title>Suche') > 0:
+            elements = string.split(self.page, "hit.php3?hit=")
+            elements[0] = ''
+            for element in elements:
+                if element <> '':
+                    id = gutils.trim(element, 'movie-', '-')
+                    if id <> '':
+                        self.ids.append(id)
+                        self.titles.append(gutils.strip_tags(string.replace(gutils.regextrim(element, '>', '</[Aa]>'), '<br />', ' - ')))
+        else:
+            id = gutils.regextrim(self.page, 'index[.]php3[?]id=', '("|;|\')')
+            self.ids.append(id)
 
 #
 # Plugin Test

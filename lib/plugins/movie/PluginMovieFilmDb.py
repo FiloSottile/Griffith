@@ -182,7 +182,7 @@ class SearchPluginTest(SearchPlugin):
     test_configuration = {
         'Rocky Balboa' : [  1,  1 ],
         'Arahan'       : [  1,  1 ],
-        'Märchen'      : [ 23, 23 ]
+        'Märchen'      : [ 24, 24 ]
     }
 
 class PluginTest:

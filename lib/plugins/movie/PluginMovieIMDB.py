@@ -132,7 +132,7 @@ class Plugin(movie.Movie):
         self.country = re.sub('[\n]+', '', self.country)
 
     def get_rating(self):
-        pattern = re.compile('>([0-9]([.][0-9])*)<[/][^/]+>[/][0-9][0-9]<')
+        pattern = re.compile('>([0-9]([.][0-9])*)(<[^>]+>)+[/](<[^>]+>)[0-9][0-9]<')
         result = pattern.search(self.page)
         if result:
             self.rating = result.groups()[0]
@@ -277,8 +277,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 24, 24 ],
-        'Ein glückliches Jahr' : [ 45, 45 ]
+        'Rocky Balboa'         : [ 25, 25 ],
+        'Ein glückliches Jahr' : [ 47, 47 ]
     }
 
 class PluginTest:

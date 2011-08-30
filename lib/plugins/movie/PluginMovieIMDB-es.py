@@ -248,7 +248,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 24, 24 ]
+        'Rocky Balboa'         : [ 25, 25 ]
     }
 
 class PluginTest:
@@ -354,9 +354,9 @@ Frank Traynor' + _(' as ') + 'Abogado (sin acreditar)\n\
 Ryan Tygh' + _(' as ') + 'Ring Photographer (sin acreditar)\n\
 Kimberly Villanova' + _(' as ') + 'Businesswoman (sin acreditar)',
             'country'           : 'Estados Unidos',
-            'genre'             : 'Drama | Deporte',
-            'classification'    : u'Estados Unidos:PG  | Singapur:PG  | Finlandia:K-11  | Reino Unido:12A  | Canadá:G (British Columbia) | Australia:M  | Irlanda:PG  | Hong Kong:IIA  | México:A  | Noruega:11  | Suiza:12 (canton of Vaud) | Suiza:12 (canton of Geneva) | Brasil:12  | Argentina:Atp  | Malasia:U  | Filipinas:PG-13 (MTRCB) | Portugal:M/12  | Corea del Sur:12  | Suecia:11  | Nueva Zelanda:M',
-            'studio'            : 'Metro-Goldwyn-Mayer (MGM) (presents) (copyright owner), Columbia Pictures (presents) (copyright owner), Revolution Studios (presents) (copyright owner), Chartoff-Winkler Productions, Rogue Marble',
+            'genre'             : u'Acción | Drama | Romance | Deporte',
+            'classification'    : u'Estados Unidos:PG  | Singapur:PG  | Finlandia:K-11  | Reino Unido:12A  | Canadá:G (British Columbia) | Australia:M  | Irlanda:PG  | Hong Kong:IIA  | México:A  | Noruega:11  | Suiza:12 (canton of Geneva) | Suiza:12 (canton of Vaud) | Brasil:12  | Argentina:Atp  | Malasia:U  | Filipinas:PG-13 (MTRCB) | Portugal:M/12  | Corea del Sur:12  | Suecia:11  | Nueva Zelanda:M',
+            'studio'            : 'Metro-Goldwyn-Mayer (MGM) (presents) (copyright owner), Columbia Pictures (presents) (copyright owner), Revolution Studios (presents) (copyright owner), Rogue Marble',
             'o_site'            : False,
             'site'              : 'http://www.imdb.es/title/tt0479143',
             'trailer'           : 'http://www.imdb.es/title/tt0479143/trailers',

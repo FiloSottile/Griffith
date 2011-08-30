@@ -46,10 +46,10 @@ class Plugin(movie.Movie):
         self.image_url = gutils.trim(self.page, '<img class="cover-art" src="', '"')
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<div class="page-heading">', '</div>')
+        self.o_title = gutils.regextrim(self.page, '<div class="page-heading">', '(</div>|<span>)')
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '<div class="page-heading">', '</div>')
+        self.title = gutils.regextrim(self.page, '<div class="page-heading">', '(</div>|<span>)')
 
     def get_director(self):
         self.director = gutils.trim(self.page, '<dt>directed by</dt>', '</ul>')
@@ -78,7 +78,7 @@ class Plugin(movie.Movie):
         self.classification = ''
 
     def get_studio(self):
-        self.studio = gutils.trim(self.page, '<dt>produced by</dt>', '</div>')
+        self.studio = gutils.regextrim(self.page, '<dt>produced by</dt>', '(</div>|<dt>)')
 
     def get_o_site(self):
         self.o_site = ''
@@ -90,10 +90,10 @@ class Plugin(movie.Movie):
         self.trailer = ''
 
     def get_country(self):
-        self.country = gutils.trim(self.page, '<dt>countries</dt>', '</div>')
+        self.country = gutils.regextrim(self.page, '<dt>countries</dt>', '(</div>|<dt>)')
 
     def get_rating(self):
-        self.rating = len(string.split(gutils.trim(self.page, '<dt>rovi rating</dt>', '</div>'), '<li>')) * 2
+        self.rating = (len(string.split(gutils.trim(self.page, '<dt>rovi rating</dt>', '</div>'), '"star full"')) - 1) * 2
 
     def get_notes(self):
         self.notes = ''
@@ -151,7 +151,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 56, 56 ],
+        'Rocky' : [ 57, 57 ],
     }
 
 class PluginTest:
@@ -195,7 +195,7 @@ Talia Shire',
             'country'             : 'USA',
             'genre'               : 'Drama',
             'classification'      : False,
-            'studio'              : 'Columbia Pictures, Chartoff Winkler Productions, MGM, Revolution Studios',
+            'studio'              : 'Chartoff Winkler Productions, MGM, Revolution Studios, Columbia Pictures',
             'o_site'              : False,
             'site'                : 'http://www.allrovi.com/movies/movie/rocky-balboa-v337682',
             'trailer'             : False,

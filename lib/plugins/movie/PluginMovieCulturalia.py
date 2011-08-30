@@ -179,7 +179,7 @@ Louis Giansante\n\
 Maureen Schilling',
             'country'             : 'USA',
             'genre'               : 'Drama / Deportes',
-            'classification'      : False,
+            'classification'      : u'No recom. menores de 7 años',
             'studio'              : False,
             'o_site'              : False,
             'site'                : 'http://www.culturalianet.com/art/ver.php?art=27039',

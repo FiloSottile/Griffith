@@ -105,7 +105,7 @@ class Plugin(movie.Movie):
 
     def get_rating(self):
         # site's rating, not users'
-        self.rating = gutils.trim(self.page, '<div class=number3>', '</div>')
+        self.rating = gutils.clean(gutils.trim(self.page, '<div class=number3>', '</div>'))
 
     def get_screenplay(self):
         self.screenplay = gutils.clean(gutils.trim(self.page_cast, u'Scénario de</h2> :', '<div id="cast_film">'))

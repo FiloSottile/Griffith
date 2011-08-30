@@ -147,13 +147,14 @@ class SearchPlugin(movie.SearchMovie):
 
     def get_searches(self):
         """Try to find both id and film title for each search result"""
-        elements = re.split('index[.]php[?]op=Movie&id=([0-9]+)">', self.page)
+        elements = re.split('index[.]php[?]op=Movie&id=([0-9]+)" ', self.page)
         
         for index in range(2, len(elements), 2):
             id = elements[index - 1]
-            title = gutils.before(elements[index], '<')
-            self.ids.append(id)
-            self.titles.append(gutils.strip_tags(gutils.convert_entities(title)))
+            title = gutils.clean(gutils.trim(elements[index], '>', '</'))
+            if id and title:
+                self.ids.append(id)
+                self.titles.append(gutils.strip_tags(gutils.convert_entities(title)))
 
 #
 # Plugin Test
@@ -164,7 +165,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa' : [ 1, 1 ],
+        'Rocky Balboa' : [ 3, 3 ],
     }
 
 class PluginTest:

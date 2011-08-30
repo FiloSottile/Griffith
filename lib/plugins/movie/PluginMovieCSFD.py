@@ -86,7 +86,10 @@ class Plugin(movie.Movie):
     def get_year(self):
         self.year = re.search(r'<p class="origin"[^<]*>([^>]*)', self.page)
         if self.year:
-            self.year = self.year.group()[18:-7].split(", ")[-2]
+            try:
+                self.year = self.year.group()[18:-7].split(", ")[-2]
+            except:
+                self.year = ""
         else:
             self.year = ""
 
@@ -145,20 +148,26 @@ class Plugin(movie.Movie):
             self.trailer = ""
 
     def get_rating(self):
-        self.rating = ""
         a = re.sub("\t", "", self.page)
         a = re.sub("\n", "", a)
-        search = re.search(r"[\s]*([\d]+)%[\s]*</h2>", a)
-        if search:
-            self.rating = search.group()[:-6]
-            if self.rating:
-                self.rating = str(float(self.rating) / 10)
+        self.rating = re.search(r"[\s]*([\d]+)%[\s]*</h2>", a).group()[:-6]
+
+        if self.rating:
+            self.rating = str(float(self.rating) / 10)
+        else:
+            self.rating = ""
 
     def get_o_site(self):
+        self.o_site = ""
         try:
-            self.o_site = gutils.before("http://" + re.findall(r'<li><a\ href="http://([^> ]*)', self.page)[1], '"')
+            index = string.rfind(self.page, u'title="oficiální web"')
+            if index > 0:
+                tmp = gutils.before(self.page, u'title="oficiální web"')
+                index = string.rfind(tmp, 'href="')
+                if index > 0:
+                    self.o_site = gutils.trim(tmp[index:], '"', '"')
         except:
-            self.o_site = ""
+            pass
 
     def get_notes(self):
         self.notes = ""
@@ -275,7 +284,7 @@ John Fin',
             'genre'          : 'Akční / Dobrodružný / Thriller',
             'classification' : False,
             'studio'         : False,
-            'o_site'         : 'http://www.popron.cz/cliffhanger-dvd/s-368398/?_actionnumber=9045',
+            'o_site'         : False,
             'site'           : 'http://www.imdb.com/title/tt0106582/',
             'trailer'        : 'http://www.csfd.cz/film/4155-cliffhanger/videa',
             'year'           : 1993,

@@ -293,8 +293,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky Balboa'         : [ 24, 24 ],
-        'Ein glückliches Jahr' : [  6,  6 ]
+        'Rocky Balboa'         : [ 25, 25 ],
+        'Ein glückliches Jahr' : [ 47, 47 ]
     }
 
 class PluginTest:
@@ -400,9 +400,9 @@ Frank Traynor' + _(' as ') + 'Rechtsanwalt (nicht im Abspann)\n\
 Ryan Tygh' + _(' as ') + 'Ring Photographer (nicht im Abspann)\n\
 Kimberly Villanova' + _(' as ') + 'Businesswoman (nicht im Abspann)',
             'country'           : 'USA',
-            'genre'             : 'Drama | Sport',
+            'genre'             : 'Action | Drama | Romanze | Sport',
             'classification'    : False,
-            'studio'            : 'Metro-Goldwyn-Mayer (MGM) (presents) (copyright owner), Columbia Pictures (presents) (copyright owner), Revolution Studios (presents) (copyright owner), Chartoff-Winkler Productions, Rogue Marble',
+            'studio'            : 'Metro-Goldwyn-Mayer (MGM) (presents) (copyright owner), Columbia Pictures (presents) (copyright owner), Revolution Studios (presents) (copyright owner), Rogue Marble',
             'o_site'            : False,
             'site'              : 'http://www.imdb.de/title/tt0479143',
             'trailer'           : 'http://www.imdb.com/title/tt0479143/trailers',
