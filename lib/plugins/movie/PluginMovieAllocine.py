@@ -21,10 +21,8 @@ __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gutils
 import movie
-import string
-import re
+import json
 import logging
 log = logging.getLogger("Griffith")
 
@@ -32,74 +30,82 @@ plugin_name         = "Allocine"
 plugin_description  = "Internet Movie Database"
 plugin_url          = "www.allocine.fr"
 plugin_language     = _("French")
-plugin_author       = "Pierre-Luc Levy"
+plugin_author       = "Pierre-Luc Levy, Michael Jahn (JSON api)"
 plugin_author_email = ""
-plugin_version      = "0.7"
+plugin_version      = "1.0"
 
 
 class Plugin(movie.Movie):
-    replace_tabs = re.compile('[\t\r\n]', re.M)
-
     def __init__(self, id):
         self.movie_id = id
-        self.url      = "http://www.allocine.fr/film/fichefilm_gen_cfilm=%s.html" % str(self.movie_id)
+        self.url      = "http://api.allocine.fr/xml/movie?partner=3&json=1&profile=large&code=%s" % str(self.movie_id)
         self.encode   = 'utf-8'
 
     def initialize(self):
-        self.page_cast = self.open_page(self.parent_window, url = "http://www.allocine.fr/film/casting_gen_cfilm=%s.html" % str(self.movie_id))
+        self.movie = json.JSONDecoder().decode(self.page)['movie']
 
     def get_image(self):
-        urls = re.split('<img[ \t]+src=[\'"]', gutils.trim(self.page, '<div class="poster">', '</div>'))
-        for url in urls[1:]:
-            url = gutils.before(url, '"')
-            url = gutils.before(url, '\'')
-            if string.find(url, '.jpg') >= 0:
-                self.image_url = url
-                break
+        self.image_url = ''
+        if 'poster' in self.movie:
+            self.image_url = self.movie['poster']['href']
 
     def get_o_title(self):
-        self.o_title = gutils.after(gutils.trim(self.page, 'Titre original : <span', '</span>'), '>')
-        if (self.o_title == ''):
-            self.o_title = re.sub('[(][0-9]+[)]', '', string.replace(gutils.trim(self.page, '<title>', '</title>'), u' - AlloCiné', ''))
+        self.o_title = ''
+        if 'originalTitle' in self.movie:
+            self.o_title = self.movie['originalTitle']
+        elif 'title' in self.movie:
+            self.o_title = self.movie['title']
 
     def get_title(self):
-        self.title = re.sub('[(][0-9]+[)]', '', string.replace(gutils.trim(self.page, '<title>', '</title>'), u' - AlloCiné', ''))
+        self.title = ''
+        if 'title' in self.movie:
+            self.title = self.movie['title']
+        elif 'originalTitle' in self.movie:
+            self.title = self.movie['originalTitle']
 
     def get_director(self):
-        self.director = gutils.trim(self.page, u'Réalisé par ', '</a>')
+        self.director = self.buildfromcast(8002)
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, 'Synopsis : ', '</div>')
+        self.plot = ''
+        if 'synopsis' in self.movie:
+            self.plot = self.movie['synopsis']
 
     def get_year(self):
-        self.year = gutils.clean(gutils.trim(self.page, u'Année de production :', '</a>'))
+        self.year = ''
+        if 'productionYear' in self.movie:
+            self.year = self.movie['productionYear']
 
     def get_runtime(self):
-        self.runtime = gutils.clean(gutils.trim(self.page, u'Durée :', 'min'))
-        if self.runtime:
-            self.runtime = str(int(gutils.before(self.runtime, "h")) * 60 + int(gutils.after(self.runtime, "h")))
+        self.runtime = ''
+        if 'runtime' in self.movie:
+            self.runtime = self.movie['runtime'] / 60
 
     def get_genre(self):
-        self.genre = gutils.regextrim(self.page, 'Genre :', '</a>[^,]')
-        self.genre = string.replace(self.replace_tabs.sub('', gutils.clean(self.genre)), ',', ', ')
+        self.genre = ''
+        if 'genre' in self.movie:
+            for genre in self.movie['genre']:
+                self.genre = self.genre + genre['$'] + ', '
+        if self.genre:
+            self.genre = self.genre[:-2]
 
     def get_cast(self):
-        self.cast = ""
-        casts = gutils.trim(self.page_cast, 'Acteurs, rôles, personnages', '<h2>')
-        parts = string.split(casts, 'href="/personne/fichepersonne_gen_cpersonne=')
-        for index in range(1, len(parts), 1):
-            character = gutils.clean(gutils.trim(parts[index], 'Rôle :', '<'))
-            if not character:
-                character = gutils.clean(gutils.trim(parts[index - 1], '<td>', '</td>'))
-            actor = gutils.clean(gutils.trim(parts[index], '>', '<'))
-            if actor:
-                if character:
-                    self.cast = self.cast + actor + _(' as ') + character + '\n'
-                else:
-                    self.cast = self.cast + actor + '\n'
+        self.cast = ''
+        if 'castMember' in self.movie:
+            for cast in self.movie['castMember']:
+                if 'activity' in cast:
+                    activity = cast['activity']
+                    if 'code' in activity:
+                        if activity['code'] == 8001:
+                            if 'role' in cast:
+                                self.cast = self.cast + cast['person']['$'] + _(' as ') + cast['role'] + '\n'
+                            else:
+                                self.cast = self.cast + cast['person']['$'] + '\n'
 
     def get_classification(self):
         self.classification = ""
+        if 'movieCertificate' in self.movie:
+            self.classification = self.movie['movieCertificate']['$']
 
     def get_studio(self):
         self.studio = ""
@@ -109,81 +115,86 @@ class Plugin(movie.Movie):
 
     def get_site(self):
         self.site = "http://www.allocine.fr/film/fichefilm_gen_cfilm=%s.html" % self.movie_id
+        if 'link' in self.movie:
+            for link in self.movie['link']:
+                if link['rel'] == 'aco:more':
+                    self.site = link['href']
 
     def get_trailer(self):
         self.trailer = "http://www.allocine.fr/film/video_gen_cfilm=%s.html" % self.movie_id
+        if 'trailer' in self.movie:
+            self.trailer = self.movie['trailer']['href']
 
     def get_country(self):
-        self.country = gutils.trim(self.page, 'Long-métrage', '</a>')
+        self.country = ''
+        if 'nationality' in self.movie:
+            for country in self.movie['nationality']:
+                self.country = self.country + country['$'] + ', '
+        if self.country:
+            self.country = self.country[:-2]
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, 'Spectateurs</a>', 'src=')
-        self.rating = gutils.trim(self.rating, 'class="stareval n', ' ')
-        if self.rating:
-            try:
-                self.rating = str(round(float(int(self.rating) * .225)))
-            except:
-                self.rating = 0
+        self.rating = 0
+        if 'statistics' in self.movie:
+            statistics = self.movie['statistics']
+            if 'pressRating' in statistics:
+                self.rating = statistics['pressRating'] * 2
+            elif 'userRating' in statistics:
+                self.rating = statistics['userRating'] * 2
 
     def get_screenplay(self):
-        self.screenplay = gutils.clean(gutils.trim(self.page_cast, u'Scénariste', '</tr>'))
+        self.screenplay = self.buildfromcast(8004)
 
     def get_cameraman(self):
-        self.cameraman = gutils.clean(gutils.trim(self.page_cast, 'Directeur de la photographie', '</tr>'))
+        self.cameraman = self.buildfromcast(8037)
+
+    def buildfromcast(self, code):
+        result = ''
+        if 'castMember' in self.movie:
+            for cast in self.movie['castMember']:
+                if 'activity' in cast:
+                    activity = cast['activity']
+                    if 'code' in activity:
+                        if activity['code'] == code:
+                            result = result + cast['person']['$'] + ', '
+        if result:
+            result = result[:-2]
+        return result
 
 
 class SearchPlugin(movie.SearchMovie):
 
     def __init__(self):
-        self.original_url_search   = "http://www.allocine.fr/recherche/1/?q="
-        self.translated_url_search = "http://www.allocine.fr/recherche/1/?q="
+        self.original_url_search   = "http://api.allocine.fr/xml/search?partner=3&json=1&count=100&profile=small&q="
+        self.translated_url_search = "http://api.allocine.fr/xml/search?partner=3&json=1&count=100&profile=small&q="
         self.encode                = 'utf-8'
         self.remove_accents        = True
 
     def search(self, parent_window):
         if not self.open_search(parent_window):
             return None
-        # try to find next pages if more than 20 results
-        match = re.search('<span class="navcurrpage">1</span> / ([0-9])+</li>', self.page)
-        self.sub_search()
-        if match:
-            saved_url = self.url
-            saved_title = self.title
-            self.title = ''
-            try:
-                maxpages = int(match.group(1))
-                if maxpages > 1:
-                    currpage = 2
-                    while currpage <= maxpages and currpage < 5:
-                        oldpage = self.page
-                        self.url = string.replace(saved_url, '/?q=', '/?p=%s&q=' % currpage)
-                        if not self.open_search(parent_window):
-                            return None
-                        self.sub_search()
-                        self.page = oldpage + self.page
-                        currpage = currpage + 1
-            except:
-                log.exception('')
-            self.url = saved_url
-            self.title = saved_title
         return self.page
 
-    def sub_search(self):
-        self.page = gutils.regextrim(self.page, u'résultat[s]* trouvé[s]*', '<form ')
-
     def get_searches(self):
-        elements = string.split(self.page, '<a href=\'/film/fichefilm_gen_cfilm=')
-        if (elements[0] <> ''):
-            for index in range(1, len(elements), 1):
-                element = elements[index]
-                title = gutils.clean(gutils.convert_entities(gutils.trim(element, '>', '</a>')))
-                year = gutils.clean(gutils.trim(element, '<span class="fs11">', '<br'))
-                if title:
-                    self.ids.append(gutils.before(element, '.'))
-                    if year:
-                        self.titles.append(title + ' (' + year + ')')
-                    else:
-                        self.titles.append(title)
+        result = json.JSONDecoder().decode(self.page)
+        try:
+            movies = result['feed']['movie']
+            for movie in movies:
+                try:
+                    title = ''
+                    year = ''
+                    if 'title' in movie:
+                        title = movie['title']
+                    elif 'originalTitle' in movie:
+                        title = movie['originalTitle']
+                    if 'productionYear' in movie:
+                        year = '(%s)' % movie['productionYear']
+                    self.titles.append('%s %s' % (title, year))
+                    self.ids.append(movie['code'])
+                except:
+                    log.exception('')
+        except:
+            log.exception('')
 
 
 #
@@ -223,25 +234,25 @@ Patrick Chesnais' + _(' as ') + 'Grégoire l\'amant\n\
 Anaïs Demoustier' + _(' as ') + 'Justine\n\
 Maud Buquet' + _(' as ') + 'la prostituée\n\
 Francis Leplay' + _(' as ') + 'l\'agent immobilier',
-            'country'             : u'français',
+            'country'             : u'France',
             'genre'               : u'Comédie',
             'classification'      : False,
             'studio'              : False,
             'o_site'              : False,
             'site'                : 'http://www.allocine.fr/film/fichefilm_gen_cfilm=110585.html',
-            'trailer'             : 'http://www.allocine.fr/film/video_gen_cfilm=110585.html',
+            'trailer'             : 'http://www.allocine.fr/blogvision/18726250',
             'year'                : 2007,
             'notes'               : False,
             'runtime'             : 95,
             'image'               : True,
-            'rating'              : 6,
+            'rating'              : 4,
             'cameraman'           : u'Jean-François Robin',
             'screenplay'          : u'Alexandra Leclère',
             'barcode'             : False
         },
         '309' : {
             'title'               : u'Terminator',
-            'o_title'             : u'Terminator',
+            'o_title'             : u'Terminator, The',
             'director'            : u'James Cameron',
             'plot'                : True,
             'cast'                : u'Arnold Schwarzenegger' + _(' as ') + 'le Terminator\n\
@@ -281,20 +292,20 @@ Webster Williams' + _(' as ') + 'Reporter\n\
 John E. Bristol' + _(' as ') + 'Biker at Phone Booth\n\
 Gregory Robbins' + _(' as ') + 'Tiki Motel Customer\n\
 Chino \'Fats\' Williams' + _(' as ') + 'Truck Driver',
-            'country'             : u'américain',
-            'genre'               : u'Science fiction',
-            'classification'      : False,
+            'country'             : 'U.S.A.',
+            'genre'               : 'Science fiction, Thriller',
+            'classification'      : 'Interdit aux moins de 12 ans',
             'studio'              : False,
             'o_site'              : False,
             'site'                : 'http://www.allocine.fr/film/fichefilm_gen_cfilm=309.html',
-            'trailer'             : 'http://www.allocine.fr/film/video_gen_cfilm=309.html',
+            'trailer'             : 'http://www.allocine.fr/blogvision/18895020',
             'year'                : 1984,
             'notes'               : False,
             'runtime'             : 108,
             'image'               : True,
-            'rating'              : 9,
+            'rating'              : 8,
             'cameraman'           : u'Adam Greenberg',
-            'screenplay'          : u'James Cameron',
+            'screenplay'          : u'James Cameron, Gale Anne Hurd, Harlan Ellison, William Wisher',
             'barcode'             : False
         },
     }
