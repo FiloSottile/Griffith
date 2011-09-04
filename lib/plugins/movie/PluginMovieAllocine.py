@@ -22,7 +22,10 @@ __revision__ = '$Id: PluginMovieIMDB.py 176 2006-02-01 12:07:26Z iznogoud $'
 # GNU General Public License, version 2 or later
 
 import movie
-import json
+try:
+    import simplejson as json
+except:
+    import json
 import logging
 log = logging.getLogger("Griffith")
 
