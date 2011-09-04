@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2009 Piotr Ożarowski
+# Copyright © 2005-2011 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,9 +21,15 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gutils, movie
-import string, re
+import urllib2
+from datetime import datetime
+from locale import getdefaultlocale
+from os.path import getmtime, isfile, join
+
+from lxml import etree
+
 from gutils import decompress
+from movie import Movie, SearchMovie
 
 plugin_name         = 'AnimeDB'
 plugin_description  = 'Anime DataBase'
@@ -31,112 +37,77 @@ plugin_url          = 'www.anidb.net'
 plugin_language     = _('English')
 plugin_author       = 'Piotr Ożarowski'
 plugin_author_email = 'piotr@griffith.cc'
-plugin_version      = '2.8'
+plugin_version      = '3.0'
 
-aid_pattern = re.compile('[?&;]aid=(\d+)')
+ANIME_TITLES_URL = 'http://anidb.net/api/animetitles.xml.gz'
+ANIME_IMG_URL = 'http://img7.anidb.net/pics/anime/'
+ANIME_WEB_URL = 'http://anidb.net/perl-bin/animedb.pl?show=anime&aid='
+REQUEST = "http://api.anidb.net:9001/httpapi?request=anime&client=%(client)s&clientver=%(version)s&protover=%(protocol)s&aid="
+REQUEST %= dict(client='griffith', version=1, protocol=1)
 
-class Plugin(movie.Movie):
-    def __init__(self, id):
+lang = getdefaultlocale()[0][:2]  # TODO: get it from settings
+
+
+class Plugin(Movie):
+    def __init__(self, aid):
         self.encode = 'utf-8'
-        if string.find(id, 'http://') != -1:
-            self.url = str(id)
-            self.movie_id = 'anidb'
-        else:
-            self.movie_id = str(id)
-            self.url = "http://anidb.net/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
+        self._aid = aid
+        self.url = REQUEST + aid
 
     def initialize(self):
-        self.page = decompress(self.page)
-        if self.movie_id == 'anidb':
-            aid =  aid_pattern.search(self.page)
-            if aid:
-                self.movie_id = aid.groups()[0]
-                self.url = "http://anidb.net/perl-bin/animedb.pl?show=anime&aid=%s" % self.movie_id
-            else:
-                return False
-        self.page = gutils.after(self.page, 'id="layout-content"')
-        pos = string.find(self.page, 'class="g_section anime_episodes">')
-        if pos >0:
-            self.page = self.page[:pos]
+        self._xml = etree.fromstring(self.page)
 
     def get_image(self):
-        match = re.search('img\d*.anidb.net/pics/anime/\d*.jpg', self.page)
-        if match is not None:
-            self.image_url = 'http://' + match.group()
-        else:
-            self.image_url = ''
+        self.image_url = ANIME_IMG_URL + self._xml.find('picture').text
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, '<span class="i_icon i_audio_ja" title=" language: japanese"><span>ja</span></span>', '</td>')
-        self.o_title = gutils.trim(self.o_title, '<label>', '</label>')
+        self.o_title = self._xml.find('titles/title[@type="main"]').text
 
     def get_title(self):
-        self.title = gutils.trim(self.page, '<h1 class="anime">Anime: ', '</h1>')
+        node = self._xml.xpath("titles/title[@xml:lang='%s' and @type='official']" % lang)
+        if node:
+            self.title = node[0].text
 
     def get_director(self):
-        self.director = gutils.trim(self.page, '>Direction (&#x76E3;&#x7763;', '</tr>')
-        self.director = gutils.after(gutils.trim(self.director, '<a ', '</a>'), '>')
+        self.director = ', '.join(n.text for n in self._xml.xpath('creators/name[@type="Direction"]'))
 
     def get_plot(self):
-        self.plot = gutils.regextrim(self.page, 'class="(g_bubble )*desc">', '</div>')
-        self.plot = self.plot.replace('<br/>', '\n')
+        self.plot = self._xml.xpath('description')[0].text
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '"field">Year', '</td>')
-        self.year = gutils.after(self.year, '"value">')[-4:]
+        node = self._xml.xpath('episodes/episode[title="Complete Movie"]')
+        if node:
+            self.year = node.xpath('airdate')[0][:4]
+        # XXX: should we take the first child if "Complete Movie" is missing?
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page, '<label>Complete Movie</label>', '</tr>')
-        self.runtime = gutils.trim(self.runtime, '<td class="duration">', 'm')
+        node = self._xml.xpath('episodes/episode[title="Complete Movie"]')
+        if node:
+            self.runtime = node.xpath('length')[0]
 
     def get_genre(self):
-        self.genre = gutils.trim(self.page, '>Categories<', '</td>')
-        self.genre = gutils.after(self.genre, 'value">')
-        self.genre = gutils.strip_tags(self.genre)
-        if len(self.genre) and self.genre.endswith('- similar'):
-            self.genre =  self.genre[:-9]
-        elif self.genre == '-':
-            self.genre = ''
-        self.genre = string.replace(self.genre, '\n', '')
+        nodes = self._xml.xpath('categories/category/name')
+        self.genre = ', '.join(n.text for n in nodes)
 
     def get_cast(self):
-        self.cast = 'Characters:\n---------------'
-        castv = gutils.trim(self.page, '<table id="characterlist" class="characterlist">', '</table>')
-        if castv != '':
-            castparts = string.split(castv, '<tr ')
-            for index in range(2, len(castparts), 1):
-                castpart = castparts[index]
-                castcharacter = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="name">', '</td>'))
-                castentity = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="entity">', '</td>'))
-                castactor = gutils.clean(gutils.trim(castpart, '<td class="name"><a href="animedb.pl?show=creator&amp;creatorid=', 'd>'))
-                castactor = gutils.clean(gutils.trim(castactor, '">', '</t'))
-                if castv == ' ':
-                    castactor = 'unknown'
-                castrelation = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="relation">', '</td>'))
-                castappearance = gutils.clean(gutils.trim(castpart, '<td rowspan="1" class="eprange">', '</td>'))
-                self.cast += '\n\n' + '[' + castcharacter + '] voiced by ' + castactor + '\n' + castentity + '; ' + castrelation + '; appears in episodes: ' + castappearance
+        nodes = self._xml.xpath('characters/character[@type="main character in"]')
+        self.cast = ''
+        for node in nodes:
+            name = node.xpath('name')[0].text
+            actor = node.xpath('seiyuu')[0].text
+            self.cast += "[%s] voiced by %s\n" % (name, actor)
 
     def get_classification(self):
         self.classification = ''
 
     def get_studio(self):
-        self.studio = gutils.trim(self.page, '<tr class="producers">', '</tr>')
-        if self.studio == '':
-            self.studio = gutils.trim(self.page, '<tr class="g_odd producers">', '</tr>')
-        self.studio = gutils.trim(self.studio, '<td class="value">', '</td>')
-        self.studio = gutils.strip_tags(self.studio)
-        if len(self.studio) and self.studio[:2] == " (":
-            self.studio = self.studio[2:]
-            if self.studio[len(self.studio)-1:] == ')':
-                self.studio = self.studio[:len(self.studio)-1]
-        self.studio = string.replace(self.studio, '\n', '')
+        self.studio = ', '.join(n.text for n in self._xml.xpath('creators/name[@type="Animation Production"]'))
 
     def get_o_site(self):
-        self.o_site = gutils.trim(self.page, '<th class="field">Resources</th>', '</tr>') #class varies, tag used
-        self.o_site = gutils.regextrim(self.o_site, '<a class="official[^"]*" href="', '" rel="anidb::extern">Official page')
+        self.site = self._xml.xpath('url')[0].text
 
     def get_site(self):
-        self.site = self.url
+        self.site = ANIME_TITLES_URL + self._aid
 
     def get_trailer(self):
         self.trailer = ''
@@ -145,77 +116,74 @@ class Plugin(movie.Movie):
         self.country = ''
 
     def get_rating(self):
-        self.rating = gutils.clean(gutils.after(gutils.trim(self.page, '<span class="rating', '</a>'), '>'))
-        if self.rating:
-            try:
-                self.rating = str(round(float(self.rating)))
-            except:
-                self.rating = ''
+        rating = self._xml.xpath('ratings/permanent')
+        if rating:
+            self.rating = str(round(float(rating[0].text)))
 
     def get_notes(self):
         self.notes = ''
         # ...type and episodes
-        atype = gutils.trim(self.page, '"field">Type', '</td>')
-        atype = gutils.clean(atype)
-        if atype != '':
-            self.notes += "Type: %s\n" % atype
-        episodes = gutils.trim(self.page, '>Episode list<', '</table>')
-        if episodes != '':
-            parts = string.split(episodes, '<tr ')
-            for index in range(2, len(parts), 1):
-                part = parts[index]
-                nr = gutils.clean(gutils.trim(part, 'class="id eid">', '</td>'))
-                title = gutils.clean(gutils.after(gutils.trim(part, '<label', '</td>'), '>'))
-                duration = gutils.clean(gutils.trim(part, 'class="duration">', '</td>'))
-                airdate = gutils.clean(gutils.trim(part, 'class="date airdate">', '</td>'))
-                self.notes += '\n' + nr + ': ' + title + ' (' + duration + ', ' + airdate + ')'
+        type_ = self._xml.find('type')
+        if type_ is not None:
+            self.notes += "Type: %s\n" % type_.text
+        episodes = {}
+        for node in self._xml.xpath('episodes/episode'):
+            key = node.find('epno').text
+            titles = {}
+            for tnode in node.xpath('title'):
+                titles[tnode.attrib['xml:lang']] = tnode.text
+            duration = node.find('length').text
+            airdate = node.find('airdate')
+            airdate = airdate.text if airdate is not None else None
+            episodes[key] = dict(titles=titles, duration=duration, airdate=airdate)
+        for key, details in sorted(episodes.iteritems()):
+            self.notes += "\n%s: " % key
+            self.notes += details['titles'].get(lang, details['titles']['en'])
+            self.notes += " (%s" % details['duration']
+            if details['airdate']:
+                self.notes += ", %s)" % details['airdate']
+            else:
+                self.notes += ')'
 
-    def get_screenplay(self):
-        self.screenplay = gutils.trim(self.page, 'Script/Screenplay (&#x811A;&#x672C;', '</tr>')
-        self.screenplay = gutils.after(gutils.trim(self.screenplay, '<a ', '</a>'), '>')
 
-class SearchPlugin(movie.SearchMovie):
-    def __init__(self):
-        self.encode = 'utf-8'
-        self.original_url_search = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
-        self.translated_url_search = 'http://anidb.net/perl-bin/animedb.pl?show=animelist&do.search=search&adb.search='
+def load_titles(fpath):
+    # animetitles.xml.gz is updated once a day
+    remote = urllib2.urlopen(ANIME_TITLES_URL)
+    last_modified = datetime(*remote.info().getdate('Last-Modified')[:7])
 
-    def search(self,parent_window):
-        self.open_search(parent_window)
-        self.page = decompress(self.page)
+    if not isfile(fpath) or \
+       datetime.fromtimestamp(getmtime(fpath)) < last_modified:
+        fp = open(fpath, 'w')
+        fp.write(remote.read())
+        fp.close()
 
-        tmp = string.find(self.page, '>Anime List - Search for: ')
-        if tmp == -1:        # already a movie page
-            self.page = 'movie'
-        else:            # multiple matches
-            self.page = gutils.trim(self.page, 'class="animelist"', '</table>');
-            self.page = gutils.after(self.page, '</tr>');
+    return etree.fromstring(decompress(open(fpath).read()))
 
-        return self.page
+
+class SearchPlugin(SearchMovie):
+    original_url_search = 'http://anidb.net/'
+    translated_url_search = 'http://anidb.net/'
+
+    def search(self, parent_window):
+        self._search_results = []
+        exml = load_titles(join(self.locations['home'], 'animetitles.xml.gz'))
+        for node in exml.xpath("anime[contains(., '%s')]" % self.title.replace("'", r"\'")):
+            aid = node.attrib['aid']
+            title = node.xpath("title[@xml:lang='%s']" % lang)
+            # XXX: how about xpath with both cases and sorting results later?
+            if not title:
+                title = node.xpath('title[@type="main"]')[0].text
+            else:
+                title = title[0].text
+            self._search_results.append((aid, title))
+
+        return self._search_results
 
     def get_searches(self):
-        if self.page == 'movie':    # already a movie page
-            self.number_results = 1
-            self.ids.append(self.url)
-            self.titles.append(self.title)
-        else:            # multiple matches
-            elements = string.split(self.page,"</tr>")
-            self.number_results = elements[-1]
-
-            if len(elements[0]):
-                for element in elements:
-                    aid = aid_pattern.search(element)
-                    if not aid:
-                        continue
-                    title = gutils.clean(gutils.trim(element, '<td class="name">', '</a>'))
-                    type = gutils.clean(gutils.after(gutils.trim(element, '<td class="type', '</td>'), '>'))
-                    self.ids.append(aid.groups()[0])
-                    if type:
-                        self.titles.append(title + ' (' + type + ')')
-                    else:
-                        self.titles.append(title)
-            else:
-                self.number_results = 0
+        self.number_results = len(self._search_results)
+        for aid, title in self._search_results:
+            self.ids.append(aid)
+            self.titles.append(title)
 
 #
 # Plugin Test
@@ -228,7 +196,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Hellsing' : [ 9, 9 ]
+        'Hellsing': [ 9, 9 ]
     }
 
 
@@ -241,7 +209,7 @@ class PluginTest:
     #        * or the expected value
     #
     test_configuration = {
-        '32' : {
+        '32': {
             'title'               : 'Hellsing',
             'o_title'             : u'ヘルシング',
             'director'            : 'Urata Yasunori',
