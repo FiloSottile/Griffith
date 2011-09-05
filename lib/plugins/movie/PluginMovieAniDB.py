@@ -153,11 +153,11 @@ def load_titles(fpath):
 
     if not isfile(fpath) or \
        datetime.fromtimestamp(getmtime(fpath)) < last_modified:
-        fp = open(fpath, 'w')
+        fp = open(fpath, 'wb')
         fp.write(remote.read())
         fp.close()
 
-    return etree.fromstring(decompress(open(fpath).read()))
+    return etree.fromstring(decompress(open(fpath, 'rb').read()))
 
 
 class SearchPlugin(SearchMovie):
