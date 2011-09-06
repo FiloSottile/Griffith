@@ -22,7 +22,7 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import urllib2
-from datetime import datetime
+from datetime import datetime, timedelta
 from locale import getdefaultlocale
 from os.path import getmtime, isfile, join
 
@@ -55,6 +55,8 @@ class Plugin(Movie):
         self.url = REQUEST + aid
 
     def initialize(self):
+        if not self.page.startswith('<?xml'):
+            raise Exception('page not in XML format')
         self._xml = etree.fromstring(self.page)
 
     def get_image(self):
@@ -148,11 +150,21 @@ class Plugin(Movie):
 
 def load_titles(fpath):
     # animetitles.xml.gz is updated once a day
-    remote = urllib2.urlopen(ANIME_TITLES_URL)
-    last_modified = datetime(*remote.info().getdate('Last-Modified')[:7])
+    remote = None
+    download = True
+    if isfile(fpath):
+        cache_last_modified = datetime.fromtimestamp(getmtime(fpath))
+        if cache_last_modified > datetime.now() - timedelta(days=1):
+            download = False
+        else:
+            remote = urllib2.urlopen(ANIME_TITLES_URL)
+            last_modified = datetime(*remote.info().getdate('Last-Modified')[:7])
+            if cache_last_modified >= last_modified:
+                download = False
+    else:
+        remote = urllib2.urlopen(ANIME_TITLES_URL)
 
-    if not isfile(fpath) or \
-       datetime.fromtimestamp(getmtime(fpath)) < last_modified:
+    if download:
         fp = open(fpath, 'wb')
         fp.write(remote.read())
         fp.close()
@@ -180,6 +192,8 @@ class SearchPlugin(SearchMovie):
         return self._search_results
 
     def get_searches(self):
+        del self.ids[:]
+        del self.titles[:]
         self.number_results = len(self._search_results)
         for aid, title in self._search_results:
             self.ids.append(aid)
