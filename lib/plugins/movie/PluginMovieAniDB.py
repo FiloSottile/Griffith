@@ -22,6 +22,7 @@ __revision__ = '$Id$'
 # GNU General Public License, version 2 or later
 
 import urllib2
+import logging
 from datetime import datetime, timedelta
 from locale import getdefaultlocale
 from os.path import getmtime, isfile, join
@@ -30,6 +31,8 @@ from lxml import etree
 
 from gutils import decompress
 from movie import Movie, SearchMovie
+
+log = logging.getLogger("Griffith")
 
 plugin_name         = 'AnimeDB'
 plugin_description  = 'Anime DataBase'
@@ -50,7 +53,8 @@ lang = getdefaultlocale()[0][:2]  # TODO: get it from settings
 
 class Plugin(Movie):
     def __init__(self, aid):
-        self.encode = 'utf-8'
+        self.encode = None
+        self.useurllib2 = True
         self._aid = aid
         self.url = REQUEST + aid
 
@@ -133,7 +137,7 @@ class Plugin(Movie):
             key = node.find('epno').text
             titles = {}
             for tnode in node.xpath('title'):
-                titles[tnode.attrib['xml:lang']] = tnode.text
+                titles[tnode.attrib['{http://www.w3.org/XML/1998/namespace}lang']] = tnode.text
             duration = node.find('length').text
             airdate = node.find('airdate')
             airdate = airdate.text if airdate is not None else None
@@ -148,37 +152,36 @@ class Plugin(Movie):
                 self.notes += ')'
 
 
-def load_titles(fpath):
-    # animetitles.xml.gz is updated once a day
-    remote = None
-    download = True
-    if isfile(fpath):
-        cache_last_modified = datetime.fromtimestamp(getmtime(fpath))
-        if cache_last_modified > datetime.now() - timedelta(days=1):
-            download = False
-        else:
-            remote = urllib2.urlopen(ANIME_TITLES_URL)
-            last_modified = datetime(*remote.info().getdate('Last-Modified')[:7])
-            if cache_last_modified >= last_modified:
-                download = False
-    else:
-        remote = urllib2.urlopen(ANIME_TITLES_URL)
-
-    if download:
-        fp = open(fpath, 'wb')
-        fp.write(remote.read())
-        fp.close()
-
-    return etree.fromstring(decompress(open(fpath, 'rb').read()))
-
-
 class SearchPlugin(SearchMovie):
     original_url_search = 'http://anidb.net/'
     translated_url_search = 'http://anidb.net/'
 
+    def load_titles(self, fpath, parent_window):
+        # animetitles.xml.gz is updated once a day
+        remote = None
+        download = True
+        if isfile(fpath):
+            cache_last_modified = datetime.fromtimestamp(getmtime(fpath))
+            if cache_last_modified > datetime.now() - timedelta(days=1):
+                download = False
+            else:
+                remote = urllib2.urlopen(ANIME_TITLES_URL)
+                last_modified = datetime(*remote.info().getdate('Last-Modified')[:7])
+                if cache_last_modified >= last_modified:
+                    download = False
+                remote.close()
+
+        if download:
+            log.info('downloading title list from %s' % ANIME_TITLES_URL)
+            self.url = ''
+            self.title = ANIME_TITLES_URL
+            self.open_search(parent_window, fpath)
+
+        return etree.fromstring(decompress(open(fpath, 'rb').read()))
+
     def search(self, parent_window):
         self._search_results = []
-        exml = load_titles(join(self.locations['home'], 'animetitles.xml.gz'))
+        exml = self.load_titles(join(self.locations['home'], 'animetitles.xml.gz'), parent_window)
         for node in exml.xpath("anime[contains(., '%s')]" % self.title.replace("'", r"\'")):
             aid = node.attrib['aid']
             title = node.xpath("title[@xml:lang='%s']" % lang)

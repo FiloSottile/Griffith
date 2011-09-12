@@ -74,6 +74,7 @@ class Movie(object):
     encode = 'iso-8859-1'
     fields_to_fetch = []
     progress = None
+    useurllib2 = False
 
     # functions that plugin should implement: {{{
     def initialize(self):
@@ -167,9 +168,10 @@ class Movie(object):
             return True
 
         except:
+            self.progress.hide()
             gutils.error(_("Connection failed."))
             return False
-        
+
     def open_page(self, parent_window=None, url=None):
         if url is None:
             url_to_fetch = self.url
@@ -178,7 +180,7 @@ class Movie(object):
         if parent_window is not None:
             self.parent_window = parent_window
         self.progress.set_data(parent_window, _("Fetching data"), _("Wait a moment"), False)
-        retriever = Retriever(url_to_fetch, self.parent_window, self.progress)
+        retriever = Retriever(url_to_fetch, self.parent_window, self.progress, useurllib2=self.useurllib2)
         retriever.start()
         while retriever.isAlive():
             self.progress.pulse()
@@ -188,28 +190,32 @@ class Movie(object):
                 gtk.main_iteration()
         data = None
         try:
-            if retriever.html:
-                ifile = file(retriever.html[0], "rb")
-                try:
-                    data = ifile.read()
-                finally:
-                    ifile.close()
-                # check for gzip compressed pages before decoding to unicode
-                if len(data) > 2 and data[0:2] == '\037\213':
-                    data = gutils.decompress(data)
-                try:
-                    # try to decode it strictly
-                    data = data.decode(self.encode)
-                except UnicodeDecodeError, exc:
-                    # something is wrong, perhaps a wrong character set
-                    # or some pages are not as strict as they should be
-                    # (like OFDb, mixes utf8 with iso8859-1)
-                    # I want to log the error here so that I can find it
-                    # but the program should not terminate
-                    log.error(exc)
-                    data = data.decode(self.encode, 'ignore')
+            if retriever.exception is None:
+                if retriever.html:
+                    ifile = file(retriever.html[0], "rb")
+                    try:
+                        data = ifile.read()
+                    finally:
+                        ifile.close()
+                    # check for gzip compressed pages before decoding to unicode
+                    if len(data) > 2 and data[0:2] == '\037\213':
+                        data = gutils.decompress(data)
+                    try:
+                        # try to decode it strictly
+                        if self.encode:
+                            data = data.decode(self.encode)
+                    except UnicodeDecodeError, exc:
+                        # something is wrong, perhaps a wrong character set
+                        # or some pages are not as strict as they should be
+                        # (like OFDb, mixes utf8 with iso8859-1)
+                        # I want to log the error here so that I can find it
+                        # but the program should not terminate
+                        log.error(exc)
+                        data = data.decode(self.encode, 'ignore')
+            else:
+                gutils.urllib_error(_("Connection error"), self.parent_window)
         except IOError:
-            pass
+            log.exception('')
         if url is None:
             self.page = data
         urlcleanup()
@@ -222,7 +228,7 @@ class Movie(object):
             dest = "%s.jpg" % tmp_dest
             try:
                 self.progress.set_data(self.parent_window, _("Fetching poster"), _("Wait a moment"), False)
-                retriever = Retriever(self.image_url, self.parent_window, self.progress, dest)
+                retriever = Retriever(self.image_url, self.parent_window, self.progress, dest, useurllib2=self.useurllib2)
                 retriever.start()
                 while retriever.isAlive():
                     self.progress.pulse()
@@ -232,6 +238,7 @@ class Movie(object):
                         gtk.main_iteration()
                 urlcleanup()
             except:
+                log.exception('')
                 self.image = ""
                 try:
                     os.remove("%s.jpg" % tmp_dest)
@@ -242,7 +249,7 @@ class Movie(object):
 
     def parse_movie(self):
         try:
-            fields = list(self.fields_to_fetch) # make a copy
+            fields = list(self.fields_to_fetch)  # make a copy
 
             self.initialize()
 
@@ -293,6 +300,8 @@ class Movie(object):
             if 'title' in self.fields_to_fetch and self.title is not None:
                 if self.title[:4] == u'The ':
                     self.title = self.title[4:] + u', The'
+        except:
+            log.exception('')
         finally:
             # close the progress dialog which was opened in get_movie
             self.progress.hide()
@@ -311,6 +320,7 @@ class SearchMovie(object):
     title = None
     remove_accents = True
     progress = None
+    useurllib2 = False
 
     def __init__(self):
         pass
@@ -331,7 +341,7 @@ class SearchMovie(object):
             # dont forget to hide the progress dialog
             self.progress.hide()
 
-    def open_search(self, parent_window):
+    def open_search(self, parent_window, destination=None):
         self.titles = [""]
         self.ids = [""]
         if self.url.find('%s') > 0:
@@ -343,8 +353,8 @@ class SearchMovie(object):
             url = self.url.encode(self.encode)
         except UnicodeEncodeError:
             url = self.url.encode('utf-8')
-        self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), False)
-        retriever = Retriever(url, parent_window, self.progress)
+        self.progress.set_data(parent_window, _("Searching"), _("Wait a moment"), True)
+        retriever = Retriever(url, parent_window, self.progress, destination, useurllib2=self.useurllib2)
         retriever.start()
         while retriever.isAlive():
             self.progress.pulse()
@@ -353,31 +363,42 @@ class SearchMovie(object):
             while gtk.events_pending():
                 gtk.main_iteration()
         try:
-            if retriever.html:
-                ifile = file(retriever.html[0], 'rb')
-                try:
-                    self.page = ifile.read()
-                finally:
-                    ifile.close()
-                # check for gzip compressed pages before decoding to unicode
-                if len(self.page) > 2 and self.page[0:2] == '\037\213':
-                    self.page = gutils.decompress(self.page)
-                self.page = self.page.decode(self.encode, 'replace')
+            if retriever.exception is None:
+                if destination:
+                    # caller gave an explicit destination file
+                    # don't care about the content
+                    return True
+                if retriever.html:
+                    ifile = file(retriever.html[0], 'rb')
+                    try:
+                        self.page = ifile.read()
+                    finally:
+                        ifile.close()
+                    # check for gzip compressed pages before decoding to unicode
+                    if len(self.page) > 2 and self.page[0:2] == '\037\213':
+                        self.page = gutils.decompress(self.page)
+                    self.page = self.page.decode(self.encode, 'replace')
+                else:
+                    return False
             else:
+                self.progress.hide()
+                gutils.urllib_error(_("Connection error"), parent_window)
                 return False
         except IOError:
-            pass
-        urlcleanup()
+            log.exception('')
+        finally:
+            urlcleanup()
         return True
 
 
 class Retriever(threading.Thread):
 
-    def __init__(self, URL, parent_window, progress, destination=None):
+    def __init__(self, URL, parent_window, progress, destination=None, useurllib2=False):
         self.URL = URL
         self.html = None
+        self.exception = None
         self.destination = destination
-        self.parent_window = parent_window
+        self.useurllib2 = useurllib2
         self.progress = progress
         self._stopevent = threading.Event()
         self._sleepperiod = 1.0
@@ -385,14 +406,15 @@ class Retriever(threading.Thread):
 
     def run(self):
         try:
-            self.html = urlretrieve(self.URL, self.destination, self.hook)
-            #self.html = urlretrieve(self.URL.encode('utf-8'), self.destination, self.hook)
+            if self.useurllib2:
+                self.html = urlretrieve2(self.URL, self.destination, self.hook)
+            else:
+                self.html = urlretrieve(self.URL, self.destination, self.hook)
             if self.progress.status:
                 self.html = []
-        except IOError:
-            self.progress.dialog.hide()
-            gutils.urllib_error(_("Connection error"), self.parent_window)
-            self.join()
+        except Exception, e:
+            log.exception('')
+            self.exception = e
 
     def hook(self, count, blockSize, totalSize):
         if totalSize == -1:
@@ -412,6 +434,7 @@ class Retriever(threading.Thread):
 # which not all sites accepting. (zelluloid.de for example)
 #
 _uaurlopener = None
+_tempfilecleanup = None
 
 
 def urlretrieve(url, filename=None, reporthook=None, data=None):
@@ -419,6 +442,33 @@ def urlretrieve(url, filename=None, reporthook=None, data=None):
     if not _uaurlopener:
         _uaurlopener = UAFancyURLopener()
     return _uaurlopener.retrieve(url, filename, reporthook, data)
+
+
+def urlretrieve2(url, filename=None, reporthook=None, data=None):
+    global _tempfilecleanup
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.1.7) Gecko/20091221 Firefox/3.5.7',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Accept-Encoding': 'gzip'}
+    req = urllib2.Request(url, data, headers)
+    response = urllib2.urlopen(req)
+    if not filename:
+        import tempfile
+        (fd, filename) = tempfile.mkstemp()
+        if not _tempfilecleanup:
+            _tempfilecleanup = TempFileCleanup()
+        _tempfilecleanup._tempfiles.append(filename)
+        tfp = os.fdopen(fd, 'wb')
+    else:
+        tfp = file(filename, 'wb')
+    while 1:
+        block = response.read(4096)
+        if block == "":
+            break
+        tfp.write(block)
+    tfp.close()
+    return [filename, response.info()]
 
 
 class UAFancyURLopener(FancyURLopener):
@@ -431,6 +481,31 @@ class UAFancyURLopener(FancyURLopener):
         # is used by UMTS connections. compression breaks the movie import plugins sometimes
         self.addheaders.append(('Cache-Control', 'no-cache'))
         self.addheaders.append(('Pragma', 'no-cache'))
+
+    def open(self, fullurl, data=None):
+        # prevent blocking calls which doesn't come back
+        import socket
+        socket.setdefaulttimeout(20)
+        return FancyURLopener.open(self, fullurl, data)
+
+
+class TempFileCleanup:
+    _tempfiles = []
+
+    def __init__(self):
+        self.__unlink = os.unlink
+
+    def __del__(self):
+        self.cleanup()
+
+    def cleanup(self):
+        if self._tempfiles:
+            for file in self._tempfiles:
+                try:
+                    self.__unlink(file)
+                except OSError:
+                    pass
+            del self._tempfiles[:]
 
 
 class Progress:
