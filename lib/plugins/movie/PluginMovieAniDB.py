@@ -44,7 +44,8 @@ plugin_version      = '3.0'
 
 ANIME_TITLES_URL = 'http://anidb.net/api/animetitles.xml.gz'
 ANIME_IMG_URL = 'http://img7.anidb.net/pics/anime/'
-ANIME_WEB_URL = 'http://anidb.net/perl-bin/animedb.pl?show=anime&aid='
+#ANIME_WEB_URL = 'http://anidb.net/perl-bin/animedb.pl?show=anime&aid='
+ANIME_WEB_URL = 'http://anidb.net/a'
 REQUEST = "http://api.anidb.net:9001/httpapi?request=anime&client=%(client)s&clientver=%(version)s&protover=%(protocol)s&aid="
 REQUEST %= dict(client='griffith', version=1, protocol=1)
 
@@ -78,18 +79,24 @@ class Plugin(Movie):
         self.director = ', '.join(n.text for n in self._xml.xpath('creators/name[@type="Direction"]'))
 
     def get_plot(self):
-        self.plot = self._xml.xpath('description')[0].text
+        self.plot = self._xml.find('description').text
 
     def get_year(self):
+        self.year = 0
         node = self._xml.xpath('episodes/episode[title="Complete Movie"]')
         if node:
-            self.year = node.xpath('airdate')[0][:4]
+            self.year = node[0].find('airdate').text[:4]
+        else:
+            node = self._xml.find('startdate')
+            if node is not None:
+                self.year = node.text[:4]
         # XXX: should we take the first child if "Complete Movie" is missing?
 
     def get_runtime(self):
+        self.runtime = 0
         node = self._xml.xpath('episodes/episode[title="Complete Movie"]')
         if node:
-            self.runtime = node.xpath('length')[0]
+            self.runtime = node[0].find('length').text
 
     def get_genre(self):
         nodes = self._xml.xpath('categories/category/name')
@@ -99,32 +106,23 @@ class Plugin(Movie):
         nodes = self._xml.xpath('characters/character[@type="main character in"]')
         self.cast = ''
         for node in nodes:
-            name = node.xpath('name')[0].text
-            actor = node.xpath('seiyuu')[0].text
+            name = node.find('name').text
+            actor = node.find('seiyuu').text
             self.cast += "[%s] voiced by %s\n" % (name, actor)
-
-    def get_classification(self):
-        self.classification = ''
 
     def get_studio(self):
         self.studio = ', '.join(n.text for n in self._xml.xpath('creators/name[@type="Animation Production"]'))
 
     def get_o_site(self):
-        self.site = self._xml.xpath('url')[0].text
+        self.o_site = self._xml.find('url').text
 
     def get_site(self):
-        self.site = ANIME_TITLES_URL + self._aid
-
-    def get_trailer(self):
-        self.trailer = ''
-
-    def get_country(self):
-        self.country = ''
+        self.site = ANIME_WEB_URL + self._aid
 
     def get_rating(self):
-        rating = self._xml.xpath('ratings/permanent')
-        if rating:
-            self.rating = str(round(float(rating[0].text)))
+        rating = self._xml.find('ratings/permanent')
+        if rating is not None:
+            self.rating = str(round(float(rating.text)))
 
     def get_notes(self):
         self.notes = ''
@@ -146,6 +144,7 @@ class Plugin(Movie):
             self.notes += "\n%s: " % key
             self.notes += details['titles'].get(lang, details['titles']['en'])
             self.notes += " (%s" % details['duration']
+            self.notes += _(' min')
             if details['airdate']:
                 self.notes += ", %s)" % details['airdate']
             else:
@@ -271,7 +270,7 @@ Organisation; appears in; appears in episodes: -\n\
             'classification'      : False,
             'studio'              : False,
             'o_site'              : 'http://www.gonzo.co.jp/works/0102.html',
-            'site'                : 'http://anidb.net/perl-bin/animedb.pl?show=anime&aid=32',
+            'site'                : 'http://anidb.net/a32',
             'trailer'             : False,
             'year'                : 2002,
             'notes'               : True,
@@ -279,6 +278,6 @@ Organisation; appears in; appears in episodes: -\n\
             'image'               : True,
             'rating'              : 8,
             'cameraman'           : False,
-            'screenplay'          : 'Konaka Chiaki'
+            'screenplay'          : False
         },
     }
