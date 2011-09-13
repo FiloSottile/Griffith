@@ -104,6 +104,7 @@ class PluginTester:
         global myconfig
         result = True
         plugin.config = myconfig
+        plugin.locations = self.locations
         # plugin.translated_url_search
         plugin.url = plugin.translated_url_search
         if plugin.remove_accents:

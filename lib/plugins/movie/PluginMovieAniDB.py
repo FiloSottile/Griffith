@@ -212,7 +212,7 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Hellsing': [ 9, 9 ]
+        'Hellsing': [ 1, 1 ]
     }
 
 
@@ -227,52 +227,21 @@ class PluginTest:
     test_configuration = {
         '32': {
             'title'               : 'Hellsing',
-            'o_title'             : u'ヘルシング',
+            'o_title'             : 'Hellsing',
             'director'            : 'Urata Yasunori',
             'plot'                : True,
-            'cast'                : u'Characters:\n\
----------------\n\
-\n\
-[Alucard] voiced by Nakata Jouji\n\
-male; main character in; appears in episodes: -\n\
-\n\
-[Incognito] voiced by Yamazaki Takumi\n\
--; main character in; appears in episodes: 8-13\n\
-\n\
-[Seras Victoria] voiced by Orikasa Fumiko\n\
-female; main character in; appears in episodes: -\n\
-\n\
+            'cast'                : u'[Alucard] voiced by Nakata Jouji\n\
 [Sir Integral Fairbrook Wingates Hellsing] voiced by Sakakibara Yoshiko\n\
-22, female; main character in; appears in episodes: -\n\
-\n\
-[Alexander Anderson] voiced by Nozawa Nachi\n\
-male; secondary cast in; appears in episodes: -\n\
-\n\
-[Enrico Maxwell] voiced by Tanaka Hideyuki\n\
-male; secondary cast in; appears in episodes: -\n\
-\n\
-[Helena] voiced by Hiramatsu Akiko\n\
-female; secondary cast in; appears in episodes: 8, 11\n\
-\n\
-[Walter C. Dornez] voiced by Kiyokawa Motomu\n\
-male; secondary cast in; appears in episodes: -\n\
-\n\
-[Hellsing Organization] voiced by \n\
-Organisation; appears in; appears in episodes: -\n\
-\n\
-[Iscariot Organization] voiced by \n\
-Organisation; appears in; appears in episodes: -\n\
-\n\
-[Police Officer inside Heli (ヘリ機内警察官)] voiced by Andy Holyfield\n\
--; appears in; appears in episodes: 8',
+[Seras Victoria] voiced by Orikasa Fumiko\n\
+[Incognito] voiced by Yamazaki Takumi',
             'country'             : False,
-            'genre'               : 'Action, Contemporary Fantasy, Cops, Fantasy, Gunfights, Horror, Law and Order, Manga, Seinen, Special Squads, Vampires, Violence',
+            'genre'               : 'Law and Order, Alternative Present, Horror, Vampires, Gunfights, Action, Contemporary Fantasy, United Kingdom, Earth, Europe, Special Squads, Cops, Manga, Seinen, Violence, Fantasy, Present',
             'classification'      : False,
             'studio'              : False,
             'o_site'              : 'http://www.gonzo.co.jp/works/0102.html',
             'site'                : 'http://anidb.net/a32',
             'trailer'             : False,
-            'year'                : 2002,
+            'year'                : 2001,
             'notes'               : True,
             'runtime'             : 0,
             'image'               : True,
