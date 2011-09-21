@@ -65,27 +65,42 @@ class Plugin(Movie):
         self._xml = etree.fromstring(self.page)
 
     def get_image(self):
-        self.image_url = ANIME_IMG_URL + self._xml.find('picture').text
+        self.image_url = ''
+        node = self._xml.find('picture')
+        if node is not None:
+            self.image_url = ANIME_IMG_URL + node.text
 
     def get_o_title(self):
-        self.o_title = self._xml.find('titles/title[@type="main"]').text
+        self.o_title = ''
+        node = self._xml.find('titles/title[@type="main"]')
+        if node is not None:
+            self.o_title = node.text
 
     def get_title(self):
         node = self._xml.xpath("titles/title[@xml:lang='%s' and @type='official']" % lang)
         if node:
             self.title = node[0].text
+        else:
+            node = self._xml.xpath("titles/title[@type='official']")
+            if node:
+                self.title = node[0].text
 
     def get_director(self):
         self.director = ', '.join(n.text for n in self._xml.xpath('creators/name[@type="Direction"]'))
 
     def get_plot(self):
-        self.plot = self._xml.find('description').text
+        self.plot = ''
+        node = self._xml.find('description')
+        if node is not None:
+            self.plot = node.text
 
     def get_year(self):
         self.year = 0
         node = self._xml.xpath('episodes/episode[title="Complete Movie"]')
         if node:
-            self.year = node[0].find('airdate').text[:4]
+            node = node[0].find('airdate')
+            if node is not None:
+                self.year = node.text[:4]
         else:
             node = self._xml.find('startdate')
             if node is not None:
@@ -114,7 +129,10 @@ class Plugin(Movie):
         self.studio = ', '.join(n.text for n in self._xml.xpath('creators/name[@type="Animation Production"]'))
 
     def get_o_site(self):
-        self.o_site = self._xml.find('url').text
+        self.o_site = ''
+        node = self._xml.find('url')
+        if node is not None:
+            self.o_site = node.text
 
     def get_site(self):
         self.site = ANIME_WEB_URL + self._aid
