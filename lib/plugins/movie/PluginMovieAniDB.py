@@ -150,7 +150,10 @@ class Plugin(Movie):
             self.notes += "Type: %s\n" % type_.text
         episodes = {}
         for node in self._xml.xpath('episodes/episode'):
-            key = node.find('epno').text
+            try:
+                key = int(node.find('epno').text)
+            except:
+                key = node.find('epno').text
             titles = {}
             for tnode in node.xpath('title'):
                 titles[tnode.attrib['{http://www.w3.org/XML/1998/namespace}lang']] = tnode.text
