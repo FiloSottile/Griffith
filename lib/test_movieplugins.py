@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2009
+# Copyright (c) 2006-2011
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@ __revision__ = '$Id$'
 #
 
 import gettext
+gettext.install('griffith', unicode=1)
 import sys
 import initialize
 import gutils

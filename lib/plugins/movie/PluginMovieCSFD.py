@@ -214,7 +214,7 @@ class SearchPluginTest(SearchPlugin):
     #
     test_configuration = {
         'Cliffhanger' : [ 1, 1 ],
-        'Rocky' : [ 37, 37 ]
+        'Rocky' : [ 38, 38 ]
     }
 
 

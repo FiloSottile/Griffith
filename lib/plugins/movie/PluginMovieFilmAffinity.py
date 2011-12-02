@@ -51,8 +51,8 @@ class Plugin(movie.Movie):
             self.image_url = 'http://' + gutils.before(self.page[tmp.start():], '"')
 
     def get_o_title(self):
-        self.o_title = gutils.trim(self.page, u'<b>TÍTULO ORIGINAL</b></td>', '</b></td>')
-        self.o_title = gutils.after(self.o_title, '<b>')
+        self.o_title = gutils.trim(self.page, u'<th>T&Iacute;TULO ORIGINAL</th>', '</strong></td>')
+        self.o_title = gutils.after(self.o_title, '<strong>')
         self.o_title = re.sub('[ ]+', ' ', self.o_title)
         self.o_title = re.sub('([(]Serie de TV[)]|[(]TV[)]|[(]TV Series[)])', '', self.o_title)
 
@@ -62,36 +62,32 @@ class Plugin(movie.Movie):
         self.title = re.sub('([(]Serie de TV[)]|[(]TV[)]|[(]TV Series[)])', '', self.title)
 
     def get_director(self):
-        self.director = gutils.trim(self.page,'<b>DIRECTOR</b></td>', '</td>')
+        self.director = gutils.trim(self.page,'<th>DIRECTOR</th>', '</td>')
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, u'<b>SINOPSIS</b>', '</tr>')
+        self.plot = gutils.trim(self.page, '<th>SINOPSIS</th>', '</td>')
         self.plot = string.replace(self.plot, ' (FILMAFFINITY)', '')
         self.plot = string.replace(self.plot, '(FILMAFFINITY)', '')
 
     def get_year(self):
-        self.year = gutils.trim(self.page, u'<b>AÑO</b></td>', '</td>')
+        self.year = gutils.trim(self.page, '<th>A&Ntilde;O</th>', '</td>')
         self.year = gutils.clean(self.year)
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page, u'<b>DURACIÓN</b></td>', ' min.</td>')
-        if self.runtime == '':
-            self.runtime = gutils.trim(self.page, '<b>DURACI&Oacute;N</b></td>', ' min.</td>')
+        self.runtime = gutils.trim(self.page, '<th>DURACI&Oacute;N</th>', ' min.')
         self.runtime = gutils.after(self.runtime[-10:], '<td>')
 
     def get_genre(self):
         self.genre = ''
-        tmp = gutils.trim(self.page, u'<b>GÉNERO</b>', '<b>SINOPSIS</b>')
-        if tmp == '':
-            tmp = gutils.trim(self.page, '<b>G&Eacute;NERO</b>', '<b>SINOPSIS</b>')
-        tmp = gutils.after(tmp, '<td valign="top">')
+        tmp = gutils.trim(self.page, '<th>G&Eacute;NERO</th>', '</tr>')
+        tmp = gutils.after(tmp, '<td>')
         if tmp:
             self.genre = gutils.clean(string.replace(tmp, ' | ', '. '))
             self.genre = re.sub('[.][ \t]+', '. ', self.genre)
 
     def get_cast(self):
         self.cast = ''
-        self.cast = gutils.trim(self.page, '<b>REPARTO</b></td>', '</td>')
+        self.cast = gutils.trim(self.page, '<th>REPARTO</th>', '</td>')
         self.cast = re.sub('</a>,[ ]*', '\n', self.cast)
         self.cast = string.strip(gutils.strip_tags(self.cast))
         self.cast = re.sub('[ ]+', ' ', self.cast)
@@ -101,11 +97,11 @@ class Plugin(movie.Movie):
         self.classification = ''
 
     def get_studio(self):
-        self.studio = gutils.trim(self.page, '<b>PRODUCTORA</b></td>', '</td>')
-        self.studio = gutils.after(self.studio, '<td  >')
+        self.studio = gutils.trim(self.page, '<th>PRODUCTORA</th>', '</td>')
+        self.studio = gutils.after(self.studio, '<td>')
 
     def get_o_site(self):
-        self.o_site = gutils.trim(self.page, '<b>WEB OFICIAL</b></td>', '</a>')
+        self.o_site = gutils.trim(self.page, '<th>WEB OFICIAL</th>', '</a>')
         self.o_site = gutils.after(self.o_site, '">')
 
     def get_site(self):
@@ -115,7 +111,7 @@ class Plugin(movie.Movie):
         self.trailer = ''
 
     def get_country(self):
-        self.country = gutils.trim(self.page, u'<b>PAÍS</b></td>', '</td>')
+        self.country = gutils.trim(self.page, '<b>PA&Iacute;S</th>', '</td>')
         tmp = gutils.trim(self.country, 'alt="', '"')
         if tmp == '':
             self.country = gutils.trim(self.country, 'title="', '"')
@@ -123,19 +119,15 @@ class Plugin(movie.Movie):
             self.country = tmp
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, '<tr><td align="center" style="color:#990000; font-size:22px; font-weight: bold;">', '</td></tr>')
+        self.rating = gutils.trim(self.page, '<div style="margin: 4px 0; color:#990000; font-size:22px; font-weight: bold;">', '</div>')
         if self.rating:
             self.rating = str(round(float(gutils.clean(string.replace(self.rating, ',', '.')))))
 
     def get_cameraman(self):
-        self.cameraman = gutils.trim(self.page, u'<b>FOTOGRAFÍA</b></td>', u'</td>')
-        if self.cameraman == '':
-            self.cameraman = gutils.trim(self.page, u'<b>FOTOGRAF&Iacute;A</b></td>', u'</td>')
+        self.cameraman = gutils.trim(self.page, '<th>FOTOGRAF&Iacute;A</th>','</td>')
 
     def get_screenplay(self):
-        self.screenplay = gutils.trim(self.page, u'<b>GUIÓN</b></td>', u'</td>')
-        if self.screenplay == '':
-            self.screenplay = gutils.trim(self.page, u'<b>GUI&Oacute;N</b></td>', u'</td>')
+        self.screenplay = gutils.trim(self.page, '<th>GUI&Oacute;N</th>', '</td>')
 
 class SearchPlugin(movie.SearchMovie):
 
@@ -156,17 +148,17 @@ class SearchPlugin(movie.SearchMovie):
         return self.page
 
     def sub_search(self, parent_window):
-        moviepage = gutils.trim(self.page, u'Resultados por título</span>', '<br>')
+        moviepage = gutils.trim(self.page, u'Resultados por título</span>', '<div id="bpanel">')
         nextpage = self.get_nextpage_url()
         while nextpage:
             self.url = nextpage
             self.open_search(parent_window)
-            moviepage = moviepage + gutils.trim(self.page, u'Resultados por título</span>', '<br>')
+            moviepage = moviepage + gutils.trim(self.page, u'Resultados por título</span>', '<div id="bpanel">')
             nextpage = self.get_nextpage_url()
         self.page = moviepage
 
     def get_nextpage_url(self):
-        match = re.search('(siguientes >>|siguientes &gt;&gt;)', self.page)
+        match = re.search('(siguientes >|siguientes &gt;)', self.page)
         if match:
             start = string.rfind(self.page, '<a href="', 0, match.start())
             if start >= 0:
@@ -174,6 +166,8 @@ class SearchPlugin(movie.SearchMovie):
         return None
 
     def get_searches(self):
+        if not self.page:
+            return
         if len(self.page) < 20:    # immidietly redirection to movie page
             self.number_results = 1
             self.ids.append(self.page)
@@ -185,9 +179,12 @@ class SearchPlugin(movie.SearchMovie):
                 for index in range(0, len(elements) - 1, 1):
                     element = elements[index]
                     nextelement = elements[index + 1]
-                    self.ids.append(gutils.trim(element, '<b><a href="/es/film', '.html'))
-                    title = gutils.after(element, '<b><a href="/es/film')
-                    self.titles.append(gutils.strip_tags(gutils.convert_entities(gutils.after(title, '>'))) + ' ' + string.strip(gutils.before(nextelement, '<')))
+                    id = gutils.trim(element, '<b><a href="/es/film', '.html')
+                    if id:
+                        self.ids.append(id)
+                        title = gutils.clean(gutils.after(element, '<b><a href="/es/film')).replace("\n", "")
+                        title = gutils.strip_tags(gutils.convert_entities(gutils.after(title, '>'))) + ' ' + string.strip(gutils.before(nextelement, '<'))
+                        self.titles.append(title)
 
 #
 # Plugin Test
@@ -198,8 +195,8 @@ class SearchPluginTest(SearchPlugin):
     # dict { movie_id -> [ expected result count for original url, expected result count for translated url ] }
     #
     test_configuration = {
-        'Rocky' : [ 16, 16 ],
-        'Darkness' : [56, 56 ]
+        'Rocky' : [ 17, 17 ],
+        'Darkness' : [59, 59 ]
     }
 
 class PluginTest:
@@ -218,13 +215,14 @@ class PluginTest:
             'plot'                : True,
             'cast'                : 'Sylvester Stallone\n\
 Burt Young\n\
-Tony Burton\n\
+Antonio Tarver\n\
+Geraldine Hughes\n\
 Milo Ventimiglia\n\
+Tony Burton\n\
 James Francis Kelly III\n\
 Talia Shire\n\
 Angela Boyd\n\
-Antonio Tarver\n\
-Geraldine Hughes\n\
+A.J. Benza\n\
 Mike Tyson',
             'country'             : 'Estados Unidos',
             'genre'               : u'Acción. Drama. Deporte. Boxeo. Secuela',
@@ -258,7 +256,8 @@ Pepe Ocio\n\
 Claudia Otero\n\
 Jordi Dauder\n\
 Emilio Gavira\n\
-Miriam Raya',
+Miriam Raya\n\
+Jan Cornet',
             'country'             : u'España',
             'genre'               : u'Drama. Enfermedad. Religión. Basado en hechos reales',
             'classification'      : False,

@@ -178,26 +178,25 @@ Burt Young' + _(' as ') + 'Paulie\n\
 Milo Ventimiglia' + _(' as ') + 'Robert Jr.\n\
 Geraldine Hughes' + _(' as ') + 'Marie\n\
 James Francis Kelly III' + _(' as ') + 'Steps\n\
-Tony Burton\n\
+Tony Burton' + _(' as ') + 'Duke\n\
 A.J. Benza\n\
 Henry G. Sanders' + _(' as ') + 'Martin\n\
 Antonio Tarver' + _(' as ') + 'Mason \'The Line\' Dixon\n\
-Pedro Lovell\n\
+Pedro Lovell' + _(' as ') + 'Spider Rico\n\
 Ana Gerena\n\
 Angela Boyd\n\
 Louis Giansante\n\
 Maureen Schilling\n\
 Carter Mitchell\n\
 Vinod Kumar\n\
-Tobias Segal\n\
+Tobias Segal' + _(' as ') + 'Robert\'s Friend\n\
 Tim Carr' + _(' as ') + 'Robert\'s Friend \n\
-Paul Dion Monte' + _(' as ') + 'Robert\'s Friend \n\
+Paul Dion Monte' + _(' as ') + 'Robert\'s Friend\n\
 Kevin King Templeton\n\
 Robert Michael Kelly\n\
-Don Sherman\n\
+Don Sherman' + _(' as ') + 'Andy\n\
 Nick Baker\n\
 Rick Buchborn\n\
-Stu Nahan\n\
 Gary Compton\n\
 Jody Giambelluca\n\
 Frank Stallone als Frank Stallone Jr.' + _(' as ') + 'Dinner Patron \n\

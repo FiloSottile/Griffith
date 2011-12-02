@@ -91,6 +91,7 @@ class Plugin(movie.Movie):
 
     def get_cast(self):
         self.cast = gutils.trim(self.detail_page, 'alt="Besetzung"', '<img')
+        self.cast = self.cast.replace('&nbsp;', '')
         self.cast = self.cast.replace('<a href=', '--flip--' + '<a href=')
         self.cast = self.cast.replace('</td></tr>', '\n')
         self.cast = gutils.strip_tags(self.cast)
@@ -99,7 +100,7 @@ class Plugin(movie.Movie):
         self.cast = ''
         for element in elements:
             elements2 = element.split("--flip--")
-            if len(elements2) > 1:
+            if len(elements2) > 1 and elements2[1]:
                 self.cast += elements2[1] + '--flip--' + elements2[0] + '\n'
             else:
                 self.cast += element + '\n'
@@ -138,8 +139,9 @@ class Plugin(movie.Movie):
                 delimiter = ', '
 
     def get_rating(self):
-        self.rating = gutils.strip_tags(gutils.trim(self.page, 'User-Wertung:', '</TABLE>'))
+        self.rating = gutils.strip_tags(gutils.regextrim(self.page, '<b>Besucher</b>[ ]*[(][0-9]+[)]', '</div>'))
         self.rating = self.rating.replace('%', '')
+        self.rating = self.rating.replace(':', '')
         self.rating = self.rating.replace('&nbsp;', '')
         self.rating = self.rating.replace('\n', '')
         try:

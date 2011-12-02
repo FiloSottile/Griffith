@@ -249,6 +249,6 @@ Carl Weathers',
 De Uitdager',
             'runtime'           : 119,
             'image'             : True,
-            'rating'            : 6
+            'rating'            : 7
         },
     }
