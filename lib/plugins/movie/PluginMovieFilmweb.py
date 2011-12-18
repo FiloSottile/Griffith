@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2007 Piotr Ożarowski
+# Copyright (c) 2005-2011 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,16 +21,19 @@ __revision__ = '$Id$'
 # You may use and distribute this software under the terms of the
 # GNU General Public License, version 2 or later
 
-import gutils, movie, string
+import gutils
+import movie
 
 plugin_name = 'Filmweb'
 plugin_description = 'Web pełen filmów'
-plugin_url = 'www.filmweb.pl'
+plugin_url = 'filmweb.pl'
+plugin_url_other = 'm.filmweb.pl'
 plugin_server = '193.200.227.13'
 plugin_language = _('Polish')
-plugin_author = 'Piotr Ożarowski, Bartosz Kurczewsk, Mariusz Szczepanek'
+plugin_author = 'Piotr Ożarowski, Bartosz Kurczewski, Mariusz Szczepanek'
 plugin_author_email = '<mariusz2806@gmail.com>'
-plugin_version = '1.21'
+plugin_version = '1.28'
+
 
 class Plugin(movie.Movie):
     def __init__(self, id):
@@ -39,79 +42,98 @@ class Plugin(movie.Movie):
         self.encode = 'utf-8'
 
     def get_image(self):
-        if string.find(self.page, '<div class="posterLightbox">') > -1:
-            self.image_url = gutils.trim(self.page, '<div class="posterLightbox">', '</div>')
+        if self.page.find('<div class=posterLightbox>') > -1:
+            self.image_url = gutils.trim(self.page, '<div class=posterLightbox>', '</div>')
             self.image_url = gutils.trim(self.image_url, 'href="', '" ')
         else:
             self.image_url = ''
 
     def get_o_title(self):
-        self.url = string.replace(self.url, plugin_server, plugin_url)
+        self.url = self.url.replace(plugin_server, plugin_url)
         self.o_title = gutils.trim(self.page, '<title>', '</title>')
-        if string.find(self.o_title, '/') > -1:
+        if self.o_title.find('/') > -1:
             self.o_title = gutils.trim(self.o_title, '/', '(')
-        if string.find(self.o_title, '(') > -1:
+        if self.o_title.find('(') > -1:
             self.o_title = gutils.before(self.o_title, '(')
 
     def get_title(self):
-        self.url = string.replace(self.url, plugin_server, plugin_url)
+        self.url = self.url.replace(plugin_server, plugin_url)
         self.title = gutils.trim(self.page, '<title>', '</title>')
-        if string.find(self.title, '(') > -1:
+        if self.title.find('(') > -1:
             self.title = gutils.before(self.title, '(')
-        if string.find(self.title, '/') > -1:
+        if self.title.find('/') > -1:
             self.title = gutils.before(self.title, '/')
 
     def get_director(self):
         self.director = gutils.trim(self.page, "reżyseria:", '</tr>')
         self.director = gutils.after(self.director, '</th>')
-        self.director = string.replace(self.director, "(więcej...)", '')
-        self.director = string.replace(self.director, '  ', '\t')
-        self.director = string.replace(self.director, "\t ", '')
-        self.director = string.replace(self.director, "\t", '')
-        self.director = string.replace(self.director, ',', ', ')
+        self.director = self.director.replace("(więcej...)", '')
+        self.director = self.director.replace('  ', '\t')
+        self.director = self.director.replace("\t ", '')
+        self.director = self.director.replace("\t", '')
+        self.director = self.director.replace(',', ', ')
         self.director = gutils.strip_tags(self.director)
 
     def get_screenplay(self):
-        self.screenplay = gutils.trim(self.page,"scenariusz:", '</tr>')
+        self.screenplay = gutils.trim(self.page, "scenariusz:", '</tr>')
         self.screenplay = gutils.after(self.screenplay, '</th>')
-        self.screenplay = string.replace(self.screenplay, "(więcej...)", '')
-        self.screenplay = string.replace(self.screenplay, '  ', '\t')
-        self.screenplay = string.replace(self.screenplay, "\t ", '')
-        self.screenplay = string.replace(self.screenplay, "\t", '')
-        self.screenplay = string.replace(self.screenplay, ',', ', ')
+        self.screenplay = self.screenplay.replace("(więcej...)", '')
+        self.screenplay = self.screenplay.replace('  ', '\t')
+        self.screenplay = self.screenplay.replace("\t ", '')
+        self.screenplay = self.screenplay.replace("\t", '')
+        self.screenplay = self.screenplay.replace(',', ', ')
         self.screenplay = gutils.strip_tags(self.screenplay)
 
     def get_plot(self):
-        self.plot = gutils.trim(self.page, '<span class="filmDescrBg">', '</span>')
-        self.plot = string.replace(self.plot, '  ', ' ')
+        self.plot = gutils.trim(self.page, '<span class=filmDescrBg property="v:summary">', '</span>')
+        self.plot = self.plot.replace('  ', ' ')
 
     def get_year(self):
-        self.year = gutils.trim(self.page, '<span id="filmYear" class="filmYear">', '</span>')
+        self.year = gutils.trim(self.page, '<span id=filmYear class=filmYear>', '</span>')
 
     def get_runtime(self):
-        self.runtime = gutils.trim(self.page, '<div class="time">', '<')
+        self.runtime = gutils.trim(self.page, "czas trwania:", '</tr>')
+        self.runtime = gutils.after(self.runtime, '<td>')
+        self.runtime = gutils.before(self.runtime, '</td>')
+        self.runtime = self.runtime.replace(' ', '')
+        if not self.runtime:
+            return
+        str_m = ''
+        str_h = ''
+        if self.runtime.find('godz.') > -1:
+            str_h = gutils.before(self.runtime, 'godz.')
+            self.runtime = gutils.after(self.runtime, 'godz.')
+        if self.runtime.find('min.') > -1:
+            str_m = gutils.before(self.runtime, 'min.')
+        val_runtime = 0
+        if str_h:
+            val_runtime = 60 * int(float(str_h))
+        if str_m:
+            val_runtime += int(float(str_m))
+        self.runtime = val_runtime
 
     def get_genre(self):
         self.genre = gutils.trim(self.page, "gatunek:", '</tr>')
-        self.genre = string.replace(self.genre, "\t", '')
-        self.genre = string.replace(self.genre, "\n", '')
-        self.genre = string.replace(self.genre, '  ', '')
-        self.genre = string.replace(self.genre, ',', ', ')
+        self.genre = self.genre.replace("\t", '')
+        self.genre = self.genre.replace("\n", '')
+        self.genre = self.genre.replace('  ', '')
+        self.genre = self.genre.replace(',', ', ')
 
     def get_cast(self):
         self.cast = gutils.trim(self.page, '<div class="castListWrapper cl">', '<div class="additional-info comBox">')
         url = gutils.after(self.cast, '</ul>')
-        url = gutils.trim(url, 'href="','"')
+        url = gutils.trim(url, 'href="', '"')
         self.cast = gutils.before(self.cast, '</ul>')
-        self.cast = string.replace(self.cast, chr(13), '')
-        self.cast = string.replace(self.cast, chr(10), '')
-        self.cast = string.replace(self.cast, "  ", '\t')
-        self.cast = string.replace(self.cast, "\t ", '')
-        self.cast = string.replace(self.cast, '\t', '')
-        self.cast = string.replace(self.cast, " (", '(')
-        self.cast = string.replace(self.cast, '(', " (")
-        self.cast = string.replace(self.cast, '<div>', _(" as "))
-        self.cast = string.replace(self.cast, '</li>', "\n")
+        self.cast = self.cast.replace(chr(13), '')
+        self.cast = self.cast.replace(chr(10), '')
+        self.cast = self.cast.replace("  ", '\t')
+        self.cast = self.cast.replace("\t ", '')
+        self.cast = self.cast.replace('\t', '')
+        self.cast = self.cast.replace(" (", '(')
+        self.cast = self.cast.replace('(', " (")
+        self.cast = self.cast.replace('<div>', _(" as "))
+        self.cast = self.cast.replace('</li>', "\n")
+        self.cast = self.cast.replace('</span> ', '')
 
     def get_classification(self):
         self.classification = ''
@@ -129,68 +151,75 @@ class Plugin(movie.Movie):
         self.trailer = ''
 
     def get_country(self):
-        self.country = gutils.trim(self.page, "produkcja:", '</tr>')
-        self.country = string.replace(self.country, '  ', '')
-        self.country = string.replace(self.country, "\t", '')
+        self.country = gutils.trim(self.page, '<dt>kraj', '</dd>')
+        self.country = self.country.replace('  ', '')
+        self.country = self.country.replace("e:", '')
+        self.country = self.country.replace(":", '')
+        self.country = self.country.replace("\t", '')
 
     def get_rating(self):
-        self.rating = gutils.trim(self.page, '<div class="rates">', '</div>')
-        self.rating = gutils.trim(self.rating, '<span class="average">', '</span>')
+        self.rating = gutils.trim(self.page, '<div class=rates>', '</div>')
+        self.rating = gutils.trim(self.rating, '<span property="v:average">', '</span>')
         if self.rating != '':
-            self.rating = string.replace(self.rating, ' ', '')
-            self.rating = string.replace(self.rating, ',', '.')
-            self.rating = str(float(string.strip(self.rating)))
+            self.rating = self.rating.replace(' ', '')
+            self.rating = self.rating.replace(',', '.')
+            self.rating = str(float(self.rating.strip()))
 
     def get_notes(self):
         self.notes = ''
 
+
 class SearchPlugin(movie.SearchMovie):
     def __init__(self):
-        self.encode='utf-8'
-        self.original_url_search = 'http://' + plugin_server + '/search?alias=film&q='
-        self.translated_url_search = 'http://' + plugin_server + '/search?alias=film&q='
+        self.encode = 'utf-8'
+        self.original_url_search = 'http://' + plugin_url_other + '/search/film?q='
+        self.translated_url_search = 'http://' + plugin_url_other + '/search/film?q='
 
     def search(self, parent_window):
         if not self.open_search(parent_window):
             return None
-        pos = string.find(self.page, '<div class="stdBar">')
-        if pos == -1: # movie page
+        pos = self.page.find('Filmy (')
+        if pos == -1:  # movie page
             self.page = None
-        else: # search results
-            items = gutils.trim(self.page[pos:], '(', ')')
+        else:  # search results
+            items = gutils.trim(self.page, 'Filmy (', ')')
             if items == '0':
                 self.page = False
             else:
-                self.page = gutils.before(self.page[pos:], '</ul>')
-                self.page = gutils.after(self.page, '<li ')
+                self.page = gutils.after(self.page[pos:], '<ul id=searchFixCheck>')
+                self.page = gutils.before(self.page, '</ul>')
         return self.page
 
     def get_searches(self):
-        if self.page is None: # movie page
+        if self.page is None:  # movie page
             self.ids.append(self.url)
             self.titles.append(gutils.convert_entities(self.title))
-        elif self.page is False: # no movie found
+        elif self.page is False:  # no movie found
             self.number_results = 0
-        else: # multiple matches
-            elements = string.split(self.page, '<li ')
+        else:  # multiple matches
+            elements = self.page.split('<li ')
             self.number_results = elements[-1]
-            if (elements[0] <> ''):
+            if elements != '':
                 for element in elements:
-                    element = gutils.after(element, '<a href="')
-                    self.ids.append('http://' + plugin_server + gutils.before(element, '"'))
-                    element_title = gutils.trim(element, 'class="searchResultTitle"', '</a>')
-                    element_title = gutils.after(element_title, '">')
-                    element_title = string.replace(element_title, "\t", '')
-                    element = gutils.after(element, 'class="searchResultDetails"')
+                    if (element == ''):
+                        continue
+                    element = gutils.after(element, 'href="')
+                    self.ids.append('http://' + plugin_url_other + gutils.before(element, '"'))
+                    element_title = gutils.trim(element, '">', '</a>')
+                    element_title = element_title.replace('\t', '')
+                    element = gutils.after(element, 'class=searchResultDetails')
                     element_year = gutils.trim(element, '>', '|')
-                    element_year = string.replace(element_year, " ", '')
+                    element_year = element_year.replace(" ", '')
                     element_year = gutils.strip_tags(element_year)
-                    element_country = gutils.trim(element, '">', '</a>')
-                    element = string.strip(element_title)
-                    if (element_year <> ''):
-                        element = element + ' (' + string.strip(element_year) + ')'
-                    if (element_country <> ''):
-                        element = element + ' - ' + string.strip(element_country)
+                    element_country = ''
+                    pos_country = element.find('countryIds')
+                    if pos_country != -1:
+                        element_country = gutils.trim(element[pos_country:], '">', '</a>')
+                    element = element_title.strip()
+                    if element_year:
+                        element += ' (' + element_year.strip() + ')'
+                    if element_country:
+                        element += ' - ' + element_country.strip()
                     element = gutils.convert_entities(element)
                     element = gutils.strip_tags(element)
                     self.titles.append(element)
