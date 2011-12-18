@@ -30,7 +30,7 @@ plugin_description  = "rovi"
 plugin_url          = "www.allrovi.com"
 plugin_language     = _("English")
 plugin_author       = "Michael Jahn"
-plugin_author_email = "griffith-private@lists.berlios.de"
+plugin_author_email = "griffith@griffith.cc"
 plugin_version      = "2.0"
 
 class Plugin(movie.Movie):

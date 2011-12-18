@@ -29,7 +29,7 @@ plugin_description  = 'Internet Movie Database'
 plugin_url          = 'www.imdb.com'
 plugin_language     = _('English')
 plugin_author       = 'Vasco Nunes, Piotr Ożarowski'
-plugin_author_email = 'griffith-private@lists.berlios.de'
+plugin_author_email = 'griffith@griffith.cc'
 plugin_version      = '1.12'
 
 class Plugin(movie.Movie):
