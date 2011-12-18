@@ -31,7 +31,7 @@ plugin_description  = 'HKMDB.COM'
 plugin_url          = 'www.hkmdb.com'
 plugin_language     = _('English')
 plugin_author       = 'Michael Jahn'
-plugin_author_email = 'griffith-private@lists.berlios.de'
+plugin_author_email = 'griffith@griffith.cc'
 plugin_version      = '1.0'
 
 class Plugin(movie.Movie):

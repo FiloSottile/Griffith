@@ -31,7 +31,7 @@ plugin_description  = 'de filmsite voor liefhebbers'
 plugin_url          = 'www.moviemeter.nl'
 plugin_language     = _('Dutch')
 plugin_author       = 'Michael Jahn'
-plugin_author_email = 'griffith-private@lists.berlios.de'
+plugin_author_email = 'griffith@griffith.cc'
 plugin_version      = '1.0'
 # API key created for Griffith
 moviemeter_api_key  = '6h70thfmkwhq55hst69gnr65ckbaqu6h'
