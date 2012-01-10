@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2005-2011 Piotr Ożarowski
+# Copyright (c) 2005-2012 Piotr Ożarowski
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,12 +27,12 @@ import movie
 plugin_name = 'Filmweb'
 plugin_description = 'Web pełen filmów'
 plugin_url = 'filmweb.pl'
-plugin_url_other = 'm.filmweb.pl'
+plugin_url_other = 'filmweb.pl'
 plugin_server = '193.200.227.13'
 plugin_language = _('Polish')
 plugin_author = 'Piotr Ożarowski, Bartosz Kurczewski, Mariusz Szczepanek'
 plugin_author_email = '<mariusz2806@gmail.com>'
-plugin_version = '1.28'
+plugin_version = '1.29'
 
 
 class Plugin(movie.Movie):
@@ -50,11 +50,14 @@ class Plugin(movie.Movie):
 
     def get_o_title(self):
         self.url = self.url.replace(plugin_server, plugin_url)
-        self.o_title = gutils.trim(self.page, '<title>', '</title>')
-        if self.o_title.find('/') > -1:
-            self.o_title = gutils.trim(self.o_title, '/', '(')
-        if self.o_title.find('(') > -1:
-            self.o_title = gutils.before(self.o_title, '(')
+        self.o_title = gutils.trim(self.page, '<h2 class=origTitle>', '</h2>')
+        self.o_title = gutils.after(self.o_title, '</span>')
+        if self.o_title == '':
+            self.o_title = gutils.trim(self.page, '<title>', '</title>')
+            if self.o_title.find('(') > -1:
+                self.o_title = gutils.before(self.o_title, '(')
+            if self.o_title.find('/') > -1:
+                self.o_title = gutils.before(self.o_title, '/')
 
     def get_title(self):
         self.url = self.url.replace(plugin_server, plugin_url)
@@ -68,20 +71,12 @@ class Plugin(movie.Movie):
         self.director = gutils.trim(self.page, "reżyseria:", '</tr>')
         self.director = gutils.after(self.director, '</th>')
         self.director = self.director.replace("(więcej...)", '')
-        self.director = self.director.replace('  ', '\t')
-        self.director = self.director.replace("\t ", '')
-        self.director = self.director.replace("\t", '')
-        self.director = self.director.replace(',', ', ')
         self.director = gutils.strip_tags(self.director)
 
     def get_screenplay(self):
         self.screenplay = gutils.trim(self.page, "scenariusz:", '</tr>')
         self.screenplay = gutils.after(self.screenplay, '</th>')
         self.screenplay = self.screenplay.replace("(więcej...)", '')
-        self.screenplay = self.screenplay.replace('  ', '\t')
-        self.screenplay = self.screenplay.replace("\t ", '')
-        self.screenplay = self.screenplay.replace("\t", '')
-        self.screenplay = self.screenplay.replace(',', ', ')
         self.screenplay = gutils.strip_tags(self.screenplay)
 
     def get_plot(self):
@@ -114,26 +109,16 @@ class Plugin(movie.Movie):
 
     def get_genre(self):
         self.genre = gutils.trim(self.page, "gatunek:", '</tr>')
-        self.genre = self.genre.replace("\t", '')
-        self.genre = self.genre.replace("\n", '')
-        self.genre = self.genre.replace('  ', '')
-        self.genre = self.genre.replace(',', ', ')
 
     def get_cast(self):
         self.cast = gutils.trim(self.page, '<div class="castListWrapper cl">', '<div class="additional-info comBox">')
-        url = gutils.after(self.cast, '</ul>')
-        url = gutils.trim(url, 'href="', '"')
         self.cast = gutils.before(self.cast, '</ul>')
-        self.cast = self.cast.replace(chr(13), '')
-        self.cast = self.cast.replace(chr(10), '')
-        self.cast = self.cast.replace("  ", '\t')
-        self.cast = self.cast.replace("\t ", '')
-        self.cast = self.cast.replace('\t', '')
-        self.cast = self.cast.replace(" (", '(')
-        self.cast = self.cast.replace('(', " (")
+        self.cast = self.cast.replace('</span> ', '')
         self.cast = self.cast.replace('<div>', _(" as "))
         self.cast = self.cast.replace('</li>', "\n")
-        self.cast = self.cast.replace('</span> ', '')
+        self.cast = gutils.strip_tags(self.cast)
+        self.cast = self.cast.replace('   ', '')
+        self.cast = self.cast.replace('  ', ' ')
 
     def get_classification(self):
         self.classification = ''
@@ -151,11 +136,7 @@ class Plugin(movie.Movie):
         self.trailer = ''
 
     def get_country(self):
-        self.country = gutils.trim(self.page, '<dt>kraj', '</dd>')
-        self.country = self.country.replace('  ', '')
-        self.country = self.country.replace("e:", '')
-        self.country = self.country.replace(":", '')
-        self.country = self.country.replace("\t", '')
+        self.country = gutils.trim(self.page, 'produkcja:', '</tr>')
 
     def get_rating(self):
         self.rating = gutils.trim(self.page, '<div class=rates>', '</div>')
