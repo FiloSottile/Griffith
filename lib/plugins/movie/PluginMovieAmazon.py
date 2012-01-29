@@ -2,7 +2,7 @@
 
 __revision__ = '$Id$'
 
-# Copyright (c) 2006-2009
+# Copyright (c) 2006-2012
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -125,7 +125,9 @@ class Plugin(movie.Movie):
             if hasattr(self.page.EditorialReviews, 'EditorialReview'):
                 if isSequenceType(self.page.EditorialReviews.EditorialReview):
                     for review in self.page.EditorialReviews.EditorialReview:
-                        if string.find(review.Source, 'Amazon') > -1:
+                        if hasattr(review, 'Source') and \
+                            hasattr(review, 'Content') and \
+                            string.find(review.Source, 'Amazon') > -1:
                             self.plot = review.Content
                 else:
                     if hasattr(self.page.EditorialReviews.EditorialReview, 'Source') and \
